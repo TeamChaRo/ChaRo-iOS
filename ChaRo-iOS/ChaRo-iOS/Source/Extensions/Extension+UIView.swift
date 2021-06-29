@@ -5,4 +5,9 @@
 //  Created by 장혜령 on 2021/06/29.
 //
 
-import Foundation
+import UIKit
+
+extension UIView{
+    
+}
+
