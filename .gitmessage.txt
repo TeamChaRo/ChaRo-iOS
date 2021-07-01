@@ -1,4 +1,4 @@
-# [Prefix]: <#Issue_Number> <Description>
+# [Prefix]: <#Issue_Number> - <Description>
 
 ##### 제목은 최대 50 글자까지만 입력 ############## -> |
 
