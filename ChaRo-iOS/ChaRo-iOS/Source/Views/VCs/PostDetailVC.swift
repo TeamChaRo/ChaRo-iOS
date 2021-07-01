@@ -9,6 +9,8 @@ import UIKit
 
 class PostDetailVC: UIViewController {
 
+    @IBOutlet weak var postDetailTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
