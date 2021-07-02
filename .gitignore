@@ -108,4 +108,6 @@ iOSInjectionProject/
 #delete DS_Store
 .DS_Store
 
+#Delete Pods/
+*/Pods/
 
