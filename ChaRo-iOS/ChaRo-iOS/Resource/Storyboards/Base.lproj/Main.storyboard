@@ -21,7 +21,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="51" y="89"/>
+=======
+            <point key="canvasLocation" x="-23" y="88"/>
+>>>>>>> feature/12-make-home-animation-cell
         </scene>
     </scenes>
     <resources>
