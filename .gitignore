@@ -111,3 +111,5 @@ iOSInjectionProject/
 #Delete Pods/
 */Pods/
 
+#Delete TmapSDK
+*/TMapSDK.framework 
