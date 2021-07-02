@@ -112,4 +112,7 @@ iOSInjectionProject/
 */Pods/
 
 #Delete TmapSDK
-*/TMapSDK.framework 
+*/TMapSDK.framework
+
+#Delete privacy file
+*/MapService.swift 
