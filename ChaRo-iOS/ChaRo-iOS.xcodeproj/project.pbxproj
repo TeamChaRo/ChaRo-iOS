@@ -20,10 +20,29 @@
 		3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */; };
 		3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF2268B14A800C41BB8 /* Extension+UIColor.swift */; };
 		3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF6268B14E300C41BB8 /* Extension+UIFont.swift */; };
+		3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */; };
+		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
+		3CB9BE76268F5BFA00EB85CB /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE75268F5BF900EB85CB /* MapService.swift */; };
+		3CB9BE78268F5CD900EB85CB /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */; };
+		3CB9BE79268F5CD900EB85CB /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		449A45BF0EF5CBE8FDD57938 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3CB9BE7A268F5CD900EB85CB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3CB9BE79268F5CD900EB85CB /* TMapSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -42,6 +61,10 @@
 		3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionView.swift"; sourceTree = "<group>"; };
 		3C879BF2268B14A800C41BB8 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		3C879BF6268B14E300C41BB8 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
+		3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
+		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
+		3CB9BE75268F5BF900EB85CB /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F49DE530268E124F00A8185C /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
@@ -54,6 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				449A45BF0EF5CBE8FDD57938 /* Pods_ChaRo_iOS.framework in Frameworks */,
+				3CB9BE78268F5CD900EB85CB /* TMapSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +151,7 @@
 				3C71FEB126881DAB007E8EAD /* LaunchScreen.storyboard */,
 				36BBD926268DE936008D8AD3 /* Home.storyboard */,
 				F49DE530268E124F00A8185C /* PostDetail.storyboard */,
+				3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -169,6 +194,7 @@
 		3C879BE6268B13A400C41BB8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3CB9BE75268F5BF900EB85CB /* MapService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -196,6 +222,7 @@
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
+				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -217,6 +244,7 @@
 		B487CF7DF5B6E959347E9909 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */,
 				D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */,
 			);
 			name = Frameworks;
@@ -234,6 +262,7 @@
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
 				D65DEDEA4CC73F43A39F0B60 /* [CP] Embed Pods Frameworks */,
+				3CB9BE7A268F5CD900EB85CB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -281,6 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */,
 				3C71FEB326881DAB007E8EAD /* LaunchScreen.storyboard in Resources */,
 				3C71FEB026881DAB007E8EAD /* Assets.xcassets in Resources */,
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
@@ -340,12 +370,14 @@
 			files = (
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
+				3CB9BE76268F5BFA00EB85CB /* MapService.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
+				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */,
 			);
@@ -497,7 +529,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J8A843466G;
-				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Resource/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "ChaRo-iOS/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -517,7 +553,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J8A843466G;
-				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Resource/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "ChaRo-iOS/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
