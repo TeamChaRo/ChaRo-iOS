@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36BBD926268DE936008D8AD3 /* Home.storyboard */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
+		36BBD92C268EAE30008D8AD3 /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD92A268EAE30008D8AD3 /* HomeAnimationTVC.swift */; };
+		36BBD92D268EAE30008D8AD3 /* HomeAnimationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BBD92B268EAE30008D8AD3 /* HomeAnimationTVC.xib */; };
+		36BBD934268EB454008D8AD3 /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD932268EB454008D8AD3 /* HomeAnimationCVC.swift */; };
+		36BBD935268EB454008D8AD3 /* HomeAnimationCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BBD933268EB454008D8AD3 /* HomeAnimationCVC.xib */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
@@ -48,6 +52,10 @@
 		0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		36BBD926268DE936008D8AD3 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		36BBD92A268EAE30008D8AD3 /* HomeAnimationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeAnimationTVC.swift; path = "ChaRo-iOS/Source/Views/VCs/HomeAnimationTVC.swift"; sourceTree = SOURCE_ROOT; };
+		36BBD92B268EAE30008D8AD3 /* HomeAnimationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeAnimationTVC.xib; path = "ChaRo-iOS/Resource/Xibs/HomeAnimationTVC.xib"; sourceTree = SOURCE_ROOT; };
+		36BBD932268EB454008D8AD3 /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeAnimationCVC.swift; path = "ChaRo-iOS/Source/Views/VCs/HomeAnimationCVC.swift"; sourceTree = SOURCE_ROOT; };
+		36BBD933268EB454008D8AD3 /* HomeAnimationCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HomeAnimationCVC.xib; path = "ChaRo-iOS/Resource/Xibs/HomeAnimationCVC.xib"; sourceTree = SOURCE_ROOT; };
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +167,8 @@
 		3C879BE2268B134400C41BB8 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				36BBD933268EB454008D8AD3 /* HomeAnimationCVC.xib */,
+				36BBD92B268EAE30008D8AD3 /* HomeAnimationTVC.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -230,6 +240,8 @@
 		3C879BEA268B13C800C41BB8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				36BBD92A268EAE30008D8AD3 /* HomeAnimationTVC.swift */,
+				36BBD932268EB454008D8AD3 /* HomeAnimationCVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -312,9 +324,11 @@
 			files = (
 				3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */,
 				3C71FEB326881DAB007E8EAD /* LaunchScreen.storyboard in Resources */,
+				36BBD92D268EAE30008D8AD3 /* HomeAnimationTVC.xib in Resources */,
 				3C71FEB026881DAB007E8EAD /* Assets.xcassets in Resources */,
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
+				36BBD935268EB454008D8AD3 /* HomeAnimationCVC.xib in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,7 +385,9 @@
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3CB9BE76268F5BFA00EB85CB /* MapService.swift in Sources */,
+				36BBD934268EB454008D8AD3 /* HomeAnimationCVC.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
+				36BBD92C268EAE30008D8AD3 /* HomeAnimationTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,

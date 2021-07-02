@@ -9,21 +9,41 @@ import UIKit
 
 class HomeVC: UIViewController {
 
+    @IBOutlet weak var HomeTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTableView()
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setTableView(){
+        HomeTableView.registerCustomXib(xibName: "HomeAnimationTVC")
+        HomeTableView.delegate = self
+        HomeTableView.dataSource = self
     }
-    */
+}
 
+extension HomeVC : UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
+        let width = UIScreen.main.bounds.width
+        let heigth = UIScreen.main.bounds.height/2
+        return heigth
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let homeTableViewCell = tableView.dequeueReusableCell(withIdentifier: HomeAnimationTVC.identifier) as? HomeAnimationTVC else {return UITableViewCell()}
+        homeTableViewCell.setDelegate()
+        
+        return homeTableViewCell
+    }
+    
+    
 }

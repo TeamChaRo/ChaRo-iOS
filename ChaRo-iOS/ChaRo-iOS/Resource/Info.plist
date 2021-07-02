@@ -34,7 +34,11 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
+<<<<<<< HEAD
 					<string>Tabbar</string>
+=======
+					<string>Home</string>
+>>>>>>> feature/12-make-home-animation-cell
 				</dict>
 			</array>
 		</dict>
