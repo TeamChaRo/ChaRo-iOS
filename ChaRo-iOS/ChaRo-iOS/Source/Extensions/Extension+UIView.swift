@@ -8,6 +8,12 @@
 import UIKit
 
 extension UIView{
-    public func getsize(){}
+    func addSubviews(_ views: [UIView]) {
+        views.forEach { self.addSubview($0) }
+    }
+    
+    func removeAllSubViews() {
+        self.subviews.forEach { $0.removeFromSuperview() }
+    }
 }
 
