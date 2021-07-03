@@ -116,5 +116,5 @@ iOSInjectionProject/
 
 #Delete privacy file
 */MapService.swift 
-./ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
-ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
+#./ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
+#ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
