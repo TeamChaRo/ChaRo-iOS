@@ -32,10 +32,12 @@
 		3CB9BE76268F5BFA00EB85CB /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE75268F5BF900EB85CB /* MapService.swift */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
+		F49DE535268F6CFE00A8185C /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */; };
+		F49DE536268F6CFE00A8185C /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		36D5FD1D268F72F100BCCB33 /* Embed Frameworks */ = {
+		F49DE537268F6CFE00A8185C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
