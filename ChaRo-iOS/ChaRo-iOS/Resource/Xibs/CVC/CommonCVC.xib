@@ -42,7 +42,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="2sD-al-a4M"/>
                                     <constraint firstItem="GEb-WK-bhg" firstAttribute="centerX" secondItem="fGZ-7n-txT" secondAttribute="centerX" id="CzI-B8-KqJ"/>
@@ -60,7 +60,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="UdA-GW-gzR"/>
                                     <constraint firstItem="as3-If-mLO" firstAttribute="centerX" secondItem="zzP-kr-qSQ" secondAttribute="centerX" id="Z0D-Vf-Euv"/>
@@ -78,7 +78,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstItem="DwB-k6-HwC" firstAttribute="centerY" secondItem="jEC-oy-FkY" secondAttribute="centerY" id="3RA-6p-Bds"/>
                                     <constraint firstItem="DwB-k6-HwC" firstAttribute="centerX" secondItem="jEC-oy-FkY" secondAttribute="centerX" id="KRq-Kh-vSy"/>
@@ -88,6 +88,14 @@
                             </view>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xT-Yy-Ygg">
+                        <rect key="frame" x="218" y="0.0" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="JE8-f1-sUT"/>
+                            <constraint firstAttribute="width" constant="48" id="eEo-N5-D2B"/>
+                        </constraints>
+                        <state key="normal" image="icHeartWhiteLine"/>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -97,8 +105,10 @@
                 <constraint firstItem="kds-Zc-lX5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ipa-mH-bGf"/>
                 <constraint firstItem="BRj-TE-ZDO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NeD-Au-6IT"/>
                 <constraint firstItem="bb5-sj-Y94" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NoT-6n-1Y3"/>
+                <constraint firstItem="3xT-Yy-Ygg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Ryw-Uq-8GQ"/>
                 <constraint firstAttribute="trailing" secondItem="kds-Zc-lX5" secondAttribute="trailing" id="SEG-32-m7o"/>
                 <constraint firstAttribute="trailing" secondItem="BRj-TE-ZDO" secondAttribute="trailing" id="hIt-Q7-hLn"/>
+                <constraint firstAttribute="trailing" secondItem="3xT-Yy-Ygg" secondAttribute="trailing" id="imK-kU-maw"/>
                 <constraint firstItem="kds-Zc-lX5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kfb-YS-ErK"/>
                 <constraint firstItem="BRj-TE-ZDO" firstAttribute="top" secondItem="kds-Zc-lX5" secondAttribute="bottom" id="rBl-ml-mIP"/>
                 <constraint firstItem="bb5-sj-Y94" firstAttribute="top" secondItem="BRj-TE-ZDO" secondAttribute="bottom" id="sPt-tw-OfP"/>
@@ -113,8 +123,9 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <image name="icHeartWhiteLine" width="48" height="48"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
