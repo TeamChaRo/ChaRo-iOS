@@ -47,7 +47,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
             return UIScreen.main.bounds.height * 0.2
         case 3:
             //일단 몰라서 고정
-            return 500
+            return 600
         default:
             return 100
         }
