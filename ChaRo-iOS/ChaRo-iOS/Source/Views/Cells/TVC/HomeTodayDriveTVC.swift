@@ -15,7 +15,7 @@ class HomeTodayDriveTVC: UITableViewCell {
     
     
     //MARK:- Variable
-    static let identifier = "TodayDriveTVC"
+    static let identifier = "HomeTodayDriveTVC"
     
     
     //MARK:- Life Cycle
@@ -35,7 +35,7 @@ class HomeTodayDriveTVC: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerCustomXib(xibName: "TodayDriveCVC")
+        collectionView.registerCustomXib(xibName: "HomeTodayDriveTVC")
     
     }
     
