@@ -70,6 +70,15 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         return 14
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        if section == 0 {
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        }
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+    }
+    
     
     
 }
