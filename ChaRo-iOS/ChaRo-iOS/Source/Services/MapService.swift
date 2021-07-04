@@ -2,15 +2,14 @@
 //  MapService.swift
 //  ChaRo-iOS
 //
-//  Created by 최인정 on 2021/07/03.
+//  Created by 최인정 on 2021/07/05.
 //
 
 import Foundation
 import TMapSDK
 
 class MapService {
-    static let mapkey = "l7xx5198cd793c144a218cedb62cb8d653f7" // 인정Key 딴사람 쓰지마센!@
-    static let serverURL = ""
+    static let mapkey = "l7xx5198cd793c144a218cedb62cb8d653f7" //인정key
     static public var mapView: TMapView?
     static var isAuthorized = false
     
