@@ -35,7 +35,7 @@ class HomeTodayDriveTVC: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerCustomXib(xibName: "HomeTodayDriveTVC")
+        collectionView.registerCustomXib(xibName: "CommonCVC")
     
     }
     
@@ -57,7 +57,7 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
     
-        //cell.imageView.image = UIImage(named: "tempImageBig")
+        cell.imageView.image = UIImage(named: "tempImageBig")
         return cell
         
     }

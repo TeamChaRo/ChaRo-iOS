@@ -28,7 +28,7 @@ class HomeSquareTVC: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerCustomXib(xibName: "HomeSquareTVC")
+        collectionView.registerCustomXib(xibName: "CommonCVC")
         
     }
     
@@ -54,7 +54,7 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
-        //cell.imageView.image = UIImage(named: "tempImageSmall")
+        cell.imageView.image = UIImage(named: "tempImageSmall")
         
         return cell
         

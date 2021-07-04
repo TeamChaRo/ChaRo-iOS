@@ -14,7 +14,7 @@ class HomeThemeTVC: UITableViewCell {
     
     
     //MARK:- Variable
-    static let identifier = "HomeThemeCVC"
+    static let identifier = "HomeThemeTVC"
     
     
     //MARK:- Life Cycle
@@ -35,7 +35,7 @@ class HomeThemeTVC: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerCustomXib(xibName: "HomeThemeTVC")
+        collectionView.registerCustomXib(xibName: "HomeThemeCVC")
     
     }
     
