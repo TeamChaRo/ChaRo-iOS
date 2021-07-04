@@ -15,7 +15,6 @@
 		36BBD935268EB454008D8AD3 /* HomeAnimationCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BBD933268EB454008D8AD3 /* HomeAnimationCVC.xib */; };
 		36D5FD16268F729E00BCCB33 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */; };
 		36D5FD1B268F72F100BCCB33 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; };
-		36D5FD1C268F72F100BCCB33 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
@@ -32,23 +31,10 @@
 		3CB9BE76268F5BFA00EB85CB /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE75268F5BF900EB85CB /* MapService.swift */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
-		F49DE535268F6CFE00A8185C /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */; };
-		F49DE536268F6CFE00A8185C /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F49DE5392690251500A8185C /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE5382690251400A8185C /* MapService.swift */; };
+		F49DE53C26903F3800A8185C /* PostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE53A26903F3800A8185C /* PostTitleTVC.swift */; };
+		F49DE53D26903F3800A8185C /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49DE53B26903F3800A8185C /* PostTitleTVC.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F49DE537268F6CFE00A8185C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				36D5FD1C268F72F100BCCB33 /* TMapSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,6 +66,9 @@
 		DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F49DE530268E124F00A8185C /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		F49DE5382690251400A8185C /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		F49DE53A26903F3800A8185C /* PostTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostTitleTVC.swift; path = "ChaRo-iOS/Source/Views/PostTitleTVC.swift"; sourceTree = SOURCE_ROOT; };
+		F49DE53B26903F3800A8185C /* PostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PostTitleTVC.xib; path = "ChaRo-iOS/Resource/Xibs/PostTitleTVC.xib"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +160,7 @@
 		3C879BE2268B134400C41BB8 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				F49DE53B26903F3800A8185C /* PostTitleTVC.xib */,
 				36BBD933268EB454008D8AD3 /* HomeAnimationCVC.xib */,
 				36BBD92B268EAE30008D8AD3 /* HomeAnimationTVC.xib */,
 			);
@@ -209,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB9BE75268F5BF900EB85CB /* MapService.swift */,
+				F49DE5382690251400A8185C /* MapService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -246,6 +237,7 @@
 			children = (
 				36BBD92A268EAE30008D8AD3 /* HomeAnimationTVC.swift */,
 				36BBD932268EB454008D8AD3 /* HomeAnimationCVC.swift */,
+				F49DE53A26903F3800A8185C /* PostTitleTVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -278,7 +270,6 @@
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
 				D65DEDEA4CC73F43A39F0B60 /* [CP] Embed Pods Frameworks */,
-				36D5FD1D268F72F100BCCB33 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -333,6 +324,7 @@
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
 				36BBD935268EB454008D8AD3 /* HomeAnimationCVC.xib in Resources */,
+				F49DE53D26903F3800A8185C /* PostTitleTVC.xib in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,9 +380,11 @@
 			files = (
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
+				F49DE53C26903F3800A8185C /* PostTitleTVC.swift in Sources */,
 				3CB9BE76268F5BFA00EB85CB /* MapService.swift in Sources */,
 				36BBD934268EB454008D8AD3 /* HomeAnimationCVC.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
+				F49DE5392690251500A8185C /* MapService.swift in Sources */,
 				36BBD92C268EAE30008D8AD3 /* HomeAnimationTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
