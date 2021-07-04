@@ -12,7 +12,7 @@
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="PostTitleTVC" selectionStyle="default" indentationWidth="10" rowHeight="139" id="KGk-i7-Jjw" customClass="PostTitleTVC" customModule="ChaRo_iOS" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -59,7 +59,6 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="iHb-1q-F8F" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" constant="12" id="8KQ-SA-Yuv"/>
                     <constraint firstAttribute="trailing" secondItem="RNb-S2-wkJ" secondAttribute="trailing" constant="20" id="CvP-QY-WD6"/>
                     <constraint firstItem="RNb-S2-wkJ" firstAttribute="bottom" secondItem="Hwn-iA-eT9" secondAttribute="bottom" constant="2" id="DKA-pI-H75"/>
                     <constraint firstItem="12s-wk-X8J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Juu-zI-I8N"/>
