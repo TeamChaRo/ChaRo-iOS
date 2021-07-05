@@ -41,7 +41,7 @@ class HomeAnimationTVC: UITableViewCell {
         let pageCount : Int = 4
 
         if scrollView.contentOffset.x > 0{
-               if scrollView.contentOffset.x < 1000 {
+               if scrollView.contentOffset.x < 10000 {
                 carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
                } else {
                 carMoveConstraint.constant = originalCarConstant
