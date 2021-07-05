@@ -47,7 +47,6 @@
                                     <constraint firstAttribute="height" constant="17" id="2sD-al-a4M"/>
                                     <constraint firstItem="GEb-WK-bhg" firstAttribute="centerX" secondItem="fGZ-7n-txT" secondAttribute="centerX" id="CzI-B8-KqJ"/>
                                     <constraint firstItem="GEb-WK-bhg" firstAttribute="centerY" secondItem="fGZ-7n-txT" secondAttribute="centerY" id="ZkN-Nu-YIW"/>
-                                    <constraint firstAttribute="width" constant="70" id="fCW-fv-jk8"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzP-kr-qSQ">
@@ -65,7 +64,6 @@
                                     <constraint firstAttribute="height" constant="17" id="UdA-GW-gzR"/>
                                     <constraint firstItem="as3-If-mLO" firstAttribute="centerX" secondItem="zzP-kr-qSQ" secondAttribute="centerX" id="Z0D-Vf-Euv"/>
                                     <constraint firstItem="as3-If-mLO" firstAttribute="centerY" secondItem="zzP-kr-qSQ" secondAttribute="centerY" id="m89-Oc-dhw"/>
-                                    <constraint firstAttribute="width" constant="70" id="rnm-Du-oUA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEC-oy-FkY">
@@ -83,7 +81,6 @@
                                     <constraint firstItem="DwB-k6-HwC" firstAttribute="centerY" secondItem="jEC-oy-FkY" secondAttribute="centerY" id="3RA-6p-Bds"/>
                                     <constraint firstItem="DwB-k6-HwC" firstAttribute="centerX" secondItem="jEC-oy-FkY" secondAttribute="centerX" id="KRq-Kh-vSy"/>
                                     <constraint firstAttribute="height" constant="17" id="VNX-Ub-W5K"/>
-                                    <constraint firstAttribute="width" constant="70" id="f4a-o2-GzV"/>
                                 </constraints>
                             </view>
                         </subviews>
