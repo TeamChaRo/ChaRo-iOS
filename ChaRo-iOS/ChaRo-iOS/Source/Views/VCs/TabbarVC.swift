@@ -24,7 +24,7 @@ class TabbarVC: UITabBarController {
                               width:  self.view.frame.size.width,
                               height: 150)
         // 이 로그는 나중에 지울게요!
-       customTabbar.backgroundImage = UIImage(named: "tabbarBackground")
+       //customTabbar.backgroundImage = UIImage(named: "tabbarBackground")
 //        newFrame.size.height = 150
 //        newFrame.origin.y = self.view.frame.size.height - newFrame.size.height
         customTabbar.frame = newFrame
