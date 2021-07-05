@@ -45,6 +45,17 @@
 		3CA1CEA52692D10D00D0AFAF /* PostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CEA42692D10D00D0AFAF /* PostTitleTVC.swift */; };
 		3CA1CEAC2692E9BC00D0AFAF /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */; };
 		3CA1CEAD2692E9BC00D0AFAF /* PostAttentionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CEAB2692E9BC00D0AFAF /* PostAttentionTVC.xib */; };
+		3CA1CED12693826000D0AFAF /* NotoSansMonoCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CEC62693826000D0AFAF /* NotoSansMonoCJKkr-Bold.otf */; };
+		3CA1CED22693826000D0AFAF /* NotoSansMonoCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CEC72693826000D0AFAF /* NotoSansMonoCJKkr-Regular.otf */; };
+		3CA1CED32693826000D0AFAF /* NotoSansCJKkr-DemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CEC82693826000D0AFAF /* NotoSansCJKkr-DemiLight.otf */; };
+		3CA1CED42693826000D0AFAF /* NotoSansCJKkr-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CEC92693826000D0AFAF /* NotoSansCJKkr-Black.otf */; };
+		3CA1CED52693826000D0AFAF /* NotoSansCJKkr-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CECA2693826000D0AFAF /* NotoSansCJKkr-Medium.otf */; };
+		3CA1CED62693826000D0AFAF /* README in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CECB2693826000D0AFAF /* README */; };
+		3CA1CED72693826000D0AFAF /* NotoSansCJKkr-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CECC2693826000D0AFAF /* NotoSansCJKkr-Light.otf */; };
+		3CA1CED82693826000D0AFAF /* NotoSansCJKkr-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CECD2693826000D0AFAF /* NotoSansCJKkr-Thin.otf */; };
+		3CA1CED92693826000D0AFAF /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CECE2693826000D0AFAF /* NotoSansCJKkr-Regular.otf */; };
+		3CA1CEDA2693826000D0AFAF /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CECF2693826000D0AFAF /* NotoSansCJKkr-Bold.otf */; };
+		3CA1CEDB2693826000D0AFAF /* LICENSE_OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CED02693826000D0AFAF /* LICENSE_OFL.txt */; };
 		3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* Extension+UITextFeild.swift */; };
 		3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
@@ -108,6 +119,17 @@
 		3CA1CEA42692D10D00D0AFAF /* PostTitleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleTVC.swift; sourceTree = "<group>"; };
 		3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
 		3CA1CEAB2692E9BC00D0AFAF /* PostAttentionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostAttentionTVC.xib; sourceTree = "<group>"; };
+		3CA1CEC62693826000D0AFAF /* NotoSansMonoCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMonoCJKkr-Bold.otf"; sourceTree = "<group>"; };
+		3CA1CEC72693826000D0AFAF /* NotoSansMonoCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMonoCJKkr-Regular.otf"; sourceTree = "<group>"; };
+		3CA1CEC82693826000D0AFAF /* NotoSansCJKkr-DemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-DemiLight.otf"; sourceTree = "<group>"; };
+		3CA1CEC92693826000D0AFAF /* NotoSansCJKkr-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Black.otf"; sourceTree = "<group>"; };
+		3CA1CECA2693826000D0AFAF /* NotoSansCJKkr-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Medium.otf"; sourceTree = "<group>"; };
+		3CA1CECB2693826000D0AFAF /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		3CA1CECC2693826000D0AFAF /* NotoSansCJKkr-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Light.otf"; sourceTree = "<group>"; };
+		3CA1CECD2693826000D0AFAF /* NotoSansCJKkr-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Thin.otf"; sourceTree = "<group>"; };
+		3CA1CECE2693826000D0AFAF /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
+		3CA1CECF2693826000D0AFAF /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
+		3CA1CED02693826000D0AFAF /* LICENSE_OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_OFL.txt; sourceTree = "<group>"; };
 		3CB315702690494700E3A101 /* Extension+UITextFeild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextFeild.swift"; sourceTree = "<group>"; };
 		3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
@@ -204,6 +226,7 @@
 		3C879BE0268B132C00C41BB8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3CA1CEC52693826000D0AFAF /* Font */,
 				3C71FEAF26881DAB007E8EAD /* Assets.xcassets */,
 				3C71FEB426881DAB007E8EAD /* Info.plist */,
 				3C879BE2268B134400C41BB8 /* Xibs */,
@@ -348,6 +371,24 @@
 			path = TVC;
 			sourceTree = "<group>";
 		};
+		3CA1CEC52693826000D0AFAF /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				3CA1CEC62693826000D0AFAF /* NotoSansMonoCJKkr-Bold.otf */,
+				3CA1CEC72693826000D0AFAF /* NotoSansMonoCJKkr-Regular.otf */,
+				3CA1CEC82693826000D0AFAF /* NotoSansCJKkr-DemiLight.otf */,
+				3CA1CEC92693826000D0AFAF /* NotoSansCJKkr-Black.otf */,
+				3CA1CECA2693826000D0AFAF /* NotoSansCJKkr-Medium.otf */,
+				3CA1CECB2693826000D0AFAF /* README */,
+				3CA1CECC2693826000D0AFAF /* NotoSansCJKkr-Light.otf */,
+				3CA1CECD2693826000D0AFAF /* NotoSansCJKkr-Thin.otf */,
+				3CA1CECE2693826000D0AFAF /* NotoSansCJKkr-Regular.otf */,
+				3CA1CECF2693826000D0AFAF /* NotoSansCJKkr-Bold.otf */,
+				3CA1CED02693826000D0AFAF /* LICENSE_OFL.txt */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		B487CF7DF5B6E959347E9909 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,15 +460,26 @@
 			files = (
 				3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */,
 				3C71FEB326881DAB007E8EAD /* LaunchScreen.storyboard in Resources */,
+				3CA1CED72693826000D0AFAF /* NotoSansCJKkr-Light.otf in Resources */,
 				3CA1CE962692C80000D0AFAF /* HomeAnimationCVC.xib in Resources */,
 				3CA1CE9D2692C81800D0AFAF /* HomeAnimationTVC.xib in Resources */,
+				3CA1CEDB2693826000D0AFAF /* LICENSE_OFL.txt in Resources */,
+				3CA1CED92693826000D0AFAF /* NotoSansCJKkr-Regular.otf in Resources */,
+				3CA1CED12693826000D0AFAF /* NotoSansMonoCJKkr-Bold.otf in Resources */,
 				3CA1CE9E2692C81800D0AFAF /* HomeTodayDriveTVC.xib in Resources */,
+				3CA1CED22693826000D0AFAF /* NotoSansMonoCJKkr-Regular.otf in Resources */,
 				3C71FEB026881DAB007E8EAD /* Assets.xcassets in Resources */,
+				3CA1CED52693826000D0AFAF /* NotoSansCJKkr-Medium.otf in Resources */,
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				3CA1CE952692C80000D0AFAF /* HomeThemeCVC.xib in Resources */,
+				3CA1CED42693826000D0AFAF /* NotoSansCJKkr-Black.otf in Resources */,
+				3CA1CED62693826000D0AFAF /* README in Resources */,
 				3CA1CE9F2692C81800D0AFAF /* HomeSquareTVC.xib in Resources */,
+				3CA1CED82693826000D0AFAF /* NotoSansCJKkr-Thin.otf in Resources */,
+				3CA1CEDA2693826000D0AFAF /* NotoSansCJKkr-Bold.otf in Resources */,
 				3CA1CE972692C80000D0AFAF /* CommonCVC.xib in Resources */,
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
+				3CA1CED32693826000D0AFAF /* NotoSansCJKkr-DemiLight.otf in Resources */,
 				3CA1CEA02692C81800D0AFAF /* HomeThemeTVC.xib in Resources */,
 				F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */,
 				3C3AF5F226902AC10099B684 /* PostParkingTVC.xib in Resources */,
