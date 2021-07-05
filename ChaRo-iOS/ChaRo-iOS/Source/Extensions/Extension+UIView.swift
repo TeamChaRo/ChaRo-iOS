@@ -17,14 +17,10 @@ extension UIView{
     }
     
     func getDeviceHeight() -> Int{
-        let screenBounds = UIScreen.main.bounds
-        let screenHeight = screenBounds.height
-        return Int(screenHeight)
+        return Int(UIScreen.main.bounds.height)
         }
     func getDeviceWidth() -> Int{
-        let screenBounds = UIScreen.main.bounds
-        let screenWidth = screenBounds.width
-        return Int(screenWidth)
+        return Int(UIScreen.main.bounds.width)
     }
 
 }

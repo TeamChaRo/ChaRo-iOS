@@ -143,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				3610A8902693730700EFC794 /* CVC */,
-				3610A8942693730700EFC794 /* PostTitleTVC.swift */,
 				3610A8952693730700EFC794 /* TVC */,
 			);
 			path = Cells;
@@ -162,6 +161,7 @@
 		3610A8952693730700EFC794 /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				3610A8942693730700EFC794 /* PostTitleTVC.swift */,
 				3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */,
 				3610A8972693730700EFC794 /* HomeSquareTVC.swift */,
 				3610A8982693730700EFC794 /* HomeThemeTVC.swift */,

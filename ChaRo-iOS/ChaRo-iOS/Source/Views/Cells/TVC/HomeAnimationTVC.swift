@@ -36,12 +36,13 @@ class HomeAnimationTVC: UITableViewCell {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //여기부분 약간 수정해야됨,,, 기기마다 몬가 값이 다 다를거같아서 일단 보류!
-        let userWidth = homeAnimationView.getDeviceWidth()
         let originalCarConstant = carMoveConstraint.constant
+        let sideMargin : CGFloat = 24
+        let pageCount : Int = 4
 
         if scrollView.contentOffset.x > 0{
-               if scrollView.contentOffset.x < 10000 {
-                carMoveConstraint.constant = (scrollView.contentOffset.x - 24)/4
+               if scrollView.contentOffset.x < 1000 {
+                carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/pageCount
                } else {
                 carMoveConstraint.constant = originalCarConstant
                }
