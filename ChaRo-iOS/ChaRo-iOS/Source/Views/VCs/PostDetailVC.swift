@@ -85,7 +85,7 @@ extension PostDetailVC: UITableViewDataSource {
     
     func getPostAttensionCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostAttentionTVC.identifier) as? PostAttentionTVC else { return UITableViewCell()}
-        cell.setAttentionList(list: [true,true,true,false])
+        cell.setAttentionList(list: [true,false,false,true])
         return cell
     }
     
