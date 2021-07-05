@@ -35,7 +35,7 @@ class CommonCVC: UICollectionViewCell {
 //        tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
 //        tagLabel2.font = UIFont.notoSansRegularFont(ofSize: 10)
 //        tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
-//
+
         tagLabel1.textColor = UIColor.mainBlue
         tagLabel2.textColor = UIColor.mainBlue
         tagLabel3.textColor = UIColor.mainBlue
