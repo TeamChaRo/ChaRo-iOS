@@ -36,5 +36,8 @@ class PostCellTitleView: UIView {
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(self.snp.leading)
         }
+        
+        titleLabel.font = UIFont.notoSansBoldFont(ofSize: 16)
+        titleLabel.textColor = UIColor.mainBlack
     }
 }
