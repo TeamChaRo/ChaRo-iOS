@@ -11,6 +11,8 @@ import SnapKit
 class PostAttentionTVC: UITableViewCell {
 
     static let identifier = "PostAttentionTVC"
+    private let deviceWidthRate = UIScreen.main.bounds.width / 375
+    private let deviceHeightRate = UIScreen.main.bounds.height / 812
     public var attentionList = [false, false, false, false]
     
     
@@ -96,6 +98,9 @@ class PostAttentionTVC: UITableViewCell {
                      beginnerButton,
                      peopleButton])
         
+        let customHeight = Int(65*deviceHeightRate)
+        let customGap = Int(181*deviceWidthRate)
+        
         titleView.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(self.snp.leading).offset(20)
@@ -104,31 +109,31 @@ class PostAttentionTVC: UITableViewCell {
         }
         
         highwayButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(-5)
-            make.leading.equalTo(self.snp.leading).offset(5)
-            make.trailing.equalTo(self.snp.trailing).offset(-180)
-            make.height.equalTo(65)
+            make.top.equalTo(titleView.snp.bottom)
+            make.leading.equalTo(self.snp.leading).offset(7)
+            make.trailing.equalTo(self.snp.trailing).offset(-customGap)
+            make.height.equalTo(customHeight)
         }
         
         mountainButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(-5)
-            make.leading.equalTo(self.snp.leading).offset(180)
-            make.trailing.equalTo(self.snp.trailing).offset(-5)
-            make.height.equalTo(65)
+            make.top.equalTo(titleView.snp.bottom)
+            make.leading.equalTo(self.snp.leading).offset(customGap)
+            make.trailing.equalTo(self.snp.trailing).offset(-7)
+            make.height.equalTo(customHeight)
         }
         
         beginnerButton.snp.makeConstraints{make in
-            make.leading.equalTo(self.snp.leading).offset(5)
-            make.trailing.equalTo(self.snp.trailing).offset(-180)
+            make.leading.equalTo(self.snp.leading).offset(7)
+            make.trailing.equalTo(self.snp.trailing).offset(-customGap)
             make.bottom.equalTo(self.snp.bottom).offset(-21)
-            make.height.equalTo(65)
+            make.height.equalTo(customHeight)
         }
         
         peopleButton.snp.makeConstraints{make in
-            make.leading.equalTo(self.snp.leading).offset(180)
-            make.trailing.equalTo(self.snp.trailing).offset(-5)
+            make.leading.equalTo(self.snp.leading).offset(customGap)
+            make.trailing.equalTo(self.snp.trailing).offset(-7)
             make.bottom.equalTo(self.snp.bottom).offset(-21)
-            make.height.equalTo(65)
+            make.height.equalTo(customHeight)
         }
     }
     
