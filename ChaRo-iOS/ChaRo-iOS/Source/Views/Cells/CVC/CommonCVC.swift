@@ -27,8 +27,19 @@ class CommonCVC: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setTagUI()
+        setLabelUI()
     }
     
+    func setLabelUI() {
+        titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
+        tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
+        tagLabel2.font = UIFont.notoSansRegularFont(ofSize: 10)
+        tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
+        
+        tagLabel1.textColor = UIColor.mainBlue
+        tagLabel2.textColor = UIColor.mainBlue
+        tagLabel3.textColor = UIColor.mainBlue
+    }
     
     func setTagUI() {
         
