@@ -11,6 +11,7 @@ class HomeThemeTVC: UITableViewCell {
 
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var TitleLabel: UILabel!
     
     
     //MARK:- Variable
@@ -21,6 +22,7 @@ class HomeThemeTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollctionView()
+        setLabelUI()
     }
     
 
@@ -37,6 +39,14 @@ class HomeThemeTVC: UITableViewCell {
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "HomeThemeCVC")
     
+    }
+    
+    func setLabelUI() {
+        
+        TitleLabel.text = "테마"
+        TitleLabel.textColor = UIColor.mainBlack
+        //TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        
     }
     
     //MARK:- Function
