@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		365AB61A2692F8A700019DC1 /* CommonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6112692F8A700019DC1 /* CommonCVC.swift */; };
+		365AB61B2692F8A700019DC1 /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6122692F8A700019DC1 /* HomeAnimationCVC.swift */; };
+		365AB61C2692F8A700019DC1 /* HomeThemeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6132692F8A700019DC1 /* HomeThemeCVC.swift */; };
+		365AB61D2692F8A700019DC1 /* PostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6142692F8A700019DC1 /* PostTitleTVC.swift */; };
+		365AB61E2692F8A700019DC1 /* HomeTodayDriveTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6162692F8A700019DC1 /* HomeTodayDriveTVC.swift */; };
+		365AB61F2692F8A700019DC1 /* HomeSquareTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6172692F8A700019DC1 /* HomeSquareTVC.swift */; };
+		365AB6202692F8A700019DC1 /* HomeThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6182692F8A700019DC1 /* HomeThemeTVC.swift */; };
+		365AB6212692F8A700019DC1 /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365AB6192692F8A700019DC1 /* HomeAnimationTVC.swift */; };
+		365AB62D2692F8C700019DC1 /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB6232692F8C700019DC1 /* PostTitleTVC.xib */; };
+		365AB62E2692F8C700019DC1 /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB6252692F8C700019DC1 /* HomeThemeCVC.xib */; };
+		365AB62F2692F8C700019DC1 /* HomeAnimationCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB6262692F8C700019DC1 /* HomeAnimationCVC.xib */; };
+		365AB6302692F8C700019DC1 /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB6272692F8C700019DC1 /* CommonCVC.xib */; };
+		365AB6312692F8C700019DC1 /* HomeAnimationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB6292692F8C700019DC1 /* HomeAnimationTVC.xib */; };
+		365AB6322692F8C700019DC1 /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB62A2692F8C700019DC1 /* HomeTodayDriveTVC.xib */; };
+		365AB6332692F8C700019DC1 /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB62B2692F8C700019DC1 /* HomeSquareTVC.xib */; };
+		365AB6342692F8C700019DC1 /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365AB62C2692F8C700019DC1 /* HomeThemeTVC.xib */; };
+		369B01222692B117008AEDA7 /* Extension+UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369B01212692B117008AEDA7 /* Extension+UITableViewCell.swift */; };
 		36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36BBD926268DE936008D8AD3 /* Home.storyboard */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
 		36D5FD16268F729E00BCCB33 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */; };
@@ -70,6 +87,24 @@
 
 /* Begin PBXFileReference section */
 		0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		365AB6112692F8A700019DC1 /* CommonCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCVC.swift; sourceTree = "<group>"; };
+		365AB6122692F8A700019DC1 /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationCVC.swift; sourceTree = "<group>"; };
+		365AB6132692F8A700019DC1 /* HomeThemeCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeCVC.swift; sourceTree = "<group>"; };
+		365AB6142692F8A700019DC1 /* PostTitleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleTVC.swift; sourceTree = "<group>"; };
+		365AB6162692F8A700019DC1 /* HomeTodayDriveTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTodayDriveTVC.swift; sourceTree = "<group>"; };
+		365AB6172692F8A700019DC1 /* HomeSquareTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSquareTVC.swift; sourceTree = "<group>"; };
+		365AB6182692F8A700019DC1 /* HomeThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeTVC.swift; sourceTree = "<group>"; };
+		365AB6192692F8A700019DC1 /* HomeAnimationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationTVC.swift; sourceTree = "<group>"; };
+		365AB6232692F8C700019DC1 /* PostTitleTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
+		365AB6252692F8C700019DC1 /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
+		365AB6262692F8C700019DC1 /* HomeAnimationCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationCVC.xib; sourceTree = "<group>"; };
+		365AB6272692F8C700019DC1 /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
+		365AB6292692F8C700019DC1 /* HomeAnimationTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationTVC.xib; sourceTree = "<group>"; };
+		365AB62A2692F8C700019DC1 /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTodayDriveTVC.xib; sourceTree = "<group>"; };
+		365AB62B2692F8C700019DC1 /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSquareTVC.xib; sourceTree = "<group>"; };
+		365AB62C2692F8C700019DC1 /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeTVC.xib; sourceTree = "<group>"; };
+		369B01212692B117008AEDA7 /* Extension+UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UITableViewCell.swift"; sourceTree = "<group>"; };
+		36B4A65726935B8F00611FB4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36BBD926268DE936008D8AD3 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
@@ -84,7 +119,6 @@
 		3C71FEAD26881DAA007E8EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C71FEAF26881DAB007E8EAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C71FEB226881DAB007E8EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3C71FEB426881DAB007E8EAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C879BEC268B146300C41BB8 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
 		3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionView.swift"; sourceTree = "<group>"; };
@@ -137,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */,
+				B487CF7DF5B6E959347E9909 /* Frameworks */,
 				DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */,
 			);
 			path = Pods;
@@ -167,7 +202,6 @@
 				3C71FEA526881DAA007E8EAD /* ChaRo-iOS */,
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
-				B487CF7DF5B6E959347E9909 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				3C879BDF268B132300C41BB8 /* Source */,
-				3C879BE0268B132C00C41BB8 /* Resource */,
 			);
 			path = "ChaRo-iOS";
 			sourceTree = "<group>";
@@ -196,7 +229,6 @@
 				3C3AF5EB269024280099B684 /* Services */,
 				3C879BE8268B13B500C41BB8 /* Models */,
 				3C879BE7268B13AD00C41BB8 /* Views */,
-				3C879BE5268B139B00C41BB8 /* ViewModels */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -204,9 +236,9 @@
 		3C879BE0268B132C00C41BB8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				36B4A65726935B8F00611FB4 /* Info.plist */,
+				365AB6222692F8C700019DC1 /* Xibs */,
 				3C71FEAF26881DAB007E8EAD /* Assets.xcassets */,
-				3C71FEB426881DAB007E8EAD /* Info.plist */,
-				3C879BE2268B134400C41BB8 /* Xibs */,
 				3C879BE1268B133A00C41BB8 /* Storyboards */,
 			);
 			path = Resource;
@@ -284,6 +316,7 @@
 		3C879BE9268B13C300C41BB8 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				3C879BE0268B132C00C41BB8 /* Resource */,
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
@@ -355,6 +388,7 @@
 				D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */,
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,11 +452,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */,
+				365AB62E2692F8C700019DC1 /* HomeThemeCVC.xib in Resources */,
 				3C71FEB326881DAB007E8EAD /* LaunchScreen.storyboard in Resources */,
 				3CA1CE962692C80000D0AFAF /* HomeAnimationCVC.xib in Resources */,
 				3CA1CE9D2692C81800D0AFAF /* HomeAnimationTVC.xib in Resources */,
 				3CA1CE9E2692C81800D0AFAF /* HomeTodayDriveTVC.xib in Resources */,
 				3C71FEB026881DAB007E8EAD /* Assets.xcassets in Resources */,
+				365AB6302692F8C700019DC1 /* CommonCVC.xib in Resources */,
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				3CA1CE952692C80000D0AFAF /* HomeThemeCVC.xib in Resources */,
 				3CA1CE9F2692C81800D0AFAF /* HomeSquareTVC.xib in Resources */,
@@ -433,6 +469,10 @@
 				3C3AF5F226902AC10099B684 /* PostParkingTVC.xib in Resources */,
 				3CA1CEAD2692E9BC00D0AFAF /* PostAttentionTVC.xib in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
+				365AB62F2692F8C700019DC1 /* HomeAnimationCVC.xib in Resources */,
+				365AB6312692F8C700019DC1 /* HomeAnimationTVC.xib in Resources */,
+				365AB6332692F8C700019DC1 /* HomeSquareTVC.xib in Resources */,
+				365AB6322692F8C700019DC1 /* HomeTodayDriveTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,14 +541,20 @@
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3CA1CE8C2692C7AD00D0AFAF /* HomeSquareTVC.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
+				365AB61E2692F8A700019DC1 /* HomeTodayDriveTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3CA1CE8E2692C7AD00D0AFAF /* HomeAnimationTVC.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
+				365AB61A2692F8A700019DC1 /* CommonCVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
 				3CA1CE842692C78900D0AFAF /* HomeAnimationCVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
+				365AB61D2692F8A700019DC1 /* PostTitleTVC.swift in Sources */,
+				365AB61F2692F8A700019DC1 /* HomeSquareTVC.swift in Sources */,
+				365AB6202692F8A700019DC1 /* HomeThemeTVC.swift in Sources */,
+				365AB6212692F8A700019DC1 /* HomeAnimationTVC.swift in Sources */,
 				3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */,
 				3C3AF5F126902AC10099B684 /* PostParkingTVC.swift in Sources */,
 			);
@@ -573,7 +619,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -635,7 +680,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -661,12 +705,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = U24ZACT97M;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "ChaRo-iOS/Resource/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Source/Views/VCs/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -687,11 +732,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J8A843466G;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "ChaRo-iOS/Resource/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Source/Views/VCs/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

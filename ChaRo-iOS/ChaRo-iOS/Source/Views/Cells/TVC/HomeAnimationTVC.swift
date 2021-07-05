@@ -12,7 +12,8 @@ class HomeAnimationTVC: UITableViewCell {
     @IBOutlet weak var animationCollectionview: UICollectionView!
     static let identifier : String = "HomeAnimationTVC"
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var homeAnimationView: UIView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,19 +36,18 @@ class HomeAnimationTVC: UITableViewCell {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //여기부분 약간 수정해야됨,,, 기기마다 몬가 값이 다 다를거같아서 일단 보류!
-        let userWidth = UIScreen.main.bounds.width
-        let screenWidth = (userWidth-24)/4
-        
-           if scrollView.contentOffset.x > 0 {
+        let userWidth = homeAnimationView.getDeviceWidth()
+        let originalCarConstant = carMoveConstraint.constant
+
+        if scrollView.contentOffset.x > 0{
                if scrollView.contentOffset.x < 10000 {
                 carMoveConstraint.constant = (scrollView.contentOffset.x - 24)/4
-                print(carMoveConstraint.constant)
                } else {
-                carMoveConstraint.constant = -100
+                carMoveConstraint.constant = originalCarConstant
                }
            }
         else{
-            carMoveConstraint.constant = 0
+            carMoveConstraint.constant = originalCarConstant
            }
 
        }
@@ -66,9 +66,12 @@ extension HomeAnimationTVC : UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width
-        let heigth = UIScreen.main.bounds.height/2
-        return CGSize(width: width, height: heigth)
+        let deviceWidth = homeAnimationView.getDeviceWidth()
+        let deviceHeigth = homeAnimationView.getDeviceHeight()
+        //*0.63이더라 비율 + 50 ㅋ ㅋ
+        let cellHeight = Double(deviceHeigth) * 0.7
+        print(cellHeight, Int(cellHeight))
+        return CGSize(width: deviceWidth, height: Int(cellHeight))
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets.zero

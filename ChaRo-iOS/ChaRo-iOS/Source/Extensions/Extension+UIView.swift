@@ -15,5 +15,17 @@ extension UIView{
     func removeAllSubViews() {
         self.subviews.forEach { $0.removeFromSuperview() }
     }
+    
+    func getDeviceHeight() -> Int{
+        let screenBounds = UIScreen.main.bounds
+        let screenHeight = screenBounds.height
+        return Int(screenHeight)
+        }
+    func getDeviceWidth() -> Int{
+        let screenBounds = UIScreen.main.bounds
+        let screenWidth = screenBounds.width
+        return Int(screenWidth)
+    }
+
 }
 
