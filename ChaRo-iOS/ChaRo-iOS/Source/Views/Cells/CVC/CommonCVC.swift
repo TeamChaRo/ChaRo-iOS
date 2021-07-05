@@ -8,8 +8,8 @@
 import UIKit
 
 class CommonCVC: UICollectionViewCell {
-
-
+    
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
@@ -17,20 +17,38 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var tagView1: UIView!
     @IBOutlet weak var tagView2: UIView!
     @IBOutlet weak var tagView3: UIView!
-//
-//    @IBOutlet weak var tagLabel1: UILabel!
-//    @IBOutlet weak var tagLabel2: UILabel!
-//    @IBOutlet weak var tagLabel3: UILabel!
-//
-
-
+    
+    @IBOutlet weak var tagLabel1: UILabel!
+    @IBOutlet weak var tagLabel2: UILabel!
+    @IBOutlet weak var tagLabel3: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setTagUI()
     }
     
-
+    
     func setTagUI() {
+        
+        tagLabel1.text = "#응봉산"
+        tagLabel2.text = "#야"
+        tagLabel3.text = "#서강준"
+        
+        tagView1.translatesAutoresizingMaskIntoConstraints = false
+        tagView2.translatesAutoresizingMaskIntoConstraints = false
+        tagView3.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        NSLayoutConstraint.activate([
+            
+            tagView1.widthAnchor.constraint(equalToConstant: 13*4),
+            tagView2.widthAnchor.constraint(equalToConstant: 13*2),
+            tagView3.widthAnchor.constraint(equalToConstant: 13*4)
+            
+        ])
+        
         
         tagView1.layer.cornerRadius = 10
         tagView2.layer.cornerRadius = 10
@@ -44,6 +62,8 @@ class CommonCVC: UICollectionViewCell {
         tagView2.layer.borderWidth = 1
         tagView3.layer.borderWidth = 1
         
+        
+        
     }
-
+    
 }
