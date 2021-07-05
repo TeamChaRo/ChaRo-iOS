@@ -78,8 +78,11 @@ class CommonCVC: UICollectionViewCell {
         tagView2.layer.borderWidth = 1
         tagView3.layer.borderWidth = 1
         
-        
-        
+//        imageView.image = UIImage(named: "tempImageSmall")?.aspectFitImage(inRect: imageView.frame)
+//        imageView.contentMode = .top
+//        imageView.layer.cornerRadius = 10
+//        imageView.clipsToBounds = true
+//        
     }
     
 }

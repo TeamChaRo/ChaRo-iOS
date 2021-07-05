@@ -71,17 +71,17 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
         cell.imageView.image = UIImage(named: "tempImageSmall")
-        
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        //일단요 ... 고정..
         let width = collectionView.frame.width / 2 - 20
-        
         let size = CGSize(width: width, height: 250)
+        
+        //이거 사이즈를 11pro, se2 - 250 딱맞고 se1 에서 - 230이 딱맞고
+        //해상도 따라 해주기
         
         return size
     }

@@ -69,7 +69,7 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
         cell.imageView.image = UIImage(named: "tempImageSmall")
-        
+        cell.imageView.backgroundColor = .red
         return cell
         
     }

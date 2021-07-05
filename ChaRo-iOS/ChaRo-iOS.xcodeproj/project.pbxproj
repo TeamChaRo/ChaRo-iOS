@@ -53,6 +53,7 @@
 		70D63DE7269379590036484B /* HomeSeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63DE5269379590036484B /* HomeSeasonRecommandTVC.xib */; };
 		70D63DEA26937DB80036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DE826937DB80036484B /* HomeAreaRecommandTVC.swift */; };
 		70D63DEB26937DB80036484B /* HomeAreaRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63DE926937DB80036484B /* HomeAreaRecommandTVC.xib */; };
+		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
 		F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA7F726921047003DA0DC /* PostTitleTVC.xib */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
@@ -122,6 +123,7 @@
 		70D63DE5269379590036484B /* HomeSeasonRecommandTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSeasonRecommandTVC.xib; sourceTree = "<group>"; };
 		70D63DE826937DB80036484B /* HomeAreaRecommandTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAreaRecommandTVC.swift; sourceTree = "<group>"; };
 		70D63DE926937DB80036484B /* HomeAreaRecommandTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAreaRecommandTVC.xib; sourceTree = "<group>"; };
+		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F42DA7F726921047003DA0DC /* PostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */,
 				3CB315702690494700E3A101 /* Extension+UITextFeild.swift */,
 				3C879BEC268B146300C41BB8 /* Extension+UIView.swift */,
+				70D63DEC2693938D0036484B /* Extension+UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
 				3CA1CE8D2692C7AD00D0AFAF /* HomeThemeTVC.swift in Sources */,
 				3CA1CEAC2692E9BC00D0AFAF /* PostAttentionTVC.swift in Sources */,
+				70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CA1CEA52692D10D00D0AFAF /* PostTitleTVC.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
