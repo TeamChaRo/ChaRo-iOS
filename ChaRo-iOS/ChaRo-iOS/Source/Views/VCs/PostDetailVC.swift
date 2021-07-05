@@ -20,6 +20,16 @@ class PostDetailVC: UIViewController {
         setTableView()
     }
     
+    private func configureTableView(){
+        registerXibs()
+        postDetailTableView.delegate = self
+        postDetailTableView.dataSource = self
+    }
+    
+    private func registerXibs(){
+        postDetailTableView.registerCustomXib(xibName: PostParkingTVC.identifier)
+    }
+}
 
     func setTableView(){
         postDetailTableView.registerCustomXib(xibName: "PostTitleTVC")
