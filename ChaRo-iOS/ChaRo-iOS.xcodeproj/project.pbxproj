@@ -50,6 +50,8 @@
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
 		F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA7F726921047003DA0DC /* PostTitleTVC.xib */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
+		F42DA800269366E0003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FE269366E0003DA0DC /* PostImagesTVC.swift */; };
+		F42DA801269366E0003DA0DC /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA7FF269366E0003DA0DC /* PostImagesTVC.xib */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
 /* End PBXBuildFile section */
@@ -116,6 +118,8 @@
 		DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F42DA7F726921047003DA0DC /* PostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
+		F42DA7FE269366E0003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
+		F42DA7FF269366E0003DA0DC /* PostImagesTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostImagesTVC.xib; sourceTree = "<group>"; };
 		F49DE530268E124F00A8185C /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,7 +157,6 @@
 		3C3AF5EE269028740099B684 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				3CA1CEA42692D10D00D0AFAF /* PostTitleTVC.swift */,
 				3CA1CE862692C7AD00D0AFAF /* TVC */,
 				3CA1CE7F2692C78900D0AFAF /* CVC */,
 			);
@@ -317,8 +320,10 @@
 				3CA1CE882692C7AD00D0AFAF /* HomeSquareTVC.swift */,
 				3CA1CE892692C7AD00D0AFAF /* HomeThemeTVC.swift */,
 				3CA1CE8A2692C7AD00D0AFAF /* HomeAnimationTVC.swift */,
-				3C3AF5EF26902AC10099B684 /* PostParkingTVC.swift */,
 				3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */,
+				F42DA7FE269366E0003DA0DC /* PostImagesTVC.swift */,
+				3C3AF5EF26902AC10099B684 /* PostParkingTVC.swift */,
+				3CA1CEA42692D10D00D0AFAF /* PostTitleTVC.swift */,
 			);
 			name = TVC;
 			path = "ChaRo-iOS/Source/Views/Cells/TVC";
@@ -342,6 +347,7 @@
 				3CA1CE9B2692C81800D0AFAF /* HomeSquareTVC.xib */,
 				3CA1CE9C2692C81800D0AFAF /* HomeThemeTVC.xib */,
 				3CA1CEAB2692E9BC00D0AFAF /* PostAttentionTVC.xib */,
+				F42DA7FF269366E0003DA0DC /* PostImagesTVC.xib */,
 				3C3AF5F026902AC10099B684 /* PostParkingTVC.xib */,
 				F42DA7F726921047003DA0DC /* PostTitleTVC.xib */,
 			);
@@ -429,6 +435,7 @@
 				3CA1CE972692C80000D0AFAF /* CommonCVC.xib in Resources */,
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
 				3CA1CEA02692C81800D0AFAF /* HomeThemeTVC.xib in Resources */,
+				F42DA801269366E0003DA0DC /* PostImagesTVC.xib in Resources */,
 				F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */,
 				3C3AF5F226902AC10099B684 /* PostParkingTVC.xib in Resources */,
 				3CA1CEAD2692E9BC00D0AFAF /* PostAttentionTVC.xib in Resources */,
@@ -499,6 +506,7 @@
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
+				F42DA800269366E0003DA0DC /* PostImagesTVC.swift in Sources */,
 				3CA1CE8C2692C7AD00D0AFAF /* HomeSquareTVC.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
