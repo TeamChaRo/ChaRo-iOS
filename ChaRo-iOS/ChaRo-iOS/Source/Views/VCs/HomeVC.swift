@@ -40,17 +40,16 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         switch indextPath.row {
         
         case 0:
-            return UIScreen.main.bounds.height/2
+            return UIScreen.main.bounds.height / 2
         case 1:
-            // 354 / 812
+            //353 / 812
             return UIScreen.main.bounds.height * 0.435
         case 2:
-            //일단 몰라서 ..,,
-            //return UIScreen.main.bounds.height * 0.2
-            return 178
+            //178 / 812
+            return UIScreen.main.bounds.height * 0.219
         case 3, 4, 5:
-            //일단 몰라서 고정
-            return 553
+            //553 / 812
+            return UIScreen.main.bounds.height * 0.72
         default:
             return 100
         }
