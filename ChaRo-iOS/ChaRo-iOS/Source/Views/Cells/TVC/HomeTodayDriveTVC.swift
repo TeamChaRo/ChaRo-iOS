@@ -39,6 +39,8 @@ class HomeTodayDriveTVC: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
+        
+        collectionView.showsHorizontalScrollIndicator = false
     
     }
 

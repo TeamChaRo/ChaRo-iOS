@@ -29,8 +29,8 @@ class HomeThemeTVC: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        
     }
+    
     
     //MARK:- default Setting Function Part
     func setCollctionView() {
@@ -39,6 +39,8 @@ class HomeThemeTVC: UITableViewCell {
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "HomeThemeCVC")
     
+        
+        collectionView.showsHorizontalScrollIndicator = false
     }
     
     func setLabelUI() {
