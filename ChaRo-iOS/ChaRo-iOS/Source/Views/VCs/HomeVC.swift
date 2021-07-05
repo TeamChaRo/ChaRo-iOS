@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
         HomeTableView.registerCustomXib(xibName: "HomeTodayDriveTVC")
         HomeTableView.registerCustomXib(xibName: "HomeThemeTVC")
         HomeTableView.registerCustomXib(xibName: "HomeSquareTVC")
+        HomeTableView.registerCustomXib(xibName: "HomeSeasonRecommandTVC")
         
     }
 }
@@ -48,6 +49,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 3:
             //일단 몰라서 고정
             return 600
+        case 4:
+            return 600
         default:
             return 100
         }
@@ -56,7 +59,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,6 +85,12 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
 
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             return cell
+            
+        case 4:
+
+            let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
+            return cell
+           
 
         default:
             return UITableViewCell()
