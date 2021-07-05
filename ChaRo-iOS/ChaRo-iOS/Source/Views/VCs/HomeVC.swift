@@ -63,6 +63,10 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         }
         
     }
+    func setNavigationViewShadow(){
+        //shadowExtension 예제
+        HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //스크롤뷰에 따라서 알파값 조정함
         let userHeight = HomeNavigationView.getDeviceHeight()
@@ -77,11 +81,13 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
                     homeNavigationLogo.image = UIImage(named: "logo.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
+                    setNavigationViewShadow()
                 }
                 else if currentHeight <= CGFloat(standardHeight){
                     homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
+                    HomeNavigationView.removeShadowView()
                 }
                
                 

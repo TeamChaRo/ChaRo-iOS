@@ -22,6 +22,16 @@ extension UIView{
     func getDeviceWidth() -> Int{
         return Int(UIScreen.main.bounds.width)
     }
+    func getShadowView(color : CGColor, masksToBounds : Bool, shadowOffset : CGSize, shadowRadius : Int, shadowOpacity : Float){
+        layer.shadowColor = color
+        layer.masksToBounds = masksToBounds
+        layer.shadowOffset = shadowOffset
+        layer.shadowRadius = CGFloat(shadowRadius)
+        layer.shadowOpacity = shadowOpacity
+    }
+    func removeShadowView(){
+        layer.shadowOpacity = 0
+    }
 
 }
 
