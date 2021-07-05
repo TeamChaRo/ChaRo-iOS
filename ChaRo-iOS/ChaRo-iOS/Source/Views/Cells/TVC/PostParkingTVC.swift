@@ -43,40 +43,6 @@ class PostParkingTVC: UITableViewCell {
             return button
         }()
     
-    private var yesButtonView = UIView()
-    private var noButtonView = UIView()
-    
-    private func setButtonView(view: UIView, text: String, parking: Bool){
-        var image = UIImageView()
-        let label = UILabel()
-        label.text = text
-        label.font = UIFont.notoSansMediumFont(ofSize: 14)
-        
-        if parking {
-            print("selected")
-            image.image = UIImage(named: "postParkingSelected")
-            label.tintColor = .mainBlue
-            view.tintColor = .mainBlue
-        }else{
-            print("Unselected")
-            image.image = UIImage(named: "postParkingUnselected")
-            label.tintColor = .gray40
-            view.tintColor = .gray40
-        }
-        
-        view.addSubviews([image,label])
-        
-        label.snp.makeConstraints{make in
-            make.center.equalTo(view.snp.center)
-        }
-        
-        image.snp.makeConstraints{make in
-            make.top.equalTo(view.snp.top)
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.trailing)
-            make.bottom.equalTo(view.snp.bottom)
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -85,14 +51,6 @@ class PostParkingTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
-    
-    
-    public func setParkingStatus(isParking: Bool){
-        print("isParking \(isParking)")
-        setButtonView(view: yesButtonView, text: "있음", parking: isParking)
-        setButtonView(view: noButtonView, text: "없음", parking: !isParking)
     }
     
     public func setParkingStatus(status: Bool){
@@ -106,17 +64,13 @@ class PostParkingTVC: UITableViewCell {
     
    
     public func idEditMode(isEditing: Bool){
-        if isEditing {
-            parkingExplanationTextFeild.isUserInteractionEnabled = true
-        }else{
-            parkingExplanationTextFeild.isUserInteractionEnabled = false
-        }
+        parkingExplanationTextFeild.isUserInteractionEnabled = isEditing
     }
     
     private func setSelectedButtonStyle(button: UIButton){
-           button.setBackgroundImage(UIImage(named: "postParkingSelected"), for: .normal)
-           button.setTitleColor(.blue, for: .normal)
-       }
+       button.setBackgroundImage(UIImage(named: "uiViewSelectboxYes"), for: .normal)
+       button.setTitleColor(.mainBlue, for: .normal)
+    }
        
    private func changeToActiveButton(hasParking: Bool){
        if hasParking{
@@ -127,10 +81,10 @@ class PostParkingTVC: UITableViewCell {
    }
     
     private func configureLayout(){
-        addSubviews([parkingExplanationTextFeild,
-                    titleView,
+        addSubviews([titleView,
                      yesButton,
-                     noButton])
+                     noButton,
+                     parkingExplanationTextFeild])
         
         titleView.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
@@ -140,16 +94,16 @@ class PostParkingTVC: UITableViewCell {
         }
         
         yesButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(-3)
-            make.leading.equalTo(self.snp.leading)
+            make.top.equalTo(titleView.snp.bottom).offset(0)
+            make.leading.equalTo(self.snp.leading).offset(5)
             make.trailing.equalTo(self.snp.trailing).offset(-181)
             make.height.equalTo(70)
         }
         
         noButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(-3)
+            make.top.equalTo(titleView.snp.bottom).offset(0)
             make.leading.equalTo(self.snp.leading).offset(181)
-            make.trailing.equalTo(self.snp.trailing)
+            make.trailing.equalTo(self.snp.trailing).offset(-5)
             make.height.equalTo(70)
         }
     
