@@ -11,7 +11,8 @@ class HomeSquareTVC: UITableViewCell {
 
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var moreLabel: UILabel!
     
     //MARK:- Variable
     static let identifier = "HomeSquareTVC"
@@ -21,6 +22,7 @@ class HomeSquareTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollctionView()
+        setLabelUI()
     }
     
     //MARK:- default Setting Function Part
@@ -32,9 +34,21 @@ class HomeSquareTVC: UITableViewCell {
         
     }
     
+    func setLabelUI() {
+        
+        TitleLabel.text = "요즘 뜨는 드라이브 코스"
+        moreLabel.text = "더보기"
+        
+        //TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        //moreLabel.font = UIFont.notoSansRegularFont(ofSize: 12)
+        
+        TitleLabel.textColor = UIColor.mainBlack
+        moreLabel.textColor = UIColor.gray40
+        
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         
     }
     
