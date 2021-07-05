@@ -41,23 +41,12 @@ class PostDetailVC: UIViewController {
 //MARK: TableView Delegate
 extension PostDetailVC: UITableViewDelegate{
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0:
-            return 146
-        case 1:
-            return 159
-        default:
-            return 159
-        }
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 146
+            return 159
         case 1:
-            return 167
+            return 159
         case 2:
             return 159
         default:
@@ -103,6 +92,7 @@ extension PostDetailVC: UITableViewDataSource {
     func getPostParkingCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostParkingTVC.identifier) as? PostParkingTVC else {return UITableViewCell()}
         
+        //cell.setParkingStatus(isParking: true)
         cell.setParkingStatus(status: true)
         cell.setParkingExplanation(text: "100m 이내에 주차공간이 있었어요 :)")
         cell.idEditMode(isEditing: false)
