@@ -13,10 +13,8 @@ class HomeTodayDriveTVC: UITableViewCell {
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     //MARK:- Variable
     static let identifier = "HomeTodayDriveTVC"
-    
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
