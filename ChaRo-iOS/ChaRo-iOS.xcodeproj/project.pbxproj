@@ -49,6 +49,8 @@
 		3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
 		70D63DDF269367680036484B /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D63DDE269367680036484B /* TMapSDK.framework */; };
+		70D63DE6269379590036484B /* HomeSeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DE4269379590036484B /* HomeSeasonRecommandTVC.swift */; };
+		70D63DE7269379590036484B /* HomeSeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63DE5269379590036484B /* HomeSeasonRecommandTVC.xib */; };
 		F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA7F726921047003DA0DC /* PostTitleTVC.xib */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
@@ -114,6 +116,8 @@
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		70D63DDE269367680036484B /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
+		70D63DE4269379590036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
+		70D63DE5269379590036484B /* HomeSeasonRecommandTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSeasonRecommandTVC.xib; sourceTree = "<group>"; };
 		D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F42DA7F726921047003DA0DC /* PostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
@@ -323,6 +327,8 @@
 				3CA1CE8A2692C7AD00D0AFAF /* HomeAnimationTVC.swift */,
 				3C3AF5EF26902AC10099B684 /* PostParkingTVC.swift */,
 				3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */,
+				70D63DE4269379590036484B /* HomeSeasonRecommandTVC.swift */,
+				70D63DE5269379590036484B /* HomeSeasonRecommandTVC.xib */,
 			);
 			name = TVC;
 			path = "ChaRo-iOS/Source/Views/Cells/TVC";
@@ -430,6 +436,7 @@
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				3CA1CE952692C80000D0AFAF /* HomeThemeCVC.xib in Resources */,
 				3CA1CE9F2692C81800D0AFAF /* HomeSquareTVC.xib in Resources */,
+				70D63DE7269379590036484B /* HomeSeasonRecommandTVC.xib in Resources */,
 				3CA1CE972692C80000D0AFAF /* CommonCVC.xib in Resources */,
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
 				3CA1CEA02692C81800D0AFAF /* HomeThemeTVC.xib in Resources */,
@@ -508,6 +515,7 @@
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3CA1CE8E2692C7AD00D0AFAF /* HomeAnimationTVC.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
+				70D63DE6269379590036484B /* HomeSeasonRecommandTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
