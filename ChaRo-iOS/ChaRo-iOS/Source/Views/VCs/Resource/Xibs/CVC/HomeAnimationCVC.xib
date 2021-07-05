@@ -45,7 +45,7 @@
                             <constraint firstAttribute="bottom" secondItem="agf-Ys-6Dc" secondAttribute="bottom" id="0CE-ln-6Al"/>
                             <constraint firstItem="agf-Ys-6Dc" firstAttribute="top" secondItem="hzx-x4-Svm" secondAttribute="top" id="3yR-No-nm4"/>
                             <constraint firstAttribute="trailing" secondItem="agf-Ys-6Dc" secondAttribute="trailing" id="ATG-Iv-5iK"/>
-                            <constraint firstAttribute="bottom" secondItem="0GL-r3-fWB" secondAttribute="bottom" constant="87" id="EoP-de-cEs"/>
+                            <constraint firstItem="fjL-2U-O43" firstAttribute="top" secondItem="hzx-x4-Svm" secondAttribute="top" constant="340.5" id="CZg-eG-Fpn"/>
                             <constraint firstItem="fjL-2U-O43" firstAttribute="leading" secondItem="hzx-x4-Svm" secondAttribute="leading" constant="20" id="QnC-Ml-8cr"/>
                             <constraint firstItem="agf-Ys-6Dc" firstAttribute="leading" secondItem="hzx-x4-Svm" secondAttribute="leading" id="T9o-qG-k3U"/>
                             <constraint firstItem="0GL-r3-fWB" firstAttribute="top" secondItem="fjL-2U-O43" secondAttribute="bottom" id="ZfQ-rg-E2f"/>
@@ -66,6 +66,8 @@
                 <outlet property="backGroundImage" destination="agf-Ys-6Dc" id="6BV-if-tDg"/>
                 <outlet property="homeAnimationHashtagLabel" destination="0GL-r3-fWB" id="XqW-RI-agR"/>
                 <outlet property="homeAnimationTitleLabel" destination="fjL-2U-O43" id="cSR-Gw-GWz"/>
+                <outlet property="homeAnimationView" destination="hzx-x4-Svm" id="CtQ-Qh-1hI"/>
+                <outlet property="homeTitleLabelTopConstraint" destination="CZg-eG-Fpn" id="VU8-dU-aRE"/>
             </connections>
             <point key="canvasLocation" x="281.8840579710145" y="187.5"/>
         </collectionViewCell>

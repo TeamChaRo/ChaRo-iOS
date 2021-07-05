@@ -42,7 +42,6 @@ class HomeAnimationTVC: UITableViewCell {
         if scrollView.contentOffset.x > 0{
                if scrollView.contentOffset.x < 10000 {
                 carMoveConstraint.constant = (scrollView.contentOffset.x - 24)/4
-                print(carMoveConstraint.constant)
                } else {
                 carMoveConstraint.constant = originalCarConstant
                }
@@ -69,9 +68,10 @@ extension HomeAnimationTVC : UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let deviceWidth = homeAnimationView.getDeviceWidth()
         let deviceHeigth = homeAnimationView.getDeviceHeight()
-        //*0.63이더라 비율
-        let height = Double(deviceHeigth) * 0.63
-        return CGSize(width: deviceWidth, height: Int(height))
+        //*0.63이더라 비율 + 50 ㅋ ㅋ
+        let cellHeight = Double(deviceHeigth) * 0.7
+        print(cellHeight, Int(cellHeight))
+        return CGSize(width: deviceWidth, height: Int(cellHeight))
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets.zero

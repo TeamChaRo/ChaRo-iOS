@@ -12,20 +12,21 @@ class HomeAnimationCVC: UICollectionViewCell {
     
     static let identifier = "HomeAnimationCVC"
     
-    @IBOutlet weak var roadImage: UIImageView!
-    @IBOutlet weak var carImage: UIImageView!
+
+    @IBOutlet weak var homeAnimationView: UIView!
     @IBOutlet weak var homeAnimationTitleLabel: UILabel!
     @IBOutlet weak var homeAnimationHashtagLabel: UILabel!
     @IBOutlet weak var backGroundImage: UIImageView!
-    
+    @IBOutlet weak var homeTitleLabelTopConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func setConsraintCar(){
-        
+    func setConsraintTitle(){
+        let topConstraint =  (Double( homeAnimationView.getDeviceHeight()) * 0.65)*0.57
+        homeTitleLabelTopConstraint.constant = CGFloat(Int(topConstraint))
     }
    
     func setData(imageName : String, titleText : String, hashTagText : String){
