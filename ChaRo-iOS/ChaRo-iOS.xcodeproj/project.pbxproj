@@ -49,8 +49,6 @@
 		3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
 		70D63DDF269367680036484B /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D63DDE269367680036484B /* TMapSDK.framework */; };
-		70D63DE2269376D80036484B /* SeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DE0269376D80036484B /* SeasonRecommandTVC.swift */; };
-		70D63DE3269376D80036484B /* SeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63DE1269376D80036484B /* SeasonRecommandTVC.xib */; };
 		F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA7F726921047003DA0DC /* PostTitleTVC.xib */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
@@ -116,8 +114,6 @@
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		70D63DDE269367680036484B /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
-		70D63DE0269376D80036484B /* SeasonRecommandTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonRecommandTVC.swift; sourceTree = "<group>"; };
-		70D63DE1269376D80036484B /* SeasonRecommandTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeasonRecommandTVC.xib; sourceTree = "<group>"; };
 		D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F42DA7F726921047003DA0DC /* PostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
@@ -327,8 +323,6 @@
 				3CA1CE8A2692C7AD00D0AFAF /* HomeAnimationTVC.swift */,
 				3C3AF5EF26902AC10099B684 /* PostParkingTVC.swift */,
 				3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */,
-				70D63DE0269376D80036484B /* SeasonRecommandTVC.swift */,
-				70D63DE1269376D80036484B /* SeasonRecommandTVC.xib */,
 			);
 			name = TVC;
 			path = "ChaRo-iOS/Source/Views/Cells/TVC";
@@ -442,7 +436,6 @@
 				F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */,
 				3C3AF5F226902AC10099B684 /* PostParkingTVC.xib in Resources */,
 				3CA1CEAD2692E9BC00D0AFAF /* PostAttentionTVC.xib in Resources */,
-				70D63DE3269376D80036484B /* SeasonRecommandTVC.xib in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,7 +510,6 @@
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
-				70D63DE2269376D80036484B /* SeasonRecommandTVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
 				3CA1CE842692C78900D0AFAF /* HomeAnimationCVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
