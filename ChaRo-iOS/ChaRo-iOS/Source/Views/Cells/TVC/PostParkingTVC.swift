@@ -11,15 +11,17 @@ import SnapKit
 class PostParkingTVC: UITableViewCell {
 
     static let identifier = "PostParkingTVC"
+    private let deviceWidthRate = UIScreen.main.bounds.width / 375
+    private let deviceHeightRate = UIScreen.main.bounds.height / 896
     public var hasParking : Bool?
     
     private let titleView = PostCellTitleView(title: "주차공간")
 
     private let parkingExplanationTextFeild: UITextField = {
         let textFeild = UITextField()
-        textFeild.background = UIImage(named: "postTextFieldParkingShow")
+        textFeild.background = UIImage(named: "uiViewTextfieldParkingShow")
         textFeild.tintColor = .gray
-        textFeild.addLeftPadding(16)
+        textFeild.addLeftPadding(36)
         return textFeild
     }()
     
@@ -86,32 +88,35 @@ class PostParkingTVC: UITableViewCell {
                      noButton,
                      parkingExplanationTextFeild])
         
+        let customHeight = Int(70*deviceHeightRate)
+        let customGap = Int(175*deviceWidthRate)
+        
         titleView.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(self.snp.leading).offset(20)
             make.trailing.equalTo(self.snp.trailing).offset(-20)
             make.height.equalTo(22)
         }
-        
+                                               
         yesButton.snp.makeConstraints{make in
             make.top.equalTo(titleView.snp.bottom).offset(0)
-            make.leading.equalTo(self.snp.leading).offset(5)
-            make.trailing.equalTo(self.snp.trailing).offset(-181)
-            make.height.equalTo(70)
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing).offset(-customGap)
+            make.height.equalTo(customHeight)
         }
         
         noButton.snp.makeConstraints{make in
             make.top.equalTo(titleView.snp.bottom).offset(0)
-            make.leading.equalTo(self.snp.leading).offset(181)
-            make.trailing.equalTo(self.snp.trailing).offset(-5)
-            make.height.equalTo(70)
+            make.leading.equalTo(self.snp.leading).offset(customGap)
+            make.trailing.equalTo(self.snp.trailing)
+            make.height.equalTo(customHeight)
         }
     
         parkingExplanationTextFeild.snp.makeConstraints{make in
-            make.leading.equalTo(self.snp.leading).offset(20)
-            make.trailing.equalTo(self.snp.trailing).offset(-20)
-            make.bottom.equalTo(self.snp.bottom).offset(-33)
-            make.height.equalTo(42)
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom).offset(-19)
+            make.height.equalTo(customHeight)
         }
     }
 }
