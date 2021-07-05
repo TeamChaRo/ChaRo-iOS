@@ -8,5 +8,5 @@
 import UIKit
 
 extension UIFont{
-    
+
 }
