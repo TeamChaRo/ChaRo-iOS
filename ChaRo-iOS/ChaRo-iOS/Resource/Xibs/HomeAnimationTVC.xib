@@ -48,7 +48,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="AnimationCollectionview" destination="auR-Uo-J51" id="VTL-k1-43a"/>
+                <outlet property="AnimationCollectionview" destination="auR-Uo-J51" id="YSg-sB-UJy"/>
                 <outlet property="carMoveConstraint" destination="X1O-21-lvv" id="z0t-p8-6h3"/>
             </connections>
             <point key="canvasLocation" x="39.855072463768117" y="169.41964285714286"/>
