@@ -25,7 +25,7 @@ class HomeAnimationCVC: UICollectionViewCell {
     }
 
     func setTitleConsraint(){
-        let topConstraint =  (Double( homeAnimationView.getDeviceHeight()) * 0.65)*0.57
+        let topConstraint =  (Double( homeAnimationView.getDeviceHeight()) * 0.65)*0.5
         homeTitleLabelTopConstraint.constant = CGFloat(Int(topConstraint))
     }
    
@@ -35,6 +35,8 @@ class HomeAnimationCVC: UICollectionViewCell {
         }
         homeAnimationTitleLabel.text = titleText
         homeAnimationHashtagLabel.text = hashTagText
+        setTitleConsraint()
+        
     }
     
 }
