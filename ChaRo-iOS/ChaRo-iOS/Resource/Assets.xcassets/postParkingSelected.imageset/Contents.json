@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ui:view:selectbox_yes@1x.png",
+      "filename" : "ui:view:selectbox_no@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ui:view:selectbox_yes@2x.png",
+      "filename" : "ui:view:selectbox_no@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ui:view:selectbox_yes@3x.png",
+      "filename" : "ui:view:selectbox_no@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

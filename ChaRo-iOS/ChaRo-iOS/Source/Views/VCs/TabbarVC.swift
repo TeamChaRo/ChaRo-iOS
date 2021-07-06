@@ -39,16 +39,24 @@ class TabbarVC: UITabBarController {
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
        
         let postStoryboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let writtingTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
-        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-        writtingTab.tabBarItem.title = "작성하기"
-        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        
-        
         let postTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
         postTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
-        let tabs = [homeTab, writtingTab, postTab]
+        let mapStoryboard = UIStoryboard(name: "AddressMain", bundle: nil)
+        let mapTab = mapStoryboard.instantiateViewController(identifier: AddressMainVC.identifier)
+       
+        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
+        mapTab.tabBarItem.title = "작성하기"
+        mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
+        
+//        let writtingTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
+//        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
+//        writtingTab.tabBarItem.title = "작성하기"
+//        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
+        
+        
+        
+        let tabs = [homeTab, mapTab, postTab]
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
     }
