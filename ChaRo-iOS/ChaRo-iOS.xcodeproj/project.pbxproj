@@ -18,6 +18,8 @@
 		3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8982693730700EFC794 /* HomeThemeTVC.swift */; };
 		3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8992693730700EFC794 /* HomeAnimationTVC.swift */; };
 		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
+		369AACD02694E8D800204614 /* HomePostTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AACCE2694E8D800204614 /* HomePostTVC.swift */; };
+		369AACD12694E8D800204614 /* HomePostTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 369AACCF2694E8D800204614 /* HomePostTVC.xib */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
 		36D5FD1B268F72F100BCCB33 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; };
 		36D5FD1C268F72F100BCCB33 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -105,6 +107,8 @@
 		3610A8982693730700EFC794 /* HomeThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeTVC.swift; sourceTree = "<group>"; };
 		3610A8992693730700EFC794 /* HomeAnimationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationTVC.swift; sourceTree = "<group>"; };
 		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
+		369AACCE2694E8D800204614 /* HomePostTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostTVC.swift; sourceTree = "<group>"; };
+		369AACCF2694E8D800204614 /* HomePostTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostTVC.xib; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				3610A8972693730700EFC794 /* HomeSquareTVC.swift */,
 				3610A8982693730700EFC794 /* HomeThemeTVC.swift */,
 				3610A8992693730700EFC794 /* HomeAnimationTVC.swift */,
+				369AACCE2694E8D800204614 /* HomePostTVC.swift */,
 				3C86FA522694C169009370CD /* PostAttentionTVC.swift */,
 				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
@@ -308,6 +313,7 @@
 				3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */,
 				3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */,
 				3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */,
+				369AACCF2694E8D800204614 /* HomePostTVC.xib */,
 				3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */,
 				3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */,
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
@@ -516,6 +522,7 @@
 				3C86FAB72694C7C6009370CD /* NotoSansCJKkr-Medium.otf in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
+				369AACD12694E8D800204614 /* HomePostTVC.xib in Resources */,
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
 				3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
@@ -607,6 +614,7 @@
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
+				369AACD02694E8D800204614 /* HomePostTVC.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
