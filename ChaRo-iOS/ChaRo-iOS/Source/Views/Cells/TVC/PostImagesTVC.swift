@@ -21,7 +21,7 @@ class PostImagesTVC: UITableViewCell {
     // ToDo: - 일단 지금은 더미데이터로 넣고, 추후 서버 통신으로 리스트 append 예정
     var images: [String] = []
     var postImageView = [UIImageView]()
-    let imageHeightRate: CGFloat = 222 / 815
+    let imageHeightRate: CGFloat = 222 / UIScreen.main.bounds.height
     let ImageViewWidth: CGFloat = UIScreen.main.bounds.width
     
     override func awakeFromNib() {
@@ -40,7 +40,7 @@ class PostImagesTVC: UITableViewCell {
     
     // MARK: - IBActions
     @IBAction func pageChanged(_ sender: Any) {
-        setButton()
+        setPageArrowButton()
     }
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
@@ -50,7 +50,7 @@ class PostImagesTVC: UITableViewCell {
             })
             let value = scrollView.contentOffset.x/scrollView.frame.size.width
             setPageControlSelectedPage(currentPage: Int(round(value)))
-            setButton()
+            setPageArrowButton()
         }
     }
     
@@ -61,7 +61,7 @@ class PostImagesTVC: UITableViewCell {
             })
             let value = scrollView.contentOffset.x/scrollView.frame.size.width
             setPageControlSelectedPage(currentPage: Int(round(value)))
-            setButton()
+            setPageArrowButton()
         }
     }
     
@@ -88,7 +88,7 @@ extension PostImagesTVC {
         pageController.numberOfPages = images.count
         pageController.currentPage = 0 // 시작은 첫 페이지
         pageController.isHidden = false // 나중에 true로 바꾸기!!
-        setButton()
+        setPageArrowButton()
     }
     
     func initScrollView(){
@@ -103,7 +103,7 @@ extension PostImagesTVC {
     
     func setPageControlSelectedPage(currentPage:Int) {
         pageController.currentPage = currentPage
-        setButton()
+        setPageArrowButton()
     }
     
     func addImageView(){
@@ -118,7 +118,7 @@ extension PostImagesTVC {
         }
     }
     
-    func setButton(){
+    func setPageArrowButton(){
         if pageController.currentPage == images.count-1 { // 마지막 페이지
             nextButton.isHidden = true
             previousButton.isHidden = false
