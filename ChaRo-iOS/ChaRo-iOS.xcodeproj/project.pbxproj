@@ -24,6 +24,11 @@
 		3C71FEB326881DAB007E8EAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C71FEB126881DAB007E8EAD /* LaunchScreen.storyboard */; };
 		3C86F9F2269450A7009370CD /* PostDriveCourseTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86F9F1269450A7009370CD /* PostDriveCourseTVC.xib */; };
 		3C86F9F4269450D0009370CD /* PostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F3269450D0009370CD /* PostDriveCourseTVC.swift */; };
+		3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F5269478F3009370CD /* AddressMainVC.swift */; };
+		3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F7269484E4009370CD /* AddressDataModel.swift */; };
+		3C86F9FA2694877D009370CD /* AddressMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86F9F92694877D009370CD /* AddressMain.storyboard */; };
+		3C86F9FD269488E9009370CD /* AddressButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9FB269488E9009370CD /* AddressButtonCell.swift */; };
+		3C86F9FE269488E9009370CD /* AddressButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86F9FC269488E9009370CD /* AddressButtonCell.xib */; };
 		3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEC268B146300C41BB8 /* Extension+UIView.swift */; };
 		3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */; };
 		3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */; };
@@ -100,6 +105,11 @@
 		3C71FEB426881DAB007E8EAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C86F9F1269450A7009370CD /* PostDriveCourseTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostDriveCourseTVC.xib; sourceTree = "<group>"; };
 		3C86F9F3269450D0009370CD /* PostDriveCourseTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDriveCourseTVC.swift; sourceTree = "<group>"; };
+		3C86F9F5269478F3009370CD /* AddressMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMainVC.swift; sourceTree = "<group>"; };
+		3C86F9F7269484E4009370CD /* AddressDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataModel.swift; sourceTree = "<group>"; };
+		3C86F9F92694877D009370CD /* AddressMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressMain.storyboard; sourceTree = "<group>"; };
+		3C86F9FB269488E9009370CD /* AddressButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressButtonCell.swift; sourceTree = "<group>"; };
+		3C86F9FC269488E9009370CD /* AddressButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressButtonCell.xib; sourceTree = "<group>"; };
 		3C879BEC268B146300C41BB8 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
 		3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionView.swift"; sourceTree = "<group>"; };
@@ -241,6 +251,7 @@
 		3C879BE1268B133A00C41BB8 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3C86F9F92694877D009370CD /* AddressMain.storyboard */,
 				3C71FEAC26881DAA007E8EAD /* Main.storyboard */,
 				3C71FEB126881DAB007E8EAD /* LaunchScreen.storyboard */,
 				36BBD926268DE936008D8AD3 /* Home.storyboard */,
@@ -303,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
+				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,6 +322,7 @@
 		3C879BE9268B13C300C41BB8 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				3C86F9F5269478F3009370CD /* AddressMainVC.swift */,
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
@@ -339,6 +352,7 @@
 		3CA1CE862692C7AD00D0AFAF /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				3C86F9FB269488E9009370CD /* AddressButtonCell.swift */,
 				3CA1CE872692C7AD00D0AFAF /* HomeTodayDriveTVC.swift */,
 				3CA1CE882692C7AD00D0AFAF /* HomeSquareTVC.swift */,
 				3CA1CE892692C7AD00D0AFAF /* HomeThemeTVC.swift */,
@@ -355,9 +369,9 @@
 		3CA1CE912692C80000D0AFAF /* CVC */ = {
 			isa = PBXGroup;
 			children = (
+				3CA1CE942692C80000D0AFAF /* CommonCVC.xib */,
 				3CA1CE922692C80000D0AFAF /* HomeThemeCVC.xib */,
 				3CA1CE932692C80000D0AFAF /* HomeAnimationCVC.xib */,
-				3CA1CE942692C80000D0AFAF /* CommonCVC.xib */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -365,6 +379,7 @@
 		3CA1CE982692C81800D0AFAF /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				3C86F9FC269488E9009370CD /* AddressButtonCell.xib */,
 				3CA1CE992692C81800D0AFAF /* HomeAnimationTVC.xib */,
 				3CA1CE9A2692C81800D0AFAF /* HomeTodayDriveTVC.xib */,
 				3CA1CE9B2692C81800D0AFAF /* HomeSquareTVC.xib */,
@@ -470,6 +485,7 @@
 				3CA1CED72693826000D0AFAF /* NotoSansCJKkr-Light.otf in Resources */,
 				3CA1CE962692C80000D0AFAF /* HomeAnimationCVC.xib in Resources */,
 				3CA1CE9D2692C81800D0AFAF /* HomeAnimationTVC.xib in Resources */,
+				3C86F9FA2694877D009370CD /* AddressMain.storyboard in Resources */,
 				3CA1CEDB2693826000D0AFAF /* LICENSE_OFL.txt in Resources */,
 				3CA1CED92693826000D0AFAF /* NotoSansCJKkr-Regular.otf in Resources */,
 				3CA1CED12693826000D0AFAF /* NotoSansMonoCJKkr-Bold.otf in Resources */,
@@ -477,6 +493,7 @@
 				3CA1CED22693826000D0AFAF /* NotoSansMonoCJKkr-Regular.otf in Resources */,
 				3C71FEB026881DAB007E8EAD /* Assets.xcassets in Resources */,
 				3CA1CED52693826000D0AFAF /* NotoSansCJKkr-Medium.otf in Resources */,
+				3C86F9FE269488E9009370CD /* AddressButtonCell.xib in Resources */,
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				3CA1CE952692C80000D0AFAF /* HomeThemeCVC.xib in Resources */,
 				3CA1CED42693826000D0AFAF /* NotoSansCJKkr-Black.otf in Resources */,
@@ -556,12 +573,15 @@
 				3CA1CEAC2692E9BC00D0AFAF /* PostAttentionTVC.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CA1CEA52692D10D00D0AFAF /* PostTitleTVC.swift in Sources */,
+				3C86F9FD269488E9009370CD /* AddressButtonCell.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3CA1CE8C2692C7AD00D0AFAF /* HomeSquareTVC.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
+				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
+				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3CA1CE8E2692C7AD00D0AFAF /* HomeAnimationTVC.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
