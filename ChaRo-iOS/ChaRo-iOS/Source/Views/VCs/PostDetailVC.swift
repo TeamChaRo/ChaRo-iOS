@@ -35,6 +35,7 @@ class PostDetailVC: UIViewController {
         postDetailTableView.registerCustomXib(xibName: PostAttentionTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
         
+        postDetailTableView.registerCustomXib(xibName: PostImagesTVC.identifier)
     }
     
 }
@@ -72,8 +73,10 @@ extension PostDetailVC: UITableViewDataSource {
         case 0:
             return getPostTitleCell(tableView: tableView)
         case 1:
-            return getPostParkingCell(tableView: tableView)
+            return getPostImagesCell(tableView: tableView)
         case 2:
+            return getPostParkingCell(tableView: tableView)
+        case 3:
             return getPostAttensionCell(tableView: tableView)
         case 3:
             return getPostDriveCourceCell(tableView: tableView)
@@ -104,6 +107,12 @@ extension PostDetailVC: UITableViewDataSource {
         cell.setParkingStatus(status: true)
         cell.setParkingExplanation(text: "100m 이내에 주차공간이 있었어요 :)")
         cell.idEditMode(isEditing: false)
+        return cell
+    }
+    
+    func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
+        cell.setImage(["Mask Group", "Mask Group", "Mask Group"])
         return cell
     }
     
