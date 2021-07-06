@@ -2,18 +2,18 @@
   "images" : [
     {
       "scale" : "1x",
-      "filename" : "uiViewSelectboxWarningSelect.png",
-      "idiom" : "universal"
-    },
-    {
-      "filename" : "uiViewSelectboxWarningSelect@2x.png",
       "idiom" : "universal",
-      "scale" : "2x"
+      "filename" : "uiViewSelectboxWarningSelect.png"
     },
     {
-      "scale" : "3x",
+      "scale" : "2x",
+      "idiom" : "universal",
+      "filename" : "uiViewSelectboxWarningSelect@2x.png"
+    },
+    {
       "filename" : "uiViewSelectboxWarningSelect@3x.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

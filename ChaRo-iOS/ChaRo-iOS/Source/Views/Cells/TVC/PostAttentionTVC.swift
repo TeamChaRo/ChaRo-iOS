@@ -11,16 +11,10 @@ import SnapKit
 class PostAttentionTVC: UITableViewCell {
 
     static let identifier = "PostAttentionTVC"
+    private let deviceWidthRate = UIScreen.main.bounds.width / 375
+    private let deviceHeightRate = UIScreen.main.bounds.height / 812
     public var attentionList = [false, false, false, false]
     
-    //작성하기때 사용하려고 우선 빈코드로 만들었습니다!
-    public var isEditingMode: Bool = false {
-        didSet{
-            if isEditingMode{
-            }else {
-            }
-        }
-    }
     
     private let titleView = PostCellTitleView(title: "주의사항")
 
@@ -30,7 +24,9 @@ class PostAttentionTVC: UITableViewCell {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "postAttentionUnselected"), for: .normal)
         button.setTitle("고속도로", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        button.setTitleColor(.gray40, for: .normal)
+        
         return button
     }()
    
@@ -38,7 +34,9 @@ class PostAttentionTVC: UITableViewCell {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "postAttentionUnselected"), for: .normal)
         button.setTitle("산길포함", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        button.setTitleColor(.gray40, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
     
@@ -46,7 +44,9 @@ class PostAttentionTVC: UITableViewCell {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "postAttentionUnselected"), for: .normal)
         button.setTitle("초보힘듦", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        button.setTitleColor(.gray40, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
     
@@ -54,7 +54,8 @@ class PostAttentionTVC: UITableViewCell {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "postAttentionUnselected"), for: .normal)
         button.setTitle("사람많음", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        button.setTitleColor(.gray40, for: .normal)
         return button
     }()
     
@@ -85,9 +86,8 @@ class PostAttentionTVC: UITableViewCell {
                                        peopleButton])
     }
     
-    
     private func changeToActiveButton(button: UIButton){
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.mainBlue, for: .normal)
         button.setBackgroundImage(UIImage(named: "postAttentionSelected"), for: .normal)
     }
     
@@ -98,6 +98,8 @@ class PostAttentionTVC: UITableViewCell {
                      beginnerButton,
                      peopleButton])
         
+        let customGap = Int(181*deviceWidthRate)
+        
         titleView.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(self.snp.leading).offset(20)
@@ -106,31 +108,31 @@ class PostAttentionTVC: UITableViewCell {
         }
         
         highwayButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(5)
-            make.leading.equalTo(self.snp.leading).offset(14)
-            make.trailing.equalTo(self.snp.trailing).offset(-186)
-            make.height.equalTo(57)
+            make.top.equalTo(titleView.snp.bottom)
+            make.leading.equalTo(self.snp.leading).offset(7)
+            make.trailing.equalTo(self.snp.trailing).offset(-customGap)
+            make.height.equalTo(65)
         }
         
         mountainButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(5)
-            make.leading.equalTo(self.snp.leading).offset(184)
-            make.trailing.equalTo(self.snp.trailing).offset(-11)
-            make.height.equalTo(57)
+            make.top.equalTo(titleView.snp.bottom)
+            make.leading.equalTo(self.snp.leading).offset(customGap)
+            make.trailing.equalTo(self.snp.trailing).offset(-7)
+            make.height.equalTo(65)
         }
         
         beginnerButton.snp.makeConstraints{make in
-            make.top.equalTo(highwayButton.snp.bottom).offset(-8)
-            make.leading.equalTo(self.snp.leading).offset(14)
-            make.trailing.equalTo(self.snp.trailing).offset(-186)
-            make.height.equalTo(57)
+            make.leading.equalTo(self.snp.leading).offset(7)
+            make.trailing.equalTo(self.snp.trailing).offset(-customGap)
+            make.bottom.equalTo(self.snp.bottom).offset(-21)
+            make.height.equalTo(65)
         }
         
         peopleButton.snp.makeConstraints{make in
-            make.top.equalTo(mountainButton.snp.bottom).offset(-8)
-            make.leading.equalTo(self.snp.leading).offset(184)
-            make.trailing.equalTo(self.snp.trailing).offset(-11)
-            make.height.equalTo(57)
+            make.leading.equalTo(self.snp.leading).offset(customGap)
+            make.trailing.equalTo(self.snp.trailing).offset(-7)
+            make.bottom.equalTo(self.snp.bottom).offset(-21)
+            make.height.equalTo(65)
         }
     }
     
