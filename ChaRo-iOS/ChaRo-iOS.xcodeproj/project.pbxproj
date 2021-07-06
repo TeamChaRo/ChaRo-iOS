@@ -72,6 +72,8 @@
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
 		70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */; };
 		70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */; };
+		70D63E222694D72E0036484B /* ThemePostTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E202694D72E0036484B /* ThemePostTVC.swift */; };
+		70D63E232694D72F0036484B /* ThemePostTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E212694D72E0036484B /* ThemePostTVC.xib */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
@@ -160,6 +162,8 @@
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
 		70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAreaRecommandTVC.swift; sourceTree = "<group>"; };
+		70D63E202694D72E0036484B /* ThemePostTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostTVC.swift; sourceTree = "<group>"; };
+		70D63E212694D72E0036484B /* ThemePostTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostTVC.xib; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
+				70D63E202694D72E0036484B /* ThemePostTVC.swift */,
+				70D63E212694D72E0036484B /* ThemePostTVC.xib */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
 				3C86FAB22694C7C6009370CD /* AddressMain.storyboard in Resources */,
 				3C86FAA82694C7C6009370CD /* HomeAnimationTVC.xib in Resources */,
+				70D63E232694D72F0036484B /* ThemePostTVC.xib in Resources */,
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
@@ -591,6 +598,7 @@
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
+				70D63E222694D72E0036484B /* ThemePostTVC.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
