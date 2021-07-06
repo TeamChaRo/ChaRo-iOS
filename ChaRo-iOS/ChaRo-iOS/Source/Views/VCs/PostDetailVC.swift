@@ -31,11 +31,10 @@ class PostDetailVC: UIViewController {
     
     private func registerXibs(){
         postDetailTableView.registerCustomXib(xibName: PostTitleTVC.identifier)
+        postDetailTableView.registerCustomXib(xibName: PostImagesTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostParkingTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostAttentionTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
-        
-        postDetailTableView.registerCustomXib(xibName: PostImagesTVC.identifier)
     }
     
 }
@@ -47,15 +46,15 @@ extension PostDetailVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 159
+            return 146
         case 1:
-            return 159
+            return 222
         case 2:
             return 159
         case 3:
-            return 408
+            return 159
         case 4:
-            return 418
+            return 408
         default:
             return 159
         }
@@ -64,7 +63,7 @@ extension PostDetailVC: UITableViewDelegate{
 
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,10 +77,8 @@ extension PostDetailVC: UITableViewDataSource {
             return getPostParkingCell(tableView: tableView)
         case 3:
             return getPostAttensionCell(tableView: tableView)
-        case 3:
-            return getPostDriveCourceCell(tableView: tableView)
         case 4:
-            return getPostDriveCourceCell(tableView: tableView, test: true)
+            return getPostDriveCourceCell(tableView: tableView)
         default:
             return getPostAttensionCell(tableView: tableView)
         }
@@ -123,9 +120,4 @@ extension PostDetailVC: UITableViewDataSource {
         return cell
     }
 
-    func getPostDriveCourceCell(tableView: UITableView, test: Bool) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else {return UITableViewCell()}
-        cell.setContentText(text: "")
-        return cell
-    }
 }
