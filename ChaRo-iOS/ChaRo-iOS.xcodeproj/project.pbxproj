@@ -7,14 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36012A422694A83F007F4633 /* PostAttentionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36012A412694A83F007F4633 /* PostAttentionTVC.xib */; };
+		36012A462694A8D0007F4633 /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36012A452694A8D0007F4633 /* PostTitleTVC.xib */; };
+		36012A482694AAF8007F4633 /* PostParkingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36012A472694AAF8007F4633 /* PostParkingTVC.xib */; };
+		3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8912693730700EFC794 /* CommonCVC.swift */; };
+		3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8922693730700EFC794 /* HomeAnimationCVC.swift */; };
+		3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8932693730700EFC794 /* HomeThemeCVC.swift */; };
+		3610A89F2693730700EFC794 /* PostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8942693730700EFC794 /* PostTitleTVC.swift */; };
+		3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */; };
+		3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8972693730700EFC794 /* HomeSquareTVC.swift */; };
+		3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8982693730700EFC794 /* HomeThemeTVC.swift */; };
+		3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8992693730700EFC794 /* HomeAnimationTVC.swift */; };
+		3610A8A42693730700EFC794 /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89A2693730700EFC794 /* PostAttentionTVC.swift */; };
+		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
+		3610A8B22693744A00EFC794 /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8A92693744A00EFC794 /* HomeThemeCVC.xib */; };
+		3610A8B32693744A00EFC794 /* HomeAnimationCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8AA2693744A00EFC794 /* HomeAnimationCVC.xib */; };
+		3610A8B42693744A00EFC794 /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8AB2693744A00EFC794 /* CommonCVC.xib */; };
+		3610A8B52693744A00EFC794 /* HomeAnimationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8AD2693744A00EFC794 /* HomeAnimationTVC.xib */; };
+		3610A8B62693744A00EFC794 /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8AE2693744A00EFC794 /* HomeTodayDriveTVC.xib */; };
+		3610A8B72693744A00EFC794 /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8AF2693744A00EFC794 /* HomeSquareTVC.xib */; };
+		3610A8B82693744A00EFC794 /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8B02693744A00EFC794 /* HomeThemeTVC.xib */; };
 		36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36BBD926268DE936008D8AD3 /* Home.storyboard */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
-		36D5FD16268F729E00BCCB33 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */; };
 		36D5FD1B268F72F100BCCB33 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; };
 		36D5FD1C268F72F100BCCB33 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EC2690244D0099B684 /* MapService.swift */; };
-		3C3AF5F126902AC10099B684 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EF26902AC10099B684 /* PostParkingTVC.swift */; };
-		3C3AF5F226902AC10099B684 /* PostParkingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3AF5F026902AC10099B684 /* PostParkingTVC.xib */; };
 		3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
@@ -28,23 +45,6 @@
 		3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF2268B14A800C41BB8 /* Extension+UIColor.swift */; };
 		3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF6268B14E300C41BB8 /* Extension+UIFont.swift */; };
 		3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */; };
-		3CA1CE832692C78900D0AFAF /* CommonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE802692C78900D0AFAF /* CommonCVC.swift */; };
-		3CA1CE842692C78900D0AFAF /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE812692C78900D0AFAF /* HomeAnimationCVC.swift */; };
-		3CA1CE852692C78900D0AFAF /* HomeThemeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE822692C78900D0AFAF /* HomeThemeCVC.swift */; };
-		3CA1CE8B2692C7AD00D0AFAF /* HomeTodayDriveTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE872692C7AD00D0AFAF /* HomeTodayDriveTVC.swift */; };
-		3CA1CE8C2692C7AD00D0AFAF /* HomeSquareTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE882692C7AD00D0AFAF /* HomeSquareTVC.swift */; };
-		3CA1CE8D2692C7AD00D0AFAF /* HomeThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE892692C7AD00D0AFAF /* HomeThemeTVC.swift */; };
-		3CA1CE8E2692C7AD00D0AFAF /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE8A2692C7AD00D0AFAF /* HomeAnimationTVC.swift */; };
-		3CA1CE952692C80000D0AFAF /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CE922692C80000D0AFAF /* HomeThemeCVC.xib */; };
-		3CA1CE962692C80000D0AFAF /* HomeAnimationCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CE932692C80000D0AFAF /* HomeAnimationCVC.xib */; };
-		3CA1CE972692C80000D0AFAF /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CE942692C80000D0AFAF /* CommonCVC.xib */; };
-		3CA1CE9D2692C81800D0AFAF /* HomeAnimationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CE992692C81800D0AFAF /* HomeAnimationTVC.xib */; };
-		3CA1CE9E2692C81800D0AFAF /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CE9A2692C81800D0AFAF /* HomeTodayDriveTVC.xib */; };
-		3CA1CE9F2692C81800D0AFAF /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CE9B2692C81800D0AFAF /* HomeSquareTVC.xib */; };
-		3CA1CEA02692C81800D0AFAF /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CE9C2692C81800D0AFAF /* HomeThemeTVC.xib */; };
-		3CA1CEA52692D10D00D0AFAF /* PostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CEA42692D10D00D0AFAF /* PostTitleTVC.swift */; };
-		3CA1CEAC2692E9BC00D0AFAF /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */; };
-		3CA1CEAD2692E9BC00D0AFAF /* PostAttentionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1CEAB2692E9BC00D0AFAF /* PostAttentionTVC.xib */; };
 		3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* Extension+UITextFeild.swift */; };
 		3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
@@ -55,7 +55,10 @@
 		70D63DEB26937DB80036484B /* HomeAreaRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63DE926937DB80036484B /* HomeAreaRecommandTVC.xib */; };
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
 		F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA7F726921047003DA0DC /* PostTitleTVC.xib */; };
+		7687131468DCFFB20A6A38EF /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DACDA8DF95D3442A47E0A9 /* Pods_ChaRo_iOS.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
+		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
+		F42DA8062694AFEE003DA0DC /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
 /* End PBXBuildFile section */
@@ -75,13 +78,31 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		36012A412694A83F007F4633 /* PostAttentionTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostAttentionTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostAttentionTVC.xib"; sourceTree = SOURCE_ROOT; };
+		36012A452694A8D0007F4633 /* PostTitleTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostTitleTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostTitleTVC.xib"; sourceTree = SOURCE_ROOT; };
+		36012A472694AAF8007F4633 /* PostParkingTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostParkingTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostParkingTVC.xib"; sourceTree = SOURCE_ROOT; };
+		3610A8912693730700EFC794 /* CommonCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCVC.swift; sourceTree = "<group>"; };
+		3610A8922693730700EFC794 /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationCVC.swift; sourceTree = "<group>"; };
+		3610A8932693730700EFC794 /* HomeThemeCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeCVC.swift; sourceTree = "<group>"; };
+		3610A8942693730700EFC794 /* PostTitleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleTVC.swift; sourceTree = "<group>"; };
+		3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTodayDriveTVC.swift; sourceTree = "<group>"; };
+		3610A8972693730700EFC794 /* HomeSquareTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSquareTVC.swift; sourceTree = "<group>"; };
+		3610A8982693730700EFC794 /* HomeThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeTVC.swift; sourceTree = "<group>"; };
+		3610A8992693730700EFC794 /* HomeAnimationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationTVC.swift; sourceTree = "<group>"; };
+		3610A89A2693730700EFC794 /* PostAttentionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
+		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
+		3610A8A92693744A00EFC794 /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
+		3610A8AA2693744A00EFC794 /* HomeAnimationCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationCVC.xib; sourceTree = "<group>"; };
+		3610A8AB2693744A00EFC794 /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
+		3610A8AD2693744A00EFC794 /* HomeAnimationTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationTVC.xib; sourceTree = "<group>"; };
+		3610A8AE2693744A00EFC794 /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTodayDriveTVC.xib; sourceTree = "<group>"; };
+		3610A8AF2693744A00EFC794 /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSquareTVC.xib; sourceTree = "<group>"; };
+		3610A8B02693744A00EFC794 /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeTVC.xib; sourceTree = "<group>"; };
+		36B4A65726935B8F00611FB4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36BBD926268DE936008D8AD3 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
-		3C3AF5EF26902AC10099B684 /* PostParkingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
-		3C3AF5F026902AC10099B684 /* PostParkingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostParkingTVC.xib; sourceTree = "<group>"; };
 		3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellTitleView.swift; sourceTree = "<group>"; };
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,30 +111,12 @@
 		3C71FEAD26881DAA007E8EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C71FEAF26881DAB007E8EAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C71FEB226881DAB007E8EAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3C71FEB426881DAB007E8EAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C879BEC268B146300C41BB8 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
 		3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionView.swift"; sourceTree = "<group>"; };
 		3C879BF2268B14A800C41BB8 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		3C879BF6268B14E300C41BB8 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
 		3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UITableViewCell.swift"; sourceTree = "<group>"; };
-		3CA1CE802692C78900D0AFAF /* CommonCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCVC.swift; sourceTree = "<group>"; };
-		3CA1CE812692C78900D0AFAF /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationCVC.swift; sourceTree = "<group>"; };
-		3CA1CE822692C78900D0AFAF /* HomeThemeCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeCVC.swift; sourceTree = "<group>"; };
-		3CA1CE872692C7AD00D0AFAF /* HomeTodayDriveTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTodayDriveTVC.swift; sourceTree = "<group>"; };
-		3CA1CE882692C7AD00D0AFAF /* HomeSquareTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSquareTVC.swift; sourceTree = "<group>"; };
-		3CA1CE892692C7AD00D0AFAF /* HomeThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeTVC.swift; sourceTree = "<group>"; };
-		3CA1CE8A2692C7AD00D0AFAF /* HomeAnimationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationTVC.swift; sourceTree = "<group>"; };
-		3CA1CE922692C80000D0AFAF /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
-		3CA1CE932692C80000D0AFAF /* HomeAnimationCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationCVC.xib; sourceTree = "<group>"; };
-		3CA1CE942692C80000D0AFAF /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
-		3CA1CE992692C81800D0AFAF /* HomeAnimationTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationTVC.xib; sourceTree = "<group>"; };
-		3CA1CE9A2692C81800D0AFAF /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTodayDriveTVC.xib; sourceTree = "<group>"; };
-		3CA1CE9B2692C81800D0AFAF /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSquareTVC.xib; sourceTree = "<group>"; };
-		3CA1CE9C2692C81800D0AFAF /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeTVC.xib; sourceTree = "<group>"; };
-		3CA1CEA42692D10D00D0AFAF /* PostTitleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleTVC.swift; sourceTree = "<group>"; };
-		3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
-		3CA1CEAB2692E9BC00D0AFAF /* PostAttentionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostAttentionTVC.xib; sourceTree = "<group>"; };
 		3CB315702690494700E3A101 /* Extension+UITextFeild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextFeild.swift"; sourceTree = "<group>"; };
 		3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
@@ -128,8 +131,11 @@
 		DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F42DA7F726921047003DA0DC /* PostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
+		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
+		F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostImagesTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostImagesTVC.xib"; sourceTree = SOURCE_ROOT; };
 		F49DE530268E124F00A8185C /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,9 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36D5FD16268F729E00BCCB33 /* Pods_ChaRo_iOS.framework in Frameworks */,
 				36D5FD1B268F72F100BCCB33 /* TMapSDK.framework in Frameworks */,
-				70D63DDF269367680036484B /* TMapSDK.framework in Frameworks */,
+				7687131468DCFFB20A6A38EF /* Pods_ChaRo_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,10 +154,79 @@
 		0CA8D00E5168EC02612F0BAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */,
-				DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */,
+				B487CF7DF5B6E959347E9909 /* Frameworks */,
+				FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */,
+				79DA1EF77939A620DA3C9971 /* Pods-ChaRo-iOS.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		3610A88F2693730700EFC794 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3610A8902693730700EFC794 /* CVC */,
+				3610A8952693730700EFC794 /* TVC */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3610A8902693730700EFC794 /* CVC */ = {
+			isa = PBXGroup;
+			children = (
+				3610A8912693730700EFC794 /* CommonCVC.swift */,
+				3610A8922693730700EFC794 /* HomeAnimationCVC.swift */,
+				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
+			);
+			path = CVC;
+			sourceTree = "<group>";
+		};
+		3610A8952693730700EFC794 /* TVC */ = {
+			isa = PBXGroup;
+			children = (
+				3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */,
+				3610A8972693730700EFC794 /* HomeSquareTVC.swift */,
+				3610A8982693730700EFC794 /* HomeThemeTVC.swift */,
+				3610A8992693730700EFC794 /* HomeAnimationTVC.swift */,
+				3610A89A2693730700EFC794 /* PostAttentionTVC.swift */,
+				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
+				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
+				3610A8942693730700EFC794 /* PostTitleTVC.swift */,
+			);
+			path = TVC;
+			sourceTree = "<group>";
+		};
+		3610A8A62693744A00EFC794 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				3610A8A82693744A00EFC794 /* CVC */,
+				3610A8AC2693744A00EFC794 /* TVC */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		3610A8A82693744A00EFC794 /* CVC */ = {
+			isa = PBXGroup;
+			children = (
+				3610A8A92693744A00EFC794 /* HomeThemeCVC.xib */,
+				3610A8AA2693744A00EFC794 /* HomeAnimationCVC.xib */,
+				3610A8AB2693744A00EFC794 /* CommonCVC.xib */,
+			);
+			path = CVC;
+			sourceTree = "<group>";
+		};
+		3610A8AC2693744A00EFC794 /* TVC */ = {
+			isa = PBXGroup;
+			children = (
+				3610A8AD2693744A00EFC794 /* HomeAnimationTVC.xib */,
+				3610A8AE2693744A00EFC794 /* HomeTodayDriveTVC.xib */,
+				3610A8AF2693744A00EFC794 /* HomeSquareTVC.xib */,
+				3610A8B02693744A00EFC794 /* HomeThemeTVC.xib */,
+				36012A412694A83F007F4633 /* PostAttentionTVC.xib */,
+				F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */,
+				36012A472694AAF8007F4633 /* PostParkingTVC.xib */,
+				36012A452694A8D0007F4633 /* PostTitleTVC.xib */,
+			);
+			path = TVC;
 			sourceTree = "<group>";
 		};
 		3C3AF5EB269024280099B684 /* Services */ = {
@@ -163,16 +237,6 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		3C3AF5EE269028740099B684 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				3CA1CEA42692D10D00D0AFAF /* PostTitleTVC.swift */,
-				3CA1CE862692C7AD00D0AFAF /* TVC */,
-				3CA1CE7F2692C78900D0AFAF /* CVC */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		3C71FE9A26881DAA007E8EAD = {
 			isa = PBXGroup;
 			children = (
@@ -181,7 +245,7 @@
 				3C71FEA526881DAA007E8EAD /* ChaRo-iOS */,
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
-				B487CF7DF5B6E959347E9909 /* Frameworks */,
+				CDE4EBC14577908D3BE5A4D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,7 +274,6 @@
 				3C3AF5EB269024280099B684 /* Services */,
 				3C879BE8268B13B500C41BB8 /* Models */,
 				3C879BE7268B13AD00C41BB8 /* Views */,
-				3C879BE5268B139B00C41BB8 /* ViewModels */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -218,12 +281,13 @@
 		3C879BE0268B132C00C41BB8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				36B4A65726935B8F00611FB4 /* Info.plist */,
+				3610A8A62693744A00EFC794 /* Xibs */,
 				3C71FEAF26881DAB007E8EAD /* Assets.xcassets */,
-				3C71FEB426881DAB007E8EAD /* Info.plist */,
-				3C879BE2268B134400C41BB8 /* Xibs */,
 				3C879BE1268B133A00C41BB8 /* Storyboards */,
 			);
-			path = Resource;
+			name = Resource;
+			path = Source/Resource;
 			sourceTree = "<group>";
 		};
 		3C879BE1268B133A00C41BB8 /* Storyboards */ = {
@@ -236,15 +300,6 @@
 				3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		3C879BE2268B134400C41BB8 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				3CA1CE982692C81800D0AFAF /* TVC */,
-				3CA1CE912692C80000D0AFAF /* CVC */,
-			);
-			path = Xibs;
 			sourceTree = "<group>";
 		};
 		3C879BE3268B137800C41BB8 /* Support */ = {
@@ -271,19 +326,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		3C879BE5268B139B00C41BB8 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		3C879BE7268B13AD00C41BB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3C879BEB268B13CD00C41BB8 /* Shared */,
-				3C3AF5EE269028740099B684 /* Cells */,
 				3C879BE9268B13C300C41BB8 /* VCs */,
+				3610A88F2693730700EFC794 /* Cells */,
+				3C879BEB268B13CD00C41BB8 /* Shared */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,63 +363,19 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		3CA1CE7F2692C78900D0AFAF /* CVC */ = {
-			isa = PBXGroup;
-			children = (
-				3CA1CE802692C78900D0AFAF /* CommonCVC.swift */,
-				3CA1CE812692C78900D0AFAF /* HomeAnimationCVC.swift */,
-				3CA1CE822692C78900D0AFAF /* HomeThemeCVC.swift */,
-			);
-			path = CVC;
-			sourceTree = "<group>";
-		};
-		3CA1CE862692C7AD00D0AFAF /* TVC */ = {
-			isa = PBXGroup;
-			children = (
-				3CA1CE8A2692C7AD00D0AFAF /* HomeAnimationTVC.swift */,
-				70D63DE826937DB80036484B /* HomeAreaRecommandTVC.swift */,
-				3CA1CE872692C7AD00D0AFAF /* HomeTodayDriveTVC.swift */,
-				70D63DE4269379590036484B /* HomeSeasonRecommandTVC.swift */,
-				3CA1CE882692C7AD00D0AFAF /* HomeSquareTVC.swift */,
-				3CA1CE892692C7AD00D0AFAF /* HomeThemeTVC.swift */,
-				3C3AF5EF26902AC10099B684 /* PostParkingTVC.swift */,
-				3CA1CEAA2692E9BC00D0AFAF /* PostAttentionTVC.swift */,
-			);
-			name = TVC;
-			path = "ChaRo-iOS/Source/Views/Cells/TVC";
-			sourceTree = SOURCE_ROOT;
-		};
-		3CA1CE912692C80000D0AFAF /* CVC */ = {
-			isa = PBXGroup;
-			children = (
-				3CA1CE922692C80000D0AFAF /* HomeThemeCVC.xib */,
-				3CA1CE932692C80000D0AFAF /* HomeAnimationCVC.xib */,
-				3CA1CE942692C80000D0AFAF /* CommonCVC.xib */,
-			);
-			path = CVC;
-			sourceTree = "<group>";
-		};
-		3CA1CE982692C81800D0AFAF /* TVC */ = {
-			isa = PBXGroup;
-			children = (
-				3CA1CE992692C81800D0AFAF /* HomeAnimationTVC.xib */,
-				70D63DE926937DB80036484B /* HomeAreaRecommandTVC.xib */,
-				3CA1CE9A2692C81800D0AFAF /* HomeTodayDriveTVC.xib */,
-				70D63DE5269379590036484B /* HomeSeasonRecommandTVC.xib */,
-				3CA1CE9B2692C81800D0AFAF /* HomeSquareTVC.xib */,
-				3CA1CE9C2692C81800D0AFAF /* HomeThemeTVC.xib */,
-				3CA1CEAB2692E9BC00D0AFAF /* PostAttentionTVC.xib */,
-				3C3AF5F026902AC10099B684 /* PostParkingTVC.xib */,
-				F42DA7F726921047003DA0DC /* PostTitleTVC.xib */,
-			);
-			path = TVC;
-			sourceTree = "<group>";
-		};
 		B487CF7DF5B6E959347E9909 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */,
-				D0533DB4F7C363C8E73EBF15 /* Pods_ChaRo_iOS.framework */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		CDE4EBC14577908D3BE5A4D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7DACDA8DF95D3442A47E0A9 /* Pods_ChaRo_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -383,12 +387,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C71FEB726881DAB007E8EAD /* Build configuration list for PBXNativeTarget "ChaRo-iOS" */;
 			buildPhases = (
-				ADEFC32927F9704ADF8B577B /* [CP] Check Pods Manifest.lock */,
+				E66EF3B26CDD2A45E2FFFBF0 /* [CP] Check Pods Manifest.lock */,
 				3C71FE9F26881DAA007E8EAD /* Sources */,
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
-				D65DEDEA4CC73F43A39F0B60 /* [CP] Embed Pods Frameworks */,
 				36D5FD1D268F72F100BCCB33 /* Embed Frameworks */,
+				AC51572F7F84C2CE03AF4C4A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -437,11 +441,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */,
+				3610A8B22693744A00EFC794 /* HomeThemeCVC.xib in Resources */,
+				36012A482694AAF8007F4633 /* PostParkingTVC.xib in Resources */,
 				3C71FEB326881DAB007E8EAD /* LaunchScreen.storyboard in Resources */,
-				3CA1CE962692C80000D0AFAF /* HomeAnimationCVC.xib in Resources */,
-				3CA1CE9D2692C81800D0AFAF /* HomeAnimationTVC.xib in Resources */,
-				3CA1CE9E2692C81800D0AFAF /* HomeTodayDriveTVC.xib in Resources */,
+				3610A8B82693744A00EFC794 /* HomeThemeTVC.xib in Resources */,
+				36012A462694A8D0007F4633 /* PostTitleTVC.xib in Resources */,
 				3C71FEB026881DAB007E8EAD /* Assets.xcassets in Resources */,
+				3610A8B42693744A00EFC794 /* CommonCVC.xib in Resources */,
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				3CA1CE952692C80000D0AFAF /* HomeThemeCVC.xib in Resources */,
 				3CA1CE9F2692C81800D0AFAF /* HomeSquareTVC.xib in Resources */,
@@ -449,18 +455,37 @@
 				70D63DEB26937DB80036484B /* HomeAreaRecommandTVC.xib in Resources */,
 				3CA1CE972692C80000D0AFAF /* CommonCVC.xib in Resources */,
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
-				3CA1CEA02692C81800D0AFAF /* HomeThemeTVC.xib in Resources */,
-				F42DA7F926921047003DA0DC /* PostTitleTVC.xib in Resources */,
-				3C3AF5F226902AC10099B684 /* PostParkingTVC.xib in Resources */,
-				3CA1CEAD2692E9BC00D0AFAF /* PostAttentionTVC.xib in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
+				3610A8B32693744A00EFC794 /* HomeAnimationCVC.xib in Resources */,
+				F42DA8062694AFEE003DA0DC /* PostImagesTVC.xib in Resources */,
+				36012A422694A83F007F4633 /* PostAttentionTVC.xib in Resources */,
+				3610A8B52693744A00EFC794 /* HomeAnimationTVC.xib in Resources */,
+				3610A8B72693744A00EFC794 /* HomeSquareTVC.xib in Resources */,
+				3610A8B62693744A00EFC794 /* HomeTodayDriveTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		ADEFC32927F9704ADF8B577B /* [CP] Check Pods Manifest.lock */ = {
+		AC51572F7F84C2CE03AF4C4A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E66EF3B26CDD2A45E2FFFBF0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -482,23 +507,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D65DEDEA4CC73F43A39F0B60 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -518,23 +526,29 @@
 				3CA1CEAC2692E9BC00D0AFAF /* PostAttentionTVC.swift in Sources */,
 				70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
-				3CA1CEA52692D10D00D0AFAF /* PostTitleTVC.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
-				3CA1CE8C2692C7AD00D0AFAF /* HomeSquareTVC.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
+				3610A8A42693730700EFC794 /* PostAttentionTVC.swift in Sources */,
+				3610A89F2693730700EFC794 /* PostTitleTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
-				3CA1CE8E2692C7AD00D0AFAF /* HomeAnimationTVC.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				70D63DE6269379590036484B /* HomeSeasonRecommandTVC.swift in Sources */,
+				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
+				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
+				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
+				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
-				3CA1CE842692C78900D0AFAF /* HomeAnimationCVC.swift in Sources */,
+				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
+				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
+				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
+				3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */,
 				3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */,
-				3C3AF5F126902AC10099B684 /* PostParkingTVC.swift in Sources */,
+				3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,17 +694,18 @@
 		};
 		3C71FEB826881DAB007E8EAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CB600D49E66DBA0FA25F8D3 /* Pods-ChaRo-iOS.debug.xcconfig */;
+			baseConfigurationReference = FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = U24ZACT97M;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "ChaRo-iOS/Resource/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Source/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -705,17 +720,18 @@
 		};
 		3C71FEB926881DAB007E8EAD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC4E7CEE4DE570491D4EBC08 /* Pods-ChaRo-iOS.release.xcconfig */;
+			baseConfigurationReference = 79DA1EF77939A620DA3C9971 /* Pods-ChaRo-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J8A843466G;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "ChaRo-iOS/Resource/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Source/Resource/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

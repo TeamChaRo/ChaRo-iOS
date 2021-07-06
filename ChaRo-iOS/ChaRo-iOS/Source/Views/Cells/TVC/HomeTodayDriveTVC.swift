@@ -15,10 +15,8 @@ class HomeTodayDriveTVC: UITableViewCell {
     @IBOutlet weak var charoPickLabel: UILabel!
     @IBOutlet weak var TodayDriveLabel: UILabel!
     
-    
     //MARK:- Variable
     static let identifier = "HomeTodayDriveTVC"
-    
     
     //MARK:- Life Cycle
     override func awakeFromNib() {

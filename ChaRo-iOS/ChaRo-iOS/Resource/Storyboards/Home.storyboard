@@ -20,18 +20,55 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KbL-a3-YBW">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGm-mL-gdn">
+                                        <rect key="frame" x="362" y="43.5" width="44" height="44"/>
+                                        <state key="normal" backgroundImage="icAlarmWhite"/>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="fNn-eX-O7v">
+                                        <rect key="frame" x="0.0" y="45" width="127" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="587-59-yk0"/>
+                                            <constraint firstAttribute="width" constant="127" id="UJJ-vi-mav"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3b-4a-hDs">
+                                        <rect key="frame" x="318" y="43.5" width="44" height="44"/>
+                                        <state key="normal" backgroundImage="icSearchWhite"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="fNn-eX-O7v" firstAttribute="leading" secondItem="KbL-a3-YBW" secondAttribute="leading" id="2ij-QV-gDm"/>
+                                    <constraint firstItem="EGm-mL-gdn" firstAttribute="centerY" secondItem="fNn-eX-O7v" secondAttribute="centerY" id="5Ef-fj-1Kx"/>
+                                    <constraint firstItem="EGm-mL-gdn" firstAttribute="leading" secondItem="e3b-4a-hDs" secondAttribute="trailing" id="7Vd-2X-G36"/>
+                                    <constraint firstAttribute="trailing" secondItem="EGm-mL-gdn" secondAttribute="trailing" constant="8" id="Jdn-op-zNT"/>
+                                    <constraint firstAttribute="height" constant="100" id="W9a-Mr-TYR"/>
+                                    <constraint firstItem="e3b-4a-hDs" firstAttribute="centerY" secondItem="fNn-eX-O7v" secondAttribute="centerY" id="hpD-tj-Uzx"/>
+                                    <constraint firstItem="fNn-eX-O7v" firstAttribute="top" secondItem="KbL-a3-YBW" secondAttribute="top" constant="45" id="wz2-U4-Okp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="J9H-Uf-xbB" secondAttribute="bottom" id="GLp-Fz-IHO"/>
-                            <constraint firstItem="J9H-Uf-xbB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="IOe-PS-cQ4"/>
-                            <constraint firstItem="J9H-Uf-xbB" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Tx7-bm-cHx"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="J9H-Uf-xbB" secondAttribute="trailing" id="bvs-12-PVZ"/>
+                            <constraint firstItem="KbL-a3-YBW" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="7XA-P5-8js"/>
+                            <constraint firstItem="KbL-a3-YBW" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="GDS-kx-nAr"/>
+                            <constraint firstItem="J9H-Uf-xbB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="OzP-xw-Y2e"/>
+                            <constraint firstItem="J9H-Uf-xbB" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="-50" id="WK8-TK-lgW"/>
+                            <constraint firstItem="KbL-a3-YBW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="d4l-Al-ABb"/>
+                            <constraint firstAttribute="bottom" secondItem="J9H-Uf-xbB" secondAttribute="bottom" id="qxB-JE-xvY"/>
+                            <constraint firstItem="J9H-Uf-xbB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sfj-FX-oVk"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="HomeNavigationView" destination="KbL-a3-YBW" id="08y-M0-Mfy"/>
                         <outlet property="HomeTableView" destination="J9H-Uf-xbB" id="4VX-FP-xBA"/>
+                        <outlet property="homeNavigationLogo" destination="fNn-eX-O7v" id="MKv-Wa-UPa"/>
+                        <outlet property="homeNavigationNotificationButton" destination="EGm-mL-gdn" id="YcG-Cc-PfE"/>
+                        <outlet property="homeNavigationSearchButton" destination="e3b-4a-hDs" id="dyI-Nv-kIW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -40,6 +77,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icAlarmWhite" width="44" height="44"/>
+        <image name="icSearchWhite" width="44" height="44"/>
+        <image name="logoWhite" width="127" height="44"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
