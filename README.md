@@ -1,5 +1,5 @@
-# <img src = "https://user-images.githubusercontent.com/46644241/124637007-29badb00-dec4-11eb-8335-d5a5abb2cbd6.png" width="80">  
-<img src = "https://user-images.githubusercontent.com/46644241/124637292-84543700-dec4-11eb-9c73-04e914dbbd53.png">  <br>
+# <img src = "https://user-images.githubusercontent.com/46644241/124637007-29badb00-dec4-11eb-8335-d5a5abb2cbd6.png" width="100"> 
+<img src = "https://user-images.githubusercontent.com/46644241/124638184-9edae000-dec5-11eb-9e9b-fae86bbc6764.png" width="750">  <br>
 
 > **차에서의 오늘이 최고가 될 수 있게, 당신의 드라이브 메이트 차로** <br>
 > SOPT 28th APPJAM <br>
@@ -12,6 +12,7 @@
  🍎 장혜령 | 🍎 박익범 | 🍎 이지원 | 🍎 최인정
 [hryeong66](https://github.com/hryeong66) | [swikkft](https://github.com/parkikbum) | [comeheredart](https://github.com/comeheredart) | [inddoni](https://github.com/inddoni)
 
+<Br>
 
 ## Development Environment and Using Library
 ### Development Environment
