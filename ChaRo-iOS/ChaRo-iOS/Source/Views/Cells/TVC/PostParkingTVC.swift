@@ -88,7 +88,6 @@ class PostParkingTVC: UITableViewCell {
                      noButton,
                      parkingExplanationTextFeild])
         
-        let customHeight = Int(70*deviceHeightRate)
         let customGap = Int(175*deviceWidthRate)
         
         titleView.snp.makeConstraints{make in
@@ -102,21 +101,21 @@ class PostParkingTVC: UITableViewCell {
             make.top.equalTo(titleView.snp.bottom).offset(0)
             make.leading.equalTo(self.snp.leading)
             make.trailing.equalTo(self.snp.trailing).offset(-customGap)
-            make.height.equalTo(customHeight)
+            make.height.equalTo(70)
         }
         
         noButton.snp.makeConstraints{make in
             make.top.equalTo(titleView.snp.bottom).offset(0)
             make.leading.equalTo(self.snp.leading).offset(customGap)
             make.trailing.equalTo(self.snp.trailing)
-            make.height.equalTo(customHeight)
+            make.height.equalTo(70)
         }
     
         parkingExplanationTextFeild.snp.makeConstraints{make in
             make.leading.equalTo(self.snp.leading)
             make.trailing.equalTo(self.snp.trailing)
             make.bottom.equalTo(self.snp.bottom).offset(-19)
-            make.height.equalTo(customHeight)
+            make.height.equalTo(70)
         }
     }
 }
