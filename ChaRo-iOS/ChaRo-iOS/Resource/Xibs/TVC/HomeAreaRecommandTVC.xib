@@ -46,7 +46,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="280" id="BTQ-pg-92F"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>

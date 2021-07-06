@@ -42,6 +42,7 @@ class HomeSquareTVC: UITableViewCell {
         //TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
         //moreLabel.font = UIFont.notoSansRegularFont(ofSize: 12)
         
+        
         TitleLabel.textColor = UIColor.mainBlack
         moreLabel.textColor = UIColor.gray40
         
