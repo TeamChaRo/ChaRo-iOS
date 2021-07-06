@@ -50,6 +50,8 @@
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
 		7687131468DCFFB20A6A38EF /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DACDA8DF95D3442A47E0A9 /* Pods_ChaRo_iOS.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
+		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
+		F42DA8062694AFEE003DA0DC /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */; };
 		F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DE530268E124F00A8185C /* PostDetail.storyboard */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
 /* End PBXBuildFile section */
@@ -115,6 +117,8 @@
 		79DA1EF77939A620DA3C9971 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A7DACDA8DF95D3442A47E0A9 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
+		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
+		F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostImagesTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostImagesTVC.xib"; sourceTree = SOURCE_ROOT; };
 		F49DE530268E124F00A8185C /* PostDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 				3610A8982693730700EFC794 /* HomeThemeTVC.swift */,
 				3610A8992693730700EFC794 /* HomeAnimationTVC.swift */,
 				3610A89A2693730700EFC794 /* PostAttentionTVC.swift */,
+				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3610A8942693730700EFC794 /* PostTitleTVC.swift */,
 			);
@@ -203,6 +208,7 @@
 				3610A8AF2693744A00EFC794 /* HomeSquareTVC.xib */,
 				3610A8B02693744A00EFC794 /* HomeThemeTVC.xib */,
 				36012A412694A83F007F4633 /* PostAttentionTVC.xib */,
+				F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */,
 				36012A472694AAF8007F4633 /* PostParkingTVC.xib */,
 				36012A452694A8D0007F4633 /* PostTitleTVC.xib */,
 			);
@@ -430,6 +436,7 @@
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
 				3610A8B32693744A00EFC794 /* HomeAnimationCVC.xib in Resources */,
+				F42DA8062694AFEE003DA0DC /* PostImagesTVC.xib in Resources */,
 				36012A422694A83F007F4633 /* PostAttentionTVC.xib in Resources */,
 				3610A8B52693744A00EFC794 /* HomeAnimationTVC.xib in Resources */,
 				3610A8B72693744A00EFC794 /* HomeSquareTVC.xib in Resources */,
@@ -500,6 +507,7 @@
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
+				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,

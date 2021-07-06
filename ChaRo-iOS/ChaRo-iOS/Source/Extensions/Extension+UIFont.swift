@@ -8,10 +8,10 @@
 import UIKit
 
 struct AppFontName {
-    static let thin = "NotoSansKR-Thin"
-    static let light = "NotoSansKR-Light"
-    static let regular = "NotoSansKR-Regular"
-    static let medium = "NotoSansKR-Medium"
+    static let thin = "NotoSansKkr-Thin"
+    static let light = "NotoSansKkr-Light"
+    static let regular = "NotoSansKkr-Regular"
+    static let medium = "NotoSansKkr-Medium"
     static let bold = "NotoSansCJKkr-Bold"
     static let black = "NotoSansCJKkr-Black"
 }
