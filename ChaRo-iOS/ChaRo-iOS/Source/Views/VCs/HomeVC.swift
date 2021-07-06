@@ -37,6 +37,8 @@ class HomeVC: UIViewController {
         HomeTableView.registerCustomXib(xibName: "HomeTodayDriveTVC")
         HomeTableView.registerCustomXib(xibName: "HomeThemeTVC")
         HomeTableView.registerCustomXib(xibName: "HomeSquareTVC")
+        HomeTableView.registerCustomXib(xibName: "HomeSeasonRecommandTVC")
+        HomeTableView.registerCustomXib(xibName: "HomeAreaRecommandTVC")
         
     }
 }
@@ -50,14 +52,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 0:
             return UIScreen.main.bounds.height*0.65
         case 1:
-            // 354 / 812
+            //353 / 812
             return UIScreen.main.bounds.height * 0.435
         case 2:
-            //일단 몰라서 ..,,
-            return UIScreen.main.bounds.height * 0.2
-        case 3:
-            //일단 몰라서 고정
-            return 600
+            //178 / 812
+            return UIScreen.main.bounds.height * 0.219
+        case 3, 4, 5:
+            //553 / 812
+            return UIScreen.main.bounds.height * 0.72
         default:
             return 100
         }
@@ -102,7 +104,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
        }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,6 +130,17 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
 
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             return cell
+            
+        case 4:
+
+            let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
+            return cell
+           
+        case 5:
+
+            let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
+            return cell
+           
 
         default:
             return UITableViewCell()

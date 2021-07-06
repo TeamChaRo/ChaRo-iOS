@@ -12,6 +12,8 @@ class HomeTodayDriveTVC: UITableViewCell {
     
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var charoPickLabel: UILabel!
+    @IBOutlet weak var TodayDriveLabel: UILabel!
     
     //MARK:- Variable
     static let identifier = "HomeTodayDriveTVC"
@@ -20,6 +22,7 @@ class HomeTodayDriveTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollctionView()
+        setLabelUI()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,7 +37,23 @@ class HomeTodayDriveTVC: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
+        
+        collectionView.showsHorizontalScrollIndicator = false
     
+    }
+
+    func setLabelUI() {
+        
+        charoPickLabel.text = "이번주 차로'S PICK"
+        TodayDriveLabel.text = "차로의 '오늘 드라이브'"
+        
+        charoPickLabel.textColor = UIColor.mainBlue
+        TodayDriveLabel.textColor = UIColor.mainBlack
+        
+        
+        //charoPickLabel.font = UIFont.notoSansRegularFont(ofSize: 13)
+        //TodayDriveLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        
     }
     
     //MARK:- Function

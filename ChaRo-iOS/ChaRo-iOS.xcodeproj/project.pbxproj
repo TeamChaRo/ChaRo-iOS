@@ -65,6 +65,15 @@
 		3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* Extension+UITextFeild.swift */; };
 		3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
+		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
+		70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */; };
+		70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */; };
+		70D63E082694BD4F0036484B /* HomeSeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E062694BD4F0036484B /* HomeSeasonRecommandTVC.xib */; };
+		70D63E092694BD4F0036484B /* HomeAreaRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E072694BD4F0036484B /* HomeAreaRecommandTVC.xib */; };
+		70D63E0C2694BD9A0036484B /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E0A2694BD9A0036484B /* HomeThemeTVC.xib */; };
+		70D63E0D2694BD9A0036484B /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E0B2694BD9A0036484B /* HomeSquareTVC.xib */; };
+		70D63E0F2694BDD00036484B /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E0E2694BDD00036484B /* HomeTodayDriveTVC.xib */; };
+		70D63E192694BEA50036484B /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E182694BEA50036484B /* CommonCVC.xib */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F42DA8062694AFEE003DA0DC /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */; };
@@ -147,7 +156,18 @@
 		3CB9BE51268EFD7700EB85CB /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
-		79DA1EF77939A620DA3C9971 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		70D63DDE269367680036484B /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
+		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
+		70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
+		70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAreaRecommandTVC.swift; sourceTree = "<group>"; };
+		70D63E062694BD4F0036484B /* HomeSeasonRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeSeasonRecommandTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeSeasonRecommandTVC.xib"; sourceTree = SOURCE_ROOT; };
+		70D63E072694BD4F0036484B /* HomeAreaRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeAreaRecommandTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeAreaRecommandTVC.xib"; sourceTree = SOURCE_ROOT; };
+		70D63E0A2694BD9A0036484B /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeThemeTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeThemeTVC.xib"; sourceTree = SOURCE_ROOT; };
+		70D63E0B2694BD9A0036484B /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeSquareTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeSquareTVC.xib"; sourceTree = SOURCE_ROOT; };
+		70D63E0E2694BDD00036484B /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeTodayDriveTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeTodayDriveTVC.xib"; sourceTree = SOURCE_ROOT; };
+		70D63E182694BEA50036484B /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommonCVC.xib; path = "ChaRo-iOS/Resource/Xibs/CVC/CommonCVC.xib"; sourceTree = SOURCE_ROOT; };
+		E2E49F6BFF8717B6A51DFBD6 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F42DA8052694AFEE003DA0DC /* PostImagesTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostImagesTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostImagesTVC.xib"; sourceTree = SOURCE_ROOT; };
@@ -174,7 +194,7 @@
 			children = (
 				B487CF7DF5B6E959347E9909 /* Frameworks */,
 				FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */,
-				79DA1EF77939A620DA3C9971 /* Pods-ChaRo-iOS.release.xcconfig */,
+				4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -202,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */,
+				70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */,
+				70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */,
 				3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */,
 				3610A8972693730700EFC794 /* HomeSquareTVC.swift */,
 				3610A8982693730700EFC794 /* HomeThemeTVC.swift */,
@@ -227,9 +249,9 @@
 		3610A8A82693744A00EFC794 /* CVC */ = {
 			isa = PBXGroup;
 			children = (
+				70D63E182694BEA50036484B /* CommonCVC.xib */,
+				3610A8A92693744A00EFC794 /* HomeThemeCVC.xib */,
 				3610A8AA2693744A00EFC794 /* HomeAnimationCVC.xib */,
-				3C86FA2B2694BA9C009370CD /* HomeThemeCVC.xib */,
-				3C86FA272694BA49009370CD /* CommonCVC.xib */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -238,6 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA1D2694B51F009370CD /* AddressButtonCell.xib */,
+				70D63E072694BD4F0036484B /* HomeAreaRecommandTVC.xib */,
+				70D63E062694BD4F0036484B /* HomeSeasonRecommandTVC.xib */,
 				3610A8AD2693744A00EFC794 /* HomeAnimationTVC.xib */,
 				3C86FA292694BA79009370CD /* HomeThemeTVC.xib */,
 				3610A8AE2693744A00EFC794 /* HomeTodayDriveTVC.xib */,
@@ -263,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */,
+				70D63DDE269367680036484B /* TMapSDK.framework */,
 				3C71FEA526881DAA007E8EAD /* ChaRo-iOS */,
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
@@ -361,6 +386,7 @@
 				3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */,
 				3CB315702690494700E3A101 /* Extension+UITextFeild.swift */,
 				3C879BEC268B146300C41BB8 /* Extension+UIView.swift */,
+				70D63DEC2693938D0036484B /* Extension+UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -499,9 +525,11 @@
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
 				3C86FA182694B441009370CD /* AddressMain.storyboard in Resources */,
 				3C86FA462694BB88009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
+				70D63E082694BD4F0036484B /* HomeSeasonRecommandTVC.xib in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
 				3C86FA3F2694BB88009370CD /* NotoSansCJKkr-DemiLight.otf in Resources */,
 				3610A8B32693744A00EFC794 /* HomeAnimationCVC.xib in Resources */,
+				70D63E192694BEA50036484B /* CommonCVC.xib in Resources */,
 				F42DA8062694AFEE003DA0DC /* PostImagesTVC.xib in Resources */,
 				36012A422694A83F007F4633 /* PostAttentionTVC.xib in Resources */,
 				3C86FA422694BB88009370CD /* README in Resources */,
@@ -566,6 +594,7 @@
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
+				70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */,
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
@@ -587,6 +616,8 @@
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				3C86FA242694B726009370CD /* PostAttentionTVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
+				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,
+				70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */,
 				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
 				3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */,
@@ -763,7 +794,7 @@
 		};
 		3C71FEB926881DAB007E8EAD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79DA1EF77939A620DA3C9971 /* Pods-ChaRo-iOS.release.xcconfig */;
+			baseConfigurationReference = 4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
