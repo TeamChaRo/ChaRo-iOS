@@ -8,6 +8,7 @@
 import UIKit
 
 protocol AddressButtonCellDelegate {
+    func addressButtonCellForPreseting(cell: AddressButtonCell)
     func addressButtonCellForRemoving(cell: AddressButtonCell)
     func addressButtonCellForAdding(cell: AddressButtonCell)
 }
@@ -15,20 +16,20 @@ protocol AddressButtonCellDelegate {
 class AddressButtonCell: UITableViewCell {
 
     static let identifier = "AddressButtonCell"
-    private var cellType = 0
     public var address = AddressDataModel()
     public var delegate: AddressButtonCellDelegate?
-
+    public var cellType = ""
     private var searchButton : UIButton = {
         let button = UIButton()
         //style
+        button.backgroundColor = .brown
         return button
     }()
     
     private var plusButton: UIButton = {
         let button = UIButton()
         //style
-        button.backgroundColor = .mainMint
+        button.backgroundColor = .mainBlue
         return button
     }()
     
@@ -51,29 +52,17 @@ class AddressButtonCell: UITableViewCell {
     
     public func setInitContentText(text: String, isAddress: Bool){
         let title = "\(text)를 입력해주세요"
-        //setCellType(type: text)
         setCellStyleForType(type: text)
-        searchButton.setTitle(text, for: .normal)
+        searchButton.setTitle(title, for: .normal)
         if isAddress{
             searchButton.setTitleColor(.mainBlack, for: .normal)
         }else{ // basic 스타일
             searchButton.setTitleColor(.gray30, for: .normal)
         }
     }
-    
-    
-    private func setCellType(type: String){
-        switch type {
-        case "출발지":
-            cellType = 0
-        case "도착지":
-            cellType = 2
-        default:
-            cellType = 1
-        }
-    }
-    
+
     private func setCellStyleForType(type: String){
+        cellType = type
         switch type {
         case "출발지":
             setStartTypeConstraints()
@@ -97,7 +86,7 @@ class AddressButtonCell: UITableViewCell {
         searchButton.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top).offset(4)
             make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing).offset(-39)
+            make.trailing.equalTo(self.snp.trailing).offset(-29)
             make.bottom.equalTo(self.snp.bottom).offset(-4)
         }
         
@@ -110,7 +99,7 @@ class AddressButtonCell: UITableViewCell {
         searchButton.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top).offset(4)
             make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing).offset(-39)
+            make.trailing.equalTo(self.snp.trailing).offset(-29)
             make.bottom.equalTo(self.snp.bottom).offset(-4)
         }
         
@@ -124,23 +113,26 @@ class AddressButtonCell: UITableViewCell {
     
     private func setEndTypeConstraints(){
         print("setEndTypeConstraints")
-        addSubviews([searchButton,plusButton])
+        addSubview(searchButton)
+        
         searchButton.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top).offset(4)
             make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing).offset(-39)
+            make.trailing.equalTo(self.snp.trailing).offset(-29)
             make.bottom.equalTo(self.snp.bottom).offset(-4)
         }
-     
+        
+        addSubview(plusButton)
         plusButton.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top).offset(4)
-            make.leading.equalTo(searchButton.snp.trailing).offset(4)
-            make.trailing.equalTo(self.snp.trailing).offset(-4)
+            make.trailing.equalTo(searchButton.snp.trailing).offset(-5)
             make.bottom.equalTo(self.snp.bottom).offset(-4)
         }
     }
     
     @objc public func goToKeywordSearch(sender: UIButton){
+        delegate!.addressButtonCellForPreseting(cell: self)
+       
         
     }
     
