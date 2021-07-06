@@ -87,7 +87,7 @@ extension PostImagesTVC {
     func initImagePage(){
         pageController.numberOfPages = images.count
         pageController.currentPage = 0 // 시작은 첫 페이지
-        pageController.isHidden = false // 나중에 true로 바꾸기!!
+        pageController.isHidden = true
         setPageArrowButton()
     }
     
