@@ -81,7 +81,6 @@ extension PostDetailVC: UITableViewDataSource {
         case 0:
             return getPostTitleCell(tableView: tableView)
         case 1:
-            print("1번들어옴")
             return getPostImagesCell(tableView: tableView)
         case 2:
             return getPostParkingCell(tableView: tableView)
@@ -116,9 +115,7 @@ extension PostDetailVC: UITableViewDataSource {
     }
     
     func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
-        print("done")
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
-        print("donedone")
         cell.setImage(["Mask Group", "Mask Group", "Mask Group"])
         return cell
     }
