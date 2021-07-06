@@ -13,32 +13,43 @@ class AddressMainVC: UIViewController {
     static let identifier = "AddressMainVC"
     public var addressList : [AddressDataModel] = []
     private var tableView = UITableView()
-    private var tableViewHeight = 88
+    private let viewForMap = UIView()
+    private var oneCellHeight = 46
+    private var tableViewHeight = 92
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setConstraints()
         configureTableView()
         initAddressList()
     }
-    
 
     private func configureTableView(){
-        setTableViewConstraints()
         tableView.registerCustomXib(xibName: AddressButtonCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    private func setTableViewConstraints(){
-        view.addSubview(tableView)
+    private func setConstraints(){
+        view.addSubviews([tableView,viewForMap])
+        
         tableView.snp.makeConstraints{make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(48)
             make.height.equalTo(tableViewHeight)
         }
+        
+        viewForMap.snp.makeConstraints{make in
+            make.top.equalTo(tableView.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        viewForMap.backgroundColor = .yellow
     }
     
+    
     private func calculateTableViewHeight() -> Int{
-        return addressList.count * 44
+        return addressList.count * oneCellHeight
     }
     
     private func initAddressList(){
@@ -79,7 +90,6 @@ extension AddressMainVC: UITableViewDataSource{
 
 extension AddressMainVC: AddressButtonCellDelegate{
     func addressButtonCellForRemoving(cell: AddressButtonCell) {
-        print("addressButtonCellForRemoving")
         let index = cell.getTableCellIndexPath()
         print("\(index)")
         addressList.remove(at: index)
@@ -92,7 +102,6 @@ extension AddressMainVC: AddressButtonCellDelegate{
     }
     
     func addressButtonCellForAdding(cell: AddressButtonCell) {
-        print("addressButtonCellForAdding")
         let index = addressList.endIndex - 2
         addressList.insert(cell.address, at: index)
         tableView.reloadData()
@@ -103,5 +112,17 @@ extension AddressMainVC: AddressButtonCellDelegate{
         }
     }
     
+    func addressButtonCellForPreseting(cell: AddressButtonCell) {
+        
+        let storyboard = UIStoryboard(name: "SearchKeyword", bundle: nil)
+        guard let nextVC =  storyboard.instantiateViewController(identifier: SearchKeywordVC.identifier) as? SearchKeywordVC else {
+            return
+        }
+        let index = cell.getTableCellIndexPath()
+        
+        nextVC.setAddressModel(model: addressList[index], text: "\(cell.cellType)를 입력해주세요")
+        nextVC.modalPresentationStyle = .fullScreen
+        self.present(nextVC, animated: true, completion: nil)
+    }
     
 }
