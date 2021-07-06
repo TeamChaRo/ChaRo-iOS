@@ -61,6 +61,8 @@
 		3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA9F2694C7C6009370CD /* LICENSE_OFL.txt */; };
 		3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */; };
 		3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */; };
+		3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FAC42694D767009370CD /* SearchKeywordVC.swift */; };
+		3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */; };
 		3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEC268B146300C41BB8 /* Extension+UIView.swift */; };
 		3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */; };
 		3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */; };
@@ -147,6 +149,8 @@
 		3C86FAA02694C7C6009370CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSeasonRecommandTVC.xib; sourceTree = "<group>"; };
 		3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAreaRecommandTVC.xib; sourceTree = "<group>"; };
+		3C86FAC42694D767009370CD /* SearchKeywordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordVC.swift; sourceTree = "<group>"; };
+		3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchKeyword.storyboard; sourceTree = "<group>"; };
 		3C879BEC268B146300C41BB8 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
 		3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionView.swift"; sourceTree = "<group>"; };
@@ -322,6 +326,7 @@
 				3C86FA912694C7C6009370CD /* Main.storyboard */,
 				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
+				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
+				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
+				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
 				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
@@ -590,6 +597,7 @@
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
+				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,

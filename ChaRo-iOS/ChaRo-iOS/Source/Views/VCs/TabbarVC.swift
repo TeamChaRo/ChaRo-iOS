@@ -53,9 +53,6 @@ class TabbarVC: UITabBarController {
 //        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
 //        writtingTab.tabBarItem.title = "작성하기"
 //        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        
-        
-        
         let tabs = [homeTab, mapTab, postTab]
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
