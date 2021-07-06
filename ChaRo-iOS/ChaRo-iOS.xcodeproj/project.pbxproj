@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1BF746D5C8549F4E027525F3 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */; };
+		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
+		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8912693730700EFC794 /* CommonCVC.swift */; };
 		3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8922693730700EFC794 /* HomeAnimationCVC.swift */; };
 		3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8932693730700EFC794 /* HomeThemeCVC.swift */; };
@@ -93,6 +95,8 @@
 
 /* Begin PBXFileReference section */
 		31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
+		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
 		3610A8912693730700EFC794 /* CommonCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCVC.swift; sourceTree = "<group>"; };
 		3610A8922693730700EFC794 /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationCVC.swift; sourceTree = "<group>"; };
 		3610A8932693730700EFC794 /* HomeThemeCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeCVC.swift; sourceTree = "<group>"; };
@@ -316,11 +320,12 @@
 		3C86FA8C2694C7C6009370CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
+				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
+				36012A492694D557007F4633 /* HomePost.storyboard */,
 				3C86FA8E2694C7C6009370CD /* Home.storyboard */,
 				3C86FA8F2694C7C6009370CD /* LaunchScreen.storyboard */,
 				3C86FA912694C7C6009370CD /* Main.storyboard */,
-				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
+				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
 			);
 			path = Storyboards;
@@ -403,6 +408,7 @@
 				3C86F9F5269478F3009370CD /* AddressMainVC.swift */,
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
+				36012A4B2694E55C007F4633 /* HomePostVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
 			);
@@ -518,6 +524,7 @@
 				3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */,
 				3C86FAB52694C7C6009370CD /* NotoSansCJKkr-DemiLight.otf in Resources */,
 				3C86FAB42694C7C6009370CD /* Assets.xcassets in Resources */,
+				36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */,
 				3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */,
 				3C86FAA92694C7C6009370CD /* PostParkingTVC.xib in Resources */,
 				3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */,
@@ -592,6 +599,7 @@
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
+				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
