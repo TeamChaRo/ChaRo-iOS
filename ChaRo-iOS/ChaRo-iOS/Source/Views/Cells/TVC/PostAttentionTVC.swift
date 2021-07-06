@@ -98,7 +98,6 @@ class PostAttentionTVC: UITableViewCell {
                      beginnerButton,
                      peopleButton])
         
-        let customHeight = Int(65*deviceHeightRate)
         let customGap = Int(181*deviceWidthRate)
         
         titleView.snp.makeConstraints{make in
@@ -112,28 +111,28 @@ class PostAttentionTVC: UITableViewCell {
             make.top.equalTo(titleView.snp.bottom)
             make.leading.equalTo(self.snp.leading).offset(7)
             make.trailing.equalTo(self.snp.trailing).offset(-customGap)
-            make.height.equalTo(customHeight)
+            make.height.equalTo(65)
         }
         
         mountainButton.snp.makeConstraints{make in
             make.top.equalTo(titleView.snp.bottom)
             make.leading.equalTo(self.snp.leading).offset(customGap)
             make.trailing.equalTo(self.snp.trailing).offset(-7)
-            make.height.equalTo(customHeight)
+            make.height.equalTo(65)
         }
         
         beginnerButton.snp.makeConstraints{make in
             make.leading.equalTo(self.snp.leading).offset(7)
             make.trailing.equalTo(self.snp.trailing).offset(-customGap)
             make.bottom.equalTo(self.snp.bottom).offset(-21)
-            make.height.equalTo(customHeight)
+            make.height.equalTo(65)
         }
         
         peopleButton.snp.makeConstraints{make in
             make.leading.equalTo(self.snp.leading).offset(customGap)
             make.trailing.equalTo(self.snp.trailing).offset(-7)
             make.bottom.equalTo(self.snp.bottom).offset(-21)
-            make.height.equalTo(customHeight)
+            make.height.equalTo(65)
         }
     }
     
