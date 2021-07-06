@@ -47,7 +47,7 @@ class HomeThemeTVC: UITableViewCell {
         
         TitleLabel.text = "테마"
         TitleLabel.textColor = UIColor.mainBlack
-        //TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
         
     }
     
