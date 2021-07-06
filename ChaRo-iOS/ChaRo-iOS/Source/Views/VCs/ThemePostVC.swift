@@ -12,7 +12,6 @@ class ThemePostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
     }
     
 

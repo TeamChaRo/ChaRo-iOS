@@ -73,6 +73,7 @@
 		70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */; };
 		70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */; };
 		70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E242694E13B0036484B /* ThemePostVC.swift */; };
+		70D63E272694E2AA0036484B /* ThemePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E262694E2AA0036484B /* ThemePost.storyboard */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
@@ -162,6 +163,7 @@
 		70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
 		70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAreaRecommandTVC.swift; sourceTree = "<group>"; };
 		70D63E242694E13B0036484B /* ThemePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostVC.swift; sourceTree = "<group>"; };
+		70D63E262694E2AA0036484B /* ThemePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemePost.storyboard; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				3C86FA912694C7C6009370CD /* Main.storyboard */,
 				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
+				70D63E262694E2AA0036484B /* ThemePost.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
+				70D63E272694E2AA0036484B /* ThemePost.storyboard in Resources */,
 				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
 				3C86FAB22694C7C6009370CD /* AddressMain.storyboard in Resources */,
 				3C86FAA82694C7C6009370CD /* HomeAnimationTVC.xib in Resources */,
