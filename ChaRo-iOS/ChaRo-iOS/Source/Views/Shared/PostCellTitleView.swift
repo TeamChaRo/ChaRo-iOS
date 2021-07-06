@@ -34,20 +34,39 @@ class PostCellTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String){
+    init(title: String, subTitle:String = ""){
         super.init(frame: .zero)
         titleLabel.text = title
-        setContraints()
+        
+        if subTitle == ""{
+            setTitleContraints()
+        }else{
+            subTitleLabel.text = subTitle
+            setSubTitleContraints()
+        }
     }
     
-    private func setContraints(){
+    private func setTitleContraints(){
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(self.snp.leading)
         }
+    }
+    
+    private func setSubTitleContraints(){
+        addSubviews([titleLabel,
+                     subTitleLabel])
         
-        titleLabel.font = UIFont.notoSansBoldFont(ofSize: 16)
-        titleLabel.textColor = UIColor.mainBlack
+        titleLabel.snp.makeConstraints{make in
+            make.top.equalTo(self.snp.top)
+            make.leading.equalTo(self.snp.leading)
+            make.height.equalTo(22)
+        }
+        
+        subTitleLabel.snp.makeConstraints{make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+            make.leading.equalTo(self.snp.leading)
+        }
     }
 }
