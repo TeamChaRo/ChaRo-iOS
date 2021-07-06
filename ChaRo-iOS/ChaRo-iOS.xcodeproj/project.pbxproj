@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36012A422694A83F007F4633 /* PostAttentionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36012A412694A83F007F4633 /* PostAttentionTVC.xib */; };
+		36012A462694A8D0007F4633 /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36012A452694A8D0007F4633 /* PostTitleTVC.xib */; };
+		36012A482694AAF8007F4633 /* PostParkingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36012A472694AAF8007F4633 /* PostParkingTVC.xib */; };
 		3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8912693730700EFC794 /* CommonCVC.swift */; };
 		3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8922693730700EFC794 /* HomeAnimationCVC.swift */; };
 		3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8932693730700EFC794 /* HomeThemeCVC.swift */; };
@@ -17,7 +20,6 @@
 		3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8992693730700EFC794 /* HomeAnimationTVC.swift */; };
 		3610A8A42693730700EFC794 /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89A2693730700EFC794 /* PostAttentionTVC.swift */; };
 		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
-		3610A8B12693744A00EFC794 /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8A72693744A00EFC794 /* PostTitleTVC.xib */; };
 		3610A8B22693744A00EFC794 /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8A92693744A00EFC794 /* HomeThemeCVC.xib */; };
 		3610A8B32693744A00EFC794 /* HomeAnimationCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8AA2693744A00EFC794 /* HomeAnimationCVC.xib */; };
 		3610A8B42693744A00EFC794 /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3610A8AB2693744A00EFC794 /* CommonCVC.xib */; };
@@ -67,6 +69,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		36012A412694A83F007F4633 /* PostAttentionTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostAttentionTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostAttentionTVC.xib"; sourceTree = SOURCE_ROOT; };
+		36012A452694A8D0007F4633 /* PostTitleTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostTitleTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostTitleTVC.xib"; sourceTree = SOURCE_ROOT; };
+		36012A472694AAF8007F4633 /* PostParkingTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PostParkingTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/PostParkingTVC.xib"; sourceTree = SOURCE_ROOT; };
 		3610A8912693730700EFC794 /* CommonCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCVC.swift; sourceTree = "<group>"; };
 		3610A8922693730700EFC794 /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationCVC.swift; sourceTree = "<group>"; };
 		3610A8932693730700EFC794 /* HomeThemeCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeCVC.swift; sourceTree = "<group>"; };
@@ -77,7 +82,6 @@
 		3610A8992693730700EFC794 /* HomeAnimationTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationTVC.swift; sourceTree = "<group>"; };
 		3610A89A2693730700EFC794 /* PostAttentionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
 		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
-		3610A8A72693744A00EFC794 /* PostTitleTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
 		3610A8A92693744A00EFC794 /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
 		3610A8AA2693744A00EFC794 /* HomeAnimationCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationCVC.xib; sourceTree = "<group>"; };
 		3610A8AB2693744A00EFC794 /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
@@ -161,13 +165,13 @@
 		3610A8952693730700EFC794 /* TVC */ = {
 			isa = PBXGroup;
 			children = (
-				3610A8942693730700EFC794 /* PostTitleTVC.swift */,
 				3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */,
 				3610A8972693730700EFC794 /* HomeSquareTVC.swift */,
 				3610A8982693730700EFC794 /* HomeThemeTVC.swift */,
 				3610A8992693730700EFC794 /* HomeAnimationTVC.swift */,
 				3610A89A2693730700EFC794 /* PostAttentionTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
+				3610A8942693730700EFC794 /* PostTitleTVC.swift */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -175,7 +179,6 @@
 		3610A8A62693744A00EFC794 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				3610A8A72693744A00EFC794 /* PostTitleTVC.xib */,
 				3610A8A82693744A00EFC794 /* CVC */,
 				3610A8AC2693744A00EFC794 /* TVC */,
 			);
@@ -199,6 +202,9 @@
 				3610A8AE2693744A00EFC794 /* HomeTodayDriveTVC.xib */,
 				3610A8AF2693744A00EFC794 /* HomeSquareTVC.xib */,
 				3610A8B02693744A00EFC794 /* HomeThemeTVC.xib */,
+				36012A412694A83F007F4633 /* PostAttentionTVC.xib */,
+				36012A472694AAF8007F4633 /* PostParkingTVC.xib */,
+				36012A452694A8D0007F4633 /* PostTitleTVC.xib */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -414,15 +420,17 @@
 			files = (
 				3CB9BE52268EFD7700EB85CB /* Tabbar.storyboard in Resources */,
 				3610A8B22693744A00EFC794 /* HomeThemeCVC.xib in Resources */,
+				36012A482694AAF8007F4633 /* PostParkingTVC.xib in Resources */,
 				3C71FEB326881DAB007E8EAD /* LaunchScreen.storyboard in Resources */,
-				3610A8B12693744A00EFC794 /* PostTitleTVC.xib in Resources */,
 				3610A8B82693744A00EFC794 /* HomeThemeTVC.xib in Resources */,
+				36012A462694A8D0007F4633 /* PostTitleTVC.xib in Resources */,
 				3C71FEB026881DAB007E8EAD /* Assets.xcassets in Resources */,
 				3610A8B42693744A00EFC794 /* CommonCVC.xib in Resources */,
 				3C71FEAE26881DAA007E8EAD /* Main.storyboard in Resources */,
 				36BBD927268DE936008D8AD3 /* Home.storyboard in Resources */,
 				F49DE531268E124F00A8185C /* PostDetail.storyboard in Resources */,
 				3610A8B32693744A00EFC794 /* HomeAnimationCVC.xib in Resources */,
+				36012A422694A83F007F4633 /* PostAttentionTVC.xib in Resources */,
 				3610A8B52693744A00EFC794 /* HomeAnimationTVC.xib in Resources */,
 				3610A8B72693744A00EFC794 /* HomeSquareTVC.xib in Resources */,
 				3610A8B62693744A00EFC794 /* HomeTodayDriveTVC.xib in Resources */,
