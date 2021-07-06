@@ -59,6 +59,8 @@
 		3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA9D2694C7C6009370CD /* NotoSansCJKkr-Regular.otf */; };
 		3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA9E2694C7C6009370CD /* NotoSansCJKkr-Bold.otf */; };
 		3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA9F2694C7C6009370CD /* LICENSE_OFL.txt */; };
+		3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */; };
+		3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */; };
 		3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEC268B146300C41BB8 /* Extension+UIView.swift */; };
 		3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */; };
 		3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */; };
@@ -70,12 +72,6 @@
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
 		70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */; };
 		70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */; };
-		70D63E082694BD4F0036484B /* HomeSeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E062694BD4F0036484B /* HomeSeasonRecommandTVC.xib */; };
-		70D63E092694BD4F0036484B /* HomeAreaRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E072694BD4F0036484B /* HomeAreaRecommandTVC.xib */; };
-		70D63E0C2694BD9A0036484B /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E0A2694BD9A0036484B /* HomeThemeTVC.xib */; };
-		70D63E0D2694BD9A0036484B /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E0B2694BD9A0036484B /* HomeSquareTVC.xib */; };
-		70D63E0F2694BDD00036484B /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E0E2694BDD00036484B /* HomeTodayDriveTVC.xib */; };
-		70D63E192694BEA50036484B /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E182694BEA50036484B /* CommonCVC.xib */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
@@ -149,6 +145,8 @@
 		3C86FA9E2694C7C6009370CD /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
 		3C86FA9F2694C7C6009370CD /* LICENSE_OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_OFL.txt; sourceTree = "<group>"; };
 		3C86FAA02694C7C6009370CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSeasonRecommandTVC.xib; sourceTree = "<group>"; };
+		3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAreaRecommandTVC.xib; sourceTree = "<group>"; };
 		3C879BEC268B146300C41BB8 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
 		3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionView.swift"; sourceTree = "<group>"; };
@@ -159,17 +157,9 @@
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		3CB9BE77268F5CD900EB85CB /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		70D63DDE269367680036484B /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
 		70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAreaRecommandTVC.swift; sourceTree = "<group>"; };
-		70D63E062694BD4F0036484B /* HomeSeasonRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeSeasonRecommandTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeSeasonRecommandTVC.xib"; sourceTree = SOURCE_ROOT; };
-		70D63E072694BD4F0036484B /* HomeAreaRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeAreaRecommandTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeAreaRecommandTVC.xib"; sourceTree = SOURCE_ROOT; };
-		70D63E0A2694BD9A0036484B /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeThemeTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeThemeTVC.xib"; sourceTree = SOURCE_ROOT; };
-		70D63E0B2694BD9A0036484B /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeSquareTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeSquareTVC.xib"; sourceTree = SOURCE_ROOT; };
-		70D63E0E2694BDD00036484B /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeTodayDriveTVC.xib; path = "ChaRo-iOS/Resource/Xibs/TVC/HomeTodayDriveTVC.xib"; sourceTree = SOURCE_ROOT; };
-		70D63E182694BEA50036484B /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommonCVC.xib; path = "ChaRo-iOS/Resource/Xibs/CVC/CommonCVC.xib"; sourceTree = SOURCE_ROOT; };
-		E2E49F6BFF8717B6A51DFBD6 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
@@ -249,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */,
-				70D63DDE269367680036484B /* TMapSDK.framework */,
 				3C71FEA526881DAA007E8EAD /* ChaRo-iOS */,
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
@@ -308,16 +297,18 @@
 		3C86FA812694C7C6009370CD /* TVC */ = {
 			isa = PBXGroup;
 			children = (
-				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
 				3C86FA832694C7C6009370CD /* AddressButtonCell.xib */,
-				3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */,
-				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
 				3C86FA862694C7C6009370CD /* HomeAnimationTVC.xib */,
-				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
-				3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */,
+				3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */,
+				3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */,
 				3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */,
 				3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */,
+				3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */,
+				3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */,
 				3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */,
+				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
+				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
+				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -511,9 +502,11 @@
 				3C86FAA82694C7C6009370CD /* HomeAnimationTVC.xib in Resources */,
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
+				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
 				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
+				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
 				3C86FAB72694C7C6009370CD /* NotoSansCJKkr-Medium.otf in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
