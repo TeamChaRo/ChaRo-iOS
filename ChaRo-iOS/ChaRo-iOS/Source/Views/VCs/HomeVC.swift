@@ -19,8 +19,6 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         setTableView()
         setHomeNavigationViewLayout()
-
-        // Do any additional setup after loading the view.
     }
     
     func setHomeNavigationViewLayout(){
@@ -43,7 +41,7 @@ class HomeVC: UIViewController {
     }
 }
 
-extension HomeVC : UITableViewDelegate, UITableViewDataSource{
+extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
         
@@ -124,6 +122,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellDelegate = self
             return cell
 
         case 3:
@@ -149,5 +148,31 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {       
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+
+    }
+    
+
+}
+
+extension HomeVC : CollectionViewCellDelegate {
+    
+    func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
+        
+        let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
+        
+        guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if let labelText = collectionviewcell?.themeLabel.text {
+                print("You tapped the cell \(index) in the row of Label \(labelText)")
+                // 여기서 CVC 클릭했을 때 할 거 쓰기
+            }
+        }
     
 }
+

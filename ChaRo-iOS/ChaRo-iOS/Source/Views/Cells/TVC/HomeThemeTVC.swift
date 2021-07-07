@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol CollectionViewCellDelegate: class {
+    func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC)
+}
+
+
 class HomeThemeTVC: UITableViewCell {
 
     //MARK:- IBOutlet
@@ -16,12 +21,13 @@ class HomeThemeTVC: UITableViewCell {
     
     //MARK:- Variable
     static let identifier = "HomeThemeTVC"
+    weak var cellDelegate: CollectionViewCellDelegate?
     
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        setCollctionView()
+        setDelegate()
         setLabelUI()
     }
     
@@ -33,7 +39,7 @@ class HomeThemeTVC: UITableViewCell {
     
     
     //MARK:- default Setting Function Part
-    func setCollctionView() {
+    func setDelegate() {
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -41,13 +47,15 @@ class HomeThemeTVC: UITableViewCell {
     
         
         collectionView.showsHorizontalScrollIndicator = false
+    
+        
     }
     
     func setLabelUI() {
         
         TitleLabel.text = "테마"
         TitleLabel.textColor = UIColor.mainBlack
-        //TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
         
     }
     
@@ -66,7 +74,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeThemeCVC", for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
-    
+
         return cell
         
     }
@@ -88,6 +96,12 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
             return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
+            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
         
     }
     

@@ -13,11 +13,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
-    }
+            // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+            // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+            // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+            // MARK: - 시작 뷰: 홈 뷰 컨트롤러로 지정
+            
+            guard let scene = (scene as? UIWindowScene) else { return }
+            window = UIWindow(windowScene: scene)
+            
+            let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+            let homeViewController = homeStoryboard.instantiateViewController(identifier: "HomeNVC")
+            
+            //   여기서 애초에 시작점을 네비가 아니라 뷰컨으로 해놨어서 네비게이션ㅁ이 무조건 nil로 빠지는거엿슴
+            
+            self.window?.rootViewController = homeViewController
+            guard let _ = (scene as? UIWindowScene) else { return }
+        }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

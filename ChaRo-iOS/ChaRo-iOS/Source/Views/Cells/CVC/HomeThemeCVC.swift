@@ -7,10 +7,15 @@
 
 import UIKit
 
-class HomeThemeCVC: UICollectionViewCell {
 
+class HomeThemeCVC: UICollectionViewCell {
+    
+    @IBOutlet weak var themeLabel: UILabel!
+    @IBOutlet weak var themeImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+
         
     }
 
