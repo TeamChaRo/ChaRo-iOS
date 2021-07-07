@@ -9,12 +9,30 @@ import UIKit
 
 class ThemePostVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
+    
+    //MARK:- IBOutlet
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    //MARK:- Variable
     
 
+    //MARK:- Constraint
     
+    
+    
+    //MARK:- Life Cycle
 
+    //MARK:- IBAction
+    
+    
+    
+    //MARK:- default Setting Function Part
+
+    //MARK:- Function
 }
+
+
+//MARK:- extension
+
+
