@@ -27,7 +27,7 @@ class HomeThemeTVC: UITableViewCell {
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        setCollctionView()
+        setDelegate()
         setLabelUI()
     }
     
@@ -39,7 +39,7 @@ class HomeThemeTVC: UITableViewCell {
     
     
     //MARK:- default Setting Function Part
-    func setCollctionView() {
+    func setDelegate() {
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -47,6 +47,8 @@ class HomeThemeTVC: UITableViewCell {
     
         
         collectionView.showsHorizontalScrollIndicator = false
+    
+        
     }
     
     func setLabelUI() {
