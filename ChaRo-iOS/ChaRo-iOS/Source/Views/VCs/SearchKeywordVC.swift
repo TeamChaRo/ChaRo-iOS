@@ -12,7 +12,11 @@ class SearchKeywordVC: UIViewController {
 
     static let identifier = "SearchKeywordVC"
     public var keyword = "안녕하세요"
-    private var resultAddress = AddressDataModel()
+    private var addressIndex = -1
+    private var resultAddress : AddressDataModel?
+    private var keywordTableView = UITableView()
+    private var autoCompletedKeywordList : [AddressDataModel] = []
+    
     private var backButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
@@ -21,8 +25,9 @@ class SearchKeywordVC: UIViewController {
     }()
     private var searchTextField: UITextField = {
         let textField = UITextField()
+        textField.autocorrectionType = .no
         textField.font = .notoSansRegularFont(ofSize: 17)
-        textField.textColor = .gray30
+        textField.textColor = .gray50
         return textField
     }()
     
@@ -41,7 +46,8 @@ class SearchKeywordVC: UIViewController {
     private func setConstraints(){
         view.addSubviews([backButton,
                           searchTextField,
-                          separateLine])
+                          separateLine,
+                          keywordTableView])
         
         backButton.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(13)
@@ -60,15 +66,25 @@ class SearchKeywordVC: UIViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(1)
         }
+        
+        keywordTableView.snp.makeConstraints{
+            $0.top.equalTo(separateLine.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        keywordTableView.backgroundColor = .red
+        
     }
     
-    public func setAddressModel(model: AddressDataModel){
-        resultAddress = model
+    private func setResultAddress(){
+        resultAddress = AddressDataModel(latitude: 10.0, longtitude: 10.0, address: "연남동 합숙자리")
     }
     
-    public func setAddressModel(model: AddressDataModel, text: String){
+    public func setAddressModel(model: AddressDataModel, text: String, index: Int){
         resultAddress = model
-        searchTextField.text = text
+        searchTextField.placeholder = text
+        addressIndex = index
+        
     }
     
     public func setActionToComponent(){
@@ -76,14 +92,50 @@ class SearchKeywordVC: UIViewController {
     }
     
     @objc func dismissAction(){
-        let beforeVC = presentingViewController
+        let beforeVC = presentingViewController as! TabbarVC
+        beforeVC.addressMainVC?.addressCellList[addressIndex].setAddressText(addressText: searchTextField.text!)
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+//MARK:- TableView
+extension SearchKeywordVC {
+    
+    func configureTableView(){
+        keywordTableView.registerCustomXib(xibName: SearchKeywordCell.identifier)
+        keywordTableView.delegate = self
+        keywordTableView.dataSource = self
+    }
+    
+    func setTableViewStyle(){
+        
+    }
+
+    
+}
+
+extension SearchKeywordVC: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }
+}
+
+extension SearchKeywordVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return autoCompletedKeywordList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchKeywordCell.identifier) as? SearchKeywordCell else {return UITableViewCell()}
+        let address = autoCompletedKeywordList[indexPath.row]
+        cell.setContents(title: address.title, address: address.address)
+        return cell
     }
 }
 
 extension SearchKeywordVC : UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
