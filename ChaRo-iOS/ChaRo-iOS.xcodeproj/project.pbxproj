@@ -24,6 +24,8 @@
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
+		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
+		3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */; };
 		3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F5269478F3009370CD /* AddressMainVC.swift */; };
 		3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F7269484E4009370CD /* AddressDataModel.swift */; };
 		3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */; };
@@ -61,6 +63,8 @@
 		3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA9F2694C7C6009370CD /* LICENSE_OFL.txt */; };
 		3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */; };
 		3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */; };
+		3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FAC42694D767009370CD /* SearchKeywordVC.swift */; };
+		3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */; };
 		3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEC268B146300C41BB8 /* Extension+UIView.swift */; };
 		3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */; };
 		3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */; };
@@ -109,6 +113,8 @@
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3C71FEAA26881DAA007E8EAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
+		3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchKeywordCell.xib; sourceTree = "<group>"; };
 		3C86F9F5269478F3009370CD /* AddressMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMainVC.swift; sourceTree = "<group>"; };
 		3C86F9F7269484E4009370CD /* AddressDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataModel.swift; sourceTree = "<group>"; };
 		3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressButtonCell.swift; sourceTree = "<group>"; };
@@ -147,6 +153,8 @@
 		3C86FAA02694C7C6009370CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSeasonRecommandTVC.xib; sourceTree = "<group>"; };
 		3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAreaRecommandTVC.xib; sourceTree = "<group>"; };
+		3C86FAC42694D767009370CD /* SearchKeywordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordVC.swift; sourceTree = "<group>"; };
+		3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchKeyword.storyboard; sourceTree = "<group>"; };
 		3C879BEC268B146300C41BB8 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		3C879BEE268B147D00C41BB8 /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
 		3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionView.swift"; sourceTree = "<group>"; };
@@ -223,6 +231,7 @@
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
+				3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -309,6 +318,7 @@
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
 				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
 				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
+				3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -322,6 +332,7 @@
 				3C86FA912694C7C6009370CD /* Main.storyboard */,
 				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
+				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -405,6 +416,7 @@
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
+				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -495,6 +507,7 @@
 			files = (
 				3C86FAA22694C7C6009370CD /* HomeAnimationCVC.xib in Resources */,
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
+				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
 				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
@@ -503,6 +516,7 @@
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
+				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
 				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
@@ -590,6 +604,7 @@
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
+				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
@@ -604,6 +619,7 @@
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,
+				3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */,
 				70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */,
 				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
