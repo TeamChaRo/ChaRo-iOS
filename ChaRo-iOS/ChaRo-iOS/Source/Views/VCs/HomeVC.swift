@@ -43,7 +43,7 @@ class HomeVC: UIViewController {
     }
 }
 
-extension HomeVC : UITableViewDelegate, UITableViewDataSource{
+extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
         
@@ -124,6 +124,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellDelegate = self
             return cell
 
         case 3:
@@ -149,5 +150,17 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         
     }
     
+
+}
+
+extension HomeVC : CollectionViewCellDelegate {
+    
+    func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
+        if let labelText = collectionviewcell?.themeLabel.text {
+                print("You tapped the cell \(index) in the row of Label \(labelText)")
+                // 여기서 CVC 클릭했을 때 할 거 쓰기
+            }
+        }
     
 }
+

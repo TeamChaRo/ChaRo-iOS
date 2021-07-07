@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol CollectionViewCellDelegate: class {
+    func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC)
+}
+
+
 class HomeThemeTVC: UITableViewCell {
 
     //MARK:- IBOutlet
@@ -16,6 +21,7 @@ class HomeThemeTVC: UITableViewCell {
     
     //MARK:- Variable
     static let identifier = "HomeThemeTVC"
+    weak var cellDelegate: CollectionViewCellDelegate?
     
     
     //MARK:- Life Cycle
@@ -66,7 +72,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeThemeCVC", for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
-    
+
         return cell
         
     }
@@ -91,6 +97,11 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
+            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        
+    }
     
     
     

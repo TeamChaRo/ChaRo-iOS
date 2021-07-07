@@ -40,6 +40,10 @@
                 <constraint firstItem="ioG-65-eqk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pQ8-Ik-Pgt"/>
             </constraints>
             <size key="customSize" width="64" height="116"/>
+            <connections>
+                <outlet property="themeImageView" destination="ioG-65-eqk" id="wXQ-sI-zvU"/>
+                <outlet property="themeLabel" destination="cyn-4L-VYc" id="g3U-Ne-TOJ"/>
+            </connections>
             <point key="canvasLocation" x="-224.63768115942031" y="97.098214285714278"/>
         </collectionViewCell>
     </objects>
