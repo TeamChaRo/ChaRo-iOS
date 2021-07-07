@@ -13,7 +13,6 @@ class ThemePostVC: UIViewController {
     //MARK:- IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
-    
     //MARK:- Variable
     
 
