@@ -44,6 +44,9 @@ class TabbarVC: UITabBarController {
         
         let mapStoryboard = UIStoryboard(name: "AddressMain", bundle: nil)
         let mapTab = mapStoryboard.instantiateViewController(identifier: AddressMainVC.identifier)
+        
+        let homePostStoryboard = UIStoryboard(name: "HomePost", bundle: nil)
+        let homePostTab = homePostStoryboard.instantiateViewController(identifier: HomePostVC.identifier)
        
         mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
         mapTab.tabBarItem.title = "작성하기"
@@ -54,8 +57,7 @@ class TabbarVC: UITabBarController {
 //        writtingTab.tabBarItem.title = "작성하기"
 //        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
         
-        
-        
+
         let tabs = [homeTab, mapTab, postTab]
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab

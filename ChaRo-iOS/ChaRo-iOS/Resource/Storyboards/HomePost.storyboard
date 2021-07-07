@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="km2-tu-6Q6">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="20" y="100" width="374" height="796"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dA3-Dq-nfP">
@@ -63,10 +63,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dA3-Dq-nfP" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="DUr-QB-05a"/>
-                            <constraint firstItem="km2-tu-6Q6" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Des-vU-iIc"/>
-                            <constraint firstItem="km2-tu-6Q6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ezc-BT-i6e"/>
+                            <constraint firstItem="km2-tu-6Q6" firstAttribute="top" secondItem="dA3-Dq-nfP" secondAttribute="bottom" id="ROV-E7-gmn"/>
+                            <constraint firstItem="km2-tu-6Q6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="ezc-BT-i6e"/>
                             <constraint firstAttribute="bottom" secondItem="km2-tu-6Q6" secondAttribute="bottom" id="hTp-za-sjE"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="km2-tu-6Q6" secondAttribute="trailing" id="ing-h5-eb7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="km2-tu-6Q6" secondAttribute="trailing" constant="20" id="ing-h5-eb7"/>
                             <constraint firstItem="dA3-Dq-nfP" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="o8d-WM-tHV"/>
                             <constraint firstItem="dA3-Dq-nfP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="rtq-aL-3wG"/>
                         </constraints>

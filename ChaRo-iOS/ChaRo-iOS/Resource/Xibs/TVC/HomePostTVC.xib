@@ -10,16 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="271" id="KGk-i7-Jjw" customClass="HomePostTVC" customModule="ChaRo_iOS" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="342" height="271"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="335" id="KGk-i7-Jjw" customClass="HomePostTVC" customModule="ChaRo_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="335"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="342" height="271"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="335"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JOM-UV-kUZ">
-                        <rect key="frame" x="29" y="104" width="240" height="128"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JOM-UV-kUZ">
+                        <rect key="frame" x="20" y="17" width="340" height="312"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7oX-Gq-gmA">
                             <size key="itemSize" width="128" height="128"/>
@@ -29,9 +28,18 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="JOM-UV-kUZ" secondAttribute="bottom" constant="6" id="ZCe-Fu-7HN"/>
+                    <constraint firstItem="JOM-UV-kUZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="dGk-8O-dRl"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="JOM-UV-kUZ" secondAttribute="trailing" id="gSo-8B-hs1"/>
+                    <constraint firstItem="JOM-UV-kUZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qDV-2i-lfY"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="105.79710144927537" y="170.42410714285714"/>
+            <connections>
+                <outlet property="homePostCollectionView" destination="JOM-UV-kUZ" id="41x-9S-IqF"/>
+            </connections>
+            <point key="canvasLocation" x="78.260869565217391" y="191.85267857142856"/>
         </tableViewCell>
     </objects>
     <resources>

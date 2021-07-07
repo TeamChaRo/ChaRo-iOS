@@ -20,6 +20,7 @@
 		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
 		369AACD02694E8D800204614 /* HomePostTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AACCE2694E8D800204614 /* HomePostTVC.swift */; };
 		369AACD12694E8D800204614 /* HomePostTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 369AACCF2694E8D800204614 /* HomePostTVC.xib */; };
+		369AACD32694FB3000204614 /* HomeNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AACD22694FB3000204614 /* HomeNVC.swift */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
 		36D5FD1B268F72F100BCCB33 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; };
 		36D5FD1C268F72F100BCCB33 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -109,6 +110,7 @@
 		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
 		369AACCE2694E8D800204614 /* HomePostTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostTVC.swift; sourceTree = "<group>"; };
 		369AACCF2694E8D800204614 /* HomePostTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostTVC.xib; sourceTree = "<group>"; };
+		369AACD22694FB3000204614 /* HomeNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNVC.swift; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				3C86FA912694C7C6009370CD /* Main.storyboard */,
 				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
+				369AACD22694FB3000204614 /* HomeNVC.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				369AACD02694E8D800204614 /* HomePostTVC.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
+				369AACD32694FB3000204614 /* HomeNVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,

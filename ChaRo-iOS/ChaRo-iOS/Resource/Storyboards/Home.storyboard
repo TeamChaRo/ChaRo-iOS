@@ -38,18 +38,6 @@
                                         <rect key="frame" x="318" y="43.5" width="44" height="44"/>
                                         <state key="normal" backgroundImage="icSearchWhite"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCU-bT-NVR">
-                                        <rect key="frame" x="15" y="43" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kk5-01-on1">
-                                        <rect key="frame" x="186" y="52" width="42" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -75,6 +63,7 @@
                             <constraint firstItem="J9H-Uf-xbB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sfj-FX-oVk"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Wae-fL-zxP"/>
                     <connections>
                         <outlet property="HomeNavigationView" destination="KbL-a3-YBW" id="08y-M0-Mfy"/>
                         <outlet property="HomeTableView" destination="J9H-Uf-xbB" id="4VX-FP-xBA"/>
@@ -85,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18.840579710144929" y="79.6875"/>
+            <point key="canvasLocation" x="928.98550724637687" y="79.6875"/>
         </scene>
     </scenes>
     <resources>

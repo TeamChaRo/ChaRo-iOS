@@ -107,6 +107,16 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         return 6
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let todayPost = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
+        switch indexPath.row{
+        case 2:
+            self.navigationController?.pushViewController(todayPost, animated: true)
+        default:
+            print("")
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
