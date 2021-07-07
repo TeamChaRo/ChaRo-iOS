@@ -11,4 +11,5 @@ struct AddressDataModel {
     var latitude = 0.0
     var longtitude = 0.0
     var address = ""
+    var title = ""
 }
