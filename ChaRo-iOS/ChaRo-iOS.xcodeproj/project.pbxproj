@@ -24,6 +24,8 @@
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
+		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
+		3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */; };
 		3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F5269478F3009370CD /* AddressMainVC.swift */; };
 		3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F7269484E4009370CD /* AddressDataModel.swift */; };
 		3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */; };
@@ -111,6 +113,8 @@
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3C71FEAA26881DAA007E8EAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
+		3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchKeywordCell.xib; sourceTree = "<group>"; };
 		3C86F9F5269478F3009370CD /* AddressMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMainVC.swift; sourceTree = "<group>"; };
 		3C86F9F7269484E4009370CD /* AddressDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataModel.swift; sourceTree = "<group>"; };
 		3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressButtonCell.swift; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
+				3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
 				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
 				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
+				3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -501,6 +507,7 @@
 			files = (
 				3C86FAA22694C7C6009370CD /* HomeAnimationCVC.xib in Resources */,
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
+				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
 				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
@@ -612,6 +619,7 @@
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,
+				3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */,
 				70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */,
 				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
