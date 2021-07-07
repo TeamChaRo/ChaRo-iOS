@@ -19,10 +19,14 @@ class AddressButtonCell: UITableViewCell {
     public var address = AddressDataModel()
     public var delegate: AddressButtonCellDelegate?
     public var cellType = ""
+
     private var searchButton : UIButton = {
         let button = UIButton()
         //style
-        button.backgroundColor = .brown
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.gray50.cgColor
+        button.layer.cornerRadius = 17
+        button.backgroundColor = .gray10
         return button
     }()
     
@@ -50,17 +54,23 @@ class AddressButtonCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    public func setInitContentText(text: String, isAddress: Bool){
+    public func setInitContentText(text: String){
         let title = "\(text)를 입력해주세요"
         setCellStyleForType(type: text)
         searchButton.setTitle(title, for: .normal)
-        if isAddress{
-            searchButton.setTitleColor(.mainBlack, for: .normal)
-        }else{ // basic 스타일
-            searchButton.setTitleColor(.gray30, for: .normal)
-        }
+        searchButton.setTitleColor(.gray30, for: .normal)
+    }
+    
+    public func setAddressText(address: AddressDataModel){
+        searchButton.setTitle(address.address, for: .normal)
+        searchButton.setTitleColor(.mainBlack, for: .normal)
     }
 
+    public func setAddressText(addressText: String){
+        searchButton.setTitle(addressText, for: .normal)
+        searchButton.setTitleColor(.mainBlack, for: .normal)
+    }
+    
     private func setCellStyleForType(type: String){
         cellType = type
         switch type {
