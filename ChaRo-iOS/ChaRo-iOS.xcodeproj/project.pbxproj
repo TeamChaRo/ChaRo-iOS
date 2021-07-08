@@ -26,6 +26,9 @@
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
 		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
 		3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */; };
+		3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */; };
+		3C840BF526962E84001CAFE5 /* AddressConfirm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */; };
+		3C840BF72696F08F001CAFE5 /* Extension+UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */; };
 		3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F5269478F3009370CD /* AddressMainVC.swift */; };
 		3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F7269484E4009370CD /* AddressDataModel.swift */; };
 		3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */; };
@@ -117,6 +120,9 @@
 		3C71FEAA26881DAA007E8EAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
 		3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchKeywordCell.xib; sourceTree = "<group>"; };
+		3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressConfirmVC.swift; sourceTree = "<group>"; };
+		3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressConfirm.storyboard; sourceTree = "<group>"; };
+		3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIScreen.swift"; sourceTree = "<group>"; };
 		3C86F9F5269478F3009370CD /* AddressMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMainVC.swift; sourceTree = "<group>"; };
 		3C86F9F7269484E4009370CD /* AddressDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataModel.swift; sourceTree = "<group>"; };
 		3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressButtonCell.swift; sourceTree = "<group>"; };
@@ -339,6 +345,7 @@
 				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
 				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
+				3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -391,6 +398,7 @@
 				3CB315702690494700E3A101 /* Extension+UITextFeild.swift */,
 				3C879BEC268B146300C41BB8 /* Extension+UIView.swift */,
 				70D63DEC2693938D0036484B /* Extension+UIImage.swift */,
+				3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -423,6 +431,7 @@
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
 				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
+				3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -531,6 +540,7 @@
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
+				3C840BF526962E84001CAFE5 /* AddressConfirm.storyboard in Resources */,
 				3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
 				3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */,
@@ -617,6 +627,7 @@
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
+				3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
@@ -624,6 +635,7 @@
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
+				3C840BF72696F08F001CAFE5 /* Extension+UIScreen.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,

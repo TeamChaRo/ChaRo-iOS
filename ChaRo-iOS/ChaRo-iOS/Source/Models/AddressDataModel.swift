@@ -5,11 +5,19 @@
 //  Created by 장혜령 on 2021/07/06.
 //
 
-import Foundation
+import UIKit
 
 struct AddressDataModel {
     var latitude = 0.0
     var longtitude = 0.0
     var address = ""
     var title = ""
+    
+    
+    func displayContent(){
+        print("title = \(title)")
+        print("address = \(address)")
+        print("latitude = \(latitude)")
+        print("longtitude = \(longtitude)")
+    }
 }

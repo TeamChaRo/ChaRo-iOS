@@ -132,11 +132,13 @@ extension AddressMainVC: AddressButtonCellDelegate{
         let index = cell.getTableCellIndexPath()
         
         nextVC.setAddressModel(model: addressList[index],
-                               text: "\(cell.cellType)를 입력해주세요",
+                               cellType: cell.cellType,
                                index: index)
         
-        nextVC.modalPresentationStyle = .fullScreen
-        self.present(nextVC, animated: true, completion: nil)
+        let navigationView = UINavigationController(rootViewController: nextVC)
+        print(navigationView)
+        navigationView.modalPresentationStyle = .fullScreen
+        self.present( navigationView, animated: true, completion: nil)
     }
     
 }
