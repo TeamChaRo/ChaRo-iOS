@@ -17,12 +17,12 @@ class PostCourseThemeTVC: UITableViewCell {
     let themeTitleView = PostCellTitleView(title: "테마")
     
     // MARK: - Buttons
-    var courseButtonList: [UIButton] = []
     var themeButtonList: [UIButton] = []
+    let buttonWidthContainer: CGFloat = 148
+    let buttonHeightContainer: CGFloat = 70
     
     let cityButton: UIButton = {
         let button = UIButton()
-        button.setTitle("서울특별시", for: .normal) // dummy
         button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
         button.setTitleColor(UIColor.mainBlue, for: .normal)
         button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
@@ -31,51 +31,16 @@ class PostCourseThemeTVC: UITableViewCell {
     }()
     let regionButton: UIButton = {
         let button = UIButton()
-        button.setTitle("마포구", for: .normal) // dummy
         button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
         button.setTitleColor(UIColor.mainBlue, for: .normal)
         button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
-    
-    let firstThemeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("봄", for: .normal) // dummy
-        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-        button.setTitleColor(UIColor.mainBlue, for: .normal)
-        button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        return button
-    }()
-    let secondThemeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("산", for: .normal) // dummy
-        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-        button.setTitleColor(UIColor.mainBlue, for: .normal)
-        button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        return button
-    }()
-    let thirdThemeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("벚꽃", for: .normal) // dummy
-        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-        button.setTitleColor(UIColor.mainBlue, for: .normal)
-        button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        return button
-    }()
-    
-    let buttonWidthContainer: CGFloat = 148
-    let buttonHeightContainer: CGFloat = 70
     
     // MARK: - AwakeFromNib and setSelected
     override func awakeFromNib() {
         super.awakeFromNib()
-        setCourseButtonList()
-        setThemeButtonList()
-        configureLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -86,16 +51,34 @@ class PostCourseThemeTVC: UITableViewCell {
 
 extension PostCourseThemeTVC {
     
-    func setCourseButtonList(){
-        courseButtonList.append(contentsOf: [cityButton, regionButton])
+    func setCourse(city: String, region: String){
+        cityButton.setTitle(city, for: .normal)
+        regionButton.setTitle(region, for: .normal)
     }
     
-    func setThemeButtonList(){
-        courseButtonList.append(contentsOf: [firstThemeButton, secondThemeButton, thirdThemeButton])
+    func setTheme(theme: [String]){
+        for i in 0..<theme.count {
+            let themeButton: UIButton = {
+                let button = UIButton()
+                button.setTitle(theme[i], for: .normal)
+                button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+                button.setTitleColor(UIColor.mainBlue, for: .normal)
+                button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
+                button.imageView?.contentMode = .scaleAspectFill
+                return button
+            }()
+            setThemeButtonList(themeButton: themeButton)
+        }
+    }
+    
+    func setThemeButtonList(themeButton: UIButton){
+        themeButtonList.append(themeButton)
     }
 
     func configureLayout(){
-        addSubviews([courseTitleView, cityButton, regionButton, themeTitleView, firstThemeButton, secondThemeButton, thirdThemeButton])
+
+        addSubviews([courseTitleView, cityButton, regionButton, themeTitleView])
+        addSubviews(themeButtonList)
         
         courseTitleView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top).offset(37)
@@ -108,13 +91,14 @@ extension PostCourseThemeTVC {
             $0.top.equalTo(courseTitleView.snp.bottom).inset(2)
             $0.leading.equalTo(self.snp.leading)
             $0.height.equalTo(buttonHeightContainer)
-            $0.width.equalTo(self.snp.height).multipliedBy(buttonWidthContainer / buttonHeightContainer)
+            $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
         }
         
         regionButton.snp.makeConstraints {
-            $0.height.equalTo(buttonHeightContainer)
             $0.leading.equalTo(cityButton.snp.trailing).inset(34)
-            $0.centerX.equalTo(cityButton.snp.centerX)
+            $0.height.equalTo(buttonHeightContainer)
+            $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
+            $0.centerY.equalTo(cityButton.snp.centerY)
         }
         
         themeTitleView.snp.makeConstraints{
@@ -124,5 +108,34 @@ extension PostCourseThemeTVC {
             $0.height.equalTo(22)
         }
         
+        
+        themeButtonList[0].snp.makeConstraints{
+            $0.top.equalTo(themeTitleView.snp.bottom).inset(2)
+            $0.leading.equalTo(self.snp.leading)
+            $0.height.equalTo(buttonHeightContainer)
+            $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
+        }
+        
+        if themeButtonList.count > 1 {
+            for i in 1..<themeButtonList.count {
+                themeButtonList[i].snp.makeConstraints{
+                    $0.leading.equalTo(themeButtonList[i-1].snp.trailing).inset(34)
+                    $0.height.equalTo(buttonHeightContainer)
+                    $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
+                    $0.centerY.equalTo(themeButtonList[i-1].snp.centerY)
+                }
+            }
+        }
+        
+        setLayer()
+    }
+    
+    func setLayer(){
+        self.bringSubviewToFront(cityButton)
+        if themeButtonList.count > 1 {
+            for i in 1..<themeButtonList.count {
+                self.bringSubviewToFront(themeButtonList[themeButtonList.count-i-1])
+            }
+        }
     }
 }
