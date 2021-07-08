@@ -75,7 +75,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         let standardHeight = userHeight/2
         let currentHeight = scrollView.contentOffset.y
         if scrollView.contentOffset.y > 0{
-            print(scrollView.contentOffset.y)
                if scrollView.contentOffset.y > 1 {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0.01 + (scrollView.contentOffset.y / CGFloat(standardHeight)))
                 

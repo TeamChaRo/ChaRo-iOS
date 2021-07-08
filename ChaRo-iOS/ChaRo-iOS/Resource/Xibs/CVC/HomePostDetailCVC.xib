@@ -34,6 +34,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEb-sk-P0q">
                                 <rect key="frame" x="269" y="4" width="42" height="42"/>
                                 <state key="normal" backgroundImage="icDown"/>
+                                <connections>
+                                    <action selector="menuButtonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="c8g-EN-zqt"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTx-eG-1V4">
                                 <rect key="frame" x="248" y="16" width="31" height="18"/>
