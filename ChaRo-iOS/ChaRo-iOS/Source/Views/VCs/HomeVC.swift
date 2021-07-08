@@ -148,13 +148,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {       
-        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
-        
-        self.navigationController?.pushViewController(nextVC, animated: true)
-
-    }
-    
 
 }
 
