@@ -81,6 +81,8 @@
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
+		F4CC1AE92697570A009A0C01 /* PostPathmapTCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE72697570A009A0C01 /* PostPathmapTCV.swift */; };
+		F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -175,6 +177,8 @@
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCourseThemeTVC.xib; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		F4CC1AE72697570A009A0C01 /* PostPathmapTCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPathmapTCV.swift; sourceTree = "<group>"; };
+		F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPathmapTCV.xib; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,6 +238,7 @@
 				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */,
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
+				F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
 				3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */,
@@ -322,6 +327,7 @@
 				F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */,
 				3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */,
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
+				F4CC1AE72697570A009A0C01 /* PostPathmapTCV.swift */,
 				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
 				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
 				3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */,
@@ -530,6 +536,7 @@
 				3C86FAB72694C7C6009370CD /* NotoSansCJKkr-Medium.otf in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
+				F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */,
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
 				3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
@@ -626,6 +633,7 @@
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
+				F4CC1AE92697570A009A0C01 /* PostPathmapTCV.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,
 				3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */,
 				70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */,
