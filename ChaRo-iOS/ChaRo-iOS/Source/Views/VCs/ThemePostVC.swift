@@ -59,6 +59,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         switch indexPath.row {
         case 0:
             let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
             return cell
             
         case 1:
@@ -76,8 +77,11 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         var topBar = self.navigationController?.navigationBar.frame.height ?? 100
         
         switch indexPath.row {
+        
         case 0:
-            return 118
+            //116.5 / 812
+            return UIScreen.main.bounds.height * 0.1434
+            
         case 1:
             return UIScreen.main.bounds.height - 100 - 118
         default:

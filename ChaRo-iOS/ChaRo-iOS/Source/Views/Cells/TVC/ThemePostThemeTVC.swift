@@ -26,6 +26,15 @@ class ThemePostThemeTVC: UITableViewCell {
     }()
     
     
+    public var TVCHeight : CGFloat = 100
+    
+    public func setTVCHeight(height: Double) {
+        TVCHeight = CGFloat(height)
+        print("있어")
+        print(TVCHeight)
+    }
+    
+    
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +45,8 @@ class ThemePostThemeTVC: UITableViewCell {
         //첫번째 셀을 클릭
         let firstIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .right)
+        
+        collectionView.reloadData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -89,7 +100,7 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 64, height: 100)
+        return CGSize(width: 64, height: self.TVCHeight - 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -106,8 +117,6 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
         else { return }
-
-        
     
     }
 }
