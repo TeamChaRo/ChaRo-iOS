@@ -75,7 +75,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         let standardHeight = userHeight/2
         let currentHeight = scrollView.contentOffset.y
         if scrollView.contentOffset.y > 0{
-            print(scrollView.contentOffset.y)
                if scrollView.contentOffset.y > 1 {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0.01 + (scrollView.contentOffset.y / CGFloat(standardHeight)))
                 
@@ -105,6 +104,12 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let VC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
+        self.navigationController?.pushViewController(VC, animated: true)
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
