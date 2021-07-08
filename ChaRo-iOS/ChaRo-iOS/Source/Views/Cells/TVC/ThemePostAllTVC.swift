@@ -30,7 +30,7 @@ class ThemePostAllTVC: UITableViewCell {
         collectionView.dataSource = self
     
         collectionView.registerCustomXib(xibName: "CommonCVC")
-        
+        collectionView.showsHorizontalScrollIndicator = false
     }
     
     //MARK:- default Setting Function Part

@@ -38,6 +38,9 @@ class ThemePostVC: UIViewController {
         tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
         tableView.registerCustomXib(xibName: "ThemePostAllTVC")
         
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.separatorStyle = .none
+
     }
 
     //MARK:- Function
@@ -72,11 +75,11 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         
         switch indexPath.row {
         case 0:
-            return 110
+            return 115
         case 1:
-            return UIScreen.main.bounds.height - 110
+            return UIScreen.main.bounds.height - 115
         default:
-            return 110
+            return 115
         }
         
     }

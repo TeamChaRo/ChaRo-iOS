@@ -58,12 +58,13 @@ class ThemePostThemeTVC: UITableViewCell {
     private func setSeperatorBarConstraints() {
         self.addSubview(seperatorBar)
 
-        seperatorBar.snp.makeConstraints{ make in
-            make.top.equalTo(collectionView.snp.bottom).offset(0.5)
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.bottom.equalTo(self.snp.bottom).offset(0.5)
+        seperatorBar.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom)
+            $0.leading.equalTo(self.snp.leading)
+            $0.trailing.equalTo(self.snp.trailing)
+            $0.height.equalTo(1)
         }
+
     }
 
     
@@ -82,12 +83,13 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeThemeCVC", for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
-
+        
         return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 64, height: 90)
+        return CGSize(width: 64, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -96,7 +98,7 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        UIEdgeInsets(top: 0, left: 21, bottom: 0, right: 21)
+        UIEdgeInsets(top: 16, left: 21, bottom: 0, right: 21)
         
     }
     
