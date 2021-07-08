@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,27 +29,18 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKZ-LV-gtd">
-                        <rect key="frame" x="5" y="90" width="54" height="9"/>
-                        <color key="backgroundColor" systemColor="labelColor"/>
-                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="vKZ-LV-gtd" secondAttribute="trailing" constant="5" id="1Pv-O7-bbd"/>
                 <constraint firstItem="cyn-4L-VYc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="APw-Bm-CBK"/>
                 <constraint firstItem="cyn-4L-VYc" firstAttribute="top" secondItem="ioG-65-eqk" secondAttribute="bottom" constant="8" id="MY8-q0-X1f"/>
                 <constraint firstItem="ioG-65-eqk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="P2A-4t-Mcs"/>
-                <constraint firstItem="vKZ-LV-gtd" firstAttribute="top" secondItem="cyn-4L-VYc" secondAttribute="bottom" constant="2" id="TFa-2s-Q54"/>
                 <constraint firstAttribute="trailing" secondItem="cyn-4L-VYc" secondAttribute="trailing" id="Vzf-EX-pd7"/>
-                <constraint firstItem="vKZ-LV-gtd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="XXR-l8-T1p"/>
-                <constraint firstAttribute="bottom" secondItem="vKZ-LV-gtd" secondAttribute="bottom" id="h6C-FY-s5L"/>
                 <constraint firstItem="ioG-65-eqk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pQ8-Ik-Pgt"/>
             </constraints>
             <size key="customSize" width="64" height="99"/>
             <connections>
-                <outlet property="highLightView" destination="vKZ-LV-gtd" id="suH-Rp-boy"/>
                 <outlet property="themeImageView" destination="ioG-65-eqk" id="wXQ-sI-zvU"/>
                 <outlet property="themeLabel" destination="cyn-4L-VYc" id="g3U-Ne-TOJ"/>
             </connections>
@@ -59,8 +49,5 @@
     </objects>
     <resources>
         <image name="tempImageCircle" width="64" height="64"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

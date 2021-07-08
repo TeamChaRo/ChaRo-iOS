@@ -27,13 +27,11 @@ class HomeThemeCVC: UICollectionViewCell {
             if newValue == false {
                 themeLabel.textColor = .mainBlack
                 themeImageView.layer.borderWidth = 0
-                highLightView.backgroundColor = .mainBlack
                 
             } else {
                 themeLabel.textColor = .mainBlue
                 themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
                 themeImageView.layer.borderWidth = 1
-                highLightView.backgroundColor = .mainBlue
             }
             
         }

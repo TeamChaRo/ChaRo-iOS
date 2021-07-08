@@ -106,9 +106,6 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
         else { return }
 
         
-        cell.highLightView.backgroundColor = .mainBlue
-
-        
     
     }
 }

@@ -54,7 +54,7 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.layer.cornerRadius = 10
         cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
-        
+        cell.lengthBtwImgLabel.constant = 0
         
         return cell
     }
