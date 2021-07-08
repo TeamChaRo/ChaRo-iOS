@@ -12,9 +12,12 @@ class HomeThemeCVC: UICollectionViewCell {
     
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var themeImageView: UIImageView!
+    @IBOutlet weak var highLightView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setImageView()
         
     }
     
@@ -24,11 +27,13 @@ class HomeThemeCVC: UICollectionViewCell {
             if newValue == false {
                 themeLabel.textColor = .mainBlack
                 themeImageView.layer.borderWidth = 0
+                highLightView.backgroundColor = .mainBlack
                 
             } else {
                 themeLabel.textColor = .mainBlue
                 themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
                 themeImageView.layer.borderWidth = 1
+                highLightView.backgroundColor = .mainBlue
             }
             
         }
@@ -39,6 +44,12 @@ class HomeThemeCVC: UICollectionViewCell {
     //재사용을 위해 값을 false 로 변경합니다.
     override func prepareForReuse() {
         isSelected = false
+    }
+    
+    
+    private func setImageView() {
+        themeImageView.clipsToBounds = true
+        themeImageView.layer.cornerRadius = themeImageView.frame.size.height / 2
     }
 
 }

@@ -72,11 +72,11 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         
         switch indexPath.row {
         case 0:
-            return 120
+            return 110
         case 1:
-            return 500
+            return UIScreen.main.bounds.height - 110
         default:
-            return 120
+            return 110
         }
         
     }
