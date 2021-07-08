@@ -45,19 +45,18 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
         
-        switch indextPath.row {
+        let factor = UIScreen.main.bounds.width / 375
         
+        switch indextPath.row {
+    
         case 0:
-            return UIScreen.main.bounds.height*0.65
+            return UIScreen.main.bounds.height * 0.65
         case 1:
-            //353 / 812
-            return UIScreen.main.bounds.height * 0.435
+            return 353 * factor
         case 2:
-            //178 / 812
-            return UIScreen.main.bounds.height * 0.219
+            return 178 * factor
         case 3, 4, 5:
-            //553 / 812
-            return UIScreen.main.bounds.height * 0.72
+            return 570 * factor
         default:
             return 100
         }

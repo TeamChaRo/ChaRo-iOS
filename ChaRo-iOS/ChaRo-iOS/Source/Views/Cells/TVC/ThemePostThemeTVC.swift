@@ -32,8 +32,6 @@ class ThemePostThemeTVC: UITableViewCell {
     
     public func setTVCHeight(height: Double) {
         TVCHeight = CGFloat(height)
-        print("있어")
-        print(TVCHeight)
     }
     
     
@@ -43,12 +41,10 @@ class ThemePostThemeTVC: UITableViewCell {
         
         setCollectionView()
         setSeperatorBarConstraints()
-        
-        //첫번째 셀을 클릭
-        let firstIndexPath = IndexPath(item: 0, section: 0)
-        collectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .right)
-        
         collectionView.reloadData()
+        setSelected()
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -79,9 +75,16 @@ class ThemePostThemeTVC: UITableViewCell {
         }
 
     }
+    
+    private func setSelected() {
+        let firstIndexPath = IndexPath(item: 0, section: 0)
+        collectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .right)
+    }
 
     
     //MARK:- Function
+    
+    
     
 }
 
@@ -102,7 +105,7 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 64, height: self.TVCHeight - 20)
+        return CGSize(width: 64, height: self.TVCHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

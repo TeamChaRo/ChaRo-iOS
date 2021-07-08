@@ -74,14 +74,14 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        var topBar = self.navigationController?.navigationBar.frame.height ?? 100
+        var topBarHeight = 100
+        let factor = UIScreen.main.bounds.width / 375
         
         switch indexPath.row {
         
         case 0:
-            //116.5 / 812
-            return UIScreen.main.bounds.height * 0.1434
-            
+            //116 / 812
+            return 118 * factor
         case 1:
             return UIScreen.main.bounds.height - 100 - 118
         default:

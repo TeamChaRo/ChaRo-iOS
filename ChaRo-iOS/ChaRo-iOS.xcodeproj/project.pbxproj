@@ -246,10 +246,8 @@
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
 				3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */,
-				70D63E3226963C810036484B /* ThemePostThemeTVC.swift */,
-				70D63E3326963C810036484B /* ThemePostThemeTVC.xib */,
 				70D63E36269646D30036484B /* ThemePostAllTVC.swift */,
-				70D63E37269646D30036484B /* ThemePostAllTVC.xib */,
+				70D63E3226963C810036484B /* ThemePostThemeTVC.swift */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -337,6 +335,8 @@
 				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
 				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
 				3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */,
+				70D63E37269646D30036484B /* ThemePostAllTVC.xib */,
+				70D63E3326963C810036484B /* ThemePostThemeTVC.xib */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
