@@ -73,6 +73,8 @@ extension PostDetailVC: UITableViewDataSource {
             return getPostTitleCell(tableView: tableView)
         case 1:
             return getPostImagesCell(tableView: tableView)
+//        case 2:
+//            return
         case 2:
             return getPostParkingCell(tableView: tableView)
         case 3:
@@ -120,4 +122,9 @@ extension PostDetailVC: UITableViewDataSource {
         return cell
     }
 
+    func getPostCourseThemeCell(tableView: UITableView) -> UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCourseThemeTVC.identifier) as? PostCourseThemeTVC else {return UITableViewCell()}
+
+        return cell
+    }
 }
