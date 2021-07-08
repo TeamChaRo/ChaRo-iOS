@@ -30,6 +30,7 @@ class ThemePostAllTVC: UITableViewCell {
         collectionView.dataSource = self
     
         collectionView.registerCustomXib(xibName: "CommonCVC")
+        
     }
     
     //MARK:- default Setting Function Part
@@ -53,6 +54,8 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.layer.cornerRadius = 10
         cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
+        
+        
         return cell
     }
     

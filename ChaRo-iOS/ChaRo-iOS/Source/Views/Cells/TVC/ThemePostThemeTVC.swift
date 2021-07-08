@@ -40,6 +40,9 @@ class ThemePostThemeTVC: UITableViewCell, UICollectionViewDelegate, UICollection
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "HomeThemeCVC")
+        
+        let firstIndexPath = IndexPath(item: 0, section: 0)
+        collectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .right)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
