@@ -9,19 +9,27 @@ import UIKit
 
 class HomePostVC: UIViewController {
     @IBOutlet weak var NavigationTitleLabel: UILabel!
-    @IBOutlet weak var homePostTableVIew: UITableView!
+    @IBOutlet weak var homePostNavigationView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var cellCount = 6
     
     static let identifier : String = "HomePostVC"
     
     func setTableView(){
-        homePostTableVIew.delegate = self
-        homePostTableVIew.dataSource = self
-        homePostTableVIew.registerCustomXib(xibName: "HomePostTVC")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.registerCustomXib(xibName: "CommonCVC")
+        collectionView.registerCustomXib(xibName: "HomePostDetailCVC")
+    }
+    func setShaow(){
+        homePostNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        setShaow()
 
         // Do any additional setup after loading the view.
     }
@@ -43,21 +51,43 @@ class HomePostVC: UIViewController {
 
 }
 
-extension HomePostVC : UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let Cell = tableView.dequeueReusableCell(withIdentifier: HomePostTVC.identifier) as? HomePostTVC else {return UITableViewCell() }
-        Cell.setCollctionView()
-        return Cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let mainHeight = UIScreen.main.bounds.height
-        return mainHeight
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+        
+        guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
+        
+        switch indexPath.row {
+        case 0:
+            topCell.setLabel()
+            return topCell
+        default:
+            cell.imageView.image = UIImage(named: "tempImageBig.png")
+            return cell
+        }
+        
+
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let Cellwidth = UIScreen.main.bounds.width - 40
+        
+        switch indexPath.row {
+        case 0:
+            return CGSize(width: Cellwidth, height: 55)
+        default:
+            return CGSize(width: Cellwidth, height: 260)
+        
+        }
+   
+        //나중에 바꿀예정 ..
+        
+    }
     
     
 }
