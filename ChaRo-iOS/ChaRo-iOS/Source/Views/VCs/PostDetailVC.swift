@@ -35,6 +35,7 @@ class PostDetailVC: UIViewController {
         postDetailTableView.registerCustomXib(xibName: PostParkingTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostAttentionTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
+        postDetailTableView.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
     }
     
 }
@@ -50,10 +51,12 @@ extension PostDetailVC: UITableViewDelegate{
         case 1:
             return 222
         case 2:
-            return 159
+            return 259
         case 3:
             return 159
         case 4:
+            return 159
+        case 5:
             return 408
         default:
             return 159
@@ -63,7 +66,7 @@ extension PostDetailVC: UITableViewDelegate{
 
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,10 +77,12 @@ extension PostDetailVC: UITableViewDataSource {
         case 1:
             return getPostImagesCell(tableView: tableView)
         case 2:
-            return getPostParkingCell(tableView: tableView)
+            return getPostCourseThemeCell(tableView: tableView)
         case 3:
-            return getPostAttensionCell(tableView: tableView)
+            return getPostParkingCell(tableView: tableView)
         case 4:
+            return getPostAttensionCell(tableView: tableView)
+        case 5:
             return getPostDriveCourceCell(tableView: tableView)
         default:
             return getPostAttensionCell(tableView: tableView)
@@ -120,4 +125,15 @@ extension PostDetailVC: UITableViewDataSource {
         return cell
     }
 
+    func getPostCourseThemeCell(tableView: UITableView) -> UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCourseThemeTVC.identifier) as? PostCourseThemeTVC else {return UITableViewCell()}
+        cell.setCourse(city: "서울특별시", region: "마포구") // dummy
+        cell.setTheme(theme: ["최","인정", "디자인짱"]) // dummy
+        
+        cell.configureLayout()
+        cell.themeButtonConfigureLayer()
+        cell.bringButtonToFront()
+        
+        return cell
+    }
 }
