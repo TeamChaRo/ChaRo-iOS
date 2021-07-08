@@ -18,8 +18,7 @@ class PostCourseThemeTVC: UITableViewCell {
     
     // MARK: - Buttons
     var themeButtonList: [UIButton] = []
-    let buttonWidthContainer: CGFloat = 148
-    let buttonHeightContainer: CGFloat = 70
+    let buttonMultiplier: CGFloat = 148/70
     
     let cityButton: UIButton = {
         let button = UIButton()
@@ -39,11 +38,11 @@ class PostCourseThemeTVC: UITableViewCell {
     }()
     
     // MARK: - AwakeFromNib and setSelected
-    override func awakeFromNib() {
+    override func awakeFromNib(){
         super.awakeFromNib()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool){
         super.setSelected(selected, animated: animated)
     }
     
@@ -76,9 +75,7 @@ extension PostCourseThemeTVC {
     }
 
     func configureLayout(){
-
         addSubviews([courseTitleView, cityButton, regionButton, themeTitleView])
-        addSubviews(themeButtonList)
         
         courseTitleView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top).offset(37)
@@ -89,48 +86,50 @@ extension PostCourseThemeTVC {
         
         cityButton.snp.makeConstraints {
             $0.top.equalTo(courseTitleView.snp.bottom).inset(2)
+            $0.height.equalTo(70)
             $0.leading.equalTo(self.snp.leading)
-            $0.height.equalTo(buttonHeightContainer)
-            $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
+            $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
+
         }
         
         regionButton.snp.makeConstraints {
             $0.leading.equalTo(cityButton.snp.trailing).inset(34)
-            $0.height.equalTo(buttonHeightContainer)
-            $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
+            $0.height.equalTo(70)
+            $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
             $0.centerY.equalTo(cityButton.snp.centerY)
         }
         
-        themeTitleView.snp.makeConstraints{
+        themeTitleView.snp.makeConstraints {
             $0.top.equalTo(cityButton.snp.bottom).offset(19)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).offset(-2)
             $0.height.equalTo(22)
         }
+    }
+    
+    func themeButtonConfigureLayer(){
+        addSubviews(themeButtonList)
         
-        
-        themeButtonList[0].snp.makeConstraints{
+        themeButtonList[0].snp.makeConstraints {
             $0.top.equalTo(themeTitleView.snp.bottom).inset(2)
             $0.leading.equalTo(self.snp.leading)
-            $0.height.equalTo(buttonHeightContainer)
-            $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
+            $0.height.equalTo(70)
+            $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
         }
         
         if themeButtonList.count > 1 {
             for i in 1..<themeButtonList.count {
                 themeButtonList[i].snp.makeConstraints{
                     $0.leading.equalTo(themeButtonList[i-1].snp.trailing).inset(34)
-                    $0.height.equalTo(buttonHeightContainer)
-                    $0.width.equalTo(self.snp.height).multipliedBy(1-buttonHeightContainer/buttonWidthContainer)
+                    $0.height.equalTo(70)
+                    $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
                     $0.centerY.equalTo(themeButtonList[i-1].snp.centerY)
                 }
             }
         }
-        
-        setLayer()
     }
     
-    func setLayer(){
+    func bringButtonToFront(){
         self.bringSubviewToFront(cityButton)
         if themeButtonList.count > 1 {
             for i in 1..<themeButtonList.count {
