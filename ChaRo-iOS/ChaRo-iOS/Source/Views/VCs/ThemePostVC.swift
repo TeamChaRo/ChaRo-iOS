@@ -31,11 +31,12 @@ class ThemePostVC: UIViewController {
     
     //MARK:- default Setting Function Part
     func setTableView() {
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
-        //tableView.registerCustomXib(xibName: "")
+        tableView.registerCustomXib(xibName: "ThemePostAllTVC")
         
     }
 
@@ -47,27 +48,20 @@ class ThemePostVC: UIViewController {
 
 extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return 10
-        default:
-            return 5
-        }
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.section {
+        switch indexPath.row {
         case 0:
             let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             return cell
             
-//        case 1:
-//            let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
-//            cell.setDelegate()
-//            return cell
+        case 1:
+            let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
+            return cell
+            
         default:
             return UITableViewCell()
         }
@@ -76,7 +70,14 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 120
+        switch indexPath.row {
+        case 0:
+            return 120
+        case 1:
+            return 500
+        default:
+            return 120
+        }
         
     }
     
