@@ -10,12 +10,14 @@ import UIKit
 
 class TabbarVC: UITabBarController {
     
+    public var addressMainVC: AddressMainVC?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabbarCustomFrame()
         configTabbar()
     }
-    
+
     
     private func setTabbarCustomFrame(){
         let customTabbar = tabBar
@@ -43,11 +45,9 @@ class TabbarVC: UITabBarController {
         postTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
         let mapStoryboard = UIStoryboard(name: "AddressMain", bundle: nil)
-        let mapTab = mapStoryboard.instantiateViewController(identifier: AddressMainVC.identifier)
+        let mapTab = mapStoryboard.instantiateViewController(identifier: AddressMainVC.identifier) as! AddressMainVC
+        addressMainVC = mapTab
         
-        let homePostStoryboard = UIStoryboard(name: "HomePost", bundle: nil)
-        let homePostTab = homePostStoryboard.instantiateViewController(identifier: HomePostVC.identifier)
-       
         mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
         mapTab.tabBarItem.title = "작성하기"
         mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
@@ -56,8 +56,6 @@ class TabbarVC: UITabBarController {
 //        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
 //        writtingTab.tabBarItem.title = "작성하기"
 //        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        
-
         let tabs = [homeTab, mapTab, postTab]
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
