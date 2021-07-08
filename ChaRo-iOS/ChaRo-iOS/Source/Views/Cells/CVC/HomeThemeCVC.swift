@@ -14,6 +14,8 @@ class HomeThemeCVC: UICollectionViewCell {
     @IBOutlet weak var themeImageView: UIImageView!
     @IBOutlet weak var highLightView: UIView!
     
+    static let identifier = "HomeThemeCVC"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

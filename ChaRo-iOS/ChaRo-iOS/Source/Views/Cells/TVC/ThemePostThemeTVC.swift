@@ -13,6 +13,8 @@ class ThemePostThemeTVC: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK:- Variable
+    static let identifier = "ThemePostThemeTVC"
+    
     private var seperatorBar : UIView = {
         let view = UIView()
         view.backgroundColor = .gray20
@@ -61,7 +63,7 @@ class ThemePostThemeTVC: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.registerCustomXib(xibName: "HomeThemeCVC")
+        collectionView.registerCustomXib(xibName: HomeThemeCVC.identifier)
         collectionView.showsHorizontalScrollIndicator = false
     }
     
@@ -93,14 +95,14 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeThemeCVC", for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
         
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 64, height: self.TVCHeight - 10)
+        return CGSize(width: 64, height: self.TVCHeight - 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

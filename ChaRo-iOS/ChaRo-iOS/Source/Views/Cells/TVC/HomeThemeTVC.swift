@@ -43,7 +43,7 @@ class HomeThemeTVC: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerCustomXib(xibName: "HomeThemeCVC")
+        collectionView.registerCustomXib(xibName: HomeThemeCVC.identifier)
     
         
         collectionView.showsHorizontalScrollIndicator = false
@@ -73,7 +73,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeThemeCVC", for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
 
         return cell
         
