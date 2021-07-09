@@ -49,83 +49,42 @@ class ThemePostAllTVC: UITableViewCell {
 extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        switch section {
-        case 0:
-            return 1
-        default:
             return 10
-        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch indexPath.section {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
-        case 0:
-    
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePostDetailCVC.identifier, for: indexPath) as? HomePostDetailCVC else { return UICollectionViewCell() }
-            
-            cell.setLabel()
-            
-            return cell
-            
-        case 1:
-            
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-            
-            cell.imageView.image = UIImage(named: "tempImageBig")
-            cell.imageView.contentMode = .scaleAspectFill
-            cell.imageView.layer.cornerRadius = 10
-            cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
-            cell.lengthBtwImgLabel.constant = 0
-            
-            return cell
-            
-        default:
-            return UICollectionViewCell()
-            
-        }
+        cell.imageView.image = UIImage(named: "tempImageBig")
+        cell.imageView.contentMode = .scaleAspectFill
+        cell.imageView.layer.cornerRadius = 10
+        cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
+        cell.lengthBtwImgLabel.constant = 0
+        
+        return cell
+
         
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        switch indexPath.section {
-        case 0:
-            return CGSize(width: UIScreen.main.bounds.width - 40, height: 55)
-        case 1:
             return CGSize(width: 335, height: 260)
-        default:
-            return CGSize(width: 0, height: 0)
-        }
+        
 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
         return 28
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-//        
-//        if indexPath.section == 0 {
-//            let cell = collectionView.cellForItem(at: indexPath) as? HomePostDetailCVC
-//            print(cell?.isButtonClicked)
-//            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.section, didTappedInTableViewCell: self, button: )
-//        }
-//        
-        
-    }
-    
-    
+
     
     
     
