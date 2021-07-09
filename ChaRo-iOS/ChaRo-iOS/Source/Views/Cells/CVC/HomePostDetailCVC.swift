@@ -24,7 +24,6 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     
     func setTitle(data : String) {
-        print(data)
         selectText = data
         selectLabel.text = selectText
         

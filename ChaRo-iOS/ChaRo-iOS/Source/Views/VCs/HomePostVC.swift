@@ -23,10 +23,6 @@ class HomePostVC: UIViewController {
     var cellCount = 6
     var topCVCCell : HomePostDetailCVC?
     
-    func cellInit(){
-        
-            }
-    
     
     static let identifier : String = "HomePostVC"
     
@@ -117,7 +113,7 @@ extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
 
 extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
