@@ -12,6 +12,7 @@ class ThemePostVC: UIViewController {
     
     //MARK:- IBOutlet
     @IBOutlet weak var navigationView: UIView!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dropDownTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -32,11 +33,18 @@ class ThemePostVC: UIViewController {
         setShaow()
         setTableViewTag()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
     //MARK:- IBAction
+    
+    @IBAction func backButtonClicked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    
+    }
+    
     
     
     
