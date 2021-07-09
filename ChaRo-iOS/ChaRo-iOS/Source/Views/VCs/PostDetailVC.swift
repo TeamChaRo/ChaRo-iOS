@@ -36,6 +36,7 @@ class PostDetailVC: UIViewController {
         postDetailTableView.registerCustomXib(xibName: PostAttentionTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
+        postDetailTableView.registerCustomXib(xibName: PostLocationTVC.identifier)
     }
     
 }
@@ -53,10 +54,12 @@ extension PostDetailVC: UITableViewDelegate{
         case 2:
             return 259
         case 3:
-            return 159
+            return 50
         case 4:
             return 159
         case 5:
+            return 159
+        case 6:
             return 408
         default:
             return 159
@@ -66,7 +69,7 @@ extension PostDetailVC: UITableViewDelegate{
 
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,10 +82,12 @@ extension PostDetailVC: UITableViewDataSource {
         case 2:
             return getPostCourseThemeCell(tableView: tableView)
         case 3:
-            return getPostParkingCell(tableView: tableView)
+            return getPostLocationCell(tableView: tableView)
         case 4:
-            return getPostAttensionCell(tableView: tableView)
+            return getPostParkingCell(tableView: tableView)
         case 5:
+            return getPostAttensionCell(tableView: tableView)
+        case 6:
             return getPostDriveCourceCell(tableView: tableView)
         default:
             return getPostAttensionCell(tableView: tableView)
@@ -133,6 +138,12 @@ extension PostDetailVC: UITableViewDataSource {
         cell.configureLayout()
         cell.themeButtonConfigureLayer()
         cell.bringButtonToFront()
+        return cell
+    }
+    
+    func getPostLocationCell(tableView: UITableView) -> UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostLocationTVC.identifier) as? PostLocationTVC else {return UITableViewCell()}
+        cell.backgroundColor = .red
         return cell
     }
 }
