@@ -18,7 +18,8 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Variable
     
-
+    var topCVCCell : HomePostDetailCVC?
+    var delegate : SetTopTitleDelegate?
     //MARK:- Constraint
     
     
@@ -117,7 +118,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
            
         }
 
-        if tableView.tag == 1{
+        if tableView.tag == 1 {
         
         switch indexPath.row {
         case 0:
@@ -141,11 +142,17 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
 
      
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.tag == 2{
-            print("dd")
+        if tableView.tag == 2 {
+            let HotCell: HotDropDownTVC = (tableView.dequeueReusableCell(withIdentifier: "HotDropDownTVC") as? HotDropDownTVC)!
+            if indexPath.row == 0 {
+                HotCell.setSelectedCell()
+                
+            }
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if tableView.tag == 2{
@@ -207,8 +214,18 @@ extension ThemePostVC: ThemeCollectionViewCellDelegate {
 extension ThemePostVC: MenuClickedDelegate{
     func menuClicked() {
         dropDownTableView.isHidden = false
-        dropDownTableView.reloadData()
     }
     
+    
+}
+
+extension ThemePostVC: SetTitleDelegate {
+    func setTitle(cell: HotDropDownTVC) {
+        print("되냐?")
+        delegate?.setTopTitle(name: cell.name)
+        dropDownTableView.isHidden = true
+        topCVCCell?.setTitle(data: cell.name)
+        
+    }
     
 }
