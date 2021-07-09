@@ -19,6 +19,8 @@
 		3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8992693730700EFC794 /* HomeAnimationTVC.swift */; };
 		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
+		36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CACA1D2698F3CF007E02CA /* ThemePostDetailTVC.swift */; };
+		36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CACA1E2698F3CF007E02CA /* ThemePostDetailTVC.xib */; };
 		36D1E5FD269709F00079BD94 /* HomePostDetailCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */; };
 		36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */; };
 		36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */; };
@@ -124,6 +126,8 @@
 		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
+		36CACA1D2698F3CF007E02CA /* ThemePostDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostDetailTVC.swift; sourceTree = "<group>"; };
+		36CACA1E2698F3CF007E02CA /* ThemePostDetailTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostDetailTVC.xib; sourceTree = "<group>"; };
 		36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostDetailCVC.swift; sourceTree = "<group>"; };
 		36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostDetailCVC.xib; sourceTree = "<group>"; };
 		36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotDropDownTVC.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */,
 				70D63E36269646D30036484B /* ThemePostAllTVC.swift */,
 				70D63E3226963C810036484B /* ThemePostThemeTVC.swift */,
+				36CACA1D2698F3CF007E02CA /* ThemePostDetailTVC.swift */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 				3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */,
 				70D63E37269646D30036484B /* ThemePostAllTVC.xib */,
 				70D63E3326963C810036484B /* ThemePostThemeTVC.xib */,
+				36CACA1E2698F3CF007E02CA /* ThemePostDetailTVC.xib */,
 			);
 			path = TVC;
 			sourceTree = "<group>";
@@ -554,6 +560,7 @@
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
 				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
+				36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */,
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
 				70D63E272694E2AA0036484B /* ThemePost.storyboard in Resources */,
 				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
@@ -647,6 +654,7 @@
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
+				36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */,
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
 				70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */,
 				70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */,

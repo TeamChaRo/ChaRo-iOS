@@ -29,6 +29,10 @@ class ThemePostVC: UIViewController {
         setdropDownTableView()
         setTitleLabel()
         setShaow()
+        setTableViewTag()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     //MARK:- IBAction
@@ -36,6 +40,11 @@ class ThemePostVC: UIViewController {
     
     
     //MARK:- default Setting Function Part
+    func setTableViewTag(){
+        tableView.tag = 1
+        dropDownTableView.tag = 2
+    }
+    
     func setTableView() {
         
         tableView.delegate = self
@@ -43,6 +52,9 @@ class ThemePostVC: UIViewController {
         
         tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
         tableView.registerCustomXib(xibName: "ThemePostAllTVC")
+        tableView.registerCustomXib(xibName: "ThemePostDetailTVC")
+
+
         
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
@@ -56,10 +68,14 @@ class ThemePostVC: UIViewController {
     }
     
     func setdropDownTableView() {
-        
+        dropDownTableView.delegate = self
+        dropDownTableView.dataSource = self
+        dropDownTableView.clipsToBounds = true
+        dropDownTableView.layer.cornerRadius = 20
+        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         dropDownTableView.isHidden = true
-        dropDownTableView.registerCustomXib(xibName: "ThemePostThemeTVC")
-        
+        dropDownTableView.registerCustomXib(xibName: "HotDropDownTVC")
+        dropDownTableView.separatorStyle = .none
     }
     
     func setTitleLabel() {
@@ -76,18 +92,43 @@ class ThemePostVC: UIViewController {
 
 extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+            if tableView.tag == 2{
+                return 2
+            }
+        return 3
+        
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
+    UITableViewCell {
+        
+        print(tableView.tag)
+        
+        if tableView.tag == 2{
+            print(indexPath.row)
+            switch indexPath.row {
+            case 0:
+                let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
+                return cell
+            default:
+                let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
+                return cell
+            }
+           
+        }
+
+        if tableView.tag == 1{
         
         switch indexPath.row {
         case 0:
             let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
             return cell
-            
         case 1:
+            let cell: ThemePostDetailTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.delegate = self
+            return cell
+        case 2:
             let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
@@ -95,10 +136,22 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         default:
             return UITableViewCell()
         }
-        
+        }
+        return UITableViewCell()
+
+     
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.tag == 2{
+            print("dd")
+        }
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if tableView.tag == 2{
+            return 44
+        }
+        
         
         var topBarHeight = 100
         let factor = UIScreen.main.bounds.width / 375
@@ -109,6 +162,8 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             //116 / 812
             return 118 * factor
         case 1:
+            return 50
+        case 2:
             return UIScreen.main.bounds.height - 100 - 118
         default:
             return 118
@@ -144,6 +199,15 @@ extension ThemePostVC: ThemeCollectionViewCellDelegate {
         } else {
             dropDownTableView.isHidden = false
         }
+    }
+    
+    
+}
+
+extension ThemePostVC: MenuClickedDelegate{
+    func menuClicked() {
+        dropDownTableView.isHidden = false
+        dropDownTableView.reloadData()
     }
     
     
