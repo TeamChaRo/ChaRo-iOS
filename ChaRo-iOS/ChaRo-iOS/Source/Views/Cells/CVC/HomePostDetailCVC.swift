@@ -20,7 +20,9 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     let postCount: Int = 6
     var delegate: MenuClickedDelegate?
+    var cellDelegate: ThemeCollectionViewCellDelegate?
     var selectText: String = "인기순"
+    var isButtonClicked: Bool = false
     
     
     func setTitle(data : String) {
@@ -40,6 +42,8 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     @IBAction func menuButtonClicked(_ sender: Any) {
         delegate?.menuClicked()
+        isButtonClicked = !isButtonClicked
+        
     }
     
     override func awakeFromNib() {

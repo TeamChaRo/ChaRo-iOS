@@ -81,7 +81,7 @@ extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
-        topCell.delegateT = self
+        topCell.delegate = self
         if isFirstLoaded {
             isFirstLoaded = false
             topCVCCell = topCell
@@ -146,6 +146,7 @@ extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
             return UITableViewCell()
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let HotCell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
         if indexPath.row == 0 {
@@ -165,7 +166,7 @@ extension HomePostVC: MenuClickedDelegate{
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-
+        print("되냐?")
         delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)

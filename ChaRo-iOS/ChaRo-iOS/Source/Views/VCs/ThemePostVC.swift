@@ -119,9 +119,19 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     
 }
 
-extension ThemePostVC: MenuClickedDelegate {
-    func menuClicked(){
-        dropDownTableView.isHidden = false
+
+extension ThemePostVC: ThemeCollectionViewCellDelegate {
+    
+    func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC) {
+        
+        print("아아아 됐니?")
+        if collectionviewcell?.isButtonClicked == false {
+            dropDownTableView.isHidden = true
+        } else {
+            dropDownTableView.isHidden = false
+        }
+        
     }
+    
     
 }

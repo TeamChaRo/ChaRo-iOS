@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ThemeCollectionViewCellDelegate: class {
+    func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC)
+}
+
 class ThemePostAllTVC: UITableViewCell {
 
     //MARK:- IBOutlet
@@ -14,6 +18,7 @@ class ThemePostAllTVC: UITableViewCell {
     
     //MARK:- Variable
     static let identifier = "ThemePostAllTVC"
+    var cellDelegate: ThemeCollectionViewCellDelegate?
     
     //MARK:- Life Cycle
     
@@ -107,6 +112,18 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         return 28
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            let cell = collectionView.cellForItem(at: indexPath) as? HomePostDetailCVC
+            print(cell?.isButtonClicked)
+            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.section, didTappedInTableViewCell: self)
+        }
+        
+            
+        
+    }
     
     
     
