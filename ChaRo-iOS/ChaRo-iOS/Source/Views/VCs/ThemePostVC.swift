@@ -13,6 +13,7 @@ class ThemePostVC: UIViewController {
     //MARK:- IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dropDownTableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     //MARK:- Variable
     
@@ -24,6 +25,8 @@ class ThemePostVC: UIViewController {
     //MARK:- Life Cycle
     override func viewDidLoad() {
         setTableView()
+        setdropDownTableView()
+        setTitleLabel()
     }
 
     //MARK:- IBAction
@@ -46,6 +49,10 @@ class ThemePostVC: UIViewController {
     
     func setdropDownTableView() {
         tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
+    }
+    
+    func setTitleLabel() {
+        titleLabel.font = .notoSansMediumFont(ofSize: 17)
     }
 
     //MARK:- Function
