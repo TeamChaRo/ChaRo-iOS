@@ -157,7 +157,7 @@ extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-extension HomePostVC: MenuClickedDelegate{
+extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
         dropDownTableview.isHidden = false
     }

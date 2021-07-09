@@ -47,6 +47,7 @@ class ThemePostVC: UIViewController {
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
 
+        
     }
     
     
@@ -88,6 +89,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             
         case 1:
             let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellDelegate = self
             return cell
             
         default:
@@ -121,16 +123,27 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
 
 
 extension ThemePostVC: ThemeCollectionViewCellDelegate {
+
     
-    func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC) {
+    
+    func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC, button: UIButton!) {
+       
+        var isButtonClicked = (collectionviewcell?.isButtonClicked)!
         
-        print("아아아 됐니?")
-        if collectionviewcell?.isButtonClicked == false {
+        collectionviewcell?.selectButton.addTarget(self, action: #selector(buttonClicked(isButtonClicked:)), for: .touchUpInside)
+        
+    }
+    
+    
+    @objc func buttonClicked(isButtonClicked: Bool) {
+        
+        print(isButtonClicked)
+        
+        if isButtonClicked == false {
             dropDownTableView.isHidden = true
         } else {
             dropDownTableView.isHidden = false
         }
-        
     }
     
     

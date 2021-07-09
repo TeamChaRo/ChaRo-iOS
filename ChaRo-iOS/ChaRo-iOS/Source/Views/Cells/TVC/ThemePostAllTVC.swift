@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ThemeCollectionViewCellDelegate: class {
-    func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC)
+    func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC, button: UIButton!)
 }
 
 class ThemePostAllTVC: UITableViewCell {
@@ -115,13 +115,13 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
-            let cell = collectionView.cellForItem(at: indexPath) as? HomePostDetailCVC
-            print(cell?.isButtonClicked)
-            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.section, didTappedInTableViewCell: self)
-        }
-        
-            
+//        
+//        if indexPath.section == 0 {
+//            let cell = collectionView.cellForItem(at: indexPath) as? HomePostDetailCVC
+//            print(cell?.isButtonClicked)
+//            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.section, didTappedInTableViewCell: self, button: )
+//        }
+//        
         
     }
     
