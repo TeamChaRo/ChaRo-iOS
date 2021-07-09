@@ -12,6 +12,7 @@ class ThemePostVC: UIViewController {
     
     //MARK:- IBOutlet
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dropDownTableView: UITableView!
     
     //MARK:- Variable
     
@@ -41,6 +42,10 @@ class ThemePostVC: UIViewController {
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
 
+    }
+    
+    func setdropDownTableView() {
+        tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
     }
 
     //MARK:- Function
