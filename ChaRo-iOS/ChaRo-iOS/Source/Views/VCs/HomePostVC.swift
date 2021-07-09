@@ -22,6 +22,7 @@ class HomePostVC: UIViewController {
     var isFirstLoaded = true
     var cellCount = 6
     var topCVCCell : HomePostDetailCVC?
+    var topText: String = "요즘 뜨는 드라이브"
     
     
     static let identifier : String = "HomePostVC"
@@ -32,6 +33,10 @@ class HomePostVC: UIViewController {
         collectionView.registerCustomXib(xibName: "CommonCVC")
         collectionView.registerCustomXib(xibName: "HomePostDetailCVC")
     }
+    func setNavigationLabel(){
+        NavigationTitleLabel.text = topText
+    }
+    
     
     func setDropdown(){
         dropDownTableview.registerCustomXib(xibName: "HotDropDownTVC")
@@ -48,17 +53,20 @@ class HomePostVC: UIViewController {
         dropDownTableview.layer.cornerRadius = 20
         dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         setShaow()
         setDropdown()
         setRound()
-
+        setNavigationLabel()
 
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+
     }
  
     @IBAction func backButtonClicked(_ sender: Any) {
@@ -73,11 +81,14 @@ extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return 6
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+
+        cell.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
         
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
-        topCell.delegateT = self
+        topCell.delegate = self
         if isFirstLoaded {
             isFirstLoaded = false
             topCVCCell = topCell
@@ -96,7 +107,7 @@ extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let Cellwidth = UIScreen.main.bounds.width - 40
+        let Cellwidth = UIScreen.main.bounds.width-40
         
         switch indexPath.row {
         case 0:
@@ -107,8 +118,7 @@ extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
         }
         
     }
-    
-    
+
 }
 
 extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
@@ -165,8 +175,8 @@ extension HomePostVC: SetTitleDelegate {
         delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)
-        
     }
     
 }
+
 

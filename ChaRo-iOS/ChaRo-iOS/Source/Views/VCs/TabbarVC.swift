@@ -32,7 +32,7 @@ class TabbarVC: UITabBarController {
         customTabbar.frame = newFrame
     }
     
-    private func configTabbar(){
+    public func configTabbar(){
         let customTabbar = tabBar
         customTabbar.tintColor = .blue
 
@@ -57,6 +57,7 @@ class TabbarVC: UITabBarController {
 //        writtingTab.tabBarItem.title = "작성하기"
 //        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
         let tabs = [homeTab, mapTab, postTab]
+        
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
     }

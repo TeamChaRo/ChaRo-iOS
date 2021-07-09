@@ -315,10 +315,10 @@
 		3C86FA7D2694C7C6009370CD /* CVC */ = {
 			isa = PBXGroup;
 			children = (
+				3C86FA802694C7C6009370CD /* CommonCVC.xib */,
 				3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */,
 				3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */,
 				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
-				3C86FA802694C7C6009370CD /* CommonCVC.xib */,
 			);
 			path = CVC;
 			sourceTree = "<group>";

@@ -16,17 +16,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CommonCVC" customModule="ChaRo_iOS" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="266" height="314"/>
+            <rect key="frame" x="0.0" y="0.0" width="326" height="314"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="266" height="314"/>
+                <rect key="frame" x="0.0" y="0.0" width="326" height="314"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="kds-Zc-lX5">
-                        <rect key="frame" x="0.0" y="0.0" width="266" height="245"/>
+                        <rect key="frame" x="0.0" y="0.0" width="326" height="245"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
-                        <rect key="frame" x="0.0" y="245" width="266" height="50"/>
+                        <rect key="frame" x="0.0" y="245" width="326" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="0cJ-rp-SQW"/>
                         </constraints>
@@ -91,7 +91,7 @@
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xT-Yy-Ygg">
-                        <rect key="frame" x="218" y="0.0" width="48" height="48"/>
+                        <rect key="frame" x="278" y="0.0" width="48" height="48"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="JE8-f1-sUT"/>
                             <constraint firstAttribute="width" constant="48" id="eEo-N5-D2B"/>
@@ -115,7 +115,7 @@
                 <constraint firstItem="bb5-sj-Y94" firstAttribute="top" secondItem="BRj-TE-ZDO" secondAttribute="bottom" constant="2" id="sPt-tw-OfP"/>
                 <constraint firstItem="3xT-Yy-Ygg" firstAttribute="trailing" secondItem="kds-Zc-lX5" secondAttribute="trailing" id="tqH-VS-O3n"/>
             </constraints>
-            <size key="customSize" width="266" height="314"/>
+            <size key="customSize" width="326" height="314"/>
             <connections>
                 <outlet property="imageView" destination="kds-Zc-lX5" id="SQ4-JG-SKe"/>
                 <outlet property="stackView" destination="bb5-sj-Y94" id="nbk-5z-rti"/>
@@ -127,7 +127,7 @@
                 <outlet property="tagView3" destination="jEC-oy-FkY" id="TJd-vm-JzW"/>
                 <outlet property="titleLabel" destination="BRj-TE-ZDO" id="qWB-Sg-mMy"/>
             </connections>
-            <point key="canvasLocation" x="252.17391304347828" y="188.16964285714286"/>
+            <point key="canvasLocation" x="295.6521739130435" y="188.16964285714286"/>
         </collectionViewCell>
     </objects>
     <resources>
