@@ -73,6 +73,7 @@
                     </view>
                     <connections>
                         <outlet property="dropDownTableView" destination="GUN-SI-I1O" id="VU7-5r-dGz"/>
+                        <outlet property="navigationView" destination="mtt-cJ-16D" id="PuT-P3-pm7"/>
                         <outlet property="tableView" destination="bB3-pq-LlX" id="ipr-zI-zB8"/>
                         <outlet property="titleLabel" destination="Tno-rF-xZD" id="xfm-j7-0Oo"/>
                     </connections>

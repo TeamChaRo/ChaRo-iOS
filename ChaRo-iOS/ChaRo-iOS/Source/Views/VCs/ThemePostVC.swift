@@ -11,6 +11,7 @@ class ThemePostVC: UIViewController {
 
     
     //MARK:- IBOutlet
+    @IBOutlet weak var navigationView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dropDownTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,6 +28,7 @@ class ThemePostVC: UIViewController {
         setTableView()
         setdropDownTableView()
         setTitleLabel()
+        setShaow()
     }
 
     //MARK:- IBAction
@@ -47,13 +49,23 @@ class ThemePostVC: UIViewController {
 
     }
     
+    
+    func setShaow(){
+        navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
+    }
+    
     func setdropDownTableView() {
-        tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
+        
+        dropDownTableView.isHidden = true
+        dropDownTableView.registerCustomXib(xibName: "ThemePostThemeTVC")
+        
     }
     
     func setTitleLabel() {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
     }
+    
+    
 
     //MARK:- Function
 }
@@ -107,3 +119,9 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     
 }
 
+extension ThemePostVC: MenuClickedDelegate {
+    func menuClicked(){
+        dropDownTableView.isHidden = false
+    }
+    
+}

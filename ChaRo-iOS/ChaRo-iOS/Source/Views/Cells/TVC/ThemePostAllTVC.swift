@@ -65,6 +65,8 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePostDetailCVC.identifier, for: indexPath) as? HomePostDetailCVC else { return UICollectionViewCell() }
             
+            cell.setLabel()
+            
             return cell
             
         case 1:
