@@ -32,7 +32,7 @@ class PostLocationTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        selectionStyle = .none
         configureLayout()
     }
     
@@ -63,7 +63,6 @@ extension PostLocationTVC {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.titleView.snp.trailing).offset(3)
             $0.bottom.equalTo(self.snp.bottom).inset(8)
-//            $0.width.equalTo(locationTextField.snp.height).multipliedBy(buttonMultiplier)
         }
         
         copyButton.snp.makeConstraints{

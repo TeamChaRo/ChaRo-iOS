@@ -22,6 +22,7 @@ class PostTitleTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         setFont()
     }
 
