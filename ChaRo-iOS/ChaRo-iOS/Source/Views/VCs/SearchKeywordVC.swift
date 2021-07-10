@@ -33,6 +33,7 @@ class SearchKeywordVC: UIViewController {
         textField.font = .notoSansRegularFont(ofSize: 17)
         textField.textColor = .gray50
         textField.clearsOnBeginEditing = true
+        textField.clearButtonMode = .whileEditing
         return textField
     }()
     
