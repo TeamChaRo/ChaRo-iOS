@@ -12,17 +12,19 @@ class PostLocationTVC: UITableViewCell {
     static let identifier: String = "PostLocationTVC"
     
     let titleView = PostCellTitleView(title: "출발지")
+    let buttonMultiplier: CGFloat = 248/42
     
     let locationTextField: UITextField = {
         let textField = UITextField()
         textField.background = UIImage(named: "postTextfieldLocationShow")
         textField.addLeftPadding(17)
+        textField.font = .notoSansRegularFont(ofSize: 14)
         return textField
     }()
     
     let copyButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "copyLightVer"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "copy1LightVer"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
@@ -33,12 +35,9 @@ class PostLocationTVC: UITableViewCell {
         configureLayout()
     }
     
-    
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }
@@ -62,9 +61,8 @@ extension PostLocationTVC {
         locationTextField.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.titleView.snp.trailing).offset(3)
-            $0.height.equalTo(42)
-            $0.bottom.equalTo(self.snp.bottom).offset(8)
-            
+            $0.bottom.equalTo(self.snp.bottom).inset(8)
+//            $0.width.equalTo(locationTextField.snp.height).multipliedBy(buttonMultiplier)
         }
         
         copyButton.snp.makeConstraints{

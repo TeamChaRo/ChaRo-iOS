@@ -18,6 +18,9 @@ class PostDetailVC: UIViewController {
                                                            imageName: "myimage",
                                                            likedCount: "1.8K")
     
+    var location: [String] = ["출발지", "경유지", "경유지", "도착지"]
+    let cellFixedCount: Int = 3 // 0~2 cell은 무조건 존재
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -46,6 +49,9 @@ class PostDetailVC: UIViewController {
 extension PostDetailVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let rowAdjustment: Int = cellFixedCount + location.count - 1
+        
         switch indexPath.row {
         case 0:
             return 146
@@ -55,24 +61,28 @@ extension PostDetailVC: UITableViewDelegate{
             return 259
         case 3:
             return 50
-        case 4:
+        case rowAdjustment:
+            return 50
+        case rowAdjustment+1:
             return 159
-        case 5:
+        case rowAdjustment+2:
             return 159
-        case 6:
+        case rowAdjustment+3:
             return 408
         default:
-            return 159
+            return 50
         }
     }
 }
 
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return 6 + location.count //지도추가하면 7로 수정하기
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let rowAdjustment: Int = cellFixedCount + location.count - 1
         
         switch indexPath.row {
         case 0:
@@ -82,15 +92,17 @@ extension PostDetailVC: UITableViewDataSource {
         case 2:
             return getPostCourseThemeCell(tableView: tableView)
         case 3:
-            return getPostLocationCell(tableView: tableView)
-        case 4:
+            return getPostLocationCell(tableView: tableView, row: indexPath.row) // 출발지
+        case rowAdjustment:
+            return getPostLocationCell(tableView: tableView, row: indexPath.row) // 도착지
+        case rowAdjustment+1:
             return getPostParkingCell(tableView: tableView)
-        case 5:
+        case rowAdjustment+2:
             return getPostAttensionCell(tableView: tableView)
-        case 6:
+        case rowAdjustment+3:
             return getPostDriveCourceCell(tableView: tableView)
-        default:
-            return getPostAttensionCell(tableView: tableView)
+        default: // 경유지 일로 들어왕
+            return getPostLocationCell(tableView: tableView, row: indexPath.row)
         }
     }
     
@@ -119,7 +131,7 @@ extension PostDetailVC: UITableViewDataSource {
     
     func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
-        cell.setImage(["Mask Group", "Mask Group", "Mask Group"])
+        cell.setImage(["testimage", "Mask Group", "Mask Group"])
         return cell
     }
     
@@ -141,9 +153,21 @@ extension PostDetailVC: UITableViewDataSource {
         return cell
     }
     
-    func getPostLocationCell(tableView: UITableView) -> UITableViewCell{
+    func getPostLocationCell(tableView: UITableView, row: Int) -> UITableViewCell{
+        
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostLocationTVC.identifier) as? PostLocationTVC else {return UITableViewCell()}
-        cell.backgroundColor = .red
+        
+        switch row {
+        case 3:
+            cell.titleView.titleLabel.text = "출발지"
+        case 3+location.count-1:
+            cell.titleView.titleLabel.text = "도착지"
+        default:
+            cell.titleView.titleLabel.text = "경유지"
+        }
+        
         return cell
     }
+    
 }
