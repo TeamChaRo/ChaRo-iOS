@@ -26,6 +26,7 @@ class PostImagesTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         configureScrollView()
     }
 

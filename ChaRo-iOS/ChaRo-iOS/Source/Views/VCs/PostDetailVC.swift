@@ -40,6 +40,7 @@ class PostDetailVC: UIViewController {
         postDetailTableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
         postDetailTableView.registerCustomXib(xibName: PostLocationTVC.identifier)
+        postDetailTableView.registerCustomXib(xibName: PostPathmapTCV.identifier)
     }
     
 }
@@ -64,10 +65,12 @@ extension PostDetailVC: UITableViewDelegate{
         case rowAdjustment:
             return 50
         case rowAdjustment+1:
-            return 159
+            return 451
         case rowAdjustment+2:
             return 159
         case rowAdjustment+3:
+            return 159
+        case rowAdjustment+4:
             return 408
         default:
             return 50
@@ -75,9 +78,11 @@ extension PostDetailVC: UITableViewDelegate{
     }
 }
 
+
+//MARK: - UITableView extension
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6 + location.count //지도추가하면 7로 수정하기
+        return 7 + location.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,16 +101,22 @@ extension PostDetailVC: UITableViewDataSource {
         case rowAdjustment:
             return getPostLocationCell(tableView: tableView, row: indexPath.row) // 도착지
         case rowAdjustment+1:
-            return getPostParkingCell(tableView: tableView)
+            return getPostPathMapCell(tableView: tableView)
         case rowAdjustment+2:
-            return getPostAttensionCell(tableView: tableView)
+            return getPostParkingCell(tableView: tableView)
         case rowAdjustment+3:
+            return getPostAttensionCell(tableView: tableView)
+        case rowAdjustment+4:
             return getPostDriveCourceCell(tableView: tableView)
         default: // 경유지 일로 들어왕
             return getPostLocationCell(tableView: tableView, row: indexPath.row)
         }
     }
-    
+
+}
+
+//MARK: - import cell funcions
+extension PostDetailVC {
     func getPostTitleCell(tableView: UITableView) -> UITableViewCell{
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: PostTitleTVC.identifier)
         as? PostTitleTVC else { return UITableViewCell() }
@@ -170,4 +181,10 @@ extension PostDetailVC: UITableViewDataSource {
         return cell
     }
     
+
+    func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathmapTCV.identifier) as? PostPathmapTCV else {return UITableViewCell()}
+        
+        return cell
+    }
 }
