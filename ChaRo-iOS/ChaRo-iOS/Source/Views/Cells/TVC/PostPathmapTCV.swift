@@ -13,15 +13,17 @@ class PostPathmapTCV: UITableViewCell {
 
     static let identifier: String = "PostPathmapTCV"
     
-    var postMap = MapService.getTmapView()
-    
     let multiplier: CGFloat = 395/335
     let mapWidth: CGFloat = UIScreen.main.bounds.width - 40
-    
+
+    let postMap: TMapView = TMapView()
     let mapViewContainerView: UIView = UIView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
+        configureLayout()
+        setMapView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,18 +32,17 @@ class PostPathmapTCV: UITableViewCell {
     
 }
 
+//MARK: - AutoLayout and functions
 extension PostPathmapTCV {
-
+    
     func configureLayout(){
         addSubview(mapViewContainerView)
         
         mapViewContainerView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top).offset(23)
-//            $0.leading.equalTo(self.snp.leading).offset(20)
-//            $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.centerX.equalTo(self.snp.centerX)
             $0.bottom.equalTo(self.snp.bottom).inset(33)
-            $0.width.equalTo(postMap)
+            $0.width.equalTo(mapWidth)
             $0.height.equalTo(self.mapViewContainerView.snp.width).multipliedBy(multiplier)
         }
         
@@ -50,7 +51,10 @@ extension PostPathmapTCV {
     
     func setMapView(){
         mapViewContainerView.addSubview(postMap)
+        postMap.setApiKey(MapService.mapkey)
         postMap.frame = mapViewContainerView.frame
+        postMap.isPanningEnable = false // 드래그 불가
+        postMap.isZoomEnable = false // 확대축소 불가
     }
     
 }
