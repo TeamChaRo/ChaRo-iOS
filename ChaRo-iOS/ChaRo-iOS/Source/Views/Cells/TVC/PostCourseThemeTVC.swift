@@ -56,6 +56,7 @@ extension PostCourseThemeTVC {
     }
     
     func setTheme(theme: [String]){
+        themeButtonList = [] // 빈배열로 초기화
         for i in 0..<theme.count {
             let themeButton: UIButton = {
                 let button = UIButton()
@@ -108,6 +109,7 @@ extension PostCourseThemeTVC {
     }
     
     func themeButtonConfigureLayer(){
+        
         addSubviews(themeButtonList)
         
         themeButtonList[0].snp.makeConstraints {

@@ -127,13 +127,12 @@ extension PostDetailVC: UITableViewDataSource {
 
     func getPostCourseThemeCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCourseThemeTVC.identifier) as? PostCourseThemeTVC else {return UITableViewCell()}
-        cell.setCourse(city: "서울특별시", region: "마포구") // dummy
-        cell.setTheme(theme: ["최","인정", "디자인짱"]) // dummy
         
+        cell.setCourse(city: "서울특별시", region: "마포구")
+        cell.setTheme(theme: ["최","인정", "디자인짱"])
         cell.configureLayout()
         cell.themeButtonConfigureLayer()
         cell.bringButtonToFront()
-        
         return cell
     }
 }
