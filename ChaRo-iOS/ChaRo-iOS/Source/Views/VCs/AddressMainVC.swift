@@ -7,70 +7,198 @@
 
 import UIKit
 import SnapKit
+import TMapSDK
 
 class AddressMainVC: UIViewController {
 
     static let identifier = "AddressMainVC"
-    public var addressList : [AddressDataModel] = []
-    public var addressCellList : [AddressButtonCell] = []
+    public var addressList: [AddressDataModel] = []
+    public var addressCellList: [AddressButtonCell] = []
+    
+    private var isFirstFinded = true
+    
     private var tableView = UITableView()
-    private let viewForMap = UIView()
-    private var oneCellHeight = 46
-    private var tableViewHeight = 92
+    private var oneCellHeight = 48
+    private var tableViewHeight = 96
+    private var tableViewBottomOffset = 19
+    
+    //MARK:- About Map
+    //private let tMapView = MapService.getTmapView()
+    private let tMapView = TMapView()
+    private var markerList : [TMapMarker] = []
+    private var polyLineList: [TMapPolyline] = []
+    
+    private let backButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "icGrayBackButton"), for: .normal)
+        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        return button
+    }()
+    
+    private var confirmButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .mainBlue
+        button.setTitleColor(.white, for: .normal)
+        button.isHidden = true
+        button.setTitle("작성완료", for: .normal)
+        button.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
+        return button
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraints()
         configureTableView()
-        initAddressList()
+        setConstraints()
+        configureCells()
+        initMapView()
+        navigationController?.isNavigationBarHidden = true
+        print("view did load = \(tMapView.frame)")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        displayAddress()
+        setMapFrame()
+        inputMarkerInMapView()
+        isThereStartAddress()
+    }
+    
+    private func configureCells(){
+        if isFirstFinded{
+            initAddressList()
+        }else{
+            setRecivedAddressCell()
+        }
+    }
+    
+    private func isThereStartAddress(){
+        if addressList[0].title != ""{
+            print("isThereStartAddress")
+            addressCellList[1].searchButton.isEnabled = true
+        }
+    }
+    
 
-    private func configureTableView(){
-        tableView.registerCustomXib(xibName: AddressButtonCell.identifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
     private func setConstraints(){
-        view.addSubviews([tableView,viewForMap])
+        view.addSubviews([backButton,
+                          tableView,
+                          tMapView,
+                          confirmButton])
         
-        tableView.snp.makeConstraints{make in
-            make.top.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(48)
-            make.height.equalTo(tableViewHeight)
+        backButton.snp.makeConstraints{
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(13)
+            $0.leading.equalTo(view.safeAreaLayoutGuide)
         }
         
-        viewForMap.snp.makeConstraints{make in
-            make.top.equalTo(tableView.snp.bottom)
-            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        tableView.snp.makeConstraints{
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(13)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(48)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-29)
+            $0.height.equalTo(tableViewHeight)
         }
         
-        viewForMap.backgroundColor = .yellow
+        setMapFrame()
+        
+        tMapView.snp.makeConstraints{
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        confirmButton.snp.makeConstraints{
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
+            $0.height.equalTo(48)
+        }
     }
     
     
-    private func calculateTableViewHeight() -> Int{
-        return addressList.count * oneCellHeight
+    @objc func dismissView(){
+        self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func sendDecidedAddress(){
+        print("이렇게 해서 경로가 보여질꺼임")
+    }
+}
+
+
+//MARK: - Address 관련
+extension AddressMainVC {
     private func initAddressList(){
         addressList.append(contentsOf: [AddressDataModel(),AddressDataModel()])
         addressCellList.append(contentsOf: [initAddressCell(text: "출발지"),
                                             initAddressCell(text: "도착지")])
-        
+    }
+    
+    private func setRecivedAddressCell(){
+        addressCellList = []
+        for item in addressList {
+            let addressCell = setRecivedAddressCellStyle(address: item)
+            addressCellList.append(addressCell)
+        }
     }
     
     private func initAddressCell(text: String) -> AddressButtonCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else { return AddressButtonCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else {return AddressButtonCell()}
         cell.delegate = self
         cell.setInitContentText(text: text)
         return cell
+    }
+    
+    private func setRecivedAddressCellStyle(address: AddressDataModel) -> AddressButtonCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else { return AddressButtonCell()}
+        cell.delegate = self
+        cell.setAddressText(address: address)
+        return cell
+    }
+    
+    
+    public func setAddressListData(list: [AddressDataModel]){
+        isFirstFinded = list.count == 0 ? true : false
+        addressList = list
+    }
+    
+    public func replaceAddressData(address: AddressDataModel, index: Int){
+        addressList[index] = address
+        addressCellList[index].setAddressText(address: address)
+        if index == 1{
+            confirmButton.isHidden = false
+            addPathInMapView()
+        }
+    }
+    private func displayAddress(){
+        print("addressList 개수 = \(addressList.count)")
+        for item in addressList{
+            item.displayContent()
+        }
     }
 }
 
 
 //MARK:- TableView Delegate
 extension AddressMainVC : UITableViewDelegate{
+    
+    private func configureTableView(){
+        tableView.registerCustomXib(xibName: AddressButtonCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        oneCellHeight = 48
+        tableViewBottomOffset = 19
+        tableViewHeight = (oneCellHeight * 2) + tableViewBottomOffset
+        print("tableViewHeight = \(tableViewHeight)")
+    }
+    
+    private func calculateTableViewHeight() -> Int{
+        return addressList.count * oneCellHeight + tableViewBottomOffset
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(oneCellHeight)
+    }
+    
 }
 
 extension AddressMainVC: UITableViewDataSource{
@@ -79,21 +207,6 @@ extension AddressMainVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else { return UITableViewCell()}
-//
-//        cell.delegate = self
-//
-//        switch indexPath.row {
-//        case 0:
-//            cell.setInitContentText(text: "출발지")
-//        case (addressList.count - 1):
-//            cell.setInitContentText(text: "도착지")
-//        default:
-//            cell.setInitContentText(text: "경유지")
-//        }
-        
-        
-        
         return addressCellList[indexPath.row]
     }
 }
@@ -109,6 +222,13 @@ extension AddressMainVC: AddressButtonCellDelegate{
         tableView.snp.updateConstraints{ make in
             make.height.equalTo(tableViewHeight)
         }
+        
+        setMapFrame()
+        
+        tMapView.snp.updateConstraints{
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     func addressButtonCellForAdding(cell: AddressButtonCell) {
@@ -118,8 +238,15 @@ extension AddressMainVC: AddressButtonCellDelegate{
         tableView.reloadData()
         
         tableViewHeight = calculateTableViewHeight()
-        tableView.snp.updateConstraints{ make in
-            make.height.equalTo(tableViewHeight)
+        tableView.snp.updateConstraints{
+            $0.height.equalTo(tableViewHeight)
+        }
+        
+        setMapFrame()
+        
+        tMapView.snp.updateConstraints{
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -131,12 +258,89 @@ extension AddressMainVC: AddressButtonCellDelegate{
         }
         let index = cell.getTableCellIndexPath()
         
+        
         nextVC.setAddressModel(model: addressList[index],
-                               text: "\(cell.cellType)를 입력해주세요",
+                               cellType: cell.cellType,
                                index: index)
         
-        nextVC.modalPresentationStyle = .fullScreen
-        self.present(nextVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
 }
+
+
+//MARK:- TMap
+extension AddressMainVC{
+    private func initMapView(){
+        tMapView.setApiKey(MapService.mapkey)
+        tMapView.delegate = self
+        tMapView.setZoom(10)
+        initMapViewStyle()
+    }
+    
+    private func setMapFrame(){
+        tMapView.frame = CGRect(x: 0, y: tableViewHeight,
+                                width: UIScreen.getDeviceWidth(),
+                                height: UIScreen.getDeviceHeight() - tableViewHeight)
+        
+    }
+    
+    private func addPathInMapView(){
+        polyLineList.removeAll()
+        let pathData = TMapPathData()
+        print("count = \(addressList.count)")
+        for index in 0..<addressList.count-1{
+            print("index = \(index)")
+            pathData.findPathData(startPoint: addressList[index].getPoint(),
+                                  endPoint: addressList[index+1].getPoint()) { result, error in
+                guard let polyLine = result else {return}
+                self.polyLineList.append(polyLine)
+                
+                if index == self.addressList.count-2{
+                    DispatchQueue.main.async {
+                        polyLine.map = self.tMapView
+                        self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func initMapViewStyle(){
+        print("initMapViewStyle")
+        print("tMapView.getZoom() = \(tMapView.getZoom())")
+    }
+    
+    private func inputMarkerInMapView(){
+        print("inputMarkerInMapView")
+        print("addressList = \(addressList.count)")
+        for item in addressList{
+            if item.title != ""{
+                let point = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longtitude)
+                let marker = TMapMarker(position: point)
+                marker.map = tMapView
+                markerList.append(marker)
+                tMapView.setCenter(point)
+            }
+        }
+    }
+    
+    
+  
+}
+
+extension AddressMainVC : TMapViewDelegate{
+    func mapViewDidFinishLoadingMap(){
+        print("mapViewDidFinishLoadingMap")
+        tMapView.setZoom(10)
+        print("tMapView.getZoom() = \(tMapView.getZoom())")
+    }
+
+    
+    func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D, to newPosition: CLLocationCoordinate2D) -> Bool {
+        return true
+    }
+    
+}
+
+
