@@ -13,8 +13,9 @@ class HomeAreaRecommandTVC: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var moreLabel: UILabel!
-    
-    
+    var delegate: IsSelectedCVCDelegate?
+    var buttonDelegate: SeeMorePushDelegate?
+    let cellTag : Int = 5
     //MARK:- Variable
     static let identifier = "HomeAreaRecommandTVC"
     
@@ -50,8 +51,13 @@ class HomeAreaRecommandTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        self.selectionStyle = .none
+
         
         
+    }
+    @IBAction func seeMoreButtonClicked(_ sender: Any) {
+        buttonDelegate?.seeMorePushDelegate(data: cellTag)
     }
     
     //MARK:- Function
@@ -65,6 +71,11 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.isSelectedCVC(indexPath: indexPath)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         

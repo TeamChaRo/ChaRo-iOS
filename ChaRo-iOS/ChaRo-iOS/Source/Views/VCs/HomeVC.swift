@@ -14,12 +14,12 @@ class HomeVC: UIViewController {
     @IBOutlet weak var homeNavigationLogo: UIImageView!
     @IBOutlet weak var homeNavigationSearchButton: UIButton!
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
-    
+    var tableIndex: IndexPath = [0,0]
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         setHomeNavigationViewLayout()
-
+        navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -75,7 +75,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         let standardHeight = userHeight/2
         let currentHeight = scrollView.contentOffset.y
         if scrollView.contentOffset.y > 0{
-            print(scrollView.contentOffset.y)
                if scrollView.contentOffset.y > 1 {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0.01 + (scrollView.contentOffset.y / CGFloat(standardHeight)))
                 
@@ -106,12 +105,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //tableview indexPath
+        tableIndex = indexPath
+    
         
         switch indexPath.row {
         case 0:
-
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setDelegate()
             return cell
@@ -129,25 +130,65 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 3:
 
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.delegate = self
+            cell.ButtonDelegate = self
             return cell
             
         case 4:
 
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.delegate = self
+            cell.buttonDelegate = self
             return cell
            
         case 5:
 
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.delegate = self
+            cell.buttonDelegate = self
             return cell
            
 
         default:
             return UITableViewCell()
         }
-
-        
     }
-    
-    
+}
+extension HomeVC : IsSelectedCVCDelegate {
+    func isSelectedCVC(indexPath: IndexPath) {
+        guard let HomePostVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
+        //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
+        print(tableIndex.row)
+        
+        switch tableIndex.row {
+        case 3:
+            HomePostVC.topText = "요즘 뜨는 드라이브 코스"
+            
+        case 4:
+            HomePostVC.topText = "여름맞이 야간 드라이브"
+        case 5:
+            HomePostVC.topText = "경기도 드라이브 코스"
+        default:
+           print("Error")
+        }
+        self.navigationController?.pushViewController(HomePostVC, animated: true)
+    }
+}
+
+extension HomeVC: SeeMorePushDelegate{
+    func seeMorePushDelegate(data: Int) {
+        guard let smVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
+        
+        switch data {
+        case 3:
+            smVC.topText = "요즘 뜨는 드라이브 코스"
+        case 4:
+            smVC.topText = "여름맞이 야간 드라이브"
+        case 5:
+            smVC.topText = "경기도 드라이브 코스"
+        default:
+            print("Error")
+        }
+        self.navigationController?.pushViewController(smVC, animated: true)
+    }
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1BF746D5C8549F4E027525F3 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */; };
+		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
+		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8912693730700EFC794 /* CommonCVC.swift */; };
 		3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8922693730700EFC794 /* HomeAnimationCVC.swift */; };
 		3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8932693730700EFC794 /* HomeThemeCVC.swift */; };
@@ -17,6 +19,10 @@
 		3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8992693730700EFC794 /* HomeAnimationTVC.swift */; };
 		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
+		36D1E5FD269709F00079BD94 /* HomePostDetailCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */; };
+		36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */; };
+		36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */; };
+		36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */; };
 		36D5FD1B268F72F100BCCB33 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; };
 		36D5FD1C268F72F100BCCB33 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EC2690244D0099B684 /* MapService.swift */; };
@@ -83,6 +89,8 @@
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
 		F4CC1AE92697570A009A0C01 /* PostPathmapTCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE72697570A009A0C01 /* PostPathmapTCV.swift */; };
 		F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */; };
+		F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */; };
+		F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -101,6 +109,8 @@
 
 /* Begin PBXFileReference section */
 		31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
+		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
 		3610A8912693730700EFC794 /* CommonCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCVC.swift; sourceTree = "<group>"; };
 		3610A8922693730700EFC794 /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationCVC.swift; sourceTree = "<group>"; };
 		3610A8932693730700EFC794 /* HomeThemeCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeCVC.swift; sourceTree = "<group>"; };
@@ -111,6 +121,10 @@
 		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		36BBD936268F6FF4008D8AD3 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
+		36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostDetailCVC.swift; sourceTree = "<group>"; };
+		36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostDetailCVC.xib; sourceTree = "<group>"; };
+		36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotDropDownTVC.swift; sourceTree = "<group>"; };
+		36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotDropDownTVC.xib; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellTitleView.swift; sourceTree = "<group>"; };
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +193,8 @@
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
 		F4CC1AE72697570A009A0C01 /* PostPathmapTCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPathmapTCV.swift; sourceTree = "<group>"; };
 		F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPathmapTCV.xib; sourceTree = "<group>"; };
+		F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVC.swift; sourceTree = "<group>"; };
+		F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostLocationTVC.xib; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +236,7 @@
 				3610A8912693730700EFC794 /* CommonCVC.swift */,
 				3610A8922693730700EFC794 /* HomeAnimationCVC.swift */,
 				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
+				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -234,11 +251,13 @@
 				3610A8972693730700EFC794 /* HomeSquareTVC.swift */,
 				3610A8982693730700EFC794 /* HomeThemeTVC.swift */,
 				3610A8992693730700EFC794 /* HomeAnimationTVC.swift */,
+				36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */,
 				3C86FA522694C169009370CD /* PostAttentionTVC.swift */,
-				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */,
+				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
 				F4CC1AE72697570A009A0C01 /* PostPathmapTCV.swift */,
+				F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
 				3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */,
@@ -306,9 +325,10 @@
 		3C86FA7D2694C7C6009370CD /* CVC */ = {
 			isa = PBXGroup;
 			children = (
+				3C86FA802694C7C6009370CD /* CommonCVC.xib */,
 				3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */,
 				3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */,
-				3C86FA802694C7C6009370CD /* CommonCVC.xib */,
+				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -323,11 +343,13 @@
 				3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */,
 				3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */,
 				3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */,
+				36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */,
 				3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */,
 				F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */,
 				3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */,
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
 				F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */,
+				F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */,
 				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
 				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
 				3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */,
@@ -338,11 +360,12 @@
 		3C86FA8C2694C7C6009370CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
+				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
+				36012A492694D557007F4633 /* HomePost.storyboard */,
 				3C86FA8E2694C7C6009370CD /* Home.storyboard */,
 				3C86FA8F2694C7C6009370CD /* LaunchScreen.storyboard */,
 				3C86FA912694C7C6009370CD /* Main.storyboard */,
-				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
+				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
 				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
 			);
@@ -426,6 +449,7 @@
 				3C86F9F5269478F3009370CD /* AddressMainVC.swift */,
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
+				36012A4B2694E55C007F4633 /* HomePostVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
 				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
@@ -531,8 +555,11 @@
 				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
 				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
+				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
+				36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
+				36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */,
 				3C86FAB72694C7C6009370CD /* NotoSansCJKkr-Medium.otf in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
@@ -545,6 +572,7 @@
 				3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */,
 				3C86FAB52694C7C6009370CD /* NotoSansCJKkr-DemiLight.otf in Resources */,
 				3C86FAB42694C7C6009370CD /* Assets.xcassets in Resources */,
+				36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */,
 				3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */,
 				3C86FAA92694C7C6009370CD /* PostParkingTVC.xib in Resources */,
 				3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */,
@@ -614,14 +642,17 @@
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
+				36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
+				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
+				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
@@ -629,6 +660,7 @@
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
+				36D1E5FD269709F00079BD94 /* HomePostDetailCVC.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
@@ -792,7 +824,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U24ZACT97M;
+				DEVELOPMENT_TEAM = M2BP76V5D4;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -803,7 +835,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -818,7 +850,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J8A843466G;
+				DEVELOPMENT_TEAM = M2BP76V5D4;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -829,7 +861,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

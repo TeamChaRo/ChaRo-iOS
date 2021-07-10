@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "textfield_location_show.png",
+      "filename" : "icDown.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "textfield_location_show@2x.png",
+      "filename" : "icDown@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "textfield_location_show@3x.png",
+      "filename" : "icDown@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

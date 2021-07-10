@@ -7,16 +7,28 @@
 
 import UIKit
 
+protocol IsSelectedCVCDelegate{
+    func isSelectedCVC(indexPath : IndexPath)
+}
+
+protocol SeeMorePushDelegate{
+    func seeMorePushDelegate(data : Int)
+}
+
 class HomeSquareTVC: UITableViewCell {
 
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var moreLabel: UILabel!
+    var delegate: IsSelectedCVCDelegate?
+    var ButtonDelegate: SeeMorePushDelegate?
+    let cellTag : Int = 3
     
     //MARK:- Variable
     static let identifier = "HomeSquareTVC"
     
+   
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -50,9 +62,12 @@ class HomeSquareTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+        self.selectionStyle = .none
     }
     
+    @IBAction func seeMoreButtonClicked(_ sender: Any) {
+        ButtonDelegate?.seeMorePushDelegate(data: cellTag)
+    }
     //MARK:- Function
     
 }
@@ -60,6 +75,11 @@ class HomeSquareTVC: UITableViewCell {
 //MARK:- extension
 
 extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.isSelectedCVC(indexPath: indexPath)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
@@ -78,7 +98,6 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         
         //일단요 ... 고정..
         let width = collectionView.frame.width / 2 - 20
-        
         let size = CGSize(width: width, height: 250)
         
         return size

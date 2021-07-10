@@ -32,10 +32,10 @@ class CommonCVC: UICollectionViewCell {
     }
     
     func setLabelUI() {
-//        titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
-//        tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
-//        tagLabel2.font = UIFont.notoSansRegularFont(ofSize: 10)
-//        tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
+        titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
+        tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
+        tagLabel2.font = UIFont.notoSansRegularFont(ofSize: 10)
+        tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
 
         tagLabel1.textColor = UIColor.mainBlue
         tagLabel2.textColor = UIColor.mainBlue
@@ -44,9 +44,9 @@ class CommonCVC: UICollectionViewCell {
     
     func setTagUI() {
         
-        tagLabel1.text = "#응봉산"
-        tagLabel2.text = "#야"
-        tagLabel3.text = "#서강준"
+        tagLabel1.text = "#야"
+        tagLabel2.text = "#서강준"
+        tagLabel3.text = "#왜불렁~"
         
         let length1 = CGFloat(tagLabel1.text!.count)
         let length2 = CGFloat(tagLabel2.text!.count)
