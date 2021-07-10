@@ -10,6 +10,9 @@ import UIKit
 class SearchKeywordCell: UITableViewCell {
 
     static let identifier = "SearchKeywordCell"
+    private var addressData : AddressDataModel?
+    public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
+    
     private var titleLabel: UILabel = {
         let label = UILabel()
         //style
@@ -25,11 +28,17 @@ class SearchKeywordCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setConstraints()
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        if selected {
+            addressData?.displayContent()
+            print("selected = \(selected)")
+            presentingMapViewClosure?(addressData!)
+        }
+        
     }
     
     private func setConstraints(){
@@ -50,6 +59,12 @@ class SearchKeywordCell: UITableViewCell {
     public func setContents(title: String, address: String){
         titleLabel.text = title
         addressLabel.text = address
+    }
+    
+    public func setContents(addressMadel: AddressDataModel){
+        addressData = addressMadel
+        titleLabel.text = addressData!.title
+        addressLabel.text = addressData!.address
     }
     
 }
