@@ -14,16 +14,16 @@ class AddressMainVC: UIViewController {
     static let identifier = "AddressMainVC"
     public var addressList: [AddressDataModel] = []
     public var addressCellList: [AddressButtonCell] = []
-    private var tableView = UITableView()
-    //private let tMapView = MapService.getTmapView()
-   
+    
     private var isFirstFinded = true
     
+    private var tableView = UITableView()
     private var oneCellHeight = 48
     private var tableViewHeight = 96
     private var tableViewBottomOffset = 19
     
     //MARK:- About Map
+    //private let tMapView = MapService.getTmapView()
     private let tMapView = TMapView()
     private var markerList : [TMapMarker] = []
     private var polyLineList: [TMapPolyline] = []
@@ -61,6 +61,7 @@ class AddressMainVC: UIViewController {
         displayAddress()
         setMapFrame()
         inputMarkerInMapView()
+        isThereStartAddress()
     }
     
     private func configureCells(){
@@ -68,6 +69,13 @@ class AddressMainVC: UIViewController {
             initAddressList()
         }else{
             setRecivedAddressCell()
+        }
+    }
+    
+    private func isThereStartAddress(){
+        if addressList[0].title != ""{
+            print("isThereStartAddress")
+            addressCellList[1].searchButton.isEnabled = true
         }
     }
     
@@ -199,8 +207,6 @@ extension AddressMainVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("\(addressCellList[indexPath.row].address)")
-        print("\(addressCellList[indexPath.row].cellType)")
         return addressCellList[indexPath.row]
     }
 }
@@ -294,9 +300,6 @@ extension AddressMainVC{
                     DispatchQueue.main.async {
                         polyLine.map = self.tMapView
                         self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
-//                        let zoomLevel = self.tMapView.getZoom()!
-//                        print("zoomLevel = \(zoomLevel)")
-//                        self.tMapView.setZoom(zoomLevel-1)
                     }
                 }
             }
@@ -335,7 +338,6 @@ extension AddressMainVC : TMapViewDelegate{
 
     
     func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D, to newPosition: CLLocationCoordinate2D) -> Bool {
-        print("view update")
         return true
     }
     
