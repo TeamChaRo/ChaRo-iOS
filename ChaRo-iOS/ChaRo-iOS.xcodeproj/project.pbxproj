@@ -90,6 +90,8 @@
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
+		F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */; };
+		F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -193,6 +195,8 @@
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCourseThemeTVC.xib; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVC.swift; sourceTree = "<group>"; };
+		F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostLocationTVC.xib; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,9 +255,10 @@
 				3610A8992693730700EFC794 /* HomeAnimationTVC.swift */,
 				36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */,
 				3C86FA522694C169009370CD /* PostAttentionTVC.swift */,
-				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */,
+				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
+				F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
 				3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */,
@@ -344,6 +349,7 @@
 				F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */,
 				3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */,
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
+				F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */,
 				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
 				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
 				3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */,
@@ -552,6 +558,7 @@
 				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
 				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
+				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
 				36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
@@ -643,6 +650,7 @@
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
+				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
@@ -820,7 +828,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U24ZACT97M;
+				DEVELOPMENT_TEAM = M2BP76V5D4;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -831,7 +839,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -846,7 +854,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J8A843466G;
+				DEVELOPMENT_TEAM = M2BP76V5D4;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -857,7 +865,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
