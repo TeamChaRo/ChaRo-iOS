@@ -17,7 +17,6 @@ class PostPathmapTCV: UITableViewCell {
     let mapWidth: CGFloat = UIScreen.main.bounds.width - 40
 
     let postMap: TMapView = TMapView()
-    let mapViewContainerView: UIView = UIView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,23 +35,21 @@ class PostPathmapTCV: UITableViewCell {
 extension PostPathmapTCV {
     
     func configureLayout(){
-        addSubview(mapViewContainerView)
+        addSubview(postMap)
         
-        mapViewContainerView.snp.makeConstraints{
+        postMap.snp.makeConstraints{
             $0.top.equalTo(self.snp.top).offset(23)
             $0.centerX.equalTo(self.snp.centerX)
             $0.bottom.equalTo(self.snp.bottom).inset(33)
             $0.width.equalTo(mapWidth)
-            $0.height.equalTo(self.mapViewContainerView.snp.width).multipliedBy(multiplier)
+            $0.height.equalTo(self.postMap.snp.width).multipliedBy(multiplier)
         }
         
         setMapView()
     }
     
     func setMapView(){
-        mapViewContainerView.addSubview(postMap)
         postMap.setApiKey(MapService.mapkey)
-        postMap.frame = mapViewContainerView.frame
         postMap.isPanningEnable = false // 드래그 불가
         postMap.isZoomEnable = false // 확대축소 불가
     }
