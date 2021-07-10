@@ -109,30 +109,27 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //tableview indexPath
         tableIndex = indexPath
+    
         
         switch indexPath.row {
         case 0:
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.selectionStyle = .none
             cell.setDelegate()
             return cell
 
         case 1:
 
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.selectionStyle = .none
             return cell
 
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.selectionStyle = .none
             return cell
 
         case 3:
 
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.selectionStyle = .none
             cell.delegate = self
             cell.ButtonDelegate = self
             return cell
@@ -140,7 +137,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 4:
 
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.selectionStyle = .none
             cell.delegate = self
             cell.buttonDelegate = self
             return cell
@@ -148,7 +144,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 5:
 
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.selectionStyle = .none
             cell.delegate = self
             cell.buttonDelegate = self
             return cell
@@ -157,9 +152,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         default:
             return UITableViewCell()
         }
-        
     }
-    
 }
 extension HomeVC : IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
@@ -170,20 +163,16 @@ extension HomeVC : IsSelectedCVCDelegate {
         switch tableIndex.row {
         case 3:
             HomePostVC.topText = "요즘 뜨는 드라이브 코스"
-            self.navigationController?.pushViewController(HomePostVC, animated: true)
+            
         case 4:
             HomePostVC.topText = "여름맞이 야간 드라이브"
-            self.navigationController?.pushViewController(HomePostVC, animated: true)
         case 5:
             HomePostVC.topText = "경기도 드라이브 코스"
-            self.navigationController?.pushViewController(HomePostVC, animated: true)
         default:
-            self.navigationController?.pushViewController(HomePostVC, animated: true)
+           print("Error")
         }
-
+        self.navigationController?.pushViewController(HomePostVC, animated: true)
     }
-    
-    
 }
 
 extension HomeVC: SeeMorePushDelegate{
@@ -193,21 +182,13 @@ extension HomeVC: SeeMorePushDelegate{
         switch data {
         case 3:
             smVC.topText = "요즘 뜨는 드라이브 코스"
-            self.navigationController?.pushViewController(smVC, animated: true)
         case 4:
             smVC.topText = "여름맞이 야간 드라이브"
-            self.navigationController?.pushViewController(smVC, animated: true)
         case 5:
             smVC.topText = "경기도 드라이브 코스"
-            self.navigationController?.pushViewController(smVC, animated: true)
         default:
             print("Error")
         }
-    }
-    
-    func seeMorePushDelegate() {
-       
-
-
+        self.navigationController?.pushViewController(smVC, animated: true)
     }
 }

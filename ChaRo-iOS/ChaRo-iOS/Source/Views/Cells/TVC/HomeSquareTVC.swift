@@ -28,6 +28,7 @@ class HomeSquareTVC: UITableViewCell {
     //MARK:- Variable
     static let identifier = "HomeSquareTVC"
     
+   
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -61,7 +62,7 @@ class HomeSquareTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+        self.selectionStyle = .none
     }
     
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
