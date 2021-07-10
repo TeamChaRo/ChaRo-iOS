@@ -98,6 +98,8 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="o9H-kv-aaH" secondAttribute="bottom" id="vj5-Vy-Q11"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <navigationItem key="navigationItem" id="EnD-WI-OWe"/>
                     <connections>
                         <outlet property="NavigationTitleLabel" destination="NOp-N0-1Lt" id="T1n-7Y-uDj"/>
                         <outlet property="collectionView" destination="o9H-kv-aaH" id="uOX-a9-z45"/>
@@ -107,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121.73913043478262" y="24.776785714285712"/>
+            <point key="canvasLocation" x="1031.8840579710145" y="24.776785714285712"/>
         </scene>
     </scenes>
     <resources>

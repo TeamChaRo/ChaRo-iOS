@@ -19,12 +19,11 @@ class HomePostDetailCVC: UICollectionViewCell {
     @IBOutlet weak var selectButton: UIButton!
     
     let postCount: Int = 6
-    var delegateT: MenuClickedDelegate?
+    var delegate: MenuClickedDelegate?
     var selectText: String = "인기순"
     
     
     func setTitle(data : String) {
-        print(data)
         selectText = data
         selectLabel.text = selectText
         
@@ -39,7 +38,7 @@ class HomePostDetailCVC: UICollectionViewCell {
     }
     
     @IBAction func menuButtonClicked(_ sender: Any) {
-        delegateT?.menuClicked()
+        delegate?.menuClicked()
     }
     
     override func awakeFromNib() {
