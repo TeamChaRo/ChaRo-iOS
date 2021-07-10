@@ -23,9 +23,13 @@ class ViewController: UIViewController {
         }
         vc.setAddressListData(list: [])
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
        // self.present(vc, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func dismissVC(){
+        self.dismiss(animated: false, completion: nil)
     }
     
 }

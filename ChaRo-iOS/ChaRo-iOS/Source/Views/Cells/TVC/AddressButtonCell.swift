@@ -20,11 +20,11 @@ class AddressButtonCell: UITableViewCell {
     public var delegate: AddressButtonCellDelegate?
     public var cellType = ""
 
-    private var searchButton : UIButton = {
+    public var searchButton : UIButton = {
         let button = UIButton()
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.gray20.cgColor
-        button.layer.cornerRadius = 17
+        button.layer.cornerRadius = 20
         button.backgroundColor = .gray10
         button.setTitleColor(.gray30, for: .normal)
         return button
@@ -45,6 +45,7 @@ class AddressButtonCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         addActionIntoButtons()
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -56,6 +57,10 @@ class AddressButtonCell: UITableViewCell {
         setCellStyleForType(type: text)
         searchButton.setTitle(title, for: .normal)
         searchButton.setTitleColor(.gray30, for: .normal)
+        
+        if text == "도착지"{
+            searchButton.isEnabled = false
+        }
     }
     
     public func setAddressText(address: AddressDataModel){
@@ -67,12 +72,7 @@ class AddressButtonCell: UITableViewCell {
             plusButton.setBackgroundImage(UIImage(named: "icWayPointPlusActive"), for: .normal)
         }
     }
-//
-//    public func setAddressText(addressText: String){
-//        searchButton.setTitle(addressText, for: .normal)
-//        searchButton.setTitleColor(.mainBlack, for: .normal)
-//    }
-    
+
     private func setCellStyleForType(type: String){
         cellType = type
         switch type {
@@ -92,6 +92,23 @@ class AddressButtonCell: UITableViewCell {
         minusButton.addTarget(self, action: #selector(removeCellAction), for: .touchUpInside)
     }
     
+    
+    @objc public func goToKeywordSearch(sender: UIButton){
+        delegate!.addressButtonCellForPreseting(cell: self)
+    }
+    
+    @objc private func addCellAction(){
+        delegate!.addressButtonCellForAdding(cell: self)
+    }
+    
+    @objc private func removeCellAction(){
+        delegate!.addressButtonCellForRemoving(cell: self)
+    }
+    
+}
+
+//MARK: UI Constraints
+extension AddressButtonCell{
     private func setSearchButtonContraints(){
         addSubview(searchButton)
         searchButton.snp.makeConstraints{make in
@@ -125,18 +142,4 @@ class AddressButtonCell: UITableViewCell {
             make.trailing.equalTo(searchButton.snp.trailing)
         }
     }
-    
-    
-    @objc public func goToKeywordSearch(sender: UIButton){
-        delegate!.addressButtonCellForPreseting(cell: self)
-    }
-    
-    @objc private func addCellAction(){
-        delegate!.addressButtonCellForAdding(cell: self)
-    }
-    
-    @objc private func removeCellAction(){
-        delegate!.addressButtonCellForRemoving(cell: self)
-    }
-    
 }
