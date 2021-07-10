@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TMapSDK
 
 struct AddressDataModel {
     var latitude = 0.0
@@ -20,4 +21,9 @@ struct AddressDataModel {
         print("latitude = \(latitude)")
         print("longtitude = \(longtitude)")
     }
+    
+    func getPoint() -> CLLocationCoordinate2D{
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+    }
+    
 }
