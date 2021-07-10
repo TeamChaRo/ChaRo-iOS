@@ -34,17 +34,15 @@ class TabbarVC: UITabBarController {
     
   
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("didSelected = \(item)")
-        if item.title == "작성하기"{
-            print("작성하기 눌림~~~!!!")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let nextVC =  storyboard.instantiateViewController(identifier: ViewController.identifier ) as? ViewController else {return}
+        
+        if item.title == "작성하기" {
+            let storyboard = UIStoryboard(name: "CreatePost", bundle: nil)
+            
+            guard let nextVC =  storyboard.instantiateViewController(identifier: CreatePostVC.identifier ) as? CreatePostVC else {return}
             
             let navigationView = UINavigationController(rootViewController: nextVC)
-            print(navigationView)
             navigationView.modalPresentationStyle = .fullScreen
             self.present(navigationView, animated: true, completion: nil)
-            
         }
     }
     

@@ -38,6 +38,14 @@
                                     <action selector="dismissVC" destination="BYZ-38-t0r" eventType="touchUpInside" id="oFc-Qr-iey"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8T-FF-Kqn">
+                                <rect key="frame" x="176" y="591" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="작성하기 ㄱ"/>
+                                <connections>
+                                    <action selector="presentingCreateView" destination="BYZ-38-t0r" eventType="touchUpInside" id="afw-2f-mcu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
