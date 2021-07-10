@@ -19,6 +19,7 @@ class PostLocationTVC: UITableViewCell {
         textField.background = UIImage(named: "postTextfieldLocationShow")
         textField.addLeftPadding(17)
         textField.font = .notoSansRegularFont(ofSize: 14)
+        textField.isEnabled = false
         return textField
     }()
     
