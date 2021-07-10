@@ -30,6 +30,8 @@
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
 		3C7DF0E92699ED8E0021939C /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7DF0E82699ED8E0021939C /* TMapSDK.framework */; };
 		3C7DF0EB2699EE7E0021939C /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7DF0EA2699EE7E0021939C /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */; };
+		3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */; };
 		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
 		3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */; };
 		3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */; };
@@ -135,6 +137,8 @@
 		3C71FEAA26881DAA007E8EAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C7DF0E82699ED8E0021939C /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C7DF0EA2699EE7E0021939C /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
+		3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchPost.storyboard; sourceTree = "<group>"; };
+		3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostVC.swift; sourceTree = "<group>"; };
 		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
 		3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchKeywordCell.xib; sourceTree = "<group>"; };
 		3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressConfirmVC.swift; sourceTree = "<group>"; };
@@ -365,6 +369,7 @@
 		3C86FA8C2694C7C6009370CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */,
 				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
 				36012A492694D557007F4633 /* HomePost.storyboard */,
 				3C86FA8E2694C7C6009370CD /* Home.storyboard */,
@@ -373,7 +378,7 @@
 				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
 				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
-				3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */,
+				3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
 				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
 				3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */,
+				3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -542,6 +548,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */,
 				3C86FAA22694C7C6009370CD /* HomeAnimationCVC.xib in Resources */,
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
 				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
@@ -648,6 +655,7 @@
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
+				3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
