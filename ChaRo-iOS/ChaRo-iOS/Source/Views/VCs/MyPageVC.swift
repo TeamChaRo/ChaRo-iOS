@@ -7,26 +7,41 @@
 
 import UIKit
 
+
 class MyPageVC: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var customTabbar: UICollectionView!
-    @IBOutlet weak var tableCollectionView: UICollectionView!
+    @IBOutlet weak var TableCollectionView: UICollectionView!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followerButton: UIButton!
     
+    var customTabbarList: [TabbarCVC] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderView()
         setCircleLayout()
+        setCollectionView()
+        customTabbarInit()
+
 
         // Do any additional setup after loading the view.
     }
     
     func setHeaderView(){
         headerView.backgroundColor = .mainBlue
+        
+    }
+    
+    func customTabbarInit(){
+        guard let MyCell = customTabbar.dequeueReusableCell(withReuseIdentifier: "TabbarCVC", for: [0,0]) as? TabbarCVC else {return}
+        guard let SaveCell = customTabbar.dequeueReusableCell(withReuseIdentifier: "TabbarCVC", for: [0,1]) as? TabbarCVC else {return}
+        
+        customTabbarList.append(MyCell)
+        customTabbarList.append(SaveCell)
         
     }
     func setCircleLayout(){
@@ -43,15 +58,96 @@ class MyPageVC: UIViewController {
         profileImageButton.layer.cornerRadius = profileImageButton.frame.height/2
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setCollectionView(){
+        customTabbar.delegate = self
+        customTabbar.dataSource = self
+        customTabbar.layer.addBorder([.bottom], color: UIColor.gray20, width: 1.0)
+        customTabbar.registerCustomXib(xibName: "TabbarCVC")
+        TableCollectionView.registerCustomXib(xibName: "MyPagePostCVC")
     }
-    */
+    
 
 }
+
+extension MyPageVC: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        switch indexPath.row{
+        case 0:
+            customTabbarList[0].setSelectedView()
+            customTabbarList[1].setDeselectedView()
+            customTabbarList[0].setIcon(data: "write_active")
+            customTabbarList[1].setIcon(data: "save5_inactive")
+        case 1:
+            customTabbarList[0].setDeselectedView()
+            customTabbarList[1].setSelectedView()
+            customTabbarList[0].setIcon(data: "write_inactive")
+            customTabbarList[1].setIcon(data: "save5_active")
+        default:
+            customTabbarList[0].setSelectedView()
+        }
+
+    }
+}
+
+extension MyPageVC: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.row == 0{
+            customTabbarList[0].setSelectedView()
+            customTabbarList[0].setIcon(data: "write_active")
+//            customTabbarList[1].setIcon(data: "save5_inactive")
+            return customTabbarList[0]
+        }
+        if indexPath.row == 1{
+            customTabbarList[1].setIcon(data: "save5_inactive")
+            return customTabbarList[1]
+        }
+        else{
+            return UICollectionViewCell()
+        }
+       
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var width = UIScreen.main.bounds.width/2
+
+        return CGSize(width: width, height: 50)
+    }
+    
+}
+
+extension MyPageVC: UICollectionViewDelegateFlowLayout{
+    
+}
+
+extension CALayer {
+    func addBorder(_ arr_edge: [UIRectEdge], color: UIColor, width: CGFloat) {
+        for edge in arr_edge {
+            let border = CALayer()
+            switch edge {
+            case UIRectEdge.top:
+                border.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: width)
+                break
+            case UIRectEdge.bottom:
+                border.frame = CGRect.init(x: 0, y: frame.height - width, width: frame.width, height: width)
+                break
+            case UIRectEdge.left:
+                border.frame = CGRect.init(x: 0, y: 0, width: width, height: frame.height)
+                break
+            case UIRectEdge.right:
+                border.frame = CGRect.init(x: frame.width - width, y: 0, width: width, height: frame.height)
+                break
+            default:
+                break
+            }
+            border.backgroundColor = color.cgColor;
+            self.addSublayer(border)
+        }
+    }
+}
+

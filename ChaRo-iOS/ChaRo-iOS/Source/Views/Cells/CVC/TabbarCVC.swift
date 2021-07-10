@@ -7,19 +7,30 @@
 
 import UIKit
 
+
+
+
 class TabbarCVC: UICollectionViewCell {
     @IBOutlet weak var tabbarIcon: UIImageView!
-    var imageName: String = "write_active.png"
     @IBOutlet weak var selectedView: UIView!
+    static var identifier: String = "TabbarCVC"
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+
     
-    func setIcon(){
-        tabbarIcon.image = UIImage(named: imageName)
+    func setSelectedView(){
+        selectedView.backgroundColor = UIColor.mainBlue
+    }
+    func setDeselectedView(){
+        selectedView.backgroundColor = .none
+    }
+    
+    func setIcon(data: String){
+        tabbarIcon.image = UIImage(named: data)
     }
     func setBottomView(){
         selectedView.backgroundColor = .mainBlue

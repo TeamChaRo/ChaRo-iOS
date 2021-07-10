@@ -130,9 +130,8 @@
                                     <constraint firstAttribute="height" constant="200" id="vbc-lo-kuP"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0nA-nc-wlr">
-                                <rect key="frame" x="0.0" y="400" width="414" height="462"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0nA-nc-wlr">
+                                <rect key="frame" x="0.0" y="250" width="414" height="612"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VLB-Wx-raG">
                                     <size key="itemSize" width="128" height="128"/>
@@ -151,13 +150,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pOY-6h-cTn">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pOY-6h-cTn">
                                 <rect key="frame" x="0.0" y="200" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="tff-a9-if8"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Uor-0G-W6w">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Uor-0G-W6w">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -165,7 +164,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2Jh-dS-apz">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="-39" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Enm-4K-4V1">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -178,15 +177,20 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="0nA-nc-wlr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="2ft-Yh-hjh"/>
                             <constraint firstItem="X1z-4M-rqe" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4vL-FC-jZi"/>
+                            <constraint firstItem="0nA-nc-wlr" firstAttribute="top" secondItem="pOY-6h-cTn" secondAttribute="bottom" id="5fl-xd-pgp"/>
+                            <constraint firstItem="0nA-nc-wlr" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="BB7-1Q-guD"/>
                             <constraint firstItem="pOY-6h-cTn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="T93-Xe-SWu"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="X1z-4M-rqe" secondAttribute="trailing" id="XJU-ds-BBx"/>
                             <constraint firstItem="pOY-6h-cTn" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="ZOh-De-oSO"/>
                             <constraint firstItem="X1z-4M-rqe" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="chP-xq-xJx"/>
+                            <constraint firstItem="0nA-nc-wlr" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="ti6-tM-hcz"/>
                             <constraint firstItem="pOY-6h-cTn" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="bottom" id="ufV-Db-z2F"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="TableCollectionView" destination="0nA-nc-wlr" id="Kcx-vr-mef"/>
                         <outlet property="customTabbar" destination="pOY-6h-cTn" id="RyZ-w7-wz1"/>
                         <outlet property="followButton" destination="80H-KY-tOi" id="dTB-Yr-OLv"/>
                         <outlet property="followerButton" destination="WYO-m9-anR" id="KlY-OY-yAy"/>
@@ -194,7 +198,6 @@
                         <outlet property="nameLabel" destination="QU8-aY-KNz" id="0ps-Ux-keY"/>
                         <outlet property="profileImageButton" destination="Bkr-2h-Tuo" id="1Dn-Lh-ARH"/>
                         <outlet property="profileImageView" destination="pke-ag-0QV" id="afQ-Yn-c7T"/>
-                        <outlet property="tableCollectionView" destination="0nA-nc-wlr" id="Xli-Q3-Vc8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
