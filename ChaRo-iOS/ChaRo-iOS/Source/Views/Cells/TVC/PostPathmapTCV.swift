@@ -36,10 +36,11 @@ extension PostPathmapTCV {
         addSubview(mapViewContainerView)
         
         mapViewContainerView.snp.makeConstraints{
-            $0.top.equalTo(self.snp.top)
-            $0.leading.equalTo(self.snp.top)
-            $0.trailing.equalTo(self.snp.top)
-            $0.bottom.equalTo(self.snp.top)
+            $0.top.equalTo(self.snp.top).offset(23)
+//            $0.leading.equalTo(self.snp.leading).offset(20)
+//            $0.trailing.equalTo(self.snp.trailing).inset(20)
+            $0.centerX.equalTo(self.snp.centerX)
+            $0.bottom.equalTo(self.snp.bottom).inset(33)
             $0.width.equalTo(postMap)
             $0.height.equalTo(self.mapViewContainerView.snp.width).multipliedBy(multiplier)
         }

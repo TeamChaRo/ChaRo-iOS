@@ -136,4 +136,10 @@ extension PostDetailVC: UITableViewDataSource {
         
         return cell
     }
+    
+    func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathmapTCV.identifier) as? PostPathmapTCV else {return UITableViewCell()}
+        
+        return cell
+    }
 }
