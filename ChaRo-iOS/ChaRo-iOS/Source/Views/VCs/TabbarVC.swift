@@ -37,7 +37,8 @@ class TabbarVC: UITabBarController {
         customTabbar.tintColor = .blue
 
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let homeTab = homeStoryboard.instantiateViewController(identifier: "HomeVC")
+        let homeVC = homeStoryboard.instantiateViewController(identifier: "HomeVC")
+        let homeTab = UINavigationController(rootViewController: homeVC)
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
        
         let postStoryboard = UIStoryboard(name: "PostDetail", bundle: nil)

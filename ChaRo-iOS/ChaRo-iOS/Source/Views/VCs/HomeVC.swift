@@ -19,7 +19,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         setTableView()
         setHomeNavigationViewLayout()
-
+        navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
     
