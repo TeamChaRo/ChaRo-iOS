@@ -113,9 +113,7 @@ class SearchKeywordVC: UIViewController {
     }
     
     @objc func dismissAction(){
-        let beforeVC = presentingViewController as! TabbarVC
-        beforeVC.addressMainVC?.addressCellList[addressIndex].setAddressText(addressText: searchTextField.text!)
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -202,28 +200,13 @@ extension SearchKeywordVC: UITableViewDataSource{
         
         let address = autoCompletedKeywordList[indexPath.row]
         cell.setContents(addressMadel: address)
-        //cell.selectionStyle = .none
         cell.presentingMapViewClosure = { address in
             let nextVC = self.getAddressConfirmVC()
             nextVC.setPresentingAddress(address: address)
-            nextVC.setSearchType(type: self.addressType)
+            nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        
-        // cell.setContents(title: address.title, address: address.address)
-        //cell.setContents(title: autoList[indexPath.row], address: autoList[indexPath.row])
         return cell
     }
 }
 
-extension SearchKeywordVC : UITextFieldDelegate{
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        keyword = textField.text!
-        print(keyword)
-    }
-    
-  
-}

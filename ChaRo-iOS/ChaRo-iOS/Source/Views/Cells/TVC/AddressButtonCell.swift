@@ -22,28 +22,25 @@ class AddressButtonCell: UITableViewCell {
 
     private var searchButton : UIButton = {
         let button = UIButton()
-        //style
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray50.cgColor
+        button.layer.borderColor = UIColor.gray20.cgColor
         button.layer.cornerRadius = 17
         button.backgroundColor = .gray10
+        button.setTitleColor(.gray30, for: .normal)
         return button
     }()
     
     private var plusButton: UIButton = {
         let button = UIButton()
-        //style
-        button.backgroundColor = .mainBlue
+        button.setBackgroundImage(UIImage(named: "icWayPointPlusInactive"), for: .normal)
         return button
     }()
     
     private var minusButton: UIButton = {
         let button = UIButton()
-        //style
-        button.backgroundColor = .mainOrange
+        button.setBackgroundImage(UIImage(named: "icWaypointMinusActive"), for: .normal)
         return button
     }()
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,14 +59,19 @@ class AddressButtonCell: UITableViewCell {
     }
     
     public func setAddressText(address: AddressDataModel){
+        self.address = address
         searchButton.setTitle(address.address, for: .normal)
         searchButton.setTitleColor(.mainBlack, for: .normal)
+        
+        if cellType == "도착지"{
+            plusButton.setBackgroundImage(UIImage(named: "icWayPointPlusActive"), for: .normal)
+        }
     }
-
-    public func setAddressText(addressText: String){
-        searchButton.setTitle(addressText, for: .normal)
-        searchButton.setTitleColor(.mainBlack, for: .normal)
-    }
+//
+//    public func setAddressText(addressText: String){
+//        searchButton.setTitle(addressText, for: .normal)
+//        searchButton.setTitleColor(.mainBlack, for: .normal)
+//    }
     
     private func setCellStyleForType(type: String){
         cellType = type
@@ -84,66 +86,49 @@ class AddressButtonCell: UITableViewCell {
     }
     
     private func addActionIntoButtons(){
+        print("addActionIntoButtons")
         searchButton.addTarget(self, action: #selector(goToKeywordSearch), for: .touchUpInside)
         plusButton.addTarget(self, action: #selector(addCellAction), for: .touchUpInside)
         minusButton.addTarget(self, action: #selector(removeCellAction), for: .touchUpInside)
     }
     
-    private func setStartTypeConstraints(){
-        print("setStartTypeConstraints")
+    private func setSearchButtonContraints(){
         addSubview(searchButton)
-        
         searchButton.snp.makeConstraints{make in
-            make.top.equalTo(self.snp.top).offset(4)
+            make.top.equalTo(self.snp.top).offset(3)
             make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing).offset(-29)
-            make.bottom.equalTo(self.snp.bottom).offset(-4)
+            make.trailing.equalTo(self.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom).offset(-3)
         }
-        
+    }
+    
+    
+    private func setStartTypeConstraints(){
+        setSearchButtonContraints()
     }
     
     private func setMiddleTypeConstraints(){
-        print("setMiddleTypeConstraints")
-        addSubviews([searchButton,minusButton])
+        setSearchButtonContraints()
         
-        searchButton.snp.makeConstraints{make in
-            make.top.equalTo(self.snp.top).offset(4)
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing).offset(-29)
-            make.bottom.equalTo(self.snp.bottom).offset(-4)
-        }
-        
+        addSubview(minusButton)
         minusButton.snp.makeConstraints{make in
-            make.top.equalTo(self.snp.top).offset(4)
-            make.leading.equalTo(searchButton.snp.trailing).offset(4)
-            make.trailing.equalTo(self.snp.trailing).offset(-4)
-            make.bottom.equalTo(self.snp.bottom).offset(-4)
+            make.centerY.equalTo(self.snp.centerY)
+            make.trailing.equalTo(searchButton.snp.trailing)
         }
     }
     
     private func setEndTypeConstraints(){
-        print("setEndTypeConstraints")
-        addSubview(searchButton)
-        
-        searchButton.snp.makeConstraints{make in
-            make.top.equalTo(self.snp.top).offset(4)
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing).offset(-29)
-            make.bottom.equalTo(self.snp.bottom).offset(-4)
-        }
-        
+        setSearchButtonContraints()
         addSubview(plusButton)
         plusButton.snp.makeConstraints{make in
-            make.top.equalTo(self.snp.top).offset(4)
-            make.trailing.equalTo(searchButton.snp.trailing).offset(-5)
-            make.bottom.equalTo(self.snp.bottom).offset(-4)
+            make.centerY.equalTo(self.snp.centerY)
+            make.trailing.equalTo(searchButton.snp.trailing)
         }
     }
     
+    
     @objc public func goToKeywordSearch(sender: UIButton){
         delegate!.addressButtonCellForPreseting(cell: self)
-       
-        
     }
     
     @objc private func addCellAction(){
