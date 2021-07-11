@@ -36,18 +36,21 @@ class TabbarVC: UITabBarController {
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
         if item.title == "작성하기" {
-            let storyboard = UIStoryboard(name: "CreatePost", bundle: nil)
-            
-            guard let nextVC =  storyboard.instantiateViewController(identifier: CreatePostVC.identifier ) as? CreatePostVC else {return}
-            
-            let navigationView = UINavigationController(rootViewController: nextVC)
-            navigationView.modalPresentationStyle = .fullScreen
-            self.present(navigationView, animated: true, completion: nil)
+//            tabBar.isHidden = true
+//            present(viewControllers[1], animated: true, completion: nil)
+            let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
+
+            let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+            let createTab = UINavigationController(rootViewController: createVC)
+
+            createTab.modalPresentationStyle = .fullScreen
+            self.present(createTab, animated: true, completion: nil)
         }
     }
     
     
     private func configTabbar(){
+        
         let customTabbar = tabBar
         customTabbar.tintColor = .blue
 
@@ -62,33 +65,18 @@ class TabbarVC: UITabBarController {
         
         
         
-        let mapStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let mapTab = mapStoryboard.instantiateViewController(identifier: "ViewController")
-        //addressMainVC = mapTab
+        let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
+//        let createTab = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+        let createTab = UINavigationController(rootViewController: createVC)
         
-        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-        mapTab.tabBarItem.title = "작성하기"
-        mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
+        createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
+        createTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
         
-        
-//        let mapStoryboard = UIStoryboard(name: "AddressMain", bundle: nil)
-//        let mapTab = mapStoryboard.instantiateViewController(identifier: AddressMainVC.identifier) as! AddressMainVC
-//        addressMainVC = mapTab
-//
-//        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-//        mapTab.tabBarItem.title = "작성하기"
-//        mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-//
-        
-//        let writtingTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
-//        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-//        writtingTab.tabBarItem.title = "작성하기"
-//        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
     
-        let tabs = [homeTab, mapTab, postTab]
+        let tabs = [homeTab, createTab, postTab]
         
         setViewControllers(tabs, animated: true)
-        print(customTabbar.items)
         selectedViewController = homeTab
     }
     

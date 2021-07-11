@@ -24,6 +24,7 @@ class CreatePostVC: UIViewController {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "close"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: #selector(xButtonDidTap), for: .touchUpInside)
         return button
     }()
     
@@ -33,6 +34,7 @@ class CreatePostVC: UIViewController {
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
         button.setTitleColor(UIColor.mainBlue, for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
         return button
     }()
     
@@ -53,9 +55,6 @@ class CreatePostVC: UIViewController {
         configureConponentLayout()
         applyTitleViewShadow()
     }
-    
-    
-    
 }
 
 // MARK: - functions
@@ -116,6 +115,22 @@ extension CreatePostVC {
             $0.height.equalTo(22)
             $0.centerY.equalTo(titleLabel.snp.centerY)
         }
+    }
+    
+    //MARK: - Button Actions
+    @objc
+    func xButtonDidTap(sender: UIButton){
+        self.dismiss(animated: true, completion: {
+            self.tabBarController?.selectedIndex = 0
+//            self.tabBarController?.tabBar.isHidden = false
+//            let tabbar = self.navigationController?.presentingViewController as! TabbarVC
+//            tabbar.selectedViewController = tabbar.viewControllers![0]
+        })
+    }
+    
+    @objc
+    func nextButtonDidTap(sender: UIButton){
+        //TODO: 작성하기 맵뷰와 연결 예정
     }
     
 }
