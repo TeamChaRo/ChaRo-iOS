@@ -12,9 +12,14 @@ class ThemePostDetailTVC: UITableViewCell {
 
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var selectLabel: UILabel!
+    @IBOutlet weak var selectButton: UIButton!
+    
     var selectText : String = "인기순"
     var postCount: Int = 6
     var delegate: MenuClickedDelegate?
+    var isButtonClicked: Bool = false
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -45,6 +50,7 @@ class ThemePostDetailTVC: UITableViewCell {
     
     @IBAction func selectButtonClicked(_ sender: Any) {
         delegate?.menuClicked()
+        isButtonClicked = !isButtonClicked
     }
     
 }

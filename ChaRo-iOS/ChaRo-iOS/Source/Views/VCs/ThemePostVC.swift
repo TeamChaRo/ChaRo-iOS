@@ -17,10 +17,14 @@ class ThemePostVC: UIViewController {
     @IBOutlet weak var dropDownTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    //MARK:- Variable
     
+    //MARK:- Variable
+    static let identifier : String = "HomePostVC"
     var topTVCCell : ThemePostDetailTVC?
     var delegate : SetTopTitleDelegate?
+    var isFirstLoaded = true
+    var cellCount = 6
+    
     //MARK:- Constraint
     
     
@@ -101,7 +105,7 @@ class ThemePostVC: UIViewController {
 
 extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            if tableView.tag == 2{
+            if tableView.tag == 2 {
                 return 2
             }
         return 3
@@ -113,14 +117,27 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         
         print(tableView.tag)
         
-        if tableView.tag == 2{
+        if tableView.tag == 2 {
             print(indexPath.row)
             switch indexPath.row {
             case 0:
                 let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
+                var bgColorView = UIView()
+                bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+                cell.selectedBackgroundView = bgColorView
+                cell.setLabel()
+                cell.setCellName(name: "인기순")
+                cell.delegate = self
+                
                 return cell
+                
             default:
                 let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
+                var bgColorView = UIView()
+                bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+                cell.selectedBackgroundView = bgColorView
+                cell.setCellName(name: "최신순")
+                cell.delegate = self
                 return cell
             }
            
@@ -135,8 +152,16 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             return cell
         case 1:
             let cell: ThemePostDetailTVC = tableView.dequeueReusableCell(for: indexPath)
+            
             cell.delegate = self
+            if isFirstLoaded {
+                isFirstLoaded = false
+                topTVCCell = cell
+            }
+            
+            cell.setLabel()
             return cell
+            
         case 2:
             let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
             return cell
