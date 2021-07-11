@@ -97,6 +97,9 @@
                             <constraint firstAttribute="width" constant="48" id="eEo-N5-D2B"/>
                         </constraints>
                         <state key="normal" image="icHeartWhiteLine"/>
+                        <connections>
+                            <action selector="heartButtonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="6rX-Gq-K2G"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -117,6 +120,7 @@
             </constraints>
             <size key="customSize" width="326" height="314"/>
             <connections>
+                <outlet property="heartButton" destination="3xT-Yy-Ygg" id="uS8-PY-x7j"/>
                 <outlet property="imageView" destination="kds-Zc-lX5" id="SQ4-JG-SKe"/>
                 <outlet property="lengthBtwImgLabel" destination="rBl-ml-mIP" id="2zx-WJ-R7W"/>
                 <outlet property="stackView" destination="bb5-sj-Y94" id="nbk-5z-rti"/>
