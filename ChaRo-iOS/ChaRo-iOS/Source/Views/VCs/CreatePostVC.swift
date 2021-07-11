@@ -51,7 +51,10 @@ class CreatePostVC: UIViewController {
         setNavigationBar()
         setMainViewLayout()
         configureConponentLayout()
+        applyTitleViewShadow()
     }
+    
+    
     
 }
 
@@ -62,9 +65,15 @@ extension CreatePostVC {
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    func applyTitleViewShadow(){
+        titleView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 10), shadowRadius: 6, shadowOpacity: 0.05)
+
+        self.view.bringSubviewToFront(titleView)
+    }
+    
     // MARK: Layout
     func setMainViewLayout(){
-        view.addSubviews([titleView,tableView])
+        self.view.addSubviews([titleView,tableView])
         
         let titleRatio: CGFloat = 58/375
         
@@ -87,7 +96,9 @@ extension CreatePostVC {
         titleView.addSubviews([titleLabel, xButton, nextButton])
         
         titleLabel.snp.makeConstraints{
-            $0.top.equalTo(titleView.snp.top).offset(14)
+            let topRatio: CGFloat = 14/58
+            let titleRatio: CGFloat = 58/375
+            $0.top.equalTo((UIScreen.getDeviceWidth()*titleRatio)*topRatio)
             $0.width.equalTo(150) // 크게 넣기
             $0.centerX.equalTo(titleView.snp.centerX)
             $0.height.equalTo(21)
@@ -118,6 +129,5 @@ extension CreatePostVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
-    
     
 }
