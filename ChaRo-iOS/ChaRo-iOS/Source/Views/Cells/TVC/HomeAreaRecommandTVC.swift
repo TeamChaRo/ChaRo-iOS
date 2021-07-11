@@ -41,8 +41,8 @@ class HomeAreaRecommandTVC: UITableViewCell {
         TitleLabel.text = "경기도 드라이브 코스"
         moreLabel.text = "더보기"
         
-        //TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
-        //moreLabel.font = UIFont.notoSansRegularFont(ofSize: 12)
+        TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        moreLabel.font = UIFont.notoSansRegularFont(ofSize: 12)
         
         TitleLabel.textColor = UIColor.mainBlack
         moreLabel.textColor = UIColor.gray40

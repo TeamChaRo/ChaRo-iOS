@@ -54,8 +54,8 @@ class HomeTodayDriveTVC: UITableViewCell {
         TodayDriveLabel.textColor = UIColor.mainBlack
         
         
-        //charoPickLabel.font = UIFont.notoSansRegularFont(ofSize: 13)
-        //TodayDriveLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        charoPickLabel.font = UIFont.notoSansRegularFont(ofSize: 13)
+        TodayDriveLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
         
     }
     
@@ -102,6 +102,7 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
         
         
     }
+    
     
     
 }
