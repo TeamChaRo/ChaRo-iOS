@@ -23,6 +23,8 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var tagLabel2: UILabel!
     @IBOutlet weak var tagLabel3: UILabel!
     
+    @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
+    
     
     
     override func awakeFromNib() {

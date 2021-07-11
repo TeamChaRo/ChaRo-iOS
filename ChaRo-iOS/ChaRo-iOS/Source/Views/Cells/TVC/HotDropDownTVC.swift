@@ -18,6 +18,7 @@ class HotDropDownTVC: UITableViewCell {
     @IBOutlet weak var checkImage: UIImageView!
     var delegate : SetTitleDelegate?
     var name: String = "인기순"
+    static let identifier: String = "HotDropDownTVC"
     
     override func awakeFromNib() {
         super.awakeFromNib()

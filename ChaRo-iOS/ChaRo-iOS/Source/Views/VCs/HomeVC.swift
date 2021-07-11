@@ -43,23 +43,23 @@ class HomeVC: UIViewController {
     }
 }
 
-extension HomeVC : UITableViewDelegate, UITableViewDataSource{
+extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
         
-        switch indextPath.row {
+        let factor = UIScreen.main.bounds.width / 375
+        let homeBannerRatio: CGFloat = 0.65
         
+        switch indextPath.row {
+    
         case 0:
-            return UIScreen.main.bounds.height*0.65
+            return UIScreen.main.bounds.height * homeBannerRatio
         case 1:
-            //353 / 812
-            return UIScreen.main.bounds.height * 0.435
+            return 353 * factor
         case 2:
-            //178 / 812
-            return UIScreen.main.bounds.height * 0.219
+            return 178 * factor
         case 3, 4, 5:
-            //553 / 812
-            return UIScreen.main.bounds.height * 0.72
+            return 570 * factor
         default:
             return 100
         }
@@ -125,6 +125,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource{
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellDelegate = self
             return cell
 
         case 3:
@@ -191,4 +192,25 @@ extension HomeVC: SeeMorePushDelegate{
         }
         self.navigationController?.pushViewController(smVC, animated: true)
     }
+    
+
 }
+
+extension HomeVC : CollectionViewCellDelegate {
+    
+    func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
+        
+        let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
+        
+        guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if let labelText = collectionviewcell?.themeLabel.text {
+                print("You tapped the cell \(index) in the row of Label \(labelText)")
+                // 여기서 CVC 클릭했을 때 할 거 쓰기
+            }
+        }
+    
+}
+

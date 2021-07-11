@@ -23,6 +23,7 @@ class HomePostVC: UIViewController {
     var cellCount = 6
     var topCVCCell : HomePostDetailCVC?
     var topText: String = "요즘 뜨는 드라이브"
+    var cellIndexpath: IndexPath = [0,0]
     
     
     static let identifier : String = "HomePostVC"
@@ -40,7 +41,6 @@ class HomePostVC: UIViewController {
     
     func setDropdown(){
         dropDownTableview.registerCustomXib(xibName: "HotDropDownTVC")
-        dropDownTableview.registerCustomXib(xibName: "NewTVC")
         dropDownTableview.delegate = self
         dropDownTableview.dataSource = self
         dropDownTableview.separatorStyle = .none
@@ -75,12 +75,10 @@ class HomePostVC: UIViewController {
     
     
 }
-
-extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension HomePostVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
@@ -105,28 +103,40 @@ extension HomePostVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
 
     }
     
+}
+extension HomePostVC: UICollectionViewDataSource{
+    
+}
+extension HomePostVC: UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let Cellwidth = UIScreen.main.bounds.width-40
         
         switch indexPath.row {
         case 0:
+            print(Cellwidth)
             return CGSize(width: Cellwidth, height: 55)
         default:
+            print(Cellwidth)
             return CGSize(width: Cellwidth, height: 260)
-        
         }
         
     }
 
+       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
+
+       }
 }
 
-extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
+extension HomePostVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        cellIndexpath = indexPath
         
         switch indexPath.row {
         case 0:
@@ -152,6 +162,7 @@ extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
             return UITableViewCell()
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let HotCell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
         if indexPath.row == 0 {
@@ -160,9 +171,14 @@ extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
         }
 
     }
+    
 }
 
-extension HomePostVC: MenuClickedDelegate{
+extension HomePostVC: UITableViewDataSource{
+    
+}
+
+extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
         dropDownTableview.isHidden = false
     }
@@ -171,7 +187,6 @@ extension HomePostVC: MenuClickedDelegate{
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-
         delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)
