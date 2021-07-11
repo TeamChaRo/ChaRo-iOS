@@ -63,7 +63,7 @@ class TabbarVC: UITabBarController {
 //        postTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
         
-<<<<<<< HEAD
+
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 //        let createTab = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
@@ -74,7 +74,7 @@ class TabbarVC: UITabBarController {
         
     
         let tabs = [homeTab, createTab, postTab]
-=======
+
         let mapStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let mapTab = mapStoryboard.instantiateViewController(identifier: "ViewController")
                 //addressMainVC = mapTab
@@ -108,8 +108,9 @@ class TabbarVC: UITabBarController {
 //        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
 //        writtingTab.tabBarItem.title = "작성하기"
 //        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
+        
         let tabs = [homeTab,mapTab, myPageTab]
->>>>>>> develop
+
         
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
