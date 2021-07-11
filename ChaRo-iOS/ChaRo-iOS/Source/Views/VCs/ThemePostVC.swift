@@ -149,6 +149,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         case 0:
             let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
+            cell.selectionStyle = .none
             return cell
         case 1:
             let cell: ThemePostDetailTVC = tableView.dequeueReusableCell(for: indexPath)
@@ -159,6 +160,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 topTVCCell = cell
             }
             
+            cell.selectionStyle = .none
             cell.setLabel()
             return cell
             
@@ -226,7 +228,6 @@ extension ThemePostVC: MenuClickedDelegate{
 
 extension ThemePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-        print("되냐?")
         delegate?.setTopTitle(name: cell.name)
         dropDownTableView.isHidden = true
         topTVCCell?.setTitle(data: cell.name)
