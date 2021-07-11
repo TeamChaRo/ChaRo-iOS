@@ -205,7 +205,7 @@ extension HomeVC : CollectionViewCellDelegate {
         let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
-        vc.selectedTheme = (collectionviewcell?.themeLabel.text)!
+        vc.selectedTheme = (collectionviewcell?.themeLabel.text)! 
         
         self.navigationController?.pushViewController(vc, animated: true)
         

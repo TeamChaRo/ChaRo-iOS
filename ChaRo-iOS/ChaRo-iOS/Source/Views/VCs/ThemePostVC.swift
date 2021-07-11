@@ -20,6 +20,7 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Variable
     static let identifier : String = "HomePostVC"
+    var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
     var topTVCCell : ThemePostDetailTVC?
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
@@ -126,9 +127,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
     UITableViewCell {
-        
-        print(tableView.tag)
-        
+                
         if tableView.tag == 2 {
 
             switch indexPath.row {
@@ -162,8 +161,11 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             
             case 0:
                 let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
+                
                 cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
                 cell.selectionStyle = .none
+                cell.setFirstTheme(name: selectedTheme)
+                
                 return cell
                 
             case 1:

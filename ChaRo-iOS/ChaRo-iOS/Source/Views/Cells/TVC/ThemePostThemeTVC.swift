@@ -14,6 +14,9 @@ class ThemePostThemeTVC: UITableViewCell {
     
     //MARK:- Variable
     static let identifier = "ThemePostThemeTVC"
+    var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
+    public var tvcHeight : CGFloat = 100
+    private var firstTheme = ""
     
     private var seperatorBar : UIView = {
         let view = UIView()
@@ -28,12 +31,6 @@ class ThemePostThemeTVC: UITableViewCell {
     }()
     
     
-    public var tvcHeight : CGFloat = 100
-    
-    public func setTVCHeight(height: Double) {
-        tvcHeight = CGFloat(height)
-    }
-    
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -45,10 +42,10 @@ class ThemePostThemeTVC: UITableViewCell {
         
         
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
     
@@ -62,28 +59,55 @@ class ThemePostThemeTVC: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator = false
     }
     
-
+    
     private func setSeperatorBarConstraints() {
         self.addSubview(seperatorBar)
-
+        
         seperatorBar.snp.makeConstraints {
             $0.top.equalTo(collectionView.snp.bottom)
             $0.leading.equalTo(self.snp.leading)
             $0.trailing.equalTo(self.snp.trailing)
             $0.height.equalTo(1)
         }
-
+        
     }
     
     private func setSelected() {
         let firstIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .right)
     }
-
+    
+    public func setTVCHeight(height: Double) {
+        tvcHeight = CGFloat(height)
+    }
+    
+    public func setFirstTheme(name: String) {
+        firstTheme = name
+        swapArray()
+    }
+    
     
     //MARK:- Function
     
     
+    //초기 선택된 테마를 위해 배열의 순서를 바꿉니다. 선택된 테마가 인덱스 0으로 올 수 있도록!
+    private func swapArray() {
+        print("하기전")
+        print(themeList)
+        for (index, element) in themeList.enumerated() {
+            print(index)
+            print(element)
+            print(firstTheme)
+            if "#\(element)" == firstTheme {
+                print("찾았다")
+                themeList.swapAt(0, index)
+            }
+        }
+        
+        print("한 후")
+        print(themeList)
+        
+    }
     
 }
 
@@ -101,13 +125,21 @@ extension ThemePostThemeTVC : UICollectionViewDelegate {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
         else { return }
-    
+        
     }
 }
 
 extension ThemePostThemeTVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
+        let themeName = themeList[indexPath.row]
+        
+
+        DispatchQueue.global().sync {
+            //이거 먼저 실행해주고 시픈데 ..
+            swapArray()
+            cell.themeLabel.text = themeName
+        }
         
         return cell
         

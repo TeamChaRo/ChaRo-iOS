@@ -78,9 +78,8 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
-        
-        
         let themeName = themeList[indexPath.row]
+        
         cell.setThemeTitle(name: themeName)
         return cell
         
@@ -111,6 +110,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
             let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
             self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
         
+
     }
     
     
