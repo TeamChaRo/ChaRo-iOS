@@ -19,7 +19,14 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var followerButton: UIButton!
     @IBOutlet weak var saveTableCollectionView: UICollectionView!
     
+    var myCVCCell: HomePostDetailCVC?
+    var saveCVCCell: HomePostDetailCVC?
+    
     var customTabbarList: [TabbarCVC] = []
+    @IBOutlet weak var dropDownTableView: UITableView!
+    var myCellIsFirstLoaded: Bool = true
+    var saveCellIsFirstLoaded: Bool = true
+    var delegate: SetTopTitleDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,7 @@ class MyPageVC: UIViewController {
         setCircleLayout()
         setCollectionView()
         customTabbarInit()
+        setDropDown()
 
 
         // Do any additional setup after loading the view.
@@ -34,6 +42,18 @@ class MyPageVC: UIViewController {
     
     func setHeaderView(){
         headerView.backgroundColor = .mainBlue
+    }
+    
+    func setDropDown(){
+        dropDownTableView.delegate = self
+        dropDownTableView.dataSource = self
+        dropDownTableView.isHidden = true
+        dropDownTableView.registerCustomXib(xibName: "HotDropDownTVC")
+        dropDownTableView.clipsToBounds = true
+        dropDownTableView.layer.cornerRadius = 10
+        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        dropDownTableView.separatorStyle = .none
+        
     }
     
     func customTabbarInit(){
@@ -146,7 +166,12 @@ extension MyPageVC: UICollectionViewDataSource{
         }
         //밑부분 셀 구현
         else if collectionView.tag == 2{
+            detailCell.delegate = self
             if indexPath.row == 0{
+                if myCellIsFirstLoaded {
+                    myCellIsFirstLoaded = false
+                    myCVCCell = detailCell
+                }
                 return detailCell
             }
             else{
@@ -154,8 +179,13 @@ extension MyPageVC: UICollectionViewDataSource{
             }
         }
         
-        else{
+        else if collectionView.tag == 3{
+            detailCell.delegate = self
             if indexPath.row == 0{
+                if saveCellIsFirstLoaded {
+                    saveCellIsFirstLoaded = false
+                    saveCVCCell = detailCell
+                }
             return detailCell
             }
             return MyCell
@@ -211,3 +241,55 @@ extension CALayer {
     }
 }
 
+extension MyPageVC: UITableViewDelegate{
+    
+}
+extension MyPageVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+            var bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            cell.setLabel()
+            cell.setCellName(name: "인기순")
+            cell.delegate = self
+            return cell
+
+        case 1:
+            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+            var bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            cell.setCellName(name: "최신순")
+            cell.delegate = self
+            return cell
+
+        default:
+            return UITableViewCell()
+    }
+    }
+    
+}
+
+extension MyPageVC: MenuClickedDelegate{
+    func menuClicked(){
+        dropDownTableView.isHidden = false
+    }
+    
+}
+
+extension MyPageVC: SetTitleDelegate {
+    func setTitle(cell: HotDropDownTVC) {
+        delegate?.setTopTitle(name: cell.name)
+        dropDownTableView.isHidden = true
+        myCVCCell?.setTitle(data: cell.name)
+        saveCVCCell?.setTitle(data: cell.name)
+    }
+    
+}

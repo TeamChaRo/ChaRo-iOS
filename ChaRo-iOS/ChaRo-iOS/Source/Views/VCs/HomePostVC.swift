@@ -41,7 +41,6 @@ class HomePostVC: UIViewController {
     
     func setDropdown(){
         dropDownTableview.registerCustomXib(xibName: "HotDropDownTVC")
-        dropDownTableview.registerCustomXib(xibName: "NewTVC")
         dropDownTableview.delegate = self
         dropDownTableview.dataSource = self
         dropDownTableview.separatorStyle = .none

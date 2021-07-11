@@ -193,6 +193,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FmT-fO-VDl">
+                                <rect key="frame" x="214" y="284" width="180" height="88"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="C2w-Aj-0qO"/>
+                                    <constraint firstAttribute="height" constant="88" id="knK-xM-2Xu"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -201,6 +209,7 @@
                             <constraint firstItem="X1z-4M-rqe" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4vL-FC-jZi"/>
                             <constraint firstItem="0nA-nc-wlr" firstAttribute="top" secondItem="pOY-6h-cTn" secondAttribute="bottom" id="5fl-xd-pgp"/>
                             <constraint firstItem="0nA-nc-wlr" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="BB7-1Q-guD"/>
+                            <constraint firstItem="FmT-fO-VDl" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="240" id="Kdp-bd-fYt"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Mti-fn-JXE" secondAttribute="trailing" id="Rp9-Gr-tM9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Mti-fn-JXE" secondAttribute="bottom" id="SLi-kn-8dN"/>
                             <constraint firstItem="pOY-6h-cTn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="T93-Xe-SWu"/>
@@ -211,10 +220,12 @@
                             <constraint firstItem="0nA-nc-wlr" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="ti6-tM-hcz"/>
                             <constraint firstItem="Mti-fn-JXE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="u1z-5i-JOx"/>
                             <constraint firstItem="pOY-6h-cTn" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="bottom" id="ufV-Db-z2F"/>
+                            <constraint firstItem="FmT-fO-VDl" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="-20" id="xjV-af-lCO"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="customTabbar" destination="pOY-6h-cTn" id="RyZ-w7-wz1"/>
+                        <outlet property="dropDownTableView" destination="FmT-fO-VDl" id="PiH-wv-yk8"/>
                         <outlet property="followButton" destination="80H-KY-tOi" id="dTB-Yr-OLv"/>
                         <outlet property="followerButton" destination="WYO-m9-anR" id="KlY-OY-yAy"/>
                         <outlet property="headerView" destination="X1z-4M-rqe" id="OQ5-d7-gQg"/>

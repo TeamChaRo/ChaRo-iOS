@@ -18,7 +18,6 @@ class TabbarVC: UITabBarController {
         configTabbar()
     }
 
-    
     private func setTabbarCustomFrame(){
         let customTabbar = tabBar
         var newFrame = CGRect(x: 0,
@@ -63,14 +62,25 @@ class TabbarVC: UITabBarController {
 //        postTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
         
+        let mapStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let mapTab = mapStoryboard.instantiateViewController(identifier: "ViewController")
+                //addressMainVC = mapTab
+                mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
+                mapTab.tabBarItem.title = "작성하기"
+                mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
+                
+        
+        
         let myPageStoryboard = UIStoryboard(name: "MyPage", bundle: nil)
         let myPageTab = myPageStoryboard.instantiateViewController(identifier: "MyPageVC")
         myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
-        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-        mapTab.tabBarItem.title = "작성하기"
-        mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        
+
+//
+//        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
+//        mapTab.tabBarItem.title = "작성하기"
+//        mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
+//
         
 //        let mapStoryboard = UIStoryboard(name: "AddressMain", bundle: nil)
 //        let mapTab = mapStoryboard.instantiateViewController(identifier: AddressMainVC.identifier) as! AddressMainVC
@@ -85,7 +95,7 @@ class TabbarVC: UITabBarController {
 //        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
 //        writtingTab.tabBarItem.title = "작성하기"
 //        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        let tabs = [homeTab, mapTab, myPageTab]
+        let tabs = [homeTab,mapTab, myPageTab]
         
         setViewControllers(tabs, animated: true)
         print(customTabbar.items)

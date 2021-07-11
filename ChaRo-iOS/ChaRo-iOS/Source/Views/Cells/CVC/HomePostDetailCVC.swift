@@ -43,6 +43,8 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setLabel()
+        setTitle(data: selectText)
     }
 
 }
