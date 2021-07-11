@@ -13,13 +13,15 @@ struct GetHomeDataService
         let URL = Constants.HomeURL
         let header : HTTPHeaders = ["Content-Type": "application/json"]
 
-        
         let dataRequest = AF.request(URL,
                                      method: .get,
                                      encoding: JSONEncoding.default,
                                      headers: header)
+
         dataRequest.responseData { dataResponse in
+            dump(dataResponse)
             switch dataResponse.result {
+            
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
@@ -46,15 +48,12 @@ struct GetHomeDataService
     
     private func isValidData(data : Data) -> NetworkResult<Any> {
         
-        let defaults = UserDefaults.standard
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(ProfileDataModel.self, from: data)
+        guard let decodedData = try? decoder.decode(HomeDataModel.self, from: data)
         else {return .pathErr}
         // 우선 PersonDataModel 형태로 decode(해독)을 한번 거칩니다. 실패하면 pathErr
         // 해독에 성공하면 Person data를 success에 넣어줍니다.
-        defaults.set(decodedData.name, forKey: "name")
-        defaults.set(decodedData.profileURL, forKey: "profile")
-    
+
         return .success(decodedData)
 
     }

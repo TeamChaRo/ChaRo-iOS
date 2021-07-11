@@ -19,6 +19,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         setTableView()
         setHomeNavigationViewLayout()
+        getData()
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
@@ -26,6 +27,24 @@ class HomeVC: UIViewController {
     func setHomeNavigationViewLayout(){
         HomeNavigationView.backgroundColor = .none
 
+    }
+    
+    func getData(){
+        GetHomeDataService.HomeData.getRecommendInfo{ (response) in
+            switch(response)
+            {
+            case .success(let loginData) :
+                print("성공")
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
     
     func setTableView(){

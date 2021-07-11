@@ -10,7 +10,7 @@ import Foundation
 struct Constants {
     
     // MARK: - BASE URL
-    static let baseURL = "3.139.62.132:5000"
+    static let baseURL = "http://3.139.62.132:5000"
     
     // MARK: - Feature URL
     
