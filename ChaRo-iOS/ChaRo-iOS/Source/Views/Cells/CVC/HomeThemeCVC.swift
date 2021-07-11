@@ -7,11 +7,52 @@
 
 import UIKit
 
-class HomeThemeCVC: UICollectionViewCell {
 
+class HomeThemeCVC: UICollectionViewCell {
+    
+    @IBOutlet weak var themeLabel: UILabel!
+    @IBOutlet weak var themeImageView: UIImageView!
+    @IBOutlet weak var highLightView: UIView!
+    
+    static let identifier = "HomeThemeCVC"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setImageView()
+        
+    }
+    
+    //선택되었을 때 글자와 border 색을 변경합니다.
+    override var isSelected: Bool {
+        willSet {
+            if newValue {
+                themeLabel.textColor = .mainBlue
+                themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
+                themeImageView.layer.borderWidth = 1
+                highLightView.backgroundColor = .mainBlue
+                
+            } else {
+
+                themeLabel.textColor = .mainBlack
+                themeImageView.layer.borderWidth = 0
+                highLightView.backgroundColor = .white
+            }
+            
+        }
+
+    }
+    
+    
+    //재사용을 위해 값을 false 로 변경합니다.
+    override func prepareForReuse() {
+        isSelected = false
+    }
+    
+    
+    private func setImageView() {
+        themeImageView.clipsToBounds = true
+        themeImageView.layer.cornerRadius = themeImageView.frame.size.height / 2
     }
 
 }

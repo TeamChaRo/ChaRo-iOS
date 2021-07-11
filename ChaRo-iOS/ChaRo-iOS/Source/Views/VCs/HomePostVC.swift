@@ -178,7 +178,7 @@ extension HomePostVC: UITableViewDataSource{
     
 }
 
-extension HomePostVC: MenuClickedDelegate{
+extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
         dropDownTableview.isHidden = false
     }
@@ -187,7 +187,6 @@ extension HomePostVC: MenuClickedDelegate{
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-
         delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)
