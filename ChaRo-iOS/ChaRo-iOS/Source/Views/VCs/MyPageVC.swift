@@ -11,12 +11,13 @@ import UIKit
 class MyPageVC: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var customTabbar: UICollectionView!
-    @IBOutlet weak var TableCollectionView: UICollectionView!
+    @IBOutlet weak var myTableCollectionView: UICollectionView!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followerButton: UIButton!
+    @IBOutlet weak var saveTableCollectionView: UICollectionView!
     
     var customTabbarList: [TabbarCVC] = []
     
@@ -33,7 +34,6 @@ class MyPageVC: UIViewController {
     
     func setHeaderView(){
         headerView.backgroundColor = .mainBlue
-        
     }
     
     func customTabbarInit(){
@@ -44,6 +44,9 @@ class MyPageVC: UIViewController {
         customTabbarList.append(SaveCell)
         
     }
+    
+    
+    
     func setCircleLayout(){
         profileImageView.clipsToBounds = true
         profileImageView.layer.masksToBounds = false
@@ -61,9 +64,22 @@ class MyPageVC: UIViewController {
     func setCollectionView(){
         customTabbar.delegate = self
         customTabbar.dataSource = self
+        myTableCollectionView.delegate = self
+        myTableCollectionView.dataSource = self
+        saveTableCollectionView.delegate = self
+        saveTableCollectionView.dataSource = self
+        
+        customTabbar.tag = 1
+        myTableCollectionView.tag = 2
+        saveTableCollectionView.tag = 3
+        
         customTabbar.layer.addBorder([.bottom], color: UIColor.gray20, width: 1.0)
         customTabbar.registerCustomXib(xibName: "TabbarCVC")
-        TableCollectionView.registerCustomXib(xibName: "MyPagePostCVC")
+        myTableCollectionView.registerCustomXib(xibName: "MyPagePostCVC")
+        myTableCollectionView.registerCustomXib(xibName: "HomePostDetailCVC")
+        saveTableCollectionView.registerCustomXib(xibName: "MyPagePostCVC")
+        saveTableCollectionView.registerCustomXib(xibName: "HomePostDetailCVC")
+    
     }
     
 
@@ -71,20 +87,28 @@ class MyPageVC: UIViewController {
 
 extension MyPageVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        //커스텀 탭바 설정
+        if collectionView.tag == 1{
         switch indexPath.row{
         case 0:
             customTabbarList[0].setSelectedView()
             customTabbarList[1].setDeselectedView()
             customTabbarList[0].setIcon(data: "write_active")
             customTabbarList[1].setIcon(data: "save5_inactive")
+            saveTableCollectionView.isHidden = true
         case 1:
             customTabbarList[0].setDeselectedView()
             customTabbarList[1].setSelectedView()
             customTabbarList[0].setIcon(data: "write_inactive")
             customTabbarList[1].setIcon(data: "save5_active")
+            saveTableCollectionView.isHidden = false
         default:
-            customTabbarList[0].setSelectedView()
+            print("Error")
+        }
+        }
+        //밑 컬렉션 뷰 설정
+        else {
+            
         }
 
     }
@@ -92,31 +116,67 @@ extension MyPageVC: UICollectionViewDelegate{
 
 extension MyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView.tag == 1{
         return 2
+        }
+        else if collectionView.tag == 2{
+            return 10
+        }
+        else{
+            return 3
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let MyCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "MyPagePostCVC", for: indexPath) as? MyPagePostCVC else {return UICollectionViewCell()}
+        guard let detailCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         
+        
+        //커스텀 탭바 구현
+        if collectionView.tag == 1{
         if indexPath.row == 0{
             customTabbarList[0].setSelectedView()
             customTabbarList[0].setIcon(data: "write_active")
-//            customTabbarList[1].setIcon(data: "save5_inactive")
             return customTabbarList[0]
         }
         if indexPath.row == 1{
             customTabbarList[1].setIcon(data: "save5_inactive")
             return customTabbarList[1]
         }
-        else{
-            return UICollectionViewCell()
         }
-       
+        //밑부분 셀 구현
+        else if collectionView.tag == 2{
+            if indexPath.row == 0{
+                return detailCell
+            }
+            else{
+            return MyCell
+            }
+        }
+        
+        else{
+            if indexPath.row == 0{
+            return detailCell
+            }
+            return MyCell
+        }
+        
+       return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width = UIScreen.main.bounds.width/2
-
-        return CGSize(width: width, height: 50)
+        var width = UIScreen.main.bounds.width
+        if collectionView.tag == 1{
+        return CGSize(width: width/2, height: 50)
+        }
+        else {
+            if indexPath.row == 0{
+                return CGSize(width: width-40, height: 30)
+            }
+            else{
+            return CGSize(width: width, height: 100)
+            }
+        }
     }
     
 }
