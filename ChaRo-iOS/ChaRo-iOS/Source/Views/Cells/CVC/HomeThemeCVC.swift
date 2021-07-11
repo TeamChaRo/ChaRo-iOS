@@ -54,5 +54,9 @@ class HomeThemeCVC: UICollectionViewCell {
         themeImageView.clipsToBounds = true
         themeImageView.layer.cornerRadius = themeImageView.frame.size.height / 2
     }
+    
+    public func setThemeTitle(name: String) {
+        themeLabel.text = "#\(name)"
+    }
 
 }
