@@ -8,7 +8,7 @@
 import UIKit
 
 class ThemePostVC: UIViewController {
-
+    
     
     //MARK:- IBOutlet
     @IBOutlet weak var navigationView: UIView!
@@ -41,12 +41,12 @@ class ThemePostVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-
+    
     //MARK:- IBAction
     
     @IBAction func backButtonClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-    
+        
     }
     
     
@@ -66,12 +66,12 @@ class ThemePostVC: UIViewController {
         tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
         tableView.registerCustomXib(xibName: "ThemePostAllTVC")
         tableView.registerCustomXib(xibName: "ThemePostDetailTVC")
-
-
+        
+        
         
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
-
+        
         
     }
     
@@ -87,7 +87,7 @@ class ThemePostVC: UIViewController {
         dropDownTableView.layer.cornerRadius = 20
         dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         dropDownTableView.isHidden = true
-        dropDownTableView.registerCustomXib(xibName: "HotDropDownTVC")
+        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
         dropDownTableView.separatorStyle = .none
     }
     
@@ -96,7 +96,7 @@ class ThemePostVC: UIViewController {
     }
     
     
-
+    
     //MARK:- Function
 }
 
@@ -104,10 +104,13 @@ class ThemePostVC: UIViewController {
 //MARK:- extension
 
 extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            if tableView.tag == 2 {
-                return 2
-            }
+        
+        if tableView.tag == 2 {
+            return 2
+        }
+        
         return 3
         
     }
@@ -118,11 +121,12 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         print(tableView.tag)
         
         if tableView.tag == 2 {
-            print(indexPath.row)
+
             switch indexPath.row {
+            
             case 0:
                 let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
-                var bgColorView = UIView()
+                let bgColorView = UIView()
                 bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
                 cell.selectedBackgroundView = bgColorView
                 cell.setLabel()
@@ -133,53 +137,59 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 
             default:
                 let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
-                var bgColorView = UIView()
+                let bgColorView = UIView()
                 bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
                 cell.selectedBackgroundView = bgColorView
                 cell.setCellName(name: "최신순")
                 cell.delegate = self
                 return cell
             }
-           
+            
         }
-
-        if tableView.tag == 1 {
         
-        switch indexPath.row {
-        case 0:
-            let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
-            cell.selectionStyle = .none
-            return cell
-        case 1:
-            let cell: ThemePostDetailTVC = tableView.dequeueReusableCell(for: indexPath)
+        if tableView.tag == 1 {
             
-            cell.delegate = self
-            if isFirstLoaded {
-                isFirstLoaded = false
-                topTVCCell = cell
+            switch indexPath.row {
+            
+            case 0:
+                let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
+                cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
+                cell.selectionStyle = .none
+                return cell
+                
+            case 1:
+                let cell: ThemePostDetailTVC = tableView.dequeueReusableCell(for: indexPath)
+                
+                //첫 텍스트 설정
+                cell.delegate = self
+                if isFirstLoaded {
+                    isFirstLoaded = false
+                    topTVCCell = cell
+                }
+                
+                cell.selectionStyle = .none
+                cell.setLabel()
+                return cell
+                
+            case 2:
+                let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
+                return cell
+                
+            default:
+                return UITableViewCell()
             }
-            
-            cell.selectionStyle = .none
-            cell.setLabel()
-            return cell
-            
-        case 2:
-            let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
-            return cell
-            
-        default:
-            return UITableViewCell()
-        }
         }
         return UITableViewCell()
-
-     
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if tableView.tag == 2 {
-            let HotCell: HotDropDownTVC = (tableView.dequeueReusableCell(withIdentifier: "HotDropDownTVC") as? HotDropDownTVC)!
+            
+            let HotCell: HotDropDownTVC = (tableView.dequeueReusableCell(withIdentifier: HotDropDownTVC.identifier) as? HotDropDownTVC)!
+            
             if indexPath.row == 0 {
                 HotCell.setSelectedCell()
                 
@@ -189,7 +199,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if tableView.tag == 2{
+        if tableView.tag == 2 {
             return 44
         }
         
@@ -200,7 +210,6 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         switch indexPath.row {
         
         case 0:
-            //116 / 812
             return 118 * factor
         case 1:
             return 50
