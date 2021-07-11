@@ -26,6 +26,9 @@ class MyPagePostCVC: UICollectionViewCell {
     @IBOutlet weak var saveImage: UIImageView!
     @IBOutlet weak var saveLabel: UILabel!
     
+    var heartText: String = "99"
+    var saveText: String = "99"
+    
     
     func setRound(){
         postImage.clipsToBounds = true
@@ -44,8 +47,13 @@ class MyPagePostCVC: UICollectionViewCell {
     func setLikeUI(){
         heartImage.image = UIImage(named: "icHeartActive")
         saveImage.image = UIImage(named: "icSave5Active")
-        heartLabel.text = "99"
-        saveLabel.text = "99"
+        heartLabel.text = heartText
+        saveLabel.text = saveText
+    }
+    
+    func setHeartSave(heart: String, save: String){
+        heartLabel.text = heart
+        saveLabel.text = save
     }
     func setLikeLabel(){
         saveLabel.textColor = .gray40
@@ -91,8 +99,8 @@ class MyPagePostCVC: UICollectionViewCell {
         tagView3.layer.borderWidth = 1
     }
     
-    func setTitleLabel(){
-        postTitle.text = "해안도로 정복할 수 있는 포항 드라이브 코스로 떠나볼까요??"
+    func setTitleLabel(text: String){
+        postTitle.text = text
     }
     
     
@@ -102,7 +110,6 @@ class MyPagePostCVC: UICollectionViewCell {
         setTagUI()
         setLabelUI()
         setRound()
-        setTitleLabel()
         setLikeLabel()
         setLikeUI()
     }
