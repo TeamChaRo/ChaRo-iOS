@@ -152,6 +152,7 @@ extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
             return UITableViewCell()
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let HotCell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
         if indexPath.row == 0 {
@@ -162,7 +163,7 @@ extension HomePostVC : UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-extension HomePostVC: MenuClickedDelegate{
+extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
         dropDownTableview.isHidden = false
     }
@@ -171,7 +172,6 @@ extension HomePostVC: MenuClickedDelegate{
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-
         delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)
