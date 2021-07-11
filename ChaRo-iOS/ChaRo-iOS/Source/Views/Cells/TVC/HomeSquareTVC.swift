@@ -91,7 +91,7 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         
         cell.imageView.image = UIImage(named: "tempImageSmall")
         cell.callback = {
-                print("button pressed", indexPath)
+            print("button pressed", indexPath.row)
             }
         return cell
         
