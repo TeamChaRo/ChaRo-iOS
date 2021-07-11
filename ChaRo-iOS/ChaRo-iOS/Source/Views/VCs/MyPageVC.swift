@@ -19,6 +19,9 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var followerButton: UIButton!
     @IBOutlet weak var saveTableCollectionView: UICollectionView!
     
+    var myCellCount = 10
+    var saveCellCount = 3
+    
     var myCVCCell: HomePostDetailCVC?
     var saveCVCCell: HomePostDetailCVC?
     
@@ -126,46 +129,40 @@ extension MyPageVC: UICollectionViewDelegate{
             print("Error")
         }
         }
-        //밑 컬렉션 뷰 설정
-        else {
-            
-        }
-
+        //나중에 누르면 구현되게 여기다가 구현 할 예정
     }
 }
 
 extension MyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 1{
-        return 2
-        }
-        else if collectionView.tag == 2{
-            return 10
-        }
-        else{
-            return 3
+        let customTabbarCount: Int = 2
+        switch collectionView.tag {
+        case 1:
+            return customTabbarCount
+        case 2:
+            return myCellCount
+        default:
+            return saveCellCount
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let MyCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "MyPagePostCVC", for: indexPath) as? MyPagePostCVC else {return UICollectionViewCell()}
         guard let detailCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         
-        
-        //커스텀 탭바 구현
-        if collectionView.tag == 1{
-        if indexPath.row == 0{
-            customTabbarList[0].setSelectedView()
-            customTabbarList[0].setIcon(data: "write_active")
-            return customTabbarList[0]
-        }
-        if indexPath.row == 1{
-            customTabbarList[1].setIcon(data: "save5_inactive")
-            return customTabbarList[1]
-        }
-        }
-        //밑부분 셀 구현
-        else if collectionView.tag == 2{
+        switch collectionView.tag {
+        case 1:
+            if indexPath.row == 0{
+                customTabbarList[0].setSelectedView()
+                customTabbarList[0].setIcon(data: "write_active")
+                return customTabbarList[0]
+            }
+            if indexPath.row == 1{
+                customTabbarList[1].setIcon(data: "save5_inactive")
+                return customTabbarList[1]
+            }
+        case 2:
             detailCell.delegate = self
             if indexPath.row == 0{
                 if myCellIsFirstLoaded {
@@ -177,9 +174,7 @@ extension MyPageVC: UICollectionViewDataSource{
             else{
             return MyCell
             }
-        }
-        
-        else if collectionView.tag == 3{
+        case 3:
             detailCell.delegate = self
             if indexPath.row == 0{
                 if saveCellIsFirstLoaded {
@@ -189,13 +184,15 @@ extension MyPageVC: UICollectionViewDataSource{
             return detailCell
             }
             return MyCell
+        default:
+            print("Error")
         }
-        
-       return UICollectionViewCell()
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var width = UIScreen.main.bounds.width
+        
         if collectionView.tag == 1{
         return CGSize(width: width/2, height: 50)
         }
@@ -214,7 +211,7 @@ extension MyPageVC: UICollectionViewDataSource{
 extension MyPageVC: UICollectionViewDelegateFlowLayout{
     
 }
-
+//이거 컬렉션뷰 밑부분만 테두리 그릴라고 익스텐션해놓음
 extension CALayer {
     func addBorder(_ arr_edge: [UIRectEdge], color: UIColor, width: CGFloat) {
         for edge in arr_edge {
