@@ -10,6 +10,12 @@
 		1BF746D5C8549F4E027525F3 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
+		360937A42699E52F005392BB /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 360937A32699E52F005392BB /* MyPage.storyboard */; };
+		360937A62699ECEB005392BB /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360937A52699ECEB005392BB /* MyPageVC.swift */; };
+		360937AD2699EF7B005392BB /* TabbarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360937AB2699EF7B005392BB /* TabbarCVC.swift */; };
+		360937AE2699EF7B005392BB /* TabbarCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360937AC2699EF7B005392BB /* TabbarCVC.xib */; };
+		360937B12699F15A005392BB /* MyPagePostCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360937AF2699F15A005392BB /* MyPagePostCVC.swift */; };
+		360937B22699F15A005392BB /* MyPagePostCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360937B02699F15A005392BB /* MyPagePostCVC.xib */; };
 		3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8912693730700EFC794 /* CommonCVC.swift */; };
 		3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8922693730700EFC794 /* HomeAnimationCVC.swift */; };
 		3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8932693730700EFC794 /* HomeThemeCVC.swift */; };
@@ -123,6 +129,12 @@
 		31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
+		360937A32699E52F005392BB /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
+		360937A52699ECEB005392BB /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		360937AB2699EF7B005392BB /* TabbarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCVC.swift; sourceTree = "<group>"; };
+		360937AC2699EF7B005392BB /* TabbarCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabbarCVC.xib; sourceTree = "<group>"; };
+		360937AF2699F15A005392BB /* MyPagePostCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPagePostCVC.swift; sourceTree = "<group>"; };
+		360937B02699F15A005392BB /* MyPagePostCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPagePostCVC.xib; sourceTree = "<group>"; };
 		3610A8912693730700EFC794 /* CommonCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCVC.swift; sourceTree = "<group>"; };
 		3610A8922693730700EFC794 /* HomeAnimationCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnimationCVC.swift; sourceTree = "<group>"; };
 		3610A8932693730700EFC794 /* HomeThemeCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeCVC.swift; sourceTree = "<group>"; };
@@ -260,6 +272,8 @@
 				3610A8922693730700EFC794 /* HomeAnimationCVC.swift */,
 				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
 				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,
+				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
+				360937AF2699F15A005392BB /* MyPagePostCVC.swift */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -355,6 +369,8 @@
 				3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */,
 				3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */,
 				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
+				360937AC2699EF7B005392BB /* TabbarCVC.xib */,
+				360937B02699F15A005392BB /* MyPagePostCVC.xib */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -398,6 +414,7 @@
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
 				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
 				70D63E262694E2AA0036484B /* ThemePost.storyboard */,
+				360937A32699E52F005392BB /* MyPage.storyboard */,
 				3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */,
 			);
 			path = Storyboards;
@@ -485,6 +502,7 @@
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
 				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
+				360937A52699ECEB005392BB /* MyPageVC.swift */,
 				3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */,
 				70D63E242694E13B0036484B /* ThemePostVC.swift */,
 			);
@@ -598,6 +616,8 @@
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
 				3C840BF526962E84001CAFE5 /* AddressConfirm.storyboard in Resources */,
 				3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */,
+				360937AE2699EF7B005392BB /* TabbarCVC.xib in Resources */,
+				360937A42699E52F005392BB /* MyPage.storyboard in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
 				3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */,
 				3C86FAB02694C7C6009370CD /* LaunchScreen.storyboard in Resources */,
@@ -612,6 +632,7 @@
 				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
 				F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */,
 				3C86FAA52694C7C6009370CD /* AddressButtonCell.xib in Resources */,
+				360937B22699F15A005392BB /* MyPagePostCVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +685,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
@@ -695,8 +717,10 @@
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */,
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
+				360937B12699F15A005392BB /* MyPagePostCVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
+				360937AD2699EF7B005392BB /* TabbarCVC.swift in Sources */,
 				36D1E5FD269709F00079BD94 /* HomePostDetailCVC.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
@@ -774,7 +798,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -837,7 +860,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -866,8 +888,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M2BP76V5D4;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				DEVELOPMENT_TEAM = U24ZACT97M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -895,7 +916,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M2BP76V5D4;
+				DEVELOPMENT_TEAM = U24ZACT97M;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
