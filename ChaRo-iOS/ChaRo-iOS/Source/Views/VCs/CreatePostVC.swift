@@ -54,12 +54,28 @@ class CreatePostVC: UIViewController {
         setMainViewLayout()
         configureConponentLayout()
         applyTitleViewShadow()
+        
+        configureTableView()
     }
+    
 }
 
 // MARK: - functions
 extension CreatePostVC {
+    
     // MARK: Setting function
+    
+    func configureTableView(){
+        registerXibs()
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    func registerXibs(){
+        tableView.registerCustomXib(xibName: CreatePostTitleTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostPhotoTVC.identifier)
+    }
+    
     func setNavigationBar(){
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -115,6 +131,7 @@ extension CreatePostVC {
             $0.height.equalTo(22)
             $0.centerY.equalTo(titleLabel.snp.centerY)
         }
+        
     }
     
     //MARK: - Button Actions
@@ -135,14 +152,44 @@ extension CreatePostVC {
     
 }
 
-extension CreatePostVC: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+// MARK: - UITableView Extension
+extension CreatePostVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
+}
+
+extension CreatePostVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        switch indexPath.row {
+        case 0:
+            return getCreatePostTitleCell(tableView: tableView)
+        case 1:
+            return getCreatePostTitleCell(tableView: tableView)
+        default:
+            return getCreatePostTitleCell(tableView: tableView)
+        }
+        
+    }
+}
+
+//MARK: - import cell function
+extension CreatePostVC {
+    func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell{
+        guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostTitleTVC.identifier) as? CreatePostTitleTVC else { return UITableViewCell() }
+        return titleCell
     }
     
+    func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
+        guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
+        return titleCell
+    }
 }

@@ -95,7 +95,6 @@
 		70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */; };
 		70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E242694E13B0036484B /* ThemePostVC.swift */; };
 		70D63E272694E2AA0036484B /* ThemePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E262694E2AA0036484B /* ThemePost.storyboard */; };
-		70D63E29269605570036484B /* HomeNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E28269605570036484B /* HomeNVC.swift */; };
 		70D63E3426963C810036484B /* ThemePostThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E3226963C810036484B /* ThemePostThemeTVC.swift */; };
 		70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E3326963C810036484B /* ThemePostThemeTVC.xib */; };
 		70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E36269646D30036484B /* ThemePostAllTVC.swift */; };
@@ -111,6 +110,10 @@
 		F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */; };
 		F4CC1B5C269A2085009A0C01 /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */; };
 		F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */; };
+		F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */; };
+		F4CC1B62269B92F0009A0C01 /* CreatePostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */; };
+		F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */; };
+		F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -219,7 +222,6 @@
 		70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAreaRecommandTVC.swift; sourceTree = "<group>"; };
 		70D63E242694E13B0036484B /* ThemePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostVC.swift; sourceTree = "<group>"; };
 		70D63E262694E2AA0036484B /* ThemePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemePost.storyboard; sourceTree = "<group>"; };
-		70D63E28269605570036484B /* HomeNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNVC.swift; sourceTree = "<group>"; };
 		70D63E3226963C810036484B /* ThemePostThemeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostThemeTVC.swift; sourceTree = "<group>"; };
 		70D63E3326963C810036484B /* ThemePostThemeTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostThemeTVC.xib; sourceTree = "<group>"; };
 		70D63E36269646D30036484B /* ThemePostAllTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostAllTVC.swift; sourceTree = "<group>"; };
@@ -235,6 +237,10 @@
 		F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPathmapTCV.xib; sourceTree = "<group>"; };
 		F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePost.storyboard; sourceTree = "<group>"; };
 		F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostVC.swift; sourceTree = "<group>"; };
+		F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostTitleTVC.swift; sourceTree = "<group>"; };
+		F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostTitleTVC.xib; sourceTree = "<group>"; };
+		F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostPhotoTVC.swift; sourceTree = "<group>"; };
+		F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostPhotoTVC.xib; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,6 +292,8 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */,
+				F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */,
+				F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */,
 				70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */,
 				70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */,
 				3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */,
@@ -383,6 +391,8 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA832694C7C6009370CD /* AddressButtonCell.xib */,
+				F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */,
+				F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */,
 				3C86FA862694C7C6009370CD /* HomeAnimationTVC.xib */,
 				3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */,
 				3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */,
@@ -409,7 +419,6 @@
 		3C86FA8C2694C7C6009370CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */,
 				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
 				F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */,
 				36012A492694D557007F4633 /* HomePost.storyboard */,
@@ -501,7 +510,6 @@
 		3C879BE9268B13C300C41BB8 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
-				3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */,
 				3C86F9F5269478F3009370CD /* AddressMainVC.swift */,
 				F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */,
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
@@ -606,6 +614,7 @@
 				3C86FAA82694C7C6009370CD /* HomeAnimationTVC.xib in Resources */,
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */,
+				F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */,
 				70D63E39269646D30036484B /* ThemePostAllTVC.xib in Resources */,
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
@@ -628,6 +637,7 @@
 				360937A42699E52F005392BB /* MyPage.storyboard in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
 				3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */,
+				F4CC1B62269B92F0009A0C01 /* CreatePostTitleTVC.xib in Resources */,
 				3C86FAB02694C7C6009370CD /* LaunchScreen.storyboard in Resources */,
 				3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */,
 				F4CC1B5C269A2085009A0C01 /* CreatePost.storyboard in Resources */,
@@ -694,9 +704,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */,
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
+				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
