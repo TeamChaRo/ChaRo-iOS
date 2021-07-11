@@ -12,7 +12,7 @@ class PostTitleTVC: UITableViewCell {
     static let identifier: String = "PostTitleTVC"
     
     // MARK: - Outlet Variables
-    
+
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
@@ -22,6 +22,7 @@ class PostTitleTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         setFont()
     }
 

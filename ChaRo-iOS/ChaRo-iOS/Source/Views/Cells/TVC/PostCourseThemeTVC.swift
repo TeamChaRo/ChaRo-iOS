@@ -39,6 +39,7 @@ class PostCourseThemeTVC: UITableViewCell {
     
     // MARK: - AwakeFromNib and setSelected
     override func awakeFromNib(){
+        selectionStyle = .none
         super.awakeFromNib()
     }
 
