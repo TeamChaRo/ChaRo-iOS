@@ -51,7 +51,7 @@ class HomePostDetailCVC: UICollectionViewCell {
     }
 
 }
-extension HomePostDetailCVC: SetTopTitleDelegate{
+extension HomePostDetailCVC: SetTopTitleDelegate {
     func setTopTitle(name: String) {
         selectLabel.text = name
     }

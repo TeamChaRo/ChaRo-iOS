@@ -19,7 +19,7 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Variable
     
-    var topCVCCell : HomePostDetailCVC?
+    var topTVCCell : ThemePostDetailTVC?
     var delegate : SetTopTitleDelegate?
     //MARK:- Constraint
     
@@ -139,7 +139,6 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             return cell
         case 2:
             let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.cellDelegate = self
             return cell
             
         default:
@@ -192,33 +191,6 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
 }
 
 
-extension ThemePostVC: ThemeCollectionViewCellDelegate {
-
-    
-    
-    func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC, button: UIButton!) {
-       
-        var isButtonClicked = (collectionviewcell?.isButtonClicked)!
-        
-        collectionviewcell?.selectButton.addTarget(self, action: #selector(buttonClicked(isButtonClicked:)), for: .touchUpInside)
-        
-    }
-    
-    
-    @objc func buttonClicked(isButtonClicked: Bool) {
-        
-        print(isButtonClicked)
-        
-        if isButtonClicked == false {
-            dropDownTableView.isHidden = true
-        } else {
-            dropDownTableView.isHidden = false
-        }
-    }
-    
-    
-}
-
 extension ThemePostVC: MenuClickedDelegate{
     func menuClicked() {
         dropDownTableView.isHidden = false
@@ -232,7 +204,7 @@ extension ThemePostVC: SetTitleDelegate {
         print("되냐?")
         delegate?.setTopTitle(name: cell.name)
         dropDownTableView.isHidden = true
-        topCVCCell?.setTitle(data: cell.name)
+        topTVCCell?.setTitle(data: cell.name)
         
     }
     

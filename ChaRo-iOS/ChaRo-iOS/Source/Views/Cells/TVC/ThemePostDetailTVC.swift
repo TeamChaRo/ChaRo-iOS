@@ -29,14 +29,32 @@ class ThemePostDetailTVC: UITableViewCell {
         selectLabel.textColor = UIColor.gray50
     }
     
+    func setTitle(data : String) {
+        print(data)
+        selectText = data
+        selectLabel.text = selectText
+        
+    }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+
     }
+    
     @IBAction func selectButtonClicked(_ sender: Any) {
         delegate?.menuClicked()
     }
     
 }
+
+extension ThemePostDetailTVC: SetTopTitleDelegate {
+    func setTopTitle(name: String) {
+        selectLabel.text = name
+    }
+    
+    
+}
+
+
