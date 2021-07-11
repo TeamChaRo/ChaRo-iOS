@@ -15,6 +15,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var homeNavigationSearchButton: UIButton!
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
     var tableIndex: IndexPath = [0,0]
+    var themeList: String = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()

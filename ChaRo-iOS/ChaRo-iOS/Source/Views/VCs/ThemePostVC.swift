@@ -24,6 +24,7 @@ class ThemePostVC: UIViewController {
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 6
+    var themeName = ""
     
     //MARK:- Constraint
     
@@ -68,10 +69,8 @@ class ThemePostVC: UIViewController {
         tableView.registerCustomXib(xibName: "ThemePostDetailTVC")
         
         
-        
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
-        
         
     }
     
@@ -100,6 +99,9 @@ class ThemePostVC: UIViewController {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
     }
     
+    func setThemeName() {
+        
+    }
     
     
     //MARK:- Function
