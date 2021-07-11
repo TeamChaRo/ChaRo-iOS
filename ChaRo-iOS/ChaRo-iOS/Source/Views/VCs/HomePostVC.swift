@@ -172,7 +172,6 @@ extension HomePostVC: MenuClickedDelegate {
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-        print("되냐?")
         delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)

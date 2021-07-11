@@ -11,7 +11,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
 
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var moreLabel: UILabel!
     var delegate: IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
@@ -38,13 +38,13 @@ class HomeAreaRecommandTVC: UITableViewCell {
     
     func setLabelUI() {
         
-        TitleLabel.text = "경기도 드라이브 코스"
+        titleLabel.text = "경기도 드라이브 코스"
         moreLabel.text = "더보기"
         
-        TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        titleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
         moreLabel.font = UIFont.notoSansRegularFont(ofSize: 12)
         
-        TitleLabel.textColor = UIColor.mainBlack
+        titleLabel.textColor = UIColor.mainBlack
         moreLabel.textColor = UIColor.gray40
         
     }

@@ -48,11 +48,12 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
         
         let factor = UIScreen.main.bounds.width / 375
+        let homeBannerRatio: CGFloat = 0.65
         
         switch indextPath.row {
     
         case 0:
-            return UIScreen.main.bounds.height * 0.65
+            return UIScreen.main.bounds.height * homeBannerRatio
         case 1:
             return 353 * factor
         case 2:

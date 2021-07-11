@@ -83,13 +83,18 @@ class ThemePostVC: UIViewController {
     func setdropDownTableView() {
         dropDownTableView.delegate = self
         dropDownTableView.dataSource = self
+        dropDownTableView.isHidden = true
+        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
+    }
+    
+    
+    func setdropDownTableViewUI() {
         dropDownTableView.clipsToBounds = true
         dropDownTableView.layer.cornerRadius = 20
         dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        dropDownTableView.isHidden = true
-        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
         dropDownTableView.separatorStyle = .none
     }
+    
     
     func setTitleLabel() {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
@@ -109,9 +114,9 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         
         if tableView.tag == 2 {
             return 2
+        } else {
+            return 3
         }
-        
-        return 3
         
     }
     

@@ -28,10 +28,10 @@ class ThemePostThemeTVC: UITableViewCell {
     }()
     
     
-    public var TVCHeight : CGFloat = 100
+    public var tvcHeight : CGFloat = 100
     
     public func setTVCHeight(height: Double) {
-        TVCHeight = CGFloat(height)
+        tvcHeight = CGFloat(height)
     }
     
     
@@ -41,7 +41,6 @@ class ThemePostThemeTVC: UITableViewCell {
         
         setCollectionView()
         setSeperatorBarConstraints()
-        collectionView.reloadData()
         setSelected()
         
         
@@ -91,21 +90,34 @@ class ThemePostThemeTVC: UITableViewCell {
 
 
 //MARK:- extension
-extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ThemePostThemeTVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
+        else { return }
+    
+    }
+}
+
+extension ThemePostThemeTVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
         
         return cell
         
     }
+}
+
+extension ThemePostThemeTVC : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 64, height: self.TVCHeight)
+        return CGSize(width: 64, height: self.tvcHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -116,12 +128,5 @@ extension ThemePostThemeTVC : UICollectionViewDelegate, UICollectionViewDataSour
         
         UIEdgeInsets(top: 16, left: 21, bottom: 0, right: 21)
         
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        guard let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
-        else { return }
-    
     }
 }
