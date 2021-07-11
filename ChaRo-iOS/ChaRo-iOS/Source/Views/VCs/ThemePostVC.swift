@@ -24,7 +24,7 @@ class ThemePostVC: UIViewController {
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 6
-    var themeName = ""
+    public var selectedTheme = ""
     
     //MARK:- Constraint
     
@@ -37,6 +37,8 @@ class ThemePostVC: UIViewController {
         setTitleLabel()
         setShaow()
         setTableViewTag()
+        
+        print("\(selectedTheme) 이거임")
     }
     
     override func viewDidAppear(_ animated: Bool) {
