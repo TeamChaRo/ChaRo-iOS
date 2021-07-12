@@ -60,11 +60,8 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
-        
         //이거 한글이 어떻게 선택되게 하지? . 이렇게
-        print("여기다 : \(selectedTheme)")
-        let themeNames = ThemeDic["\(selectedTheme)"]!
-        getThemeData(theme: themeNames)
+        getThemeData(theme: selectedTheme)
         setTableView()
         setdropDownTableView()
         setTitleLabelUI()
@@ -143,8 +140,10 @@ class ThemePostVC: UIViewController {
     
     //MARK: - 테마 서버 통신
     func getThemeData(theme: String) {
+        
+        let themeNames = ThemeDic["\(theme)"]!
 
-        GetThemeDataService.shared.getThemeInfo(theme: theme) { (response) in
+        GetThemeDataService.shared.getThemeInfo(theme: themeNames) { (response) in
                     print("VC success ---")
                     switch(response)
                     {
@@ -232,6 +231,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
                 cell.selectionStyle = .none
                 cell.setFirstTheme(name: selectedTheme)
+                cell.themeDelegate = self
                 
                 return cell
                 
@@ -326,6 +326,16 @@ extension ThemePostVC: SetTitleDelegate {
         dropDownTableView.isHidden = true
         topTVCCell?.setTitle(data: cell.name)
         
+    }
+    
+}
+
+
+extension ThemePostVC: ThemeNetworkDelegate {
+    
+    func setClickedThemeData(themeName: String) {
+        
+        getThemeData(theme: themeName)
     }
     
 }

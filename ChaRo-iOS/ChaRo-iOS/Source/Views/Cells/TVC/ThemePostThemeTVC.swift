@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ThemeNetworkDelegate {
+    func setClickedThemeData(themeName: String)
+}
+
+
 class ThemePostThemeTVC: UITableViewCell {
     
     //MARK:- IBOutlet
@@ -16,6 +21,7 @@ class ThemePostThemeTVC: UITableViewCell {
     static let identifier = "ThemePostThemeTVC"
     var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
     public var tvcHeight : CGFloat = 100
+    var themeDelegate: ThemeNetworkDelegate?
     private var firstTheme = ""
     
     private var seperatorBar : UIView = {
@@ -92,7 +98,7 @@ class ThemePostThemeTVC: UITableViewCell {
     
     //초기 선택된 테마를 위해 배열의 순서를 바꿉니다. 선택된 테마가 인덱스 0으로 올 수 있도록!
     private func swapArray() {
-
+        
         for (index, element) in themeList.enumerated() {
             if "#\(element)" == firstTheme {
                 themeList.swapAt(0, index)
@@ -112,17 +118,19 @@ extension ThemePostThemeTVC : UICollectionViewDelegate {
         return 10
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
-        else { return }
+        let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
+        let themeName = (cell?.themeLabel.text)!
+        
+        themeDelegate?.setClickedThemeData(themeName: themeName)
         
     }
 }
 
 extension ThemePostThemeTVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
         let themeName = themeList[indexPath.row]
         cell.themeLabel.text = "#\(themeName)"
