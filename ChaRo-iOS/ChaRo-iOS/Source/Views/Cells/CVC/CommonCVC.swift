@@ -24,13 +24,26 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var tagLabel3: UILabel!
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
+  
     
-    
+    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
+        
+        imageView.kf.setImage(with: URL(string: image))
+        
+        titleLabel.text = title
+        tagLabel1.text = tag1
+        tagLabel2.text = tag2
+        tagLabel3.text = tag3
+        
+        setTagUI()
+        setLabelUI()
+
+        
+        //킹피셔 받아서 이거 처리해야됨
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setTagUI()
-        setLabelUI()
     }
     
     func setLabelUI() {
@@ -46,10 +59,6 @@ class CommonCVC: UICollectionViewCell {
     
     func setTagUI() {
         
-        tagLabel1.text = "#야"
-        tagLabel2.text = "#서강준"
-        tagLabel3.text = "#왜불렁~"
-        
         let length1 = CGFloat(tagLabel1.text!.count)
         let length2 = CGFloat(tagLabel2.text!.count)
         let length3 = CGFloat(tagLabel3.text!.count)
@@ -62,9 +71,9 @@ class CommonCVC: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             
-            tagView1.widthAnchor.constraint(equalToConstant: 13 * length1),
-            tagView2.widthAnchor.constraint(equalToConstant: 13 * length2),
-            tagView3.widthAnchor.constraint(equalToConstant: 13 * length3)
+            tagView1.widthAnchor.constraint(equalToConstant: 15 * length1),
+            tagView2.widthAnchor.constraint(equalToConstant: 15 * length2),
+            tagView3.widthAnchor.constraint(equalToConstant: 15 * length3)
             
         ])
         
