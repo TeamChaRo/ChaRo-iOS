@@ -19,6 +19,7 @@ class SearchKeywordVC: UIViewController {
     private var resultAddress : AddressDataModel?
     private var keywordTableView = UITableView()
     private var autoCompletedKeywordList : [AddressDataModel] = []
+    
     private var autoList : [String] = []
     
     private var backButton: UIButton = {
@@ -137,8 +138,8 @@ class SearchKeywordVC: UIViewController {
                             }
                             break
                         }
-                        let poiItem = AddressDataModel(latitude: poi.coordinate?.latitude ?? 0.0,
-                                                       longtitude: poi.coordinate?.longitude ?? 0.0,
+                        let poiItem = AddressDataModel(latitude: String(poi.coordinate?.latitude ?? 0),
+                                                       longitude: String(poi.coordinate?.longitude ?? 0) ,
                                                        address: poi.address ?? "주소안뜸",
                                                        title: poi.name ?? "이름없음")
                         self.autoCompletedKeywordList.append(poiItem)
@@ -156,10 +157,8 @@ class SearchKeywordVC: UIViewController {
         
         print("search Keyword = \(textField.text)")
         let searchKeyword = textField.text!
-       // var autoKeywordList : [String] = []
         DispatchQueue.global().sync {
             pathData.autoComplete(searchKeyword){results , error in
-                //autoKeywordList = results
                 self.searchKeywordPOI(keywordList: results, pathData: pathData)
             }
         }
