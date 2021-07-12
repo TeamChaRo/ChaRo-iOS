@@ -11,6 +11,10 @@ protocol ThemeCollectionViewCellDelegate: class {
     func collectionView(collectionviewcell: HomePostDetailCVC?, index: Int, didTappedInTableViewCell: ThemePostAllTVC, button: UIButton!)
 }
 
+protocol PostIdDelegate {
+    func sendPostID(data: Int)
+}
+
 class ThemePostAllTVC: UITableViewCell {
 
     //MARK:- IBOutlet
@@ -19,6 +23,7 @@ class ThemePostAllTVC: UITableViewCell {
     //MARK:- Variable
     static let identifier = "ThemePostAllTVC"
     var cellDelegate: ThemeCollectionViewCellDelegate?
+    var postDelegate: PostIdDelegate?
     var selectedDriveList: [Drive] = []
     private var cellCount = 0
     
@@ -77,10 +82,17 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         //요소 변수화
         let element = selectedDriveList[indexPath.row]
         
-        cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite)
+        cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postId)
         
         return cell
 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
+        let postid = cell!.postID
+        postDelegate?.sendPostID(data: postid)
         
         
     }

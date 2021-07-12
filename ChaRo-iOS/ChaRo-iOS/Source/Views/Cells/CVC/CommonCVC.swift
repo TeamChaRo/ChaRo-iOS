@@ -31,6 +31,7 @@ class CommonCVC: UICollectionViewCell {
     
     //MARK: Variable
     var callback : (() -> Void)?
+    var postID: Int = 0
     
     
     //MARK:- Life Cycle
@@ -92,8 +93,10 @@ class CommonCVC: UICollectionViewCell {
     }
 
     //MARK:- Function
-    func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool) {
+    func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
         
+        //postID 설정
+        self.postID = postID
         
         //제목 설정
         self.titleLabel.text = title

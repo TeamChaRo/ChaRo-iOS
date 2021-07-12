@@ -232,6 +232,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 cell.selectedDriveList = self.selectedDriveList
                 cell.setCellCount(num: cellCount)
                 cell.collectionView.reloadData()
+                cell.postDelegate = self
                 return cell
                 
             default:
@@ -310,6 +311,14 @@ extension ThemePostVC: ThemeNetworkDelegate {
     func setClickedThemeData(themeName: String) {
         
         getThemeData(theme: themeName)
+    }
+    
+}
+
+extension ThemePostVC: PostIdDelegate {
+    
+    func sendPostID(data: Int) {
+        print(data)
     }
     
 }
