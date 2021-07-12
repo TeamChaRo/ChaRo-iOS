@@ -115,6 +115,8 @@
 		F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */; };
 		F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */; };
 		F4CC1B68269B9850009A0C01 /* Extension+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B67269B9850009A0C01 /* Extension+UITextView.swift */; };
+		F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B8E269C5EFA009A0C01 /* CreatePostPhotosCVC.swift */; };
+		F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -243,6 +245,8 @@
 		F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostPhotoTVC.swift; sourceTree = "<group>"; };
 		F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostPhotoTVC.xib; sourceTree = "<group>"; };
 		F4CC1B67269B9850009A0C01 /* Extension+UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextView.swift"; sourceTree = "<group>"; };
+		F4CC1B8E269C5EFA009A0C01 /* CreatePostPhotosCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostPhotosCVC.swift; sourceTree = "<group>"; };
+		F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostPhotosCVC.xib; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -281,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				3610A8912693730700EFC794 /* CommonCVC.swift */,
+				F4CC1B8E269C5EFA009A0C01 /* CreatePostPhotosCVC.swift */,
 				3610A8922693730700EFC794 /* HomeAnimationCVC.swift */,
 				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
 				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,
@@ -380,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA802694C7C6009370CD /* CommonCVC.xib */,
+				F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */,
 				3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */,
 				3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */,
 				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
@@ -653,6 +659,7 @@
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
 				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
 				F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */,
+				F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */,
 				3C86FAA52694C7C6009370CD /* AddressButtonCell.xib in Resources */,
 				360937B22699F15A005392BB /* MyPagePostCVC.xib in Resources */,
 			);
@@ -738,6 +745,7 @@
 				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
+				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
 				3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,

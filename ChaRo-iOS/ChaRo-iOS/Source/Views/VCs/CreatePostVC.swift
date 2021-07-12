@@ -11,6 +11,8 @@ import SnapKit
 class CreatePostVC: UIViewController {
     
     static let identifier: String = "CreatePostVC"
+    
+    var postImages: [String] = []
 
     //MARK: - components
     let tableView: UITableView = UITableView()
@@ -67,6 +69,7 @@ extension CreatePostVC {
     
     func configureTableView(){
         registerXibs()
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -156,7 +159,14 @@ extension CreatePostVC {
 extension CreatePostVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        switch indexPath.row {
+        case 0:
+            return UITableView.automaticDimension
+        case 1:
+            return 222+33
+        default:
+            return 89
+        }
     }
     
 }
@@ -173,7 +183,7 @@ extension CreatePostVC: UITableViewDataSource {
         case 0:
             return getCreatePostTitleCell(tableView: tableView)
         case 1:
-            return getCreatePostTitleCell(tableView: tableView)
+            return getCreatePostPhotoCell(tableView: tableView)
         default:
             return getCreatePostTitleCell(tableView: tableView)
         }
@@ -185,11 +195,36 @@ extension CreatePostVC: UITableViewDataSource {
 extension CreatePostVC {
     func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell{
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostTitleTVC.identifier) as? CreatePostTitleTVC else { return UITableViewCell() }
+        titleCell.delegateCell = self
         return titleCell
     }
     
     func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
-        guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
-        return titleCell
+        guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
+        photoCell.setCollcetionView()
+      
+        return photoCell
+    }
+}
+
+extension CreatePostVC: PostTitlecTVCDelegate {
+    func updateTextViewHeight(_ cell: CreatePostTitleTVC,_ textView: UITextView,_ height: CGFloat) {
+        print("---")
+        
+        let size = textView.frame.size
+        let newSize = tableView.sizeThatFits(CGSize(width: size.width, height: height))
+        
+        print(tableView.contentSize)
+        
+        if size.height != newSize.height {
+            print(tableView.contentSize)
+            UIView.setAnimationsEnabled(false)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+            print(tableView.contentSize)
+        }
+        
+        
     }
 }
