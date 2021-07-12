@@ -19,6 +19,8 @@ class ThemePostAllTVC: UITableViewCell {
     //MARK:- Variable
     static let identifier = "ThemePostAllTVC"
     var cellDelegate: ThemeCollectionViewCellDelegate?
+    var selectedDriveList: [Drive] = [Drive(postId: 1, title: "해운대 드라이브 코스. 달맞이길 추천 플러스 조개구이까지", image: "https://charo-server.s3.ap-northeast-2.amazonaws.com/post/1625761886665.jpg", isFavorite: true, tags: ["부산", "여름"])]
+    private var cellCount = 0
     
     //MARK:- Life Cycle
     
@@ -40,6 +42,9 @@ class ThemePostAllTVC: UITableViewCell {
     }
     
     //MARK:- default Setting Function Part
+    func setCellCount(num: Int) {
+        cellCount = num
+    }
     
     //MARK:- Function
 }
@@ -54,8 +59,8 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-            return 10
-
+        return cellCount
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +70,21 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         cell.imageView.image = UIImage(named: "tempImageBig")
         cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.layer.cornerRadius = 10
+        
         cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
+        
+        
+        let element = selectedDriveList[indexPath.row]
+        
+        print("PostAllTVC에서 collectionView 설정 시 cell count : \(cellCount)")
+        cell.titleLabel.text = element.title
+        
+        if element.isFavorite == true {
+            print("트루다")
+            cell.heartButton.setImage(UIImage(named: "heart_active"), for: .normal) 
+        }
+           
+        
         cell.lengthBtwImgLabel.constant = 0
         
         return cell

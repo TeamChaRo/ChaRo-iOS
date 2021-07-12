@@ -92,20 +92,12 @@ class ThemePostThemeTVC: UITableViewCell {
     
     //초기 선택된 테마를 위해 배열의 순서를 바꿉니다. 선택된 테마가 인덱스 0으로 올 수 있도록!
     private func swapArray() {
-        print("하기전")
-        print(themeList)
+
         for (index, element) in themeList.enumerated() {
-            print(index)
-            print(element)
-            print(firstTheme)
             if "#\(element)" == firstTheme {
-                print("찾았다")
                 themeList.swapAt(0, index)
             }
         }
-        
-        print("한 후")
-        print(themeList)
         
     }
     
@@ -133,13 +125,7 @@ extension ThemePostThemeTVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
         let themeName = themeList[indexPath.row]
-        
-
-        DispatchQueue.global().sync {
-            //이거 먼저 실행해주고 시픈데 ..
-            swapArray()
-            cell.themeLabel.text = themeName
-        }
+        cell.themeLabel.text = "#\(themeName)"
         
         return cell
         

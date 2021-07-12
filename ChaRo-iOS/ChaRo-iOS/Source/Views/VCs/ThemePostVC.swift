@@ -6,6 +6,32 @@
 //
 
 import UIKit
+//
+//enum ThemeNames: String {
+//    case 봄 = "spring"
+//    case 여름 = "summer"
+//    case 가을 = "fall"
+//    case 겨울 = "winter"
+//    case 산 = "mountain"
+//    case 바다 = "sea"
+//    case 호수 = "lake"
+//    case 강 = "river"
+//    case 해안도로 = "oceanRoad"
+//    case 벚꽃 = "blossom"
+//    case 단풍 = "maple"
+//    case 여유 = "relax"
+//    case 스피드 = "speed"
+//    case 야경 = "nightView"
+//    case 도심 = "cityView"
+//}
+
+var ThemeDic: Dictionary = ["#봄":"spring", "#여름":"summer", "#가을":"fall", "#겨울":"winter", "#산":"mountain", "#바다":"sea", "#호수":"lake", "#강":"river", "#해안도로":"oceanRoad", "#벚꽃":"blossom", "#단풍":"maple", "#여유":"relax", "#스피드":"speed", "#야경":"nightView", "#도심":"cityView"]
+
+//
+//struct ThemeNames {
+//   static let 봄  = "spring"
+//   static let summer = "여름"
+//}
 
 class ThemePostVC: UIViewController {
     
@@ -24,8 +50,9 @@ class ThemePostVC: UIViewController {
     var topTVCCell : ThemePostDetailTVC?
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
-    var cellCount = 6
-    public var selectedTheme = ""
+    var cellCount = 0
+    private var selectedTheme = ""
+    private var selectedDriveList: [Drive] = []
     
     //MARK:- Constraint
     
@@ -33,13 +60,16 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
+        
+        //이거 한글이 어떻게 선택되게 하지? . 이렇게
+        print("여기다 : \(selectedTheme)")
+        let themeNames = ThemeDic["\(selectedTheme)"]!
+        getThemeData(theme: themeNames)
         setTableView()
         setdropDownTableView()
-        setTitleLabel()
+        setTitleLabelUI()
         setShaow()
         setTableViewTag()
-        
-        print("\(selectedTheme) 이거임")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +82,6 @@ class ThemePostVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
         
     }
-    
     
     
     
@@ -77,7 +106,6 @@ class ThemePostVC: UIViewController {
         
     }
     
-    
     func setShaow(){
         navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
@@ -97,17 +125,56 @@ class ThemePostVC: UIViewController {
         dropDownTableView.separatorStyle = .none
     }
     
+    func setTitleLabel(name: String) {
+        titleLabel.text = name
+    }
     
-    func setTitleLabel() {
+    func setTitleLabelUI() {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
     }
     
-    func setThemeName() {
+    func setSelectedTheme(name: String) {
+        selectedTheme = name
+    }
+
+    
+    //MARK:- Function
+    
+    
+    //MARK: - 테마 서버 통신
+    func getThemeData(theme: String) {
+
+        GetThemeDataService.shared.getThemeInfo(theme: theme) { (response) in
+                    print("VC success ---")
+                    switch(response)
+                    {
+                    case .success(let driveData):
+                        print("succsee final ---")
+                        if let object = driveData as? TotalDrive {
+                            self.cellCount = object.totalCourse
+                                                    
+                            if let drive = object.drive as? [Drive] {
+                                self.selectedDriveList = drive
+                                
+                            }
+                            
+                            self.tableView.reloadData()
+                        }
+                        
+                    case .requestErr(let message) :
+                        print("requestERR",message)
+                    case .pathErr :
+                        print("pathERR")
+                    case .serverErr:
+                        print("serverERR")
+                    case .networkFail:
+                        print("networkFail")
+                    }
+                }
+        
         
     }
     
-    
-    //MARK:- Function
 }
 
 
@@ -179,11 +246,18 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 }
                 
                 cell.selectionStyle = .none
+                cell.setPostCount(data: cellCount)
                 cell.setLabel()
+                
                 return cell
                 
             case 2:
                 let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
+                cell.selectedDriveList = self.selectedDriveList
+                print("VC에서 PostAllTVC 설정 시 cell count : \(cellCount)")
+                print("VC에서 PostAllTVC 설정 시 cell 배열: \(cell.selectedDriveList)")
+                cell.setCellCount(num: cellCount)
+                cell.collectionView.reloadData()
                 return cell
                 
             default:
