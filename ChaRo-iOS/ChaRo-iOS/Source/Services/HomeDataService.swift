@@ -19,7 +19,7 @@ struct GetHomeDataService
                                      headers: header)
 
         dataRequest.responseData { dataResponse in
-            dump(dataResponse)
+//            dump(dataResponse)
             switch dataResponse.result {
             
             case .success:
@@ -54,6 +54,10 @@ struct GetHomeDataService
         // 우선 PersonDataModel 형태로 decode(해독)을 한번 거칩니다. 실패하면 pathErr
         // 해독에 성공하면 Person data를 success에 넣어줍니다.
 
+        
+        
+        
+        
         return .success(decodedData)
 
     }

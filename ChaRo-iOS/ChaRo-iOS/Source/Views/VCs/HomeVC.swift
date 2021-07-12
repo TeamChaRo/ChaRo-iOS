@@ -14,12 +14,20 @@ class HomeVC: UIViewController {
     @IBOutlet weak var homeNavigationLogo: UIImageView!
     @IBOutlet weak var homeNavigationSearchButton: UIButton!
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
+    
+    var isFirstSetData: Bool = true
+    
+    ///배너 데이타
+    var bannerData: [Banner] = []
+    var 
+    
     var tableIndex: IndexPath = [0,0]
     override func viewDidLoad() {
         super.viewDidLoad()
+        getData()
         setTableView()
         setHomeNavigationViewLayout()
-        getData()
+        
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
@@ -29,12 +37,31 @@ class HomeVC: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getData()
+    }
+    
     func getData(){
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
-            switch(response)
+            switch response
             {
-            case .success(let loginData) :
-                print("성공")
+            case .success(let data) :
+                if let response = data as? HomeDataModel{
+                    
+                        let data = response.data
+                    print("성공", response.data.trendDrive)
+                        //배너 타이틀
+                        self.bannerData.append(data.banner[0])
+                        self.bannerData.append(data.banner[1])
+                        self.bannerData.append(data.banner[2])
+                        self.bannerData.append(data.banner[3])
+                    DispatchQueue.main.async {
+                        print("리로드")
+                        self.HomeTableView.reloadData()
+                    }     
+                   
+                }
             case .requestErr(let message) :
                 print("requestERR")
             case .pathErr :
@@ -134,7 +161,25 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         case 0:
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setDelegate()
-            return cell
+            
+            if bannerData.count == 0{
+                return cell
+            }
+            
+            else{
+                
+                if isFirstSetData{
+                    print("홈브씨")
+                    cell.setData(imageName: bannerData[0].bannerImage, title: bannerData[0].bannerTitle, tag: bannerData[0].bannerTag)
+                    cell.setData(imageName: bannerData[1].bannerImage, title: bannerData[1].bannerTitle, tag: bannerData[1].bannerTag)
+                    cell.setData(imageName: bannerData[2].bannerImage, title: bannerData[2].bannerTitle, tag: bannerData[2].bannerTag)
+                    cell.setData(imageName: bannerData[3].bannerImage, title: bannerData[3].bannerTitle, tag: bannerData[3].bannerTag)
+                    isFirstSetData = false
+                    return cell
+                }
+         
+                
+            }
 
         case 1:
 
@@ -168,11 +213,12 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             cell.buttonDelegate = self
             return cell
            
-
         default:
             return UITableViewCell()
         }
+        return UITableViewCell()
     }
+
 }
 extension HomeVC : IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
@@ -183,7 +229,6 @@ extension HomeVC : IsSelectedCVCDelegate {
         switch tableIndex.row {
         case 3:
             HomePostVC.topText = "요즘 뜨는 드라이브 코스"
-            
         case 4:
             HomePostVC.topText = "여름맞이 야간 드라이브"
         case 5:
