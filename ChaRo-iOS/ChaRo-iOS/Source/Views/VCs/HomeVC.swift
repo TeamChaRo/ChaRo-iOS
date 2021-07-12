@@ -44,6 +44,7 @@ class HomeVC: UIViewController {
         getData()
         setTableView()
         setHomeNavigationViewLayout()
+        setActionToSearchButton()
         
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
@@ -136,8 +137,21 @@ class HomeVC: UIViewController {
         HomeTableView.registerCustomXib(xibName: "HomeSquareTVC")
         HomeTableView.registerCustomXib(xibName: "HomeSeasonRecommandTVC")
         HomeTableView.registerCustomXib(xibName: "HomeAreaRecommandTVC")
+    }
+    
+    func setActionToSearchButton(){
+        homeNavigationSearchButton.addTarget(self, action: #selector(presentSearchPost), for: .touchUpInside)
+    }
+    
+    @objc func presentSearchPost(){
+        let storyboard = UIStoryboard(name: "SearchPost", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: SearchPostVC.identifier) as! SearchPostVC
+        let navigation = UINavigationController(rootViewController: nextVC)
+        navigation.modalPresentationStyle = .fullScreen
+        present(navigation, animated: true, completion: nil)
         
     }
+    
 
 }
 
