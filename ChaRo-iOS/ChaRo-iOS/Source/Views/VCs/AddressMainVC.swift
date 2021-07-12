@@ -120,6 +120,8 @@ class AddressMainVC: UIViewController {
     
     @objc func sendDecidedAddress(){
         print("이렇게 해서 경로가 보여질꺼임")
+        
+        postSearchKeywords()
     }
 }
 
@@ -301,6 +303,9 @@ extension AddressMainVC{
                         polyLine.strokeColor = .mainBlue
                         polyLine.map = self.tMapView
                         self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
+                        print("befor = \(self.tMapView.getCenter())")
+                        self.tMapView.setCenter(self.getOptimizationCenter())
+                        self.tMapView.setZoom(self.tMapView.getZoom()! - 1)
                     }
                 }
             }
@@ -315,10 +320,12 @@ extension AddressMainVC{
     private func inputMarkerInMapView(){
         print("inputMarkerInMapView")
         print("addressList = \(addressList.count)")
-        for item in addressList{
-            if item.title != ""{
-                let point = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longtitude)
+        for index in 0..<addressList.count{
+            
+            if addressList[index].title != ""{
+                let point = addressList[index].getPoint()
                 let marker = TMapMarker(position: point)
+                marker.icon = setMarkerImage(index: index)
                 marker.map = tMapView
                 markerList.append(marker)
                 tMapView.setCenter(point)
@@ -326,8 +333,100 @@ extension AddressMainVC{
         }
     }
     
+    private func setMarkerImage(index: Int) -> UIImage{
+        var image = UIImage()
+        switch index {
+        case 0:
+            image = UIImage(named: "icRouteStart")!
+        case addressList.count - 1:
+        image = UIImage(named: "icRouteEnd")!
+        default:
+            image = UIImage(named: "icRouteWaypoint")!
+        }
+        return image
+    }
     
-  
+    
+    private func getOptimizationCenter() ->  CLLocationCoordinate2D{
+        var minX, minY, maxX, maxY : Double
+        print("addressList.endIndex = \(addressList.endIndex)")
+        let point1 = addressList[0].getPoint()
+        let point2 = addressList[addressList.endIndex-1].getPoint()
+        
+        if point1.latitude < point2.latitude {
+            minX = point1.latitude
+            maxX = point2.latitude
+        }else{
+            maxX = point1.latitude
+            minX = point2.latitude
+        }
+        
+        if point1.longitude < point2.longitude{
+            minY = point1.longitude
+            maxY = point2.longitude
+        }else{
+            maxY = point1.longitude
+            minY = point2.longitude
+        }
+        
+        
+        for i in 1..<addressList.count{
+            let point = addressList[i].getPoint()
+            if point.latitude < minX{
+                minX = point.latitude
+            }else if point.latitude > maxX{
+                maxX = point.latitude
+            }
+            
+            if point.longitude < minY{
+                minY = point.longitude
+            }else if point.longitude > maxY{
+                maxY = point.longitude
+            }
+        }
+        
+        
+        return CLLocationCoordinate2D(latitude: (minX+maxX)/2, longitude: (minY+maxY)/2)
+        
+    }
+    
+
+
+}
+
+extension AddressMainVC{
+    private func postSearchKeywords(){
+        print(addressList)
+        var searchKeywordList: [SearchHistory] = []
+        
+        for item in addressList{
+            let address = SearchHistory(title: item.title,
+                                        address: item.address,
+                                        latitude: item.latitude,
+                                        longitude: item.longitude)
+            searchKeywordList.append(address)
+        }
+        
+        SearchKeywordService.shared.postSearchKeywords(userId: "111",
+                                                       keywords: searchKeywordList){ response in
+            print("받아올때 문제?")
+            switch(response){
+            
+            case .success(let resultData):
+                if let data =  resultData as? SearchPostResultDataModel{
+                    dump(data)
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
 }
 
 extension AddressMainVC : TMapViewDelegate{
@@ -343,5 +442,6 @@ extension AddressMainVC : TMapViewDelegate{
     }
     
 }
+
 
 
