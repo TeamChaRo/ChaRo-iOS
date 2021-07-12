@@ -13,20 +13,19 @@ class SearchResultVC: UIViewController {
     
     private let navigationView = UIView()
     private lazy var backButton = LeftBackButton(toPop: self)
-    private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춥 겸색 결과",
+    private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 겸색 결과",
                                                             color: .mainBlack)
     
     private var tableView = UITableView()
+    public var filterfilterResultList: [String] = []
     
-
-    public var resultList: [String] = []
-    
-    private let closeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "닫기"
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .mainBlue
-        return label
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("닫기", for: .normal)
+        button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
+        button.setTitleColor(.mainBlue, for: .normal)
+        button.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        return button
     }()
     
     
@@ -51,6 +50,7 @@ class SearchResultVC: UIViewController {
         let button = UIButton()
         button.setTitle("드라이브 코스 작성하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         button.layer.cornerRadius = 8
         button.backgroundColor = .mainBlue
         return button
@@ -61,16 +61,42 @@ class SearchResultVC: UIViewController {
         setConstraint()
         setContentViewConstraint()
         configureTableView()
+        //setShadowInNavigationView()
     }
     
     public func setFilterTagList(list: [String]){
-        resultList = list
+        filterfilterResultList = list
     }
 
+    @objc func dismissAction(){
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func configureTableView(){
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func setShadowInNavigationView(){
+        navigationView.backgroundColor = .white
+
+        navigationView.layer.shadowOpacity = 0.05
+        navigationView.layer.shadowColor = UIColor.black.cgColor
+        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        navigationView.layer.shadowRadius = 6
+
+        navigationView.layer.masksToBounds = false
+        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
+                                                                           width: UIScreen.getDeviceWidth(),
+                                                                           height: UIScreen.getNotchHeight()+58),
+                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
+//
+//
+//        navigationView.getShadowView(color: UIColor.black.cgColor,
+//                                     masksToBounds: false,
+//                                     shadowOffset: CGSize(width: 0, height: 2),
+//                                     shadowRadius: 8,
+//                                     shadowOpacity: 0.3)
     }
     
 }
@@ -95,12 +121,15 @@ extension SearchResultVC: UITableViewDataSource{
 extension SearchResultVC{
     
     private func setConstraint(){
-        view.addSubviews([navigationView])
-        
+        view.addSubview(navigationView)
+    
         navigationView.snp.makeConstraints{
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(58)
+            $0.top.leading.trailing.equalTo(view)
+            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
         }
+        
+        
+        setShadowInNavigationView()
         setConstraintsInNavigaitionView()
     }
     
@@ -108,10 +137,10 @@ extension SearchResultVC{
     private func setConstraintsInNavigaitionView(){
         navigationView.addSubviews([backButton,
                                     navigationTitleLabel
-                                    ,closeLabel])
+                                    ,closeButton])
         
         backButton.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(1)
+            $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-9)
         }
@@ -121,14 +150,14 @@ extension SearchResultVC{
             $0.centerY.equalTo(backButton.snp.centerY)
         }
         
-        closeLabel.snp.makeConstraints{
+        closeButton.snp.makeConstraints{
             $0.trailing.equalToSuperview().offset(-20)
             $0.centerY.equalTo(backButton.snp.centerY)
         }
     }
     
     private func setContentViewConstraint(){
-        if resultList.count == 0{
+        if filterfilterResultList.isEmpty{
             setEmptyViewConstraint()
         }else{
             setResultViewConstraint()
@@ -154,6 +183,7 @@ extension SearchResultVC{
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            $0.height.equalTo(48)
         }
     }
     
@@ -161,7 +191,7 @@ extension SearchResultVC{
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints{
-            $0.top.equalTo(navigationView.snp.bottom)
+            $0.top.equalTo(navigationView.snp.bottom).offset(15)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -178,45 +208,43 @@ extension SearchResultVC{
         stackView.axis = .horizontal
         stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.spacing = 10
-    
-        stackView.backgroundColor = .red
+        stackView.spacing = 4
         
         view.addSubview(stackView)
         stackView.snp.makeConstraints{
-            $0.top.equalTo(view.snp.top).offset(15)
+            $0.top.equalTo(view.snp.top).offset(0)
             $0.leading.equalTo(view.snp.leading).offset(20)
-            //$0.trailing.equalTo(view.snp.trailing).offset(-20)
             $0.height.equalTo(34)
-            
         }
-        
         return view
     }
     
     private func makeTagLabelList() -> [UIButton] {
         var list: [UIButton] = []
-        for text in resultList {
-            print(text)
-            if text == "" {
+        for index in 0..<filterfilterResultList.count {
+           
+            if filterfilterResultList[index] == "" || filterfilterResultList[index] == "선택안함"{
                 continue
             }
+            
             let button = UIButton()
-            button.titleEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
-            button.setTitle("#\(text)", for: .normal)
-            button.setTitleColor(.mainBlue, for: .normal)
-            button.titleLabel?.font = .notoSansRegularFont(ofSize: 12)
-            button.layer.cornerRadius = 20
+            button.titleLabel?.font = .notoSansRegularFont(ofSize: 14)
+            button.layer.cornerRadius = 17
             button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.mainlightBlue.cgColor
+            
+            if index == 3 {
+                button.setTitle(" #\(filterfilterResultList[index])X ", for: .normal)
+                button.setTitleColor(.gray30, for: .normal)
+                button.layer.borderColor = UIColor.gray30.cgColor
+            }else{
+                button.setTitle(" #\(filterfilterResultList[index]) ", for: .normal)
+                button.setTitleColor(.mainBlue, for: .normal)
+                button.layer.borderColor = UIColor.mainlightBlue.cgColor
+            }
+            
             list.append(button)
-        }
-        
-        if list.count == 4 {
-            let title = list[3].titleLabel?.text ?? ""
-            list[3].setTitle("\(title)X", for: .normal)
-            list[3].setTitleColor(.gray30, for: .normal)
-            list[3].layer.borderColor = UIColor.gray30.cgColor
+            
+            //button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         }
         
         return list
