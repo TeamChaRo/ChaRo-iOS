@@ -11,7 +11,6 @@ class LeftBackButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -25,14 +24,13 @@ class LeftBackButton: UIButton {
     }
     
    private func setBackgroundImage(){
-        //setImage(UIImage(named: "icClose"), for: .normal)
         setBackgroundImage(UIImage(named: "icBackButton"), for: .normal)
     }
     
     private func initAction(vc: UIViewController) {
-        let dismissAction = UIAction { _ in
+        let popAction = UIAction { _ in
             vc.navigationController?.popViewController(animated: true)
         }
-        addAction(dismissAction, for: .touchUpInside)
+        addAction(popAction, for: .touchUpInside)
     }
 }
