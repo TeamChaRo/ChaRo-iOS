@@ -38,6 +38,14 @@
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
 		3C7DF0E92699ED8E0021939C /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7DF0E82699ED8E0021939C /* TMapSDK.framework */; };
 		3C7DF0EB2699EE7E0021939C /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7DF0EA2699EE7E0021939C /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */; };
+		3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */; };
+		3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */; };
+		3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */; };
+		3C7DF0F5269ACE8F0021939C /* FilterDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */; };
+		3C7DF0F7269AEE7D0021939C /* SearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */; };
+		3C7DF0F9269AEE910021939C /* SearchResult.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F8269AEE910021939C /* SearchResult.storyboard */; };
+		3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */; };
 		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
 		3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */; };
 		3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */; };
@@ -160,6 +168,14 @@
 		3C71FEAA26881DAA007E8EAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C7DF0E82699ED8E0021939C /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C7DF0EA2699EE7E0021939C /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
+		3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchPost.storyboard; sourceTree = "<group>"; };
+		3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostVC.swift; sourceTree = "<group>"; };
+		3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmarkDismissButton.swift; sourceTree = "<group>"; };
+		3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
+		3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDatas.swift; sourceTree = "<group>"; };
+		3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultVC.swift; sourceTree = "<group>"; };
+		3C7DF0F8269AEE910021939C /* SearchResult.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchResult.storyboard; sourceTree = "<group>"; };
+		3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBackButton.swift; sourceTree = "<group>"; };
 		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
 		3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchKeywordCell.xib; sourceTree = "<group>"; };
 		3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressConfirmVC.swift; sourceTree = "<group>"; };
@@ -419,9 +435,10 @@
 				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
 				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
+				3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */,
+				3C7DF0F8269AEE910021939C /* SearchResult.storyboard */,
 				70D63E262694E2AA0036484B /* ThemePost.storyboard */,
 				360937A32699E52F005392BB /* MyPage.storyboard */,
-				3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -494,6 +511,7 @@
 			children = (
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
+				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -511,7 +529,8 @@
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
 				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
 				360937A52699ECEB005392BB /* MyPageVC.swift */,
-				3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */,
+				3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */,
+				3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */,
 				70D63E242694E13B0036484B /* ThemePostVC.swift */,
 			);
 			path = VCs;
@@ -521,6 +540,9 @@
 			isa = PBXGroup;
 			children = (
 				3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */,
+				3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */,
+				3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */,
+				3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -594,6 +616,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */,
 				3C86FAA22694C7C6009370CD /* HomeAnimationCVC.xib in Resources */,
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
 				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
@@ -637,6 +660,7 @@
 				3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */,
 				3C86FAA92694C7C6009370CD /* PostParkingTVC.xib in Resources */,
 				3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */,
+				3C7DF0F9269AEE910021939C /* SearchResult.storyboard in Resources */,
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
 				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
 				F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */,
@@ -694,6 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */,
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
@@ -704,15 +729,20 @@
 				36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */,
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
 				70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */,
+				3C7DF0F7269AEE7D0021939C /* SearchResultVC.swift in Sources */,
 				70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */,
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
+				3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */,
 				70D63E3426963C810036484B /* ThemePostThemeTVC.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
+				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
 				36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
+				3C7DF0F5269ACE8F0021939C /* FilterDatas.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
+				3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,

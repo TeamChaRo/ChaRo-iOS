@@ -76,39 +76,6 @@
             </objects>
             <point key="canvasLocation" x="1839.1304347826087" y="79.6875"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="VKK-ts-8Ft">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Fss-ys-Bf0" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OMv-Ck-OBl">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="f5X-Qz-KCQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iY9-SN-Nf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="928.98550724637687" y="79.6875"/>
-        </scene>
-        <!--HomeNVC-->
-        <scene sceneID="OIG-P0-y7E">
-            <objects>
-                <navigationController storyboardIdentifier="HomeNVC" id="Fty-kw-oAy" customClass="HomeNVC" customModule="ChaRo_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cAk-JN-ZWb">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="q78-1g-mwQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="382-yd-Kg1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-790" y="80"/>
-        </scene>
     </scenes>
     <resources>
         <image name="icAlarmWhite" width="44" height="44"/>

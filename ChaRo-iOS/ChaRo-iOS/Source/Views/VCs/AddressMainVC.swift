@@ -78,7 +78,7 @@ class AddressMainVC: UIViewController {
             addressCellList[1].searchButton.isEnabled = true
         }
     }
-    
+
 
     private func setConstraints(){
         view.addSubviews([backButton,
@@ -298,6 +298,7 @@ extension AddressMainVC{
                 
                 if index == self.addressList.count-2{
                     DispatchQueue.main.async {
+                        polyLine.strokeColor = .mainBlue
                         polyLine.map = self.tMapView
                         self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
                     }

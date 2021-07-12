@@ -14,7 +14,6 @@ class AddressConfirmVC: UIViewController {
 
     static let identifier = "AddressConfirmVC"
     private var addressModel : AddressDataModel?
-    private var viewForMap = UIView()
     private var tMapView = MapService.getTmapView()
     private var deviceHeight : CGFloat?
     public var searchType = ""
@@ -151,7 +150,6 @@ class AddressConfirmVC: UIViewController {
         tMapView.snp.makeConstraints{
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(bottomView.snp.top)
-            viewForMap.backgroundColor = .yellow
         }
         
         backButton.snp.makeConstraints{

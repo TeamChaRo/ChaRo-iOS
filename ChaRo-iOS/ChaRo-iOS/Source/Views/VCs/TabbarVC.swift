@@ -58,30 +58,14 @@ class TabbarVC: UITabBarController {
         let homeTab = UINavigationController(rootViewController: homeVC)
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
        
-//        let postStoryboard = UIStoryboard(name: "PostDetail", bundle: nil)
-//        let postTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
-//        postTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
-        
-<<<<<<< HEAD
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
-//        let createTab = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
         let createTab = UINavigationController(rootViewController: createVC)
         
         createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
         createTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        
-    
-        let tabs = [homeTab, createTab, postTab]
-=======
-        let mapStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let mapTab = mapStoryboard.instantiateViewController(identifier: "ViewController")
-                //addressMainVC = mapTab
-                mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-                mapTab.tabBarItem.title = "작성하기"
-                mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-                
         
         
         let myPageStoryboard = UIStoryboard(name: "MyPage", bundle: nil)
@@ -89,27 +73,7 @@ class TabbarVC: UITabBarController {
         myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
 
-//
-//        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-//        mapTab.tabBarItem.title = "작성하기"
-//        mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-//
-        
-//        let mapStoryboard = UIStoryboard(name: "AddressMain", bundle: nil)
-//        let mapTab = mapStoryboard.instantiateViewController(identifier: AddressMainVC.identifier) as! AddressMainVC
-//        addressMainVC = mapTab
-//
-//        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-//        mapTab.tabBarItem.title = "작성하기"
-//        mapTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-//
-        
-//        let writtingTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
-//        writtingTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
-//        writtingTab.tabBarItem.title = "작성하기"
-//        writtingTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        let tabs = [homeTab,mapTab, myPageTab]
->>>>>>> develop
+        let tabs = [homeTab,createTab, myPageTab]
         
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
