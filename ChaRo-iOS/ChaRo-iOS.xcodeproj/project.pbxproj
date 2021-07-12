@@ -102,6 +102,10 @@
 		3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */; };
 		3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* Extension+UITextFeild.swift */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
+		3CE2A6FC269C977600567395 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FB269C977600567395 /* NetworkResult.swift */; };
+		3CE2A6FE269C977B00567395 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FD269C977B00567395 /* Contants.swift */; };
+		3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */; };
+		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
 		70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */; };
 		70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */; };
@@ -236,6 +240,10 @@
 		3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UITableViewCell.swift"; sourceTree = "<group>"; };
 		3CB315702690494700E3A101 /* Extension+UITextFeild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextFeild.swift"; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
+		3CE2A6FB269C977600567395 /* NetworkResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		3CE2A6FD269C977B00567395 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordDataMadel.swift; sourceTree = "<group>"; };
+		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
 		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
@@ -334,10 +342,13 @@
 		3C3AF5EB269024280099B684 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3CE2A6FD269C977B00567395 /* Contants.swift */,
+				3CE2A6FB269C977600567395 /* NetworkResult.swift */,
 				3C3AF5EC2690244D0099B684 /* MapService.swift */,
 				36B8B492269B6C10008DC781 /* Contants.swift */,
 				36B8B496269B6E03008DC781 /* HomeDataService.swift */,
 				36B8B498269B6E37008DC781 /* NetworkResult.swift */,
+				3CE2A701269C99CD00567395 /* SearchKeywordService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -522,6 +533,7 @@
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
+				3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */,
 				36B8B494269B6DB8008DC781 /* HomeDataModel.swift */,
 			);
 			path = Models;
@@ -736,6 +748,7 @@
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
+				3CE2A6FC269C977600567395 /* NetworkResult.swift in Sources */,
 				F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */,
 				36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */,
 				36B8B493269B6C10008DC781 /* Contants.swift in Sources */,
@@ -746,6 +759,7 @@
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
 				3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */,
 				70D63E3426963C810036484B /* ThemePostThemeTVC.swift in Sources */,
+				3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
@@ -760,6 +774,7 @@
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
+				3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* Extension+UICollectionView.swift in Sources */,
 				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
@@ -777,6 +792,7 @@
 				36B8B497269B6E03008DC781 /* HomeDataService.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
+				3CE2A6FE269C977B00567395 /* Contants.swift in Sources */,
 				36B8B495269B6DB8008DC781 /* HomeDataModel.swift in Sources */,
 				3C840BF72696F08F001CAFE5 /* Extension+UIScreen.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
