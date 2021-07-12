@@ -5,11 +5,11 @@
 //  Created by 최인정 on 2021/07/12.
 //
 
-import Foundation
+import UIKit
 
 extension UITextView {
     
-    func addPadding(left: CGFlot, right: CGFlot) {
+    func addPadding(left: CGFloat, right: CGFloat) {
         self.textContainerInset = UIEdgeInsets(top: 10, left: left, bottom: 10, right: right)
     }
     
