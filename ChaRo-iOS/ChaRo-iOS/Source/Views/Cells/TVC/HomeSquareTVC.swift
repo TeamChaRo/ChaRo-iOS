@@ -51,8 +51,8 @@ class HomeSquareTVC: UITableViewCell {
         TitleLabel.text = "요즘 뜨는 드라이브 코스"
         moreLabel.text = "더보기"
         
-        //TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
-        //moreLabel.font = UIFont.notoSansRegularFont(ofSize: 12)
+        TitleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
+        moreLabel.font = UIFont.notoSansRegularFont(ofSize: 12)
         
         
         TitleLabel.textColor = UIColor.mainBlack
