@@ -25,16 +25,20 @@ class HomeVC: UIViewController {
     var isFirstSetData: Bool = true
     
     ///배너 데이타
+    
     var bannerData: [Banner] = []
     var todayData: [Drive] = []
     var trendyData: [Drive] = []
     var customData: [Drive] = []
     var localData: [Drive] = []
-    
+
     var customText: String = ""
     var localText: String = ""
     
     var tableIndex: IndexPath = [0,0]
+    
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
@@ -52,7 +56,7 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getData()
+
     }
     
     func getData(){
@@ -96,7 +100,7 @@ class HomeVC: UIViewController {
                     DispatchQueue.main.async {
                         print("리로드")
                         self.HomeTableView.reloadData()
-                    }     
+                    }
                    
                 }
             case .requestErr(let message) :
@@ -191,10 +195,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
 //MARK: 내용 구현 부
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        print("ㅎㅇ", bannerData)
+        
         //tableview indexPath
         tableIndex = indexPath
 //MARK: 배너부분 구현
         switch indexPath.row {
+        
         case 0:
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setDelegate()
@@ -219,6 +227,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             }
 //MARK: 오늘의 드라이브
         case 1:
+
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             //image
             if todayData.count == 0{
@@ -237,7 +246,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             //hashTag
                 cell.hashTagText.append(todayData[0].tags[0].rawValue)
             cell.hashTagText.append(todayData[0].tags[1].rawValue)
-            cell.hashTagText.append(todayData[0].tags[2].rawValue)
+//            cell.hashTagText.append(todayData[0].tags[2].rawValue)
             cell.hashTagText.append(todayData[1].tags[0].rawValue)
             cell.hashTagText.append(todayData[1].tags[1].rawValue)
             cell.hashTagText.append(todayData[2].tags[0].rawValue)
@@ -250,33 +259,102 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             cell.heart.append(todayData[0].isFavorite)
             cell.heart.append(todayData[1].isFavorite)
             cell.heart.append(todayData[2].isFavorite)
+            cell.heart.append(todayData[3].isFavorite)
             
             
             return cell
             }
         
         
-//MARK: 테마
+
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
-
+//MARK: 트렌드
         case 3:
 
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
-            return cell
+            //image
+            if trendyData.count == 0{
+                return cell
+            }
+            else{
+            cell.imageNameText.append(trendyData[0].image)
+            cell.imageNameText.append(trendyData[1].image)
+            cell.imageNameText.append(trendyData[2].image)
+            cell.imageNameText.append(trendyData[3].image)
+            //title
+            cell.titleText.append(trendyData[0].title)
+            cell.titleText.append(trendyData[1].title)
+            cell.titleText.append(trendyData[2].title)
+            cell.titleText.append(trendyData[3].title)
+            //hashTag
+                cell.hashTagText.append(trendyData[0].tags[0].rawValue)
+            cell.hashTagText.append(trendyData[0].tags[1].rawValue)
+            cell.hashTagText.append(trendyData[0].tags[0].rawValue)
+            cell.hashTagText.append(trendyData[1].tags[0].rawValue)
+            cell.hashTagText.append(trendyData[1].tags[1].rawValue)
+            cell.hashTagText.append(trendyData[2].tags[0].rawValue)
+            cell.hashTagText.append(trendyData[2].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
+            cell.hashTagText.append(trendyData[3].tags[0].rawValue)
+            cell.hashTagText.append(trendyData[3].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
+            //heart
+            cell.heart.append(trendyData[0].isFavorite)
+            cell.heart.append(trendyData[1].isFavorite)
+            cell.heart.append(trendyData[2].isFavorite)
             
+            return cell
+            }
+            return cell
+
+            
+//MARK: 커스텀 테마
         case 4:
 
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
+            if customData.count == 0{
+                return cell
+            }
+            else{
+            cell.imageNameText.append(customData[0].image)
+            cell.imageNameText.append(customData[1].image)
+            cell.imageNameText.append(customData[2].image)
+            cell.imageNameText.append(customData[3].image)
+            //title
+            cell.titleText.append(customData[0].title)
+            cell.titleText.append(customData[1].title)
+            cell.titleText.append(customData[2].title)
+            cell.titleText.append(customData[3].title)
+            //hashTag
+                cell.hashTagText.append(customData[0].tags[0].rawValue)
+            cell.hashTagText.append(customData[0].tags[1].rawValue)
+            cell.hashTagText.append(customData[0].tags[0].rawValue)
+            cell.hashTagText.append(customData[1].tags[0].rawValue)
+            cell.hashTagText.append(customData[1].tags[1].rawValue)
+            cell.hashTagText.append(customData[2].tags[0].rawValue)
+            cell.hashTagText.append(customData[2].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
+            cell.hashTagText.append(customData[3].tags[0].rawValue)
+            cell.hashTagText.append(customData[3].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
+            //heart
+            cell.heart.append(customData[0].isFavorite)
+            cell.heart.append(customData[1].isFavorite)
+            cell.heart.append(customData[2].isFavorite)
+            
+            return cell
+            }
             return cell
            
+//MARK: 로컬 테마
         case 5:
 
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)

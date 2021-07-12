@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeAnimationCVC: UICollectionViewCell {
     
@@ -30,9 +31,10 @@ class HomeAnimationCVC: UICollectionViewCell {
     }
    
     func setData(imageName : String, titleText : String, hashTagText : String){
-        if let userImage = UIImage(named: imageName){
-            backGroundImage.image = userImage
-        }
+        
+        backGroundImage.kf.setImage(with: URL(string: imageName))
+        
+        
         homeAnimationTitleLabel.text = titleText
         homeAnimationHashtagLabel.text = hashTagText
         setTitleConsraint()

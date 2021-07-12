@@ -51,7 +51,7 @@ class HomeTodayDriveTVC: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.selectionStyle = .none
-
+        collectionView.reloadData()
         
     }
     
@@ -90,7 +90,7 @@ class HomeTodayDriveTVC: UITableViewCell {
 extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return cellList.count
     }
     
     
@@ -102,18 +102,9 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
         }
         else{
         switch indexPath.row {
-        case 0:
-            cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText[1], tag2: hashTagText[2], tag3: "", hearth: heart[0])
-            return cellList[0]
-        case 1:
-            cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText[3], tag2: hashTagText[4], tag3: hashTagText[5], hearth: heart[1])
-            return cellList[1]
-        case 2:
-            cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText[6], tag2: hashTagText[7], tag3: hashTagText[8], hearth: heart[2])
-            return cellList[2]
-        case 3:
-            cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText[9], tag2: hashTagText[10], tag3: hashTagText[11], hearth: heart[3])
-            return cellList[3]
+        case indexPath.row:
+            cellList[indexPath.row].setData(image: imageNameText[indexPath.row], title: titleText[indexPath.row], tag1: hashTagText[indexPath.row], tag2: hashTagText[2], tag3: hashTagText[indexPath.row], hearth: heart[indexPath.row])
+            return cellList[indexPath.row]
         default:
             print("Error")
         }

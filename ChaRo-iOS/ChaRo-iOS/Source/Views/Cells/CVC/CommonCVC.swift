@@ -24,13 +24,11 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var tagLabel3: UILabel!
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
-    
-    var titleText: String = ""
-    var tagText1: String = ""
-    var tagText2: String = ""
-    var tagText3: String = ""
+  
     
     func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
+        
+        imageView.kf.setImage(with: URL(string: image))
         
         titleLabel.text = title
         tagLabel1.text = tag1
@@ -39,15 +37,13 @@ class CommonCVC: UICollectionViewCell {
         
         setTagUI()
         setLabelUI()
-        
+
         
         //킹피셔 받아서 이거 처리해야됨
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setTagUI()
-        setLabelUI()
     }
     
     func setLabelUI() {

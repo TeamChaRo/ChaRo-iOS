@@ -58,6 +58,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
     }
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
         buttonDelegate?.seeMorePushDelegate(data: cellTag)
+        collectionView.reloadData()
     }
     
     //MARK:- Function

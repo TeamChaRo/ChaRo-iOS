@@ -43,7 +43,7 @@ class HomeAnimationTVC: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-//        animationCollectionview.reloadData()
+        animationCollectionview.reloadData()
 
         // Configure the view for the selected state
     }
@@ -88,7 +88,7 @@ class HomeAnimationTVC: UITableViewCell {
 
 extension HomeAnimationTVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return imageNameText.count
     }
     
     

@@ -17,6 +17,14 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     var buttonDelegate: SeeMorePushDelegate?
     let cellTag : Int = 4
     
+    
+    var imageNameText: [String] = []
+    var titleText: [String] = []
+    var hashTagText: [String] = []
+    var heart: [Bool] = []
+    
+    var cellList: [CommonCVC] = []
+    
     //MARK:- Variable
     static let identifier = "HomeSeasonRecommandTVC"
     
@@ -26,6 +34,7 @@ class HomeSeasonRecommandTVC: UITableViewCell {
         super.awakeFromNib()
         setCollctionView()
         setLabelUI()
+        cellInit()
     }
     
     //MARK:- default Setting Function Part
@@ -36,6 +45,19 @@ class HomeSeasonRecommandTVC: UITableViewCell {
         collectionView.registerCustomXib(xibName: "CommonCVC")
         
     }
+    
+     func cellInit(){
+             guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
+             guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
+             guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
+             guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
+         
+         
+         cellList.append(cell1)
+         cellList.append(cell2)
+         cellList.append(cell3)
+         cellList.append(cell4)
+     }
     
     func setLabelUI() {
         
@@ -59,6 +81,7 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     }
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
         buttonDelegate?.seeMorePushDelegate(data: cellTag)
+        collectionView.reloadData()
     }
     
     //MARK:- Function
@@ -70,17 +93,27 @@ class HomeSeasonRecommandTVC: UITableViewCell {
 extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return cellList.count
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-        
-        cell.imageView.image = UIImage(named: "tempImageSmall")
-        return cell
+        if imageNameText.count == 0{
+                    return cellList[0]
+                }
+                else{
+                    print(indexPath.row)
+                switch indexPath.row {
+                case indexPath.row:
+                    cellList[indexPath.row].setData(image: imageNameText[indexPath.row], title: titleText[indexPath.row], tag1: hashTagText[indexPath.row], tag2: hashTagText[indexPath.row], tag3: hashTagText[indexPath.row], hearth: heart[0])
+                    return cellList[indexPath.row]
+                default:
+                    print("Error")
+                }
+            }
+
+        return cellList[indexPath.row]
         
     }
     

@@ -18,7 +18,9 @@ class TabbarVC: UITabBarController {
         configTabbar()
     }
 
+
     private func setTabbarCustomFrame(){
+
         let customTabbar = tabBar
         var newFrame = CGRect(x: 0,
                               y: self.view.frame.size.height-150,
@@ -31,7 +33,7 @@ class TabbarVC: UITabBarController {
         customTabbar.frame = newFrame
     }
     
-  
+    
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         print("didSelected = \(item)")
         if item.title == "작성하기"{
@@ -49,6 +51,7 @@ class TabbarVC: UITabBarController {
     
     
     private func configTabbar(){
+
         let customTabbar = tabBar
         customTabbar.tintColor = .blue
 
@@ -56,6 +59,7 @@ class TabbarVC: UITabBarController {
         let homeVC = homeStoryboard.instantiateViewController(identifier: "HomeVC")
         let homeTab = UINavigationController(rootViewController: homeVC)
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
+        
        
 //        let postStoryboard = UIStoryboard(name: "PostDetail", bundle: nil)
 //        let postTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
