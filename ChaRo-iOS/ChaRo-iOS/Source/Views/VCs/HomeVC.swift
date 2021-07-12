@@ -49,15 +49,25 @@ class HomeVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("뷰디드어피어")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("뷰 윌 어피어")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        print("뷰 디드 디사피어")
+    }
+    
+    
+    
     func setHomeNavigationViewLayout(){
         HomeNavigationView.backgroundColor = .none
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
+   
     
     func getData(){
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
@@ -128,6 +138,7 @@ class HomeVC: UIViewController {
         HomeTableView.registerCustomXib(xibName: "HomeAreaRecommandTVC")
         
     }
+
 }
 
 extension HomeVC : UITableViewDelegate, UITableViewDataSource {
@@ -176,8 +187,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
                     HomeNavigationView.removeShadowView()
+ 
                 }
-               
                 
                } else {
                 HomeNavigationView.backgroundColor = .none
@@ -195,9 +206,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
 //MARK: 내용 구현 부
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        print("ㅎㅇ", bannerData)
-        
         //tableview indexPath
         tableIndex = indexPath
 //MARK: 배너부분 구현
@@ -212,17 +220,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             }
             
             else{
-                
                 if isFirstSetData{
-                    print("홈브씨")
-                    cell.setData(imageName: bannerData[0].bannerImage, title: bannerData[0].bannerTitle, tag: bannerData[0].bannerTag)
-                    cell.setData(imageName: bannerData[1].bannerImage, title: bannerData[1].bannerTitle, tag: bannerData[1].bannerTag)
-                    cell.setData(imageName: bannerData[2].bannerImage, title: bannerData[2].bannerTitle, tag: bannerData[2].bannerTag)
-                    cell.setData(imageName: bannerData[3].bannerImage, title: bannerData[3].bannerTitle, tag: bannerData[3].bannerTag)
+                    for i in 0 ... 3{
+                        cell.setData(imageName: bannerData[i].bannerImage, title: bannerData[i].bannerTitle, tag: bannerData[i].bannerTag)
+                    }
                     isFirstSetData = false
                     return cell
                 }
-         
+
                 
             }
 //MARK: 오늘의 드라이브
@@ -234,34 +239,48 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             else{
-            cell.imageNameText.append(todayData[0].image)
-            cell.imageNameText.append(todayData[1].image)
-            cell.imageNameText.append(todayData[2].image)
-            cell.imageNameText.append(todayData[3].image)
-            //title
-            cell.titleText.append(todayData[0].title)
-            cell.titleText.append(todayData[1].title)
-            cell.titleText.append(todayData[2].title)
-            cell.titleText.append(todayData[3].title)
-            //hashTag
-                cell.hashTagText.append(todayData[0].tags[0].rawValue)
-            cell.hashTagText.append(todayData[0].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[0].tags[2].rawValue)
-            cell.hashTagText.append(todayData[1].tags[0].rawValue)
-            cell.hashTagText.append(todayData[1].tags[1].rawValue)
-            cell.hashTagText.append(todayData[2].tags[0].rawValue)
-            cell.hashTagText.append(todayData[2].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
-            cell.hashTagText.append(todayData[3].tags[0].rawValue)
-            cell.hashTagText.append(todayData[3].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
+                for image in todayData{
+                    cell.imageNameText.append(image.image)
+                }
+                for title in todayData{
+                    cell.titleText.append(title.title)
+                }
+                //해 쉬 태 그
+                for i in 0 ... todayData[0].tags.count-1{
+                    cell.hashTagText1.append(todayData[0].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText1.count == 2{
+                    cell.hashTagText1.append("")
+                }
+                
+                for i in 0 ... todayData[1].tags.count-1{
+                    cell.hashTagText2.append(todayData[1].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText2.count == 2{
+                    cell.hashTagText2.append("")
+                }
+                
+                for i in 0 ... todayData[2].tags.count-1{
+                    cell.hashTagText3.append(todayData[2].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText3.count == 2{
+                    cell.hashTagText3.append("")
+                }
+                
+                for i in 0 ... todayData[3].tags.count-1{
+                    cell.hashTagText4.append(todayData[3].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText4.count == 2{
+                    cell.hashTagText4.append("")
+                }
             //heart
-            cell.heart.append(todayData[0].isFavorite)
-            cell.heart.append(todayData[1].isFavorite)
-            cell.heart.append(todayData[2].isFavorite)
-            cell.heart.append(todayData[3].isFavorite)
-            
-            
+                for heart in todayData{
+                    cell.heart.append(heart.isFavorite)
+                }
             return cell
             }
         
@@ -272,46 +291,61 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
+            
 //MARK: 트렌드
         case 3:
 
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
-            //image
             if trendyData.count == 0{
                 return cell
             }
             else{
-            cell.imageNameText.append(trendyData[0].image)
-            cell.imageNameText.append(trendyData[1].image)
-            cell.imageNameText.append(trendyData[2].image)
-            cell.imageNameText.append(trendyData[3].image)
-            //title
-            cell.titleText.append(trendyData[0].title)
-            cell.titleText.append(trendyData[1].title)
-            cell.titleText.append(trendyData[2].title)
-            cell.titleText.append(trendyData[3].title)
-            //hashTag
-                cell.hashTagText.append(trendyData[0].tags[0].rawValue)
-            cell.hashTagText.append(trendyData[0].tags[1].rawValue)
-            cell.hashTagText.append(trendyData[0].tags[0].rawValue)
-            cell.hashTagText.append(trendyData[1].tags[0].rawValue)
-            cell.hashTagText.append(trendyData[1].tags[1].rawValue)
-            cell.hashTagText.append(trendyData[2].tags[0].rawValue)
-            cell.hashTagText.append(trendyData[2].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
-            cell.hashTagText.append(trendyData[3].tags[0].rawValue)
-            cell.hashTagText.append(trendyData[3].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
-            //heart
-            cell.heart.append(trendyData[0].isFavorite)
-            cell.heart.append(trendyData[1].isFavorite)
-            cell.heart.append(trendyData[2].isFavorite)
+                for image in trendyData{
+                    cell.imageNameText.append(image.image)
+                }
+                for title in trendyData{
+                    cell.titleText.append(title.title)
+                }
+                //해 쉬 태 그
+                for i in 0 ... trendyData[0].tags.count-1{
+                    cell.hashTagText1.append(trendyData[0].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText1.count == 2{
+                    cell.hashTagText1.append("")
+                }
             
+                for i in 0 ... trendyData[1].tags.count-1{
+                    cell.hashTagText2.append(trendyData[1].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText2.count == 2{
+                    cell.hashTagText2.append("")
+                }
+                
+                for i in 0 ... trendyData[2].tags.count-1{
+                    cell.hashTagText3.append(trendyData[2].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText3.count == 2{
+                    cell.hashTagText3.append("")
+                }
+                
+                for i in 0 ... trendyData[3].tags.count-1{
+                    cell.hashTagText4.append(trendyData[3].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText4.count == 2{
+                    cell.hashTagText4.append("")
+                }
+            //heart
+                for heart in trendyData{
+                    cell.heart.append(heart.isFavorite)
+                }
             return cell
             }
-            return cell
 
             
 //MARK: 커스텀 테마
@@ -320,39 +354,55 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
+            cell.headerText = customText
             if customData.count == 0{
                 return cell
             }
             else{
-            cell.imageNameText.append(customData[0].image)
-            cell.imageNameText.append(customData[1].image)
-            cell.imageNameText.append(customData[2].image)
-            cell.imageNameText.append(customData[3].image)
-            //title
-            cell.titleText.append(customData[0].title)
-            cell.titleText.append(customData[1].title)
-            cell.titleText.append(customData[2].title)
-            cell.titleText.append(customData[3].title)
-            //hashTag
-                cell.hashTagText.append(customData[0].tags[0].rawValue)
-            cell.hashTagText.append(customData[0].tags[1].rawValue)
-            cell.hashTagText.append(customData[0].tags[0].rawValue)
-            cell.hashTagText.append(customData[1].tags[0].rawValue)
-            cell.hashTagText.append(customData[1].tags[1].rawValue)
-            cell.hashTagText.append(customData[2].tags[0].rawValue)
-            cell.hashTagText.append(customData[2].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
-            cell.hashTagText.append(customData[3].tags[0].rawValue)
-            cell.hashTagText.append(customData[3].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
-            //heart
-            cell.heart.append(customData[0].isFavorite)
-            cell.heart.append(customData[1].isFavorite)
-            cell.heart.append(customData[2].isFavorite)
+                for image in customData{
+                    cell.imageNameText.append(image.image)
+                }
+                for title in customData{
+                    cell.titleText.append(title.title)
+                }
+                //해 쉬 태 그
+                for i in 0 ... customData[0].tags.count-1{
+                    cell.hashTagText1.append(customData[0].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText1.count == 2{
+                    cell.hashTagText1.append("")
+                }
             
+                for i in 0 ... customData[1].tags.count-1{
+                    cell.hashTagText2.append(customData[1].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText2.count == 2{
+                    cell.hashTagText2.append("")
+                }
+                
+                for i in 0 ... customData[2].tags.count-1{
+                    cell.hashTagText3.append(customData[2].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText3.count == 2{
+                    cell.hashTagText3.append("")
+                }
+                
+                for i in 0 ... customData[3].tags.count-1{
+                    cell.hashTagText4.append(customData[3].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText4.count == 2{
+                    cell.hashTagText4.append("")
+                }
+            //heart
+                for heart in customData{
+                    cell.heart.append(heart.isFavorite)
+                }
             return cell
             }
-            return cell
            
 //MARK: 로컬 테마
         case 5:
@@ -360,8 +410,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
-            
-            if customData.count == 0{
+            cell.headerText = localText
+            print("로컬 뷰 시작")
+            if localData.count == 0{
                 return cell
             }
             else{
@@ -371,28 +422,46 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 for title in localData{
                     cell.titleText.append(title.title)
                 }
-            //hashTag
-                //포문 세번 돌리자 ㅋ
-                cell.hashTagText.append(customData[0].tags[0].rawValue)
-            cell.hashTagText.append(customData[0].tags[1].rawValue)
-            cell.hashTagText.append(customData[0].tags[0].rawValue)
-            cell.hashTagText.append(customData[1].tags[0].rawValue)
-            cell.hashTagText.append(customData[1].tags[1].rawValue)
-            cell.hashTagText.append(customData[2].tags[0].rawValue)
-            cell.hashTagText.append(customData[2].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
-            cell.hashTagText.append(customData[3].tags[0].rawValue)
-            cell.hashTagText.append(customData[3].tags[1].rawValue)
-//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
+                //해 쉬 태 그
+                for i in 0 ... localData[0].tags.count-1{
+                    cell.hashTagText1.append(localData[0].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText1.count == 2{
+                    cell.hashTagText1.append("")
+                }
+            
+                for i in 0 ... localData[1].tags.count-1{
+                    cell.hashTagText2.append(localData[1].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText2.count == 2{
+                    cell.hashTagText2.append("")
+                }
+                
+                for i in 0 ... localData[2].tags.count-1{
+                    cell.hashTagText3.append(localData[2].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText3.count == 2{
+                    cell.hashTagText3.append("")
+                }
+                
+                for i in 0 ... localData[3].tags.count-1{
+                    cell.hashTagText4.append(localData[3].tags[i].rawValue)
+                }
+                
+                if cell.hashTagText4.count == 2{
+                    cell.hashTagText4.append("")
+                }
             //heart
                 for heart in localData{
                     cell.heart.append(heart.isFavorite)
                 }
             return cell
             }
-           
         default:
-            return UITableViewCell()
+            print("Error")
         }
         return UITableViewCell()
     }
@@ -408,9 +477,9 @@ extension HomeVC : IsSelectedCVCDelegate {
         case 3:
             HomePostVC.topText = "요즘 뜨는 드라이브 코스"
         case 4:
-            HomePostVC.topText = "여름맞이 야간 드라이브"
+            HomePostVC.topText = customText
         case 5:
-            HomePostVC.topText = "경기도 드라이브 코스"
+            HomePostVC.topText = localText
         default:
            print("Error")
         }
@@ -426,9 +495,9 @@ extension HomeVC: SeeMorePushDelegate{
         case 3:
             smVC.topText = "요즘 뜨는 드라이브 코스"
         case 4:
-            smVC.topText = "여름맞이 야간 드라이브"
+            smVC.topText = customText
         case 5:
-            smVC.topText = "경기도 드라이브 코스"
+            smVC.topText = localText
         default:
             print("Error")
         }

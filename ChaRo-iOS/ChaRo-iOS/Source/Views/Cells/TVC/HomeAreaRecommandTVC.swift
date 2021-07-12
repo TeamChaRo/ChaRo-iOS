@@ -21,9 +21,12 @@ class HomeAreaRecommandTVC: UITableViewCell {
     
     var imageNameText: [String] = []
     var titleText: [String] = []
-    var hashTagText: [String] = []
+    var hashTagText1: [String] = []
+    var hashTagText2: [String] = []
+    var hashTagText3: [String] = []
+    var hashTagText4: [String] = []
     var heart: [Bool] = []
-    
+    var headerText: String = ""
     var cellList: [CommonCVC] = []
     
     //MARK:- Life Cycle
@@ -33,6 +36,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
         setLabelUI()
         cellInit()
     }
+
     
     //MARK:- default Setting Function Part
     func setCollctionView() {
@@ -58,7 +62,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
     
     func setLabelUI() {
         
-        titleLabel.text = "경기도 드라이브 코스"
+        titleLabel.text = headerText
         moreLabel.text = "더보기"
         
         titleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
@@ -72,13 +76,16 @@ class HomeAreaRecommandTVC: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.selectionStyle = .none
+        titleLabel.text = headerText
+        collectionView.reloadData()
+
 
         
         
     }
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
         buttonDelegate?.seeMorePushDelegate(data: cellTag)
-        collectionView.reloadData()
+
     }
     
     //MARK:- Function
@@ -100,22 +107,25 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if imageNameText.count == 0{
-
-                    return cellList[0]
-                }
-                else{
-                    print(indexPath.row)
-                switch indexPath.row {
-                case indexPath.row:
-                    print("22",imageNameText)
-                    cellList[indexPath.row].setData(image: imageNameText[indexPath.row], title: titleText[indexPath.row], tag1: hashTagText[indexPath.row], tag2: hashTagText[indexPath.row], tag3: hashTagText[indexPath.row], hearth: heart[0])
-                    return cellList[indexPath.row]
-                default:
-                    print("Error")
-                }
+            return cellList[0]
+        }
+        else{
+          
+            switch indexPath.row {
+            case 0:
+                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
+            case 1:
+                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
+            case 2:
+                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
+            case 3:
+                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
+            default:
+                print("Error")
             }
-
-        return cellList[indexPath.row]
+            return cellList[indexPath.row]
+            
+        }
         
     }
     

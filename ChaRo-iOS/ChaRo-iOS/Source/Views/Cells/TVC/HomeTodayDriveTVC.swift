@@ -22,7 +22,10 @@ class HomeTodayDriveTVC: UITableViewCell {
     
     var imageNameText: [String] = []
     var titleText: [String] = []
-    var hashTagText: [String] = []
+    var hashTagText1: [String] = []
+    var hashTagText2: [String] = []
+    var hashTagText3: [String] = []
+    var hashTagText4: [String] = []
     var heart: [Bool] = []
     
     var cellList: [CommonCVC] = []
@@ -95,22 +98,30 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(hashTagText)
-        print("타이틀",titleText)
+
         if imageNameText.count == 0{
             return cellList[0]
         }
         else{
-        switch indexPath.row {
-        case indexPath.row:
-            cellList[indexPath.row].setData(image: imageNameText[indexPath.row], title: titleText[indexPath.row], tag1: hashTagText[indexPath.row], tag2: hashTagText[2], tag3: hashTagText[indexPath.row], hearth: heart[indexPath.row])
+          
+            switch indexPath.row {
+            case 0:
+                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
+            case 1:
+                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
+            case 2:
+                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
+            case 3:
+                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
+            default:
+                print("Error")
+            }
             return cellList[indexPath.row]
-        default:
-            print("Error")
+            
         }
+      
     }
-        return cellList[0]
-    }
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         //나중에 바꿀예정 ..
