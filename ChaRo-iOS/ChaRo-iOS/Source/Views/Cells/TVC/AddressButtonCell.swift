@@ -23,6 +23,8 @@ class AddressButtonCell: UITableViewCell {
     public var searchButton : UIButton = {
         let button = UIButton()
         button.layer.borderWidth = 1
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 47)
         button.layer.borderColor = UIColor.gray20.cgColor
         button.layer.cornerRadius = 20
         button.backgroundColor = .gray10
