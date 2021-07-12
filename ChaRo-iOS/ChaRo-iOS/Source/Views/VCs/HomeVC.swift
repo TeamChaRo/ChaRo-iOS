@@ -360,7 +360,36 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
+            
+            if customData.count == 0{
+                return cell
+            }
+            else{
+                for image in localData{
+                    cell.imageNameText.append(image.image)
+                }
+                for title in localData{
+                    cell.titleText.append(title.title)
+                }
+            //hashTag
+                //포문 세번 돌리자 ㅋ
+                cell.hashTagText.append(customData[0].tags[0].rawValue)
+            cell.hashTagText.append(customData[0].tags[1].rawValue)
+            cell.hashTagText.append(customData[0].tags[0].rawValue)
+            cell.hashTagText.append(customData[1].tags[0].rawValue)
+            cell.hashTagText.append(customData[1].tags[1].rawValue)
+            cell.hashTagText.append(customData[2].tags[0].rawValue)
+            cell.hashTagText.append(customData[2].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
+            cell.hashTagText.append(customData[3].tags[0].rawValue)
+            cell.hashTagText.append(customData[3].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
+            //heart
+                for heart in localData{
+                    cell.heart.append(heart.isFavorite)
+                }
             return cell
+            }
            
         default:
             return UITableViewCell()

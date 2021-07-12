@@ -19,12 +19,19 @@ class HomeAreaRecommandTVC: UITableViewCell {
     //MARK:- Variable
     static let identifier = "HomeAreaRecommandTVC"
     
+    var imageNameText: [String] = []
+    var titleText: [String] = []
+    var hashTagText: [String] = []
+    var heart: [Bool] = []
+    
+    var cellList: [CommonCVC] = []
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollctionView()
         setLabelUI()
+        cellInit()
     }
     
     //MARK:- default Setting Function Part
@@ -34,6 +41,19 @@ class HomeAreaRecommandTVC: UITableViewCell {
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
         
+    }
+    
+    func cellInit(){
+            guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
+            guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
+            guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
+            guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
+        
+        
+        cellList.append(cell1)
+        cellList.append(cell2)
+        cellList.append(cell3)
+        cellList.append(cell4)
     }
     
     func setLabelUI() {
@@ -70,7 +90,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
 extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return cellList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -79,12 +99,23 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-        
-        cell.imageView.image = UIImage(named: "tempImageSmall")
+        if imageNameText.count == 0{
 
-        return cell
+                    return cellList[0]
+                }
+                else{
+                    print(indexPath.row)
+                switch indexPath.row {
+                case indexPath.row:
+                    print("22",imageNameText)
+                    cellList[indexPath.row].setData(image: imageNameText[indexPath.row], title: titleText[indexPath.row], tag1: hashTagText[indexPath.row], tag2: hashTagText[indexPath.row], tag3: hashTagText[indexPath.row], hearth: heart[0])
+                    return cellList[indexPath.row]
+                default:
+                    print("Error")
+                }
+            }
+
+        return cellList[indexPath.row]
         
     }
     
