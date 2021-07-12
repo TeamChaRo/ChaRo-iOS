@@ -6,32 +6,10 @@
 //
 
 import UIKit
-//
-//enum ThemeNames: String {
-//    case 봄 = "spring"
-//    case 여름 = "summer"
-//    case 가을 = "fall"
-//    case 겨울 = "winter"
-//    case 산 = "mountain"
-//    case 바다 = "sea"
-//    case 호수 = "lake"
-//    case 강 = "river"
-//    case 해안도로 = "oceanRoad"
-//    case 벚꽃 = "blossom"
-//    case 단풍 = "maple"
-//    case 여유 = "relax"
-//    case 스피드 = "speed"
-//    case 야경 = "nightView"
-//    case 도심 = "cityView"
-//}
+
 
 var ThemeDic: Dictionary = ["#봄":"spring", "#여름":"summer", "#가을":"fall", "#겨울":"winter", "#산":"mountain", "#바다":"sea", "#호수":"lake", "#강":"river", "#해안도로":"oceanRoad", "#벚꽃":"blossom", "#단풍":"maple", "#여유":"relax", "#스피드":"speed", "#야경":"nightView", "#도심":"cityView"]
 
-//
-//struct ThemeNames {
-//   static let 봄  = "spring"
-//   static let summer = "여름"
-//}
 
 class ThemePostVC: UIViewController {
     
@@ -60,11 +38,7 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
-        
-        //이거 한글이 어떻게 선택되게 하지? . 이렇게
-        print("여기다 : \(selectedTheme)")
-        let themeNames = ThemeDic["\(selectedTheme)"]!
-        getThemeData(theme: themeNames)
+        getThemeData(theme: selectedTheme)
         setTableView()
         setdropDownTableView()
         setTitleLabelUI()
@@ -143,13 +117,14 @@ class ThemePostVC: UIViewController {
     
     //MARK: - 테마 서버 통신
     func getThemeData(theme: String) {
+        
+        let themeNames = ThemeDic["\(theme)"]!
 
-        GetThemeDataService.shared.getThemeInfo(theme: theme) { (response) in
-                    print("VC success ---")
+        GetThemeDataService.shared.getThemeInfo(theme: themeNames) { (response) in
                     switch(response)
                     {
                     case .success(let driveData):
-                        print("succsee final ---")
+                        
                         if let object = driveData as? TotalDrive {
                             self.cellCount = object.totalCourse
                                                     
@@ -232,6 +207,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 cell.setTVCHeight(height: Double(UIScreen.main.bounds.height) * 0.1434)
                 cell.selectionStyle = .none
                 cell.setFirstTheme(name: selectedTheme)
+                cell.themeDelegate = self
                 
                 return cell
                 
@@ -254,10 +230,9 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             case 2:
                 let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
                 cell.selectedDriveList = self.selectedDriveList
-                print("VC에서 PostAllTVC 설정 시 cell count : \(cellCount)")
-                print("VC에서 PostAllTVC 설정 시 cell 배열: \(cell.selectedDriveList)")
                 cell.setCellCount(num: cellCount)
                 cell.collectionView.reloadData()
+                cell.postDelegate = self
                 return cell
                 
             default:
@@ -326,6 +301,24 @@ extension ThemePostVC: SetTitleDelegate {
         dropDownTableView.isHidden = true
         topTVCCell?.setTitle(data: cell.name)
         
+    }
+    
+}
+
+
+extension ThemePostVC: ThemeNetworkDelegate {
+    
+    func setClickedThemeData(themeName: String) {
+        
+        getThemeData(theme: themeName)
+    }
+    
+}
+
+extension ThemePostVC: PostIdDelegate {
+    
+    func sendPostID(data: Int) {
+        print(data)
     }
     
 }

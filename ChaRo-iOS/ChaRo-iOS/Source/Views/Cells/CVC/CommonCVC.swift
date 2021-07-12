@@ -47,6 +47,7 @@ class CommonCVC: UICollectionViewCell {
     
     //MARK: Variable
     var callback : (() -> Void)?
+    var postID: Int = 0
     
     
     //MARK:- Life Cycle
@@ -68,6 +69,7 @@ class CommonCVC: UICollectionViewCell {
     }
     
     func setTagUI() {
+        
         
         let length1 = CGFloat(tagLabel1.text!.count)
         let length2 = CGFloat(tagLabel2.text!.count)
@@ -105,6 +107,33 @@ class CommonCVC: UICollectionViewCell {
     }
 
     //MARK:- Function
+    func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
+        
+        //postID 설정
+        self.postID = postID
+        
+        //제목 설정
+        self.titleLabel.text = title
+        //하트 설정
+        if isFavorite == true {
+            self.heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+        }
+        //태그 설정
+        if tagCount == 2 {
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = ""
+            
+        } else {
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = "#\(tagArr[2])"
+        }
+        
+        setTagUI()
+        
+        
+    }
     
     //MARK:- IBAction
     

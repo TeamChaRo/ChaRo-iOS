@@ -25,7 +25,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="kds-Zc-lX5">
                         <rect key="frame" x="0.0" y="0.0" width="326" height="245"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
                         <rect key="frame" x="0.0" y="245" width="326" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="0cJ-rp-SQW"/>
