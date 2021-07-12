@@ -21,10 +21,7 @@ class SearchPostVC: UIViewController {
     private var imageViewList: [UIImageView] = []
     private var filterData = FilterDatas()
     private var currentList: [String] = []
-    private var stateName = ""
-    private var cityName = ""
-    private var themaName = ""
-    private var cautionName = ""
+    private var filterList : [String] = ["","","",""]
     
     
     //MARK: Component
@@ -173,10 +170,7 @@ class SearchPostVC: UIViewController {
             return
         }
         
-        nextVC.setFilterTagList(list: [stateName,
-                                       cityName,
-                                       themaName,
-                                       cautionName])
+        nextVC.setFilterTagList(list: filterList)
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -215,39 +209,88 @@ extension SearchPostVC {
         print("currentIndex = \(currentIndex)")
         pickerView.selectRow(0, inComponent: 0, animated: true)
         changeCurrentPickerData(index: currentIndex)
+        
         changeToolbarText(index: currentIndex)
         pickerView.reloadComponent(0)
     }
 
-    func changeActiveMode(index: Int){
+
+    func changeFilterActive(index: Int){
         imageViewList[index].image = UIImage(named: "searchBtnSelect")
-        textFieldList[index].text = selectedCurrentText()
+        textFieldList[index].text = filterList[index]
         textFieldList[index].textColor = .mainBlue
-        if index == 0{
-            textFieldList[1].isUserInteractionEnabled = true
-        }
-        changeFindButtonToActive()
     }
     
-    private func selectedCurrentText() -> String {
-        switch currentIndex {
-        case 0:
-            return stateName
-        case 1:
-            return cityName
-        case 2:
-            return themaName
-        case 3:
-            return cautionName
-        default:
-            return "뭔가 잘못됨"
+    func changeCityFilterUnactive(){
+        textFieldList[1].isUserInteractionEnabled = false
+        imageViewList[1].image = UIImage(named: "searchBtnUnselect")
+        textFieldList[1].text = "지역"
+        textFieldList[1].textColor = .gray40
+        filterList[1] = ""
+    }
+    
+ 
+    func canChangeActiveMode() -> Bool{
+        print(filterList)
+        for index in 0..<filterList.count{
+            if index == 0 && filterList[1] != ""{
+                return true
+            }else if index != 0{
+                if filterList[index] != "" && filterList[index] != "선택안함"{
+                    print("이 값은 OK = \(filterList[index]), index = \(index)")
+                    return true
+                }
+            }
+            
+            //4가지 값중 1하나로 들어간 경우
+            
         }
+    
+        return false
+    }
+    
+//    func isCheckWhenClickedState() -> Bool{
+//
+//        for index in 0..<filterList.count{
+//            print("현재보는 값 = \(filterList[index]), index = \(index)")
+//            if index == 0 && filterList[index] != "선택안함"{
+//                return true
+//            }
+//            if filterList[index] != "" && filterList[index] != "선택안함"{
+//                print("이 값은 OK = \(filterList[index]), index = \(index)")
+//                return true
+//            }
+//        }
+//        return false
+//    }
+    
+    func isCheckWhenStateNonValue(){
+        
+        if filterList[1] == ""{
+            textFieldList[1].isUserInteractionEnabled = true
+        }
+        
+        if filterList[0] == "선택안함"{
+            changeCityFilterUnactive()
+        }
+        
+//        if isCheckWhenClickedState(){
+//            changeFindButtonToActive()
+//        }else{
+//            changeFindButtonToUnactive()
+//        }
     }
     
     func changeFindButtonToActive(){
         findButton.isUserInteractionEnabled = true
         findButton.setBackgroundImage(UIImage(named: "searchBtnBlue"), for: .normal)
         findButton.setTitleColor(.white, for: .normal)
+    }
+    
+    func changeFindButtonToUnactive(){
+        findButton.isUserInteractionEnabled = false
+        findButton.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
+        findButton.setTitleColor(.mainBlue, for: .normal)
     }
     
     
@@ -280,8 +323,18 @@ extension SearchPostVC {
     }
     
     @objc func donePresseed(){
-        //dateTextField.text = getKoreaDateTime(date: datePicker.date)
-        changeActiveMode(index: currentIndex)
+        if canChangeActiveMode(){
+            changeFindButtonToActive()
+        }else{
+            changeFindButtonToUnactive()
+        }
+        
+        changeFilterActive(index: currentIndex)
+    
+        if currentIndex == 0{
+            isCheckWhenStateNonValue()
+        }
+        
         self.view.endEditing(true)
     }
     
@@ -290,12 +343,13 @@ extension SearchPostVC {
         case 0:
             currentList = filterData.state
         case 1:
-            currentList = filterData.cityDict[stateName]!
+            currentList = filterData.cityDict[filterList[0]]!
         case 2:
             currentList = filterData.thema
         default:
             currentList = filterData.caution
         }
+        filterList[index] = currentList[0]
     }
     
     
@@ -311,8 +365,6 @@ extension SearchPostVC {
         }
         toolbar.items![0].title = newTitle
     }
-    
-   
 
 }
 
@@ -321,22 +373,16 @@ extension SearchPostVC: UIPickerViewDelegate{
         return currentList[row]
     }
     
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(currentList[row])
-        switch currentIndex{
-        case 0:
-            stateName = currentList[row]
-        case 1:
-            cityName = currentList[row]
-        case 2:
-            themaName = currentList[row]
-        default:
-            cautionName = currentList[row]
+        if row == 0 {
+            filterList[currentIndex] = currentList[0]
+        }else{
+            filterList[currentIndex] = currentList[row-1]
+            filterList[currentIndex] = currentList[row]
         }
     }
-    
-    
-    
 }
 
 extension SearchPostVC: UIPickerViewDataSource{
