@@ -2,7 +2,7 @@
 //  Contants.swift
 //  ChaRo-iOS
 //
-//  Created by 박익범 on 2021/07/12.
+//  Created by 서강준 on 2021/07/12.
 //
 
 import Foundation

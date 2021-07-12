@@ -278,8 +278,8 @@
 				3610A8922693730700EFC794 /* HomeAnimationCVC.swift */,
 				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
 				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,
-				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
 				360937AF2699F15A005392BB /* MyPagePostCVC.swift */,
+				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
 			);
 			path = CVC;
 			sourceTree = "<group>";

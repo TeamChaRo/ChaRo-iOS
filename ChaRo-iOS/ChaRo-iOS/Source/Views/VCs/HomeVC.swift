@@ -4,6 +4,13 @@
 //
 //  Created by 박익범 on 2021/07/01.
 //
+//
+//let banner: [Banner]
+//let todayCharoDrive, trendDrive: [Drive]
+//let customThemeTitle: String
+//let customThemeDrive: [Drive]
+//let localTitle: String
+//let localDrive: [Drive]
 
 import UIKit
 
@@ -19,7 +26,13 @@ class HomeVC: UIViewController {
     
     ///배너 데이타
     var bannerData: [Banner] = []
-    var 
+    var todayData: [Drive] = []
+    var trendyData: [Drive] = []
+    var customData: [Drive] = []
+    var localData: [Drive] = []
+    
+    var customText: String = ""
+    var localText: String = ""
     
     var tableIndex: IndexPath = [0,0]
     override func viewDidLoad() {
@@ -50,12 +63,36 @@ class HomeVC: UIViewController {
                 if let response = data as? HomeDataModel{
                     
                         let data = response.data
-                    print("성공", response.data.trendDrive)
                         //배너 타이틀
                         self.bannerData.append(data.banner[0])
                         self.bannerData.append(data.banner[1])
                         self.bannerData.append(data.banner[2])
                         self.bannerData.append(data.banner[3])
+                    //today 차로
+                    self.todayData.append(data.todayCharoDrive[0])
+                    self.todayData.append(data.todayCharoDrive[1])
+                    self.todayData.append(data.todayCharoDrive[2])
+                    self.todayData.append(data.todayCharoDrive[3])
+                    //trendy 차로
+                    self.trendyData.append(data.trendDrive[0])
+                    self.trendyData.append(data.trendDrive[1])
+                    self.trendyData.append(data.trendDrive[2])
+                    self.trendyData.append(data.trendDrive[3])
+        
+                    //custom 차로
+                    self.customData.append(data.customThemeDrive[0])
+                    self.customData.append(data.customThemeDrive[1])
+                    self.customData.append(data.customThemeDrive[2])
+                    self.customData.append(data.customThemeDrive[3])
+                    self.customText = data.customThemeTitle
+                    //local 차로
+                    self.localData.append(data.localDrive[0])
+                    self.localData.append(data.localDrive[1])
+                    self.localData.append(data.localDrive[2])
+                    self.localData.append(data.localDrive[3])
+                    self.localText = data.localTitle
+                    
+                    
                     DispatchQueue.main.async {
                         print("리로드")
                         self.HomeTableView.reloadData()
@@ -151,12 +188,12 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
-
+    
+//MARK: 내용 구현 부
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //tableview indexPath
         tableIndex = indexPath
-    
-        
+//MARK: 배너부분 구현
         switch indexPath.row {
         case 0:
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
@@ -180,12 +217,46 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
          
                 
             }
-
+//MARK: 오늘의 드라이브
         case 1:
-
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
+            //image
+            if todayData.count == 0{
+                return cell
+            }
+            else{
+            cell.imageNameText.append(todayData[0].image)
+            cell.imageNameText.append(todayData[1].image)
+            cell.imageNameText.append(todayData[2].image)
+            cell.imageNameText.append(todayData[3].image)
+            //title
+            cell.titleText.append(todayData[0].title)
+            cell.titleText.append(todayData[1].title)
+            cell.titleText.append(todayData[2].title)
+            cell.titleText.append(todayData[3].title)
+            //hashTag
+                cell.hashTagText.append(todayData[0].tags[0].rawValue)
+            cell.hashTagText.append(todayData[0].tags[1].rawValue)
+            cell.hashTagText.append(todayData[0].tags[2].rawValue)
+            cell.hashTagText.append(todayData[1].tags[0].rawValue)
+            cell.hashTagText.append(todayData[1].tags[1].rawValue)
+            cell.hashTagText.append(todayData[2].tags[0].rawValue)
+            cell.hashTagText.append(todayData[2].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[2].tags[2].rawValue)
+            cell.hashTagText.append(todayData[3].tags[0].rawValue)
+            cell.hashTagText.append(todayData[3].tags[1].rawValue)
+//            cell.hashTagText.append(todayData[3].tags[2].rawValue)
+            //heart
+            cell.heart.append(todayData[0].isFavorite)
+            cell.heart.append(todayData[1].isFavorite)
+            cell.heart.append(todayData[2].isFavorite)
+            
+            
             return cell
-
+            }
+        
+        
+//MARK: 테마
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
