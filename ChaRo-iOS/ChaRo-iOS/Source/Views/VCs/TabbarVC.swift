@@ -58,28 +58,32 @@ class TabbarVC: UITabBarController {
         let homeTab = UINavigationController(rootViewController: homeVC)
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
        
-//        let postStoryboard = UIStoryboard(name: "PostDetail", bundle: nil)
-//        let postTab = postStoryboard.instantiateViewController(identifier: "PostDetailVC")
-//        postTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
+<<<<<<< HEAD
         
 
+=======
+>>>>>>> develop
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
-//        let createTab = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
         let createTab = UINavigationController(rootViewController: createVC)
         
         createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
         createTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
         
+<<<<<<< HEAD
 
         
+=======
+>>>>>>> develop
         
         let myPageStoryboard = UIStoryboard(name: "MyPage", bundle: nil)
         let myPageTab = myPageStoryboard.instantiateViewController(identifier: "MyPageVC")
         myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
 
+<<<<<<< HEAD
 //
 //        mapTab.tabBarItem.image = UIImage(named: "tabbarIcPostWrite")
 //        mapTab.tabBarItem.title = "작성하기"
@@ -102,6 +106,9 @@ class TabbarVC: UITabBarController {
         
         let tabs = [homeTab, createTab, myPageTab]
 
+=======
+        let tabs = [homeTab,createTab, myPageTab]
+>>>>>>> develop
         
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
