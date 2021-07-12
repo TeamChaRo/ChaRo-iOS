@@ -25,16 +25,41 @@ class HomeSquareTVC: UITableViewCell {
     var ButtonDelegate: SeeMorePushDelegate?
     let cellTag : Int = 3
     
+    var imageNameText: [String] = []
+    var titleText: [String] = []
+    var hashTagText1: [String] = []
+    var hashTagText2: [String] = []
+    var hashTagText3: [String] = []
+    var hashTagText4: [String] = []
+    var heart: [Bool] = []
+    
+    var cellList: [CommonCVC] = []
+    
     //MARK:- Variable
     static let identifier = "HomeSquareTVC"
     
    
+    func cellInit(){
+            guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
+            guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
+            guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
+            guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
+        
+        
+        cellList.append(cell1)
+        cellList.append(cell2)
+        cellList.append(cell3)
+        cellList.append(cell4)
+    }
+    
+    
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollctionView()
         setLabelUI()
+        cellInit()
     }
     
     //MARK:- default Setting Function Part
@@ -63,6 +88,7 @@ class HomeSquareTVC: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.selectionStyle = .none
+        collectionView.reloadData()
     }
     
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
@@ -82,10 +108,31 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return cellList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if imageNameText.count == 0{
+            return cellList[0]
+        }
+        else{
+          
+            switch indexPath.row {
+            case 0:
+                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
+            case 1:
+                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
+            case 2:
+                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
+            case 3:
+                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
+            default:
+                print("Error")
+            }
+            return cellList[indexPath.row]
+            
+        }
+      
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         

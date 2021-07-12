@@ -2,7 +2,7 @@
 //  NetworkResult.swift
 //  ChaRo-iOS
 //
-//  Created by JEN Lee on 2021/07/12.
+//  Created by Jack on 2021/07/12.
 //
 
 import Foundation
