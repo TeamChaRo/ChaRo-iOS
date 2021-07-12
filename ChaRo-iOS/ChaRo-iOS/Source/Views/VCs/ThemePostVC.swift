@@ -6,32 +6,10 @@
 //
 
 import UIKit
-//
-//enum ThemeNames: String {
-//    case 봄 = "spring"
-//    case 여름 = "summer"
-//    case 가을 = "fall"
-//    case 겨울 = "winter"
-//    case 산 = "mountain"
-//    case 바다 = "sea"
-//    case 호수 = "lake"
-//    case 강 = "river"
-//    case 해안도로 = "oceanRoad"
-//    case 벚꽃 = "blossom"
-//    case 단풍 = "maple"
-//    case 여유 = "relax"
-//    case 스피드 = "speed"
-//    case 야경 = "nightView"
-//    case 도심 = "cityView"
-//}
+
 
 var ThemeDic: Dictionary = ["#봄":"spring", "#여름":"summer", "#가을":"fall", "#겨울":"winter", "#산":"mountain", "#바다":"sea", "#호수":"lake", "#강":"river", "#해안도로":"oceanRoad", "#벚꽃":"blossom", "#단풍":"maple", "#여유":"relax", "#스피드":"speed", "#야경":"nightView", "#도심":"cityView"]
 
-//
-//struct ThemeNames {
-//   static let 봄  = "spring"
-//   static let summer = "여름"
-//}
 
 class ThemePostVC: UIViewController {
     
@@ -60,7 +38,6 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
-        //이거 한글이 어떻게 선택되게 하지? . 이렇게
         getThemeData(theme: selectedTheme)
         setTableView()
         setdropDownTableView()
@@ -254,8 +231,6 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             case 2:
                 let cell: ThemePostAllTVC = tableView.dequeueReusableCell(for: indexPath)
                 cell.selectedDriveList = self.selectedDriveList
-                print("VC에서 PostAllTVC 설정 시 cell count : \(cellCount)")
-                print("VC에서 PostAllTVC 설정 시 cell 배열: \(cell.selectedDriveList)")
                 cell.setCellCount(num: cellCount)
                 cell.collectionView.reloadData()
                 return cell
