@@ -114,7 +114,7 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
             switch indexPath.row {
             case 0:
                 if hashTagText1.count == 2{
-                    hashTagText2.append("")
+                    hashTagText1.append("")
                 }
                 cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
             case 1:
