@@ -121,11 +121,10 @@ class ThemePostVC: UIViewController {
         let themeNames = ThemeDic["\(theme)"]!
 
         GetThemeDataService.shared.getThemeInfo(theme: themeNames) { (response) in
-                    print("VC success ---")
                     switch(response)
                     {
                     case .success(let driveData):
-                        print("succsee final ---")
+                        
                         if let object = driveData as? TotalDrive {
                             self.cellCount = object.totalCourse
                                                     
