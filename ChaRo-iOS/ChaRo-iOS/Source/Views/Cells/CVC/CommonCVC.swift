@@ -9,6 +9,7 @@ import UIKit
 
 class CommonCVC: UICollectionViewCell {
 
+    //MARK: IBOutlet
     static let identifier = "CommonCVC"
     
     @IBOutlet weak var imageView: UIImageView!
@@ -41,11 +42,23 @@ class CommonCVC: UICollectionViewCell {
         
         //킹피셔 받아서 이거 처리해야됨
     }
+    @IBOutlet weak var heartButton: UIButton!
     
+    
+    //MARK: Variable
+    var callback : (() -> Void)?
+    var postID: Int = 0
+    
+    
+    //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setLabelUI()
     }
     
+    
+    //MARK:- default Setting Function Part
     func setLabelUI() {
         titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
         tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
@@ -90,11 +103,45 @@ class CommonCVC: UICollectionViewCell {
         tagView2.layer.borderWidth = 1
         tagView3.layer.borderWidth = 1
         
-//        imageView.image = UIImage(named: "tempImageSmall")?.aspectFitImage(inRect: imageView.frame)
-//        imageView.contentMode = .top
-//        imageView.layer.cornerRadius = 10
-//        imageView.clipsToBounds = true
-//        
+
+       
+    }
+
+    //MARK:- Function
+    func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
+        
+        //postID 설정
+        self.postID = postID
+        
+        //제목 설정
+        self.titleLabel.text = title
+        //하트 설정
+        if isFavorite == true {
+            self.heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+        }
+        //태그 설정
+        if tagCount == 2 {
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = ""
+            
+        } else {
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = "#\(tagArr[2])"
+        }
+        
+        setTagUI()
+        
+        
+    }
+    
+    //MARK:- IBAction
+    
+    @IBAction func heartButtonClicked(_ sender: UIButton) {
+        callback?()
     }
     
 }
+
+//MARK:- extension

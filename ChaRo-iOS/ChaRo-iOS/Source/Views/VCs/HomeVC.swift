@@ -38,7 +38,6 @@ class HomeVC: UIViewController {
     var tableIndex: IndexPath = [0,0]
     
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
@@ -528,6 +527,8 @@ extension HomeVC : CollectionViewCellDelegate {
         let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
+        
+        vc.setSelectedTheme(name: (collectionviewcell?.themeLabel.text)!)
         
         self.navigationController?.pushViewController(vc, animated: true)
         
