@@ -21,6 +21,7 @@ class HomeThemeTVC: UITableViewCell {
     
     //MARK:- Variable
     static let identifier = "HomeThemeTVC"
+    var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
     weak var cellDelegate: CollectionViewCellDelegate?
     
     
@@ -61,6 +62,7 @@ class HomeThemeTVC: UITableViewCell {
         
     }
     
+    
     //MARK:- Function
     
 }
@@ -76,7 +78,9 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
-
+        let themeName = themeList[indexPath.row]
+        
+        cell.setThemeTitle(name: themeName)
         return cell
         
     }
@@ -106,6 +110,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
             let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
             self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
         
+
     }
     
     

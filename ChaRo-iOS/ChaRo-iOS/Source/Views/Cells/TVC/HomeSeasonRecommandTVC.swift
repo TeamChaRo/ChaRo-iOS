@@ -72,14 +72,19 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
         cell.imageView.image = UIImage(named: "tempImageSmall")
+        cell.callback = {
+            print("button pressed", indexPath.row)
+            }
         return cell
         
     }

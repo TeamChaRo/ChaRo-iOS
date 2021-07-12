@@ -15,6 +15,8 @@ class HomeVC: UIViewController {
     @IBOutlet weak var homeNavigationSearchButton: UIButton!
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
     var tableIndex: IndexPath = [0,0]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
@@ -217,6 +219,8 @@ extension HomeVC : CollectionViewCellDelegate {
         let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
+        
+        vc.setSelectedTheme(name: (collectionviewcell?.themeLabel.text)!)
         
         self.navigationController?.pushViewController(vc, animated: true)
         

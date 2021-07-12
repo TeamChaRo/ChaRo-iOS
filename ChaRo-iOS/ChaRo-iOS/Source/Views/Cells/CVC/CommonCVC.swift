@@ -9,6 +9,7 @@ import UIKit
 
 class CommonCVC: UICollectionViewCell {
 
+    //MARK: IBOutlet
     static let identifier = "CommonCVC"
     
     @IBOutlet weak var imageView: UIImageView!
@@ -25,14 +26,22 @@ class CommonCVC: UICollectionViewCell {
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
     
+    @IBOutlet weak var heartButton: UIButton!
     
     
+    //MARK: Variable
+    var callback : (() -> Void)?
+    
+    
+    //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setTagUI()
         setLabelUI()
     }
     
+    
+    //MARK:- default Setting Function Part
     func setLabelUI() {
         titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
         tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
@@ -81,11 +90,18 @@ class CommonCVC: UICollectionViewCell {
         tagView2.layer.borderWidth = 1
         tagView3.layer.borderWidth = 1
         
-//        imageView.image = UIImage(named: "tempImageSmall")?.aspectFitImage(inRect: imageView.frame)
-//        imageView.contentMode = .top
-//        imageView.layer.cornerRadius = 10
-//        imageView.clipsToBounds = true
-//        
+
+       
+    }
+
+    //MARK:- Function
+    
+    //MARK:- IBAction
+    
+    @IBAction func heartButtonClicked(_ sender: UIButton) {
+        callback?()
     }
     
 }
+
+//MARK:- extension
