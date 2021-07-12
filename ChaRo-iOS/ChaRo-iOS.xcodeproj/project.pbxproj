@@ -102,7 +102,6 @@
 		3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */; };
 		3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* Extension+UITextFeild.swift */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
-		3CE2A6FC269C977600567395 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FB269C977600567395 /* NetworkResult.swift */; };
 		3CE2A6FE269C977B00567395 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FD269C977B00567395 /* Contants.swift */; };
 		3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */; };
 		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
@@ -240,7 +239,6 @@
 		3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UITableViewCell.swift"; sourceTree = "<group>"; };
 		3CB315702690494700E3A101 /* Extension+UITextFeild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextFeild.swift"; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
-		3CE2A6FB269C977600567395 /* NetworkResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		3CE2A6FD269C977B00567395 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordDataMadel.swift; sourceTree = "<group>"; };
 		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
@@ -343,7 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				3CE2A6FD269C977B00567395 /* Contants.swift */,
-				3CE2A6FB269C977600567395 /* NetworkResult.swift */,
 				3C3AF5EC2690244D0099B684 /* MapService.swift */,
 				36B8B492269B6C10008DC781 /* Contants.swift */,
 				36B8B496269B6E03008DC781 /* HomeDataService.swift */,
@@ -529,7 +526,6 @@
 		3C879BE8268B13B500C41BB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
@@ -748,7 +744,6 @@
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
-				3CE2A6FC269C977600567395 /* NetworkResult.swift in Sources */,
 				F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */,
 				36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */,
 				36B8B493269B6C10008DC781 /* Contants.swift in Sources */,
