@@ -50,19 +50,6 @@ class HomeVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("뷰디드어피어")
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("뷰 윌 어피어")
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        print("뷰 디드 디사피어")
-    }
-    
-    
-    
     func setHomeNavigationViewLayout(){
         HomeNavigationView.backgroundColor = .none
 
@@ -149,7 +136,6 @@ class HomeVC: UIViewController {
         let navigation = UINavigationController(rootViewController: nextVC)
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true, completion: nil)
-        
     }
     
 
@@ -177,10 +163,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         }
         
     }
+    
+  
     func setNavigationViewShadow(){
         //shadowExtension 예제
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //스크롤뷰에 따라서 알파값 조정함
         let userHeight = HomeNavigationView.getDeviceHeight()
