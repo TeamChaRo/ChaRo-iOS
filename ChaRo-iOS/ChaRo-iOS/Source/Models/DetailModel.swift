@@ -21,8 +21,8 @@ struct DetailDataClass: Codable {
 // MARK: - Drive
 struct DetailDrive: Codable {
     let postID: Int
-    let image: String
     let title: String
+    let image: String
     let isFavorite: Bool
     let tags: [String]
 
