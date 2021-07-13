@@ -103,8 +103,10 @@ class CommonCVC: UICollectionViewCell {
         tagView2.layer.borderWidth = 1
         tagView3.layer.borderWidth = 1
         
-
-       
+        
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        
     }
 
     //MARK:- Function

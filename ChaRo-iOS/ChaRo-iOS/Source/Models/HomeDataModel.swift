@@ -35,7 +35,7 @@ struct Drive: Codable {
     let title: String
     let image: String
     let isFavorite: Bool
-    let tags: [Tag]
+    let tags: [String]
 
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
