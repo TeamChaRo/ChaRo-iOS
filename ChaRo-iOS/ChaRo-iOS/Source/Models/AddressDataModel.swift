@@ -9,8 +9,6 @@ import UIKit
 import TMapSDK
 
 struct AddressDataModel: Codable {
-//    var latitude = 0.0
-//    var longtitude = 0.0
     
     var latitude: String = ""
     var longitude: String = ""
@@ -27,6 +25,16 @@ struct AddressDataModel: Codable {
     
     func getPoint() -> CLLocationCoordinate2D{
         return CLLocationCoordinate2D(latitude: Double(latitude)!, longitude: Double(longitude)!)
+    }
+    
+    func getKeywordResult() -> KeywordResult{
+        return KeywordResult(title: title,
+                             address: address,
+                             latitude: latitude,
+                             longitude: longitude,
+                             year: Date.getCurrentYear(),
+                             month: Date.getCurrentMonth(),
+                             day: Date.getCurrentDay())
     }
     
 }
