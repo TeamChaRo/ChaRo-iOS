@@ -110,8 +110,16 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
-            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
+        
+        self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        
+        //홈에서는 선택되었을 때 색이 들어가면 안됨
+        cell?.highLightView.backgroundColor = .systemBackground
+        cell?.themeImageView.layer.borderWidth = 0
+        cell?.themeLabel.textColor = .mainBlack
+        
         
 
     }

@@ -32,6 +32,15 @@ class CommonCVC: UICollectionViewCell {
     //MARK: Variable
     var callback : (() -> Void)?
     var postID: Int = 1
+    var isFavorite: Bool? {
+        didSet {
+            if isFavorite == true {
+                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+            } else {
+                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+            }
+        }
+    }
     
     
     //MARK:- Life Cycle
@@ -130,11 +139,7 @@ class CommonCVC: UICollectionViewCell {
         self.titleLabel.text = title
         
         //하트 설정
-        if isFavorite == true {
-            self.heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
-        } else {
-            self.heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
-        }
+        self.isFavorite = isFavorite
         
         //태그 설정
         if tagCount == 2 {
@@ -156,7 +161,7 @@ class CommonCVC: UICollectionViewCell {
     func likeAction()
     {
         //일단 userId 111로 박아놈
-        LikeService.shared.Like(userId: "111", postId: self.postID) { result in
+        LikeService.shared.Like(userId: "111", postId: self.postID) { [self] result in
             
             switch result
             {
@@ -164,7 +169,7 @@ class CommonCVC: UICollectionViewCell {
                 
                 if let success = success as? Bool {
                     if success {
-                        self.setHeartButton()
+                        isFavorite = !isFavorite!
                     }
                 }
                 
@@ -182,18 +187,18 @@ class CommonCVC: UICollectionViewCell {
         }
     }
     
-    func setHeartButton() {
-        
-        let emptyHeartImage = UIImage(named: "icHeartWhiteLine")
-        let fullHeartImage = UIImage(named: "heart_active")
-        
-        if self.heartButton.currentImage == emptyHeartImage {
-            self.heartButton.setImage(fullHeartImage, for: .normal)
-        } else {
-            self.heartButton.setImage(emptyHeartImage, for: .normal)
-        }
-        
-    }
+//    func setHeartButton() {
+//
+//        let emptyHeartImage = UIImage(named: "icHeartWhiteLine")
+//        let fullHeartImage = UIImage(named: "heart_active")
+//
+//        if self.heartButton.currentImage == emptyHeartImage {
+//            self.heartButton.setImage(fullHeartImage, for: .normal)
+//        } else {
+//            self.heartButton.setImage(emptyHeartImage, for: .normal)
+//        }
+//
+//    }
     
     
     //MARK:- IBAction
@@ -201,6 +206,7 @@ class CommonCVC: UICollectionViewCell {
     @IBAction func heartButtonClicked(_ sender: UIButton) {
         likeAction()
     }
+    
     
 }
 
