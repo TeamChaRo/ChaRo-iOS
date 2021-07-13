@@ -105,6 +105,7 @@
 		3CE2A6FE269C977B00567395 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FD269C977B00567395 /* Contants.swift */; };
 		3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */; };
 		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
+		3CEC010C269DF4E400E9332C /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC010B269DF4E400E9332C /* Extension+Date.swift */; };
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
 		70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */; };
 		70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */; };
@@ -242,6 +243,7 @@
 		3CE2A6FD269C977B00567395 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordDataMadel.swift; sourceTree = "<group>"; };
 		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
+		3CEC010B269DF4E400E9332C /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 		3C879BE4268B139000C41BB8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3CEC010B269DF4E400E9332C /* Extension+Date.swift */,
 				3C879BF0268B149800C41BB8 /* Extension+UICollectionView.swift */,
 				3C879BF2268B14A800C41BB8 /* Extension+UIColor.swift */,
 				3C879BF6268B14E300C41BB8 /* Extension+UIFont.swift */,
@@ -544,9 +547,9 @@
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
 				36BBD928268DE94F008D8AD3 /* HomeVC.swift */,
 				36012A4B2694E55C007F4633 /* HomePostVC.swift */,
+				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */,
-				3C86FAC42694D767009370CD /* SearchKeywordVC.swift */,
 				360937A52699ECEB005392BB /* MyPageVC.swift */,
 				3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */,
 				3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */,
@@ -764,6 +767,7 @@
 				3C7DF0F5269ACE8F0021939C /* FilterDatas.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */,
+				3CEC010C269DF4E400E9332C /* Extension+Date.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
@@ -982,7 +986,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U24ZACT97M;
+				DEVELOPMENT_TEAM = J8A843466G;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
