@@ -21,6 +21,7 @@ class ThemePostThemeTVC: UITableViewCell {
     static let identifier = "ThemePostThemeTVC"
     var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
     var ThemeDic: Dictionary = ["봄":"spring", "여름":"summer", "가을":"fall", "겨울":"winter", "산":"mountain", "바다":"sea", "호수":"lake", "강":"river", "해안도로":"oceanRoad", "벚꽃":"blossom", "단풍":"maple", "여유":"relax", "스피드":"speed", "야경":"nightView", "도심":"cityView"]
+    
     public var tvcHeight : CGFloat = 100
     var themeDelegate: ThemeNetworkDelegate?
     private var firstTheme = ""
