@@ -129,6 +129,10 @@
 		F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */; };
 		F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B93269C95DB009A0C01 /* AddressConfirmVC.swift */; };
 		F4CC1B96269C960C009A0C01 /* AddressConfirm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B95269C960C009A0C01 /* AddressConfirm.storyboard */; };
+		F4CC1B99269D3E67009A0C01 /* CreatePostCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B97269D3E67009A0C01 /* CreatePostCourseTVC.swift */; };
+		F4CC1B9A269D3E67009A0C01 /* CreatePostCourseTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B98269D3E67009A0C01 /* CreatePostCourseTVC.xib */; };
+		F4CC1B9D269D3E7B009A0C01 /* CreatePostThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B9B269D3E7B009A0C01 /* CreatePostThemeTVC.swift */; };
+		F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B9C269D3E7B009A0C01 /* CreatePostThemeTVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -271,6 +275,10 @@
 		F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostPhotosCVC.xib; sourceTree = "<group>"; };
 		F4CC1B93269C95DB009A0C01 /* AddressConfirmVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressConfirmVC.swift; sourceTree = "<group>"; };
 		F4CC1B95269C960C009A0C01 /* AddressConfirm.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddressConfirm.storyboard; sourceTree = "<group>"; };
+		F4CC1B97269D3E67009A0C01 /* CreatePostCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostCourseTVC.swift; sourceTree = "<group>"; };
+		F4CC1B98269D3E67009A0C01 /* CreatePostCourseTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostCourseTVC.xib; sourceTree = "<group>"; };
+		F4CC1B9B269D3E7B009A0C01 /* CreatePostThemeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostThemeTVC.swift; sourceTree = "<group>"; };
+		F4CC1B9C269D3E7B009A0C01 /* CreatePostThemeTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostThemeTVC.xib; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -323,7 +331,9 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */,
+				F4CC1B97269D3E67009A0C01 /* CreatePostCourseTVC.swift */,
 				F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */,
+				F4CC1B9B269D3E7B009A0C01 /* CreatePostThemeTVC.swift */,
 				F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */,
 				70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */,
 				70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */,
@@ -426,7 +436,9 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA832694C7C6009370CD /* AddressButtonCell.xib */,
+				F4CC1B98269D3E67009A0C01 /* CreatePostCourseTVC.xib */,
 				F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */,
+				F4CC1B9C269D3E7B009A0C01 /* CreatePostThemeTVC.xib */,
 				F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */,
 				3C86FA862694C7C6009370CD /* HomeAnimationTVC.xib */,
 				3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */,
@@ -539,7 +551,6 @@
 		3C879BE8268B13B500C41BB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
@@ -666,6 +677,7 @@
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
 				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
+				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
 				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
@@ -696,6 +708,7 @@
 				3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */,
 				3C7DF0F9269AEE910021939C /* SearchResult.storyboard in Resources */,
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
+				F4CC1B9A269D3E67009A0C01 /* CreatePostCourseTVC.xib in Resources */,
 				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
 				F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */,
 				F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */,
@@ -774,9 +787,11 @@
 				70D63E3426963C810036484B /* ThemePostThemeTVC.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
+				F4CC1B99269D3E67009A0C01 /* CreatePostCourseTVC.swift in Sources */,
 				F4CC1B68269B9850009A0C01 /* Extension+UITextView.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
 				36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */,
+				F4CC1B9D269D3E7B009A0C01 /* CreatePostThemeTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3C7DF0F5269ACE8F0021939C /* FilterDatas.swift in Sources */,
