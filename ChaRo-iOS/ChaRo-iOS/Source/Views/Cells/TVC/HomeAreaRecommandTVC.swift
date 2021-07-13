@@ -139,6 +139,15 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
             
         }
         
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+        
+        cell.imageView.image = UIImage(named: "tempImageSmall")
+        cell.callback = {
+            print("button pressed", indexPath.row)
+            }
+
+        return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
