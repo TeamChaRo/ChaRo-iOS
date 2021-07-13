@@ -67,7 +67,7 @@ class AddressButtonCell: UITableViewCell {
     
     public func setAddressText(address: AddressDataModel){
         self.address = address
-        searchButton.setTitle(address.address, for: .normal)
+        searchButton.setTitle(address.title, for: .normal)
         searchButton.setTitleColor(.mainBlack, for: .normal)
         
         if cellType == "도착지"{
