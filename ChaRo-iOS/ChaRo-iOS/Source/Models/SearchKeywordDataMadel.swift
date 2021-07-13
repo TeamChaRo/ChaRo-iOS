@@ -60,4 +60,13 @@ struct SearchHistory: Codable {
 struct KeywordResult: Codable {
     let title, address, latitude, longitude: String
     let year, month, day: String
+
+    func getAddressModel() -> AddressDataModel {
+        return AddressDataModel(latitude: latitude,
+                                longitude: longitude,
+                                address: address,
+                                title: title)
+    }
+    
+    
 }
