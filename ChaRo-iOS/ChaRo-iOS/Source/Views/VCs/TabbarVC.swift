@@ -11,6 +11,8 @@ import UIKit
 class TabbarVC: UITabBarController {
     
     public var addressMainVC: AddressMainVC?
+    public var tabs: [UIViewController] = []
+    private var comeBackIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,25 +36,37 @@ class TabbarVC: UITabBarController {
     }
     
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        selectedViewController = tabs[comeBackIndex]
+    }
+    
+    
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
+        
         if item.title == "작성하기" {
-//            tabBar.isHidden = true
-//            present(viewControllers[1], animated: true, completion: nil)
             let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
             let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
             let createTab = UINavigationController(rootViewController: createVC)
 
             createTab.modalPresentationStyle = .fullScreen
-            self.present(createTab, animated: true, completion: nil)
+            self.present(createTab, animated: false, completion: nil)
+        }else if item.title == "나의차로"{
+            comeBackIndex = 2
+        }else{
+            comeBackIndex = 0
         }
+        
+        print("comeBackIndex = \(comeBackIndex)")
+        
     }
     
     
     private func configTabbar(){
         
-
         let customTabbar = tabBar
         customTabbar.tintColor = .blue
 
@@ -77,7 +91,7 @@ class TabbarVC: UITabBarController {
         myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
 
-        let tabs = [homeTab,createTab, myPageTab]
+        tabs = [homeTab,createTab, myPageTab]
         
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab

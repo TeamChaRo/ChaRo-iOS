@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "icRouteWaypoint.png",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "icRouteWaypoint@2x.png",
+      "scale" : "2x",
+      "idiom" : "universal"
+    },
+    {
+      "scale" : "3x",
+      "filename" : "icRouteWaypoint@3x.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
