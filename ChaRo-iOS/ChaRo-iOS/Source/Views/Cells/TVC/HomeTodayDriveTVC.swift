@@ -10,7 +10,7 @@ import UIKit
 
 
 class HomeTodayDriveTVC: UITableViewCell {
-
+    
     
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,7 +37,7 @@ class HomeTodayDriveTVC: UITableViewCell {
         setLabelUI()
         cellInit()
     }
-
+    
     func cellInit(){
         guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
         guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
@@ -67,9 +67,9 @@ class HomeTodayDriveTVC: UITableViewCell {
         collectionView.registerCustomXib(xibName: "CommonCVC")
         
         collectionView.showsHorizontalScrollIndicator = false
-    
+        
     }
-
+    
     func setLabelUI() {
         
         charoPickLabel.text = "이번주 차로'S PICK"
@@ -99,12 +99,12 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         if imageNameText.count == 0{
             return cellList[0]
         }
         else{
-          
+            
             switch indexPath.row {
             case 0:
                 if hashTagText1.count == 2{
@@ -132,40 +132,38 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
             return cellList[indexPath.row]
             
         }
-      
-    }
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-    
-        cell.imageView.image = UIImage(named: "tempImageBig")
-        cell.callback = {
-                print("button pressed", indexPath)
-            }
-        return cell
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        //나중에 바꿀예정 ..
-        return CGSize(width: 260, height: 256)
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+    
+    cell.imageView.image = UIImage(named: "tempImageBig")
+    cell.callback = {
+    print("button pressed", indexPath)
     }
+    return cell
     
+}
+
+func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+    //나중에 바꿀예정 ..
+    return CGSize(width: 260, height: 256)
+}
+
+
+func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 16
+}
+
+func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    
+    if section == 0 {
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        if section == 0 {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        }
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        
-    }
-    
+    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     
 }
+
+

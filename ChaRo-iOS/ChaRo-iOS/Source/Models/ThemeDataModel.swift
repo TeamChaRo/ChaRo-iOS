@@ -20,17 +20,4 @@ struct TotalDrive: Codable {
     let drive: [Drive]
 }
 
-// MARK: - Drive
-struct Drive: Codable {
-    let postId: Int
-    let title: String
-    let image: String
-    let isFavorite: Bool
-    let tags: [String]
-
-    enum CodingKeys: String, CodingKey {
-        case postId = "postId"
-        case title, image, isFavorite, tags
-    }
-}
 
