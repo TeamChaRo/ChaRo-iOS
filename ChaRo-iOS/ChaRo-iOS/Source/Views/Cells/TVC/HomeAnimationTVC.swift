@@ -13,17 +13,49 @@ class HomeAnimationTVC: UITableViewCell {
     static let identifier : String = "HomeAnimationTVC"
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     @IBOutlet weak var homeAnimationView: UIView!
-
+    
+    public static var collectionIndexPath: IndexPath = [0,0]
+    
+    var animationCell: [HomeAnimationCVC] = []
+    
+    var imageNameText: [String] = []
+    var titleText: [String] = []
+    var hashTagText: [String] = []
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
+    }
+    
+    func cellInit(){
+        guard let cell1 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,0]) as? HomeAnimationCVC else {return}
+        guard let cell2 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,1]) as? HomeAnimationCVC else {return}
+        guard let cell3 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,2]) as? HomeAnimationCVC else {return}
+        guard let cell4 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,3]) as? HomeAnimationCVC else {return}
+        animationCell.append(cell1)
+        animationCell.append(cell2)
+        animationCell.append(cell3)
+        animationCell.append(cell4)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        animationCollectionview.reloadData()
 
         // Configure the view for the selected state
     }
+    
+   
+    
+    func setData(imageName: String, title: String, tag: String){
+        imageNameText.append(imageName)
+        titleText.append(title)
+        hashTagText.append(tag)
+    }
+    
 //MARK: delegate
     func setDelegate(){
         animationCollectionview.delegate = self
@@ -32,8 +64,8 @@ class HomeAnimationTVC: UITableViewCell {
         let flowLayout = animationCollectionview.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.scrollDirection = .horizontal
         animationCollectionview.registerCustomXib(xibName: "HomeAnimationCVC")
+        cellInit()
     }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //여기부분 약간 수정해야됨,,, 기기마다 몬가 값이 다 다를거같아서 일단 보류!
         let originalCarConstant = carMoveConstraint.constant
@@ -56,14 +88,37 @@ class HomeAnimationTVC: UITableViewCell {
 
 extension HomeAnimationTVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return imageNameText.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let homeAnimationCVC = collectionView.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: indexPath) as? HomeAnimationCVC else {return UICollectionViewCell()}
+        HomeAnimationTVC.collectionIndexPath = indexPath
         
-        homeAnimationCVC.setData(imageName: "dummyMain", titleText: "차로와 함께 즐기는 드라이브 코스", hashTagText: "#날씨도좋은데 #바다와함께라면")
-        return homeAnimationCVC
+        print(hashTagText)
+        if imageNameText.count == 0{
+            return animationCell[0]
+        }
+        else{
+        switch indexPath.row {
+        case 0:
+            animationCell[0].setData(imageName: imageNameText[0], titleText: titleText[0], hashTagText: hashTagText[0])
+            return animationCell[0]
+
+        case 1:
+            animationCell[1].setData(imageName: imageNameText[1], titleText: titleText[1], hashTagText: hashTagText[1])
+            return animationCell[1]
+        case 2:
+            animationCell[2].setData(imageName: imageNameText[2], titleText: titleText[2], hashTagText: hashTagText[2])
+            return animationCell[2]
+        case 3:
+            animationCell[3].setData(imageName: imageNameText[3], titleText: titleText[3], hashTagText: hashTagText[3])
+            return animationCell[3]
+        default:
+            print("Error")
+        }
+        }
+        return animationCell[0]
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -85,3 +140,4 @@ extension HomeAnimationTVC : UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
 }
+
