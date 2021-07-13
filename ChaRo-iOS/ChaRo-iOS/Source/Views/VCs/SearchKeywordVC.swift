@@ -18,6 +18,8 @@ class SearchKeywordVC: UIViewController {
     private var addressType = ""
     private var resultAddress : AddressDataModel?
     private var keywordTableView = UITableView()
+    private var searchHistory : [KeywordResult] = []
+    private var newSearchHistory : [KeywordResult] = []
     private var autoCompletedKeywordList : [AddressDataModel] = []
     
     private var autoList : [String] = []
@@ -50,7 +52,16 @@ class SearchKeywordVC: UIViewController {
         setActionToComponent()
         configureTableView()
         navigationController?.isNavigationBarHidden = true
+        searchTextField.delegate = self
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("search VC - viewWillDisappear")
+        let searchMain = navigationController?.viewControllers[1] as! AddressMainVC
+        searchMain.newSearchHistory = self.newSearchHistory + searchMain.newSearchHistory
+    }
+   
     
     private func setConstraints(){
         view.addSubviews([backButton,
@@ -82,8 +93,6 @@ class SearchKeywordVC: UIViewController {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-        keywordTableView.backgroundColor = .red
-        
     }
     
     public func setAddressModel(model: AddressDataModel, cellType: String, index: Int){
@@ -91,6 +100,12 @@ class SearchKeywordVC: UIViewController {
         searchTextField.placeholder = "\(cellType)를 입력해주세요"
         addressType = cellType
         addressIndex = index
+    }
+    
+    public func setSearchKeyword(list: [KeywordResult]){
+        searchHistory = list
+        print(searchHistory)
+        print("setSearchKeyword")
     }
     
     public func setActionToComponent(){
@@ -106,6 +121,11 @@ class SearchKeywordVC: UIViewController {
         return nextVC
     }
     
+    @objc func dismissAction(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     private func reloadTableViewData(){
         print("reloadTableViewData")
         DispatchQueue.main.sync {
@@ -114,11 +134,7 @@ class SearchKeywordVC: UIViewController {
         }
     }
     
-    @objc func dismissAction(){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
+   
     private func searchKeywordPOI(keywordList: [String], pathData: TMapPathData){
         var results = 0
         var isLoaded = false
@@ -153,13 +169,16 @@ class SearchKeywordVC: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        let pathData = TMapPathData()
-        
-        print("search Keyword = \(textField.text)")
-        let searchKeyword = textField.text!
-        DispatchQueue.global().sync {
-            pathData.autoComplete(searchKeyword){results , error in
-                self.searchKeywordPOI(keywordList: results, pathData: pathData)
+        if textField.text == ""{
+            keywordTableView.reloadData()
+        }else{
+            let pathData = TMapPathData()
+            print("search Keyword = \(textField.text)")
+            let searchKeyword = textField.text!
+            DispatchQueue.global().sync {
+                pathData.autoComplete(searchKeyword){results , error in
+                    self.searchKeywordPOI(keywordList: results, pathData: pathData)
+                }
             }
         }
     }
@@ -175,7 +194,11 @@ extension SearchKeywordVC {
         keywordTableView.dataSource = self
     }
     
-    func setTableViewStyle(){
+    func setTableViewHeader(){
+        var title = ""
+        if autoCompletedKeywordList.count == 0{
+            
+        }
     }
 
 }
@@ -188,25 +211,50 @@ extension SearchKeywordVC: UITableViewDelegate{
 
 extension SearchKeywordVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if autoCompletedKeywordList.count == 0{
+            return searchHistory.count
+        }
         return autoCompletedKeywordList.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchKeywordCell.identifier) as? SearchKeywordCell else {return UITableViewCell()}
         
         if autoCompletedKeywordList.count == 0 {
-            return UITableViewCell()
-        }
-        
-        let address = autoCompletedKeywordList[indexPath.row]
-        cell.setContents(addressMadel: address)
-        cell.presentingMapViewClosure = { address in
-            let nextVC = self.getAddressConfirmVC()
-            nextVC.setPresentingAddress(address: address)
-            nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            let address = searchHistory[indexPath.row]
+            cell.setContents(addressMadel: address)
+            
+            let addressModel = address.getAddressModel()
+            
+            cell.presentingMapViewClosure = { addressModel in
+                let nextVC = self.getAddressConfirmVC()
+                nextVC.setPresentingAddress(address: addressModel)
+                nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }else{
+            let address = autoCompletedKeywordList[indexPath.row]
+            cell.setContents(addressMadel: address)
+            cell.presentingMapViewClosure = { address in
+                self.newSearchHistory.insert(address.getKeywordResult(), at: 0)
+                self.searchHistory.insert(address.getKeywordResult(), at: 0)
+                let nextVC = self.getAddressConfirmVC()
+                nextVC.setPresentingAddress(address: address)
+                nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
         }
         return cell
+    }
+    
+}
+
+extension SearchKeywordVC: UITextFieldDelegate {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        autoCompletedKeywordList = []
+        keywordTableView.reloadData()
+        return true
     }
 }
 
