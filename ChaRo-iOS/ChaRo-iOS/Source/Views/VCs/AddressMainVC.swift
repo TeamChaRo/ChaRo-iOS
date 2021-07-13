@@ -49,12 +49,12 @@ class AddressMainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getSearchKeywords()
         configureTableView()
         setConstraints()
         configureCells()
         initMapView()
         navigationController?.isNavigationBarHidden = true
-        print("view did load = \(tMapView.frame)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -394,9 +394,34 @@ extension AddressMainVC{
 
 }
 
+//MARK: Network
 extension AddressMainVC{
+    private func getSearchKeywords(){
+        print("getSearchKeywords")
+        SearchKeywordService.shared.getSearchKeywords(userId: "111"){response in
+            
+            switch(response){
+            case .success(let resultData):
+                if let data =  resultData as? SearchResultDataModel{
+                    print("-----------!!!!!!!!!!!!!!!!----------------")
+                    dump(data)
+                    print("-------------!!!!!!!!!!!!!!!--------------")
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    
     private func postSearchKeywords(){
-        print(addressList)
+
         var searchKeywordList: [SearchHistory] = []
         
         for item in addressList{
@@ -409,11 +434,11 @@ extension AddressMainVC{
         
         SearchKeywordService.shared.postSearchKeywords(userId: "111",
                                                        keywords: searchKeywordList){ response in
-            print("받아올때 문제?")
+            
             switch(response){
             
             case .success(let resultData):
-                if let data =  resultData as? SearchPostResultDataModel{
+                if let data =  resultData as? SearchResultDataModel{
                     dump(data)
                 }
             case .requestErr(let message):
