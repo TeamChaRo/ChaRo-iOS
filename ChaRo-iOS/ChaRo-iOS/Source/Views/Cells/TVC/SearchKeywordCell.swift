@@ -15,13 +15,23 @@ class SearchKeywordCell: UITableViewCell {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        //style
+        label.font = .notoSansMediumFont(ofSize: 16)
+        label.textColor = .gray50
         return label
     }()
     
     private var addressLabel: UILabel = {
         let label = UILabel()
-        //style
+        label.font = .notoSansRegularFont(ofSize: 14)
+        label.textColor = .gray40
+        return label
+    }()
+    
+    private var dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .notoSansRegularFont(ofSize: 12)
+        label.textColor = .gray30
+        label.text = ""
         return label
     }()
     
@@ -34,37 +44,46 @@ class SearchKeywordCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            addressData?.displayContent()
-            print("selected = \(selected)")
             presentingMapViewClosure?(addressData!)
         }
-        
     }
     
     private func setConstraints(){
         addSubviews([titleLabel,
-                     addressLabel])
+                     addressLabel,
+                     dateLabel])
         
         titleLabel.snp.makeConstraints{
             $0.top.equalTo(self.snp.top).offset(13)
             $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.trailing.equalTo(self.snp.trailing).offset(-70)
         }
         
         addressLabel.snp.makeConstraints{
             $0.top.equalTo(titleLabel.snp.bottom).offset(2)
             $0.leading.equalTo(self.snp.leading).offset(20)
         }
-    }
-    
-    public func setContents(title: String, address: String){
-        titleLabel.text = title
-        addressLabel.text = address
+        
+        dateLabel.snp.makeConstraints{
+            $0.top.equalTo(self.snp.top).offset(16)
+            $0.trailing.equalTo(self.snp.trailing).offset(-20)
+        }
     }
     
     public func setContents(addressMadel: AddressDataModel){
         addressData = addressMadel
         titleLabel.text = addressData!.title
         addressLabel.text = addressData!.address
+        dateLabel.text = ""
     }
     
+    public func setContents(addressMadel: KeywordResult){
+        addressData = AddressDataModel(latitude: addressMadel.latitude,
+                                       longitude: addressMadel.longitude,
+                                       address: addressMadel.address,
+                                       title: addressMadel.title)
+        titleLabel.text = addressData!.title
+        addressLabel.text = addressData!.address
+        dateLabel.text = "\(addressMadel.month). \(addressMadel.day)"
+    }
 }

@@ -23,6 +23,8 @@ class AddressButtonCell: UITableViewCell {
     public var searchButton : UIButton = {
         let button = UIButton()
         button.layer.borderWidth = 1
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 47)
         button.layer.borderColor = UIColor.gray20.cgColor
         button.layer.cornerRadius = 20
         button.backgroundColor = .gray10
@@ -65,7 +67,7 @@ class AddressButtonCell: UITableViewCell {
     
     public func setAddressText(address: AddressDataModel){
         self.address = address
-        searchButton.setTitle(address.address, for: .normal)
+        searchButton.setTitle(address.title, for: .normal)
         searchButton.setTitleColor(.mainBlack, for: .normal)
         
         if cellType == "도착지"{

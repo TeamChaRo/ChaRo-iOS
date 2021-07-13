@@ -13,6 +13,8 @@ class AddressMainVC: UIViewController {
 
     static let identifier = "AddressMainVC"
     public var addressList: [AddressDataModel] = []
+    public var searchHistory : [KeywordResult] = []
+    public var newSearchHistory: [KeywordResult] = []
     public var addressCellList: [AddressButtonCell] = []
     
     private var isFirstFinded = true
@@ -49,12 +51,12 @@ class AddressMainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getSearchKeywords()
         configureTableView()
         setConstraints()
         configureCells()
         initMapView()
         navigationController?.isNavigationBarHidden = true
-        print("view did load = \(tMapView.frame)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +121,7 @@ class AddressMainVC: UIViewController {
     }
     
     @objc func sendDecidedAddress(){
-        print("이렇게 해서 경로가 보여질꺼임")
+        postSearchKeywords()
     }
 }
 
@@ -262,6 +264,7 @@ extension AddressMainVC: AddressButtonCellDelegate{
         nextVC.setAddressModel(model: addressList[index],
                                cellType: cell.cellType,
                                index: index)
+        nextVC.setSearchKeyword(list: newSearchHistory+searchHistory)
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -301,6 +304,9 @@ extension AddressMainVC{
                         polyLine.strokeColor = .mainBlue
                         polyLine.map = self.tMapView
                         self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
+                        print("befor = \(self.tMapView.getCenter())")
+                        self.tMapView.setCenter(self.getOptimizationCenter())
+                        self.tMapView.setZoom(self.tMapView.getZoom()! - 1)
                     }
                 }
             }
@@ -315,10 +321,12 @@ extension AddressMainVC{
     private func inputMarkerInMapView(){
         print("inputMarkerInMapView")
         print("addressList = \(addressList.count)")
-        for item in addressList{
-            if item.title != ""{
-                let point = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longtitude)
+        for index in 0..<addressList.count{
+            
+            if addressList[index].title != ""{
+                let point = addressList[index].getPoint()
                 let marker = TMapMarker(position: point)
+                marker.icon = setMarkerImage(index: index)
                 marker.map = tMapView
                 markerList.append(marker)
                 tMapView.setCenter(point)
@@ -326,8 +334,121 @@ extension AddressMainVC{
         }
     }
     
+    private func setMarkerImage(index: Int) -> UIImage{
+        var image = UIImage()
+        switch index {
+        case 0:
+            image = UIImage(named: "icRouteStart")!
+        case addressList.count - 1:
+        image = UIImage(named: "icRouteEnd")!
+        default:
+            image = UIImage(named: "icRouteWaypoint")!
+        }
+        return image
+    }
     
-  
+    
+    private func getOptimizationCenter() ->  CLLocationCoordinate2D{
+        var minX, minY, maxX, maxY : Double
+        print("addressList.endIndex = \(addressList.endIndex)")
+        let point1 = addressList[0].getPoint()
+        let point2 = addressList[addressList.endIndex-1].getPoint()
+        
+        if point1.latitude < point2.latitude {
+            minX = point1.latitude
+            maxX = point2.latitude
+        }else{
+            maxX = point1.latitude
+            minX = point2.latitude
+        }
+        
+        if point1.longitude < point2.longitude{
+            minY = point1.longitude
+            maxY = point2.longitude
+        }else{
+            maxY = point1.longitude
+            minY = point2.longitude
+        }
+        
+        
+        for i in 1..<addressList.count{
+            let point = addressList[i].getPoint()
+            if point.latitude < minX{
+                minX = point.latitude
+            }else if point.latitude > maxX{
+                maxX = point.latitude
+            }
+            
+            if point.longitude < minY{
+                minY = point.longitude
+            }else if point.longitude > maxY{
+                maxY = point.longitude
+            }
+        }
+        
+        
+        return CLLocationCoordinate2D(latitude: (minX+maxX)/2, longitude: (minY+maxY)/2)
+        
+    }
+
+}
+
+//MARK: Network
+extension AddressMainVC{
+    private func getSearchKeywords(){
+        print("getSearchKeywords")
+        SearchKeywordService.shared.getSearchKeywords(userId: "111"){response in
+            
+            switch(response){
+            case .success(let resultData):
+                if let data =  resultData as? SearchResultDataModel{
+                    self.searchHistory = data.data!
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    
+    private func postSearchKeywords(){
+
+        var searchKeywordList: [SearchHistory] = []
+        
+        for item in newSearchHistory{
+            let address = SearchHistory(title: item.title,
+                                        address: item.address,
+                                        latitude: item.latitude,
+                                        longitude: item.longitude)
+            searchKeywordList.append(address)
+        }
+        
+        SearchKeywordService.shared.postSearchKeywords(userId: "111",
+                                                       keywords: searchKeywordList){ [self] response in
+            
+            switch(response){
+            
+            case .success(let resultData):
+                if let data =  resultData as? SearchResultDataModel{
+                    
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
 }
 
 extension AddressMainVC : TMapViewDelegate{
@@ -343,5 +464,6 @@ extension AddressMainVC : TMapViewDelegate{
     }
     
 }
+
 
 

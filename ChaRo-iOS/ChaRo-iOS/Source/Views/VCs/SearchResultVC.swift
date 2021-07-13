@@ -84,19 +84,11 @@ class SearchResultVC: UIViewController {
         navigationView.layer.shadowColor = UIColor.black.cgColor
         navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
         navigationView.layer.shadowRadius = 6
-
         navigationView.layer.masksToBounds = false
         navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
                                                                            width: UIScreen.getDeviceWidth(),
                                                                            height: UIScreen.getNotchHeight()+58),
                                                        cornerRadius: navigationView.layer.cornerRadius).cgPath
-//
-//
-//        navigationView.getShadowView(color: UIColor.black.cgColor,
-//                                     masksToBounds: false,
-//                                     shadowOffset: CGSize(width: 0, height: 2),
-//                                     shadowRadius: 8,
-//                                     shadowOpacity: 0.3)
     }
     
 }
