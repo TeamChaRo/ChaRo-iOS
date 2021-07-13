@@ -12,6 +12,7 @@ class TabbarVC: UITabBarController {
     
     public var addressMainVC: AddressMainVC?
     public var tabs: [UIViewController] = []
+    private var comeBackIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +35,16 @@ class TabbarVC: UITabBarController {
         customTabbar.frame = newFrame
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
-        selectedViewController = tabs[0]
+        super.viewWillAppear(animated)
+        selectedViewController = tabs[comeBackIndex]
     }
     
     
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
         
         if item.title == "작성하기" {
             let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
@@ -49,7 +54,14 @@ class TabbarVC: UITabBarController {
 
             createTab.modalPresentationStyle = .fullScreen
             self.present(createTab, animated: false, completion: nil)
+        }else if item.title == "나의차로"{
+            comeBackIndex = 2
+        }else{
+            comeBackIndex = 0
         }
+        
+        print("comeBackIndex = \(comeBackIndex)")
+        
     }
     
     
