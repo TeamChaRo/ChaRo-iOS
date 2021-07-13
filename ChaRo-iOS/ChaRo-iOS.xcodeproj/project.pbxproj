@@ -345,7 +345,6 @@
 				36B8B496269B6E03008DC781 /* HomeDataService.swift */,
 				36B8B498269B6E37008DC781 /* NetworkResult.swift */,
 				707A7D4F269C1B900033C40F /* GetThemeDataService.swift */,
-				70636C37269D03A8000B9F8C /* NetworkResult.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -530,8 +529,8 @@
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
-				36B8B494269B6DB8008DC781 /* HomeDataModel.swift */,
 				707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */,
+				36B8B494269B6DB8008DC781 /* HomeDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
