@@ -17,4 +17,9 @@ struct Constants {
     ///1. 홈 데이터 URL 여기에 + 유저 아이디(111,222,333) 해줘야 함 // 일단은 111로 해놓을겡~!
     static let HomeURL = baseURL + "/getMain/111"
     
+    ///2. 더보기 뷰 URL
+    static let detailURL = baseURL + "/preview/like/111/"
+    
+    ///3.더보기 최신순 URL
+    static let newDetailURL = baseURL + "preview/new/111/"
 }

@@ -18,7 +18,7 @@ class HomePostDetailCVC: UICollectionViewCell {
     @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
-    let postCount: Int = 6
+    var postCount: Int = 6
     var delegate: MenuClickedDelegate?
     var selectText: String = "인기순"
     var isButtonClicked: Bool = false

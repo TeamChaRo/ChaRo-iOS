@@ -22,9 +22,11 @@ class HomePostVC: UIViewController {
     var isFirstLoaded = true
     var cellCount = 6
     var topCVCCell : HomePostDetailCVC?
+    var postCell: CommonCVC?
     var topText: String = "요즘 뜨는 드라이브"
     var cellIndexpath: IndexPath = [0,0]
-    
+    var postCount: Int = 0
+    var postData: [DetailModel] = []
     
     static let identifier : String = "HomePostVC"
     
@@ -61,6 +63,7 @@ class HomePostVC: UIViewController {
         setDropdown()
         setRound()
         setNavigationLabel()
+        getData()
 
         // Do any additional setup after loading the view.
     }
@@ -73,16 +76,43 @@ class HomePostVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func getData(){
+        GetDetailDataService.detailData.getRecommendInfo{ (response) in
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? DetailModel{
+                    self.postCount = response.data.totalCourse
+                    self.postData = [response]
+                    
+                    DispatchQueue.main.async {
+                        if self.postData.count > 0{
+                            self.collectionView.reloadData()
+                        }
+                    }
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
     
 }
 extension HomePostVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return postCount+1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-
+        
+      
         cell.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
         
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
@@ -91,12 +121,22 @@ extension HomePostVC: UICollectionViewDelegate{
             isFirstLoaded = false
             topCVCCell = topCell
         }
+        
         switch indexPath.row {
         case 0:
             topCVCCell!.setLabel()
+            topCVCCell?.postCount = postCount
             return topCVCCell!
         default:
-            cell.imageView.image = UIImage(named: "tempImageBig.png")
+            if postData.count == 0{
+                return cell
+            }
+            else{
+                cell.setData(image: postData[0].data.drive[indexPath.row-1].image, title: postData[0].data.drive[indexPath.row-1].title, tagCount: postData[0].data.drive[indexPath.row-1].tags.count, tagArr: postData[0].data.drive[indexPath.row-1].tags, isFavorite: postData[0].data.drive[indexPath.row-1].isFavorite, postID: postData[0].data.drive[indexPath.row-1].postID)
+                topCVCCell?.postCount = postCount
+                return cell
+            }
+
             return cell
         }
         
