@@ -74,7 +74,7 @@ class SearchKeywordCell: UITableViewCell {
         addressData = addressMadel
         titleLabel.text = addressData!.title
         addressLabel.text = addressData!.address
-        
+        dateLabel.text = ""
     }
     
     public func setContents(addressMadel: KeywordResult){
