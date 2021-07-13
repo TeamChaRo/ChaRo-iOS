@@ -274,7 +274,8 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
         case 1:
             return 50
         case 2:
-            return UIScreen.main.bounds.height - 100 - 118
+            //탭바 높이 알아오기
+            return UIScreen.main.bounds.height - 100 - 118 * factor - 120
         default:
             return 118
         }
