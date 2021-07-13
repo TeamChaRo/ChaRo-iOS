@@ -82,7 +82,7 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         //요소 변수화
         let element = selectedDriveList[indexPath.row]
         
-        cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postId)
+        cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postID)
         
         return cell
 

@@ -112,6 +112,10 @@ class CommonCVC: UICollectionViewCell {
     //MARK:- Function
     func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
         
+        //이미지 설정
+        guard let url = URL(string: image) else { return }
+        self.imageView.kf.setImage(with: url)
+        
         //postID 설정
         self.postID = postID
         
