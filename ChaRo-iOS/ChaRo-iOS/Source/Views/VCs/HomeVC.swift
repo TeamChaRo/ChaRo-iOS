@@ -48,12 +48,18 @@ class HomeVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
-    
+     
     func setHomeNavigationViewLayout(){
         HomeNavigationView.backgroundColor = .none
-
+        homeNavigationNotificationButton.addTarget(self, action: #selector(presentOnBoarding), for: .touchUpInside)
     }
     
+    @objc func presentOnBoarding(){
+        let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)
+        nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true, completion: nil)
+    }
    
     
     func getData(){
