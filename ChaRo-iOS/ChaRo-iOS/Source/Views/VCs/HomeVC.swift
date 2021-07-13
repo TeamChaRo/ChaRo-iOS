@@ -50,19 +50,6 @@ class HomeVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("뷰디드어피어")
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("뷰 윌 어피어")
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        print("뷰 디드 디사피어")
-    }
-    
-    
-    
     func setHomeNavigationViewLayout(){
         HomeNavigationView.backgroundColor = .none
 
@@ -149,7 +136,6 @@ class HomeVC: UIViewController {
         let navigation = UINavigationController(rootViewController: nextVC)
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true, completion: nil)
-        
     }
     
 
@@ -177,10 +163,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         }
         
     }
+    
+  
     func setNavigationViewShadow(){
         //shadowExtension 예제
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //스크롤뷰에 따라서 알파값 조정함
         let userHeight = HomeNavigationView.getDeviceHeight()
@@ -260,37 +250,11 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                     cell.titleText.append(title.title)
                 }
                 //해 쉬 태 그
-                for i in 0 ... todayData[0].tags.count-1{
-                    cell.hashTagText1.append(todayData[0].tags[i].rawValue)
-                }
+                cell.hashTagText1 = todayData[0].tags
+                cell.hashTagText2 = todayData[1].tags
+                cell.hashTagText3 = todayData[2].tags
+                cell.hashTagText4 = todayData[3].tags
                 
-                if cell.hashTagText1.count == 2{
-                    cell.hashTagText1.append("")
-                }
-                
-                for i in 0 ... todayData[1].tags.count-1{
-                    cell.hashTagText2.append(todayData[1].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText2.count == 2{
-                    cell.hashTagText2.append("")
-                }
-                
-                for i in 0 ... todayData[2].tags.count-1{
-                    cell.hashTagText3.append(todayData[2].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText3.count == 2{
-                    cell.hashTagText3.append("")
-                }
-                
-                for i in 0 ... todayData[3].tags.count-1{
-                    cell.hashTagText4.append(todayData[3].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText4.count == 2{
-                    cell.hashTagText4.append("")
-                }
             //heart
                 for heart in todayData{
                     cell.heart.append(heart.isFavorite)
@@ -323,37 +287,11 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                     cell.titleText.append(title.title)
                 }
                 //해 쉬 태 그
-                for i in 0 ... trendyData[0].tags.count-1{
-                    cell.hashTagText1.append(trendyData[0].tags[i].rawValue)
-                }
+                cell.hashTagText1 = todayData[0].tags
+                cell.hashTagText2 = todayData[1].tags
+                cell.hashTagText3 = todayData[2].tags
+                cell.hashTagText4 = todayData[3].tags
                 
-                if cell.hashTagText1.count == 2{
-                    cell.hashTagText1.append("")
-                }
-            
-                for i in 0 ... trendyData[1].tags.count-1{
-                    cell.hashTagText2.append(trendyData[1].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText2.count == 2{
-                    cell.hashTagText2.append("")
-                }
-                
-                for i in 0 ... trendyData[2].tags.count-1{
-                    cell.hashTagText3.append(trendyData[2].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText3.count == 2{
-                    cell.hashTagText3.append("")
-                }
-                
-                for i in 0 ... trendyData[3].tags.count-1{
-                    cell.hashTagText4.append(trendyData[3].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText4.count == 2{
-                    cell.hashTagText4.append("")
-                }
             //heart
                 for heart in trendyData{
                     cell.heart.append(heart.isFavorite)
@@ -380,37 +318,10 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                     cell.titleText.append(title.title)
                 }
                 //해 쉬 태 그
-                for i in 0 ... customData[0].tags.count-1{
-                    cell.hashTagText1.append(customData[0].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText1.count == 2{
-                    cell.hashTagText1.append("")
-                }
-            
-                for i in 0 ... customData[1].tags.count-1{
-                    cell.hashTagText2.append(customData[1].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText2.count == 2{
-                    cell.hashTagText2.append("")
-                }
-                
-                for i in 0 ... customData[2].tags.count-1{
-                    cell.hashTagText3.append(customData[2].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText3.count == 2{
-                    cell.hashTagText3.append("")
-                }
-                
-                for i in 0 ... customData[3].tags.count-1{
-                    cell.hashTagText4.append(customData[3].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText4.count == 2{
-                    cell.hashTagText4.append("")
-                }
+                cell.hashTagText1 = todayData[0].tags
+                cell.hashTagText2 = todayData[1].tags
+                cell.hashTagText3 = todayData[2].tags
+                cell.hashTagText4 = todayData[3].tags
             //heart
                 for heart in customData{
                     cell.heart.append(heart.isFavorite)
@@ -437,37 +348,10 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                     cell.titleText.append(title.title)
                 }
                 //해 쉬 태 그
-                for i in 0 ... localData[0].tags.count-1{
-                    cell.hashTagText1.append(localData[0].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText1.count == 2{
-                    cell.hashTagText1.append("")
-                }
-            
-                for i in 0 ... localData[1].tags.count-1{
-                    cell.hashTagText2.append(localData[1].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText2.count == 2{
-                    cell.hashTagText2.append("")
-                }
-                
-                for i in 0 ... localData[2].tags.count-1{
-                    cell.hashTagText3.append(localData[2].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText3.count == 2{
-                    cell.hashTagText3.append("")
-                }
-                
-                for i in 0 ... localData[3].tags.count-1{
-                    cell.hashTagText4.append(localData[3].tags[i].rawValue)
-                }
-                
-                if cell.hashTagText4.count == 2{
-                    cell.hashTagText4.append("")
-                }
+                cell.hashTagText1 = todayData[0].tags
+                cell.hashTagText2 = todayData[1].tags
+                cell.hashTagText3 = todayData[2].tags
+                cell.hashTagText4 = todayData[3].tags
             //heart
                 for heart in localData{
                     cell.heart.append(heart.isFavorite)
