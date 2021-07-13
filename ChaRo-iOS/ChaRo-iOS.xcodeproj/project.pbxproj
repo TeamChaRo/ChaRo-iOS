@@ -102,7 +102,6 @@
 		3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */; };
 		3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* Extension+UITextFeild.swift */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
-		70636C38269D03A8000B9F8C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70636C37269D03A8000B9F8C /* NetworkResult.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
@@ -240,7 +239,6 @@
 		3CB315702690494700E3A101 /* Extension+UITextFeild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextFeild.swift"; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		70636C37269D03A8000B9F8C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
@@ -525,7 +523,6 @@
 		3C879BE8268B13B500C41BB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
@@ -741,7 +738,6 @@
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
-				70636C38269D03A8000B9F8C /* NetworkResult.swift in Sources */,
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
