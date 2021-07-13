@@ -132,6 +132,8 @@ class CommonCVC: UICollectionViewCell {
         //하트 설정
         if isFavorite == true {
             self.heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+        } else {
+            self.heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
         }
         
         //태그 설정

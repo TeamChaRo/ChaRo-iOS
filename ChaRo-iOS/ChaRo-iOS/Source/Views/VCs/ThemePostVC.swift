@@ -38,16 +38,19 @@ class ThemePostVC: UIViewController {
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
-        getThemeData(theme: selectedTheme)
         setTableView()
         setdropDownTableView()
         setTitleLabelUI()
         setShaow()
         setTableViewTag()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getThemeData(theme: selectedTheme)
     }
     
     //MARK:- IBAction
@@ -130,7 +133,6 @@ class ThemePostVC: UIViewController {
                                                     
                             if let drive = object.drive as? [Drive] {
                                 self.selectedDriveList = drive
-                                
                             }
                             
                             self.tableView.reloadData()
