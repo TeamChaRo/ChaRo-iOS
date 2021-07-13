@@ -27,6 +27,7 @@ class HomePostVC: UIViewController {
     var cellIndexpath: IndexPath = [0,0]
     var postCount: Int = 0
     var postData: [DetailModel] = []
+    var newPostData: [NewDetailModel] = []
     
     static let identifier : String = "HomePostVC"
     
@@ -102,6 +103,35 @@ class HomePostVC: UIViewController {
             }
         }
     }
+    
+    func getNewData(){
+        GetNewDetailDataService.detailData.getRecommendInfo{ (response) in
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? NewDetailModel{
+                    self.postCount = response.data.totalCourse
+                    self.newPostData = [response]
+                    
+                    DispatchQueue.main.async {
+                        if self.postData.count > 0{
+                            self.collectionView.reloadData()
+                        }
+                    }
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+
     
 }
 extension HomePostVC: UICollectionViewDelegate{
@@ -196,6 +226,10 @@ extension HomePostVC: UITableViewDelegate{
             cell.selectedBackgroundView = bgColorView
             cell.setCellName(name: "최신순")
             cell.delegate = self
+            getNewData()
+            
+            
+            
             return cell
 
         default:

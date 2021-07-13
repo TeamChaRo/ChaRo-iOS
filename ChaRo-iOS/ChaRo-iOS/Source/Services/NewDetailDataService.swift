@@ -52,7 +52,7 @@ struct GetNewDetailDataService
     private func isValidData(data : Data) -> NetworkResult<Any> {
         
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(DetailModel.self, from: data)
+        guard let decodedData = try? decoder.decode(NewDetailModel.self, from: data)
         else {return .pathErr}
         // 우선 PersonDataModel 형태로 decode(해독)을 한번 거칩니다. 실패하면 pathErr
         // 해독에 성공하면 Person data를 success에 넣어줍니다.
