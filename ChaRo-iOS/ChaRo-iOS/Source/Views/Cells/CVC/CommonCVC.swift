@@ -31,7 +31,7 @@ class CommonCVC: UICollectionViewCell {
 
     //MARK: Variable
     var callback : (() -> Void)?
-    var postID: Int = 0
+    var postID: Int = 1
     
     
     //MARK:- Life Cycle
@@ -133,6 +133,7 @@ class CommonCVC: UICollectionViewCell {
         if isFavorite == true {
             self.heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
         }
+        
         //태그 설정
         if tagCount == 2 {
             tagLabel1.text = "#\(tagArr[0])"
@@ -150,10 +151,53 @@ class CommonCVC: UICollectionViewCell {
         
     }
     
+    func likeAction()
+    {
+        //일단 userId 111로 박아놈
+        LikeService.shared.Like(userId: "111", postId: self.postID) { result in
+            
+            switch result
+            {
+            case .success(let success):
+                
+                if let success = success as? Bool {
+                    if success {
+                        self.setHeartButton()
+                    }
+                }
+                
+                
+            case .requestErr(let msg):
+                
+                if let msg = msg as? String {
+                    print(msg)
+                }
+                
+                
+            default :
+                print("ERROR")
+            }
+        }
+    }
+    
+    func setHeartButton() {
+        
+        let emptyHeartImage = UIImage(named: "icHeartWhiteLine")
+        let fullHeartImage = UIImage(named: "heart_active")
+        
+        if self.heartButton.currentImage == emptyHeartImage {
+            self.heartButton.setImage(fullHeartImage, for: .normal)
+        } else {
+            self.heartButton.setImage(emptyHeartImage, for: .normal)
+        }
+        
+    }
+    
+    
     //MARK:- IBAction
     
     @IBAction func heartButtonClicked(_ sender: UIButton) {
-        callback?()
+        likeAction()
     }
     
 }

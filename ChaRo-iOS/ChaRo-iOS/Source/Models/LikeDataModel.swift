@@ -8,6 +8,6 @@
 import Foundation
 
 struct LikeDataModel: Codable {
-    let sucess: Bool
+    let success: Bool
     let msg: String
 }
