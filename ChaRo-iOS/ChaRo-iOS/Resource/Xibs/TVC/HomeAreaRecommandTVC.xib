@@ -63,8 +63,8 @@
                     <constraint firstAttribute="trailing" secondItem="wF3-Yf-bYB" secondAttribute="trailing" id="ane-X5-5LO"/>
                     <constraint firstItem="P9S-oK-K4r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="cg8-D9-h2u"/>
                     <constraint firstItem="wF3-Yf-bYB" firstAttribute="top" secondItem="P9S-oK-K4r" secondAttribute="bottom" constant="14" id="gne-2u-e50"/>
+                    <constraint firstItem="du7-ga-FRg" firstAttribute="centerY" secondItem="Bwq-Eu-ci2" secondAttribute="centerY" id="twd-BB-AyF"/>
                     <constraint firstAttribute="bottom" secondItem="wF3-Yf-bYB" secondAttribute="bottom" id="vny-3s-845"/>
-                    <constraint firstItem="du7-ga-FRg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="xbj-vq-Ycc"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

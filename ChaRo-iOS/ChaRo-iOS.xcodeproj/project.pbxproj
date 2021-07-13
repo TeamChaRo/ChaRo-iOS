@@ -102,6 +102,9 @@
 		3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE7D2692C74200D0AFAF /* Extension+UITableViewCell.swift */; };
 		3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* Extension+UITextFeild.swift */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
+		70636C38269D03A8000B9F8C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70636C37269D03A8000B9F8C /* NetworkResult.swift */; };
+		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
+		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
 		3CE2A6FE269C977B00567395 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FD269C977B00567395 /* Contants.swift */; };
 		3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */; };
 		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
@@ -245,6 +248,9 @@
 		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
 		3CEC010B269DF4E400E9332C /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		70636C37269D03A8000B9F8C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
+		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSeasonRecommandTVC.swift; sourceTree = "<group>"; };
 		70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAreaRecommandTVC.swift; sourceTree = "<group>"; };
@@ -347,6 +353,7 @@
 				36B8B492269B6C10008DC781 /* Contants.swift */,
 				36B8B496269B6E03008DC781 /* HomeDataService.swift */,
 				36B8B498269B6E37008DC781 /* NetworkResult.swift */,
+				707A7D4F269C1B900033C40F /* GetThemeDataService.swift */,
 				3CE2A701269C99CD00567395 /* SearchKeywordService.swift */,
 			);
 			path = Services;
@@ -533,6 +540,7 @@
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
 				3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */,
+				707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */,
 				36B8B494269B6DB8008DC781 /* HomeDataModel.swift */,
 			);
 			path = Models;
@@ -744,6 +752,7 @@
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
+				70636C38269D03A8000B9F8C /* NetworkResult.swift in Sources */,
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
@@ -794,6 +803,7 @@
 				3CE2A6FE269C977B00567395 /* Contants.swift in Sources */,
 				36B8B495269B6DB8008DC781 /* HomeDataModel.swift in Sources */,
 				3C840BF72696F08F001CAFE5 /* Extension+UIScreen.swift in Sources */,
+				707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				F4CC1AE92697570A009A0C01 /* PostPathmapTCV.swift in Sources */,
@@ -804,6 +814,7 @@
 				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
 				3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */,
+				707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */,
 				3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */,
 				3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */,
 			);
