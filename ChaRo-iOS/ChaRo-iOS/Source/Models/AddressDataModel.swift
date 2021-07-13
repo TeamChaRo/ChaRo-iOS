@@ -8,22 +8,33 @@
 import UIKit
 import TMapSDK
 
-struct AddressDataModel {
-    var latitude = 0.0
-    var longtitude = 0.0
-    var address = ""
-    var title = ""
+struct AddressDataModel: Codable {
+    
+    var latitude: String = ""
+    var longitude: String = ""
+    var address: String = ""
+    var title: String = ""
     
     
     func displayContent(){
         print("title = \(title)")
         print("address = \(address)")
         print("latitude = \(latitude)")
-        print("longtitude = \(longtitude)")
+        print("longtitude = \(longitude)")
     }
     
     func getPoint() -> CLLocationCoordinate2D{
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude)
+        return CLLocationCoordinate2D(latitude: Double(latitude)!, longitude: Double(longitude)!)
+    }
+    
+    func getKeywordResult() -> KeywordResult{
+        return KeywordResult(title: title,
+                             address: address,
+                             latitude: latitude,
+                             longitude: longitude,
+                             year: Date.getCurrentYear(),
+                             month: Date.getCurrentMonth(),
+                             day: Date.getCurrentDay())
     }
     
 }

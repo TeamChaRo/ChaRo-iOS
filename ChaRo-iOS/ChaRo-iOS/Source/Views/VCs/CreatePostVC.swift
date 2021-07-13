@@ -130,7 +130,13 @@ extension CreatePostVC {
     
     @objc
     func nextButtonDidTap(sender: UIButton){
-        //TODO: 작성하기 맵뷰와 연결 예정
+        let storyboard = UIStoryboard(name: "AddressMain", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: AddressMainVC.identifier) as? AddressMainVC else {
+            return
+        }
+        vc.setAddressListData(list: [])
+        
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
 }
