@@ -30,9 +30,6 @@ struct SearchKeywordService {
                                      headers: header)
         
         dataRequest.responseData{ dataResponse in
-            print("데이터 받기")
-            dump(dataResponse)
-            
             switch dataResponse.result{
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}

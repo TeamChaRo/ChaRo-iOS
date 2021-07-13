@@ -403,7 +403,6 @@ extension AddressMainVC{
             case .success(let resultData):
                 if let data =  resultData as? SearchResultDataModel{
                     self.searchHistory = data.data!
-                    dump(self.searchHistory)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
