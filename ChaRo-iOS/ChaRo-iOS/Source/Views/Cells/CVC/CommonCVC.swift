@@ -26,25 +26,9 @@ class CommonCVC: UICollectionViewCell {
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
   
-    
-    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
-        
-        imageView.kf.setImage(with: URL(string: image))
-        
-        titleLabel.text = title
-        tagLabel1.text = tag1
-        tagLabel2.text = tag2
-        tagLabel3.text = tag3
-        
-        setTagUI()
-        setLabelUI()
-
-        
-        //킹피셔 받아서 이거 처리해야됨
-    }
     @IBOutlet weak var heartButton: UIButton!
     
-    
+
     //MARK: Variable
     var callback : (() -> Void)?
     var postID: Int = 0
@@ -108,8 +92,31 @@ class CommonCVC: UICollectionViewCell {
         imageView.clipsToBounds = true
         
     }
+    
+    
 
     //MARK:- Function
+    
+    //setData 익범이꺼
+    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
+        
+        imageView.kf.setImage(with: URL(string: image))
+        
+        titleLabel.text = title
+        tagLabel1.text = tag1
+        tagLabel2.text = tag2
+        tagLabel3.text = tag3
+        
+        setTagUI()
+        setLabelUI()
+
+        
+        //킹피셔 받아서 이거 처리해야됨
+    }
+    
+    
+    
+    //setData 지원이꺼
     func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
         
         //이미지 설정
@@ -121,6 +128,7 @@ class CommonCVC: UICollectionViewCell {
         
         //제목 설정
         self.titleLabel.text = title
+        
         //하트 설정
         if isFavorite == true {
             self.heartButton.setImage(UIImage(named: "heart_active"), for: .normal)

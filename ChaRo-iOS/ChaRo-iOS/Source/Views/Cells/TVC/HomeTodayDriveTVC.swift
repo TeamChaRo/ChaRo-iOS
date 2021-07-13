@@ -27,8 +27,11 @@ class HomeTodayDriveTVC: UITableViewCell {
     var hashTagText3: [String] = []
     var hashTagText4: [String] = []
     var heart: [Bool] = []
+    var postID: [Int] = []
     
     var cellList: [CommonCVC] = []
+    
+    var postDelegate: PostIdDelegate?
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -97,6 +100,14 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
         return cellList.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
+        let postid = cell!.postID
+        postDelegate?.sendPostID(data: postid)
+        
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -136,6 +147,7 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
     }
     
 }
+
 
 func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
