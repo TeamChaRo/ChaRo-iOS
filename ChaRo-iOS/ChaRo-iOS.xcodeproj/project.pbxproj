@@ -113,6 +113,7 @@
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */; };
+		F468C0F6269DDA290019B1B3 /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468C0F5269DDA290019B1B3 /* Notification.Name.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
 		F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */; };
 		F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */; };
@@ -255,6 +256,7 @@
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCourseThemeTVC.xib; sourceTree = "<group>"; };
+		F468C0F5269DDA290019B1B3 /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
 		F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVC.swift; sourceTree = "<group>"; };
 		F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostLocationTVC.xib; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				70D63DEC2693938D0036484B /* Extension+UIImage.swift */,
 				3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */,
 				F4CC1B67269B9850009A0C01 /* Extension+UITextView.swift */,
+				F468C0F5269DDA290019B1B3 /* Notification.Name.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -539,7 +542,6 @@
 		3C879BE8268B13B500C41BB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */,
 				3C86F9F7269484E4009370CD /* AddressDataModel.swift */,
 				3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */,
@@ -768,6 +770,7 @@
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
 				70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */,
 				3C7DF0F7269AEE7D0021939C /* SearchResultVC.swift in Sources */,
+				F468C0F6269DDA290019B1B3 /* Notification.Name.swift in Sources */,
 				70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */,
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
 				3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */,
@@ -971,7 +974,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U24ZACT97M;
+				DEVELOPMENT_TEAM = M2BP76V5D4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -982,7 +985,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -999,7 +1002,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U24ZACT97M;
+				DEVELOPMENT_TEAM = M2BP76V5D4;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1011,7 +1014,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

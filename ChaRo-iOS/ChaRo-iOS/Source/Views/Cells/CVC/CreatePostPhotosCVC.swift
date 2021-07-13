@@ -14,7 +14,6 @@ class CreatePostPhotosCVC: UICollectionViewCell {
     // MARK: UIComponent
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "imagePlaceholder")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
@@ -47,7 +46,8 @@ class CreatePostPhotosCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        deleteButton.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
+        plusButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
     }
 
 }
@@ -89,6 +89,20 @@ extension CreatePostPhotosCVC {
             $0.height.equalTo(imageView.snp.height).multipliedBy(heightRatio)
             $0.width.equalTo(deleteButton.snp.height).multipliedBy(1)
         }
+    }
+    
+    func setImageView(image: UIImage = UIImage(named: "imagePlaceholder")!){
+        self.imageView.image = image
+    }
+    
+    @objc
+    func deleteButtonDidTap(_ sender: UIButton){
+        NotificationCenter.default.post(name: .createPostDeletePhotoClicked, object: sender.tag)
+    }
+    
+    @objc
+    func addButtonDidTap(_ sender: UIButton){
+        NotificationCenter.default.post(name: .createPostAddPhotoClicked, object: sender.tag)
     }
     
 }
