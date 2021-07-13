@@ -26,8 +26,9 @@ class HomePostVC: UIViewController {
     var topText: String = "요즘 뜨는 드라이브"
     var cellIndexpath: IndexPath = [0,0]
     var postCount: Int = 0
+    var newPostCount: Int = 0
     var postData: [DetailModel] = []
-    var newPostData: [NewDetailModel] = []
+    var newPostData: [DetailModel] = []
     
     static let identifier : String = "HomePostVC"
     
@@ -65,6 +66,7 @@ class HomePostVC: UIViewController {
         setRound()
         setNavigationLabel()
         getData()
+        getNewData()
 
         // Do any additional setup after loading the view.
     }
@@ -109,7 +111,7 @@ class HomePostVC: UIViewController {
             switch response
             {
             case .success(let data) :
-                if let response = data as? NewDetailModel{
+                if let response = data as? DetailModel{
                     self.postCount = response.data.totalCourse
                     self.newPostData = [response]
                     
@@ -226,10 +228,6 @@ extension HomePostVC: UITableViewDelegate{
             cell.selectedBackgroundView = bgColorView
             cell.setCellName(name: "최신순")
             cell.delegate = self
-            getNewData()
-            
-            
-            
             return cell
 
         default:
@@ -255,6 +253,7 @@ extension HomePostVC: UITableViewDataSource{
 extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
         dropDownTableview.isHidden = false
+
     }
     
 }
@@ -264,6 +263,22 @@ extension HomePostVC: SetTitleDelegate {
         delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)
+        
+        if cell.name == "인기순" {
+            getData()
+            DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+            }
+        }
+        else if cell.name == "최신순"{
+            getNewData()
+            DispatchQueue.main.async {
+                    self.postData = self.newPostData
+                    self.collectionView.reloadData()
+            }
+
+        }
+        
     }
     
 }
