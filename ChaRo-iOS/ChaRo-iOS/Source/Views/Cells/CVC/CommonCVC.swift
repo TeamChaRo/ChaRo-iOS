@@ -9,6 +9,7 @@ import UIKit
 
 class CommonCVC: UICollectionViewCell {
 
+    //MARK: IBOutlet
     static let identifier = "CommonCVC"
     
     @IBOutlet weak var imageView: UIImageView!
@@ -25,27 +26,23 @@ class CommonCVC: UICollectionViewCell {
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
   
+    @IBOutlet weak var heartButton: UIButton!
     
-    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
-        
-        imageView.kf.setImage(with: URL(string: image))
-        
-        titleLabel.text = title
-        tagLabel1.text = tag1
-        tagLabel2.text = tag2
-        tagLabel3.text = tag3
-        
-        setTagUI()
-        setLabelUI()
 
-        
-        //킹피셔 받아서 이거 처리해야됨
-    }
+    //MARK: Variable
+    var callback : (() -> Void)?
+    var postID: Int = 0
     
+    
+    //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setLabelUI()
     }
     
+    
+    //MARK:- default Setting Function Part
     func setLabelUI() {
         titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
         tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
@@ -96,4 +93,69 @@ class CommonCVC: UICollectionViewCell {
         
     }
     
+    
+
+    //MARK:- Function
+    
+    //setData 익범이꺼
+    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
+        
+        imageView.kf.setImage(with: URL(string: image))
+        
+        titleLabel.text = title
+        tagLabel1.text = tag1
+        tagLabel2.text = tag2
+        tagLabel3.text = tag3
+        
+        setTagUI()
+        setLabelUI()
+
+        
+        //킹피셔 받아서 이거 처리해야됨
+    }
+    
+    
+    
+    //setData 지원이꺼
+    func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
+        
+        //이미지 설정
+        guard let url = URL(string: image) else { return }
+        self.imageView.kf.setImage(with: url)
+        
+        //postID 설정
+        self.postID = postID
+        
+        //제목 설정
+        self.titleLabel.text = title
+        
+        //하트 설정
+        if isFavorite == true {
+            self.heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+        }
+        //태그 설정
+        if tagCount == 2 {
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = ""
+            
+        } else {
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = "#\(tagArr[2])"
+        }
+        
+        setTagUI()
+        
+        
+    }
+    
+    //MARK:- IBAction
+    
+    @IBAction func heartButtonClicked(_ sender: UIButton) {
+        callback?()
+    }
+    
 }
+
+//MARK:- extension

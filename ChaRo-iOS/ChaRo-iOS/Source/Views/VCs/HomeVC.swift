@@ -38,7 +38,6 @@ class HomeVC: UIViewController {
     var tableIndex: IndexPath = [0,0]
     
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
@@ -238,6 +237,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         case 1:
 
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.postDelegate = self
             //image
             if todayData.count == 0{
                 return cell
@@ -259,6 +259,13 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 for heart in todayData{
                     cell.heart.append(heart.isFavorite)
                 }
+                
+                
+                //MARK: - 물어보기
+                for id in todayData {
+                    cell.postID.append(id.postID)
+                }
+                
             return cell
             }
         
@@ -413,6 +420,8 @@ extension HomeVC : CollectionViewCellDelegate {
         
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
         
+        vc.setSelectedTheme(name: (collectionviewcell?.themeLabel.text)!)
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
         if let labelText = collectionviewcell?.themeLabel.text {
@@ -423,3 +432,12 @@ extension HomeVC : CollectionViewCellDelegate {
     
 }
 
+
+//postID 넘기기 위한 Delegate 구현
+extension HomeVC: PostIdDelegate {
+    
+    func sendPostID(data: Int) {
+        print(data)
+    }
+    
+}

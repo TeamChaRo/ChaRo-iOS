@@ -15,7 +15,7 @@ class ThemePostDetailTVC: UITableViewCell {
     @IBOutlet weak var selectButton: UIButton!
     
     var selectText : String = "인기순"
-    var postCount: Int = 6
+    var postCount: Int = 0
     var delegate: MenuClickedDelegate?
     var isButtonClicked: Bool = false
     
@@ -39,6 +39,10 @@ class ThemePostDetailTVC: UITableViewCell {
         selectText = data
         selectLabel.text = selectText
         
+    }
+    
+    func setPostCount(data: Int) {
+        self.postCount = data
     }
     
 
