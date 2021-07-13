@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CreatePostCourseTVC: UITableViewCell {
 
@@ -42,17 +43,20 @@ class CreatePostCourseTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configureLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        selectionStyle = .none
     }
     
 }
 
 extension CreatePostCourseTVC {
-    // MARK: Layout
+    // MARK: Layout (셀높이 125)
+    private func configureLayout(){
+        addSubviews([courseTitleView, cityButton, cityLabel, regionButton, regionLabel])
+        
+    }
 }
