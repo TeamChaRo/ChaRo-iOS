@@ -12,7 +12,8 @@ class CreatePostVC: UIViewController {
     
     static let identifier: String = "CreatePostVC"
     
-    var postImages: [String] = []
+    var postImages: [String] = ["ㅇㅇ","ㅇㅇ"]
+    var cellHeights: [CGFloat] = []
 
     //MARK: - components
     let tableView: UITableView = UITableView()
@@ -53,9 +54,10 @@ class CreatePostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
-        setMainViewLayout()
-        configureConponentLayout()
-        applyTitleViewShadow()
+        setMainViewLayout() // Layout
+        configureConponentLayout() // Layout
+        applyTitleViewShadow() // 상단바 그림자 적용
+        initCellHeight()
         
         configureTableView()
     }
@@ -87,6 +89,10 @@ extension CreatePostVC {
         titleView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 10), shadowRadius: 6, shadowOpacity: 0.05)
 
         self.view.bringSubviewToFront(titleView)
+    }
+    
+    func initCellHeight(){
+        cellHeights.append(contentsOf: [89, 255])
     }
     
     // MARK: Layout
@@ -158,23 +164,21 @@ extension CreatePostVC {
 // MARK: - UITableView Extension
 extension CreatePostVC: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0:
-            return UITableView.automaticDimension
-        case 1:
-            return 222+33
-        default:
-            return 89
-        }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[indexPath.row]
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[indexPath.row]
+    }
+    
     
 }
 
 extension CreatePostVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        print("=====\(cellHeights)")
+        return cellHeights.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -195,36 +199,57 @@ extension CreatePostVC: UITableViewDataSource {
 extension CreatePostVC {
     func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell{
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostTitleTVC.identifier) as? CreatePostTitleTVC else { return UITableViewCell() }
+        
         titleCell.delegateCell = self
+        
         return titleCell
     }
     
     func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
-        photoCell.setCollcetionView()
+
+        if postImages.count > 0 {
+            photoCell.photoConfigureLayout()
+            photoCell.setCollcetionView()
+        } else {
+            photoCell.emptyConfigureLayout()
+        }
       
         return photoCell
     }
 }
 
 extension CreatePostVC: PostTitlecTVCDelegate {
-    func updateTextViewHeight(_ cell: CreatePostTitleTVC,_ textView: UITextView,_ height: CGFloat) {
-        print("---")
+    func increaseTextViewHeight(_ cell: CreatePostTitleTVC,_ textView: UITextView) {
         
-        let size = textView.frame.size
-        let newSize = tableView.sizeThatFits(CGSize(width: size.width, height: height))
+        let thisIndexPath = tableView.indexPath(for: cell)!
+        cellHeights[thisIndexPath.row] += 22
         
-        print(tableView.contentSize)
-        
-        if size.height != newSize.height {
-            print(tableView.contentSize)
+        let newSize = tableView.sizeThatFits(CGSize(width: textView.bounds.width,
+                                                    height: CGFloat.greatestFiniteMagnitude))
+        print("늘리기 성공 ㅋ")
+        if textView.bounds.height != newSize.height {
             UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
             tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
-            print(tableView.contentSize)
         }
+    }
+    
+    func decreaseTextViewHeight(_ cell: CreatePostTitleTVC,_ textView: UITextView) {
         
+        let thisIndexPath = tableView.indexPath(for: cell)!
+        cellHeights[thisIndexPath.row] -= 22
         
+        let newSize = tableView.sizeThatFits(CGSize(width: textView.bounds.width,
+                                                    height: CGFloat.greatestFiniteMagnitude))
+        
+        if textView.bounds.height != newSize.height {
+            print("줄이기 성공 ㅋ")
+            UIView.setAnimationsEnabled(false)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+        }
     }
 }

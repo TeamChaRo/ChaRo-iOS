@@ -9,13 +9,15 @@ import UIKit
 import SnapKit
 
 protocol PostTitlecTVCDelegate: class {
-    func updateTextViewHeight(_ cell: CreatePostTitleTVC,_ textView: UITextView,_ height: CGFloat)
+    func increaseTextViewHeight(_ cell: CreatePostTitleTVC,_ textView: UITextView)
+    func decreaseTextViewHeight(_ cell: CreatePostTitleTVC,_ textView: UITextView)
 }
 
 class CreatePostTitleTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostTitleTVC"
     weak var delegateCell: PostTitlecTVCDelegate?
+    var maxLineFlag: Bool = false // 20자 이상 감지
     
     // MARK: UI Components
     let titleTextView: UITextView = {
@@ -30,6 +32,14 @@ class CreatePostTitleTVC: UITableViewCell {
         textView.addPadding(left: 17, right: 17)
         
         return textView
+    }()
+    
+    let warningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "공백 포함 38자 이내로 작성해주세요."
+        label.textColor = UIColor.mainOrange
+        label.font = .notoSansRegularFont(ofSize: 11)
+        return label
     }()
     
     override func awakeFromNib() {
@@ -59,18 +69,21 @@ extension CreatePostTitleTVC: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if titleTextView.text.count > 20 {
-            increaseTitleHight()
-            
+        if !maxLineFlag && titleTextView.text.count == 20 {
+            maxLineFlag = true
+            titleTextView.text += "\n"
             if let delegate = delegateCell {
-                delegate.updateTextViewHeight(self, textView, 64.0)
+                delegate.increaseTextViewHeight(self, textView)
             }
-        } else {
-            decreaseTitleHight()
-            
+        } else if maxLineFlag && titleTextView.text.count <= 20 {
+            maxLineFlag = false
             if let delegate = delegateCell {
-                delegate.updateTextViewHeight(self, textView, 42.0)
+                delegate.decreaseTextViewHeight(self, textView)
             }
+        } else if maxLineFlag && titleTextView.text.count > 38 {
+            setWarningTextField(titleTextView)
+            warningConfigureLayout()
+            print("38자 넘었어유~")
         }
     }
 }
@@ -90,6 +103,15 @@ extension CreatePostTitleTVC {
         }
     }
     
+    func warningConfigureLayout(){
+        addSubview(warningLabel)
+        
+        warningLabel.snp.makeConstraints{
+            $0.top.equalTo(self.titleTextView.snp.bottom).offset(4)
+            $0.leading.equalTo(self.snp.leading).offset(21)
+        }
+    }
+    
     func increaseTitleHight(){
         titleTextView.snp.makeConstraints{
             $0.height.equalTo(64)
@@ -102,5 +124,10 @@ extension CreatePostTitleTVC {
         }
     }
     
+    //MARK: - Function
+    func setWarningTextField(_ textView: UITextView){
+        textView.layer.borderColor = UIColor.mainOrange.cgColor
+        textView.layer.borderWidth = 1
+    }
 }
 

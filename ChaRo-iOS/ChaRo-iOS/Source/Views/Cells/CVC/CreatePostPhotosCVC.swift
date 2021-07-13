@@ -16,7 +16,9 @@ class CreatePostPhotosCVC: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "imagePlaceholder")
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
+        
         return imageView
     }()
     
@@ -45,11 +47,14 @@ class CreatePostPhotosCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
 
 }
 
 extension CreatePostPhotosCVC {
+    
+    // MARK: Layout
     func plusViewConfigureLayout(){
         addSubviews([plusView, plusButton])
         plusView.snp.makeConstraints{
@@ -85,4 +90,5 @@ extension CreatePostPhotosCVC {
             $0.width.equalTo(deleteButton.snp.height).multipliedBy(1)
         }
     }
+    
 }

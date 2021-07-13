@@ -19,7 +19,15 @@ class CreatePostPhotoTVC: UITableViewCell {
         return imageView
     }()
     
-    let collectionView: UICollectionView = UICollectionView()
+    let collectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let heigthRatio: CGFloat = 222/335
+        let width: CGFloat = UIScreen.getDeviceWidth()-40
+        let collectionView = UICollectionView(frame: .init(x: 0, y: 0, width: width, height: width*heigthRatio), collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .white
+        return collectionView
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,10 +42,11 @@ class CreatePostPhotoTVC: UITableViewCell {
 }
 
 extension CreatePostPhotoTVC {
+    
     // MARK: Functions
     func setCollcetionView(){
         collectionView.delegate = self
-//        collectionView.dataSource = self
+        collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: CreatePostPhotosCVC.identifier)
         
         collectionView.showsHorizontalScrollIndicator = false
@@ -54,25 +63,41 @@ extension CreatePostPhotoTVC {
             $0.bottom.equalTo(self.snp.bottom).inset(33)
         }
     }
+    
+    func photoConfigureLayout(){
+        addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints{
+            $0.top.equalTo(self.snp.top)
+            $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.trailing.equalTo(self.snp.trailing).inset(20)
+            $0.bottom.equalTo(self.snp.bottom).inset(33)
+        }
+    }
 }
 
 extension CreatePostPhotoTVC : UICollectionViewDelegate {
     
 }
 
-//extension CreatePostPhotoTVC : UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-////    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-////        <#code#>
-////    }
-////
-////    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-////        <#code#>
-////    }
-//}
+extension CreatePostPhotoTVC : UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatePostPhotosCVC.identifier, for: indexPath) as? CreatePostPhotosCVC else {return UICollectionViewCell() }
+        
+        cell.configureLayout()
+        
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("select imageView")
+    }
+    
+}
 
 extension CreatePostPhotoTVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -86,5 +111,4 @@ extension CreatePostPhotoTVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
 }
