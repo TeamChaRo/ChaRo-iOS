@@ -9,7 +9,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-
 struct SearchKeywordService {
     
     static let shared = SearchKeywordService()
@@ -49,7 +48,7 @@ struct SearchKeywordService {
     func getSearchKeywords(userId : String,
                            completion: @escaping (NetworkResult<Any>) -> Void){
        
-        let dataRequeat = AF.download(Constants.searchKeywordURL+"/111",
+        let dataRequeat = AF.download(Constants.searchKeywordURL+"/\(userId)",
                                       method: .get,
                                       encoding: JSONEncoding.default,
                                       headers: header)
