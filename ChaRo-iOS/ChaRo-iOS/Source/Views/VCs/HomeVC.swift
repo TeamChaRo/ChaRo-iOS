@@ -399,10 +399,16 @@ extension HomeVC: SeeMorePushDelegate{
         switch data {
         case 3:
             smVC.topText = "요즘 뜨는 드라이브 코스"
+            GetDetailDataService.value = "0"
+            GetNewDetailDataService.value = "0"
         case 4:
             smVC.topText = customText
+            GetDetailDataService.value = "1?value=summer"
+            GetNewDetailDataService.value = "1?value=summer"
         case 5:
             smVC.topText = localText
+            GetDetailDataService.value = "2?value=busan"
+            GetNewDetailDataService.value = "2?value=busan"
         default:
             print("Error")
         }
