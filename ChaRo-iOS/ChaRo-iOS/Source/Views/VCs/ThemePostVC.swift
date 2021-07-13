@@ -8,8 +8,6 @@
 import UIKit
 
 
-var ThemeDic: Dictionary = ["#봄":"spring", "#여름":"summer", "#가을":"fall", "#겨울":"winter", "#산":"mountain", "#바다":"sea", "#호수":"lake", "#강":"river", "#해안도로":"oceanRoad", "#벚꽃":"blossom", "#단풍":"maple", "#여유":"relax", "#스피드":"speed", "#야경":"nightView", "#도심":"cityView"]
-
 
 class ThemePostVC: UIViewController {
     
@@ -25,6 +23,9 @@ class ThemePostVC: UIViewController {
     //MARK:- Variable
     static let identifier : String = "HomePostVC"
     var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
+    
+    var ThemeDic: Dictionary = ["봄":"spring", "여름":"summer", "가을":"fall", "겨울":"winter", "산":"mountain", "바다":"sea", "호수":"lake", "강":"river", "해안도로":"oceanRoad", "벚꽃":"blossom", "단풍":"maple", "여유":"relax", "스피드":"speed", "야경":"nightView", "도심":"cityView"]
+    
     var topTVCCell : ThemePostDetailTVC?
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
@@ -121,8 +122,13 @@ class ThemePostVC: UIViewController {
     //MARK: - 테마 서버 통신
     func getThemeData(theme: String) {
         
-        let themeNames = ThemeDic["\(theme)"]!
+        //문자열에서 # 제거
+        let strimmedTheme = theme.trimmingCharacters(in: ["#"])
+        
+        //영어로 변환
+        let themeNames = ThemeDic["\(strimmedTheme)"]!
 
+        //서버에 통신 요청
         GetThemeDataService.shared.getThemeInfo(theme: themeNames) { (response) in
                     switch(response)
                     {

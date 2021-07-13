@@ -34,6 +34,7 @@ class HomeVC: UIViewController {
 
     var customText: String = ""
     var localText: String = ""
+
     
     var tableIndex: IndexPath = [0,0]
     
