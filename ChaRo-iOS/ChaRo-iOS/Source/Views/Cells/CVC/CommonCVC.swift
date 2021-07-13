@@ -37,9 +37,9 @@ class CommonCVC: UICollectionViewCell {
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setLabelUI()
     }
+
     
     
     //MARK:- default Setting Function Part
@@ -149,7 +149,6 @@ class CommonCVC: UICollectionViewCell {
         }
         
         setTagUI()
-        
         
     }
     
