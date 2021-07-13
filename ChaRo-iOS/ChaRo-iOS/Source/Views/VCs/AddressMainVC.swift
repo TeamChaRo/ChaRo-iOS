@@ -13,6 +13,8 @@ class AddressMainVC: UIViewController {
 
     static let identifier = "AddressMainVC"
     public var addressList: [AddressDataModel] = []
+    public var searchHistory : [KeywordResult] = []
+    public var newSearchHistory: [KeywordResult] = []
     public var addressCellList: [AddressButtonCell] = []
     
     private var isFirstFinded = true
@@ -119,8 +121,6 @@ class AddressMainVC: UIViewController {
     }
     
     @objc func sendDecidedAddress(){
-        print("이렇게 해서 경로가 보여질꺼임")
-        
         postSearchKeywords()
     }
 }
@@ -264,6 +264,7 @@ extension AddressMainVC: AddressButtonCellDelegate{
         nextVC.setAddressModel(model: addressList[index],
                                cellType: cell.cellType,
                                index: index)
+        nextVC.setSearchKeyword(list: newSearchHistory+searchHistory)
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -389,8 +390,6 @@ extension AddressMainVC{
         return CLLocationCoordinate2D(latitude: (minX+maxX)/2, longitude: (minY+maxY)/2)
         
     }
-    
-
 
 }
 
@@ -403,9 +402,8 @@ extension AddressMainVC{
             switch(response){
             case .success(let resultData):
                 if let data =  resultData as? SearchResultDataModel{
-                    print("-----------!!!!!!!!!!!!!!!!----------------")
-                    dump(data)
-                    print("-------------!!!!!!!!!!!!!!!--------------")
+                    self.searchHistory = data.data!
+                    dump(self.searchHistory)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -424,7 +422,7 @@ extension AddressMainVC{
 
         var searchKeywordList: [SearchHistory] = []
         
-        for item in addressList{
+        for item in newSearchHistory{
             let address = SearchHistory(title: item.title,
                                         address: item.address,
                                         latitude: item.latitude,
@@ -433,13 +431,13 @@ extension AddressMainVC{
         }
         
         SearchKeywordService.shared.postSearchKeywords(userId: "111",
-                                                       keywords: searchKeywordList){ response in
+                                                       keywords: searchKeywordList){ [self] response in
             
             switch(response){
             
             case .success(let resultData):
                 if let data =  resultData as? SearchResultDataModel{
-                    dump(data)
+                    
                 }
             case .requestErr(let message):
                 print("requestErr", message)
