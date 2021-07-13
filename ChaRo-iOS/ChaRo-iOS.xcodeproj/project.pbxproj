@@ -108,6 +108,10 @@
 		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
 		3CEC010C269DF4E400E9332C /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC010B269DF4E400E9332C /* Extension+Date.swift */; };
 		3CEC010F269E1C0700E9332C /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC010E269E1C0700E9332C /* Contants.swift */; };
+		3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC0110269E259800E9332C /* OnBoardVC.swift */; };
+		3CEC0113269E25AB00E9332C /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC0112269E25AB00E9332C /* OnBoard.storyboard */; };
+		3CEC0116269E277A00E9332C /* OnBoardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC0114269E277A00E9332C /* OnBoardCVC.swift */; };
+		3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC0115269E277A00E9332C /* OnBoardCVC.xib */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
 		70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */; };
@@ -252,6 +256,10 @@
 		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
 		3CEC010B269DF4E400E9332C /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		3CEC010E269E1C0700E9332C /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		3CEC0110269E259800E9332C /* OnBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardVC.swift; sourceTree = "<group>"; };
+		3CEC0112269E25AB00E9332C /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
+		3CEC0114269E277A00E9332C /* OnBoardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardCVC.swift; sourceTree = "<group>"; };
+		3CEC0115269E277A00E9332C /* OnBoardCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardCVC.xib; sourceTree = "<group>"; };
 		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -320,6 +328,7 @@
 				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,
 				360937AF2699F15A005392BB /* MyPagePostCVC.swift */,
 				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
+				3CEC0114269E277A00E9332C /* OnBoardCVC.swift */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -423,8 +432,9 @@
 				3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */,
 				3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */,
 				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
-				360937AC2699EF7B005392BB /* TabbarCVC.xib */,
 				360937B02699F15A005392BB /* MyPagePostCVC.xib */,
+				3CEC0115269E277A00E9332C /* OnBoardCVC.xib */,
+				360937AC2699EF7B005392BB /* TabbarCVC.xib */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -473,6 +483,7 @@
 				3C7DF0F8269AEE910021939C /* SearchResult.storyboard */,
 				70D63E262694E2AA0036484B /* ThemePost.storyboard */,
 				360937A32699E52F005392BB /* MyPage.storyboard */,
+				3CEC0112269E25AB00E9332C /* OnBoard.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -572,6 +583,7 @@
 				3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */,
 				3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */,
 				70D63E242694E13B0036484B /* ThemePostVC.swift */,
+				3CEC0110269E259800E9332C /* OnBoardVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -680,6 +692,8 @@
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
 				36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */,
+				3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */,
+				3CEC0113269E25AB00E9332C /* OnBoard.storyboard in Resources */,
 				3C86FAB72694C7C6009370CD /* NotoSansCJKkr-Medium.otf in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
@@ -779,6 +793,7 @@
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
+				3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */,
 				36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
@@ -787,6 +802,7 @@
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */,
 				3CEC010C269DF4E400E9332C /* Extension+Date.swift in Sources */,
+				3CEC0116269E277A00E9332C /* OnBoardCVC.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
