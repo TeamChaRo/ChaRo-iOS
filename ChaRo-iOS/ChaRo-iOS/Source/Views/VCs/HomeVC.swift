@@ -25,7 +25,6 @@ class HomeVC: UIViewController {
     var isFirstSetData: Bool = true
     
     ///배너 데이타
-    
     var bannerData: [Banner] = []
     var todayData: [Drive] = []
     var trendyData: [Drive] = []
@@ -223,14 +222,17 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setDelegate()
             
-            if bannerData.count == 0{
+            if bannerData.count == 0 {
                 return cell
             }
             
-            else{
-                if isFirstSetData{
-                    for i in 0 ... 3{
-                        cell.setData(imageName: bannerData[i].bannerImage, title: bannerData[i].bannerTitle, tag: bannerData[i].bannerTag)
+            else {
+                
+                //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈려 죽겟다 ....
+                if isFirstSetData {
+                    for i in 0 ... 3 {
+//                        cell.setData(imageName: bannerData[i].bannerImage, title: bannerData[i].bannerTitle, tag: bannerData[i].bannerTag)
+                        cell.setBannerList(inputList: bannerData)
                     }
                     isFirstSetData = false
                     return cell
@@ -247,7 +249,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             if todayData.count == 0{
                 return cell
             }
-            else{
+            else {
                 for image in todayData{
                     cell.imageNameText.append(image.image)
                 }
