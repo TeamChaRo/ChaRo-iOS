@@ -292,27 +292,31 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
+            
             if trendyData.count == 0 {
                 return cell
             }
-            else{
-                for image in trendyData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in trendyData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
+            else {
+                cell.trendyDriveList = trendyData
+//                for image in trendyData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in trendyData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//
+//            //heart
+//                for heart in trendyData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
                 
-            //heart
-                for heart in trendyData{
-                    cell.heart.append(heart.isFavorite)
-                }
             return cell
+                
             }
 
             
