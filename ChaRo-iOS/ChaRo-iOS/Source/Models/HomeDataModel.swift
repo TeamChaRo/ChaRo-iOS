@@ -43,10 +43,3 @@ struct Drive: Codable {
     }
 }
 
-enum Tag: String, Codable {
-    case 바다 = "바다"
-    case 부산 = "부산"
-    case 사람많음 = "사람많음"
-    case 여름 = "여름"
-    case 초보힘듦 = "초보힘듦"
-}

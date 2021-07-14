@@ -25,7 +25,6 @@ class HomeVC: UIViewController {
     var isFirstSetData: Bool = true
     
     ///배너 데이타
-    
     var bannerData: [Banner] = []
     var todayData: [Drive] = []
     var trendyData: [Drive] = []
@@ -63,43 +62,41 @@ class HomeVC: UIViewController {
     }
    
     
-    func getData(){
+    func getData() {
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
             switch response
             {
             case .success(let data) :
-                if let response = data as? HomeDataModel{
+                if let response = data as? HomeDataModel {
                     
                         let data = response.data
-                        //배너 타이틀
-                        self.bannerData.append(data.banner[0])
-                        self.bannerData.append(data.banner[1])
-                        self.bannerData.append(data.banner[2])
-                        self.bannerData.append(data.banner[3])
-                    //today 차로
-                    self.todayData.append(data.todayCharoDrive[0])
-                    self.todayData.append(data.todayCharoDrive[1])
-                    self.todayData.append(data.todayCharoDrive[2])
-                    self.todayData.append(data.todayCharoDrive[3])
-                    //trendy 차로
-                    self.trendyData.append(data.trendDrive[0])
-                    self.trendyData.append(data.trendDrive[1])
-                    self.trendyData.append(data.trendDrive[2])
-                    self.trendyData.append(data.trendDrive[3])
-        
-                    //custom 차로
-                    self.customData.append(data.customThemeDrive[0])
-                    self.customData.append(data.customThemeDrive[1])
-                    self.customData.append(data.customThemeDrive[2])
-                    self.customData.append(data.customThemeDrive[0])
-                    self.customText = data.customThemeTitle
-                    //local 차로
-                    self.localData.append(data.localDrive[0])
-                    self.localData.append(data.localDrive[1])
-                    self.localData.append(data.localDrive[2])
-                    self.localData.append(data.localDrive[3])
-                    self.localText = data.localTitle
+                        
+                    //배너 타이틀
+                    if let banner = data.banner as? [Banner] {
+                        self.bannerData = banner
+                    }
                     
+                    //today 차로
+                    if let today = data.todayCharoDrive as? [Drive] {
+                        self.todayData = today
+                    }
+                    
+                    //trendy 차로
+                    if let trendy = data.trendDrive as? [Drive] {
+                        self.trendyData = trendy
+                    }
+        
+                    //custom 차로 & 텍스트
+                    if let custom = data.customThemeDrive as? [Drive] {
+                        self.customData = custom
+                        self.customText = data.customThemeTitle
+                    }
+                    
+                    //local 차로
+                    if let local = data.localDrive as? [Drive] {
+                        self.localData = local
+                        self.localText = data.localTitle
+                    }
                     
                     DispatchQueue.main.async {
                         print("리로드")
@@ -225,14 +222,17 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setDelegate()
             
-            if bannerData.count == 0{
+            if bannerData.count == 0 {
                 return cell
             }
             
-            else{
-                if isFirstSetData{
-                    for i in 0 ... 3{
-                        cell.setData(imageName: bannerData[i].bannerImage, title: bannerData[i].bannerTitle, tag: bannerData[i].bannerTag)
+            else {
+                
+                //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈리다 ....
+                if isFirstSetData {
+                    for i in 0 ... 3 {
+//                        cell.setData(imageName: bannerData[i].bannerImage, title: bannerData[i].bannerTitle, tag: bannerData[i].bannerTag)
+                        cell.setBannerList(inputList: bannerData)
                     }
                     isFirstSetData = false
                     return cell
@@ -240,49 +240,51 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 
                 
             }
+            
 //MARK: 오늘의 드라이브
         case 1:
 
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
             //image
-            if todayData.count == 0{
+            if todayData.count == 0 {
                 return cell
             }
-            else{
-                for image in todayData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in todayData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
-                
-            //heart
-                for heart in todayData{
-                    cell.heart.append(heart.isFavorite)
-                }
-                
-                
-                //MARK: - 물어보기
-                for id in todayData {
-                    cell.postID.append(id.postID)
-                }
+            else {
+                cell.todayDriveList = todayData
+//                for image in todayData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in todayData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//
+//            //heart
+//                for heart in todayData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
+//
+//
+//                //MARK: - 물어보기
+//                for id in todayData {
+//                    cell.postID.append(id.postID)
+//                }
                 
             return cell
-            }
+            
+        }
         
-        
-
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
+            
             
 //MARK: 트렌드
         case 3:
@@ -290,27 +292,33 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
-            if trendyData.count == 0{
+            cell.postDelegate = self
+            
+
+            if trendyData.count == 0 {
                 return cell
             }
-            else{
-                for image in trendyData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in trendyData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
+            else {
+                cell.trendyDriveList = trendyData
+//                for image in trendyData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in trendyData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//
+//            //heart
+//                for heart in trendyData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
                 
-            //heart
-                for heart in trendyData{
-                    cell.heart.append(heart.isFavorite)
-                }
             return cell
+                
             }
 
             
@@ -320,27 +328,35 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
+            cell.postDelegate = self
+            
             cell.headerText = customText
-            if customData.count == 0{
+            
+            if customData.count == 0 {
                 return cell
             }
-            else{
-                for image in customData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in customData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
-            //heart
-                for heart in customData{
-                    cell.heart.append(heart.isFavorite)
-                }
+            
+            else {
+                cell.customList = customData
+                
+                //MARK: - 이건 어디서 하고 있는 거주ㅣ?
+//                for image in customData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in customData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//            //heart
+//                for heart in customData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
             return cell
+                
             }
            
 //MARK: 로컬 테마
@@ -349,29 +365,36 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
+            cell.postDelegate = self
+            
             cell.headerText = localText
-            print("로컬 뷰 시작")
-            if localData.count == 0{
-                return cell
-            }
-            else{
-                for image in localData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in localData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
-            //heart
-                for heart in localData{
-                    cell.heart.append(heart.isFavorite)
-                }
+            
+            cell.LocelList = localData
+
+            
+//            if localData.count == 0 {
+//                return cell
+//            }
+//            else {
+//                for image in localData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in localData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//            //heart
+//                for heart in localData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
+            
             return cell
-            }
+        
+        
         default:
             print("Error")
         }
@@ -450,7 +473,7 @@ extension HomeVC : CollectionViewCellDelegate {
 extension HomeVC: PostIdDelegate {
     
     func sendPostID(data: Int) {
-        print(data)
+        print("이거임 ~~~~\(data)")
     }
     
 }
