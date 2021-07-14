@@ -105,6 +105,27 @@ extension CreatePostVC {
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
     }
     
+    func postCreatePost(){
+        let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
+        //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        
+        print("===서버통신 시작=====")
+        CreatePostService.shared.createPost(userId: "111", theme: ["하잉","예원"], warning: [true,true,false,false], isParking: true, image: images){ result in
+            switch result {
+            case .success(let message):
+                print(message)
+            case .requestErr(let message):
+                print(message)
+            case .serverErr:
+                print("서버에러")
+            case .networkFail:
+                print("네트워크에러")
+            default:
+                print("몰라에러")
+            }
+        }
+    }
+    
     // MARK: Layout
     func setMainViewLayout(){
         self.view.addSubviews([titleView,tableView])
@@ -164,7 +185,8 @@ extension CreatePostVC {
     
     @objc
     func nextButtonDidTap(sender: UIButton){
-        //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        
+
     }
     
     @objc
