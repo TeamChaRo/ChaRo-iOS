@@ -194,6 +194,22 @@ extension CreatePostVC {
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
+    @objc
+    func addPhotoButtonDidTap(){
+        if #available(iOS 14, *) { // 14이상 부터 쓸 수 있음
+            var configuration = PHPickerConfiguration()
+            configuration.selectionLimit = 6 - selectImages.count // 최대 6개 선택
+            configuration.filter = .images
+            
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+            
+            self.present(picker, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
 }
 
 // MARK: - UITableView Extension
