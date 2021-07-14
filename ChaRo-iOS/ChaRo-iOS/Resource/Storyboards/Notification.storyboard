@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansCJKkr-Medium.otf">
+            <string>NotoSansCJKkr-Medium</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--NotificationVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NotificationVC" id="Y6W-OH-hqX" customClass="NotificationVC" customModule="ChaRo_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VV-8K-pFu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7O-BY-XYf">
+                                        <rect key="frame" x="0.0" y="43" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="4LO-eZ-tcq"/>
+                                            <constraint firstAttribute="height" constant="48" id="Iue-xT-J8J"/>
+                                        </constraints>
+                                        <state key="normal" image="icBackButton"/>
+                                        <connections>
+                                            <action selector="backButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7cC-ng-hRO"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dp-XY-fGh">
+                                        <rect key="frame" x="157" y="54.5" width="100" height="25.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="SLd-DZ-j4s"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Medium" family="Noto Sans CJK KR" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="7qu-Sv-DkV"/>
+                                    <constraint firstItem="j7O-BY-XYf" firstAttribute="leading" secondItem="4VV-8K-pFu" secondAttribute="leading" id="CZ0-sc-aXq"/>
+                                    <constraint firstItem="4dp-XY-fGh" firstAttribute="centerY" secondItem="j7O-BY-XYf" secondAttribute="centerY" id="EaP-6w-s44"/>
+                                    <constraint firstAttribute="bottom" secondItem="j7O-BY-XYf" secondAttribute="bottom" constant="9" id="T7g-cR-HKN"/>
+                                    <constraint firstItem="4dp-XY-fGh" firstAttribute="centerX" secondItem="4VV-8K-pFu" secondAttribute="centerX" id="nv2-Ck-PxT"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notificationImage" translatesAutoresizingMaskIntoConstraints="NO" id="ENR-56-nVz">
+                                <rect key="frame" x="0.0" y="100" width="414" height="291"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="291" id="e11-Ut-mni"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ENR-56-nVz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="JJp-Sf-dCM"/>
+                            <constraint firstItem="4VV-8K-pFu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="PUO-Rf-VWJ"/>
+                            <constraint firstItem="ENR-56-nVz" firstAttribute="top" secondItem="4VV-8K-pFu" secondAttribute="bottom" id="Vf7-Kj-oCf"/>
+                            <constraint firstItem="4VV-8K-pFu" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="cIp-No-dSM"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4VV-8K-pFu" secondAttribute="trailing" id="kUX-6U-kFJ"/>
+                            <constraint firstItem="ENR-56-nVz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wOY-Dr-Z7I"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="headerView" destination="4VV-8K-pFu" id="X7p-ri-OSg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="27.536231884057973" y="30.803571428571427"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icBackButton" width="48" height="48"/>
+        <image name="notificationImage" width="375" height="291.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

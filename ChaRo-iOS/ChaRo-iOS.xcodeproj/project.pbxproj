@@ -10,6 +10,8 @@
 		1BF746D5C8549F4E027525F3 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
+		36071676269F9AE10042256B /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36071675269F9AE10042256B /* Notification.storyboard */; };
+		36071678269F9B030042256B /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36071677269F9B030042256B /* NotificationVC.swift */; };
 		360937A42699E52F005392BB /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 360937A32699E52F005392BB /* MyPage.storyboard */; };
 		360937A62699ECEB005392BB /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360937A52699ECEB005392BB /* MyPageVC.swift */; };
 		360937AD2699EF7B005392BB /* TabbarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360937AB2699EF7B005392BB /* TabbarCVC.swift */; };
@@ -171,6 +173,8 @@
 		31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
+		36071675269F9AE10042256B /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
+		36071677269F9B030042256B /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		360937A32699E52F005392BB /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		360937A52699ECEB005392BB /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		360937AB2699EF7B005392BB /* TabbarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCVC.swift; sourceTree = "<group>"; };
@@ -525,6 +529,7 @@
 				70D63E262694E2AA0036484B /* ThemePost.storyboard */,
 				360937A32699E52F005392BB /* MyPage.storyboard */,
 				3CEC0112269E25AB00E9332C /* OnBoard.storyboard */,
+				36071675269F9AE10042256B /* Notification.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -629,6 +634,7 @@
 				3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */,
 				70D63E242694E13B0036484B /* ThemePostVC.swift */,
 				3CEC0110269E259800E9332C /* OnBoardVC.swift */,
+				36071677269F9B030042256B /* NotificationVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -769,6 +775,7 @@
 				F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */,
 				3C86FAA52694C7C6009370CD /* AddressButtonCell.xib in Resources */,
 				360937B22699F15A005392BB /* MyPagePostCVC.xib in Resources */,
+				36071676269F9AE10042256B /* Notification.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,6 +887,7 @@
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
 				360937B12699F15A005392BB /* MyPagePostCVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
+				36071678269F9B030042256B /* NotificationVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
 				360937AD2699EF7B005392BB /* TabbarCVC.swift in Sources */,
 				36D1E5FD269709F00079BD94 /* HomePostDetailCVC.swift in Sources */,
