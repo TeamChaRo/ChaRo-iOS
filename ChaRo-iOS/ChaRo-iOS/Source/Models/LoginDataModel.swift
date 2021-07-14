@@ -11,11 +11,11 @@ import Foundation
 struct LoginDataModel: Codable {
     let success: Bool
     let msg: String
-    let data: UserData
+    let data: User
 }
 
-// MARK: - User
-struct UserData: Codable {
+// MARK: - UserData
+struct User: Codable {
     let userID, nickname, token: String
 
     enum CodingKeys: String, CodingKey {
