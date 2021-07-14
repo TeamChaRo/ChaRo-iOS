@@ -9,6 +9,8 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+    static let identifier = "LoginVC"
+    
     //MARK: - Component
     private let CharoimageView: UIImageView = {
         let imageView = UIImageView()
@@ -38,6 +40,7 @@ class LoginVC: UIViewController {
         return textField
     }()
     
+
     private let joinButton: UIButton = {
         let button = UIButton()
         return button
@@ -46,7 +49,7 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setConstraints()
         
 
         
@@ -54,4 +57,47 @@ class LoginVC: UIViewController {
     }
     
 
+}
+
+extension LoginVC {
+    func setConstraints() {
+
+        let factor = UIScreen.main.bounds.width / 375
+
+        view.addSubview(CharoimageView)
+        view.addSubview(idBackground)
+        view.addSubview(pwdBackground)
+        
+        view.addSubviews([CharoimageView,
+                          idBackground,
+                          pwdBackground,
+                          idTextField,
+                          pwdTextField,
+                          joinButton])
+
+        CharoimageView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(464 * factor)
+        }
+
+        idBackground.snp.makeConstraints {
+            $0.top.equalTo(CharoimageView.snp.bottom).offset(13)
+            $0.leading.equalToSuperview().offset(14)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(64)
+        }
+        
+        idBackground.snp.makeConstraints {
+            $0.top.equalTo(idBackground.snp.bottom).offset(-5)
+            $0.leading.equalToSuperview().offset(14)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(64)
+        }
+        
+        
+        
+        
+        
+        
+    }
 }
