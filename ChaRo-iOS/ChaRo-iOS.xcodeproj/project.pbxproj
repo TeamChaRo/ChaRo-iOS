@@ -113,6 +113,7 @@
 		3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC0115269E277A00E9332C /* OnBoardCVC.xib */; };
 		703DD830269F3A7E004416A9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 703DD82F269F3A7E004416A9 /* Login.storyboard */; };
 		703DD832269F3B19004416A9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD831269F3B19004416A9 /* LoginVC.swift */; };
+		703DD83A269F810D004416A9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD839269F810D004416A9 /* UserDataModel.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
 		70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */; };
@@ -275,6 +276,7 @@
 		4D2B76801A48969BD8FE6DBF /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		703DD82F269F3A7E004416A9 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		703DD831269F3B19004416A9 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		703DD839269F810D004416A9 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
 		70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDataModel.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */,
 				36CEE5B5269DF9A900974EFF /* DetailModel.swift */,
 				70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */,
+				703DD839269F810D004416A9 /* UserDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* Extension+UIFont.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
+				703DD83A269F810D004416A9 /* UserDataModel.swift in Sources */,
 				F4CC1AE92697570A009A0C01 /* PostPathmapTCV.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,
 				3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */,
