@@ -91,7 +91,7 @@ class HomeVC: UIViewController {
                     self.customData.append(data.customThemeDrive[0])
                     self.customData.append(data.customThemeDrive[1])
                     self.customData.append(data.customThemeDrive[2])
-                    self.customData.append(data.customThemeDrive[3])
+                    self.customData.append(data.customThemeDrive[0])
                     self.customText = data.customThemeTitle
                     //local 차로
                     self.localData.append(data.localDrive[0])

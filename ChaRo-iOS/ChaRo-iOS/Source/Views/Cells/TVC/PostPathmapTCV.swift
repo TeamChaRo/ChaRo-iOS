@@ -44,8 +44,6 @@ extension PostPathmapTCV {
             $0.width.equalTo(mapWidth)
             $0.height.equalTo(self.postMap.snp.width).multipliedBy(multiplier)
         }
-        
-        setMapView()
     }
     
     func setMapView(){
