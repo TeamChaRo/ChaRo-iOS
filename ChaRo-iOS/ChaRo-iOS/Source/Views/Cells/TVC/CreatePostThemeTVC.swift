@@ -30,7 +30,7 @@ class CreatePostThemeTVC: UITableViewCell {
         return button
     }()
     
-    private let themeFirstLabel: UITextField = {
+    private let themeFirstField: UITextField = {
         let textfield = UITextField()
         textfield.text = "테마 1"
         textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
@@ -38,7 +38,7 @@ class CreatePostThemeTVC: UITableViewCell {
         return textfield
     }()
     
-    private let themeSecondLabel: UITextField = {
+    private let themeSecondField: UITextField = {
         let textfield = UITextField()
         textfield.text = "테마 2"
         textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
@@ -46,8 +46,8 @@ class CreatePostThemeTVC: UITableViewCell {
         return textfield
     }()
     
-    private let themeThirdLabel: UITextField = {
-        let label = UITextField()
+    private let themeThirdField: UITextField = {
+        let textfield = UITextField()
         textfield.text = "테마 3"
         textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
         textfield.textColor = UIColor.gray40
@@ -69,6 +69,56 @@ class CreatePostThemeTVC: UITableViewCell {
 extension CreatePostThemeTVC{
     // MARK: Layout (셀높이 125)
     private func configureLayout(){
-        addSubviews([courseTitleView, themeFirstLabel, themeFirstButton, themeSecondLabel, themeSecondButton, themeThirdLabel, themeThirdButton])
+        addSubviews([courseTitleView, themeFirstField, themeFirstButton, themeSecondField, themeSecondButton, themeThirdField, themeThirdButton])
+       
+        let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
+        let heightRatio: CGFloat = 42/108
+        
+        courseTitleView.snp.makeConstraints{
+            $0.top.equalTo(self.snp.top)
+            $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.trailing.equalTo(self.snp.trailing).inset(20)
+            $0.height.equalTo(38)
+        }
+        
+        themeFirstButton.snp.makeConstraints{
+            $0.top.equalTo(12)
+            $0.leading.equalTo(20)
+            $0.width.equalTo(buttonWidth)
+            $0.height.equalTo(themeFirstButton.snp.width).multipliedBy(heightRatio)
+        }
+        
+        themeSecondButton.snp.makeConstraints{
+            $0.top.equalTo(12)
+            $0.leading.equalTo(themeFirstButton.snp.trailing).offset(6)
+            $0.width.equalTo(buttonWidth)
+            $0.height.equalTo(themeSecondButton.snp.width).multipliedBy(heightRatio)
+        }
+        
+        themeThirdButton.snp.makeConstraints{
+            $0.top.equalTo(12)
+            $0.leading.equalTo(themeSecondButton.snp.trailing).offset(6)
+            $0.trailing.equalTo(self.snp.trailing).inset(20)
+            $0.width.equalTo(buttonWidth)
+            $0.height.equalTo(themeThirdButton.snp.width).multipliedBy(heightRatio)
+        }
+        
+        themeFirstField.snp.makeConstraints{
+            $0.height.equalTo(21)
+            $0.leading.equalTo(themeFirstButton.snp.leading).offset(12)
+            $0.centerY.equalTo(themeFirstButton.snp.centerY)
+        }
+        
+        themeSecondField.snp.makeConstraints{
+            $0.height.equalTo(21)
+            $0.leading.equalTo(themeSecondButton.snp.leading).offset(12)
+            $0.centerY.equalTo(themeSecondButton.snp.centerY)
+        }
+        
+        themeThirdField.snp.makeConstraints{
+            $0.height.equalTo(21)
+            $0.leading.equalTo(themeThirdButton.snp.leading).offset(12)
+            $0.centerY.equalTo(themeThirdButton.snp.centerY)
+        }
     }
 }
