@@ -16,7 +16,7 @@ struct GetThemeDataService {
     func getThemeInfo(theme: String, completion : @escaping (NetworkResult<Any>) -> Void)
         {
         
-            let URL = Constants.ThemeURL + "\(theme)"
+            let URL = Constants.ThemeLikeURL + "\(theme)"
             let header : HTTPHeaders = ["Content-Type": "application/json"]
             
             let dataRequest = AF.request(URL,
