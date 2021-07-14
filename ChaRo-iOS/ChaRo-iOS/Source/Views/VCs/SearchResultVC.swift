@@ -11,13 +11,19 @@ class SearchResultVC: UIViewController {
 
     static let identifier = "SearchResultVC"
     
+    //MARK: Result Data
+    public var postCount: Int = 0
+    public var postData : [DetailDrive] = []
+    public var filterResultList: [String] = []
+    
+    
+    //MARK: UIComponent
     private let navigationView = UIView()
     private lazy var backButton = LeftBackButton(toPop: self)
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 겸색 결과",
                                                             color: .mainBlack)
     
     private var tableView = UITableView()
-    public var filterfilterResultList: [String] = []
     
     private let closeButton: UIButton = {
         let button = UIButton()
@@ -53,45 +59,48 @@ class SearchResultVC: UIViewController {
         button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         button.layer.cornerRadius = 8
         button.backgroundColor = .mainBlue
+        button.addTarget(self, action: #selector(presentToCreatePostVC), for: .touchUpInside)
         return button
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        postSearchPost(type: "like")
         setConstraint()
-        setContentViewConstraint()
         configureTableView()
-        //setShadowInNavigationView()
+        setShadowInNavigationView()
     }
     
     public func setFilterTagList(list: [String]){
-        filterfilterResultList = list
+        filterResultList = list
     }
 
+    
     @objc func dismissAction(){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func presentToCreatePostVC(){
+        let tabbar = presentingViewController as! TabbarVC
+        let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
+        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+        let createTab = UINavigationController(rootViewController: createVC)
+        createTab.modalPresentationStyle = .fullScreen
+        dismiss(animated: false){
+            tabbar.present(createTab, animated: true, completion: nil)
+        }
+       
+    }
+    
     
     func configureTableView(){
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    func setShadowInNavigationView(){
-        navigationView.backgroundColor = .white
-
-        navigationView.layer.shadowOpacity = 0.05
-        navigationView.layer.shadowColor = UIColor.black.cgColor
-        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        navigationView.layer.shadowRadius = 6
-        navigationView.layer.masksToBounds = false
-        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
-                                                                           width: UIScreen.getDeviceWidth(),
-                                                                           height: UIScreen.getNotchHeight()+58),
-                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
-    }
-    
 }
+
 
 extension SearchResultVC: UITableViewDelegate{
     
@@ -106,9 +115,10 @@ extension SearchResultVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
-    
-    
 }
+
+
+
 
 extension SearchResultVC{
     
@@ -119,7 +129,6 @@ extension SearchResultVC{
             $0.top.leading.trailing.equalTo(view)
             $0.height.equalTo(UIScreen.getNotchHeight() + 58)
         }
-        
         
         setShadowInNavigationView()
         setConstraintsInNavigaitionView()
@@ -149,7 +158,7 @@ extension SearchResultVC{
     }
     
     private func setContentViewConstraint(){
-        if filterfilterResultList.isEmpty{
+        if postData.isEmpty{
             setEmptyViewConstraint()
         }else{
             setResultViewConstraint()
@@ -213,9 +222,9 @@ extension SearchResultVC{
     
     private func makeTagLabelList() -> [UIButton] {
         var list: [UIButton] = []
-        for index in 0..<filterfilterResultList.count {
+        for index in 0..<filterResultList.count {
            
-            if filterfilterResultList[index] == "" || filterfilterResultList[index] == "선택안함"{
+            if filterResultList[index] == "" || filterResultList[index] == "선택안함"{
                 continue
             }
             
@@ -225,21 +234,70 @@ extension SearchResultVC{
             button.layer.borderWidth = 1
             
             if index == 3 {
-                button.setTitle(" #\(filterfilterResultList[index])X ", for: .normal)
+                button.setTitle(" #\(filterResultList[index])X ", for: .normal)
                 button.setTitleColor(.gray30, for: .normal)
                 button.layer.borderColor = UIColor.gray30.cgColor
             }else{
-                button.setTitle(" #\(filterfilterResultList[index]) ", for: .normal)
+                button.setTitle(" #\(filterResultList[index]) ", for: .normal)
                 button.setTitleColor(.mainBlue, for: .normal)
                 button.layer.borderColor = UIColor.mainlightBlue.cgColor
             }
             
             list.append(button)
-            
-            //button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         }
         
         return list
+    }
+    
+    func setShadowInNavigationView(){
+        navigationView.backgroundColor = .white
+
+        navigationView.layer.shadowOpacity = 0.05
+        navigationView.layer.shadowColor = UIColor.black.cgColor
+        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        navigationView.layer.shadowRadius = 6
+        navigationView.layer.masksToBounds = false
+        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
+                                                                           width: UIScreen.getDeviceWidth(),
+                                                                           height: UIScreen.getNotchHeight()+58),
+                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
+    }
+}
+
+
+//MARK: Network
+extension SearchResultVC{
+    
+    
+    func refinePostResultData(data: DetailDataClass, type: String){
+        postData = data.drive
+        dump(postData)
+        setContentViewConstraint()
+    }
+    
+    func postSearchPost(type: String){
+        PostResultService.shared.postSearchKeywords(userId: "111",
+                                                    region: filterResultList[1],
+                                                    theme: filterResultList[2],
+                                                    warning: filterResultList[3],
+                                                    type: type){ response in
+            
+            switch(response){
+            case .success(let resultData):
+                if let data =  resultData as? DetailModel{
+                    self.refinePostResultData(data: data.data, type: type)
+                    
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 }
 
