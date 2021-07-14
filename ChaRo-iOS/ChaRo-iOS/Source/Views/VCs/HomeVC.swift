@@ -461,6 +461,8 @@ extension HomeVC : CollectionViewCellDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
         
+        print("You tapped the cell \(index)")
+        
         if let labelText = collectionviewcell?.themeLabel.text {
                 print("You tapped the cell \(index) in the row of Label \(labelText)")
                 // 여기서 CVC 클릭했을 때 할 거 쓰기
@@ -475,6 +477,12 @@ extension HomeVC: PostIdDelegate {
     
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        
+        nextVC.setPostId(id: data)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
 }
