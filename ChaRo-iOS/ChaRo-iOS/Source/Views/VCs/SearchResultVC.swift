@@ -59,45 +59,48 @@ class SearchResultVC: UIViewController {
         button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         button.layer.cornerRadius = 8
         button.backgroundColor = .mainBlue
+        button.addTarget(self, action: #selector(presentToCreatePostVC), for: .touchUpInside)
         return button
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        postSearchPost(type: "like")
         setConstraint()
-        setContentViewConstraint()
         configureTableView()
-        //setShadowInNavigationView()
+        setShadowInNavigationView()
     }
     
     public func setFilterTagList(list: [String]){
-        filterfilterResultList = list
+        filterResultList = list
     }
 
+    
     @objc func dismissAction(){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func presentToCreatePostVC(){
+        let tabbar = presentingViewController as! TabbarVC
+        let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
+        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+        let createTab = UINavigationController(rootViewController: createVC)
+        createTab.modalPresentationStyle = .fullScreen
+        dismiss(animated: false){
+            tabbar.present(createTab, animated: true, completion: nil)
+        }
+       
+    }
+    
     
     func configureTableView(){
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    func setShadowInNavigationView(){
-        navigationView.backgroundColor = .white
-
-        navigationView.layer.shadowOpacity = 0.05
-        navigationView.layer.shadowColor = UIColor.black.cgColor
-        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        navigationView.layer.shadowRadius = 6
-        navigationView.layer.masksToBounds = false
-        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
-                                                                           width: UIScreen.getDeviceWidth(),
-                                                                           height: UIScreen.getNotchHeight()+58),
-                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
-    }
-    
 }
+
 
 extension SearchResultVC: UITableViewDelegate{
     
