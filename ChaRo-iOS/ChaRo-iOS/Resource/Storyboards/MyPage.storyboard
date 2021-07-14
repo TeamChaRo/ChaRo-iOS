@@ -41,7 +41,7 @@
                                         <rect key="frame" x="346" y="47" width="48" height="48"/>
                                         <state key="normal" backgroundImage="setting2_white"/>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pke-ag-0QV">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pke-ag-0QV">
                                         <rect key="frame" x="20" y="118" width="62" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="62" id="6ld-FX-OG0"/>
@@ -55,8 +55,8 @@
                                             <constraint firstAttribute="width" constant="19" id="kuN-q8-OgB"/>
                                         </constraints>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QU8-aY-KNz">
-                                        <rect key="frame" x="182.5" y="113" width="49" height="27"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QU8-aY-KNz">
+                                        <rect key="frame" x="124" y="113" width="49" height="27"/>
                                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -116,7 +116,6 @@
                                 <constraints>
                                     <constraint firstItem="pke-ag-0QV" firstAttribute="leading" secondItem="Bkr-2h-Tuo" secondAttribute="trailing" constant="-60" id="9qU-wB-Ymu"/>
                                     <constraint firstItem="QU8-aY-KNz" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="top" constant="113" id="A8Q-LK-1sl"/>
-                                    <constraint firstItem="QU8-aY-KNz" firstAttribute="centerX" secondItem="dzp-dE-G6y" secondAttribute="centerX" id="F7Z-ez-ZFZ"/>
                                     <constraint firstItem="dzp-dE-G6y" firstAttribute="leading" secondItem="X1z-4M-rqe" secondAttribute="leading" constant="50" id="FRX-SW-vH6"/>
                                     <constraint firstAttribute="bottom" secondItem="pke-ag-0QV" secondAttribute="bottom" constant="20" id="LQg-nd-10Y"/>
                                     <constraint firstItem="Bkr-2h-Tuo" firstAttribute="bottom" secondItem="pke-ag-0QV" secondAttribute="bottom" id="Ned-lP-KC1"/>
@@ -128,6 +127,7 @@
                                     <constraint firstAttribute="trailing" secondItem="rMu-BR-rBt" secondAttribute="trailing" constant="20" id="u47-J9-OCi"/>
                                     <constraint firstItem="dzp-dE-G6y" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="top" constant="58" id="v7q-8z-uaR"/>
                                     <constraint firstAttribute="height" constant="200" id="vbc-lo-kuP"/>
+                                    <constraint firstItem="QU8-aY-KNz" firstAttribute="leading" secondItem="80H-KY-tOi" secondAttribute="leading" id="xYH-0k-h2y"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0nA-nc-wlr">
@@ -226,8 +226,10 @@
                     <connections>
                         <outlet property="customTabbar" destination="pOY-6h-cTn" id="RyZ-w7-wz1"/>
                         <outlet property="dropDownTableView" destination="FmT-fO-VDl" id="PiH-wv-yk8"/>
+                        <outlet property="folloerCountButton" destination="uyo-gY-eRO" id="uvg-Yk-xK0"/>
                         <outlet property="followButton" destination="80H-KY-tOi" id="dTB-Yr-OLv"/>
                         <outlet property="followerButton" destination="WYO-m9-anR" id="KlY-OY-yAy"/>
+                        <outlet property="followingCountButton" destination="YAG-14-16j" id="QYi-wW-Ign"/>
                         <outlet property="headerView" destination="X1z-4M-rqe" id="OQ5-d7-gQg"/>
                         <outlet property="myTableCollectionView" destination="0nA-nc-wlr" id="VTF-Ck-bXx"/>
                         <outlet property="nameLabel" destination="QU8-aY-KNz" id="0ps-Ux-keY"/>

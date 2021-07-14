@@ -25,6 +25,9 @@ class MyPagePostCVC: UICollectionViewCell {
     @IBOutlet weak var heartLabel: UILabel!
     @IBOutlet weak var saveImage: UIImageView!
     @IBOutlet weak var saveLabel: UILabel!
+    //데이트 ㅋ
+    @IBOutlet weak var dateLabel: UILabel!
+    var postid:Int = 0
     
     var heartText: String = "99"
     var saveText: String = "99"
@@ -63,9 +66,6 @@ class MyPagePostCVC: UICollectionViewCell {
     }
     
     func setTagUI() {
-        tagLabel1.text = "#야"
-        tagLabel2.text = "#서강준"
-        tagLabel3.text = "#왜불렁~"
         
         let length1 = CGFloat(tagLabel1.text!.count)
         let length2 = CGFloat(tagLabel2.text!.count)
@@ -79,9 +79,9 @@ class MyPagePostCVC: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             
-            tagView1.widthAnchor.constraint(equalToConstant: 13 * length1),
-            tagView2.widthAnchor.constraint(equalToConstant: 13 * length2),
-            tagView3.widthAnchor.constraint(equalToConstant: 13 * length3)
+            tagView1.widthAnchor.constraint(equalToConstant: 11 * length1),
+            tagView2.widthAnchor.constraint(equalToConstant: 11 * length2),
+            tagView3.widthAnchor.constraint(equalToConstant: 11 * length3)
             
         ])
         
@@ -103,15 +103,51 @@ class MyPagePostCVC: UICollectionViewCell {
         postTitle.text = text
     }
     
+    func setData(image: String, title: String, tagCount: Int, tagArr: [String], heart: Int , save: Int, year: String, month: String, day: String, postID: Int) {
+        
+        //이미지 설정
+        guard let url = URL(string: image) else { return }
+        self.postImage.kf.setImage(with: url)
+        
+        //postID 설정
+        self.postid = postID
+        
+        //제목 설정
+        self.postTitle.text = title
+        
+        //태그 설정
+        if tagCount == 2 {
+            tagLabel1.text = ""
+            tagLabel2.text = ""
+            tagLabel3.text = ""
+            
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = ""
+            
+        } else {
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.text = "#\(tagArr[2])"
+        }
+        //하트 수 및 저장 수
+        self.heartLabel.text = String(heart)
+        self.saveLabel.text = String(save)
+        //날짜
+        self.dateLabel.text = "\(year).\(month).\(day)"
+
+        setTagUI()
+        setLabelUI()
+    }
     
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setTagUI()
-        setLabelUI()
         setRound()
         setLikeLabel()
         setLikeUI()
+        
     }
 
 }
