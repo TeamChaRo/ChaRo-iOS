@@ -9,21 +9,49 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+    //MARK: - Component
+    private let CharoimageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "maskGroup")
+        return imageView
+    }()
+    
+    private let idBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "idBackground")
+        return imageView
+    }()
+    
+    private let pwdBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "pwdBackground")
+        return imageView
+    }()
+    
+    private let idTextField: UITextField = {
+        let textField = UITextField()
+        return textField
+    }()
+    
+    private let pwdTextField: UITextField = {
+        let textField = UITextField()
+        return textField
+    }()
+    
+    private let joinButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
