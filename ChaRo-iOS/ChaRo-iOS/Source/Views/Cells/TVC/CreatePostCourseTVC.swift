@@ -85,8 +85,8 @@ class CreatePostCourseTVC: UITableViewCell {
     }
     
     private func setTextFieldAction(){
-        cityField.addTarget(self, action: #selector(clikedTextField), for: .touchDown)
-        regionField.addTarget(self, action: #selector(clikedTextField), for: .touchDown)
+        cityField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
+        regionField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         self.bringSubviewToFront(cityField)
         self.bringSubviewToFront(regionField)
     }
@@ -125,6 +125,7 @@ extension CreatePostCourseTVC {
             cityField.text = filterList[currentIndex]
             cityField.textColor = .mainBlue
             cityButton.setImage(UIImage(named: "select"), for: .normal)
+            wasSelected()
         case 1:
             regionField.text = filterList[currentIndex]
             regionField.textColor = .mainBlue
@@ -136,11 +137,21 @@ extension CreatePostCourseTVC {
         self.endEditing(true)
     }
     
+    func wasSelected(){
+        // 기존에 선택되어있으면 2번째 애 초기화해주기
+        if filterList[0] != "" && filterList[0] != "선택안함" {
+            filterList[1] = "" // 뒤에 애 초기화
+            regionField.text = "시 단위"
+            regionField.textColor = .gray40
+            regionButton.setImage(UIImage(named: "unselect"), for: .normal)
+        }
+    }
+    
 
     @objc
     func clikedTextField(_ sender: UITextField){
+        
         currentIndex = sender.tag
-        print("태그!!\(sender.tag)")
         pickerView.selectRow(0, inComponent: 0, animated: true)
         changeCurrentPickerData(index: currentIndex) // data 지정
         changeToolbarText(index: currentIndex) // title 지정
@@ -165,19 +176,12 @@ extension CreatePostCourseTVC {
         
         switch index {
         case 0:
-            newTitle = "지역"
+            newTitle = "지역(도)"
         default:
-            newTitle = "지역"
+            newTitle = "지역(시)"
         }
-        
-        print("title: \(newTitle)")
-        toolbar.items![0].title = newTitle
-    }
-    
-    func isCheckWhenStateNonValue(){
-        // TODO 0번째 선택이 안되어있으면 1번째 선택하지 못하도록 하기
 
-        
+        toolbar.items![0].title = newTitle
     }
     
 }
