@@ -327,26 +327,32 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.buttonDelegate = self
             cell.headerText = customText
-            if customData.count == 0{
+            
+            if customData.count == 0 {
                 return cell
             }
-            else{
-                for image in customData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in customData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
-            //heart
-                for heart in customData{
-                    cell.heart.append(heart.isFavorite)
-                }
+            
+            else {
+                cell.customList = customData
+                //MARK: - 이건 어디서 하고 있는 거지?
+                cell.headerText = ""
+//                for image in customData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in customData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//            //heart
+//                for heart in customData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
             return cell
+                
             }
            
 //MARK: 로컬 테마
@@ -356,27 +362,30 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.buttonDelegate = self
             cell.headerText = localText
-            print("로컬 뷰 시작")
-            if localData.count == 0{
-                return cell
-            }
-            else{
-                for image in localData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in localData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
-            //heart
-                for heart in localData{
-                    cell.heart.append(heart.isFavorite)
-                }
+            
+//            if localData.count == 0 {
+//                return cell
+//            }
+//            else {
+//                for image in localData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in localData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//            //heart
+//                for heart in localData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
+            
             return cell
+            
+            
             }
         default:
             print("Error")

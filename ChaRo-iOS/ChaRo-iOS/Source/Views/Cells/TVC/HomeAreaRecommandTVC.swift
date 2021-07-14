@@ -19,22 +19,23 @@ class HomeAreaRecommandTVC: UITableViewCell {
     //MARK:- Variable
     static let identifier = "HomeAreaRecommandTVC"
     
-    var imageNameText: [String] = []
-    var titleText: [String] = []
-    var hashTagText1: [String] = []
-    var hashTagText2: [String] = []
-    var hashTagText3: [String] = []
-    var hashTagText4: [String] = []
-    var heart: [Bool] = []
+//    var imageNameText: [String] = []
+//    var titleText: [String] = []
+//    var hashTagText1: [String] = []
+//    var hashTagText2: [String] = []
+//    var hashTagText3: [String] = []
+//    var hashTagText4: [String] = []
+//    var heart: [Bool] = []
+//    var cellList: [CommonCVC] = []
     var headerText: String = ""
-    var cellList: [CommonCVC] = []
+    var LocelList: [Drive] = []
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollctionView()
         setLabelUI()
-        cellInit()
+        //cellInit()
     }
 
     
@@ -47,18 +48,18 @@ class HomeAreaRecommandTVC: UITableViewCell {
         
     }
     
-    func cellInit(){
-            guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
-            guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
-            guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
-            guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
-        
-        
-        cellList.append(cell1)
-        cellList.append(cell2)
-        cellList.append(cell3)
-        cellList.append(cell4)
-    }
+//    func cellInit(){
+//            guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
+//            guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
+//            guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
+//            guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
+//
+//
+//        cellList.append(cell1)
+//        cellList.append(cell2)
+//        cellList.append(cell3)
+//        cellList.append(cell4)
+//    }
     
     func setLabelUI() {
         
@@ -97,7 +98,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
 extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellList.count
+        return LocelList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -106,10 +107,13 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if imageNameText.count == 0{
-            return cellList[0]
+        
+        if LocelList.count == 0 {
+            return cell
         }
-        else{
+        else {
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
           
             switch indexPath.row {
             case 0:
@@ -139,7 +143,6 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
             
         }
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
         cell.imageView.image = UIImage(named: "tempImageSmall")
         cell.callback = {
