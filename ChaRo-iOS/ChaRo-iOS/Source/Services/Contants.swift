@@ -28,7 +28,7 @@ struct Constants {
     static let ThemeNewURL = baseURL + "/preview/new/111/1?value="
     static let likeURL = baseURL + "/post/like"
     
-    
+   
     ///필터 검색 결과 조회
     static let searchPostURL = baseURL + "/search/"
     
