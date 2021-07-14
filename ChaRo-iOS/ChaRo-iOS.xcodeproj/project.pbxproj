@@ -864,7 +864,6 @@
 				361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */,
 				36CEE5BC269E168500974EFF /* NewDetailDataService.swift in Sources */,
 				3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */,
-				3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */,
 				362BC9F9269ED39A008EF625 /* MyPageDataService.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
@@ -1052,7 +1051,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M2BP76V5D4;
+				DEVELOPMENT_TEAM = U24ZACT97M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1080,8 +1079,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J8A843466G;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1095,6 +1094,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_WORKSPACE = YES;
