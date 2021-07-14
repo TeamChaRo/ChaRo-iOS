@@ -165,6 +165,12 @@ extension AddressMainVC {
     public func replaceAddressData(address: AddressDataModel, index: Int){
         addressList[index] = address
         addressCellList[index].setAddressText(address: address)
+        
+        if index == 0 {
+            addressCellList[1].searchButton.isEnabled = true
+            addressCellList[1].searchButton.isUserInteractionEnabled = true
+        }
+        
         if index == 1{
             confirmButton.isHidden = false
             addPathInMapView()
