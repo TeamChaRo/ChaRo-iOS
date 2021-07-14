@@ -12,8 +12,8 @@ struct UserInfo {
     static let shared = UserInfo()
     
     var id: String?
-    var password: String?
-    var name: String?
+    var nickname: String?
+    var token: String?
     
     private init() { }
     
