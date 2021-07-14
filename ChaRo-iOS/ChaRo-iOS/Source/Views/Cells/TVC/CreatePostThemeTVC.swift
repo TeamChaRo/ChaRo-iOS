@@ -30,28 +30,28 @@ class CreatePostThemeTVC: UITableViewCell {
         return button
     }()
     
-    private let themeFirstLabel: UILabel = {
-        let label = UILabel()
-        label.text = "테마 1"
-        label.font = UIFont.notoSansMediumFont(ofSize: 14)
-        label.textColor = UIColor.gray40
-        return label
+    private let themeFirstLabel: UITextField = {
+        let textfield = UITextField()
+        textfield.text = "테마 1"
+        textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
+        textfield.textColor = UIColor.gray40
+        return textfield
     }()
     
-    private let themeSecondLabel: UILabel = {
-        let label = UILabel()
-        label.text = "테마 2"
-        label.font = UIFont.notoSansMediumFont(ofSize: 14)
-        label.textColor = UIColor.gray40
-        return label
+    private let themeSecondLabel: UITextField = {
+        let textfield = UITextField()
+        textfield.text = "테마 2"
+        textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
+        textfield.textColor = UIColor.gray40
+        return textfield
     }()
     
-    private let themeThirdLabel: UILabel = {
-        let label = UILabel()
-        label.text = "테마 3"
-        label.font = UIFont.notoSansMediumFont(ofSize: 14)
-        label.textColor = UIColor.gray40
-        return label
+    private let themeThirdLabel: UITextField = {
+        let label = UITextField()
+        textfield.text = "테마 3"
+        textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
+        textfield.textColor = UIColor.gray40
+        return textfield
     }()
     
     override func awakeFromNib() {
