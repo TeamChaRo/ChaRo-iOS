@@ -101,11 +101,11 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
         let postid = cell!.postID
         postDelegate?.sendPostID(data: postid)
-        
+
     }
     
     
@@ -152,6 +152,7 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
 func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
     //나중에 바꿀예정 ..
+
     return CGSize(width: 260, height: 256)
 }
 
@@ -164,7 +165,7 @@ func collectionView(_ collectionView: UICollectionView, layout collectionViewLay
     
     if section == 0 {
         return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-    }
+           }
     return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     
