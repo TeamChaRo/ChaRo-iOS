@@ -125,6 +125,7 @@ extension ThemePostThemeTVC : UICollectionViewDelegate {
         let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
         let themeName = (cell?.themeLabel.text)!
         
+        //Delegate 로 서버 통신, reload 다시
         themeDelegate?.setClickedThemeData(themeName: themeName)
         
     }
