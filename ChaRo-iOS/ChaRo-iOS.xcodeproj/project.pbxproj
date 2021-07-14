@@ -37,6 +37,8 @@
 		36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */; };
 		36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */; };
 		36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */; };
+		3C117E1E269F45D5005F4646 /* PostResultHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */; };
+		3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */; };
 		3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EC2690244D0099B684 /* MapService.swift */; };
 		3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */; };
 		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
@@ -194,6 +196,8 @@
 		36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostDetailCVC.xib; sourceTree = "<group>"; };
 		36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotDropDownTVC.swift; sourceTree = "<group>"; };
 		36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotDropDownTVC.xib; sourceTree = "<group>"; };
+		3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultHeaderCVC.swift; sourceTree = "<group>"; };
+		3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostResultHeaderCVC.xib; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellTitleView.swift; sourceTree = "<group>"; };
 		3C706798269ECE8C0082C852 /* PostResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultService.swift; sourceTree = "<group>"; };
@@ -350,8 +354,9 @@
 				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
 				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,
 				360937AF2699F15A005392BB /* MyPagePostCVC.swift */,
-				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
+				3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */,
 				3CEC0114269E277A00E9332C /* OnBoardCVC.swift */,
+				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
 				360937B02699F15A005392BB /* MyPagePostCVC.xib */,
 				3CEC0115269E277A00E9332C /* OnBoardCVC.xib */,
+				3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */,
 				360937AC2699EF7B005392BB /* TabbarCVC.xib */,
 			);
 			path = CVC;
@@ -735,6 +741,7 @@
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
 				3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */,
 				360937AE2699EF7B005392BB /* TabbarCVC.xib in Resources */,
+				3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */,
 				360937A42699E52F005392BB /* MyPage.storyboard in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
 				3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */,
@@ -858,7 +865,7 @@
 				361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */,
 				36CEE5BC269E168500974EFF /* NewDetailDataService.swift in Sources */,
 				3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */,
-				3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */,
+				3C117E1E269F45D5005F4646 /* PostResultHeaderCVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */,

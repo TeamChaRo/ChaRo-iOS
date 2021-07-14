@@ -23,7 +23,26 @@ class SearchResultVC: UIViewController {
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 겸색 결과",
                                                             color: .mainBlack)
     
-    private var tableView = UITableView()
+    private var collectionView : UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: UICollectionViewFlowLayout())
+        
+        collectionView.isPagingEnabled = true
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: 624)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .vertical
+        collectionView.setCollectionViewLayout(layout, animated: true)
+        
+        collectionView.registerCustomXib(xibName: PostResultHeaderCVC.identifier)
+        collectionView.registerCustomXib(xibName: CommonCVC.identifier)
+        
+        return collectionView
+    }()
     
     private let closeButton: UIButton = {
         let button = UIButton()
@@ -68,7 +87,7 @@ class SearchResultVC: UIViewController {
         super.viewDidLoad()
         postSearchPost(type: "like")
         setConstraint()
-        configureTableView()
+        configureCollectionView()
         setShadowInNavigationView()
     }
     
@@ -94,30 +113,68 @@ class SearchResultVC: UIViewController {
     }
     
     
-    func configureTableView(){
-        tableView.delegate = self
-        tableView.dataSource = self
+    func configureCollectionView(){
+        collectionView.register(UINib(nibName: PostResultHeaderCVC.identifier, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: PostResultHeaderCVC.identifier)
+
+        collectionView.registerCustomXib(xibName: CommonCVC.identifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
 }
 
-
-extension SearchResultVC: UITableViewDelegate{
-    
+extension SearchResultVC: UICollectionViewDelegate{
     
 }
 
-extension SearchResultVC: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SearchResultVC: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath)
+        return cell
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PostResultHeaderCVC.identifier, for: indexPath) as? PostResultHeaderCVC else {
+            return UICollectionReusableView()
+        }
+        header.setStackViewData(list: filterResultList)
+        return header
+        
+    }
+
 }
 
-
+extension SearchResultVC: UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: UIScreen.getDeviceWidth(), height: 65)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+}
 
 
 extension SearchResultVC{
@@ -189,66 +246,16 @@ extension SearchResultVC{
     }
     
     private func setResultViewConstraint(){
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
         
-        tableView.snp.makeConstraints{
+        collectionView.snp.makeConstraints{
             $0.top.equalTo(navigationView.snp.bottom).offset(15)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        tableView.tableHeaderView = setTableHearderView()
     }
     
-    
-    private func setTableHearderView() -> UIView {
-        let view = UIView(frame: CGRect(x: 0, y: 0,
-                                        width: UIScreen.getDeviceWidth(),
-                                        height: 65))
-        
-        let stackView = UIStackView(arrangedSubviews: makeTagLabelList())
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.spacing = 4
-        
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints{
-            $0.top.equalTo(view.snp.top).offset(0)
-            $0.leading.equalTo(view.snp.leading).offset(20)
-            $0.height.equalTo(34)
-        }
-        return view
-    }
-    
-    private func makeTagLabelList() -> [UIButton] {
-        var list: [UIButton] = []
-        for index in 0..<filterResultList.count {
-           
-            if filterResultList[index] == "" || filterResultList[index] == "선택안함"{
-                continue
-            }
-            
-            let button = UIButton()
-            button.titleLabel?.font = .notoSansRegularFont(ofSize: 14)
-            button.layer.cornerRadius = 17
-            button.layer.borderWidth = 1
-            
-            if index == 3 {
-                button.setTitle(" #\(filterResultList[index])X ", for: .normal)
-                button.setTitleColor(.gray30, for: .normal)
-                button.layer.borderColor = UIColor.gray30.cgColor
-            }else{
-                button.setTitle(" #\(filterResultList[index]) ", for: .normal)
-                button.setTitleColor(.mainBlue, for: .normal)
-                button.layer.borderColor = UIColor.mainlightBlue.cgColor
-            }
-            
-            list.append(button)
-        }
-        
-        return list
-    }
-    
+
     func setShadowInNavigationView(){
         navigationView.backgroundColor = .white
 
@@ -267,7 +274,6 @@ extension SearchResultVC{
 
 //MARK: Network
 extension SearchResultVC{
-    
     
     func refinePostResultData(data: DetailDataClass, type: String){
         postData = data.drive
