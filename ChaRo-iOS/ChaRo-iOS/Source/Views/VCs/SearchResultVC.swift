@@ -15,12 +15,15 @@ class SearchResultVC: UIViewController {
     public var postCount: Int = 0
     public var postData : [DetailDrive] = []
     public var filterResultList: [String] = []
+    var myCellIsFirstLoaded: Bool = true
     
+    var topCVCCell: HomePostDetailCVC?
     
     //MARK: UIComponent
     private let navigationView = UIView()
+    @IBOutlet weak var dropDownTableView: UITableView!
     private lazy var backButton = LeftBackButton(toPop: self)
-    private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 겸색 결과",
+    private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
                                                             color: .mainBlack)
     
     private var collectionView : UICollectionView = {
@@ -58,6 +61,7 @@ class SearchResultVC: UIViewController {
     private let searchNoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "searchNoImage"))
         imageView.contentMode = .scaleAspectFit
+        
         return imageView
     }()
     
@@ -89,6 +93,8 @@ class SearchResultVC: UIViewController {
         setConstraint()
         configureCollectionView()
         setShadowInNavigationView()
+        configureDropDown()
+        
     }
     
     public func setFilterTagList(list: [String]){
@@ -119,8 +125,21 @@ class SearchResultVC: UIViewController {
                                 withReuseIdentifier: PostResultHeaderCVC.identifier)
 
         collectionView.registerCustomXib(xibName: CommonCVC.identifier)
+        collectionView.registerCustomXib(xibName: HomePostDetailCVC.identifier)
+
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isPagingEnabled = false
+        
+       
+    }
+    func configureDropDown(){
+        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
+        dropDownTableView.delegate = self
+        dropDownTableView.dataSource = self
+        dropDownTableView.isHidden = true
+        dropDownTableView.separatorStyle = .none
+
     }
     
 }
@@ -131,12 +150,28 @@ extension SearchResultVC: UICollectionViewDelegate{
 
 extension SearchResultVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return postData.count + 1
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath)
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC
+        let dropDownCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePostDetailCVC.identifier, for: indexPath) as? HomePostDetailCVC
+        dropDownCell?.delegate = self
+        if indexPath.row == 0{
+            if myCellIsFirstLoaded {
+                myCellIsFirstLoaded = false
+                topCVCCell = dropDownCell
+                topCVCCell?.postCount = postCount
+                topCVCCell?.setLabel()
+            }
+            return topCVCCell as! UICollectionViewCell
+        }
+        cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
+        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
+        
+        
+        return cell!
     }
     
     
@@ -155,15 +190,20 @@ extension SearchResultVC: UICollectionViewDataSource{
 extension SearchResultVC: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: UIScreen.getDeviceWidth(), height: 65)
+        return CGSize(width: UIScreen.getDeviceWidth(), height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+        
+        if indexPath.row == 0{
+            return CGSize(width: collectionView.frame.size.width-40, height: 30)
+        }
+        
+        return CGSize(width: collectionView.frame.size.width-40, height: 260)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -247,7 +287,7 @@ extension SearchResultVC{
     
     private func setResultViewConstraint(){
         view.addSubview(collectionView)
-        
+        view.addSubview(dropDownTableView)
         collectionView.snp.makeConstraints{
             $0.top.equalTo(navigationView.snp.bottom).offset(15)
             $0.leading.trailing.bottom.equalToSuperview()
@@ -282,7 +322,7 @@ extension SearchResultVC{
     }
     
     func postSearchPost(type: String){
-        PostResultService.shared.postSearchKeywords(userId: "111",
+        PostResultService.shared.postSearchKeywords(userId: "jieun1211",
                                                     region: filterResultList[1],
                                                     theme: filterResultList[2],
                                                     warning: filterResultList[3],
@@ -292,7 +332,11 @@ extension SearchResultVC{
             case .success(let resultData):
                 if let data =  resultData as? DetailModel{
                     self.refinePostResultData(data: data.data, type: type)
-                    
+                    self.postCount = data.data.totalCourse
+                    print(self.postData)
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -309,3 +353,70 @@ extension SearchResultVC{
 
 
 
+extension SearchResultVC: UITableViewDelegate{
+    
+}
+extension SearchResultVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+            var bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            cell.setLabel()
+            cell.setCellName(name: "인기순")
+            print("실행됨")
+            cell.delegate = self
+            return cell
+
+        case 1:
+            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+            var bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            print("실행됨")
+            cell.setLabel()
+            cell.setCellName(name: "최신순")
+            cell.delegate = self
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+}
+    
+extension SearchResultVC: SetTitleDelegate{
+    func setTitle(cell: HotDropDownTVC) {
+        if cell.name == "인기순"{
+            print("인기순 실행")
+            GetMyPageDataService.URL = Constants.myPageLikeURL
+            postSearchPost(type: "like")
+            postCount = postData.count
+            self.dropDownTableView.isHidden = true
+            topCVCCell?.setTitle(data: "인기순")
+          
+
+        }
+        
+        else if cell.name == "최신순"{
+            print("최신순 실행")
+            GetMyPageDataService.URL = Constants.myPageNewURL
+            postSearchPost(type: "new")
+            postCount = postData.count
+            self.dropDownTableView.isHidden = true
+            topCVCCell?.setTitle(data: "최신순")
+            
+        }
+    }
+}
+extension SearchResultVC: MenuClickedDelegate {
+    func menuClicked(){
+        print("딜리게이트 실행됨?")
+        dropDownTableView.isHidden = false
+    }
+}
