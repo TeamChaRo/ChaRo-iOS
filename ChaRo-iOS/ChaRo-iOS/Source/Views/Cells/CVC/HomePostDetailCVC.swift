@@ -38,7 +38,9 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     @IBAction func menuButtonClicked(_ sender: Any) {
         delegate?.menuClicked()
-        isButtonClicked.toggle()
+//        isButtonClicked.toggle()
+        print("HomePostDetailCVC")
+        print("버튼 눌림")
         
     }
     
