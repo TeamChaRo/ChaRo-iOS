@@ -23,11 +23,3 @@ struct User: Codable {
         case nickname, token
     }
 }
-
-
-
-//
-//`id` : `String` , 유저의 로그인 아이디
-//
-//`password` : `String` , 비밀번호
-//
