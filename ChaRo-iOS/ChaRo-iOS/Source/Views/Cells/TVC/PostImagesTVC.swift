@@ -113,7 +113,7 @@ extension PostImagesTVC {
             let xPos = UIScreen.main.bounds.width * CGFloat(i)
             imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * imageHeightRate)
             imageView.contentMode = .scaleAspectFill
-            imageView.image = UIImage(named: images[i])
+            imageView.kf.setImage(with: URL(string: images[i]))
             scrollView.addSubview(imageView)
             scrollView.contentSize.width = imageView.frame.width * CGFloat(i+1)
         }
