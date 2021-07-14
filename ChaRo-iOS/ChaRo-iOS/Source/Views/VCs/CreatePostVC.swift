@@ -108,22 +108,6 @@ extension CreatePostVC {
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
     }
     
-    @objc
-    func addPhotoButtonDidTap(){
-        if #available(iOS 14, *) { // 14이상 부터 쓸 수 있음
-            var configuration = PHPickerConfiguration()
-            configuration.selectionLimit = 6 - selectImages.count // 최대 6개 선택
-            configuration.filter = .images
-            
-            let picker = PHPickerViewController(configuration: configuration)
-            picker.delegate = self
-            
-            self.present(picker, animated: true, completion: nil)
-        } else {
-            // Fallback on earlier versions
-        }
-    }
-    
     func postCreatePost(){
         let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정

@@ -12,6 +12,7 @@ class CreatePostCourseTVC: UITableViewCell {
     
 
     static let identifier: String = "CreatePostCourseTVC"
+    
     // about pickerview
     private var pickerView = UIPickerView()
     private let toolbar = UIToolbar()
@@ -57,7 +58,7 @@ class CreatePostCourseTVC: UITableViewCell {
         configureLayout()
         initTextField()
         initPickerView()
-        setButtonAction()
+        setTextFieldAction()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -83,19 +84,132 @@ class CreatePostCourseTVC: UITableViewCell {
         }
     }
     
-    private func setButtonAction(){
-        cityButton.addTarget(self, action: #selector(clikedTextField), for: .touchUpInside)
-        regionButton.addTarget(self, action: #selector(clikedTextField), for: .touchUpInside)
-        self.bringSubviewToFront(cityButton)
-        self.bringSubviewToFront(regionButton)
+    private func setTextFieldAction(){
+        cityField.addTarget(self, action: #selector(clikedTextField), for: .touchDown)
+        regionField.addTarget(self, action: #selector(clikedTextField), for: .touchDown)
+        self.bringSubviewToFront(cityField)
+        self.bringSubviewToFront(regionField)
     }
     
 }
 
+// MARK: - PickerView
 extension CreatePostCourseTVC {
-    // MARK: Layout (셀높이 125)
+    private func initPickerView(){
+        setPickerViewDelegate()
+        createPickerViewToolbar()
+    }
+    
+    private func setPickerViewDelegate(){
+        pickerView.dataSource = self
+        pickerView.delegate = self
+    }
+    
+    private func createPickerViewToolbar(){
+        // ToolBar
+        toolbar.sizeToFit()
+        
+        // bar button item
+        let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(self.donePresseed))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
+
+    }
+    
+    @objc
+    func donePresseed(){
+
+        switch currentIndex {
+        case 0:
+            cityField.text = filterList[currentIndex]
+            cityField.textColor = .mainBlue
+            cityButton.setImage(UIImage(named: "select"), for: .normal)
+        case 1:
+            regionField.text = filterList[currentIndex]
+            regionField.textColor = .mainBlue
+            regionButton.setImage(UIImage(named: "select"), for: .normal)
+        default:
+            print("done error")
+        }
+
+        self.endEditing(true)
+    }
+    
+
+    @objc
+    func clikedTextField(_ sender: UITextField){
+        currentIndex = sender.tag
+        print("태그!!\(sender.tag)")
+        pickerView.selectRow(0, inComponent: 0, animated: true)
+        changeCurrentPickerData(index: currentIndex) // data 지정
+        changeToolbarText(index: currentIndex) // title 지정
+        pickerView.reloadComponent(0)
+        
+    }
+    
+    func changeCurrentPickerData(index : Int){
+        
+        if index == 0 {
+            currentList = filterData.state
+        } else if  index == 1 && filterList[0] != "" {
+            currentList = filterData.cityDict[filterList[0]]!
+        } else { // 도 선택 없이 시를 눌렀을 때
+            self.endEditing(true)
+        }
+        
+    }
+    
+    func changeToolbarText(index: Int){
+        var newTitle = ""
+        
+        switch index {
+        case 0:
+            newTitle = "지역"
+        default:
+            newTitle = "지역"
+        }
+        
+        print("title: \(newTitle)")
+        toolbar.items![0].title = newTitle
+    }
+    
+    func isCheckWhenStateNonValue(){
+        // TODO 0번째 선택이 안되어있으면 1번째 선택하지 못하도록 하기
+
+        
+    }
+    
+}
+
+extension CreatePostCourseTVC: UIPickerViewDelegate{
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return currentList[row]
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if currentList[row] != "선택안함" && currentList[row] != "" {
+            filterList[currentIndex] = currentList[row]
+        }
+    }
+}
+
+extension CreatePostCourseTVC: UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return currentList.count
+    }
+}
+
+// MARK:- Layout (셀높이 125)
+extension CreatePostCourseTVC {
+    
     private func configureLayout(){
-        addSubviews([themeTitleView, cityButton, cityField, regionButton, regionField])
+        addSubviews([themeTitleView, cityField, regionField, regionButton, cityButton])
         
         let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
         let textWidth: CGFloat = 65
@@ -138,117 +252,3 @@ extension CreatePostCourseTVC {
         
     }
 }
-
-// MARK: - PickerView
-extension CreatePostCourseTVC {
-    private func initPickerView(){
-        setPickerViewDelegate()
-        createPickerViewToolbar()
-    }
-    
-    private func setPickerViewDelegate(){
-        pickerView.dataSource = self
-        pickerView.delegate = self
-    }
-    
-    private func createPickerViewToolbar(){
-        // ToolBar
-        toolbar.sizeToFit()
-        
-        // bar button item
-        let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: nil, action: #selector(donePresseed))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
-    }
-    
-    @objc
-    func donePresseed(){
-        print("완료!")
-        if currentIndex == 0 {
-            isCheckWhenStateNonValue()
-        }
-        self.endEditing(true)
-    }
-    
-    @objc
-    func clikedTextField(_ sender: UIButton){
-        currentIndex = sender.tag
-        print("\(currentIndex)")
-        pickerView.selectRow(0, inComponent: 0, animated: true)
-        changeCurrentPickerData(index: currentIndex) // data 지정
-        
-        changeToolbarText(index: currentIndex) // title 지정
-        pickerView.reloadComponent(0)
-    }
-    
-    func changeCurrentPickerData(index : Int){
-        if index == 0 {
-            currentList = filterData.state
-        } else if  index == 1 && filterList[0] != "" {
-            currentList = filterData.cityDict[filterList[0]]!
-        }
-        
-        print("currentlist")
-        print(currentList[0])
-            
-//        filterList[index] = currentList[0]
-        
-    }
-    
-    func changeToolbarText(index: Int){
-        var newTitle = ""
-        
-        switch index {
-        case 0:
-            newTitle = "지역"
-        default:
-            newTitle = "지역"
-        }
-        
-        toolbar.items![0].title = newTitle
-    }
-    
-    func isCheckWhenStateNonValue(){
-        
-        if filterList[1] == ""{
-            regionButton.isUserInteractionEnabled = true
-        }
-        
-//        if filterList[0] == "선택안함"{
-//
-//        }
-
-    }
-    
-}
-
-extension CreatePostCourseTVC: UIPickerViewDelegate{
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currentList[row]
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("select!!")
-        print(currentList[row])
-        if currentList[row] != "선택안함" {
-            filterList[currentIndex] = currentList[row]
-        }
-        
-//        filterList[currentIndex] = currentList[row-1]
-        
-        
-    }
-}
-
-extension CreatePostCourseTVC: UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currentList.count
-    }
-}
-
