@@ -228,7 +228,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             
             else {
                 
-                //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈려 죽겟다 ....
+                //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈리다 ....
                 if isFirstSetData {
                     for i in 0 ... 3 {
 //                        cell.setData(imageName: bannerData[i].bannerImage, title: bannerData[i].bannerTitle, tag: bannerData[i].bannerTag)
@@ -240,49 +240,51 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 
                 
             }
+            
 //MARK: 오늘의 드라이브
         case 1:
 
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
             //image
-            if todayData.count == 0{
+            if todayData.count == 0 {
                 return cell
             }
             else {
-                for image in todayData{
-                    cell.imageNameText.append(image.image)
-                }
-                for title in todayData{
-                    cell.titleText.append(title.title)
-                }
-                //해 쉬 태 그
-                cell.hashTagText1 = todayData[0].tags
-                cell.hashTagText2 = todayData[1].tags
-                cell.hashTagText3 = todayData[2].tags
-                cell.hashTagText4 = todayData[3].tags
-                
-            //heart
-                for heart in todayData{
-                    cell.heart.append(heart.isFavorite)
-                }
-                
-                
-                //MARK: - 물어보기
-                for id in todayData {
-                    cell.postID.append(id.postID)
-                }
+                cell.todayDriveList = todayData
+//                for image in todayData{
+//                    cell.imageNameText.append(image.image)
+//                }
+//                for title in todayData{
+//                    cell.titleText.append(title.title)
+//                }
+//                //해 쉬 태 그
+//                cell.hashTagText1 = todayData[0].tags
+//                cell.hashTagText2 = todayData[1].tags
+//                cell.hashTagText3 = todayData[2].tags
+//                cell.hashTagText4 = todayData[3].tags
+//
+//            //heart
+//                for heart in todayData{
+//                    cell.heart.append(heart.isFavorite)
+//                }
+//
+//
+//                //MARK: - 물어보기
+//                for id in todayData {
+//                    cell.postID.append(id.postID)
+//                }
                 
             return cell
-            }
+            
+        }
         
-        
-
         case 2:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
+            
             
 //MARK: 트렌드
         case 3:
@@ -290,7 +292,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
-            if trendyData.count == 0{
+            if trendyData.count == 0 {
                 return cell
             }
             else{
