@@ -17,22 +17,26 @@ class CreatePostThemeTVC: UITableViewCell {
 
     private let themeFirstButton: UIButton = {
         let button = UIButton()
+        button.setImage(UIImage(named: "unselect"), for: .normal)
         return button
     }()
     
     private let themeSecondButton: UIButton = {
         let button = UIButton()
+        button.setImage(UIImage(named: "unselect"), for: .normal)
         return button
     }()
     
     private let themeThirdButton: UIButton = {
         let button = UIButton()
+        button.setImage(UIImage(named: "unselect"), for: .normal)
         return button
     }()
     
     private let themeFirstField: UITextField = {
         let textfield = UITextField()
         textfield.text = "테마 1"
+        textfield.textAlignment = .center
         textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
         textfield.textColor = UIColor.gray40
         return textfield
@@ -41,6 +45,7 @@ class CreatePostThemeTVC: UITableViewCell {
     private let themeSecondField: UITextField = {
         let textfield = UITextField()
         textfield.text = "테마 2"
+        textfield.textAlignment = .center
         textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
         textfield.textColor = UIColor.gray40
         return textfield
@@ -49,6 +54,7 @@ class CreatePostThemeTVC: UITableViewCell {
     private let themeThirdField: UITextField = {
         let textfield = UITextField()
         textfield.text = "테마 3"
+        textfield.textAlignment = .center
         textfield.font = UIFont.notoSansMediumFont(ofSize: 14)
         textfield.textColor = UIColor.gray40
         return textfield
@@ -72,6 +78,7 @@ extension CreatePostThemeTVC{
         addSubviews([courseTitleView, themeFirstField, themeFirstButton, themeSecondField, themeSecondButton, themeThirdField, themeThirdButton])
        
         let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
+        let textWidth: CGFloat = 65
         let heightRatio: CGFloat = 42/108
         
         courseTitleView.snp.makeConstraints{
@@ -82,21 +89,21 @@ extension CreatePostThemeTVC{
         }
         
         themeFirstButton.snp.makeConstraints{
-            $0.top.equalTo(12)
-            $0.leading.equalTo(20)
+            $0.top.equalTo(courseTitleView.snp.bottom).offset(12)
+            $0.leading.equalTo(self.snp.leading).offset(20)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(themeFirstButton.snp.width).multipliedBy(heightRatio)
         }
         
         themeSecondButton.snp.makeConstraints{
-            $0.top.equalTo(12)
+            $0.top.equalTo(courseTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(themeFirstButton.snp.trailing).offset(6)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(themeSecondButton.snp.width).multipliedBy(heightRatio)
         }
         
         themeThirdButton.snp.makeConstraints{
-            $0.top.equalTo(12)
+            $0.top.equalTo(courseTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(themeSecondButton.snp.trailing).offset(6)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.width.equalTo(buttonWidth)
@@ -106,18 +113,21 @@ extension CreatePostThemeTVC{
         themeFirstField.snp.makeConstraints{
             $0.height.equalTo(21)
             $0.leading.equalTo(themeFirstButton.snp.leading).offset(12)
+            $0.width.equalTo(textWidth)
             $0.centerY.equalTo(themeFirstButton.snp.centerY)
         }
         
         themeSecondField.snp.makeConstraints{
             $0.height.equalTo(21)
             $0.leading.equalTo(themeSecondButton.snp.leading).offset(12)
+            $0.width.equalTo(textWidth)
             $0.centerY.equalTo(themeSecondButton.snp.centerY)
         }
         
         themeThirdField.snp.makeConstraints{
             $0.height.equalTo(21)
             $0.leading.equalTo(themeThirdButton.snp.leading).offset(12)
+            $0.width.equalTo(textWidth)
             $0.centerY.equalTo(themeThirdButton.snp.centerY)
         }
     }

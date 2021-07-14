@@ -9,41 +9,55 @@ import UIKit
 import SnapKit
 
 class CreatePostCourseTVC: UITableViewCell {
+    
 
     static let identifier: String = "CreatePostCourseTVC"
+    // about pickerview
+    private var pickerView = UIPickerView()
+    private let toolbar = UIToolbar()
+    private var textFieldList: [UITextField] = []
+    private var currentList: [String] = [] //pickerview에 표시 될 List
+    private var currentIndex = 0 // 현재 선택된 component (0 == city, 1 == region)
+    private var filterData = FilterDatas() //pickerview에 표시 될 list data model
+    private var filterList : [String] = ["",""] // pickerview 선택 완료 후에 담길 결과 배열
     
     // MARK: UI Components
-    private let courseTitleView = PostCellTitleView(title: "어느 테마의 드라이브였나요?", subTitle: "드라이브 테마를 한 개 이상 선택해주세요.")
+    private let themeTitleView = PostCellTitleView(title: "어느 테마의 드라이브였나요?", subTitle: "드라이브 테마를 한 개 이상 선택해주세요.")
     
     private let cityButton: UIButton = {
         let button = UIButton()
+        button.tag = 0
+        button.setImage(UIImage(named: "unselect"), for: .normal)
         return button
     }()
     
     private let regionButton: UIButton = {
         let button = UIButton()
+        button.tag = 1
+        button.setImage(UIImage(named: "unselect"), for: .normal)
         return button
     }()
     
-    private let cityLabel: UILabel = {
-        let label = UILabel()
-        label.text = "도 단위"
-        label.font = UIFont.notoSansMediumFont(ofSize: 14)
-        label.textColor = UIColor.gray40
-        return label
+    private let cityField: UITextField = {
+        let textField = UITextField()
+        textField.tag = 0
+        textField.text = "도 단위"
+        return textField
     }()
     
-    private let regionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "시 단위"
-        label.font = UIFont.notoSansMediumFont(ofSize: 14)
-        label.textColor = UIColor.gray40
-        return label
+    private let regionField: UITextField = {
+        let textField = UITextField()
+        textField.tag = 1
+        textField.text = "시 단위"
+        return textField
     }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
+        initTextField()
+        initPickerView()
+        setButtonAction()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,12 +65,190 @@ class CreatePostCourseTVC: UITableViewCell {
         selectionStyle = .none
     }
     
+
+    private func initTextField(){
+        textFieldList.append(contentsOf: [cityField,
+                                          regionField])
+        
+        for textField in textFieldList{
+            
+            textField.textAlignment = .center
+            textField.borderStyle = .none
+            textField.tintColor = .clear
+            textField.font = .notoSansMediumFont(ofSize: 14)
+            textField.textColor = .gray40
+            
+            textField.inputAccessoryView = toolbar
+            textField.inputView = pickerView
+        }
+    }
+    
+    private func setButtonAction(){
+        cityButton.addTarget(self, action: #selector(clikedTextField), for: .touchUpInside)
+        regionButton.addTarget(self, action: #selector(clikedTextField), for: .touchUpInside)
+        self.bringSubviewToFront(cityButton)
+        self.bringSubviewToFront(regionButton)
+    }
+    
 }
 
 extension CreatePostCourseTVC {
     // MARK: Layout (셀높이 125)
     private func configureLayout(){
-        addSubviews([courseTitleView, cityButton, cityLabel, regionButton, regionLabel])
+        addSubviews([themeTitleView, cityButton, cityField, regionButton, regionField])
+        
+        let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
+        let textWidth: CGFloat = 65
+        let heightRatio: CGFloat = 42/108
+        
+        themeTitleView.snp.makeConstraints{
+            $0.top.equalTo(self.snp.top)
+            $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.trailing.equalTo(self.snp.trailing).inset(20)
+            $0.height.equalTo(38)
+        }
+        
+        cityButton.snp.makeConstraints{
+            $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
+            $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.width.equalTo(buttonWidth)
+            $0.height.equalTo(cityButton.snp.width).multipliedBy(heightRatio)
+        }
+        
+        regionButton.snp.makeConstraints{
+            $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
+            $0.leading.equalTo(cityButton.snp.trailing).offset(6)
+            $0.width.equalTo(buttonWidth)
+            $0.height.equalTo(cityButton.snp.width).multipliedBy(heightRatio)
+        }
+        
+        cityField.snp.makeConstraints{
+            $0.height.equalTo(21)
+            $0.leading.equalTo(cityButton.snp.leading).offset(12)
+            $0.width.equalTo(textWidth)
+            $0.centerY.equalTo(cityButton.snp.centerY)
+        }
+        
+        regionField.snp.makeConstraints{
+            $0.height.equalTo(21)
+            $0.leading.equalTo(regionButton.snp.leading).offset(12)
+            $0.width.equalTo(textWidth)
+            $0.centerY.equalTo(regionButton.snp.centerY)
+        }
         
     }
 }
+
+// MARK: - PickerView
+extension CreatePostCourseTVC {
+    private func initPickerView(){
+        setPickerViewDelegate()
+        createPickerViewToolbar()
+    }
+    
+    private func setPickerViewDelegate(){
+        pickerView.dataSource = self
+        pickerView.delegate = self
+    }
+    
+    private func createPickerViewToolbar(){
+        // ToolBar
+        toolbar.sizeToFit()
+        
+        // bar button item
+        let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: nil, action: #selector(donePresseed))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
+    }
+    
+    @objc
+    func donePresseed(){
+        print("완료!")
+        if currentIndex == 0 {
+            isCheckWhenStateNonValue()
+        }
+        self.endEditing(true)
+    }
+    
+    @objc
+    func clikedTextField(_ sender: UIButton){
+        currentIndex = sender.tag
+        print("\(currentIndex)")
+        pickerView.selectRow(0, inComponent: 0, animated: true)
+        changeCurrentPickerData(index: currentIndex) // data 지정
+        
+        changeToolbarText(index: currentIndex) // title 지정
+        pickerView.reloadComponent(0)
+    }
+    
+    func changeCurrentPickerData(index : Int){
+        if index == 0 {
+            currentList = filterData.state
+        } else if  index == 1 && filterList[0] != "" {
+            currentList = filterData.cityDict[filterList[0]]!
+        }
+        
+        print("currentlist")
+        print(currentList[0])
+            
+//        filterList[index] = currentList[0]
+        
+    }
+    
+    func changeToolbarText(index: Int){
+        var newTitle = ""
+        
+        switch index {
+        case 0:
+            newTitle = "지역"
+        default:
+            newTitle = "지역"
+        }
+        
+        toolbar.items![0].title = newTitle
+    }
+    
+    func isCheckWhenStateNonValue(){
+        
+        if filterList[1] == ""{
+            regionButton.isUserInteractionEnabled = true
+        }
+        
+//        if filterList[0] == "선택안함"{
+//
+//        }
+
+    }
+    
+}
+
+extension CreatePostCourseTVC: UIPickerViewDelegate{
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return currentList[row]
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("select!!")
+        print(currentList[row])
+        if currentList[row] != "선택안함" {
+            filterList[currentIndex] = currentList[row]
+        }
+        
+//        filterList[currentIndex] = currentList[row-1]
+        
+        
+    }
+}
+
+extension CreatePostCourseTVC: UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return currentList.count
+    }
+}
+

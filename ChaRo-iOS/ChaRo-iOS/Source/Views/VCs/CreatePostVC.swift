@@ -19,9 +19,10 @@ class CreatePostVC: UIViewController {
     
     var itemProviders: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
-
+    
     //MARK:  components
     let tableView: UITableView = UITableView()
+    
     let titleView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -85,6 +86,8 @@ extension CreatePostVC {
     func registerXibs(){
         tableView.registerCustomXib(xibName: CreatePostTitleTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostPhotoTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostCourseTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostThemeTVC.identifier)
     }
     
     func setNavigationBar(){
@@ -98,7 +101,7 @@ extension CreatePostVC {
     }
     
     func initCellHeight(){
-        cellHeights.append(contentsOf: [89, 255])
+        cellHeights.append(contentsOf: [89, 255, 125, 125])
     }
     
     func setNotificationCenter(){
@@ -218,6 +221,7 @@ extension CreatePostVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]
     }
@@ -238,6 +242,10 @@ extension CreatePostVC: UITableViewDataSource {
             return getCreatePostTitleCell(tableView: tableView)
         case 1:
             return getCreatePostPhotoCell(tableView: tableView)
+        case 2:
+            return getCreatePostCourseCell(tableView: tableView)
+        case 3:
+            return getCreatePostThemeCell(tableView: tableView)
         default:
             return getCreatePostTitleCell(tableView: tableView)
         }
@@ -304,6 +312,18 @@ extension CreatePostVC {
       
         return photoCell
     }
+    
+    func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell{
+        guard let courseCell = tableView.dequeueReusableCell(withIdentifier: CreatePostCourseTVC.identifier) as? CreatePostCourseTVC else { return UITableViewCell() }
+        
+        return courseCell
+    }
+    
+    func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell{
+        guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
+        
+        return themeCell
+    }
 }
 
 extension CreatePostVC: PostTitlecTVCDelegate {
@@ -338,3 +358,4 @@ extension CreatePostVC: PostTitlecTVCDelegate {
         }
     }
 }
+
