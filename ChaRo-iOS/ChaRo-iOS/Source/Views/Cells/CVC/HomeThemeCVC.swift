@@ -27,14 +27,13 @@ class HomeThemeCVC: UICollectionViewCell {
     override var isSelected: Bool {
         willSet {
             if newValue {
-                themeLabel.textColor = .mainBlue
                 themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
                 themeImageView.layer.borderWidth = 1
                 highLightView.backgroundColor = .mainBlue
+                themeLabel.textColor = .mainBlue
                 
             } else {
-
-                themeLabel.textColor = .mainBlack
+                themeLabel.textColor = .gray40
                 themeImageView.layer.borderWidth = 0
                 highLightView.backgroundColor = .white
             }

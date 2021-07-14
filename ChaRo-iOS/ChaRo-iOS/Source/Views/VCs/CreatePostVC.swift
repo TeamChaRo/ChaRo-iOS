@@ -185,24 +185,13 @@ extension CreatePostVC {
     
     @objc
     func nextButtonDidTap(sender: UIButton){
-        
-
-    }
-    
-    @objc
-    func addPhotoButtonDidTap(){
-        if #available(iOS 14, *) { // 14이상 부터 쓸 수 있음
-            var configuration = PHPickerConfiguration()
-            configuration.selectionLimit = 6 - selectImages.count // 최대 6개 선택
-            configuration.filter = .images
-            
-            let picker = PHPickerViewController(configuration: configuration)
-            picker.delegate = self
-            
-            self.present(picker, animated: true, completion: nil)
-        } else {
-            // Fallback on earlier versions
+        let storyboard = UIStoryboard(name: "AddressMain", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: AddressMainVC.identifier) as? AddressMainVC else {
+            return
         }
+        vc.setAddressListData(list: [])
+        
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
 }

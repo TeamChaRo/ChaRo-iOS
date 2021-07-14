@@ -25,4 +25,9 @@ class MapService {
         mapView = TMapView(frame: .init(x: 0, y: 0, width: 100, height: 5))
         mapView?.setApiKey(MapService.mapkey)
     }
+    
+    static public func authorizeMapView(map: TMapView) ->TMapView{
+        map.setApiKey(mapkey)
+        return map
+    }
 }
