@@ -20,7 +20,7 @@ struct Constants {
     static let detailURL = baseURL + "/preview/like/111/"
     
     ///3.더보기 최신순 URL
-    static let newDetailURL = baseURL + "preview/new/111/"
+    static let newDetailURL = baseURL + "/preview/new/111/"
     static let ThemeURL = baseURL + "/preview/like/111/1?value="
     static let likeURL = baseURL + "/post/like"
     static let searchKeywordURL = baseURL + "/searchHistory"

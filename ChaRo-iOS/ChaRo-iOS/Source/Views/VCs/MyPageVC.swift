@@ -32,20 +32,19 @@ class MyPageVC: UIViewController {
     
     var customTabbarList: [TabbarCVC] = []
     @IBOutlet weak var dropDownTableView: UITableView!
+    
     var myCellIsFirstLoaded: Bool = true
     var saveCellIsFirstLoaded: Bool = true
+    
     var delegate: SetTopTitleDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setHeaderView()
         setCircleLayout()
         setCollectionView()
         customTabbarInit()
         setDropDown()
         getData()
-//        setHeaderView()
-
 
         // Do any additional setup after loading the view.
     }
@@ -128,9 +127,11 @@ class MyPageVC: UIViewController {
 
                     DispatchQueue.main.async {
                         if self.LikePostData.count > 0{
-                            self.myCellCount = self.LikePostData[0].data.writtenPost.count + 1
+                            self.myCellCount = self.LikePostData[0].data.writtenPost.count
+                            self.saveCellCount = self.LikePostData[0].data.savedPost.count
                             self.setHeaderView()
                             self.myTableCollectionView.reloadData()
+                            self.saveTableCollectionView.reloadData()
                         }
                     }
                 }
@@ -161,12 +162,16 @@ extension MyPageVC: UICollectionViewDelegate{
             customTabbarList[0].setIcon(data: "write_active")
             customTabbarList[1].setIcon(data: "save5_inactive")
             saveTableCollectionView.isHidden = true
+//            myTableCollectionView.reloadData()
+//            saveTableCollectionView.reloadData()
         case 1:
             customTabbarList[0].setDeselectedView()
             customTabbarList[1].setSelectedView()
             customTabbarList[0].setIcon(data: "write_inactive")
             customTabbarList[1].setIcon(data: "save5_active")
             saveTableCollectionView.isHidden = false
+//            saveTableCollectionView.reloadData()
+//            myTableCollectionView.reloadData()
         default:
             print("Error")
         }
@@ -213,8 +218,10 @@ extension MyPageVC: UICollectionViewDataSource{
                 if myCellIsFirstLoaded {
                     myCellIsFirstLoaded = false
                     myCVCCell = detailCell
+                    myCVCCell?.postCount = myCellCount
+                    myCVCCell?.setLabel()
                 }
-                return detailCell
+                return myCVCCell as! UICollectionViewCell
             default:
                 if LikePostData.count == 0{
                     return MyCell
@@ -226,18 +233,31 @@ extension MyPageVC: UICollectionViewDataSource{
             return MyCell
                 
             }
-                
             }
         case 3:
             detailCell.delegate = self
-            if indexPath.row == 0{
+            switch indexPath.row {
+            case 0:
                 if saveCellIsFirstLoaded {
                     saveCellIsFirstLoaded = false
                     saveCVCCell = detailCell
+                    saveCVCCell?.postCount = saveCellCount
+                    saveCVCCell?.setLabel()
                 }
-            return detailCell
-            }
+                return saveCVCCell as! UICollectionViewCell
+            default:
+                if LikePostData.count == 0{
+                    return MyCell
+                }
+                else{
+                    print(myCellCount, indexPath.row)
+                    MyCell.setData(image: LikePostData[0].data.savedPost[indexPath.row-1
+                    ].image, title: LikePostData[0].data.savedPost[indexPath.row-1].title, tagCount: LikePostData[0].data.savedPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.savedPost[indexPath.row-1].tags, heart: LikePostData[0].data.savedPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.savedPost[indexPath.row-1].saveNum, year: LikePostData[0].data.savedPost[indexPath.row-1].year, month: LikePostData[0].data.savedPost[indexPath.row-1].month, day: LikePostData[0].data.savedPost[indexPath.row-1].day, postID: LikePostData[0].data.savedPost[indexPath.row-1].postID)
             return MyCell
+            }
+                
+            }
+
         default:
             print("Error")
         }
@@ -317,6 +337,7 @@ extension MyPageVC: UITableViewDataSource{
             var bgColorView = UIView()
             bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
             cell.selectedBackgroundView = bgColorView
+            cell.setLabel()
             cell.setCellName(name: "최신순")
             cell.delegate = self
             return cell
@@ -337,10 +358,27 @@ extension MyPageVC: MenuClickedDelegate{
 
 extension MyPageVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-        delegate?.setTopTitle(name: cell.name)
-        dropDownTableView.isHidden = true
-        myCVCCell?.setTitle(data: cell.name)
-        saveCVCCell?.setTitle(data: cell.name)
+        if cell.name == "인기순"{
+            print("인기순 실행")
+            GetMyPageDataService.URL = Constants.myPageLikeURL
+            getData()
+            self.myCellCount = self.LikePostData[0].data.writtenPost.count
+            self.dropDownTableView.isHidden = true
+            myCVCCell?.setTitle(data: "인기순")
+            saveCVCCell?.setTitle(data: "인기순")
+        }
+        
+        else if cell.name == "최신순"{
+            print("최신순 실행")
+            GetMyPageDataService.URL = Constants.myPageNewURL
+            getData()
+            self.myCellCount = self.LikePostData[0].data.writtenPost.count
+            self.dropDownTableView.isHidden = true
+            myCVCCell?.setTitle(data: "최신순")
+            saveCVCCell?.setTitle(data: "최신순")
+
+        }
+        
     }
     
 }

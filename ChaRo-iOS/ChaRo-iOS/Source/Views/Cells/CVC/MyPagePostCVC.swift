@@ -79,9 +79,9 @@ class MyPagePostCVC: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             
-            tagView1.widthAnchor.constraint(equalToConstant: 13 * length1),
-            tagView2.widthAnchor.constraint(equalToConstant: 13 * length2),
-            tagView3.widthAnchor.constraint(equalToConstant: 13 * length3)
+            tagView1.widthAnchor.constraint(equalToConstant: 11 * length1),
+            tagView2.widthAnchor.constraint(equalToConstant: 11 * length2),
+            tagView3.widthAnchor.constraint(equalToConstant: 11 * length3)
             
         ])
         
@@ -115,10 +115,12 @@ class MyPagePostCVC: UICollectionViewCell {
         //제목 설정
         self.postTitle.text = title
         
-        print(tagArr)
-        
         //태그 설정
         if tagCount == 2 {
+            tagLabel1.text = ""
+            tagLabel2.text = ""
+            tagLabel3.text = ""
+            
             tagLabel1.text = "#\(tagArr[0])"
             tagLabel2.text = "#\(tagArr[1])"
             tagLabel3.text = ""
@@ -133,18 +135,19 @@ class MyPagePostCVC: UICollectionViewCell {
         self.saveLabel.text = String(save)
         //날짜
         self.dateLabel.text = "\(year).\(month).\(day)"
+
         setTagUI()
         setLabelUI()
-        
     }
     
-    
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         setRound()
         setLikeLabel()
         setLikeUI()
+        
     }
 
 }

@@ -5,13 +5,14 @@ import Foundation
 
 struct GetMyPageDataService
 {
+    static var URL = Constants.myPageLikeURL
     
     static let MyPageData = GetMyPageDataService()
     func getRecommendInfo(completion : @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
         
-        let URL = Constants.myPageLikeURL
+        let URL = GetMyPageDataService.URL
         print(URL)
         let header : HTTPHeaders = ["Content-Type": "application/json"]
 
