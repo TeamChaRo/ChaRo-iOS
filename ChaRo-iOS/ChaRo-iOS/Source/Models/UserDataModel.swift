@@ -7,15 +7,15 @@
 
 import Foundation
 
-// MARK: - UserDataModel
-struct UserDataModel: Codable {
+// MARK: - LoginDataModel
+struct LoginDataModel: Codable {
     let success: Bool
     let msg: String
-    let data: User
+    let data: UserData
 }
 
 // MARK: - User
-struct User: Codable {
+struct UserData: Codable {
     let userID, nickname, token: String
 
     enum CodingKeys: String, CodingKey {
