@@ -25,4 +25,9 @@ struct Constants {
     static let likeURL = baseURL + "/post/like"
     static let searchKeywordURL = baseURL + "/searchHistory"
 
+    ///4. 마이 페이지 URL
+    ////  인기순
+    static let myPageLikeURL = baseURL + "/myPage/like/111"
+    //// 최신순
+    static let myPageNewURL = baseURL + "/myPage/new/111"
 }

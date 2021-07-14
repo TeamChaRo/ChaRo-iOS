@@ -18,12 +18,17 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followerButton: UIButton!
     @IBOutlet weak var saveTableCollectionView: UICollectionView!
+    @IBOutlet weak var followingCountButton: UIButton!
+    @IBOutlet weak var folloerCountButton: UIButton!
     
-    var myCellCount = 10
-    var saveCellCount = 3
+    var myCellCount = 0
+    var saveCellCount = 0
     
     var myCVCCell: HomePostDetailCVC?
     var saveCVCCell: HomePostDetailCVC?
+    
+    var LikePostData: [MyPageDataModel] = []
+    var newPostData: [MyPageDataModel] = []
     
     var customTabbarList: [TabbarCVC] = []
     @IBOutlet weak var dropDownTableView: UITableView!
@@ -33,11 +38,13 @@ class MyPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHeaderView()
+//        setHeaderView()
         setCircleLayout()
         setCollectionView()
         customTabbarInit()
         setDropDown()
+        getData()
+//        setHeaderView()
 
 
         // Do any additional setup after loading the view.
@@ -45,6 +52,12 @@ class MyPageVC: UIViewController {
     
     func setHeaderView(){
         headerView.backgroundColor = .mainBlue
+        nameLabel.text = LikePostData[0].data.userInformation.nickname
+        folloerCountButton.setTitle(String(LikePostData[0].data.userInformation.follower.count), for: .normal)
+        followingCountButton.setTitle(String(LikePostData[0].data.userInformation.following.count), for: .normal)
+        guard let url = URL(string: LikePostData[0].data.userInformation.profileImage) else { return }
+        self.profileImageView.kf.setImage(with: url)
+        setCircleLayout()
     }
     
     func setDropDown(){
@@ -72,7 +85,7 @@ class MyPageVC: UIViewController {
     
     func setCircleLayout(){
         profileImageView.clipsToBounds = true
-        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 3
         profileImageView.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
         profileImageButton.setBackgroundImage(UIImage(named: "camera_mypage_wth_circle.png"), for: .normal)
@@ -104,6 +117,35 @@ class MyPageVC: UIViewController {
         saveTableCollectionView.registerCustomXib(xibName: "HomePostDetailCVC")
     
     }
+    
+    func getData(){
+        GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? MyPageDataModel{
+                    self.LikePostData = [response]
+
+                    DispatchQueue.main.async {
+                        if self.LikePostData.count > 0{
+                            self.myCellCount = self.LikePostData[0].data.writtenPost.count + 1
+                            self.setHeaderView()
+                            self.myTableCollectionView.reloadData()
+                        }
+                    }
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
     
 
 }
@@ -152,6 +194,7 @@ extension MyPageVC: UICollectionViewDataSource{
         guard let detailCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         
         switch collectionView.tag {
+        // 커스텀 탭바
         case 1:
             if indexPath.row == 0{
                 customTabbarList[0].setSelectedView()
@@ -162,17 +205,28 @@ extension MyPageVC: UICollectionViewDataSource{
                 customTabbarList[1].setIcon(data: "save5_inactive")
                 return customTabbarList[1]
             }
+        //내가 쓴 글
         case 2:
             detailCell.delegate = self
-            if indexPath.row == 0{
+            switch indexPath.row {
+            case 0:
                 if myCellIsFirstLoaded {
                     myCellIsFirstLoaded = false
                     myCVCCell = detailCell
                 }
                 return detailCell
-            }
-            else{
+            default:
+                if LikePostData.count == 0{
+                    return MyCell
+                }
+                else{
+                    print(myCellCount, indexPath.row)
+                    MyCell.setData(image: LikePostData[0].data.writtenPost[indexPath.row-1
+                    ].image, title: LikePostData[0].data.writtenPost[indexPath.row-1].title, tagCount: LikePostData[0].data.writtenPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.writtenPost[indexPath.row-1].tags, heart: LikePostData[0].data.writtenPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.writtenPost[indexPath.row-1].saveNum, year: LikePostData[0].data.writtenPost[indexPath.row-1].year, month: LikePostData[0].data.writtenPost[indexPath.row-1].month, day: LikePostData[0].data.writtenPost[indexPath.row-1].day, postID: LikePostData[0].data.writtenPost[indexPath.row-1].postID)
             return MyCell
+                
+            }
+                
             }
         case 3:
             detailCell.delegate = self
