@@ -334,8 +334,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             
             else {
                 cell.customList = customData
-                //MARK: - 이건 어디서 하고 있는 거지?
-                cell.headerText = ""
+                //MARK: - 이건 어디서 하고 있는 거주ㅣ?
 //                for image in customData{
 //                    cell.imageNameText.append(image.image)
 //                }
@@ -363,6 +362,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             cell.buttonDelegate = self
             cell.headerText = localText
             
+            cell.LocelList = localData
+
+            
 //            if localData.count == 0 {
 //                return cell
 //            }
@@ -384,9 +386,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 //                }
             
             return cell
-            
-            
-            }
+        
+        
         default:
             print("Error")
         }

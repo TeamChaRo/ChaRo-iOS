@@ -108,46 +108,54 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+      
+        
         if LocelList.count == 0 {
             return cell
         }
         else {
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-          
-            switch indexPath.row {
-            case 0:
-                if hashTagText1.count == 2{
-                    hashTagText1.append("")
-                }
-                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
-            case 1:
-                if hashTagText2.count == 2{
-                    hashTagText2.append("")
-                }
-                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
-            case 2:
-                if hashTagText3.count == 2{
-                    hashTagText3.append("")
-                }
-                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
-            case 3:
-                if hashTagText4.count == 2{
-                    hashTagText4.append("")
-                }
-                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
-            default:
-                print("Error")
-            }
-            return cellList[indexPath.row]
+            let element = LocelList[indexPath.row]
+            
+            cell.setData(image: element.image,
+                         title: element.title,
+                         tagCount: element.tags.count,
+                         tagArr: element.tags,
+                         isFavorite: element.isFavorite,
+                         postID: element.postID)
+            
+//            switch indexPath.row {
+//            case 0:
+//                if hashTagText1.count == 2{
+//                    hashTagText1.append("")
+//                }
+//                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
+//            case 1:
+//                if hashTagText2.count == 2{
+//                    hashTagText2.append("")
+//                }
+//                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
+//            case 2:
+//                if hashTagText3.count == 2{
+//                    hashTagText3.append("")
+//                }
+//                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
+//            case 3:
+//                if hashTagText4.count == 2{
+//                    hashTagText4.append("")
+//                }
+//                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
+//            default:
+//                print("Error")
+//            }
+            return cell
             
         }
-        
-        
-        cell.imageView.image = UIImage(named: "tempImageSmall")
-        cell.callback = {
-            print("button pressed", indexPath.row)
-            }
+//        
+//        cell.callback = {
+//            print("button pressed", indexPath.row)
+//            }
 
         return cell
         
