@@ -63,43 +63,41 @@ class HomeVC: UIViewController {
     }
    
     
-    func getData(){
+    func getData() {
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
             switch response
             {
             case .success(let data) :
-                if let response = data as? HomeDataModel{
+                if let response = data as? HomeDataModel {
                     
                         let data = response.data
-                        //배너 타이틀
-                        self.bannerData.append(data.banner[0])
-                        self.bannerData.append(data.banner[1])
-                        self.bannerData.append(data.banner[2])
-                        self.bannerData.append(data.banner[3])
-                    //today 차로
-                    self.todayData.append(data.todayCharoDrive[0])
-                    self.todayData.append(data.todayCharoDrive[1])
-                    self.todayData.append(data.todayCharoDrive[2])
-                    self.todayData.append(data.todayCharoDrive[3])
-                    //trendy 차로
-                    self.trendyData.append(data.trendDrive[0])
-                    self.trendyData.append(data.trendDrive[1])
-                    self.trendyData.append(data.trendDrive[2])
-                    self.trendyData.append(data.trendDrive[3])
-        
-                    //custom 차로
-                    self.customData.append(data.customThemeDrive[0])
-                    self.customData.append(data.customThemeDrive[1])
-                    self.customData.append(data.customThemeDrive[2])
-                    self.customData.append(data.customThemeDrive[3])
-                    self.customText = data.customThemeTitle
-                    //local 차로
-                    self.localData.append(data.localDrive[0])
-                    self.localData.append(data.localDrive[1])
-                    self.localData.append(data.localDrive[2])
-                    self.localData.append(data.localDrive[3])
-                    self.localText = data.localTitle
+                        
+                    //배너 타이틀
+                    if let banner = data.banner as? [Banner] {
+                        self.bannerData = banner
+                    }
                     
+                    //today 차로
+                    if let today = data.todayCharoDrive as? [Drive] {
+                        self.todayData = today
+                    }
+                    
+                    //trendy 차로
+                    if let trendy = data.trendDrive as? [Drive] {
+                        self.trendyData = trendy
+                    }
+        
+                    //custom 차로 & 텍스트
+                    if let custom = data.customThemeDrive as? [Drive] {
+                        self.customData = custom
+                        self.customText = data.customThemeTitle
+                    }
+                    
+                    //local 차로
+                    if let local = data.localDrive as? [Drive] {
+                        self.localData = local
+                        self.localText = data.localTitle
+                    }
                     
                     DispatchQueue.main.async {
                         print("리로드")
