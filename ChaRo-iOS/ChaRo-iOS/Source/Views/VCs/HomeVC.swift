@@ -34,11 +34,11 @@ class HomeVC: UIViewController {
 
     var customText: String = ""
     var localText: String = ""
+
     
     var tableIndex: IndexPath = [0,0]
     
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
@@ -49,12 +49,18 @@ class HomeVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
-    
+     
     func setHomeNavigationViewLayout(){
         HomeNavigationView.backgroundColor = .none
-
+        homeNavigationNotificationButton.addTarget(self, action: #selector(presentOnBoarding), for: .touchUpInside)
     }
     
+    @objc func presentOnBoarding(){
+        let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)
+        nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true, completion: nil)
+    }
    
     
     func getData(){
@@ -85,7 +91,7 @@ class HomeVC: UIViewController {
                     self.customData.append(data.customThemeDrive[0])
                     self.customData.append(data.customThemeDrive[1])
                     self.customData.append(data.customThemeDrive[2])
-                    self.customData.append(data.customThemeDrive[3])
+                    self.customData.append(data.customThemeDrive[0])
                     self.customText = data.customThemeTitle
                     //local 차로
                     self.localData.append(data.localDrive[0])
@@ -238,6 +244,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         case 1:
 
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
+            cell.postDelegate = self
             //image
             if todayData.count == 0{
                 return cell
@@ -259,6 +266,13 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 for heart in todayData{
                     cell.heart.append(heart.isFavorite)
                 }
+                
+                
+                //MARK: - 물어보기
+                for id in todayData {
+                    cell.postID.append(id.postID)
+                }
+                
             return cell
             }
         
@@ -392,10 +406,16 @@ extension HomeVC: SeeMorePushDelegate{
         switch data {
         case 3:
             smVC.topText = "요즘 뜨는 드라이브 코스"
+            GetDetailDataService.value = "0"
+            GetNewDetailDataService.value = "0"
         case 4:
             smVC.topText = customText
+            GetDetailDataService.value = "1?value=summer"
+            GetNewDetailDataService.value = "1?value=summer"
         case 5:
             smVC.topText = localText
+            GetDetailDataService.value = "2?value=busan"
+            GetNewDetailDataService.value = "2?value=busan"
         default:
             print("Error")
         }
@@ -413,6 +433,8 @@ extension HomeVC : CollectionViewCellDelegate {
         
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
         
+        vc.setSelectedTheme(name: (collectionviewcell?.themeLabel.text)!)
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
         if let labelText = collectionviewcell?.themeLabel.text {
@@ -423,3 +445,12 @@ extension HomeVC : CollectionViewCellDelegate {
     
 }
 
+
+//postID 넘기기 위한 Delegate 구현
+extension HomeVC: PostIdDelegate {
+    
+    func sendPostID(data: Int) {
+        print(data)
+    }
+    
+}

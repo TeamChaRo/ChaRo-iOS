@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +25,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="kds-Zc-lX5">
                         <rect key="frame" x="0.0" y="0.0" width="326" height="245"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
                         <rect key="frame" x="0.0" y="245" width="326" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="0cJ-rp-SQW"/>
@@ -96,7 +96,9 @@
                             <constraint firstAttribute="height" constant="48" id="JE8-f1-sUT"/>
                             <constraint firstAttribute="width" constant="48" id="eEo-N5-D2B"/>
                         </constraints>
-                        <state key="normal" image="icHeartWhiteLine"/>
+                        <connections>
+                            <action selector="heartButtonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="6rX-Gq-K2G"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -117,6 +119,7 @@
             </constraints>
             <size key="customSize" width="326" height="314"/>
             <connections>
+                <outlet property="heartButton" destination="3xT-Yy-Ygg" id="uS8-PY-x7j"/>
                 <outlet property="imageView" destination="kds-Zc-lX5" id="SQ4-JG-SKe"/>
                 <outlet property="lengthBtwImgLabel" destination="rBl-ml-mIP" id="2zx-WJ-R7W"/>
                 <outlet property="stackView" destination="bb5-sj-Y94" id="nbk-5z-rti"/>
@@ -132,7 +135,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icHeartWhiteLine" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

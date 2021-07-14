@@ -21,6 +21,9 @@ class HomeThemeTVC: UITableViewCell {
     
     //MARK:- Variable
     static let identifier = "HomeThemeTVC"
+    var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
+    var ThemeDic: Dictionary = ["봄":"spring", "여름":"summer", "가을":"fall", "겨울":"winter", "산":"mountain", "바다":"sea", "호수":"lake", "강":"river", "해안도로":"oceanRoad", "벚꽃":"blossom", "단풍":"maple", "여유":"relax", "스피드":"speed", "야경":"nightView", "도심":"cityView"]
+    
     weak var cellDelegate: CollectionViewCellDelegate?
     
     
@@ -61,6 +64,7 @@ class HomeThemeTVC: UITableViewCell {
         
     }
     
+    
     //MARK:- Function
     
 }
@@ -76,7 +80,10 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
-
+        let themeName = themeList[indexPath.row]
+        
+        cell.setThemeTitle(name: themeName)
+        cell.themeImageView?.image = UIImage(named: ThemeDic[themeName] ?? "gear")
         return cell
         
     }
@@ -103,9 +110,18 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
-            self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
         
+        let cell = collectionView.cellForItem(at: indexPath) as? HomeThemeCVC
+        
+        self.cellDelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        
+        //홈에서는 선택되었을 때 색이 들어가면 안됨
+        cell?.highLightView.backgroundColor = .systemBackground
+        cell?.themeImageView.layer.borderWidth = 0
+        cell?.themeLabel.textColor = .mainBlack
+        
+        
+
     }
     
     

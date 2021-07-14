@@ -7,15 +7,20 @@
 
 import UIKit
 import SnapKit
+import Photos
+import PhotosUI
 
 class CreatePostVC: UIViewController {
     
     static let identifier: String = "CreatePostVC"
     
-    var postImages: [String] = ["ㅇㅇ","ㅇㅇ"]
+    var selectImages: [UIImage] = []
     var cellHeights: [CGFloat] = []
+    
+    var itemProviders: [NSItemProvider] = []
+    var iterator: IndexingIterator<[NSItemProvider]>?
 
-    //MARK: - components
+    //MARK:  components
     let tableView: UITableView = UITableView()
     let titleView: UIView = {
         let view = UIView()
@@ -50,10 +55,11 @@ class CreatePostVC: UIViewController {
         return label
     }()
     
-    //MARK: - viewDidLoad
+    //MARK:  viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
+        setNotificationCenter() // Noti
         setMainViewLayout() // Layout
         configureConponentLayout() // Layout
         applyTitleViewShadow() // 상단바 그림자 적용
@@ -93,6 +99,31 @@ extension CreatePostVC {
     
     func initCellHeight(){
         cellHeights.append(contentsOf: [89, 255])
+    }
+    
+    func setNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
+    }
+    
+    func postCreatePost(){
+        let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
+        //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        
+        print("===서버통신 시작=====")
+        CreatePostService.shared.createPost(userId: "111", theme: ["하잉","예원"], warning: [true,true,false,false], isParking: true, image: images){ result in
+            switch result {
+            case .success(let message):
+                print(message)
+            case .requestErr(let message):
+                print(message)
+            case .serverErr:
+                print("서버에러")
+            case .networkFail:
+                print("네트워크에러")
+            default:
+                print("몰라에러")
+            }
+        }
     }
     
     // MARK: Layout
@@ -148,15 +179,19 @@ extension CreatePostVC {
     func xButtonDidTap(sender: UIButton){
         self.dismiss(animated: true, completion: {
             self.tabBarController?.selectedIndex = 0
-//            self.tabBarController?.tabBar.isHidden = false
-//            let tabbar = self.navigationController?.presentingViewController as! TabbarVC
-//            tabbar.selectedViewController = tabbar.viewControllers![0]
+            // TODO: 홈 탭으로 돌아가는 코드 추가
         })
     }
     
     @objc
     func nextButtonDidTap(sender: UIButton){
-        //TODO: 작성하기 맵뷰와 연결 예정
+        let storyboard = UIStoryboard(name: "AddressMain", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: AddressMainVC.identifier) as? AddressMainVC else {
+            return
+        }
+        vc.setAddressListData(list: [])
+        
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
 }
@@ -177,7 +212,6 @@ extension CreatePostVC: UITableViewDelegate {
 extension CreatePostVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("=====\(cellHeights)")
         return cellHeights.count
     }
     
@@ -195,6 +229,40 @@ extension CreatePostVC: UITableViewDataSource {
     }
 }
 
+// MARK: - PHPicker Extension
+extension CreatePostVC: PHPickerViewControllerDelegate {
+    @available(iOS 14, *)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        itemProviders = results.map(\.itemProvider)
+        iterator = itemProviders.makeIterator()
+        
+        if itemProviders.count + selectImages.count > 6 {
+            // 선택된 사진 갯수가 6개 초과면 alert을 띄워줌
+            let alert = UIAlertController(title: "사진 추가", message: "최대 6개까지 추가할 수 있습니다.", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler : nil )
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        } else {
+            while true {
+                // iterator가 있을 때 까지 selectImages 배열에 append
+                if let itemProvider = iterator?.next(), itemProvider.canLoadObject(ofClass: UIImage.self) {
+                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                        guard let self = self, let image = image as? UIImage else {return}
+                        self.selectImages.append(image)
+                        DispatchQueue.main.async { // 다 배열에 넣고 reload
+                            self.tableView.reloadData()
+                        }
+                    }
+                } else {
+                    break
+                }
+            }
+        }
+    }
+}
+
 //MARK: - import cell function
 extension CreatePostVC {
     func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell{
@@ -207,8 +275,11 @@ extension CreatePostVC {
     
     func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
-
-        if postImages.count > 0 {
+        
+        // 여기서 VC 이미지를 Cell에 전달
+        photoCell.receiveImageListfromVC(image: selectImages)
+        
+        if selectImages.count > 0 {
             photoCell.photoConfigureLayout()
             photoCell.setCollcetionView()
         } else {
@@ -227,7 +298,6 @@ extension CreatePostVC: PostTitlecTVCDelegate {
         
         let newSize = tableView.sizeThatFits(CGSize(width: textView.bounds.width,
                                                     height: CGFloat.greatestFiniteMagnitude))
-        print("늘리기 성공 ㅋ")
         if textView.bounds.height != newSize.height {
             UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
@@ -245,7 +315,6 @@ extension CreatePostVC: PostTitlecTVCDelegate {
                                                     height: CGFloat.greatestFiniteMagnitude))
         
         if textView.bounds.height != newSize.height {
-            print("줄이기 성공 ㅋ")
             UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
             tableView.endUpdates()
