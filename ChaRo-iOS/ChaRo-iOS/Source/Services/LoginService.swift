@@ -23,6 +23,7 @@ struct LoginService {
                    completion : @escaping (NetworkResult<Any>) -> Void)
         {
             let header : HTTPHeaders = ["Content-Type": "application/json"]
+            
             let dataRequest = AF.request(Constants.loginURL,
                                          method: .post,
                                          parameters: makeParameter(id: id, password: password),
@@ -33,10 +34,12 @@ struct LoginService {
             dataRequest.responseData { dataResponse in
                                 
                 switch dataResponse.result {
+            
                 case .success:
                     
-                    guard let statusCode = dataResponse.response?.statusCode else {return}
+                    guard let statusCode = dataResponse.response?.statusCode else { return }
                     guard let value = dataResponse.value else {return}
+                    
                     let networkResult = self.judgeStatus(by: statusCode, value)
                     completion(networkResult)
                 
@@ -52,13 +55,24 @@ struct LoginService {
             let decoder = JSONDecoder()
             
             guard let decodedData = try? decoder.decode(LoginDataModel.self, from: data)
-            else { return .pathErr}
+            else {
+                return .pathErr
+                
+            }
             
             switch statusCode {
                 
-            case 200: return .success(decodedData.msg)
-            case 400: return .requestErr(decodedData.msg)
-            case 500: return .serverErr
+            case 200:
+                print(decodedData.msg)
+                return .success(decodedData.msg)
+                
+            case 400:
+                print(decodedData.msg)
+                return .requestErr(decodedData.msg)
+                
+            case 500:
+                return .serverErr
+                
             default: return .networkFail
             }
         }

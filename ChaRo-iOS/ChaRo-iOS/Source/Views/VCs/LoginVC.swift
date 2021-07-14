@@ -9,6 +9,13 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+    //MARK: IBOutlet
+    @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var pwdTextField: UITextField!
+    
+    
     static let identifier = "LoginVC"
     
     //MARK: - Component
@@ -29,17 +36,17 @@ class LoginVC: UIViewController {
         imageView.image = UIImage(named: "pwdBackground")
         return imageView
     }()
-    
-    private let idTextField: UITextField = {
-        let textField = UITextField()
-        return textField
-    }()
-    
-    private let pwdTextField: UITextField = {
-        let textField = UITextField()
-        return textField
-    }()
-    
+//
+//    private let idTextField: UITextField = {
+//        let textField = UITextField()
+//        return textField
+//    }()
+//
+//    private let pwdTextField: UITextField = {
+//        let textField = UITextField()
+//        return textField
+//    }()
+//
 
     private let joinButton: UIButton = {
         let button = UIButton()
@@ -53,10 +60,37 @@ class LoginVC: UIViewController {
         
 
         
-        
     }
     
-
+    
+    func loginAction()
+        {
+        print("id",self.idTextField.text! )
+        print("password",self.pwdTextField.text! )
+            LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
+                
+                switch result
+                {
+                case .success(let message):
+                    if let message = message as? String {
+                        print(message)
+                    }
+                    
+                case .requestErr(let message):
+                        if let message = message as? String {
+                        print(message)
+                    }
+                
+                default :
+                    print("ERROR")
+                }
+            }
+        }
+    
+    @IBAction func loginButtonClicked(_ sender: UIButton) {
+        loginAction()
+    }
+    
 }
 
 extension LoginVC {
