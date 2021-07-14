@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserInfo {
+class UserInfo {
     
     static let shared = UserInfo()
     

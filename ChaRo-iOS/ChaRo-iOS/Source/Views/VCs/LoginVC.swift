@@ -58,22 +58,24 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         setConstraints()
         
-
-        
     }
     
     
     func loginAction()
         {
-        print("id",self.idTextField.text! )
-        print("password",self.pwdTextField.text! )
             LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
                 
                 switch result
                 {
                 case .success(let message):
-                    if let message = message as? String {
+                    print("여기까진..")
+                    print(message)
+                    if let message = message as? UserData {
+                        //as? UserData {
                         print(message)
+//                        print(UserInfo.shared.id)
+//                        print(UserInfo.shared.nickname)
+//                        print(UserInfo.shared.token)
                     }
                     
                 case .requestErr(let message):
@@ -86,6 +88,7 @@ class LoginVC: UIViewController {
                 }
             }
         }
+    
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()

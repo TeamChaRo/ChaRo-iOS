@@ -38,7 +38,7 @@ struct LoginService {
                 case .success:
                     
                     guard let statusCode = dataResponse.response?.statusCode else { return }
-                    guard let value = dataResponse.value else {return}
+                    guard let value = dataResponse.value else { return }
                     
                     let networkResult = self.judgeStatus(by: statusCode, value)
                     completion(networkResult)
@@ -57,14 +57,19 @@ struct LoginService {
             guard let decodedData = try? decoder.decode(LoginDataModel.self, from: data)
             else {
                 return .pathErr
-                
             }
             
             switch statusCode {
                 
             case 200:
-                print(decodedData.msg)
-                return .success(decodedData.msg)
+//                print(decodedData.msg)
+//                print(decodedData.data?.token)
+//                print(decodedData.data?.userId)
+//                print(decodedData.data?.nickname)
+                //setUserInfo(data: decodedData.data)
+                print(decodedData.success)
+                print(decodedData.data as? UserData)
+                return .success(decodedData.data as? UserData)
                 
             case 400:
                 print(decodedData.msg)
@@ -76,4 +81,12 @@ struct LoginService {
             default: return .networkFail
             }
         }
+    
+    
+    func setUserInfo(data: UserData) {
+        let userInfo = UserInfo.shared
+        userInfo.id = data.userId
+        userInfo.nickname = data.nickname
+        userInfo.token = data.token
+    }
 }
