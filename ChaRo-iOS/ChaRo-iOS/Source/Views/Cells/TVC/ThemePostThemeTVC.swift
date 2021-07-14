@@ -117,7 +117,7 @@ class ThemePostThemeTVC: UITableViewCell {
 extension ThemePostThemeTVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return themeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -135,6 +135,7 @@ extension ThemePostThemeTVC : UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
         
+        //테마 이름, 이미지 설정
         let themeName = themeList[indexPath.row]
         cell.themeLabel.text = "#\(themeName)"
         cell.themeImageView.image = UIImage(named: ThemeDic[themeName] ?? "gear")

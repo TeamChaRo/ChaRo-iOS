@@ -60,8 +60,7 @@ class ThemePostVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
         
     }
-    
-    
+
     
     //MARK:- default Setting Function Part
     func setTableViewTag(){
