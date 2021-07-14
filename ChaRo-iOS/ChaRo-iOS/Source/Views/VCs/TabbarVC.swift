@@ -77,6 +77,8 @@ class TabbarVC: UITabBarController {
         
        
         
+        
+
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
@@ -84,6 +86,8 @@ class TabbarVC: UITabBarController {
         
         createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
         createTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
+        
+
         
         
         let myPageStoryboard = UIStoryboard(name: "MyPage", bundle: nil)

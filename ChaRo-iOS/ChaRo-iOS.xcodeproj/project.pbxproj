@@ -39,6 +39,7 @@
 		36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */; };
 		3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EC2690244D0099B684 /* MapService.swift */; };
 		3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */; };
+		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
 		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
@@ -54,8 +55,6 @@
 		3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */; };
 		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
 		3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */; };
-		3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */; };
-		3C840BF526962E84001CAFE5 /* AddressConfirm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */; };
 		3C840BF72696F08F001CAFE5 /* Extension+UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */; };
 		3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F5269478F3009370CD /* AddressMainVC.swift */; };
 		3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F7269484E4009370CD /* AddressDataModel.swift */; };
@@ -129,6 +128,9 @@
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */; };
+		F468C0F6269DDA290019B1B3 /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468C0F5269DDA290019B1B3 /* Notification.Name.swift */; };
+		F468C0FA269E1C410019B1B3 /* CreatePostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468C0F9269E1C410019B1B3 /* CreatePostService.swift */; };
+		F468C0FE269E20390019B1B3 /* CreatePostDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
 		F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */; };
 		F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */; };
@@ -136,6 +138,15 @@
 		F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */; };
 		F4CC1B5C269A2085009A0C01 /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */; };
 		F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */; };
+		F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */; };
+		F4CC1B62269B92F0009A0C01 /* CreatePostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */; };
+		F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */; };
+		F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */; };
+		F4CC1B68269B9850009A0C01 /* Extension+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B67269B9850009A0C01 /* Extension+UITextView.swift */; };
+		F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B8E269C5EFA009A0C01 /* CreatePostPhotosCVC.swift */; };
+		F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */; };
+		F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B93269C95DB009A0C01 /* AddressConfirmVC.swift */; };
+		F4CC1B96269C960C009A0C01 /* AddressConfirm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B95269C960C009A0C01 /* AddressConfirm.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -185,6 +196,7 @@
 		36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotDropDownTVC.xib; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellTitleView.swift; sourceTree = "<group>"; };
+		3C706798269ECE8C0082C852 /* PostResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultService.swift; sourceTree = "<group>"; };
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -201,8 +213,6 @@
 		3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBackButton.swift; sourceTree = "<group>"; };
 		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
 		3C840BEF269589DF001CAFE5 /* SearchKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchKeywordCell.xib; sourceTree = "<group>"; };
-		3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressConfirmVC.swift; sourceTree = "<group>"; };
-		3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressConfirm.storyboard; sourceTree = "<group>"; };
 		3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIScreen.swift"; sourceTree = "<group>"; };
 		3C86F9F5269478F3009370CD /* AddressMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMainVC.swift; sourceTree = "<group>"; };
 		3C86F9F7269484E4009370CD /* AddressDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataModel.swift; sourceTree = "<group>"; };
@@ -278,6 +288,9 @@
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F42DA80F2694D4C5003DA0DC /* PostCourseThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCourseThemeTVC.xib; sourceTree = "<group>"; };
+		F468C0F5269DDA290019B1B3 /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
+		F468C0F9269E1C410019B1B3 /* CreatePostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostService.swift; sourceTree = "<group>"; };
+		F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDataModel.swift; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
 		F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVC.swift; sourceTree = "<group>"; };
 		F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostLocationTVC.xib; sourceTree = "<group>"; };
@@ -285,6 +298,15 @@
 		F4CC1AE82697570A009A0C01 /* PostPathmapTCV.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPathmapTCV.xib; sourceTree = "<group>"; };
 		F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePost.storyboard; sourceTree = "<group>"; };
 		F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostVC.swift; sourceTree = "<group>"; };
+		F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostTitleTVC.swift; sourceTree = "<group>"; };
+		F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostTitleTVC.xib; sourceTree = "<group>"; };
+		F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostPhotoTVC.swift; sourceTree = "<group>"; };
+		F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostPhotoTVC.xib; sourceTree = "<group>"; };
+		F4CC1B67269B9850009A0C01 /* Extension+UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITextView.swift"; sourceTree = "<group>"; };
+		F4CC1B8E269C5EFA009A0C01 /* CreatePostPhotosCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostPhotosCVC.swift; sourceTree = "<group>"; };
+		F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostPhotosCVC.xib; sourceTree = "<group>"; };
+		F4CC1B93269C95DB009A0C01 /* AddressConfirmVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressConfirmVC.swift; sourceTree = "<group>"; };
+		F4CC1B95269C960C009A0C01 /* AddressConfirm.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddressConfirm.storyboard; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -323,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				3610A8912693730700EFC794 /* CommonCVC.swift */,
+				F4CC1B8E269C5EFA009A0C01 /* CreatePostPhotosCVC.swift */,
 				3610A8922693730700EFC794 /* HomeAnimationCVC.swift */,
 				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
 				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,
@@ -337,6 +360,8 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */,
+				F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */,
+				F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */,
 				70D63E032694BD290036484B /* HomeAreaRecommandTVC.swift */,
 				70D63E022694BD290036484B /* HomeSeasonRecommandTVC.swift */,
 				3610A8962693730700EFC794 /* HomeTodayDriveTVC.swift */,
@@ -368,10 +393,12 @@
 				3C3AF5EC2690244D0099B684 /* MapService.swift */,
 				36B8B496269B6E03008DC781 /* HomeDataService.swift */,
 				707A7D4F269C1B900033C40F /* GetThemeDataService.swift */,
+				F468C0F9269E1C410019B1B3 /* CreatePostService.swift */,
 				70B9E1E6269DC479006DACB2 /* LikeService.swift */,
 				3CE2A701269C99CD00567395 /* SearchKeywordService.swift */,
 				36CEE5B7269DFA8400974EFF /* DatailDataService.swift */,
 				36CEE5BB269E168500974EFF /* NewDetailDataService.swift */,
+				3C706798269ECE8C0082C852 /* PostResultService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -429,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA802694C7C6009370CD /* CommonCVC.xib */,
+				F4CC1B8F269C5EFA009A0C01 /* CreatePostPhotosCVC.xib */,
 				3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */,
 				3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */,
 				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
@@ -443,6 +471,8 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA832694C7C6009370CD /* AddressButtonCell.xib */,
+				F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */,
+				F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */,
 				3C86FA862694C7C6009370CD /* HomeAnimationTVC.xib */,
 				3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */,
 				3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */,
@@ -469,7 +499,7 @@
 		3C86FA8C2694C7C6009370CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3C840BF426962E84001CAFE5 /* AddressConfirm.storyboard */,
+				F4CC1B95269C960C009A0C01 /* AddressConfirm.storyboard */,
 				3C86FA932694C7C6009370CD /* AddressMain.storyboard */,
 				F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */,
 				36012A492694D557007F4633 /* HomePost.storyboard */,
@@ -538,6 +568,8 @@
 				3C879BEC268B146300C41BB8 /* Extension+UIView.swift */,
 				70D63DEC2693938D0036484B /* Extension+UIImage.swift */,
 				3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */,
+				F4CC1B67269B9850009A0C01 /* Extension+UITextView.swift */,
+				F468C0F5269DDA290019B1B3 /* Notification.Name.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -561,6 +593,7 @@
 				3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */,
 				707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */,
 				36B8B494269B6DB8008DC781 /* HomeDataModel.swift */,
+				F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */,
 				36CEE5B5269DF9A900974EFF /* DetailModel.swift */,
 				70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */,
 			);
@@ -570,7 +603,7 @@
 		3C879BE9268B13C300C41BB8 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
-				3C840BF226962E73001CAFE5 /* AddressConfirmVC.swift */,
+				F4CC1B93269C95DB009A0C01 /* AddressConfirmVC.swift */,
 				3C86F9F5269478F3009370CD /* AddressMainVC.swift */,
 				F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */,
 				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
@@ -681,6 +714,7 @@
 				3C86FAA82694C7C6009370CD /* HomeAnimationTVC.xib in Resources */,
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */,
+				F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */,
 				70D63E39269646D30036484B /* ThemePostAllTVC.xib in Resources */,
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
@@ -699,16 +733,17 @@
 				3C86FAB82694C7C6009370CD /* README in Resources */,
 				F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */,
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
-				3C840BF526962E84001CAFE5 /* AddressConfirm.storyboard in Resources */,
 				3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */,
 				360937AE2699EF7B005392BB /* TabbarCVC.xib in Resources */,
 				360937A42699E52F005392BB /* MyPage.storyboard in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
 				3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */,
+				F4CC1B62269B92F0009A0C01 /* CreatePostTitleTVC.xib in Resources */,
 				3C86FAB02694C7C6009370CD /* LaunchScreen.storyboard in Resources */,
 				3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */,
 				F4CC1B5C269A2085009A0C01 /* CreatePost.storyboard in Resources */,
 				3C86FAB52694C7C6009370CD /* NotoSansCJKkr-DemiLight.otf in Resources */,
+				F4CC1B96269C960C009A0C01 /* AddressConfirm.storyboard in Resources */,
 				3C86FAB42694C7C6009370CD /* Assets.xcassets in Resources */,
 				36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */,
 				3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */,
@@ -718,6 +753,7 @@
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
 				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
 				F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */,
+				F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */,
 				3C86FAA52694C7C6009370CD /* AddressButtonCell.xib in Resources */,
 				360937B22699F15A005392BB /* MyPagePostCVC.xib in Resources */,
 			);
@@ -772,11 +808,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */,
 				3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */,
 				36CEE5B6269DF9A900974EFF /* DetailModel.swift in Sources */,
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
+				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
@@ -785,6 +823,7 @@
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
 				70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */,
 				3C7DF0F7269AEE7D0021939C /* SearchResultVC.swift in Sources */,
+				F468C0F6269DDA290019B1B3 /* Notification.Name.swift in Sources */,
 				70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */,
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
 				3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */,
@@ -792,6 +831,7 @@
 				3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* Extension+UITextFeild.swift in Sources */,
+				F4CC1B68269B9850009A0C01 /* Extension+UITextView.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
 				3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */,
 				36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */,
@@ -805,6 +845,7 @@
 				3CEC0116269E277A00E9332C /* OnBoardCVC.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
 				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
+				F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* Extension+UIView.swift in Sources */,
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
@@ -813,12 +854,15 @@
 				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
+				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
 				361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */,
 				36CEE5BC269E168500974EFF /* NewDetailDataService.swift in Sources */,
+				3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */,
 				3C840BF326962E73001CAFE5 /* AddressConfirmVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */,
+				F468C0FA269E1C410019B1B3 /* CreatePostService.swift in Sources */,
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
 				360937B12699F15A005392BB /* MyPagePostCVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
@@ -840,6 +884,7 @@
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,
 				3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */,
 				70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */,
+				F468C0FE269E20390019B1B3 /* CreatePostDataModel.swift in Sources */,
 				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
 				3610A8A32693730700EFC794 /* HomeAnimationTVC.swift in Sources */,
@@ -999,7 +1044,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U24ZACT97M;
+				DEVELOPMENT_TEAM = M2BP76V5D4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1010,7 +1055,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1040,7 +1085,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeong.ChaRo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.hryeoong.ChaRo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
