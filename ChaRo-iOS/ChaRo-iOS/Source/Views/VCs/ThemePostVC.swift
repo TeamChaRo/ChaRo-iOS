@@ -314,7 +314,6 @@ extension ThemePostVC: SetTitleDelegate {
 extension ThemePostVC: ThemeNetworkDelegate {
     
     func setClickedThemeData(themeName: String) {
-        
         getThemeData(theme: themeName, filter: Filter.new)
     }
     

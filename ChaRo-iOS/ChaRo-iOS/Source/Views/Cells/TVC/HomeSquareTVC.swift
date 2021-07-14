@@ -23,6 +23,7 @@ class HomeSquareTVC: UITableViewCell {
     @IBOutlet weak var moreLabel: UILabel!
     var delegate: IsSelectedCVCDelegate?
     var ButtonDelegate: SeeMorePushDelegate?
+    var postDelegate: PostIdDelegate?
     let cellTag : Int = 3
 //
 //    var imageNameText: [String] = []
@@ -105,6 +106,10 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
+        let postid = cell!.postID
+        postDelegate?.sendPostID(data: postid)
     }
     
     
@@ -167,6 +172,8 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         return cell
         
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

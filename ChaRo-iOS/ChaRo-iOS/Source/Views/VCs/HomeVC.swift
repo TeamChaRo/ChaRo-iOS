@@ -292,7 +292,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
+            cell.postDelegate = self
             
+
             if trendyData.count == 0 {
                 return cell
             }
@@ -326,6 +328,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
+            cell.postDelegate = self
+            
             cell.headerText = customText
             
             if customData.count == 0 {
@@ -334,6 +338,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             
             else {
                 cell.customList = customData
+                
                 //MARK: - 이건 어디서 하고 있는 거주ㅣ?
 //                for image in customData{
 //                    cell.imageNameText.append(image.image)
@@ -360,6 +365,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
+            cell.postDelegate = self
+            
             cell.headerText = localText
             
             cell.LocelList = localData
@@ -466,7 +473,7 @@ extension HomeVC : CollectionViewCellDelegate {
 extension HomeVC: PostIdDelegate {
     
     func sendPostID(data: Int) {
-        print(data)
+        print("이거임 ~~~~\(data)")
     }
     
 }

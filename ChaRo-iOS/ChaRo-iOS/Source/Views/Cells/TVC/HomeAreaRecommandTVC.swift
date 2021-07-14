@@ -15,6 +15,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
     @IBOutlet weak var moreLabel: UILabel!
     var delegate: IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
+    var postDelegate: PostIdDelegate?
     let cellTag : Int = 5
     //MARK:- Variable
     static let identifier = "HomeAreaRecommandTVC"
@@ -103,6 +104,10 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
+        let postid = cell!.postID
+        postDelegate?.sendPostID(data: postid)
     }
     
     

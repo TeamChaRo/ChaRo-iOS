@@ -15,6 +15,7 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     @IBOutlet weak var moreLabel: UILabel!
     var delegate : IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
+    var postDelegate: PostIdDelegate?
     let cellTag : Int = 4
     
     
@@ -107,6 +108,10 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
+        let postid = cell!.postID
+        postDelegate?.sendPostID(data: postid)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
