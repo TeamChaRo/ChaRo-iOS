@@ -33,7 +33,10 @@ class OnBoardVC: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: 624)
+        
+        let rate : CGFloat = UIScreen.getDeviceHeight() / 812
+        
+        layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: rate * 624)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
