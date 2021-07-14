@@ -22,10 +22,13 @@ struct Constants {
     
     ///3.더보기 최신순 URL
     static let newDetailURL = baseURL + "preview/new/111/"
-    static let ThemeURL = baseURL + "/preview/like/111/1?value="
+    
+    ///4.
+    static let ThemeLikeURL = baseURL + "/preview/like/111/1?value="
+    static let ThemeNewURL = baseURL + "/preview/new/111/1?value="
     static let likeURL = baseURL + "/post/like"
     
-    
+   
     ///필터 검색 결과 조회
     static let searchPostURL = baseURL + "/search/"
     

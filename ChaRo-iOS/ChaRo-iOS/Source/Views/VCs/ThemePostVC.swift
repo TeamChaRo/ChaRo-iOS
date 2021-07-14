@@ -51,7 +51,7 @@ class ThemePostVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getThemeData(theme: selectedTheme)
+        getThemeData(theme: selectedTheme, filter: Filter.like)
     }
     
     //MARK:- IBAction
@@ -60,8 +60,7 @@ class ThemePostVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
         
     }
-    
-    
+
     
     //MARK:- default Setting Function Part
     func setTableViewTag(){
@@ -120,7 +119,7 @@ class ThemePostVC: UIViewController {
     
     
     //MARK: - 테마 서버 통신
-    func getThemeData(theme: String) {
+    func getThemeData(theme: String, filter: Filter) {
         
         //문자열에서 # 제거
         let strimmedTheme = theme.trimmingCharacters(in: ["#"])
@@ -129,7 +128,7 @@ class ThemePostVC: UIViewController {
         let themeNames = ThemeDic["\(strimmedTheme)"]!
 
         //서버에 통신 요청
-        GetThemeDataService.shared.getThemeInfo(theme: themeNames) { (response) in
+        GetThemeDataService.shared.getThemeInfo(theme: themeNames, filter: filter) { (response) in
                     switch(response)
                     {
                     case .success(let driveData):
@@ -179,29 +178,26 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
     UITableViewCell {
                 
         if tableView.tag == 2 {
-
-            switch indexPath.row {
             
+            let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
+            
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            cell.setLabel()
+            
+            switch indexPath.row {
             case 0:
-                let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-                cell.selectedBackgroundView = bgColorView
-                cell.setLabel()
                 cell.setCellName(name: "인기순")
-                cell.delegate = self
-                
-                return cell
-                
-            default:
-                let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-                cell.selectedBackgroundView = bgColorView
+            case 1:
                 cell.setCellName(name: "최신순")
-                cell.delegate = self
-                return cell
+            default:
+                break
             }
+            
+            cell.delegate = self
+            
+            return cell
             
         }
         
@@ -318,8 +314,7 @@ extension ThemePostVC: SetTitleDelegate {
 extension ThemePostVC: ThemeNetworkDelegate {
     
     func setClickedThemeData(themeName: String) {
-        
-        getThemeData(theme: themeName)
+        getThemeData(theme: themeName, filter: Filter.new)
     }
     
 }

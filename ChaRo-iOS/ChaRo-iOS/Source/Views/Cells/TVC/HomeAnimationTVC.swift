@@ -18,9 +18,10 @@ class HomeAnimationTVC: UITableViewCell {
     
     var animationCell: [HomeAnimationCVC] = []
     
-    var imageNameText: [String] = []
-    var titleText: [String] = []
-    var hashTagText: [String] = []
+    var bannerList: [Banner] = []
+//    var imageNameText: [String] = []
+//    var titleText: [String] = []
+//    var hashTagText: [String] = []
     
     
     
@@ -30,16 +31,17 @@ class HomeAnimationTVC: UITableViewCell {
         // Initialization code
     }
     
-    func cellInit(){
-        guard let cell1 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,0]) as? HomeAnimationCVC else {return}
-        guard let cell2 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,1]) as? HomeAnimationCVC else {return}
-        guard let cell3 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,2]) as? HomeAnimationCVC else {return}
-        guard let cell4 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,3]) as? HomeAnimationCVC else {return}
-        animationCell.append(cell1)
-        animationCell.append(cell2)
-        animationCell.append(cell3)
-        animationCell.append(cell4)
-    }
+    //MARK: - 이게 몰까?
+//    func cellInit() {
+//        guard let cell1 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,0]) as? HomeAnimationCVC else {return}
+//        guard let cell2 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,1]) as? HomeAnimationCVC else {return}
+//        guard let cell3 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,2]) as? HomeAnimationCVC else {return}
+//        guard let cell4 = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: [0,3]) as? HomeAnimationCVC else {return}
+//        animationCell.append(cell1)
+//        animationCell.append(cell2)
+//        animationCell.append(cell3)
+//        animationCell.append(cell4)
+//    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -49,11 +51,14 @@ class HomeAnimationTVC: UITableViewCell {
     }
     
    
+//    func setData(imageName: String, title: String, tag: String){
+//        imageNameText.append(imageName)
+//        titleText.append(title)
+//        hashTagText.append(tag)
+//    }
     
-    func setData(imageName: String, title: String, tag: String){
-        imageNameText.append(imageName)
-        titleText.append(title)
-        hashTagText.append(tag)
+    func setBannerList(inputList: [Banner]) {
+        self.bannerList = inputList
     }
     
 //MARK: delegate
@@ -64,8 +69,9 @@ class HomeAnimationTVC: UITableViewCell {
         let flowLayout = animationCollectionview.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.scrollDirection = .horizontal
         animationCollectionview.registerCustomXib(xibName: "HomeAnimationCVC")
-        cellInit()
+        //cellInit()
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //여기부분 약간 수정해야됨,,, 기기마다 몬가 값이 다 다를거같아서 일단 보류!
         let originalCarConstant = carMoveConstraint.constant
@@ -86,39 +92,29 @@ class HomeAnimationTVC: UITableViewCell {
        }
 }
 
+
+//MARK: - extension
 extension HomeAnimationTVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageNameText.count
+        return bannerList.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        //도저언 !
+        
         HomeAnimationTVC.collectionIndexPath = indexPath
         
-        print(hashTagText)
-        if imageNameText.count == 0{
-            return animationCell[0]
-        }
-        else{
-        switch indexPath.row {
-        case 0:
-            animationCell[0].setData(imageName: imageNameText[0], titleText: titleText[0], hashTagText: hashTagText[0])
-            return animationCell[0]
+        guard let cell = animationCollectionview.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: indexPath) as? HomeAnimationCVC else { return UICollectionViewCell() }
 
-        case 1:
-            animationCell[1].setData(imageName: imageNameText[1], titleText: titleText[1], hashTagText: hashTagText[1])
-            return animationCell[1]
-        case 2:
-            animationCell[2].setData(imageName: imageNameText[2], titleText: titleText[2], hashTagText: hashTagText[2])
-            return animationCell[2]
-        case 3:
-            animationCell[3].setData(imageName: imageNameText[3], titleText: titleText[3], hashTagText: hashTagText[3])
-            return animationCell[3]
-        default:
-            print("Error")
-        }
-        }
-        return animationCell[0]
+        let element = bannerList[indexPath.row]
+        
+            cell.setData(image: element.bannerImage
+                         ,title: element.bannerTitle
+                         ,tagText: element.bannerTag)
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

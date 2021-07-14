@@ -30,15 +30,30 @@ class HomeAnimationCVC: UICollectionViewCell {
         homeTitleLabelTopConstraint.constant = CGFloat(Int(topConstraint))
     }
    
-    func setData(imageName : String, titleText : String, hashTagText : String){
+//    func setData(imageName : String, titleText : String, hashTagText : String){
+//
+//        backGroundImage.kf.setImage(with: URL(string: imageName))
+//
+//
+//        homeAnimationTitleLabel.text = titleText
+//        homeAnimationHashtagLabel.text = hashTagText
+//        setTitleConsraint()
+//
+//    }
+    
+    func setData(image: String, title: String, tagText: String) {
         
-        backGroundImage.kf.setImage(with: URL(string: imageName))
+        //이미지 설정
+        guard let url = URL(string: image) else { return }
+        self.backGroundImage.kf.setImage(with: url)
         
+        //제목 설정
+        self.homeAnimationTitleLabel.text = title
         
-        homeAnimationTitleLabel.text = titleText
-        homeAnimationHashtagLabel.text = hashTagText
+        //태그 텍스트 설정
+        self.homeAnimationHashtagLabel.text = tagText
+    
         setTitleConsraint()
-        
     }
     
 }
