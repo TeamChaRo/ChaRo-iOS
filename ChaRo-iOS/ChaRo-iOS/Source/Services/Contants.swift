@@ -30,7 +30,13 @@ struct Constants {
     static let ThemeNewURL = baseURL + "/preview/new/\(userId)/1?value="
     static let likeURL = baseURL + "/post/like"
     
+    
+=======
+  
+    static let likeURL = baseURL + "/post/like"
+    
    
+>>>>>>> develop
     ///필터 검색 결과 조회
     static let searchPostURL = baseURL + "/search/"
     

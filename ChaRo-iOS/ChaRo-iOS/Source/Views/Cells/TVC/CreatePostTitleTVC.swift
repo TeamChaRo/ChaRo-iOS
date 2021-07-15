@@ -17,7 +17,24 @@ class CreatePostTitleTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostTitleTVC"
     weak var delegateCell: PostTitlecTVCDelegate?
-    var maxLineFlag: Bool = false // 20자 이상 감지
+    
+    // MARK: textview maxText check
+    private var enterFlag: Bool = false // 20자 이상 감지
+    private let limitTextCount: Int = 38
+    private let limitLineTextCount: Int = 23
+    private var titleContent: String = ""
+    private var isWarning: Bool = false {
+        didSet{
+            if isWarning {
+                warningLabel.isHidden = false
+                titleTextView.layer.borderColor = UIColor.mainOrange.cgColor
+            } else {
+                warningLabel.isHidden = true
+                titleTextView.layer.borderColor = UIColor.gray20.cgColor
+            }
+        }
+    }
+    
     
     // MARK: UI Components
     let titleTextView: UITextView = {
@@ -39,20 +56,21 @@ class CreatePostTitleTVC: UITableViewCell {
         label.text = "공백 포함 38자 이내로 작성해주세요."
         label.textColor = UIColor.mainOrange
         label.font = .notoSansRegularFont(ofSize: 11)
+        label.isHidden = true
         return label
     }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         titleTextView.delegate = self
-        selectionStyle = .none
         configureLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        selectionStyle = .none
     }
+
 }
 
 extension CreatePostTitleTVC: UITextViewDelegate {
@@ -69,21 +87,33 @@ extension CreatePostTitleTVC: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if !maxLineFlag && titleTextView.text.count == 20 {
-            maxLineFlag = true
-            titleTextView.text += "\n"
-            if let delegate = delegateCell {
-                delegate.increaseTextViewHeight(self, textView)
+        let textCount = titleTextView.text.count
+        
+        if textCount <= limitTextCount {
+            titleContent = titleTextView.text
+            isWarning = isWarning ? false : isWarning
+            
+            // 1줄 최대 글자수 초과시, textview height 조절
+            if textCount > limitLineTextCount { // 1줄 최대 금액 되면 줄바꾸기
+                if !enterFlag {
+                    titleTextView.text += "\n"
+                    enterFlag = true
+                    if let delegate = delegateCell {
+                        delegate.increaseTextViewHeight(self, textView)
+                    }
+                }
+            } else if textCount <= limitLineTextCount { // 1줄 최대텍스트 이하
+                if enterFlag {
+                    enterFlag = false
+                    if let delegate = delegateCell {
+                        delegate.decreaseTextViewHeight(self, textView)
+                    }
+                }
             }
-        } else if maxLineFlag && titleTextView.text.count <= 20 {
-            maxLineFlag = false
-            if let delegate = delegateCell {
-                delegate.decreaseTextViewHeight(self, textView)
-            }
-        } else if maxLineFlag && titleTextView.text.count > 38 {
-            setWarningTextField(titleTextView)
-            warningConfigureLayout()
-            print("38자 넘었어유~")
+            
+        } else if textCount > limitTextCount {
+            titleTextView.text = titleContent
+            isWarning = !isWarning ? true : isWarning
         }
     }
 }
@@ -92,7 +122,7 @@ extension CreatePostTitleTVC {
     
     // MARK: - Layout
     func configureLayout(){
-        addSubview(titleTextView)
+        addSubviews([titleTextView, warningLabel])
         
         titleTextView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top).offset(23)
@@ -101,14 +131,10 @@ extension CreatePostTitleTVC {
             $0.bottom.equalTo(self.snp.bottom).inset(24)
             $0.height.equalTo(42)
         }
-    }
-    
-    func warningConfigureLayout(){
-        addSubview(warningLabel)
         
         warningLabel.snp.makeConstraints{
             $0.top.equalTo(self.titleTextView.snp.bottom).offset(4)
-            $0.leading.equalTo(self.snp.leading).offset(21)
+            $0.leading.equalTo(self.snp.leading).offset(20)
         }
     }
     
@@ -124,10 +150,5 @@ extension CreatePostTitleTVC {
         }
     }
     
-    //MARK: - Function
-    func setWarningTextField(_ textView: UITextView){
-        textView.layer.borderColor = UIColor.mainOrange.cgColor
-        textView.layer.borderWidth = 1
-    }
 }
 
