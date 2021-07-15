@@ -116,9 +116,7 @@ class HomePostVC: UIViewController {
                     self.newPostData = [response]
                     
                     DispatchQueue.main.async {
-                        if self.postData.count > 0{
                             self.collectionView.reloadData()
-                        }
                     }
                 }
             case .requestErr(let message) :
