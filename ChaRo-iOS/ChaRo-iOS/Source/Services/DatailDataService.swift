@@ -7,6 +7,8 @@ struct GetDetailDataService
 {
     static var value: String = "1?value=summer"
     
+
+    
     static let detailData = GetDetailDataService()
     func getRecommendInfo(completion : @escaping (NetworkResult<Any>) -> Void)
     {

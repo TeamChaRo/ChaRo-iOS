@@ -19,9 +19,10 @@ class CreatePostVC: UIViewController {
     
     var itemProviders: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
-
+    
     //MARK:  components
     let tableView: UITableView = UITableView()
+    
     let titleView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -68,23 +69,31 @@ class CreatePostVC: UIViewController {
         configureTableView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        removeObservers() // 옵저버 해제
+    }
+    
 }
 
 // MARK: - functions
 extension CreatePostVC {
     
-    // MARK: Setting function
-    
+    // MARK: function
     func configureTableView(){
         registerXibs()
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dismissKeyboardWhenTappedAround()
     }
     
     func registerXibs(){
         tableView.registerCustomXib(xibName: CreatePostTitleTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostPhotoTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostCourseTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostThemeTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostParkingWarningTVC.identifier)
+        tableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
     }
     
     func setNavigationBar(){
@@ -98,19 +107,48 @@ extension CreatePostVC {
     }
     
     func initCellHeight(){
-        cellHeights.append(contentsOf: [89, 255])
+        cellHeights.append(contentsOf: [89, 255, 125, 125, 334, 408])
     }
     
     func setNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
     }
     
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .callPhotoPicker, object: nil)
+    }
+    
+    @objc
+    func textFieldMoveUp(_ notification: NSNotification){
+        
+        print("tableView.frame.height = \(tableView.frame.height)")
+        print("tableView.bounds.height = \(tableView.bounds.height)")
+        print(notification.object.debugDescription)
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            })
+        }
+    }
+    
+    @objc
+    func textFieldMoveDown(_ notification: NSNotification){
+        self.tableView.transform = .identity
+    }
+    
+    // MARK: 서버통신 .post /writePost
     func postCreatePost(){
         let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
         
         print("===서버통신 시작=====")
-        CreatePostService.shared.createPost(userId: "111", theme: ["하잉","예원"], warning: [true,true,false,false], isParking: true, image: images){ result in
+        CreatePostService.shared.createPost(model: model, image: images){ result in
             switch result {
             case .success(let message):
                 print(message)
@@ -130,17 +168,17 @@ extension CreatePostVC {
     func setMainViewLayout(){
         self.view.addSubviews([titleView,tableView])
         
-        let titleRatio: CGFloat = 58/375
+        let titleRatio: CGFloat = 102/375
         
         titleView.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaInsets)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(UIScreen.getDeviceWidth()*titleRatio)
         }
         
         tableView.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(UIScreen.getDeviceWidth()*titleRatio)
+            $0.top.equalTo(view.safeAreaInsets).offset(UIScreen.getDeviceWidth()*titleRatio)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -151,9 +189,7 @@ extension CreatePostVC {
         titleView.addSubviews([titleLabel, xButton, nextButton])
         
         titleLabel.snp.makeConstraints{
-            let topRatio: CGFloat = 14/58
-            let titleRatio: CGFloat = 58/375
-            $0.top.equalTo((UIScreen.getDeviceWidth()*titleRatio)*topRatio)
+            $0.bottom.equalTo(titleView.snp.bottom).inset(23)
             $0.width.equalTo(150) // 크게 넣기
             $0.centerX.equalTo(titleView.snp.centerX)
             $0.height.equalTo(21)
@@ -177,10 +213,9 @@ extension CreatePostVC {
     //MARK: - Button Actions
     @objc
     func xButtonDidTap(sender: UIButton){
-        self.dismiss(animated: true, completion: {
-            self.tabBarController?.selectedIndex = 0
-            // TODO: 홈 탭으로 돌아가는 코드 추가
-        })
+
+        // TODO: Alert 추가 (중단하시겠습니까?)
+
     }
     
     @objc
@@ -218,6 +253,7 @@ extension CreatePostVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]
     }
@@ -238,6 +274,14 @@ extension CreatePostVC: UITableViewDataSource {
             return getCreatePostTitleCell(tableView: tableView)
         case 1:
             return getCreatePostPhotoCell(tableView: tableView)
+        case 2:
+            return getCreatePostCourseCell(tableView: tableView)
+        case 3:
+            return getCreatePostThemeCell(tableView: tableView)
+        case 4:
+            return getCreatePostParkingWarningCell(tableView: tableView)
+        case 5:
+            return getCreatePostCourseDescCell(tableView: tableView)
         default:
             return getCreatePostTitleCell(tableView: tableView)
         }
@@ -304,6 +348,30 @@ extension CreatePostVC {
       
         return photoCell
     }
+    
+    func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell{
+        guard let courseCell = tableView.dequeueReusableCell(withIdentifier: CreatePostCourseTVC.identifier) as? CreatePostCourseTVC else { return UITableViewCell() }
+        
+        return courseCell
+    }
+    
+    func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell{
+        guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
+        
+        return themeCell
+    }
+    
+    func getCreatePostParkingWarningCell(tableView: UITableView) -> UITableViewCell{
+        guard let parkingWarningCell = tableView.dequeueReusableCell(withIdentifier: CreatePostParkingWarningTVC.identifier) as? CreatePostParkingWarningTVC else { return UITableViewCell() }
+        
+        return parkingWarningCell
+    }
+    
+    func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
+        guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else { return UITableViewCell() }
+        courseDescCell.setContentText(text: "")
+        return courseDescCell
+    }
 }
 
 extension CreatePostVC: PostTitlecTVCDelegate {
@@ -338,3 +406,4 @@ extension CreatePostVC: PostTitlecTVCDelegate {
         }
     }
 }
+
