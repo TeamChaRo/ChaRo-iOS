@@ -398,8 +398,6 @@ extension SearchResultVC: SetTitleDelegate{
             postCount = postData.count
             self.dropDownTableView.isHidden = true
             topCVCCell?.setTitle(data: "인기순")
-          
-
         }
         
         else if cell.name == "최신순"{
