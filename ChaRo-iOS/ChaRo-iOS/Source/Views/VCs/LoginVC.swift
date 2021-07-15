@@ -73,6 +73,8 @@ class LoginVC: UIViewController {
                     if let message = message as? UserData {
                         //as? UserData {
                         print(message)
+                        
+                        //guard let nextVC = else { return }
 //                        print(UserInfo.shared.id)
 //                        print(UserInfo.shared.nickname)
 //                        print(UserInfo.shared.token)

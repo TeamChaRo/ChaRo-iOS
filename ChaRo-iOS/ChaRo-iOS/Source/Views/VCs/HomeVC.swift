@@ -55,8 +55,8 @@ class HomeVC: UIViewController {
     }
     
     @objc func presentOnBoarding(){
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
+        let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true, completion: nil)
     }
