@@ -44,4 +44,7 @@ struct Constants {
     static let detailPostURL = baseURL + "/postDetail/" + userId + "/"
     
     static let loginURL = baseURL + "/sign/signIn"
+    
+    /// 저장하기
+    static let saveURL = baseURL + "/post/save"
 }
