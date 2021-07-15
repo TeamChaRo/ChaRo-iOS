@@ -11,7 +11,7 @@ class PostDetailVC: UIViewController {
 
     static let identifier = "PostDetailVC"
     
-    private var isAuthor = true
+    private var isAuthor = false
     private var isEditingMode = false
     
     private var tableView = UITableView()
@@ -79,6 +79,12 @@ class PostDetailVC: UIViewController {
     }
     
     
+    public func setPostMode(isAuthor: Bool, isEditing: Bool){
+        self.isAuthor = isAuthor
+        self.isEditingMode = isEditing
+        
+    }
+    
     public func setPostId(id: Int){
         print("setPost PostDetailVC - \(id)")
         postId = id
@@ -138,6 +144,7 @@ class PostDetailVC: UIViewController {
     }
     
     
+    
     func showToast(message : String) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100,
                                                y: self.view.frame.size.height-100, width: 200, height: 35))
@@ -159,15 +166,20 @@ class PostDetailVC: UIViewController {
 
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
+        let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
         })
-        let saveAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
         })
 
+        let cancleAction = UIAlertAction(title: "취소", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        optionMenu.addAction(modifyAction)
         optionMenu.addAction(deleteAction)
-        optionMenu.addAction(saveAction)
+        optionMenu.addAction(cancleAction)
         
         self.present(optionMenu, animated: true, completion: nil)
 
@@ -196,7 +208,7 @@ extension PostDetailVC{
             $0.top.leading.trailing.equalTo(view)
             $0.height.equalTo(UIScreen.getNotchHeight() + 58)
         }
-        //navigationView.bringSubviewToFront(tableView)
+        navigationView.bringSubviewToFront(view)
         setBasicNavigationView()
         setShadowInNavigationView()
         
@@ -270,8 +282,6 @@ extension PostDetailVC{
                                                                            height: UIScreen.getNotchHeight()+58),
                                                        cornerRadius: navigationView.layer.cornerRadius).cgPath
     }
-    
-    
  
 }
 
