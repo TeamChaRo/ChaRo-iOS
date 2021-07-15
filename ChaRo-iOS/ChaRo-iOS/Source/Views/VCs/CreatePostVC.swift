@@ -69,6 +69,10 @@ class CreatePostVC: UIViewController {
         configureTableView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        removeObservers() // 옵저버 해제
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
@@ -79,7 +83,6 @@ class CreatePostVC: UIViewController {
 extension CreatePostVC {
     
     // MARK: function
-    
     func configureTableView(){
         registerXibs()
         tableView.separatorStyle = .none
@@ -111,9 +114,35 @@ extension CreatePostVC {
     }
     
     func setNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
     }
+    
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .callPhotoPicker, object: nil)
+    }
 
+    func setKeyboardObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func textFieldMoveUp(_ notification: NSNotification){
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            })
+        }
+    }
+    
+    @objc
+    func textFieldMoveDown(_ notification: NSNotification){
+        self.tableView.transform = .identity
+    }
     
     // MARK: 서버통신 .post /writePost
     func postCreatePost(){
@@ -142,17 +171,17 @@ extension CreatePostVC {
     func setMainViewLayout(){
         self.view.addSubviews([titleView,tableView])
         
-        let titleRatio: CGFloat = 58/375
+        let titleRatio: CGFloat = 102/375
         
         titleView.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaInsets)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(UIScreen.getDeviceWidth()*titleRatio)
         }
         
         tableView.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(UIScreen.getDeviceWidth()*titleRatio)
+            $0.top.equalTo(view.safeAreaInsets).offset(UIScreen.getDeviceWidth()*titleRatio)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -163,9 +192,7 @@ extension CreatePostVC {
         titleView.addSubviews([titleLabel, xButton, nextButton])
         
         titleLabel.snp.makeConstraints{
-            let topRatio: CGFloat = 14/58
-            let titleRatio: CGFloat = 58/375
-            $0.top.equalTo((UIScreen.getDeviceWidth()*titleRatio)*topRatio)
+            $0.bottom.equalTo(titleView.snp.bottom).inset(23)
             $0.width.equalTo(150) // 크게 넣기
             $0.centerX.equalTo(titleView.snp.centerX)
             $0.height.equalTo(21)
@@ -190,7 +217,7 @@ extension CreatePostVC {
     @objc
     func xButtonDidTap(sender: UIButton){
 
-        // TODO: 홈 탭으로 돌아가는 코드 추가
+        // TODO: Alert 추가 (중단하시겠습니까?)
 
     }
     
@@ -345,7 +372,7 @@ extension CreatePostVC {
     
     func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
         guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else { return UITableViewCell() }
-        
+        courseDescCell.setContentText(text: "")
         return courseDescCell
     }
 }

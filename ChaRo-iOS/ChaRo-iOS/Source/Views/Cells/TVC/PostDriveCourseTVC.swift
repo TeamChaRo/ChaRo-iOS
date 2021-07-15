@@ -17,7 +17,7 @@ class PostDriveCourseTVC: UITableViewCell {
     private let titleView = PostCellTitleView(title: "제 드라이브 코스는요")
     
     private var contentText = ""
-    private let limitTextCount = 10
+    private let limitTextCount = 280
     private var isWarnning : Bool = false {
         didSet{
             if isWarnning{
