@@ -18,33 +18,45 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followerButton: UIButton!
     @IBOutlet weak var saveTableCollectionView: UICollectionView!
+    @IBOutlet weak var followingCountButton: UIButton!
+    @IBOutlet weak var folloerCountButton: UIButton!
     
-    var myCellCount = 10
-    var saveCellCount = 3
+    var myCellCount = 0
+    var saveCellCount = 0
     
     var myCVCCell: HomePostDetailCVC?
     var saveCVCCell: HomePostDetailCVC?
     
+    var LikePostData: [MyPageDataModel] = []
+    var newPostData: [MyPageDataModel] = []
+    
     var customTabbarList: [TabbarCVC] = []
     @IBOutlet weak var dropDownTableView: UITableView!
+    
     var myCellIsFirstLoaded: Bool = true
     var saveCellIsFirstLoaded: Bool = true
+    
     var delegate: SetTopTitleDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHeaderView()
         setCircleLayout()
         setCollectionView()
         customTabbarInit()
         setDropDown()
-
+        getData()
 
         // Do any additional setup after loading the view.
     }
     
     func setHeaderView(){
         headerView.backgroundColor = .mainBlue
+        nameLabel.text = LikePostData[0].data.userInformation.nickname
+        folloerCountButton.setTitle(String(LikePostData[0].data.userInformation.follower.count), for: .normal)
+        followingCountButton.setTitle(String(LikePostData[0].data.userInformation.following.count), for: .normal)
+        guard let url = URL(string: LikePostData[0].data.userInformation.profileImage) else { return }
+        self.profileImageView.kf.setImage(with: url)
+        setCircleLayout()
     }
     
     func setDropDown(){
@@ -72,7 +84,7 @@ class MyPageVC: UIViewController {
     
     func setCircleLayout(){
         profileImageView.clipsToBounds = true
-        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 3
         profileImageView.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
         profileImageButton.setBackgroundImage(UIImage(named: "camera_mypage_wth_circle.png"), for: .normal)
@@ -105,6 +117,37 @@ class MyPageVC: UIViewController {
     
     }
     
+    func getData(){
+        GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? MyPageDataModel{
+                    self.LikePostData = [response]
+
+                    DispatchQueue.main.async {
+                        if self.LikePostData.count > 0{
+                            self.myCellCount = self.LikePostData[0].data.writtenPost.count
+                            self.saveCellCount = self.LikePostData[0].data.savedPost.count
+                            self.setHeaderView()
+                            self.myTableCollectionView.reloadData()
+                            self.saveTableCollectionView.reloadData()
+                        }
+                    }
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    
 
 }
 
@@ -119,12 +162,16 @@ extension MyPageVC: UICollectionViewDelegate{
             customTabbarList[0].setIcon(data: "write_active")
             customTabbarList[1].setIcon(data: "save5_inactive")
             saveTableCollectionView.isHidden = true
+//            myTableCollectionView.reloadData()
+//            saveTableCollectionView.reloadData()
         case 1:
             customTabbarList[0].setDeselectedView()
             customTabbarList[1].setSelectedView()
             customTabbarList[0].setIcon(data: "write_inactive")
             customTabbarList[1].setIcon(data: "save5_active")
             saveTableCollectionView.isHidden = false
+//            saveTableCollectionView.reloadData()
+//            myTableCollectionView.reloadData()
         default:
             print("Error")
         }
@@ -152,6 +199,7 @@ extension MyPageVC: UICollectionViewDataSource{
         guard let detailCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         
         switch collectionView.tag {
+        // 커스텀 탭바
         case 1:
             if indexPath.row == 0{
                 customTabbarList[0].setSelectedView()
@@ -162,28 +210,54 @@ extension MyPageVC: UICollectionViewDataSource{
                 customTabbarList[1].setIcon(data: "save5_inactive")
                 return customTabbarList[1]
             }
+        //내가 쓴 글
         case 2:
             detailCell.delegate = self
-            if indexPath.row == 0{
+            switch indexPath.row {
+            case 0:
                 if myCellIsFirstLoaded {
                     myCellIsFirstLoaded = false
                     myCVCCell = detailCell
+                    myCVCCell?.postCount = myCellCount
+                    myCVCCell?.setLabel()
                 }
-                return detailCell
-            }
-            else{
+                return myCVCCell as! UICollectionViewCell
+            default:
+                if LikePostData.count == 0{
+                    return MyCell
+                }
+                else{
+                    print(myCellCount, indexPath.row)
+                    MyCell.setData(image: LikePostData[0].data.writtenPost[indexPath.row-1
+                    ].image, title: LikePostData[0].data.writtenPost[indexPath.row-1].title, tagCount: LikePostData[0].data.writtenPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.writtenPost[indexPath.row-1].tags, heart: LikePostData[0].data.writtenPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.writtenPost[indexPath.row-1].saveNum, year: LikePostData[0].data.writtenPost[indexPath.row-1].year, month: LikePostData[0].data.writtenPost[indexPath.row-1].month, day: LikePostData[0].data.writtenPost[indexPath.row-1].day, postID: LikePostData[0].data.writtenPost[indexPath.row-1].postID)
             return MyCell
+                
+            }
             }
         case 3:
             detailCell.delegate = self
-            if indexPath.row == 0{
+            switch indexPath.row {
+            case 0:
                 if saveCellIsFirstLoaded {
                     saveCellIsFirstLoaded = false
                     saveCVCCell = detailCell
+                    saveCVCCell?.postCount = saveCellCount
+                    saveCVCCell?.setLabel()
                 }
-            return detailCell
-            }
+                return saveCVCCell as! UICollectionViewCell
+            default:
+                if LikePostData.count == 0{
+                    return MyCell
+                }
+                else{
+                    print(myCellCount, indexPath.row)
+                    MyCell.setData(image: LikePostData[0].data.savedPost[indexPath.row-1
+                    ].image, title: LikePostData[0].data.savedPost[indexPath.row-1].title, tagCount: LikePostData[0].data.savedPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.savedPost[indexPath.row-1].tags, heart: LikePostData[0].data.savedPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.savedPost[indexPath.row-1].saveNum, year: LikePostData[0].data.savedPost[indexPath.row-1].year, month: LikePostData[0].data.savedPost[indexPath.row-1].month, day: LikePostData[0].data.savedPost[indexPath.row-1].day, postID: LikePostData[0].data.savedPost[indexPath.row-1].postID)
             return MyCell
+            }
+                
+            }
+
         default:
             print("Error")
         }
@@ -263,6 +337,7 @@ extension MyPageVC: UITableViewDataSource{
             var bgColorView = UIView()
             bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
             cell.selectedBackgroundView = bgColorView
+            cell.setLabel()
             cell.setCellName(name: "최신순")
             cell.delegate = self
             return cell
@@ -283,10 +358,27 @@ extension MyPageVC: MenuClickedDelegate{
 
 extension MyPageVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-        delegate?.setTopTitle(name: cell.name)
-        dropDownTableView.isHidden = true
-        myCVCCell?.setTitle(data: cell.name)
-        saveCVCCell?.setTitle(data: cell.name)
+        if cell.name == "인기순"{
+            print("인기순 실행")
+            GetMyPageDataService.URL = Constants.myPageLikeURL
+            getData()
+            self.myCellCount = self.LikePostData[0].data.writtenPost.count
+            self.dropDownTableView.isHidden = true
+            myCVCCell?.setTitle(data: "인기순")
+            saveCVCCell?.setTitle(data: "인기순")
+        }
+        
+        else if cell.name == "최신순"{
+            print("최신순 실행")
+            GetMyPageDataService.URL = Constants.myPageNewURL
+            getData()
+            self.myCellCount = self.LikePostData[0].data.writtenPost.count
+            self.dropDownTableView.isHidden = true
+            myCVCCell?.setTitle(data: "최신순")
+            saveCVCCell?.setTitle(data: "최신순")
+
+        }
+        
     }
     
 }

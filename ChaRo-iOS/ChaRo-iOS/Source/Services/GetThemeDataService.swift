@@ -8,15 +8,31 @@
 import Foundation
 import Alamofire
 
+enum Filter {
+    case like
+    case new
+}
 
 struct GetThemeDataService {
     
     static let shared = GetThemeDataService()
     
-    func getThemeInfo(theme: String, completion : @escaping (NetworkResult<Any>) -> Void)
+    func getThemeInfo(theme: String, filter: Filter, completion : @escaping (NetworkResult<Any>) -> Void)
         {
         
-            let URL = Constants.ThemeLikeURL + "\(theme)"
+        var URL = ""
+        
+        switch filter {
+        
+        case Filter.like:
+            URL = Constants.ThemeLikeURL + "\(theme)"
+            
+            break
+        case Filter.new:
+            URL = Constants.ThemeNewURL + "\(theme)"
+            break
+        }
+        
             let header : HTTPHeaders = ["Content-Type": "application/json"]
             
             let dataRequest = AF.request(URL,

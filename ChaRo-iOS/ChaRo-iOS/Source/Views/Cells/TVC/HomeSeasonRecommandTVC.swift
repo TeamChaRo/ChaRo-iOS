@@ -15,20 +15,23 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     @IBOutlet weak var moreLabel: UILabel!
     var delegate : IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
+    var postDelegate: PostIdDelegate?
     let cellTag : Int = 4
     
     
-    var imageNameText: [String] = []
-    var titleText: [String] = []
-    var hashTagText1: [String] = []
-    var hashTagText2: [String] = []
-    var hashTagText3: [String] = []
-    var hashTagText4: [String] = []
-    var heart: [Bool] = []
+    var customList: [Drive] = []
     var headerText: String = ""
-
     
-    var cellList: [CommonCVC] = []
+//
+//    var imageNameText: [String] = []
+//    var titleText: [String] = []
+//    var hashTagText1: [String] = []
+//    var hashTagText2: [String] = []
+//    var hashTagText3: [String] = []
+//    var hashTagText4: [String] = []
+//    var heart: [Bool] = []
+    
+//    var cellList: [CommonCVC] = []
     
     //MARK:- Variable
     static let identifier = "HomeSeasonRecommandTVC"
@@ -39,7 +42,7 @@ class HomeSeasonRecommandTVC: UITableViewCell {
         super.awakeFromNib()
         setCollctionView()
         setLabelUI()
-        cellInit()
+//        cellInit()
     }
     
     //MARK:- default Setting Function Part
@@ -51,18 +54,18 @@ class HomeSeasonRecommandTVC: UITableViewCell {
         
     }
     
-     func cellInit(){
-             guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
-             guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
-             guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
-             guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
-         
-         
-         cellList.append(cell1)
-         cellList.append(cell2)
-         cellList.append(cell3)
-         cellList.append(cell4)
-     }
+//     func cellInit(){
+//             guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
+//             guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
+//             guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
+//             guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
+//
+//
+//         cellList.append(cell1)
+//         cellList.append(cell2)
+//         cellList.append(cell3)
+//         cellList.append(cell4)
+//     }
     
     func setLabelUI() {
         
@@ -82,10 +85,10 @@ class HomeSeasonRecommandTVC: UITableViewCell {
         self.selectionStyle = .none
         TitleLabel.text = headerText
         collectionView.reloadData()
-
-        
         
     }
+    
+    
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
         buttonDelegate?.seeMorePushDelegate(data: cellTag)
         collectionView.reloadData()
@@ -100,61 +103,76 @@ class HomeSeasonRecommandTVC: UITableViewCell {
 extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellList.count
+        return customList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
+        let postid = cell!.postID
+        postDelegate?.sendPostID(data: postid)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if imageNameText.count == 0{
-            return cellList[0]
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+        
+        if customList.count == 0 {
+            return cell
         }
-        else{
-          
-            switch indexPath.row {
-            case 0:
-                if hashTagText1.count == 2{
-                    hashTagText1.append("")
-                }
-                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
-            case 1:
-                if hashTagText2.count == 2{
-                    hashTagText2.append("")
-                }
-                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
-            case 2:
-                if hashTagText3.count == 2{
-                    hashTagText3.append("")
-                }
-                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
-            case 3:
-                if hashTagText4.count == 2{
-                    hashTagText4.append("")
-                }
-                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
-            default:
-                print("Error")
-            }
-            return cellList[indexPath.row]
+        
+        else {
+            
+            let element = customList[indexPath.row]
+            
+            cell.setData(image: element.image,
+                         title: element.title,
+                         tagCount: element.tags.count,
+                         tagArr: element.tags,
+                         isFavorite: element.isFavorite,
+                         postID: element.postID)
+//
+//            switch indexPath.row {
+//            case 0:
+//                if hashTagText1.count == 2{
+//                    hashTagText1.append("")
+//                }
+//                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
+//            case 1:
+//                if hashTagText2.count == 2{
+//                    hashTagText2.append("")
+//                }
+//                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
+//            case 2:
+//                if hashTagText3.count == 2{
+//                    hashTagText3.append("")
+//                }
+//                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
+//            case 3:
+//                if hashTagText4.count == 2{
+//                    hashTagText4.append("")
+//                }
+//                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
+//            default:
+//                print("Error")
+//            }
+            return cell
             
         }
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+//
+//        cell.callback = {
+//            print("button pressed", indexPath.row)
+//            }
         
-        cell.imageView.image = UIImage(named: "tempImageSmall")
-        cell.callback = {
-            print("button pressed", indexPath.row)
-            }
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.frame.width / 2 - 20
-        let size = CGSize(width: width, height: 250)
+        let size = CGSize(width: 160, height: 230)
         
         //이거 사이즈를 11pro, se2 - 250 딱맞고 se1 에서 - 230이 딱맞고
         //해상도 따라 해주기
@@ -164,7 +182,15 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
     }
     
     

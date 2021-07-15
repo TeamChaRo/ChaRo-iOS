@@ -162,16 +162,13 @@ class SearchPostVC: UIViewController {
         initImageViewList()
         initTextFieldList()
     }
-   
     
     @objc func pushNextVC(){
         let storyboard = UIStoryboard(name: "SearchResult", bundle: nil)
         guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.identifier)as? SearchResultVC else {
             return
         }
-        
         nextVC.setFilterTagList(list: filterList)
-        
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
@@ -323,6 +320,7 @@ extension SearchPostVC {
     }
     
     @objc func donePresseed(){
+        
         if canChangeActiveMode(){
             changeFindButtonToActive()
         }else{
@@ -349,6 +347,7 @@ extension SearchPostVC {
         default:
             currentList = filterData.caution
         }
+        
         filterList[index] = currentList[0]
     }
     
@@ -394,7 +393,6 @@ extension SearchPostVC: UIPickerViewDataSource{
         return  currentList.count
     }
 }
-
 
 
 

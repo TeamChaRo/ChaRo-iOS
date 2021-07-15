@@ -160,7 +160,7 @@ class CommonCVC: UICollectionViewCell {
     func likeAction()
     {
         //일단 userId 111로 박아놈
-        LikeService.shared.Like(userId: "111", postId: self.postID) { [self] result in
+        LikeService.shared.Like(userId: "jieun1211", postId: self.postID) { [self] result in
             
             switch result
             {
