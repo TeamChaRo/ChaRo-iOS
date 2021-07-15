@@ -11,12 +11,13 @@ import SnapKit
 class PostDriveCourseTVC: UITableViewCell {
 
     static let identifier = "PostDriveCourseTVC"
+    
     public var isEditingMode = false
     private let placeHolderText = "드라이브 코스에 대한 설명과 추가적으로 이야기하고 싶은 내용을 마음껏 남겨주세요"
     private let titleView = PostCellTitleView(title: "제 드라이브 코스는요")
     
     private var contentText = ""
-    private let limitTextCount = 10
+    private let limitTextCount = 280
     private var isWarnning : Bool = false {
         didSet{
             if isWarnning{
@@ -178,7 +179,12 @@ class PostDriveCourseTVC: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        selectionStyle = .none
 
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.endEditing(true)
     }
     
 }
