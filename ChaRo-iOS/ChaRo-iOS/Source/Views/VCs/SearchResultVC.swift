@@ -15,15 +15,37 @@ class SearchResultVC: UIViewController {
     public var postCount: Int = 0
     public var postData : [DetailDrive] = []
     public var filterResultList: [String] = []
+    var myCellIsFirstLoaded: Bool = true
     
+    var topCVCCell: HomePostDetailCVC?
     
     //MARK: UIComponent
     private let navigationView = UIView()
+    @IBOutlet weak var dropDownTableView: UITableView!
     private lazy var backButton = LeftBackButton(toPop: self)
-    private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 겸색 결과",
+    private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
                                                             color: .mainBlack)
     
-    private var tableView = UITableView()
+    private var collectionView : UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: UICollectionViewFlowLayout())
+        
+        collectionView.isPagingEnabled = true
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: 624)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .vertical
+        collectionView.setCollectionViewLayout(layout, animated: true)
+        
+        collectionView.registerCustomXib(xibName: PostResultHeaderCVC.identifier)
+        collectionView.registerCustomXib(xibName: CommonCVC.identifier)
+        
+        return collectionView
+    }()
     
     private let closeButton: UIButton = {
         let button = UIButton()
@@ -39,6 +61,7 @@ class SearchResultVC: UIViewController {
     private let searchNoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "searchNoImage"))
         imageView.contentMode = .scaleAspectFit
+        
         return imageView
     }()
     
@@ -68,8 +91,10 @@ class SearchResultVC: UIViewController {
         super.viewDidLoad()
         postSearchPost(type: "like")
         setConstraint()
-        configureTableView()
+        configureCollectionView()
         setShadowInNavigationView()
+        configureDropDown()
+        
     }
     
     public func setFilterTagList(list: [String]){
@@ -94,30 +119,102 @@ class SearchResultVC: UIViewController {
     }
     
     
-    func configureTableView(){
-        tableView.delegate = self
-        tableView.dataSource = self
+    func configureCollectionView(){
+        collectionView.register(UINib(nibName: PostResultHeaderCVC.identifier, bundle: nil),
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: PostResultHeaderCVC.identifier)
+
+        collectionView.registerCustomXib(xibName: CommonCVC.identifier)
+        collectionView.registerCustomXib(xibName: HomePostDetailCVC.identifier)
+
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.isPagingEnabled = false
+        
+       
+    }
+    func configureDropDown(){
+        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
+        dropDownTableView.delegate = self
+        dropDownTableView.dataSource = self
+        dropDownTableView.isHidden = true
+        dropDownTableView.separatorStyle = .none
+
     }
     
 }
 
-
-extension SearchResultVC: UITableViewDelegate{
-    
+extension SearchResultVC: UICollectionViewDelegate{
     
 }
 
-extension SearchResultVC: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SearchResultVC: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return postData.count + 1
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC
+        let dropDownCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePostDetailCVC.identifier, for: indexPath) as? HomePostDetailCVC
+        dropDownCell?.delegate = self
+        if indexPath.row == 0{
+            if myCellIsFirstLoaded {
+                myCellIsFirstLoaded = false
+                topCVCCell = dropDownCell
+                topCVCCell?.postCount = postCount
+                topCVCCell?.setLabel()
+            }
+            return topCVCCell as! UICollectionViewCell
+        }
+        cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
+        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
+        
+        
+        return cell!
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PostResultHeaderCVC.identifier, for: indexPath) as? PostResultHeaderCVC else {
+            return UICollectionReusableView()
+        }
+        header.setStackViewData(list: filterResultList)
+        return header
+        
+    }
+
+}
+
+extension SearchResultVC: UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: UIScreen.getDeviceWidth(), height: 40)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if indexPath.row == 0{
+            return CGSize(width: collectionView.frame.size.width-40, height: 30)
+        }
+        
+        return CGSize(width: collectionView.frame.size.width-40, height: 260)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
 }
-
-
 
 
 extension SearchResultVC{
@@ -189,66 +286,16 @@ extension SearchResultVC{
     }
     
     private func setResultViewConstraint(){
-        view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints{
+        view.addSubview(collectionView)
+        view.addSubview(dropDownTableView)
+        collectionView.snp.makeConstraints{
             $0.top.equalTo(navigationView.snp.bottom).offset(15)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        tableView.tableHeaderView = setTableHearderView()
     }
     
-    
-    private func setTableHearderView() -> UIView {
-        let view = UIView(frame: CGRect(x: 0, y: 0,
-                                        width: UIScreen.getDeviceWidth(),
-                                        height: 65))
-        
-        let stackView = UIStackView(arrangedSubviews: makeTagLabelList())
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.spacing = 4
-        
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints{
-            $0.top.equalTo(view.snp.top).offset(0)
-            $0.leading.equalTo(view.snp.leading).offset(20)
-            $0.height.equalTo(34)
-        }
-        return view
-    }
-    
-    private func makeTagLabelList() -> [UIButton] {
-        var list: [UIButton] = []
-        for index in 0..<filterResultList.count {
-           
-            if filterResultList[index] == "" || filterResultList[index] == "선택안함"{
-                continue
-            }
-            
-            let button = UIButton()
-            button.titleLabel?.font = .notoSansRegularFont(ofSize: 14)
-            button.layer.cornerRadius = 17
-            button.layer.borderWidth = 1
-            
-            if index == 3 {
-                button.setTitle(" #\(filterResultList[index])X ", for: .normal)
-                button.setTitleColor(.gray30, for: .normal)
-                button.layer.borderColor = UIColor.gray30.cgColor
-            }else{
-                button.setTitle(" #\(filterResultList[index]) ", for: .normal)
-                button.setTitleColor(.mainBlue, for: .normal)
-                button.layer.borderColor = UIColor.mainlightBlue.cgColor
-            }
-            
-            list.append(button)
-        }
-        
-        return list
-    }
-    
+
     func setShadowInNavigationView(){
         navigationView.backgroundColor = .white
 
@@ -268,7 +315,6 @@ extension SearchResultVC{
 //MARK: Network
 extension SearchResultVC{
     
-    
     func refinePostResultData(data: DetailDataClass, type: String){
         postData = data.drive
         dump(postData)
@@ -276,7 +322,7 @@ extension SearchResultVC{
     }
     
     func postSearchPost(type: String){
-        PostResultService.shared.postSearchKeywords(userId: "111",
+        PostResultService.shared.postSearchKeywords(userId: "jieun1211",
                                                     region: filterResultList[1],
                                                     theme: filterResultList[2],
                                                     warning: filterResultList[3],
@@ -286,7 +332,11 @@ extension SearchResultVC{
             case .success(let resultData):
                 if let data =  resultData as? DetailModel{
                     self.refinePostResultData(data: data.data, type: type)
-                    
+                    self.postCount = data.data.totalCourse
+                    print(self.postData)
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -303,3 +353,70 @@ extension SearchResultVC{
 
 
 
+extension SearchResultVC: UITableViewDelegate{
+    
+}
+extension SearchResultVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+            var bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            cell.setLabel()
+            cell.setCellName(name: "인기순")
+            print("실행됨")
+            cell.delegate = self
+            return cell
+
+        case 1:
+            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+            var bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            print("실행됨")
+            cell.setLabel()
+            cell.setCellName(name: "최신순")
+            cell.delegate = self
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+}
+    
+extension SearchResultVC: SetTitleDelegate{
+    func setTitle(cell: HotDropDownTVC) {
+        if cell.name == "인기순"{
+            print("인기순 실행")
+            GetMyPageDataService.URL = Constants.myPageLikeURL
+            postSearchPost(type: "like")
+            postCount = postData.count
+            self.dropDownTableView.isHidden = true
+            topCVCCell?.setTitle(data: "인기순")
+          
+
+        }
+        
+        else if cell.name == "최신순"{
+            print("최신순 실행")
+            GetMyPageDataService.URL = Constants.myPageNewURL
+            postSearchPost(type: "new")
+            postCount = postData.count
+            self.dropDownTableView.isHidden = true
+            topCVCCell?.setTitle(data: "최신순")
+            
+        }
+    }
+}
+extension SearchResultVC: MenuClickedDelegate {
+    func menuClicked(){
+        print("딜리게이트 실행됨?")
+        dropDownTableView.isHidden = false
+    }
+}

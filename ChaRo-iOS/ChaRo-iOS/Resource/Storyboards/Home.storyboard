@@ -26,6 +26,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGm-mL-gdn">
                                         <rect key="frame" x="362" y="43.5" width="44" height="44"/>
                                         <state key="normal" backgroundImage="icAlarmWhite"/>
+                                        <connections>
+                                            <action selector="notificationButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jvw-go-3uj"/>
+                                        </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="fNn-eX-O7v">
                                         <rect key="frame" x="0.0" y="45" width="127" height="41"/>
