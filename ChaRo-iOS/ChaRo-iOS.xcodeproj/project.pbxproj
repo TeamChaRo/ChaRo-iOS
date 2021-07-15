@@ -150,6 +150,9 @@
 		F4CC1B9A269D3E67009A0C01 /* CreatePostCourseTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B98269D3E67009A0C01 /* CreatePostCourseTVC.xib */; };
 		F4CC1B9D269D3E7B009A0C01 /* CreatePostThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B9B269D3E7B009A0C01 /* CreatePostThemeTVC.swift */; };
 		F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B9C269D3E7B009A0C01 /* CreatePostThemeTVC.xib */; };
+		F4FB2EC8269F8F6C000C339B /* CreatePostParkingWarningTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB2EC6269F8F6B000C339B /* CreatePostParkingWarningTVC.swift */; };
+		F4FB2EC9269F8F6C000C339B /* CreatePostParkingWarningTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4FB2EC7269F8F6B000C339B /* CreatePostParkingWarningTVC.xib */; };
+		F4FB2ECB269FD7AE000C339B /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB2ECA269FD7AE000C339B /* Extension+UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -313,6 +316,9 @@
 		F4CC1B98269D3E67009A0C01 /* CreatePostCourseTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostCourseTVC.xib; sourceTree = "<group>"; };
 		F4CC1B9B269D3E7B009A0C01 /* CreatePostThemeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostThemeTVC.swift; sourceTree = "<group>"; };
 		F4CC1B9C269D3E7B009A0C01 /* CreatePostThemeTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostThemeTVC.xib; sourceTree = "<group>"; };
+		F4FB2EC6269F8F6B000C339B /* CreatePostParkingWarningTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostParkingWarningTVC.swift; sourceTree = "<group>"; };
+		F4FB2EC7269F8F6B000C339B /* CreatePostParkingWarningTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostParkingWarningTVC.xib; sourceTree = "<group>"; };
+		F4FB2ECA269FD7AE000C339B /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		FE8A21E68807481DF1B95D22 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -367,6 +373,7 @@
 			children = (
 				3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */,
 				F4CC1B97269D3E67009A0C01 /* CreatePostCourseTVC.swift */,
+				F4FB2EC6269F8F6B000C339B /* CreatePostParkingWarningTVC.swift */,
 				F4CC1B63269B943B009A0C01 /* CreatePostPhotoTVC.swift */,
 				F4CC1B9B269D3E7B009A0C01 /* CreatePostThemeTVC.swift */,
 				F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */,
@@ -479,6 +486,7 @@
 			children = (
 				3C86FA832694C7C6009370CD /* AddressButtonCell.xib */,
 				F4CC1B98269D3E67009A0C01 /* CreatePostCourseTVC.xib */,
+				F4FB2EC7269F8F6B000C339B /* CreatePostParkingWarningTVC.xib */,
 				F4CC1B64269B943B009A0C01 /* CreatePostPhotoTVC.xib */,
 				F4CC1B9C269D3E7B009A0C01 /* CreatePostThemeTVC.xib */,
 				F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */,
@@ -579,6 +587,7 @@
 				3C840BF62696F08F001CAFE5 /* Extension+UIScreen.swift */,
 				F4CC1B67269B9850009A0C01 /* Extension+UITextView.swift */,
 				F468C0F5269DDA290019B1B3 /* Notification.Name.swift */,
+				F4FB2ECA269FD7AE000C339B /* Extension+UIButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -739,6 +748,7 @@
 				3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */,
 				3CEC0113269E25AB00E9332C /* OnBoard.storyboard in Resources */,
 				3C86FAB72694C7C6009370CD /* NotoSansCJKkr-Medium.otf in Resources */,
+				F4FB2EC9269F8F6C000C339B /* CreatePostParkingWarningTVC.xib in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
 				F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */,
@@ -868,6 +878,8 @@
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
 				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
+				F4FB2ECB269FD7AE000C339B /* Extension+UIButton.swift in Sources */,
+				F4FB2EC8269F8F6C000C339B /* CreatePostParkingWarningTVC.swift in Sources */,
 				361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */,
 				36CEE5BC269E168500974EFF /* NewDetailDataService.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
