@@ -12,7 +12,7 @@ class PostDetailVC: UIViewController {
     static let identifier = "PostDetailVC"
     
     private var isAuthor = true
-    private var isEditingMode = true
+    private var isEditingMode = false
     
     private var tableView = UITableView()
     private var postId: Int = 1
@@ -31,6 +31,7 @@ class PostDetailVC: UIViewController {
     private var modifyButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
+        button.addTarget(self, action: #selector(registActionSheet), for: .touchUpInside)
         return button
     }()
     
@@ -99,13 +100,40 @@ class PostDetailVC: UIViewController {
         tableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
         tableView.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
         tableView.registerCustomXib(xibName: PostLocationTVC.identifier)
-        tableView.registerCustomXib(xibName: PostPathmapTCV.identifier)
+        tableView.registerCustomXib(xibName: PostPathMapTVC.identifier)
     }
     
     func refineAddressData(){
         let startAddreaa = AddressDataModel(latitude: postData!.latitude[0],
                                             longitude: postData!.longtitude[0],
-                                            address: postData!.source, title: "")
+                                            address: postData!.source,
+                                            title: "출발지")
+        
+        addressList.append(startAddreaa)
+        
+        
+        if postData!.wayPoint[0] != ""{
+           let wayAddress = AddressDataModel(latitude: postData!.latitude[1],
+                                             longitude: postData!.longtitude[1],
+                                             address: postData!.wayPoint[0],
+                                             title: "경유지1")
+            addressList.append(wayAddress)
+        }
+        
+        if postData!.wayPoint[1] != ""{
+           let wayAddress = AddressDataModel(latitude: postData!.latitude[2],
+                                             longitude: postData!.longtitude[2],
+                                             address: postData!.wayPoint[1],
+                                             title: "경유지2")
+            addressList.append(wayAddress)
+        }
+        
+        
+        let destinationAddress = AddressDataModel(latitude: postData!.latitude[3],
+                                                  longitude: postData!.longtitude[3],
+                                                  address: postData!.destination,
+                                                  title: "도착지")
+        addressList.append(destinationAddress)
         
     }
     
@@ -126,6 +154,25 @@ class PostDetailVC: UIViewController {
     }
     
     
+    @objc
+    func registActionSheet(){
+
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        let saveAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(saveAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+
+    }
+    
 }
 
 extension PostDetailVC{
@@ -142,7 +189,6 @@ extension PostDetailVC{
         }
     }
 
-    
     private func setNavigaitionViewConstraints(){
         view.addSubview(navigationView)
     
@@ -150,13 +196,13 @@ extension PostDetailVC{
             $0.top.leading.trailing.equalTo(view)
             $0.height.equalTo(UIScreen.getNotchHeight() + 58)
         }
-        navigationView.bringSubviewToFront(tableView)
+        //navigationView.bringSubviewToFront(tableView)
         setBasicNavigationView()
         setShadowInNavigationView()
         
         if isAuthor{
             navigationTitleLabel.text = "내가 작성한 글"
-            if isEditing{
+            if isEditingMode{
                 setNavigationViewInSaveMode()
             }else{
                 setNavigationViewInConfirmMode()
@@ -235,7 +281,7 @@ extension PostDetailVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let rowAdjustment: Int = cellFixedCount + location.count - 1
+        let rowAdjustment: Int = cellFixedCount + addressList.count - 1
         
         switch indexPath.row {
         case 0:
@@ -266,12 +312,13 @@ extension PostDetailVC: UITableViewDelegate{
 //MARK: - UITableView extension
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7 + location.count
+        print("address count = \(addressList.count)")
+        return 7 + addressList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let rowAdjustment: Int = cellFixedCount + location.count - 1
+        let rowAdjustment: Int = cellFixedCount + addressList.count - 1
         
         switch indexPath.row {
         case 0:
@@ -329,7 +376,7 @@ extension PostDetailVC {
         cell.setTheme(theme: postData!.themes)
         cell.configureLayout()
         cell.themeButtonConfigureLayer()
-        cell.bringButtonToFront()
+        //cell.bringButtonToFront()
         cell.selectionStyle = .none
         return cell
     }
@@ -340,22 +387,27 @@ extension PostDetailVC {
         switch row {
         case 3:
             cell.titleView.titleLabel.text = "출발지"
-            cell.setLocationText(address: postData!.source)
+            cell.setLocationText(address: addressList[0].address)
             cell.clickCopyButton = {
                 print("출발지 실행 안됌??")
                 self.showToast(message: "출발지")
             }
             
-        case 3+location.count-1:
+        case 3+addressList.count-1:
             cell.titleView.titleLabel.text = "도착지"
-            cell.setLocationText(address: postData!.source)
+            cell.setLocationText(address: addressList[addressList.count-1].address)
             cell.clickCopyButton = {
                 print("도착지 실행 안됌??")
                 self.showToast(message: "도착지")
             }
         default:
             cell.titleView.titleLabel.text = "경유지"
-            cell.setLocationText(address: postData!.source)
+            if row == 4 {
+                cell.setLocationText(address: addressList[1].address)
+            }
+            if row == 5 {
+                cell.setLocationText(address: addressList[2].address)
+            }
             cell.clickCopyButton = {
                 print("경유지 실행 안됌??")
                 self.showToast(message: "경유지")
@@ -366,7 +418,8 @@ extension PostDetailVC {
     }
     
     func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathmapTCV.identifier) as? PostPathmapTCV else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathMapTVC.identifier) as? PostPathMapTVC else {return UITableViewCell()}
+        cell.setAddressList(list: addressList, height: 451)
         cell.selectionStyle = .none
         return cell
     }
@@ -396,7 +449,6 @@ extension PostDetailVC {
         cell.selectionStyle = .none
         return cell
     }
-
 }
 
 
@@ -404,18 +456,20 @@ extension PostDetailVC {
 extension PostDetailVC {
     func setPostContentView(data: PostDetail){
         postData = data
+        isAuthor = postData!.isAuthor
+        refineAddressData()
         configureTableView()
         setTableViewConstraints()
     }
     
     func getPostDetailData(){
+        print("getPostDetailData 넘겨진 postId = \(self.postId)")
         PostResultService.shared.getPostDetail(postId: postId){ response in
-            print("postId = \(self.postId)")
+            print("getPostDetailData postId = \(self.postId)")
             switch(response){
             case .success(let resultData):
                 if let data =  resultData as? PostDatailDataModel{
                     self.setPostContentView(data: data.data[0])
-                    print(data.msg)
                     dump(self.postData)
                 }
             case .requestErr(let message):
