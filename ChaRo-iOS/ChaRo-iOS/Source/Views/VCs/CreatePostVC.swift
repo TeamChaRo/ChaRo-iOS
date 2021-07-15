@@ -69,12 +69,16 @@ class CreatePostVC: UIViewController {
         configureTableView()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
 }
 
 // MARK: - functions
 extension CreatePostVC {
     
-    // MARK: Setting function
+    // MARK: function
     
     func configureTableView(){
         registerXibs()
@@ -109,6 +113,7 @@ extension CreatePostVC {
     func setNotificationCenter(){
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
     }
+
     
     // MARK: 서버통신 .post /writePost
     func postCreatePost(){

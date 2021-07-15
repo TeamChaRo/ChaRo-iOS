@@ -183,6 +183,10 @@ class PostDriveCourseTVC: UITableViewCell {
 
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.endEditing(true)
+    }
+    
 }
 
 //MARK: TextViewDelegate

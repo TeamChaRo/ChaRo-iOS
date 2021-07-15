@@ -66,7 +66,10 @@ class CreatePostCourseTVC: UITableViewCell {
         selectionStyle = .none
     }
     
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.endEditing(true)
+    }
+    
     private func initTextField(){
         textFieldList.append(contentsOf: [cityField,
                                           regionField])
