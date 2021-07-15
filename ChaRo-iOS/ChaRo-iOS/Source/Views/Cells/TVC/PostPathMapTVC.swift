@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 import TMapSDK
 
-class PostPathmapTCV: UITableViewCell {
+class PostPathMapTVC: UITableViewCell {
 
-    static let identifier: String = "PostPathmapTCV"
+    static let identifier: String = "PostPathMapTVC"
     
    // let multiplier: CGFloat = 395/335
    // let mapWidth: CGFloat = UIScreen.main.bounds.width - 40
@@ -21,14 +21,12 @@ class PostPathmapTCV: UITableViewCell {
     private var markerList : [TMapMarker] = []
     private var addressList : [AddressDataModel] = []
     private var polyLineList: [TMapPolyline] = []
+    private var viewHeight : CGFloat = 0
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        setMapView()
-        addPathInMapView()
-        addMarkerInMapView()
         configureLayout()
         
     }
@@ -37,8 +35,16 @@ class PostPathmapTCV: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    
+    public func setAddressList(list: [AddressDataModel], height: CGFloat){
+        addressList = list
+        tMapView.delegate = self
+        tMapView.setApiKey(MapService.mapkey)
+        viewHeight = height
+        
+    }
+    
     private func addPathInMapView(){
-        polyLineList.removeAll()
         let pathData = TMapPathData()
         print("count = \(addressList.count)")
         for index in 0..<addressList.count-1{
@@ -46,14 +52,22 @@ class PostPathmapTCV: UITableViewCell {
             pathData.findPathData(startPoint: addressList[index].getPoint(),
                                   endPoint: addressList[index+1].getPoint()) { result, error in
                 guard let polyLine = result else {return}
+                
+                print(" start = \(self.addressList[index])")
+                print(" end = \(self.addressList[index+1])")
+                
+                print("경로 들어감")
                 self.polyLineList.append(polyLine)
+                polyLine.strokeColor = .mainBlue
+                polyLine.map = self.tMapView
                 
                 if index == self.addressList.count-2{
+                    print("경로 그려져야함!!!!! = \(index)")
                     DispatchQueue.main.async {
                         polyLine.strokeColor = .mainBlue
-                        polyLine.map = self.tMapView
+                        //polyLine.map = self.tMapView
                         self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
-                        //print("befor = \(self.tMapView.getCenter())")
+                        print("befor = \(self.tMapView.getCenter())")
                         //self.tMapView.setCenter(self.getOptimizationCenter())
                         //self.tMapView.setZoom(self.tMapView.getZoom()! - 1)
                     }
@@ -73,27 +87,26 @@ class PostPathmapTCV: UITableViewCell {
             }else{
                 marker.icon = UIImage(named: "icRouteWaypoint")
             }
+            
+            marker.map = self.tMapView
             markerList.append(marker)
-            marker.map = tMapView
         }
     }
-    
 }
 
 //MARK: - AutoLayout and functions
-extension PostPathmapTCV {
+extension PostPathMapTVC {
     
     func configureLayout(){
-        addSubview(tMapView)
         
+        
+        print(tMapView.frame)
+        addSubview(tMapView)
         tMapView.snp.makeConstraints{
-            $0.top.leading.equalToSuperview().offset(20)
-            $0.trailing.bottom.equalToSuperview().offset(-20)
-//            $0.top.equalTo(self.snp.top).offset(23)
-//            $0.centerX.equalTo(self.snp.centerX)
-//            $0.bottom.equalTo(self.snp.bottom).inset(33)
-           // $0.width.equalTo(mapWidth)
-          //  $0.height.equalTo(self.postMap.snp.width).multipliedBy(multiplier)
+            $0.top.equalTo(self.snp.top).offset(20)
+            $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.trailing.equalTo(self.snp.trailing).offset(-20)
+            $0.bottom.equalTo(self.snp.bottom).offset(-20)
         }
     }
     
@@ -103,5 +116,18 @@ extension PostPathmapTCV {
         //tMapView.isZoomEnable = false // 확대축소 불가
     }
     
+}
+
+extension PostPathMapTVC: TMapViewDelegate{
+    func mapViewDidFinishLoadingMap() {
+        print("befor = \(self.tMapView.getCenter())")
+        print("mapViewDidFinishLoadingMap")
+        dump(addressList)
+        let mapWidth: CGFloat = UIScreen.getDeviceWidth() - 40
+        let mapHeight: CGFloat = viewHeight - 40
+        tMapView.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight)
+        addPathInMapView()
+        addMarkerInMapView()
+    }
 }
 
