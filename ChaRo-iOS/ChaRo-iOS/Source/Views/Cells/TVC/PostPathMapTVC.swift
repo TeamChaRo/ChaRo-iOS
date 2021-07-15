@@ -61,13 +61,12 @@ class PostPathMapTVC: UITableViewCell {
                 polyLine.strokeColor = .mainBlue
                 polyLine.map = self.tMapView
                 
+                
                 if index == self.addressList.count-2{
-                    self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
+                    
                     print("경로 그려져야함!!!!! = \(index)")
                     DispatchQueue.main.async {
-                        polyLine.strokeColor = .mainBlue
-                        //polyLine.map = self.tMapView
-                        
+                        self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
                         print("befor = \(self.tMapView.getCenter())")
                         //self.tMapView.setCenter(self.getOptimizationCenter())
                         //self.tMapView.setZoom(self.tMapView.getZoom()! - 1)
