@@ -19,7 +19,7 @@ class CreatePostThemeTVC: UITableViewCell {
     private var currentIndex = 0 // 현재 선택된 component (0 == city, 1 == region)
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
     private var currentList: [String] = [] //pickerview에 표시 될 List
-    private var filterList : [String] = ["","",""] // pickerview 선택 완료 후에 담길 결과 배열
+    private var filterList : [String] = ["","",""] // pickerview 선택 완료 후에 담길 결과 배열 => 미친여기수정!!!
     
     // MARK: UI Components
     private let courseTitleView = PostCellTitleView(title: "어느 지역으로 다녀오셨나요?", subTitle: "도/광역시, 시 단위로 선택해주세요.")
@@ -131,21 +131,27 @@ extension CreatePostThemeTVC {
     
     @objc
     func donePresseed(){
-
+        var setText: String = filterList[currentIndex]
+        
         switch currentIndex {
         case 0:
-            themeFirstField.text = filterList[currentIndex]
-            themeFirstField.textColor = .mainBlue
-            themeFirstButton.setImage(UIImage(named: "select"), for: .normal)
-            wasSelected()
+            if setText != "" {
+                themeFirstField.textColor = .mainBlue
+                themeFirstButton.setImage(UIImage(named: "select"), for: .normal)
+            } else { setText = "테마 1" }
+            themeFirstField.text = setText
         case 1:
-            themeSecondField.text = filterList[currentIndex]
-            themeSecondField.textColor = .mainBlue
-            themeSecondButton.setImage(UIImage(named: "select"), for: .normal)
+            if setText != "" {
+                themeSecondField.textColor = .mainBlue
+                themeSecondButton.setImage(UIImage(named: "select"), for: .normal)
+            } else { setText = "테마 2" }
+            themeSecondField.text = setText
         case 2:
-            themeThirdField.text = filterList[currentIndex]
-            themeThirdField.textColor = .mainBlue
-            themeThirdButton.setImage(UIImage(named: "select"), for: .normal)
+            if setText != "" {
+                themeThirdField.textColor = .mainBlue
+                themeThirdButton.setImage(UIImage(named: "select"), for: .normal)
+            } else { setText = "테마 3" }
+            themeThirdField.text = setText
         default:
             print("done error")
         }
@@ -156,7 +162,6 @@ extension CreatePostThemeTVC {
     func wasSelected(){
         // TODO: 기존에 선택되어있으면 초기화해주는 기능 구현
     }
-    
 
     @objc
     func clikedTextField(_ sender: UITextField){
@@ -205,6 +210,7 @@ extension CreatePostThemeTVC: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if currentList[row] != "선택안함" && currentList[row] != "" {
             filterList[currentIndex] = currentList[row]
+            print("\(currentList[row]) didSelectRow ")
         }
     }
 }
