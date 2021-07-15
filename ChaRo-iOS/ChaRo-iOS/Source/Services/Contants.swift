@@ -20,23 +20,20 @@ struct Constants {
     static let CreatePostURL = baseURL + "/writePost"
     
     ///2. 더보기 뷰 URL
-    static let detailURL = baseURL + "/preview/like/" + userId
+    static let detailURL = baseURL + "/preview/like/" + userId + "/"
     
     ///3.더보기 최신순 URL
-    static let newDetailURL = baseURL + "preview/new/" + userId
+    static let newDetailURL = baseURL + "/preview/new/" + userId + "/"
     
     ///4.
     static let ThemeLikeURL = baseURL + "/preview/like/\(userId)/1?value="
     static let ThemeNewURL = baseURL + "/preview/new/\(userId)/1?value="
     static let likeURL = baseURL + "/post/like"
     
+    static let myPageLikeURL = baseURL + "/myPage/like/" + userId
+    static let myPageNewURL = baseURL + "/myPage/new/" + userId
     
-=======
-  
-    static let likeURL = baseURL + "/post/like"
     
-   
->>>>>>> develop
     ///필터 검색 결과 조회
     static let searchPostURL = baseURL + "/search/"
     
