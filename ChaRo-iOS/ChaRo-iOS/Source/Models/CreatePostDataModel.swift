@@ -27,28 +27,21 @@ struct CreatePostDataModel: Decodable {
     }
 }
 
-//struct UserData: Codable {
-//    let title: String
-//    let userId: String
-//    let province: String
-//    let region: String
-//    let theme: [String]
-//    let warning: [Bool]
-//    let isParking: Bool
-//    let parkingDesc: String
-//    let courseDesc: String
-//    let course: [Address]
-//    let image: [UIImage]
+struct WritePostData {
+    let title: String
+    let userId: String
+    let province: String
+    let region: String
+    let theme: [String]
+    let warning: [Bool]
+    let isParking: Bool
+    let parkingDesc: String
+    let courseDesc: String
+    let course: [Address]
+}
 
-//    enum CodingKeys: String, CodingKey {
-//        case userID = "UserId"
-//        case userNickname = "user_nickname"
-//        case token
-//    }
-//}
-
-//struct Address {
-//    let address: String
-//    let latitude: String
-//    let longtitude: String
-//}
+struct Address {
+    let address: String
+    let latitude: String
+    let longtitude: String
+}

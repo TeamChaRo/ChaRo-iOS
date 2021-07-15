@@ -42,4 +42,6 @@ struct Constants {
 
     /// 게시물 상세보기
     static let detailPostURL = baseURL + "/postDetail/" + userId + "/"
+    
+    static let loginURL = baseURL + "/sign/signIn"
 }
