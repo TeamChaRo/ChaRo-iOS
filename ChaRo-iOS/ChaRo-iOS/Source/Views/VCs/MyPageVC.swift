@@ -67,7 +67,7 @@ class MyPageVC: UIViewController {
         dropDownTableView.registerCustomXib(xibName: "HotDropDownTVC")
         dropDownTableView.clipsToBounds = true
         dropDownTableView.layer.cornerRadius = 10
-        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+//        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         dropDownTableView.separatorStyle = .none
         
     }
@@ -373,8 +373,9 @@ extension MyPageVC: SetTitleDelegate {
             myCVCCell?.setLabel()
             saveCVCCell?.postCount = saveCellCount
             saveCVCCell?.setLabel()
-            myCVCCell?.setTitle(data: "인기순")
-            saveCVCCell?.setTitle(data: "인기순")
+            saveCVCCell?.setSelectName(name: "인기순")
+            myCVCCell?.setSelectName(name: "인기순")
+            
         }
         
         else if cell.name == "최신순"{
@@ -386,10 +387,9 @@ extension MyPageVC: SetTitleDelegate {
             myCVCCell?.postCount = myCellCount
             myCVCCell?.setLabel()
             saveCVCCell?.postCount = saveCellCount
-            saveCVCCell?.setLabel()
-            myCVCCell?.setTitle(data: "최신순")
-            saveCVCCell?.setTitle(data: "최신순")
-
+            myCVCCell?.setLabel()
+            saveCVCCell?.setSelectName(name: "최신순")
+            myCVCCell?.setSelectName(name: "최신순")
         }
         
     }
