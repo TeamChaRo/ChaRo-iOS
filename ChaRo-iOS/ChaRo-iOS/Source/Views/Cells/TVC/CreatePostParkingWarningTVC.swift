@@ -11,6 +11,19 @@ import SnapKit
 class CreatePostParkingWarningTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostParkingWarningTVC"
+    private let limitTextCount: Int = 23
+    private var parkingContent: String = ""
+    private var isWarning: Bool = false {
+        didSet{
+            if isWarning {
+                warningLabel.isHidden = false
+                parkingDescTextField.setMainOrangeBorder(8)
+            } else {
+                warningLabel.isHidden = true
+                parkingDescTextField.setGray20Border(8)
+            }
+        }
+    }
     
     // MARK: UI Components
     private let parkingTitleView = PostCellTitleView(title: "주차 공간은 어땠나요?")
@@ -50,6 +63,15 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         textField.setGray20Border(8)
         textField.clearButtonMode = .whileEditing
         return textField
+    }()
+    
+    private let warningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "공백 포함 23자 이내로 작성해주세요."
+        label.font = .notoSansRegularFont(ofSize: 11)
+        label.textColor = .mainOrange
+        label.isHidden = true
+        return label
     }()
     
     private let highwayButton: UIButton = {
@@ -92,10 +114,15 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         return button
     }()
     
+    func setTextFieldDelegate(){
+        parkingDescTextField.delegate = self
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
         setButtonActions()
+        setTextFieldDelegate()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -109,13 +136,24 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     
 }
 
+extension CreatePostParkingWarningTVC: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let textCount = parkingDescTextField.text!.count
+        
+        if textCount <= limitTextCount {
+            parkingContent = parkingDescTextField.text!
+            isWarning = isWarning ? false : isWarning
+        } else {
+            parkingDescTextField.text = parkingContent
+            isWarning = !isWarning ? true : isWarning
+        }
+    }
+}
 
 extension CreatePostParkingWarningTVC {
     
     //MARK: - Button Actions
     func setButtonActions(){
-        
-        
         parkingExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
         parkingNonExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
         highwayButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
@@ -214,9 +252,10 @@ extension CreatePostParkingWarningTVC {
         }
     }
     
+    
     //MARK: - UI Layout
     func configureLayout(){
-        addSubviews([parkingTitleView, parkingExistButton, parkingNonExistButton, parkingDescTextField])
+        addSubviews([parkingTitleView, parkingExistButton, parkingNonExistButton, parkingDescTextField, warningLabel])
         
         let buttonHeightRatio: CGFloat = 42/164
         let buttonWidth: CGFloat = (UIScreen.getDeviceWidth() - 47)/2
@@ -249,6 +288,11 @@ extension CreatePostParkingWarningTVC {
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.height.equalTo(parkingDescTextField.snp.width).multipliedBy(textFieldHeightRatio)
+        }
+        
+        warningLabel.snp.makeConstraints{
+            $0.top.equalTo(parkingDescTextField.snp.bottom).offset(4)
+            $0.leading.equalTo(20)
         }
         
         addSubviews([warningTitleView, highwayButton, mountainButton, beginnerButton, peopleButton])
