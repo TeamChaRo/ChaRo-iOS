@@ -18,6 +18,7 @@ class PostDetailVC: UIViewController {
     private var postId: Int = 1
     private var postData : PostDetail?
     private var driveCell: PostDriveCourseTVC?
+    private var addressList: [AddressDataModel] = []
     
     
     //MARK: UIComponent
@@ -99,6 +100,29 @@ class PostDetailVC: UIViewController {
         tableView.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
         tableView.registerCustomXib(xibName: PostLocationTVC.identifier)
         tableView.registerCustomXib(xibName: PostPathmapTCV.identifier)
+    }
+    
+    func refineAddressData(){
+        let startAddreaa = AddressDataModel(latitude: postData!.latitude[0],
+                                            longitude: postData!.longtitude[0],
+                                            address: postData!.source, title: "")
+        
+    }
+    
+    
+    func showToast(message : String) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,
+                                               y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = .gray30
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = .notoSansRegularFont(ofSize: 14)
+        toastLabel.textAlignment = .center
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds = true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 10.0, delay: 0.1, options: .curveEaseOut, animations: { toastLabel.alpha = 0.0 }, completion: {(isCompleted) in toastLabel.removeFromSuperview() })
     }
     
     
@@ -201,6 +225,8 @@ extension PostDetailVC{
                                                        cornerRadius: navigationView.layer.cornerRadius).cgPath
     }
     
+    
+ 
 }
 
 
@@ -314,12 +340,26 @@ extension PostDetailVC {
         switch row {
         case 3:
             cell.titleView.titleLabel.text = "출발지"
-            cell.setTitleText(title: postData!.source)
+            cell.setLocationText(address: postData!.source)
+            cell.clickCopyButton = {
+                print("출발지 실행 안됌??")
+                self.showToast(message: "출발지")
+            }
+            
         case 3+location.count-1:
             cell.titleView.titleLabel.text = "도착지"
-            cell.setTitleText(title: postData!.destination)
+            cell.setLocationText(address: postData!.source)
+            cell.clickCopyButton = {
+                print("도착지 실행 안됌??")
+                self.showToast(message: "도착지")
+            }
         default:
             cell.titleView.titleLabel.text = "경유지"
+            cell.setLocationText(address: postData!.source)
+            cell.clickCopyButton = {
+                print("경유지 실행 안됌??")
+                self.showToast(message: "경유지")
+            }
         }
         cell.selectionStyle = .none
         return cell
