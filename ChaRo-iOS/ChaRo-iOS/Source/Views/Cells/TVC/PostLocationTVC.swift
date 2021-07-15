@@ -26,9 +26,11 @@ class PostLocationTVC: UITableViewCell {
     
     let copyButton: UIButton = {
         let button = UIButton()
+
         button.setBackgroundImage(UIImage(named: "copy1LightVer"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        button.addTarget(self, action: #selector(copyTextInClibBoard), for: .allTouchEvents)
+        button.isUserInteractionEnabled = true
+        //button.imageView?.contentMode = .scaleToFill
+        button.addTarget(self, action: #selector(copyTextInClibBoard), for: .allEvents)
         return button
     }()
     
@@ -40,16 +42,17 @@ class PostLocationTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+        if selected {
+            print("눌리냐?????????????")
+        }
     }
     
     @objc
     func copyTextInClibBoard(){
         print("복사버튼 눌림")
-        UIPasteboard.general.string = locationTextField.text
-        clickCopyButton?()
+        //UIPasteboard.general.string = locationTextField.text
+        //clickCopyButton?()
     }
-    
     
 }
 
@@ -64,12 +67,14 @@ extension PostLocationTVC {
     }
     
     func configureLayout(){
-        
-        addSubviews([titleView, locationTextField, copyButton])
+        addSubview(copyButton)
+        addSubviews([titleView])
+        addSubview(locationTextField)
         
         titleView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top).offset(10)
-            $0.leading.equalTo(20)
+            $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.centerY.equalTo(copyButton.snp.centerY)
             $0.width.equalTo(50)
         }
         
@@ -77,15 +82,17 @@ extension PostLocationTVC {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.titleView.snp.trailing).offset(3)
             $0.trailing.equalTo(copyButton.snp.leading).offset(-1)
-            $0.bottom.equalTo(self.snp.bottom).inset(8)
+            $0.bottom.equalTo(self.snp.bottom).offset(-8)
         }
         
+        //copyButton.bringSubviewToFront(self)
         copyButton.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
-            //$0.leading.equalTo(self.locationTextField.snp.trailing)
-            $0.bottom.equalTo(self.snp.bottom).inset(8)
-            $0.trailing.equalTo(self.snp.trailing).inset(6)
+            $0.bottom.equalTo(self.snp.bottom).offset(-6)
+            $0.trailing.equalTo(self.snp.trailing).offset(-6)
+            $0.width.height.equalTo(48)
         }
         
     }
 }
+
