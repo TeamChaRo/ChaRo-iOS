@@ -52,8 +52,8 @@ class MyPageVC: UIViewController {
     func setHeaderView(){
         headerView.backgroundColor = .mainBlue
         nameLabel.text = LikePostData[0].data.userInformation.nickname
-        folloerCountButton.setTitle(String(LikePostData[0].data.userInformation.follower.count), for: .normal)
-        followingCountButton.setTitle(String(LikePostData[0].data.userInformation.following.count), for: .normal)
+        folloerCountButton.setTitle(String(LikePostData[0].data.userInformation.follower), for: .normal)
+        followingCountButton.setTitle(String(LikePostData[0].data.userInformation.following), for: .normal)
         guard let url = URL(string: LikePostData[0].data.userInformation.profileImage) else { return }
         self.profileImageView.kf.setImage(with: url)
         setCircleLayout()
@@ -187,9 +187,9 @@ extension MyPageVC: UICollectionViewDataSource{
         case 1:
             return customTabbarCount
         case 2:
-            return myCellCount
+            return myCellCount + 1
         default:
-            return saveCellCount
+            return saveCellCount + 1
         }
     }
     
