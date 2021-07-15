@@ -133,13 +133,14 @@ extension ThemePostThemeTVC : UICollectionViewDataSource {
         
         //테마 이름, 이미지 설정
         let themeName = themeList[indexPath.row]
-        cell.themeLabel.text = "#\(themeName)"
+        
+        cell.setThemeTitle(name: themeName)
         cell.themeImageView.image = UIImage(named: ThemeDic[themeName] ?? "gear")
         cell.location = .ThemeTopTVC
         
         if indexPath.row == 0 {
             cell.isSelected = true
-        }else{
+        } else {
             cell.isSelected = false
         }
         

@@ -22,6 +22,10 @@ class HomeVC: UIViewController {
     @IBOutlet weak var homeNavigationSearchButton: UIButton!
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
     
+    @IBOutlet weak var homeNavigationHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var charoIconImageView: NSLayoutConstraint!
+    
+    
     var isFirstSetData: Bool = true
     
     ///배너 데이타
@@ -52,6 +56,14 @@ class HomeVC: UIViewController {
     func setHomeNavigationViewLayout(){
         HomeNavigationView.backgroundColor = .none
         homeNavigationNotificationButton.addTarget(self, action: #selector(presentOnBoarding), for: .touchUpInside)
+        
+        if !UIScreen.hasNotch {
+            homeNavigationHeightConstraints.constant = 93
+            charoIconImageView.constant = 39
+            print("노치 없음")
+        }
+        
+        
     }
     
     @objc func presentOnBoarding(){
@@ -141,6 +153,7 @@ class HomeVC: UIViewController {
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true, completion: nil)
     }
+    
     @IBAction func notificationButtonClicked(_ sender: Any) {
         
         guard let notiVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(identifier: "NotificationVC") as? NotificationVC else {return}

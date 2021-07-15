@@ -32,7 +32,6 @@ class HomeThemeCVC: UICollectionViewCell {
     override var isSelected: Bool {
         willSet {
             if newValue {
-                
                 if location == .HomeThemeTVC {
                     
                     themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
@@ -48,13 +47,10 @@ class HomeThemeCVC: UICollectionViewCell {
                     
                 }
                 
-                
             } else {
                 
                 if location == .HomeThemeTVC {
-                    
                     themeLabel.textColor = .black
-                    
                 } else {
                     themeLabel.textColor = .gray40
                 }
@@ -80,8 +76,14 @@ class HomeThemeCVC: UICollectionViewCell {
         themeImageView.layer.cornerRadius = themeImageView.frame.size.height / 2
     }
     
+    
     public func setThemeTitle(name: String) {
         themeLabel.text = "#\(name)"
+    }
+    
+    public func setData() {
+        
+        
     }
 
 }
