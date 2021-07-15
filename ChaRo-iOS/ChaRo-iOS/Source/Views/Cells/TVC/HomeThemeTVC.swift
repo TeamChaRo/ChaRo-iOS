@@ -64,6 +64,8 @@ class HomeThemeTVC: UITableViewCell {
         
     }
     
+
+    
     
     //MARK:- Function
     
@@ -84,6 +86,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         
         cell.setThemeTitle(name: themeName)
         cell.themeImageView?.image = UIImage(named: ThemeDic[themeName] ?? "gear")
+        cell.location = .HomeThemeTVC
         return cell
         
     }
@@ -98,6 +101,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 14
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
@@ -120,8 +124,11 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         cell?.themeImageView.layer.borderWidth = 0
         cell?.themeLabel.textColor = .mainBlack
         
-        
 
+    }
+    
+    override func prepareForReuse() {
+        
     }
     
     

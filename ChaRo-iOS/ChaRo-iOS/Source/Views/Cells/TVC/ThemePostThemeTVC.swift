@@ -51,11 +51,6 @@ class ThemePostThemeTVC: UITableViewCell {
         
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-    }
-    
     
     //MARK:- default Setting Function Part
     
@@ -138,9 +133,16 @@ extension ThemePostThemeTVC : UICollectionViewDataSource {
         
         //테마 이름, 이미지 설정
         let themeName = themeList[indexPath.row]
-        cell.themeLabel.text = "#\(themeName)"
-        cell.themeImageView.image = UIImage(named: ThemeDic[themeName] ?? "gear")
         
+        cell.setThemeTitle(name: themeName)
+        cell.themeImageView.image = UIImage(named: ThemeDic[themeName] ?? "gear")
+        cell.location = .ThemeTopTVC
+        
+        if indexPath.row == 0 {
+            cell.isSelected = true
+        } else {
+            cell.isSelected = false
+        }
         
         return cell
         
@@ -162,4 +164,6 @@ extension ThemePostThemeTVC : UICollectionViewDelegateFlowLayout {
         UIEdgeInsets(top: 16, left: 21, bottom: 0, right: 21)
         
     }
+    
+    
 }

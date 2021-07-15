@@ -20,6 +20,13 @@ class ThemePostVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     
+    
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fromBottomToTitle: NSLayoutConstraint!
+    
+    
+    
+    
     //MARK:- Variable
     static let identifier : String = "HomePostVC"
     var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
@@ -36,11 +43,11 @@ class ThemePostVC: UIViewController {
     //MARK:- Constraint
     
     
-    
     //MARK:- Life Cycle
     override func viewDidLoad() {
         setTableView()
         setdropDownTableView()
+        setdropDownTableViewUI()
         setTitleLabelUI()
         setShaow()
         setTableViewTag()
@@ -84,6 +91,11 @@ class ThemePostVC: UIViewController {
     }
     
     func setShaow(){
+        
+        //SE일 때 설정
+        self.setDetailNavigationViewUI(height: heightConstraint,
+                                       fromBottomToTitle: fromBottomToTitle)
+        
         navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
     
@@ -98,7 +110,7 @@ class ThemePostVC: UIViewController {
     func setdropDownTableViewUI() {
         dropDownTableView.clipsToBounds = true
         dropDownTableView.layer.cornerRadius = 20
-        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        //dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         dropDownTableView.separatorStyle = .none
     }
     
