@@ -155,12 +155,40 @@ extension CreatePostThemeTVC {
         default:
             print("done error")
         }
+        
+        wasSelected()
 
         self.endEditing(true)
     }
     
     func wasSelected(){
-        // TODO: 기존에 선택되어있으면 초기화해주는 기능 구현
+        
+        switch currentIndex {
+        case 0: // 테마 1 재선택 필터링
+            if filterList[currentIndex+1] != "" { // 테마2가 이미 있다는 것
+                filterList[currentIndex+1] = "테마 2"
+                themeSecondField.text = filterList[currentIndex+1]
+                themeSecondField.textColor = .gray40
+                themeSecondButton.setImage(UIImage(named: "unselect"), for: .normal)
+            }
+            if filterList[currentIndex+2] != "" { // 테마3이 이미 있다는 것
+                filterList[currentIndex+2] = "테마 3"
+                themeThirdField.text = filterList[currentIndex+2]
+                themeThirdField.textColor = .gray40
+                themeThirdButton.setImage(UIImage(named: "unselect"), for: .normal)
+            }
+        case 1: // 테마 2 재선택 필터링
+            if filterList[currentIndex+1] != "" { // 테마3이 이미 있다는 것
+                filterList[currentIndex+1] = "테마 3"
+                themeThirdField.text = filterList[currentIndex+1]
+                themeThirdField.textColor = .gray40
+                themeThirdButton.setImage(UIImage(named: "unselect"), for: .normal)
+            }
+        default:
+            print("wasSelected() error")
+        }
+        
+        
     }
 
     @objc
@@ -210,7 +238,6 @@ extension CreatePostThemeTVC: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if currentList[row] != "선택안함" && currentList[row] != "" {
             filterList[currentIndex] = currentList[row]
-            print("\(currentList[row]) didSelectRow ")
         }
     }
 }
