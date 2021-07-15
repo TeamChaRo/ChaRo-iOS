@@ -28,16 +28,8 @@ struct Constants {
     ///4.
     static let ThemeLikeURL = baseURL + "/preview/like/jiwon0321/1?value="
     static let ThemeNewURL = baseURL + "/preview/new/jiwon0321/1?value="
-<<<<<<< HEAD
     static let likeURL = baseURL + "/post/like"
-    
-    
-=======
-  
-    static let likeURL = baseURL + "/post/like"
-    
-   
->>>>>>> develop
+
     ///필터 검색 결과 조회
     static let searchPostURL = baseURL + "/search/"
     
