@@ -88,6 +88,8 @@ extension CreatePostVC {
         tableView.registerCustomXib(xibName: CreatePostPhotoTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostCourseTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostThemeTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostParkingWarningTVC.identifier)
+        tableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
     }
     
     func setNavigationBar(){
@@ -101,13 +103,14 @@ extension CreatePostVC {
     }
     
     func initCellHeight(){
-        cellHeights.append(contentsOf: [89, 255, 125, 125])
+        cellHeights.append(contentsOf: [89, 255, 125, 125, 334, 408])
     }
     
     func setNotificationCenter(){
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
     }
     
+    // MARK: 서버통신 .post /writePost
     func postCreatePost(){
         let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정
@@ -181,11 +184,9 @@ extension CreatePostVC {
     //MARK: - Button Actions
     @objc
     func xButtonDidTap(sender: UIButton){
-        postCreatePost()
-//        self.dismiss(animated: true, completion: {
-//            self.tabBarController?.selectedIndex = 0
-//            // TODO: 홈 탭으로 돌아가는 코드 추가
-//        })
+
+        // TODO: 홈 탭으로 돌아가는 코드 추가
+
     }
     
     @objc
@@ -248,6 +249,10 @@ extension CreatePostVC: UITableViewDataSource {
             return getCreatePostCourseCell(tableView: tableView)
         case 3:
             return getCreatePostThemeCell(tableView: tableView)
+        case 4:
+            return getCreatePostParkingWarningCell(tableView: tableView)
+        case 5:
+            return getCreatePostCourseDescCell(tableView: tableView)
         default:
             return getCreatePostTitleCell(tableView: tableView)
         }
@@ -325,6 +330,18 @@ extension CreatePostVC {
         guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
         
         return themeCell
+    }
+    
+    func getCreatePostParkingWarningCell(tableView: UITableView) -> UITableViewCell{
+        guard let parkingWarningCell = tableView.dequeueReusableCell(withIdentifier: CreatePostParkingWarningTVC.identifier) as? CreatePostParkingWarningTVC else { return UITableViewCell() }
+        
+        return parkingWarningCell
+    }
+    
+    func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
+        guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else { return UITableViewCell() }
+        
+        return courseDescCell
     }
 }
 
