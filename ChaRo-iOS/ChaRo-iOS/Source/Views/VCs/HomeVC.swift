@@ -53,7 +53,7 @@ class HomeVC: UIViewController {
         // Do any additional setup after loading the view.
     }
      
-    func setHomeNavigationViewLayout(){
+    func setHomeNavigationViewLayout() {
         HomeNavigationView.backgroundColor = .none
         homeNavigationNotificationButton.addTarget(self, action: #selector(presentOnBoarding), for: .touchUpInside)
         

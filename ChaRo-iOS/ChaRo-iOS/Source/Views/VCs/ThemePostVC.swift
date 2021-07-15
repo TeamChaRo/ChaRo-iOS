@@ -47,6 +47,7 @@ class ThemePostVC: UIViewController {
     override func viewDidLoad() {
         setTableView()
         setdropDownTableView()
+        setdropDownTableViewUI()
         setTitleLabelUI()
         setShaow()
         setTableViewTag()
@@ -109,7 +110,7 @@ class ThemePostVC: UIViewController {
     func setdropDownTableViewUI() {
         dropDownTableView.clipsToBounds = true
         dropDownTableView.layer.cornerRadius = 20
-        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        //dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         dropDownTableView.separatorStyle = .none
     }
     
