@@ -67,17 +67,20 @@ class LoginVC: UIViewController {
                 
                 switch result
                 {
-                case .success(let message):
-                    print("여기까진..")
-                    print(message)
-                    if let message = message as? UserData {
-                        //as? UserData {
-                        print(message)
+                case .success(let data):
+                    let loginData = data as? LoginDataModel
+                    let userData = loginData?.data
+                    dump(userData)
+                    
+                    if let user = userData as? UserData {
                         
-                        //guard let nextVC = else { return }
-//                        print(UserInfo.shared.id)
-//                        print(UserInfo.shared.nickname)
-//                        print(UserInfo.shared.token)
+                        UserDefaults.standard.set(user.userId, forKey: "userId")
+                        UserDefaults.standard.set(user.nickname, forKey: "nickname")
+                        UserDefaults.standard.set(user.token, forKey: "token")
+                        
+                        print(UserDefaults.standard.string(forKey: "userId"))
+                        print(UserDefaults.standard.string(forKey: "nickname"))
+                        print(UserDefaults.standard.string(forKey: "token"))
                     }
                     
                 case .requestErr(let message):

@@ -50,7 +50,7 @@ class HomeThemeCVC: UICollectionViewCell {
             } else {
                 
                 if location == .HomeThemeTVC {
-                    themeLabel.textColor = .black
+                    themeLabel.textColor = .gray50
                 } else {
                     themeLabel.textColor = .gray40
                 }

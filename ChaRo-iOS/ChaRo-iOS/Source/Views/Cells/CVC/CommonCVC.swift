@@ -33,15 +33,16 @@ class CommonCVC: UICollectionViewCell {
     //MARK: Variable
     var callback : (() -> Void)?
     var postID: Int = 1
-    var isFavorite: Bool? {
-        didSet {
-            if isFavorite == true {
-                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
-            } else {
-                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
-            }
-        }
-    }
+    var isFavorite = false
+//    var isFavorite: Bool? {
+//        didSet {
+//            if isFavorite! {
+//                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+//            } else {
+//                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+//            }
+//        }
+//    }
     
     
     //MARK:- Life Cycle
@@ -51,6 +52,9 @@ class CommonCVC: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        
+        setTagUI()
+        
         if isFavorite == true {
             heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
         } else {
@@ -59,6 +63,7 @@ class CommonCVC: UICollectionViewCell {
     }
     
     //MARK:- default Setting Function Part
+    
     func setLabelUI() {
         titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
         tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
@@ -68,6 +73,13 @@ class CommonCVC: UICollectionViewCell {
         tagLabel1.textColor = UIColor.mainBlue
         tagLabel2.textColor = UIColor.mainBlue
         tagLabel3.textColor = UIColor.mainBlue
+        
+        if isFavorite {
+            heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+        } else {
+            heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+        }
+        
     }
     
     func setTagUI() {
@@ -90,7 +102,7 @@ class CommonCVC: UICollectionViewCell {
             
         ])
         
-        
+    
         tagView1.layer.cornerRadius = 10
         tagView2.layer.cornerRadius = 10
         tagView3.layer.cornerRadius = 10
@@ -112,25 +124,6 @@ class CommonCVC: UICollectionViewCell {
     
 
     //MARK:- Function
-    
-//    //setData 익범이꺼
-//    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
-//
-//        imageView.kf.setImage(with: URL(string: image))
-//
-//        titleLabel.text = title
-//        tagLabel1.text = tag1
-//        tagLabel2.text = tag2
-//        tagLabel3.text = tag3
-//
-//        setTagUI()
-//        setLabelUI()
-//
-//
-        //킹피셔 받아서 이거 처리해야됨
-//    }
-    
-    
     
     //setData 지원이꺼
     func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
@@ -183,37 +176,25 @@ class CommonCVC: UICollectionViewCell {
             case .success(let success):
                 
                 if let success = success as? Bool {
-                    if success {
-                        isFavorite = !isFavorite!
-                    }
+                    
+                    print(self.isFavorite)
+                    self.isFavorite = success ? !isFavorite : isFavorite
+                    
+                    print(self.isFavorite)
+                    prepareForReuse()
+                    
                 }
-                
-                
             case .requestErr(let msg):
                 
                 if let msg = msg as? String {
                     print(msg)
                 }
                 
-                
             default :
                 print("ERROR")
             }
         }
     }
-    
-//    func setHeartButton() {
-//
-//        let emptyHeartImage = UIImage(named: "icHeartWhiteLine")
-//        let fullHeartImage = UIImage(named: "heart_active")
-//
-//        if self.heartButton.currentImage == emptyHeartImage {
-//            self.heartButton.setImage(fullHeartImage, for: .normal)
-//        } else {
-//            self.heartButton.setImage(emptyHeartImage, for: .normal)
-//        }
-//
-//    }
     
     
     //MARK:- IBAction

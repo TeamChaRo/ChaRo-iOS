@@ -61,8 +61,8 @@ class HomeVC: UIViewController {
     }
     
     @objc func presentOnBoarding(){
-        let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true, completion: nil)
     }
@@ -228,6 +228,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         tableIndex = indexPath
 //MARK: 배너부분 구현
         switch indexPath.row {
+        
         
         case 0:
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
