@@ -14,5 +14,9 @@ extension Notification.Name {
     static let callPhotoPicker = Notification.Name("callPhotoPicker")
     static let createPostPickerFieldClicked = Notification.Name("createPostPickerFieldClicked")
     
+    static let sendNewPostTitle = Notification.Name("sendNewPostTitle")
+    static let sendNewCity = Notification.Name("sendNewCity")
+    static let sendNewRegion = Notification.Name("sendNewRegion")
+    static let sendNewTheme = Notification.Name("sendNewTheme")
 }
 

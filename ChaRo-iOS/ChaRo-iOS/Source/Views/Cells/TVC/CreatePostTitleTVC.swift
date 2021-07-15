@@ -83,6 +83,8 @@ extension CreatePostTitleTVC: UITextViewDelegate {
         if titleTextView.text.count == 0 {
             textView.text = "제목을 입력해주세요" //placeholder
             textView.textColor = UIColor.gray30
+        } else { // end 될 때마다 VC로 title 전달
+            NotificationCenter.default.post(name: .sendNewPostTitle, object: titleContent)
         }
     }
     
@@ -119,7 +121,7 @@ extension CreatePostTitleTVC: UITextViewDelegate {
 }
 
 extension CreatePostTitleTVC {
-    
+ 
     // MARK: - Layout
     func configureLayout(){
         addSubviews([titleTextView, warningLabel])

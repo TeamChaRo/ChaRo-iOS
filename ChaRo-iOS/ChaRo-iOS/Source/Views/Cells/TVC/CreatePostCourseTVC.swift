@@ -13,6 +13,17 @@ class CreatePostCourseTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostCourseTVC"
     
+    private var city: String = ""{
+        didSet{
+            NotificationCenter.default.post(name: .sendNewCity, object: city)
+        }
+    }
+    private var region: String = "" {
+        didSet{
+            NotificationCenter.default.post(name: .sendNewRegion, object: region)
+        }
+    }
+
     // about pickerview
     private var pickerView = UIPickerView()
     private let toolbar = UIToolbar()
@@ -121,17 +132,21 @@ extension CreatePostCourseTVC {
 
         switch currentIndex {
         case 0:
+            city = filterList[currentIndex]
             cityField.text = filterList[currentIndex]
             cityField.textColor = .mainBlue
             cityButton.setImage(UIImage(named: "select"), for: .normal)
             wasSelected()
         case 1:
+            region = filterList[currentIndex]
             regionField.text = filterList[currentIndex]
             regionField.textColor = .mainBlue
             regionButton.setImage(UIImage(named: "select"), for: .normal)
         default:
             print("done error")
         }
+        
+        
 
         self.endEditing(true)
     }
