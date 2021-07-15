@@ -181,6 +181,7 @@
             </constraints>
             <size key="customSize" width="539" height="140"/>
             <connections>
+                <outlet property="dateLabel" destination="P39-Bv-C2D" id="RNY-BW-vtb"/>
                 <outlet property="heartImage" destination="ra2-ju-x6H" id="3mX-ec-JRT"/>
                 <outlet property="heartLabel" destination="uDQ-Vc-Txx" id="iee-sV-FVr"/>
                 <outlet property="postImage" destination="kd9-bz-d0z" id="jzr-Ku-ilr"/>

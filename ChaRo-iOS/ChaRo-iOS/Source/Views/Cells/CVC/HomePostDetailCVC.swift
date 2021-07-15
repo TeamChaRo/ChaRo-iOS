@@ -18,16 +18,14 @@ class HomePostDetailCVC: UICollectionViewCell {
     @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
-    var postCount: Int = 6
+    var postCount: Int = 0
     var delegate: MenuClickedDelegate?
     var selectText: String = "인기순"
     var isButtonClicked: Bool = false
     
     
     func setTitle(data : String) {
-        selectText = data
-        selectLabel.text = selectText
-        
+        selectLabel.text = data
     }
 
     func setLabel(){
@@ -40,7 +38,9 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     @IBAction func menuButtonClicked(_ sender: Any) {
         delegate?.menuClicked()
-        isButtonClicked.toggle()
+//        isButtonClicked.toggle()
+        print("HomePostDetailCVC")
+        print("버튼 눌림")
         
     }
     
@@ -48,6 +48,11 @@ class HomePostDetailCVC: UICollectionViewCell {
         super.awakeFromNib()
         setLabel()
         setTitle(data: selectText)
+    }
+    
+    func setSelectName(name: String){
+        selectLabel.text = name
+        selectText = name
     }
 
 }

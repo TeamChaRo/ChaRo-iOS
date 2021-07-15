@@ -20,7 +20,7 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var dropDownTableview: UITableView!
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
-    var cellCount = 6
+    var cellCount = 0
     var topCVCCell : HomePostDetailCVC?
     var postCell: CommonCVC?
     var topText: String = "요즘 뜨는 드라이브"
@@ -169,7 +169,6 @@ extension HomePostVC: UICollectionViewDelegate{
                 return cell
             }
 
-            return cell
         }
         
 
@@ -260,7 +259,7 @@ extension HomePostVC: MenuClickedDelegate {
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-        delegate?.setTopTitle(name: cell.name)
+//        delegate?.setTopTitle(name: cell.name)
         dropDownTableview.isHidden = true
         topCVCCell?.setTitle(data: cell.name)
         

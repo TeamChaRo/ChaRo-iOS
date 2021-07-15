@@ -28,6 +28,7 @@ struct Constants {
     ///4.
     static let ThemeLikeURL = baseURL + "/preview/like/jiwon0321/1?value="
     static let ThemeNewURL = baseURL + "/preview/new/jiwon0321/1?value="
+  
     static let likeURL = baseURL + "/post/like"
     
    
@@ -37,4 +38,9 @@ struct Constants {
     /// 최근 검색 결과 관련
     static let searchKeywordURL = baseURL + "/searchHistory"
 
+    ///4. 마이 페이지 URL
+    ////  인기순
+    static let myPageLikeURL = baseURL + "/myPage/like/jieun1211"
+    //// 최신순
+    static let myPageNewURL = baseURL + "/myPage/new/jieun1211"
 }
