@@ -30,7 +30,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIJ-eF-GAs">
-                                        <rect key="frame" x="0.0" y="43" width="48" height="48"/>
+                                        <rect key="frame" x="0.0" y="42.5" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="VSg-OF-UIj"/>
                                             <constraint firstAttribute="height" constant="48" id="viP-Ms-bnq"/>
@@ -43,11 +43,11 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="AZk-Qy-zUy"/>
-                                    <constraint firstItem="Tno-rF-xZD" firstAttribute="centerX" secondItem="mtt-cJ-16D" secondAttribute="centerX" id="NcJ-qM-ETk"/>
-                                    <constraint firstAttribute="bottom" secondItem="FIJ-eF-GAs" secondAttribute="bottom" constant="9" id="T0Q-ok-rLL"/>
-                                    <constraint firstItem="FIJ-eF-GAs" firstAttribute="leading" secondItem="mtt-cJ-16D" secondAttribute="leading" id="g4V-20-Tqq"/>
-                                    <constraint firstAttribute="bottom" secondItem="Tno-rF-xZD" secondAttribute="bottom" constant="23" id="yfE-bO-PRU"/>
+                                    <constraint firstItem="FIJ-eF-GAs" firstAttribute="leading" secondItem="mtt-cJ-16D" secondAttribute="leading" id="KUI-TL-sk9"/>
+                                    <constraint firstItem="Tno-rF-xZD" firstAttribute="centerX" secondItem="mtt-cJ-16D" secondAttribute="centerX" id="RJc-LR-thR"/>
+                                    <constraint firstItem="FIJ-eF-GAs" firstAttribute="centerY" secondItem="Tno-rF-xZD" secondAttribute="centerY" id="Vci-fH-RPy"/>
+                                    <constraint firstAttribute="height" constant="100" id="kVC-EP-YOR"/>
+                                    <constraint firstAttribute="bottom" secondItem="Tno-rF-xZD" secondAttribute="bottom" constant="23" id="wC5-cS-U7e"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GUN-SI-I1O">
@@ -62,21 +62,22 @@
                         <viewLayoutGuide key="safeArea" id="EfI-xp-oZM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="mtt-cJ-16D" firstAttribute="top" secondItem="ra4-LH-ODE" secondAttribute="top" id="2Ph-iO-X2T"/>
-                            <constraint firstItem="mtt-cJ-16D" firstAttribute="leading" secondItem="EfI-xp-oZM" secondAttribute="leading" id="5lm-P3-RXd"/>
+                            <constraint firstItem="mtt-cJ-16D" firstAttribute="leading" secondItem="EfI-xp-oZM" secondAttribute="leading" id="2Cp-RB-AEV"/>
+                            <constraint firstItem="bB3-pq-LlX" firstAttribute="top" secondItem="mtt-cJ-16D" secondAttribute="bottom" id="2Hc-Xb-I1C"/>
+                            <constraint firstItem="mtt-cJ-16D" firstAttribute="trailing" secondItem="EfI-xp-oZM" secondAttribute="trailing" id="9Lv-MT-k3c"/>
                             <constraint firstItem="GUN-SI-I1O" firstAttribute="trailing" secondItem="EfI-xp-oZM" secondAttribute="trailing" constant="-20" id="Eyl-tv-tgu"/>
                             <constraint firstItem="EfI-xp-oZM" firstAttribute="bottom" secondItem="bB3-pq-LlX" secondAttribute="bottom" id="G93-D8-jIq"/>
                             <constraint firstItem="GUN-SI-I1O" firstAttribute="top" secondItem="EfI-xp-oZM" secondAttribute="top" constant="110" id="I5e-Gk-Uvu"/>
                             <constraint firstItem="bB3-pq-LlX" firstAttribute="trailing" secondItem="EfI-xp-oZM" secondAttribute="trailing" id="NPp-ES-PNf"/>
                             <constraint firstItem="bB3-pq-LlX" firstAttribute="leading" secondItem="EfI-xp-oZM" secondAttribute="leading" id="cVB-h9-KJR"/>
-                            <constraint firstItem="EfI-xp-oZM" firstAttribute="top" secondItem="mtt-cJ-16D" secondAttribute="bottom" constant="-56" id="dGa-OH-nxb"/>
-                            <constraint firstItem="mtt-cJ-16D" firstAttribute="trailing" secondItem="EfI-xp-oZM" secondAttribute="trailing" id="q7r-55-euS"/>
-                            <constraint firstItem="bB3-pq-LlX" firstAttribute="top" secondItem="mtt-cJ-16D" secondAttribute="bottom" id="qlt-8L-IB2"/>
+                            <constraint firstItem="mtt-cJ-16D" firstAttribute="top" secondItem="ra4-LH-ODE" secondAttribute="top" id="ndJ-zj-5OP"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="FIJ-eF-GAs" id="DC9-eC-0nc"/>
                         <outlet property="dropDownTableView" destination="GUN-SI-I1O" id="VU7-5r-dGz"/>
+                        <outlet property="fromBottomToTitle" destination="wC5-cS-U7e" id="5QC-ID-La6"/>
+                        <outlet property="heightConstraint" destination="kVC-EP-YOR" id="FuE-k2-gtL"/>
                         <outlet property="navigationView" destination="mtt-cJ-16D" id="PuT-P3-pm7"/>
                         <outlet property="tableView" destination="bB3-pq-LlX" id="ipr-zI-zB8"/>
                         <outlet property="titleLabel" destination="Tno-rF-xZD" id="xfm-j7-0Oo"/>

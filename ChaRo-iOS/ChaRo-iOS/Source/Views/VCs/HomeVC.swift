@@ -57,12 +57,8 @@ class HomeVC: UIViewController {
         HomeNavigationView.backgroundColor = .none
         homeNavigationNotificationButton.addTarget(self, action: #selector(presentOnBoarding), for: .touchUpInside)
         
-        if !UIScreen.hasNotch {
-            homeNavigationHeightConstraints.constant = 93
-            charoIconImageView.constant = 39
-            print("노치 없음")
-        }
-        
+        self.setMainNavigationViewUI(height: homeNavigationHeightConstraints,
+                                 fromTopToImageView: charoIconImageView)
         
     }
     
