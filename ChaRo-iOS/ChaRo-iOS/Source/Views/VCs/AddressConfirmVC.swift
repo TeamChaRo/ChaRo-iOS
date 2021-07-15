@@ -76,7 +76,6 @@ class AddressConfirmVC: UIViewController {
         let addressMainVC = navigationController?.viewControllers[endIndex-3] as! AddressMainVC
         addressMainVC.replaceAddressData(address: addressModel!, index: presentingCellIndex)
         navigationController?.popToViewController(addressMainVC, animated: true)
-        
     }
     
     func setPresentingAddress(address: AddressDataModel){
@@ -119,7 +118,7 @@ class AddressConfirmVC: UIViewController {
         let initPosition: CLLocationCoordinate2D = address.getPoint()
         print("setTMapInitAddressView - tMapView.getZoom() = \(tMapView.getZoom())")
         tMapView.setCenter(initPosition)
-        tMapView.setZoom(10)
+        tMapView.setZoom(18)
     }
     
     

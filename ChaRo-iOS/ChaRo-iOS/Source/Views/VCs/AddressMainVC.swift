@@ -392,7 +392,6 @@ extension AddressMainVC{
             }
         }
         
-        
         return CLLocationCoordinate2D(latitude: (minX+maxX)/2, longitude: (minY+maxY)/2)
         
     }
@@ -460,7 +459,7 @@ extension AddressMainVC{
 extension AddressMainVC : TMapViewDelegate{
     func mapViewDidFinishLoadingMap(){
         print("mapViewDidFinishLoadingMap")
-        tMapView.setZoom(10)
+        tMapView.setZoom(12)
         print("tMapView.getZoom() = \(tMapView.getZoom())")
     }
 

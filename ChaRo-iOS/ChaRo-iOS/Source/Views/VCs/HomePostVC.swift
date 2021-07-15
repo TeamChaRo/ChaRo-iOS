@@ -4,7 +4,7 @@
 //
 //  Created by 박익범 on 2021/07/07.
 //
-
+import Foundation
 import UIKit
 
 protocol SetTopTitleDelegate {
@@ -67,14 +67,11 @@ class HomePostVC: UIViewController {
         setNavigationLabel()
         getData()
         getNewData()
+        self.dismissDropDownWhenTappedAround()
 
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
 
-    }
- 
     @IBAction func backButtonClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -85,14 +82,13 @@ class HomePostVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? DetailModel{
-                    self.postCount = response.data.totalCourse
-                    self.postData = [response]
                     
-                    DispatchQueue.main.async {
-                        if self.postData.count > 0{
-                            self.collectionView.reloadData()
-                        }
+                    DispatchQueue.global().sync {
+                        self.postCount = response.data.totalCourse
+                        self.postData = [response]
                     }
+                    self.collectionView.reloadData()
+            
                 }
             case .requestErr(let message) :
                 print("requestERR")
@@ -112,14 +108,13 @@ class HomePostVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? DetailModel{
-                    self.postCount = response.data.totalCourse
-                    self.newPostData = [response]
                     
-                    DispatchQueue.main.async {
-                        if self.postData.count > 0{
-                            self.collectionView.reloadData()
-                        }
+                    DispatchQueue.global().sync {
+                        self.postCount = response.data.drive.count
+                    self.postData = [response]
                     }
+                    
+                    self.collectionView.reloadData()
                 }
             case .requestErr(let message) :
                 print("requestERR")
@@ -149,13 +144,14 @@ extension HomePostVC: UICollectionViewDelegate{
         
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         topCell.delegate = self
-        if isFirstLoaded {
-            isFirstLoaded = false
-            topCVCCell = topCell
-        }
         
+     
         switch indexPath.row {
         case 0:
+            if isFirstLoaded {
+                isFirstLoaded = false
+                topCVCCell = topCell
+            }
             topCVCCell!.setLabel()
             topCVCCell?.postCount = postCount
             return topCVCCell!
@@ -259,22 +255,23 @@ extension HomePostVC: MenuClickedDelegate {
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
-//        delegate?.setTopTitle(name: cell.name)
-        dropDownTableview.isHidden = true
-        topCVCCell?.setTitle(data: cell.name)
-        
-        if cell.name == "인기순" {
-            getData()
-            DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-            }
+        if cell.name == "인기순"{
+            print("인기순 실행")
+            self.getData()
+            self.cellCount = self.postData[0].data.drive.count
+            self.dropDownTableview.isHidden = true
+            topCVCCell?.setTitle(data: "인기순")
+            topCVCCell?.setTitle(data: "인기순")
         }
+        
         else if cell.name == "최신순"{
-            getNewData()
-            DispatchQueue.main.async {
-                    self.postData = self.newPostData
-                    self.collectionView.reloadData()
-            }
+            print("최신순 실행")
+            self.getNewData()
+            self.cellCount = self.postData[0].data.drive.count
+            self.dropDownTableview.isHidden = true
+            topCVCCell?.setTitle(data: "최신순")
+            topCVCCell?.setTitle(data: "최신순")
+            self.collectionView.reloadData()
 
         }
         
@@ -282,4 +279,16 @@ extension HomePostVC: SetTitleDelegate {
     
 }
 
+extension HomePostVC{
 
+func dismissDropDownWhenTappedAround() {
+        let tap: UITapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissDropDown() {
+        self.dropDownTableview.isHidden = true
+    }
+}

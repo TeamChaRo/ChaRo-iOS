@@ -37,4 +37,11 @@ struct AddressDataModel: Codable {
                              day: Date.getCurrentDay())
     }
     
+    func getAddressDataModel() -> Address{
+        return Address(address: address,
+                       latitude: latitude,
+                       longtitude: longitude)
+        
+    }
+    
 }

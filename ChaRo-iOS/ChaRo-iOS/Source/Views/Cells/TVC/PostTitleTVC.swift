@@ -42,11 +42,17 @@ class PostTitleTVC: UITableViewCell {
         userNameLabel.text = userName
         postDateLabel.text = date
         likedCountLabel.text = likedCount
-        if let image = UIImage(named: imageName) {
-            profileImageView.layer.masksToBounds = true
-            profileImageView.image = image
-            profileImageView.layer.cornerRadius = profileImageView.frame.height / 2.0
-        }
+    
+        profileImageView.layer.masksToBounds = true
+        profileImageView.kf.setImage(with: URL(string: imageName))
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2.0
+        
+//        if let image = UIImage(named: imageName) {
+//            profileImageView.layer.masksToBounds = true
+//
+//            profileImageView.image = image
+//            profileImageView.layer.cornerRadius = profileImageView.frame.height / 2.0
+//        }
     }
     
 }
