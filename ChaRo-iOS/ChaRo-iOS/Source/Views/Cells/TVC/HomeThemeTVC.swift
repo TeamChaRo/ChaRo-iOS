@@ -86,6 +86,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         
         cell.setThemeTitle(name: themeName)
         cell.themeImageView?.image = UIImage(named: ThemeDic[themeName] ?? "gear")
+        cell.location = .HomeThemeTVC
         return cell
         
     }
