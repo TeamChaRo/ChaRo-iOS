@@ -19,7 +19,8 @@ class CreatePostThemeTVC: UITableViewCell {
     private var currentIndex = 0 // 현재 선택된 component (0 == city, 1 == region)
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
     private var currentList: [String] = [] //pickerview에 표시 될 List
-    private var filterList : [String] = ["","",""] // pickerview 선택 완료 후에 담길 결과 배열 => 미친여기수정!!!
+    private var filterList: [String] = ["","",""] // pickerview 선택 완료 후에 담길 결과 배열
+    private var pickerSelectFlag: Bool = false
     
     // MARK: UI Components
     private let courseTitleView = PostCellTitleView(title: "어느 지역으로 다녀오셨나요?", subTitle: "도/광역시, 시 단위로 선택해주세요.")
@@ -131,6 +132,8 @@ extension CreatePostThemeTVC {
     
     @objc
     func donePresseed(){
+        
+        if !pickerSelectFlag { didNotSelect() }
         var setText: String = filterList[currentIndex]
         
         switch currentIndex {
@@ -155,10 +158,18 @@ extension CreatePostThemeTVC {
         default:
             print("done error")
         }
-        
         wasSelected()
 
         self.endEditing(true)
+    }
+    
+    func didNotSelect(){
+        switch currentIndex {
+        case 0 : filterList[currentIndex] = ""
+        case 1 : filterList[currentIndex] = ""
+        case 2 : filterList[currentIndex] = ""
+        default : print("text set error")
+        }
     }
     
     func wasSelected(){
@@ -195,6 +206,7 @@ extension CreatePostThemeTVC {
     func clikedTextField(_ sender: UITextField){
         
         currentIndex = sender.tag
+        pickerSelectFlag = false
         pickerView.selectRow(0, inComponent: 0, animated: true)
         changeCurrentPickerData(index: currentIndex) // data 지정
         changeToolbarText(index: currentIndex) // title 지정
@@ -203,13 +215,19 @@ extension CreatePostThemeTVC {
     }
     
     func changeCurrentPickerData(index : Int){
-        print(filterList[0], filterList[1], filterList[2])
+        
         if index == 0 {
             currentList = filterData.thema
         } else if  index == 1 && filterList[0] != "" {
             currentList = filterData.thema
+            let removeIdx = currentList.firstIndex(of: filterList[0])!
+            currentList.remove(at: removeIdx)
         } else if index == 2 && filterList[0] != "" && filterList[1] != "" {
             currentList = filterData.thema
+            let removeIdx1 = currentList.firstIndex(of: filterList[0])!
+            currentList.remove(at: removeIdx1)
+            let removeIdx2 = currentList.firstIndex(of: filterList[1])!
+            currentList.remove(at: removeIdx2)
         } else {
             self.endEditing(true)
         }
@@ -236,8 +254,16 @@ extension CreatePostThemeTVC: UIPickerViewDelegate{
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerSelectFlag = true
         if currentList[row] != "선택안함" && currentList[row] != "" {
             filterList[currentIndex] = currentList[row]
+        } else {
+            switch currentIndex {
+            case 0 : filterList[currentIndex] = "테마 1"
+            case 1 : filterList[currentIndex] = "테마 2"
+            case 2 : filterList[currentIndex] = "테마 3"
+            default : print("text set error")
+            }
         }
     }
 }
