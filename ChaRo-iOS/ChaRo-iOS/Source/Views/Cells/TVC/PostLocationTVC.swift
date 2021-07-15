@@ -24,13 +24,12 @@ class PostLocationTVC: UITableViewCell {
         return textField
     }()
     
+
     let copyButton: UIButton = {
         let button = UIButton()
-
         button.setBackgroundImage(UIImage(named: "copy1LightVer"), for: .normal)
         button.isUserInteractionEnabled = true
-        //button.imageView?.contentMode = .scaleToFill
-        button.addTarget(self, action: #selector(copyTextInClibBoard), for: .allEvents)
+        button.imageView?.contentMode = .scaleToFill
         return button
     }()
     
@@ -38,20 +37,18 @@ class PostLocationTVC: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         configureLayout()
+        copyButton.addTarget(self, action: #selector(copyTextInClibBoard), for: .touchUpInside)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        if selected {
-            print("눌리냐?????????????")
-        }
     }
     
     @objc
     func copyTextInClibBoard(){
         print("복사버튼 눌림")
-        //UIPasteboard.general.string = locationTextField.text
-        //clickCopyButton?()
+        UIPasteboard.general.string = locationTextField.text
+        clickCopyButton?()
     }
     
 }
@@ -85,14 +82,13 @@ extension PostLocationTVC {
             $0.bottom.equalTo(self.snp.bottom).offset(-8)
         }
         
-        //copyButton.bringSubviewToFront(self)
+        copyButton.bringSubviewToFront(self)
         copyButton.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
             $0.bottom.equalTo(self.snp.bottom).offset(-6)
             $0.trailing.equalTo(self.snp.trailing).offset(-6)
             $0.width.height.equalTo(48)
         }
-        
     }
 }
 
