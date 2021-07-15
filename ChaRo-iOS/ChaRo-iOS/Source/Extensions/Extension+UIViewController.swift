@@ -22,11 +22,11 @@ extension UIViewController {
         let alertViewController = UIAlertController(title: title, message: message,
                                                     preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: okAction)
+        let okAction = UIAlertAction(title: "예", style: .default, handler: okAction)
         alertViewController.addAction(okAction)
         
         
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: cancelAction)
+        let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: cancelAction)
         alertViewController.addAction(cancelAction)
         
         
