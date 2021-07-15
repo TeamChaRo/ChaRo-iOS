@@ -19,6 +19,7 @@ class PostDetailVC: UIViewController {
     private var postData : PostDetail?
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [AddressDataModel] = []
+    private var imageList: [UIImage] = []
     
     
     //MARK: UIComponent
@@ -38,12 +39,14 @@ class PostDetailVC: UIViewController {
     private var heartButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
+        button.addTarget(self, action: #selector(clickedToHeartButton), for: .touchUpInside)
         return button
     }()
     
     private var scrapButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "icSaveInactive"), for: .normal)
+        button.addTarget(self, action: #selector(clickedToScrapButton), for: .touchUpInside)
         return button
     }()
     
@@ -52,16 +55,17 @@ class PostDetailVC: UIViewController {
         button.setTitle("등록", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
         button.setTitleColor(.mainBlue, for: .normal)
-        //button.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clickedToSaveButton), for: .touchUpInside)
         return button
     }()
     
     
-    var location: [String] = ["출발지", "경유지", "경유지", "도착지"]
+   // var location: [String] = ["출발지", "경유지", "경유지", "도착지"]
     let cellFixedCount: Int = 3 // 0~2 cell은 무조건 존재
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getPostDetailData()
         print("PostDetailVC viewDidLoad")
         setTableViewConstraints()
         setNavigaitionViewConstraints()
@@ -88,7 +92,37 @@ class PostDetailVC: UIViewController {
     public func setPostId(id: Int){
         print("setPost PostDetailVC - \(id)")
         postId = id
-        getPostDetailData()
+    }
+    
+    public func setDataWhenConfirmPost(data: WritePostData,
+                                       imageList: [UIImage],
+                                       addressList: [AddressDataModel]){
+        let sendedPostDate = PostDetail(title: data.title,
+                                  author: Constants.userId,
+                                  isAuthor: true,
+                                  profileImage: "",
+                                  postingYear: Date.getCurrentYear(),
+                                  postingMonth: Date.getCurrentMonth(),
+                                  postingDay: Date.getCurrentDay(),
+                                  isStored: false,
+                                  isFavorite: false,
+                                  likesCount: 0,
+                                  images: [""],
+                                  province: data.province,
+                                  city: data.province,
+                                  themes: data.theme,
+                                  source: "",
+                                  wayPoint: [""],
+                                  destination: "",
+                                  longtitude: [""],
+                                  latitude: [""],
+                                  isParking: data.isParking,
+                                  parkingDesc: data.parkingDesc,
+                                  warnings: data.warning,
+                                  courseDesc: data.courseDesc)
+        self.postData = sendedPostDate
+        self.addressList = addressList
+        self.imageList = imageList
     }
     
     private func configureTableView(){
@@ -145,6 +179,51 @@ class PostDetailVC: UIViewController {
     
     
     
+}
+
+//MARK: Button Action
+extension PostDetailVC{
+    
+    //하트 버튼 눌렀을 때 (좋아요)서버 통신
+    @objc func clickedToHeartButton(){
+        print("하트 버튼")
+        
+    }
+    
+    //스크랩 버튼 눌렀을 때 (저장하기) 서버통신
+    @objc func clickedToScrapButton(){
+        print("스크랩 버튼")
+    }
+    
+   
+    //등록 버튼 눌렀을 때 post 서버 통신
+    @objc func clickedToSaveButton(){
+        print("등록 버튼")
+        
+    }
+    
+    
+    // ... 버튼 눌렀을 때 actionSheet 뜨도록 수정
+    @objc func registActionSheet(){
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+
+        let cancleAction = UIAlertAction(title: "취소", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        optionMenu.addAction(modifyAction)
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancleAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
     func showToast(message : String) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100,
                                                y: self.view.frame.size.height-100, width: 200, height: 35))
@@ -160,32 +239,9 @@ class PostDetailVC: UIViewController {
         UIView.animate(withDuration: 2.0, delay: 0.5, options: .curveEaseOut, animations: { toastLabel.alpha = 0.0 }, completion: {(isCompleted) in toastLabel.removeFromSuperview() })
     }
     
-    
-    @objc
-    func registActionSheet(){
-
-        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-
-        let cancleAction = UIAlertAction(title: "취소", style: .cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        optionMenu.addAction(modifyAction)
-        optionMenu.addAction(deleteAction)
-        optionMenu.addAction(cancleAction)
-        
-        self.present(optionMenu, animated: true, completion: nil)
-
-    }
-    
 }
+
+
 
 extension PostDetailVC{
     
@@ -386,7 +442,6 @@ extension PostDetailVC {
         cell.setTheme(theme: postData!.themes)
         cell.configureLayout()
         cell.themeButtonConfigureLayer()
-        //cell.bringButtonToFront()
         cell.selectionStyle = .none
         return cell
     }
@@ -460,6 +515,7 @@ extension PostDetailVC {
     func setPostContentView(data: PostDetail){
         postData = data
         isAuthor = postData!.isAuthor
+        print("isAuthor = \(isAuthor)")
         refineAddressData()
         configureTableView()
         setTableViewConstraints()
@@ -467,13 +523,13 @@ extension PostDetailVC {
     
     func getPostDetailData(){
         print("getPostDetailData 넘겨진 postId = \(self.postId)")
+        print("현재 보낼 URL = \(Constants.detailURL)\(self.postId)")
         PostResultService.shared.getPostDetail(postId: postId){ response in
             print("getPostDetailData postId = \(self.postId)")
             switch(response){
             case .success(let resultData):
                 if let data =  resultData as? PostDatailDataModel{
                     self.setPostContentView(data: data.data[0])
-                    dump(self.postData)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
