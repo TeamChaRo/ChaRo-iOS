@@ -77,9 +77,9 @@ class CommonCVC: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             
-            tagView1.widthAnchor.constraint(equalToConstant: 15 * length1),
-            tagView2.widthAnchor.constraint(equalToConstant: 15 * length2),
-            tagView3.widthAnchor.constraint(equalToConstant: 15 * length3)
+            tagView1.widthAnchor.constraint(equalToConstant: 13 * length1),
+            tagView2.widthAnchor.constraint(equalToConstant: 13 * length2),
+            tagView3.widthAnchor.constraint(equalToConstant: 13 * length3)
             
         ])
         
@@ -106,22 +106,22 @@ class CommonCVC: UICollectionViewCell {
 
     //MARK:- Function
     
-    //setData 익범이꺼
-    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
-        
-        imageView.kf.setImage(with: URL(string: image))
-        
-        titleLabel.text = title
-        tagLabel1.text = tag1
-        tagLabel2.text = tag2
-        tagLabel3.text = tag3
-        
-        setTagUI()
-        setLabelUI()
-
-        
+//    //setData 익범이꺼
+//    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
+//
+//        imageView.kf.setImage(with: URL(string: image))
+//
+//        titleLabel.text = title
+//        tagLabel1.text = tag1
+//        tagLabel2.text = tag2
+//        tagLabel3.text = tag3
+//
+//        setTagUI()
+//        setLabelUI()
+//
+//
         //킹피셔 받아서 이거 처리해야됨
-    }
+//    }
     
     
     
