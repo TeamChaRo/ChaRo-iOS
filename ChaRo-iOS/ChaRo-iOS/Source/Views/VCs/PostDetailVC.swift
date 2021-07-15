@@ -388,18 +388,11 @@ extension PostDetailVC {
         case 3:
             cell.titleView.titleLabel.text = "출발지"
             cell.setLocationText(address: addressList[0].address)
-            cell.clickCopyButton = {
-                print("출발지 실행 안됌??")
-                self.showToast(message: "출발지")
-            }
             
         case 3+addressList.count-1:
             cell.titleView.titleLabel.text = "도착지"
             cell.setLocationText(address: addressList[addressList.count-1].address)
-            cell.clickCopyButton = {
-                print("도착지 실행 안됌??")
-                self.showToast(message: "도착지")
-            }
+           
         default:
             cell.titleView.titleLabel.text = "경유지"
             if row == 4 {
@@ -408,10 +401,10 @@ extension PostDetailVC {
             if row == 5 {
                 cell.setLocationText(address: addressList[2].address)
             }
-            cell.clickCopyButton = {
-                print("경유지 실행 안됌??")
-                self.showToast(message: "경유지")
-            }
+        }
+        
+        cell.clickCopyButton = {
+            self.showToast(message: "클립보드에 복사되었습니다.")
         }
         cell.selectionStyle = .none
         return cell

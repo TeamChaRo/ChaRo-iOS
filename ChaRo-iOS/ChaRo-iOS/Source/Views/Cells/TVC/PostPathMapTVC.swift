@@ -99,9 +99,8 @@ extension PostPathMapTVC {
     
     func configureLayout(){
         
-        
-        print(tMapView.frame)
         addSubview(tMapView)
+        tMapView.layer.cornerRadius = 30
         tMapView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top).offset(20)
             $0.leading.equalTo(self.snp.leading).offset(20)
