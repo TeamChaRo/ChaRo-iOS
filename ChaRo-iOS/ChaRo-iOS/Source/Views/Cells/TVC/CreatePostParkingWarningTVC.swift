@@ -165,10 +165,6 @@ extension CreatePostParkingWarningTVC {
     @objc
     func ButtonDidTap(_ sender: UIButton){
         changeButtonStatus(tag: sender.tag)
-        
-        if sender.tag > 3 { // parking butoon select
-            parkingSelectFlag = true
-        }
     }
     
     func changeButtonStatus(tag: Int){
@@ -193,10 +189,19 @@ extension CreatePostParkingWarningTVC {
                 AvailableParking = false
                 setTapParkingButton()
             } else {
-                initParkingButton()
+                if parkingSelectFlag {
+                    initParkingButton()
+                } else { // 처음부터 없음 눌렀을 때
+                    AvailableParking = false
+                    setTapParkingButton()
+                }
             }
         default:
             print("버튼 탭 오류")
+        }
+        
+        if tag > 3 { // parking butoon select
+            parkingSelectFlag = true
         }
     }
     
