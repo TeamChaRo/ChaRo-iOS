@@ -261,7 +261,8 @@ extension HomePostVC: SetTitleDelegate {
             self.cellCount = self.postData[0].data.drive.count
             self.dropDownTableview.isHidden = true
             topCVCCell?.setTitle(data: "인기순")
-            topCVCCell?.setTitle(data: "인기순")
+            topCVCCell?.setTopTitle(name: "인기순")
+            topCVCCell?.setSelectName(name: "인기순")
         }
         
         else if cell.name == "최신순"{
@@ -270,8 +271,8 @@ extension HomePostVC: SetTitleDelegate {
             self.cellCount = self.postData[0].data.drive.count
             self.dropDownTableview.isHidden = true
             topCVCCell?.setTitle(data: "최신순")
-            topCVCCell?.setTitle(data: "최신순")
-            self.collectionView.reloadData()
+            topCVCCell?.setTopTitle(name: "최신순")
+            topCVCCell?.setSelectName(name: "최신순")
 
         }
         
