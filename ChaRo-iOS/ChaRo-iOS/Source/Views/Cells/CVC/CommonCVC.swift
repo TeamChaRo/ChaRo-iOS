@@ -50,7 +50,13 @@ class CommonCVC: UICollectionViewCell {
         setLabelUI()
     }
 
-    
+    override func prepareForReuse() {
+        if isFavorite == true {
+            heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+        } else {
+            heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+        }
+    }
     
     //MARK:- default Setting Function Part
     func setLabelUI() {

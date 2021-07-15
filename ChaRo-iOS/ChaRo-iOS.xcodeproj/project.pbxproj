@@ -125,7 +125,6 @@
 		703DD83E269F8829004416A9 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD83D269F8829004416A9 /* UserInfo.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
-		7084944F26A0AAC6001B3C2B /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084944E26A0AAC5001B3C2B /* Extension+UIViewController.swift */; };
 		70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */; };
 		70B9E1E7269DC479006DACB2 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E6269DC479006DACB2 /* LikeService.swift */; };
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
@@ -306,7 +305,6 @@
 		703DD83D269F8829004416A9 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
-		7084944E26A0AAC5001B3C2B /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDataModel.swift; sourceTree = "<group>"; };
 		70B9E1E6269DC479006DACB2 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
@@ -884,7 +882,6 @@
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
 				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
 				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
-				7084944F26A0AAC6001B3C2B /* Extension+UIViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* Extension+UITableView.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* Extension+UIColor.swift in Sources */,
 				F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */,
