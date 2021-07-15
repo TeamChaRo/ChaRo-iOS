@@ -12,7 +12,6 @@ class CreatePostParkingWarningTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostParkingWarningTVC"
     private let limitTextCount: Int = 23
-    private var parkingContent: String = ""
     private var isWarning: Bool = false {
         didSet{
             if isWarning {
@@ -24,13 +23,33 @@ class CreatePostParkingWarningTVC: UITableViewCell {
             }
         }
     }
+    private var parkingContent: String = ""  {
+        didSet{
+            _ = setParkingDesc?(self.parkingContent)
+        }
+    }
+    private var warningValue: [Bool] = [false, false, false, false] {
+        didSet{
+            _ = setWraningData?(self.warningValue)
+        }
+    }
+    public var availableParking: Bool = false {
+        didSet{
+            _ = setParkingInfo?(self.availableParking)
+        }
+    }
+    private var parkingSelectFlag: Bool = false
+    
+    // 데이터 전달 closure
+    public var setParkingInfo: ((Bool) -> Void)?
+    public var setWraningData: (([Bool]) -> Void)?
+    public var setParkingDesc: ((String) -> Void)?
     
     // MARK: UI Components
     private let parkingTitleView = PostCellTitleView(title: "주차 공간은 어땠나요?")
     private let warningTitleView = PostCellTitleView(title: "드라이브 시 주의해야 할 사항이 있으셨나요?", subTitle: "고려해야 할 사항이 있다면 선택해주세요. 선택 사항입니다.")
-    private var warningValue: [Bool] = [false, false, false, false]
-    private var AvailableParking: Bool = false
-    private var parkingSelectFlag: Bool = false
+    
+    
     
     private let parkingExistButton: UIButton = {
         let button = UIButton()
@@ -174,21 +193,21 @@ extension CreatePostParkingWarningTVC {
         case 3:
             setWarningList(peopleButton, index: 3)
         case 4:
-            if !AvailableParking {
-                AvailableParking = true
+            if !availableParking {
+                availableParking = true
                 setTapParkingButton()
             } else {
                 initParkingButton()
             }
         case 5:
-            if AvailableParking {
-                AvailableParking = false
+            if availableParking {
+                availableParking = false
                 setTapParkingButton()
             } else {
                 if parkingSelectFlag {
                     initParkingButton()
                 } else { // 처음부터 없음 눌렀을 때
-                    AvailableParking = false
+                    availableParking = false
                     setTapParkingButton()
                 }
             }
@@ -202,7 +221,7 @@ extension CreatePostParkingWarningTVC {
     }
     
     func setTapParkingButton(){
-        if AvailableParking {
+        if availableParking {
             parkingExistButton.setMainBlueBorder(8)
             parkingExistButton.setBenefitTitleColor()
             parkingExistButton.backgroundColor = .blueSelect
