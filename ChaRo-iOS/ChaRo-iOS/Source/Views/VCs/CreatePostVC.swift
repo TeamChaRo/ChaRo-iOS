@@ -73,10 +73,6 @@ class CreatePostVC: UIViewController {
         removeObservers() // 옵저버 해제
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        self.view.endEditing(true)
-    }
-    
 }
 
 // MARK: - functions
@@ -88,6 +84,7 @@ extension CreatePostVC {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dismissKeyboardWhenTappedAround()
     }
     
     func registerXibs(){
