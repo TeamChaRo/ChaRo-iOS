@@ -49,7 +49,7 @@ class MyPagePostCVC: UICollectionViewCell {
     
     func setLikeUI(){
         heartImage.image = UIImage(named: "icHeartActive")
-        saveImage.image = UIImage(named: "icSave5Active")
+        saveImage.image = UIImage(named: "icSaveActive")
         heartLabel.text = heartText
         saveLabel.text = saveText
     }

@@ -23,12 +23,12 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="kds-Zc-lX5">
-                        <rect key="frame" x="0.0" y="0.0" width="326" height="245"/>
+                        <rect key="frame" x="0.0" y="0.0" width="326" height="247"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
-                        <rect key="frame" x="0.0" y="245" width="326" height="50"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
+                        <rect key="frame" x="0.0" y="247" width="326" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="0cJ-rp-SQW"/>
+                            <constraint firstAttribute="height" constant="50" id="rXM-hI-63P"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="17"/>
                         <nil key="textColor"/>
@@ -74,7 +74,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEC-oy-FkY">
                                 <rect key="frame" x="148" y="0.0" width="70" height="17"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwB-k6-HwC">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwB-k6-HwC">
                                         <rect key="frame" x="26.5" y="2.5" width="17.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
@@ -114,7 +114,7 @@
                 <constraint firstItem="kds-Zc-lX5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kfb-YS-ErK"/>
                 <constraint firstItem="3xT-Yy-Ygg" firstAttribute="top" secondItem="kds-Zc-lX5" secondAttribute="top" id="nVy-f0-rha"/>
                 <constraint firstItem="BRj-TE-ZDO" firstAttribute="top" secondItem="kds-Zc-lX5" secondAttribute="bottom" id="rBl-ml-mIP"/>
-                <constraint firstItem="bb5-sj-Y94" firstAttribute="top" secondItem="BRj-TE-ZDO" secondAttribute="bottom" constant="2" id="sPt-tw-OfP"/>
+                <constraint firstItem="bb5-sj-Y94" firstAttribute="top" secondItem="BRj-TE-ZDO" secondAttribute="bottom" id="sPt-tw-OfP"/>
                 <constraint firstItem="3xT-Yy-Ygg" firstAttribute="trailing" secondItem="kds-Zc-lX5" secondAttribute="trailing" id="tqH-VS-O3n"/>
             </constraints>
             <size key="customSize" width="326" height="314"/>
@@ -129,6 +129,7 @@
                 <outlet property="tagView1" destination="fGZ-7n-txT" id="lyG-ss-A4T"/>
                 <outlet property="tagView2" destination="zzP-kr-qSQ" id="lxk-lB-K4O"/>
                 <outlet property="tagView3" destination="jEC-oy-FkY" id="TJd-vm-JzW"/>
+                <outlet property="titleHeight" destination="rXM-hI-63P" id="m9f-7j-CbG"/>
                 <outlet property="titleLabel" destination="BRj-TE-ZDO" id="qWB-Sg-mMy"/>
             </connections>
             <point key="canvasLocation" x="295.6521739130435" y="188.16964285714286"/>
