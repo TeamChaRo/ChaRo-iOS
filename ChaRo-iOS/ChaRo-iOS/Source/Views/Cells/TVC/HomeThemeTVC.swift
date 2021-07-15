@@ -64,6 +64,8 @@ class HomeThemeTVC: UITableViewCell {
         
     }
     
+
+    
     
     //MARK:- Function
     
@@ -99,6 +101,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         return 14
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         if section == 0 {
@@ -120,8 +123,11 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         cell?.themeImageView.layer.borderWidth = 0
         cell?.themeLabel.textColor = .mainBlack
         
-        
 
+    }
+    
+    override func prepareForReuse() {
+        
     }
     
     

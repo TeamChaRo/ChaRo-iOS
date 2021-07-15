@@ -124,6 +124,8 @@
 		703DD83E269F8829004416A9 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD83D269F8829004416A9 /* UserInfo.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
+		7084944C26A085DA001B3C2B /* ThemeTopCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084944A26A085DA001B3C2B /* ThemeTopCVC.swift */; };
+		7084944D26A085DA001B3C2B /* ThemeTopCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7084944B26A085DA001B3C2B /* ThemeTopCVC.xib */; };
 		70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */; };
 		70B9E1E7269DC479006DACB2 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E6269DC479006DACB2 /* LikeService.swift */; };
 		70D63DED2693938E0036484B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* Extension+UIImage.swift */; };
@@ -295,6 +297,8 @@
 		703DD83D269F8829004416A9 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
+		7084944A26A085DA001B3C2B /* ThemeTopCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTopCVC.swift; sourceTree = "<group>"; };
+		7084944B26A085DA001B3C2B /* ThemeTopCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeTopCVC.xib; sourceTree = "<group>"; };
 		70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDataModel.swift; sourceTree = "<group>"; };
 		70B9E1E6269DC479006DACB2 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 				3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */,
 				3CEC0114269E277A00E9332C /* OnBoardCVC.swift */,
 				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
+				7084944A26A085DA001B3C2B /* ThemeTopCVC.swift */,
+				7084944B26A085DA001B3C2B /* ThemeTopCVC.xib */,
 			);
 			path = CVC;
 			sourceTree = "<group>";
@@ -763,6 +769,7 @@
 				3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */,
 				3CEC0113269E25AB00E9332C /* OnBoard.storyboard in Resources */,
 				3C86FAB72694C7C6009370CD /* NotoSansCJKkr-Medium.otf in Resources */,
+				7084944D26A085DA001B3C2B /* ThemeTopCVC.xib in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
 				F4CC1AEA2697570A009A0C01 /* PostPathmapTCV.xib in Resources */,
@@ -915,6 +922,7 @@
 				36CEE5B8269DFA8400974EFF /* DatailDataService.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3CEC010F269E1C0700E9332C /* Contants.swift in Sources */,
+				7084944C26A085DA001B3C2B /* ThemeTopCVC.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				36B8B495269B6DB8008DC781 /* HomeDataModel.swift in Sources */,
 				3C840BF72696F08F001CAFE5 /* Extension+UIScreen.swift in Sources */,
