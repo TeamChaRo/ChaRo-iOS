@@ -9,38 +9,196 @@ import UIKit
 
 class PostDetailVC: UIViewController {
 
-    @IBOutlet weak var postDetailTableView: UITableView!
+    static let identifier = "PostDetailVC"
     
-    // MARK: - Dummy data
-    var postTitle: PostTitleDataModel = PostTitleDataModel(title: "서강준이 다녀온 응봉산 드라이브  코스,\n서강준 얼굴 말고 야경을 보여줘!",
-                                                           userName: "킹왕짱 드라이버님",
-                                                           date: "2021년 7월 4일",
-                                                           imageName: "myimage",
-                                                           likedCount: "1.8K")
+    private var isAuthor = true
+    private var isEditingMode = true
+    
+    private var tableView = UITableView()
+    private var postId: Int = 1
+    private var postData : PostDetail?
+    private var driveCell: PostDriveCourseTVC?
+    
+    
+    //MARK: UIComponent
+    private let navigationView = UIView()
+    private lazy var backButton = LeftBackButton(toPop: self)
+    private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
+                                                            color: .mainBlack)
+    
+    
+    private var modifyButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
+        return button
+    }()
+    
+    private var heartButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
+        return button
+    }()
+    
+    private var scrapButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "icSaveInactive"), for: .normal)
+        return button
+    }()
+    
+    private let saveButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("등록", for: .normal)
+        button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
+        button.setTitleColor(.mainBlue, for: .normal)
+        //button.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        return button
+    }()
+    
     
     var location: [String] = ["출발지", "경유지", "경유지", "도착지"]
     let cellFixedCount: Int = 3 // 0~2 cell은 무조건 존재
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
+        print("PostDetailVC viewDidLoad")
+        setTableViewConstraints()
+        setNavigaitionViewConstraints()
+        //self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
+    
+    public func setPostId(id: Int){
+        print("setPost PostDetailVC - \(id)")
+        postId = id
+        getPostDetailData()
     }
     
     private func configureTableView(){
         registerXibs()
-        postDetailTableView.delegate = self
-        postDetailTableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
     }
     
     private func registerXibs(){
-        postDetailTableView.registerCustomXib(xibName: PostTitleTVC.identifier)
-        postDetailTableView.registerCustomXib(xibName: PostImagesTVC.identifier)
-        postDetailTableView.registerCustomXib(xibName: PostParkingTVC.identifier)
-        postDetailTableView.registerCustomXib(xibName: PostAttentionTVC.identifier)
-        postDetailTableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
-        postDetailTableView.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
-        postDetailTableView.registerCustomXib(xibName: PostLocationTVC.identifier)
-        postDetailTableView.registerCustomXib(xibName: PostPathmapTCV.identifier)
+        tableView.registerCustomXib(xibName: PostTitleTVC.identifier)
+        tableView.registerCustomXib(xibName: PostImagesTVC.identifier)
+        tableView.registerCustomXib(xibName: PostParkingTVC.identifier)
+        tableView.registerCustomXib(xibName: PostAttentionTVC.identifier)
+        tableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
+        tableView.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
+        tableView.registerCustomXib(xibName: PostLocationTVC.identifier)
+        tableView.registerCustomXib(xibName: PostPathmapTCV.identifier)
+    }
+    
+    
+}
+
+extension PostDetailVC{
+    
+    func setTableViewConstraints(){
+        print(postData)
+        if postData != nil{
+            view.addSubview(tableView)
+            
+            tableView.snp.makeConstraints{
+                $0.top.equalTo(navigationView.snp.bottom).offset(5)
+                $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            }
+        }
+    }
+
+    
+    private func setNavigaitionViewConstraints(){
+        view.addSubview(navigationView)
+    
+        navigationView.snp.makeConstraints{
+            $0.top.leading.trailing.equalTo(view)
+            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+        }
+        navigationView.bringSubviewToFront(tableView)
+        setBasicNavigationView()
+        setShadowInNavigationView()
+        
+        if isAuthor{
+            navigationTitleLabel.text = "내가 작성한 글"
+            if isEditing{
+                setNavigationViewInSaveMode()
+            }else{
+                setNavigationViewInConfirmMode()
+            }
+        }else{
+            navigationTitleLabel.text = "구경하기"
+            setNavigationViewInWatchMode()
+        }
+    }
+    
+    func setBasicNavigationView(){
+        navigationView.addSubviews([backButton,
+                                    navigationTitleLabel])
+        
+        backButton.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
+            $0.leading.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-9)
+        }
+        
+        navigationTitleLabel.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(backButton.snp.centerY)
+        }
+        
+    }
+    
+    func setNavigationViewInSaveMode(){
+        navigationView.addSubview(saveButton)
+        saveButton.snp.makeConstraints{
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.centerY.equalTo(backButton.snp.centerY)
+        }
+    }
+    
+    func setNavigationViewInConfirmMode(){
+        navigationView.addSubview(modifyButton)
+        modifyButton.snp.makeConstraints{
+            $0.trailing.equalToSuperview().offset(-11)
+            $0.centerY.equalTo(backButton.snp.centerY)
+        }
+    }
+    
+    func setNavigationViewInWatchMode(){
+        navigationView.addSubviews([heartButton, scrapButton])
+        heartButton.snp.makeConstraints{
+            $0.trailing.equalTo(scrapButton.snp.leading)
+            $0.centerY.equalTo(backButton.snp.centerY)
+        }
+        scrapButton.snp.makeConstraints{
+            $0.trailing.equalToSuperview().offset(-11)
+            $0.centerY.equalTo(backButton.snp.centerY)
+        }
+    }
+    
+    func setShadowInNavigationView(){
+        navigationView.backgroundColor = .white
+        navigationView.layer.shadowOpacity = 0.05
+        navigationView.layer.shadowColor = UIColor.black.cgColor
+        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        navigationView.layer.shadowRadius = 6
+        navigationView.layer.masksToBounds = false
+        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
+                                                                           width: UIScreen.getDeviceWidth(),
+                                                                           height: UIScreen.getNotchHeight()+58),
+                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
     }
     
 }
@@ -107,12 +265,13 @@ extension PostDetailVC: UITableViewDataSource {
         case rowAdjustment+3:
             return getPostAttensionCell(tableView: tableView)
         case rowAdjustment+4:
-            return getPostDriveCourceCell(tableView: tableView)
+            driveCell = getPostDriveCourceCell(tableView: tableView) as? PostDriveCourseTVC
+            //return getPostDriveCourceCell(tableView: tableView)
+            return driveCell!
         default: // 경유지 일로 들어왕
             return getPostLocationCell(tableView: tableView, row: indexPath.row)
         }
     }
-
 }
 
 //MARK: - import cell funcions
@@ -121,70 +280,115 @@ extension PostDetailVC {
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: PostTitleTVC.identifier)
         as? PostTitleTVC else { return UITableViewCell() }
         
-        titleCell.setTitle(title: postTitle.title, userName: postTitle.userName, date: postTitle.date, imageName: postTitle.imageName, likedCount: postTitle.likedCount)
+        titleCell.setTitle(title: postData!.title,
+                           userName: postData!.author,
+                           date: "\(postData!.postingYear)년 \(postData!.postingMonth)월 \(postData!.postingDay)일",
+                           imageName: postData?.profileImage ?? "",
+                           likedCount: String(postData?.likesCount ?? -1))
         return titleCell
-    }
-    
-    func getPostAttensionCell(tableView: UITableView) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostAttentionTVC.identifier) as? PostAttentionTVC else { return UITableViewCell()}
-        cell.setAttentionList(list: [true,false,false,true])
-        return cell
-    }
-    
-    func getPostParkingCell(tableView: UITableView) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostParkingTVC.identifier) as? PostParkingTVC else {return UITableViewCell()}
-        
-        cell.setParkingStatus(status: true)
-        cell.setParkingExplanation(text: "100m 이내에 주차공간이 있었어요 :)")
-        cell.idEditMode(isEditing: false)
-        return cell
     }
     
     func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
-        cell.setImage(["testimage", "Mask Group", "Mask Group"])
+        
+        cell.setImage(postData!.images)
+        cell.selectionStyle = .none
         return cell
     }
     
-    func getPostDriveCourceCell(tableView: UITableView) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else {return UITableViewCell()}
-        
-        cell.setContentText(text: "안녕하세요. 이제 점점 봄이 오나봐요. 아파트 내에 목련과 개나리가 피었더라구요. 코로나19때문에 집콕하는 동안에도, 어김없이 봄과함께 벚꽃축제 시즌이 우리 곁에 왔나봅니다. 가족과 서울 금천 벚꽃 십리길에 드라이브를 갔다왔어요. 길게 뻗은 벚꽃 길의 길이가 3.7Km로 약10리에 달한다고 해요. 딸이 이 얘길 듣고 어찌나 놀라던지. 철도길과 함께 뻗은 길을 따라 드라이브 하면 흩날리는 꽃 비를 즐길 수도 있다고 하네요. 모두 봄의 내음을 듬뿍 받을 수 있는 금천 벚꽃 십리길에 다녀와보세요~:)")
-        return cell
-    }
-
     func getPostCourseThemeCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCourseThemeTVC.identifier) as? PostCourseThemeTVC else {return UITableViewCell()}
         
-        cell.setCourse(city: "서울특별시", region: "마포구")
-        cell.setTheme(theme: ["최","인정", "디자인짱"])
+        cell.setCourse(city: postData!.province, region: postData!.city)
+        cell.setTheme(theme: postData!.themes)
         cell.configureLayout()
         cell.themeButtonConfigureLayer()
         cell.bringButtonToFront()
+        cell.selectionStyle = .none
         return cell
     }
     
     func getPostLocationCell(tableView: UITableView, row: Int) -> UITableViewCell{
-        
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostLocationTVC.identifier) as? PostLocationTVC else {return UITableViewCell()}
         
         switch row {
         case 3:
             cell.titleView.titleLabel.text = "출발지"
+            cell.setTitleText(title: postData!.source)
         case 3+location.count-1:
             cell.titleView.titleLabel.text = "도착지"
+            cell.setTitleText(title: postData!.destination)
         default:
             cell.titleView.titleLabel.text = "경유지"
         }
-        
+        cell.selectionStyle = .none
         return cell
     }
     
-
     func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathmapTCV.identifier) as? PostPathmapTCV else {return UITableViewCell()}
-        
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    
+    func getPostParkingCell(tableView: UITableView) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostParkingTVC.identifier) as? PostParkingTVC else {return UITableViewCell()}
+        print(postData?.parkingDesc)
+        cell.setParkingStatus(status: postData!.isParking)
+        cell.setParkingExplanation(text: postData!.parkingDesc)
+        cell.idEditMode(isEditing: false)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func getPostAttensionCell(tableView: UITableView) -> UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostAttentionTVC.identifier) as? PostAttentionTVC else { return UITableViewCell()}
+        cell.setAttentionList(list: postData!.warnings)
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    func getPostDriveCourceCell(tableView: UITableView) -> UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else {return UITableViewCell()}
+        print(postData!.courseDesc)
+        cell.setContentText(text: postData!.courseDesc)
+        cell.selectionStyle = .none
+        return cell
+    }
+
+}
+
+
+//MARK: Network
+extension PostDetailVC {
+    func setPostContentView(data: PostDetail){
+        postData = data
+        configureTableView()
+        setTableViewConstraints()
+    }
+    
+    func getPostDetailData(){
+        PostResultService.shared.getPostDetail(postId: postId){ response in
+            print("postId = \(self.postId)")
+            switch(response){
+            case .success(let resultData):
+                if let data =  resultData as? PostDatailDataModel{
+                    self.setPostContentView(data: data.data[0])
+                    print(data.msg)
+                    dump(self.postData)
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+            
+        }
+        
     }
 }

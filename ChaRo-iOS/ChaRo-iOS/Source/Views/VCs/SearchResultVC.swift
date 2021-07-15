@@ -109,7 +109,6 @@ class SearchResultVC: UIViewController {
         dismiss(animated: false){
             tabbar.present(createTab, animated: true, completion: nil)
         }
-       
     }
     
     
