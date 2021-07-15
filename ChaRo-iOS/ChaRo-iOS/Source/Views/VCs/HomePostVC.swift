@@ -66,7 +66,6 @@ class HomePostVC: UIViewController {
         setRound()
         setNavigationLabel()
         getData()
-        getNewData()
         self.dismissDropDownWhenTappedAround()
 
         // Do any additional setup after loading the view.
