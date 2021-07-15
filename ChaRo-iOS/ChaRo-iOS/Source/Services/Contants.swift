@@ -28,6 +28,7 @@ struct Constants {
     ///4.
     static let ThemeLikeURL = baseURL + "/preview/like/jiwon0321/1?value="
     static let ThemeNewURL = baseURL + "/preview/new/jiwon0321/1?value="
+  
     static let likeURL = baseURL + "/post/like"
     
    
