@@ -13,6 +13,7 @@ class PostLocationTVC: UITableViewCell {
     
     let titleView = PostCellTitleView(title: "출발지")
     let buttonMultiplier: CGFloat = 248/42
+    public var clickCopyButton: (() -> Void)?
     
     let locationTextField: UITextField = {
         let textField = UITextField()
@@ -27,6 +28,7 @@ class PostLocationTVC: UITableViewCell {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "copy1LightVer"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: #selector(copyTextInClibBoard), for: .allTouchEvents)
         return button
     }()
     
@@ -38,8 +40,16 @@ class PostLocationTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
+    
+    @objc
+    func copyTextInClibBoard(){
+        print("복사버튼 눌림")
+        UIPasteboard.general.string = locationTextField.text
+        clickCopyButton?()
+    }
+    
     
 }
 
@@ -47,6 +57,10 @@ extension PostLocationTVC {
     
     func setTitleText(title: String){
         titleView.titleLabel.text = title
+    }
+    
+    func setLocationText(address: String){
+        locationTextField.text = address
     }
     
     func configureLayout(){
@@ -62,12 +76,13 @@ extension PostLocationTVC {
         locationTextField.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.titleView.snp.trailing).offset(3)
+            $0.trailing.equalTo(copyButton.snp.leading).offset(-1)
             $0.bottom.equalTo(self.snp.bottom).inset(8)
         }
         
         copyButton.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
-            $0.leading.equalTo(self.locationTextField.snp.trailing)
+            //$0.leading.equalTo(self.locationTextField.snp.trailing)
             $0.bottom.equalTo(self.snp.bottom).inset(8)
             $0.trailing.equalTo(self.snp.trailing).inset(6)
         }
