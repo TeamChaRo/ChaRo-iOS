@@ -4,13 +4,6 @@
 //
 //  Created by 박익범 on 2021/07/01.
 //
-//
-//let banner: [Banner]
-//let todayCharoDrive, trendDrive: [Drive]
-//let customThemeTitle: String
-//let customThemeDrive: [Drive]
-//let localTitle: String
-//let localDrive: [Drive]
 
 import UIKit
 
@@ -23,6 +16,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
     
     var isFirstSetData: Bool = true
+    
     
     ///배너 데이타
     var bannerData: [Banner] = []
@@ -37,6 +31,10 @@ class HomeVC: UIViewController {
     
     var tableIndex: IndexPath = [0,0]
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +66,7 @@ class HomeVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? HomeDataModel {
-                    
+                    DispatchQueue.global().sync {
                         let data = response.data
                         
                     //배너 타이틀
@@ -98,11 +96,9 @@ class HomeVC: UIViewController {
                         self.localData = local
                         self.localText = data.localTitle
                     }
-                    
-                    DispatchQueue.main.async {
-                        print("리로드")
-                        self.HomeTableView.reloadData()
+
                     }
+                    self.HomeTableView.reloadData()
                    
                 }
             case .requestErr(let message) :
@@ -159,7 +155,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         let homeBannerRatio: CGFloat = 0.65
         
         switch indextPath.row {
-    
         case 0:
             return UIScreen.main.bounds.height * homeBannerRatio
         case 1:
@@ -238,7 +233,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈리다 ....
                 if isFirstSetData {
                     for i in 0 ... 3 {
-//                        cell.setData(imageName: bannerData[i].bannerImage, title: bannerData[i].bannerTitle, tag: bannerData[i].bannerTag)
                         cell.setBannerList(inputList: bannerData)
                     }
                     isFirstSetData = false
@@ -259,28 +253,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             }
             else {
                 cell.todayDriveList = todayData
-//                for image in todayData{
-//                    cell.imageNameText.append(image.image)
-//                }
-//                for title in todayData{
-//                    cell.titleText.append(title.title)
-//                }
-//                //해 쉬 태 그
-//                cell.hashTagText1 = todayData[0].tags
-//                cell.hashTagText2 = todayData[1].tags
-//                cell.hashTagText3 = todayData[2].tags
-//                cell.hashTagText4 = todayData[3].tags
-//
-//            //heart
-//                for heart in todayData{
-//                    cell.heart.append(heart.isFavorite)
-//                }
-//
-//
-//                //MARK: - 물어보기
-//                for id in todayData {
-//                    cell.postID.append(id.postID)
-//                }
+
                 
             return cell
             
@@ -307,22 +280,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             }
             else {
                 cell.trendyDriveList = trendyData
-//                for image in trendyData{
-//                    cell.imageNameText.append(image.image)
-//                }
-//                for title in trendyData{
-//                    cell.titleText.append(title.title)
-//                }
-//                //해 쉬 태 그
-//                cell.hashTagText1 = todayData[0].tags
-//                cell.hashTagText2 = todayData[1].tags
-//                cell.hashTagText3 = todayData[2].tags
-//                cell.hashTagText4 = todayData[3].tags
-//
-//            //heart
-//                for heart in trendyData{
-//                    cell.heart.append(heart.isFavorite)
-//                }
+
                 
             return cell
                 
@@ -346,22 +304,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             else {
                 cell.customList = customData
                 
-                //MARK: - 이건 어디서 하고 있는 거주ㅣ?
-//                for image in customData{
-//                    cell.imageNameText.append(image.image)
-//                }
-//                for title in customData{
-//                    cell.titleText.append(title.title)
-//                }
-//                //해 쉬 태 그
-//                cell.hashTagText1 = todayData[0].tags
-//                cell.hashTagText2 = todayData[1].tags
-//                cell.hashTagText3 = todayData[2].tags
-//                cell.hashTagText4 = todayData[3].tags
-//            //heart
-//                for heart in customData{
-//                    cell.heart.append(heart.isFavorite)
-//                }
             return cell
                 
             }
@@ -377,27 +319,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             cell.headerText = localText
             
             cell.LocelList = localData
-
-            
-//            if localData.count == 0 {
-//                return cell
-//            }
-//            else {
-//                for image in localData{
-//                    cell.imageNameText.append(image.image)
-//                }
-//                for title in localData{
-//                    cell.titleText.append(title.title)
-//                }
-//                //해 쉬 태 그
-//                cell.hashTagText1 = todayData[0].tags
-//                cell.hashTagText2 = todayData[1].tags
-//                cell.hashTagText3 = todayData[2].tags
-//                cell.hashTagText4 = todayData[3].tags
-//            //heart
-//                for heart in localData{
-//                    cell.heart.append(heart.isFavorite)
-//                }
             
             return cell
         

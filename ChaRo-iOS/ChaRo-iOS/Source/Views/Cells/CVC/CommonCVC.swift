@@ -26,6 +26,7 @@ class CommonCVC: UICollectionViewCell {
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
   
+    @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var heartButton: UIButton!
     
 
@@ -128,6 +129,10 @@ class CommonCVC: UICollectionViewCell {
     //setData 지원이꺼
     func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
         
+        tagLabel1.text = ""
+        tagLabel2.text = ""
+        tagLabel3.text = ""
+        
         //이미지 설정
         guard let url = URL(string: image) else { return }
         self.imageView.kf.setImage(with: url)
@@ -137,6 +142,12 @@ class CommonCVC: UICollectionViewCell {
         
         //제목 설정
         self.titleLabel.text = title
+        if titleLabel.numberOfLines == 2{
+            titleHeight.constant == 25
+        }
+        else{
+            titleHeight.constant = 50
+        }
         
         //하트 설정
         self.isFavorite = isFavorite
@@ -159,7 +170,6 @@ class CommonCVC: UICollectionViewCell {
     
     func likeAction()
     {
-        //일단 userId 111로 박아놈
         LikeService.shared.Like(userId: "jieun1211", postId: self.postID) { [self] result in
             
             switch result

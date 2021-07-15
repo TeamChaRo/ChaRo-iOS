@@ -330,12 +330,12 @@ extension SearchResultVC{
             switch(response){
             case .success(let resultData):
                 if let data =  resultData as? DetailModel{
+                    DispatchQueue.global().sync {
                     self.refinePostResultData(data: data.data, type: type)
                     self.postCount = data.data.totalCourse
-                    print(self.postData)
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
                     }
+                    print(self.postData)
+                        self.collectionView.reloadData()
                 }
             case .requestErr(let message):
                 print("requestErr", message)

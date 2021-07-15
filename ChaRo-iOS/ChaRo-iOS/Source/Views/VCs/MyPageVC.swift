@@ -45,6 +45,7 @@ class MyPageVC: UIViewController {
         customTabbarInit()
         setDropDown()
         getData()
+        self.dismissDropDownWhenTappedAround()
 
         // Do any additional setup after loading the view.
     }
@@ -125,15 +126,13 @@ class MyPageVC: UIViewController {
                 if let response = data as? MyPageDataModel{
                     self.LikePostData = [response]
 
-                    DispatchQueue.main.async {
-                        if self.LikePostData.count > 0{
-                            self.myCellCount = self.LikePostData[0].data.writtenPost.count
-                            self.saveCellCount = self.LikePostData[0].data.savedPost.count
-                            self.setHeaderView()
-                            self.myTableCollectionView.reloadData()
-                            self.saveTableCollectionView.reloadData()
-                        }
+                    DispatchQueue.global().sync {
+                        self.myCellCount = self.LikePostData[0].data.writtenPost.count
+                        self.saveCellCount = self.LikePostData[0].data.savedPost.count
+                        self.setHeaderView()
                     }
+                    self.myTableCollectionView.reloadData()
+                    self.saveTableCollectionView.reloadData()
                 }
             case .requestErr(let message) :
                 print("requestERR")
@@ -381,4 +380,18 @@ extension MyPageVC: SetTitleDelegate {
         
     }
     
+}
+
+extension MyPageVC{
+
+func dismissDropDownWhenTappedAround() {
+        let tap: UITapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissDropDown() {
+        self.dropDownTableView.isHidden = true
+    }
 }
