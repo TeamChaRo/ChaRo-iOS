@@ -32,6 +32,7 @@
 		36B8B495269B6DB8008DC781 /* HomeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B8B494269B6DB8008DC781 /* HomeDataModel.swift */; };
 		36B8B497269B6E03008DC781 /* HomeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B8B496269B6E03008DC781 /* HomeDataService.swift */; };
 		36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BBD928268DE94F008D8AD3 /* HomeVC.swift */; };
+		36C1C33126A0C28500F34750 /* SavePostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1C33026A0C28500F34750 /* SavePostService.swift */; };
 		36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CACA1D2698F3CF007E02CA /* ThemePostDetailTVC.swift */; };
 		36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36CACA1E2698F3CF007E02CA /* ThemePostDetailTVC.xib */; };
 		36CEE5B6269DF9A900974EFF /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CEE5B5269DF9A900974EFF /* DetailModel.swift */; };
@@ -209,6 +210,7 @@
 		36B8B494269B6DB8008DC781 /* HomeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataModel.swift; sourceTree = "<group>"; };
 		36B8B496269B6E03008DC781 /* HomeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataService.swift; sourceTree = "<group>"; };
 		36BBD928268DE94F008D8AD3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		36C1C33026A0C28500F34750 /* SavePostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePostService.swift; sourceTree = "<group>"; };
 		36CACA1D2698F3CF007E02CA /* ThemePostDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostDetailTVC.swift; sourceTree = "<group>"; };
 		36CACA1E2698F3CF007E02CA /* ThemePostDetailTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostDetailTVC.xib; sourceTree = "<group>"; };
 		36CEE5B5269DF9A900974EFF /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				362BC9F8269ED39A008EF625 /* MyPageDataService.swift */,
 				3C706798269ECE8C0082C852 /* PostResultService.swift */,
 				703DD83B269F867D004416A9 /* LoginService.swift */,
+				36C1C33026A0C28500F34750 /* SavePostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -555,11 +558,11 @@
 				36012A492694D557007F4633 /* HomePost.storyboard */,
 				3C86FA8E2694C7C6009370CD /* Home.storyboard */,
 				3C86FA8F2694C7C6009370CD /* LaunchScreen.storyboard */,
-				3C86FA912694C7C6009370CD /* Main.storyboard */,
 				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
 				3C86FA942694C7C6009370CD /* Tabbar.storyboard */,
 				3C86FAC62694DFC6009370CD /* SearchKeyword.storyboard */,
 				3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */,
+				3C86FA912694C7C6009370CD /* Main.storyboard */,
 				3C7DF0F8269AEE910021939C /* SearchResult.storyboard */,
 				70D63E262694E2AA0036484B /* ThemePost.storyboard */,
 				360937A32699E52F005392BB /* MyPage.storyboard */,
@@ -947,6 +950,7 @@
 				70B9E1E7269DC479006DACB2 /* LikeService.swift in Sources */,
 				703DD83E269F8829004416A9 /* UserInfo.swift in Sources */,
 				703DD832269F3B19004416A9 /* LoginVC.swift in Sources */,
+				36C1C33126A0C28500F34750 /* SavePostService.swift in Sources */,
 				36B8B497269B6E03008DC781 /* HomeDataService.swift in Sources */,
 				36CEE5B8269DFA8400974EFF /* DatailDataService.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
