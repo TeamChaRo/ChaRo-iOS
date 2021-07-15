@@ -332,21 +332,10 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 }
 extension HomeVC : IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
-        guard let HomePostVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
         print(tableIndex.row)
         
-        switch tableIndex.row {
-        case 3:
-            HomePostVC.topText = "요즘 뜨는 드라이브 코스"
-        case 4:
-            HomePostVC.topText = customText
-        case 5:
-            HomePostVC.topText = localText
-        default:
-           print("Error")
-        }
-        self.navigationController?.pushViewController(HomePostVC, animated: true)
+       
     }
 }
 
