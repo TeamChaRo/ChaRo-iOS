@@ -71,11 +71,7 @@ class HomePostVC: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
 
-    }
- 
     @IBAction func backButtonClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -88,16 +84,11 @@ class HomePostVC: UIViewController {
                 if let response = data as? DetailModel{
                     
                     DispatchQueue.global().sync {
-                        self.postCount = response.data.drive.count
+                        self.postCount = response.data.totalCourse
                         self.postData = [response]
                     }
                     self.collectionView.reloadData()
-                    
-//                    DispatchQueue.main.async {
-//                        if self.postData.count > 0{
-//                            self.collectionView.reloadData()
-//                        }
-//                    }
+            
                 }
             case .requestErr(let message) :
                 print("requestERR")
@@ -117,10 +108,12 @@ class HomePostVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? DetailModel{
+                    
                     DispatchQueue.global().sync {
                         self.postCount = response.data.drive.count
-                    self.newPostData = [response]
+                    self.postData = [response]
                     }
+                    
                     self.collectionView.reloadData()
                 }
             case .requestErr(let message) :
@@ -159,8 +152,8 @@ extension HomePostVC: UICollectionViewDelegate{
                 isFirstLoaded = false
                 topCVCCell = topCell
             }
-//            topCVCCell!.setLabel()
-//            topCVCCell?.postCount = postCount
+            topCVCCell!.setLabel()
+            topCVCCell?.postCount = postCount
             return topCVCCell!
         default:
             if postData.count == 0{
