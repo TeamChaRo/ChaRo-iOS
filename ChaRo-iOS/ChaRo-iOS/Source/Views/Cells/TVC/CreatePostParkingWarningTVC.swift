@@ -15,9 +15,13 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     // MARK: UI Components
     private let parkingTitleView = PostCellTitleView(title: "주차 공간은 어땠나요?")
     private let warningTitleView = PostCellTitleView(title: "드라이브 시 주의해야 할 사항이 있으셨나요?", subTitle: "고려해야 할 사항이 있다면 선택해주세요. 선택 사항입니다.")
+    private var warningValue: [Bool] = [false, false, false, false]
+    private var AvailableParking: Bool = false
+    private var parkingSelectFlag: Bool = false
     
     private let parkingExistButton: UIButton = {
         let button = UIButton()
+        button.tag = 4
         button.setTitle("있음", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.titleLabel?.textAlignment = .center
@@ -28,6 +32,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     
     private let parkingNonExistButton: UIButton = {
         let button = UIButton()
+        button.tag = 5
         button.setTitle("없음", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.titleLabel?.textAlignment = .center
@@ -49,6 +54,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     
     private let highwayButton: UIButton = {
         let button = UIButton()
+        button.tag = 0
         button.setTitle("고속도로", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.setEmptyTitleColor(colorNum: 40)
@@ -58,6 +64,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     
     private let mountainButton: UIButton = {
         let button = UIButton()
+        button.tag = 1
         button.setTitle("산길포함", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.setEmptyTitleColor(colorNum: 40)
@@ -67,6 +74,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     
     private let beginnerButton: UIButton = {
         let button = UIButton()
+        button.tag = 2
         button.setTitle("초보힘듦", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.setEmptyTitleColor(colorNum: 40)
@@ -76,6 +84,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     
     private let peopleButton: UIButton = {
         let button = UIButton()
+        button.tag = 3
         button.setTitle("사람많음", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.setEmptyTitleColor(colorNum: 40)
@@ -86,6 +95,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
+        setButtonActions()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -101,6 +111,109 @@ class CreatePostParkingWarningTVC: UITableViewCell {
 
 
 extension CreatePostParkingWarningTVC {
+    
+    //MARK: - Button Actions
+    func setButtonActions(){
+        
+        
+        parkingExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        parkingNonExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        highwayButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        mountainButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        beginnerButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        peopleButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc
+    func ButtonDidTap(_ sender: UIButton){
+        changeButtonStatus(tag: sender.tag)
+        
+        if sender.tag > 3 { // parking butoon select
+            parkingSelectFlag = true
+        }
+    }
+    
+    func changeButtonStatus(tag: Int){
+        switch tag {
+        case 0:
+            setWarningList(highwayButton, index: 0)
+        case 1:
+            setWarningList(mountainButton, index: 1)
+        case 2:
+            setWarningList(beginnerButton, index: 2)
+        case 3:
+            setWarningList(peopleButton, index: 3)
+        case 4:
+            if !AvailableParking {
+                AvailableParking = true
+                setTapParkingButton()
+            } else {
+                initParkingButton()
+            }
+        case 5:
+            if AvailableParking {
+                AvailableParking = false
+                setTapParkingButton()
+            } else {
+                initParkingButton()
+            }
+        default:
+            print("버튼 탭 오류")
+        }
+    }
+    
+    func setTapParkingButton(){
+        if AvailableParking {
+            parkingExistButton.setMainBlueBorder(8)
+            parkingExistButton.setBenefitTitleColor()
+            parkingExistButton.backgroundColor = .blueSelect
+            
+            parkingNonExistButton.setGray20Border(8)
+            parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
+            parkingNonExistButton.backgroundColor = .clear
+        } else {
+            parkingNonExistButton.setMainBlueBorder(8)
+            parkingNonExistButton.setBenefitTitleColor()
+            parkingNonExistButton.backgroundColor = .blueSelect
+            
+            parkingExistButton.setGray20Border(8)
+            parkingExistButton.setEmptyTitleColor(colorNum: 40)
+            parkingExistButton.backgroundColor = .clear
+        }
+    }
+    
+    func initParkingButton(){
+        parkingExistButton.setGray20Border(8)
+        parkingExistButton.setEmptyTitleColor(colorNum: 40)
+        parkingExistButton.backgroundColor = .clear
+        parkingNonExistButton.setGray20Border(8)
+        parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
+        parkingNonExistButton.backgroundColor = .clear
+    }
+    
+    func setWarningList(_ button: UIButton, index: Int){
+        if warningValue[index] { // true 일 때
+            warningValue[index] = false
+        } else {
+            warningValue[index] = true
+        }
+        
+        setWarningButtonUI(button, warningValue[index])
+    }
+    
+    func setWarningButtonUI(_ button: UIButton,_ value: Bool){
+        // warning value에 맞춰서 색상 업데이트
+        if value {
+            button.setMainBlueBorder(21)
+            button.setBenefitTitleColor()
+            button.backgroundColor = .blueSelect
+        } else {
+            button.setGray20Border(21)
+            button.setEmptyTitleColor(colorNum: 40)
+            button.backgroundColor = .clear
+        }
+    }
+    
     //MARK: - UI Layout
     func configureLayout(){
         addSubviews([parkingTitleView, parkingExistButton, parkingNonExistButton, parkingDescTextField])
