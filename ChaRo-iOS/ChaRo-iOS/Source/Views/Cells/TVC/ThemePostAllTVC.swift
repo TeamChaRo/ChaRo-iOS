@@ -47,6 +47,7 @@ class ThemePostAllTVC: UITableViewCell {
     }
     
     //MARK:- default Setting Function Part
+    
     func setCellCount(num: Int) {
         cellCount = num
     }
@@ -59,7 +60,7 @@ class ThemePostAllTVC: UITableViewCell {
 extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -93,7 +94,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
         let postid = cell!.postID
         postDelegate?.sendPostID(data: postid)
-        
         
     }
     
