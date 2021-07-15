@@ -196,6 +196,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             }
             
             cell.delegate = self
+            cell.themeDelegate = self
             
             return cell
             
@@ -325,4 +326,14 @@ extension ThemePostVC: PostIdDelegate {
         print(data)
     }
     
+}
+
+
+extension ThemePostVC: SetThemeUpdateDelegate {
+    
+    func updateThemeData(filter: Filter) {
+        getThemeData(theme: selectedTheme, filter: filter)
+        print(selectedDriveList)
+    }
+
 }

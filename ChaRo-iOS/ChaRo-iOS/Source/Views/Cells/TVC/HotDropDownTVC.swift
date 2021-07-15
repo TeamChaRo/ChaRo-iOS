@@ -11,12 +11,17 @@ protocol SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC)
 }
 
+protocol SetThemeUpdateDelegate {
+    func updateThemeData(filter: Filter)
+}
+
 
 class HotDropDownTVC: UITableViewCell {
 
     @IBOutlet weak var hotLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
-    var delegate : SetTitleDelegate?
+    var delegate: SetTitleDelegate?
+    var themeDelegate: SetThemeUpdateDelegate?
     var name: String = "인기순"
     static let identifier: String = "HotDropDownTVC"
     
@@ -34,6 +39,7 @@ class HotDropDownTVC: UITableViewCell {
         hotLabel.text = name
         self.name = name
     }
+    
     func setSelectedCell(){
         hotLabel.textColor = UIColor.mainBlue
         checkImage.isHidden = false
@@ -42,9 +48,17 @@ class HotDropDownTVC: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        if selected == true{
+        if selected == true {
             setSelectedCell()
             delegate?.setTitle(cell: self)
+            
+            print(name)
+            if name == "최신순" {
+                themeDelegate?.updateThemeData(filter: .new)
+            } else {
+                themeDelegate?.updateThemeData(filter: .like)
+            }
+            
         }
         else {
             setLabel()

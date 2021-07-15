@@ -47,6 +47,7 @@ class ThemePostAllTVC: UITableViewCell {
     }
     
     //MARK:- default Setting Function Part
+    
     func setCellCount(num: Int) {
         cellCount = num
     }
@@ -93,7 +94,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
         let postid = cell!.postID
         postDelegate?.sendPostID(data: postid)
-        
         
     }
     
