@@ -141,6 +141,12 @@ class HomeVC: UIViewController {
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true, completion: nil)
     }
+    @IBAction func notificationButtonClicked(_ sender: Any) {
+        
+        guard let notiVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(identifier: "NotificationVC") as? NotificationVC else {return}
+        
+        self.navigationController?.pushViewController(notiVC, animated: true)
+    }
     
 
 }
