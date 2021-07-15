@@ -19,5 +19,17 @@ extension UITextField{
         self.rightView = paddingView
         self.rightViewMode = .always
     }
+    
+    func setGray20Border(_ radius: CGFloat) {
+        self.layer.borderColor = UIColor.gray20.cgColor
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = radius
+    }
+    
+    func setMainBlueBorder(_ radius: CGFloat) {
+        self.layer.borderColor = UIColor.mainBlue.cgColor
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = radius
+    }
 
 }
