@@ -121,14 +121,14 @@ extension CreatePostVC {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: .callPhotoPicker, object: nil)
     }
-
-    func setKeyboardObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
     
     @objc
     func textFieldMoveUp(_ notification: NSNotification){
+        
+        print("tableView.frame.height = \(tableView.frame.height)")
+        print("tableView.bounds.height = \(tableView.bounds.height)")
+        print(notification.object.debugDescription)
+        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
                 self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
