@@ -172,8 +172,7 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.frame.width / 2 - 20
-        let size = CGSize(width: width, height: 250)
+        let size = CGSize(width: 160, height: 230)
         
         //이거 사이즈를 11pro, se2 - 250 딱맞고 se1 에서 - 230이 딱맞고
         //해상도 따라 해주기
@@ -183,7 +182,15 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
     }
     
     

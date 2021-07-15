@@ -52,7 +52,6 @@ class HotDropDownTVC: UITableViewCell {
             setSelectedCell()
             delegate?.setTitle(cell: self)
             
-            print(name)
             if name == "최신순" {
                 themeDelegate?.updateThemeData(filter: .new)
             } else {

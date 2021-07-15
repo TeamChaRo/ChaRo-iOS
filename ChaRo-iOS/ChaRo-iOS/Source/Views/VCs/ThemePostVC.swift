@@ -218,18 +218,18 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 
             case 1:
                 let cell: ThemePostDetailTVC = tableView.dequeueReusableCell(for: indexPath)
-                
+
                 //첫 텍스트 설정
                 cell.delegate = self
                 if isFirstLoaded {
                     isFirstLoaded = false
                     topTVCCell = cell
                 }
-                
+
                 cell.selectionStyle = .none
                 cell.setPostCount(data: cellCount)
                 cell.setLabel()
-                
+
                 return cell
                 
             case 2:
