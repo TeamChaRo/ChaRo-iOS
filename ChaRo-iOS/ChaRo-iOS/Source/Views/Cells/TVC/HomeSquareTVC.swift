@@ -178,16 +178,22 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         //일단요 ... 고정..
-        let width = collectionView.frame.width / 2 - 20
-        let size = CGSize(width: width, height: 250)
+        //let width = UIScreen.main.bounds.width / 2 - 30
+        let size = CGSize(width: 160, height: 230)
         
         return size
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
+    }
 }

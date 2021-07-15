@@ -12,21 +12,22 @@ struct Constants {
     // MARK: - BASE URL
     static let baseURL = "http://3.139.62.132:5000"
     
+    static let loginURL = baseURL + "/sign/signIn"
+    
     // MARK: - Feature URL
     ///1. 홈 데이터 URL 여기에 + 유저 아이디(111,222,333) 해줘야 함 // 일단은 111로 해놓을겡~!
-    static let HomeURL = baseURL + "/getMain/jieun1211"
+    static let HomeURL = baseURL + "/getMain/jiwon0321"
     static let CreatePostURL = baseURL + "/writePost"
     
     ///2. 더보기 뷰 URL
-    static let detailURL = baseURL + "/preview/like/jieun1211/"
+    static let detailURL = baseURL + "/preview/like/jiwon0321/"
     
     ///3.더보기 최신순 URL
-    static let newDetailURL = baseURL + "preview/new/jieun1211/"
+    static let newDetailURL = baseURL + "preview/new/jiwon0321/"
     
     ///4.
-    static let ThemeLikeURL = baseURL + "/preview/like/jieun1211/1?value="
-    static let ThemeNewURL = baseURL + "/preview/new/jieun1211/1?value="
-    static let ThemeURL = baseURL + "/preview/like/jieun1211/1?value="
+    static let ThemeLikeURL = baseURL + "/preview/like/jiwon0321/1?value="
+    static let ThemeNewURL = baseURL + "/preview/new/jiwon0321/1?value="
     static let likeURL = baseURL + "/post/like"
     
    
