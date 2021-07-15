@@ -57,27 +57,21 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
-        
     }
     
     
-    func loginAction()
-        {
+    func loginAction(){
+            
             LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
                 
                 switch result
                 {
-                case .success(let message):
+                case .success(let data):
                     print("여기까진..")
-                    print(message)
-                    if let message = message as? UserData {
-                        //as? UserData {
-                        print(message)
+            
+                    if let userData = data as? LoginDataModel {
+                        dump(userData)
                         
-                        //guard let nextVC = else { return }
-//                        print(UserInfo.shared.id)
-//                        print(UserInfo.shared.nickname)
-//                        print(UserInfo.shared.token)
                     }
                     
                 case .requestErr(let message):
