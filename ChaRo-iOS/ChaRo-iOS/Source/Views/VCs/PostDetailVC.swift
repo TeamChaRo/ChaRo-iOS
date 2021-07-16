@@ -14,7 +14,6 @@ class PostDetailVC: UIViewController {
     private var isAuthor = false
     private var isEditingMode = false
     
-    
     private var tableView = UITableView()
     private var postId: Int = -1
     private var postData : PostDetail?
@@ -93,7 +92,6 @@ class PostDetailVC: UIViewController {
         checkModeForSendingServer()
         
         print("PostDetailVC viewDidLoad")
-        setNavigaitionViewConstraints()
         setTableViewConstraints()
     }
     
@@ -111,7 +109,6 @@ class PostDetailVC: UIViewController {
     public func setPostMode(isAuthor: Bool, isEditing: Bool){
         self.isAuthor = isAuthor
         self.isEditingMode = isEditing
-        
     }
     
     public func setPostId(id: Int){
@@ -131,7 +128,7 @@ class PostDetailVC: UIViewController {
         let sendedPostDate = PostDetail(title: data.title,
                                   author: Constants.userId,
                                   isAuthor: true,
-                                  profileImage: "",
+                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
                                   postingYear: Date.getCurrentYear(),
                                   postingMonth: Date.getCurrentMonth(),
                                   postingDay: Date.getCurrentDay(),
@@ -174,6 +171,7 @@ class PostDetailVC: UIViewController {
             print("postData = \(postData)")
             print("addressList = \(addressList)")
             print("isAuthor = \(isAuthor)")
+            setNavigaitionViewConstraints()
             configureTableView()
         }else{
             print("그냥 구경하러 왔음")
@@ -588,10 +586,14 @@ extension PostDetailVC {
     func setPostContentView(data: PostDetail){
         postData = data
         isAuthor = postData!.isAuthor
+        print("----------------------------------")
+        print("isAuthor = \(isAuthor)")
+        print("----------------------------------")
         isFavorite = postData!.isFavorite
         isStored = postData!.isStored
         refineAddressData()
         configureTableView()
+        setNavigaitionViewConstraints()
         setTableViewConstraints()
     }
     
