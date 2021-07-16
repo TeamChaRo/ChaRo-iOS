@@ -17,7 +17,7 @@ struct SaveService {
                 "postId" : postId ]
     }
     
-    func Like(userId : String,
+    func requestScrapPost(userId : String,
               postId : Int,
               completion : @escaping (NetworkResult<Any>) -> Void)
     {
