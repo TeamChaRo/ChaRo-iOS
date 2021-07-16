@@ -11,10 +11,13 @@ class LoginVC: UIViewController {
 
     //MARK: IBOutlet
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
+    
     
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
     
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     static let identifier = "LoginVC"
     
@@ -24,41 +27,34 @@ class LoginVC: UIViewController {
         imageView.image = UIImage(named: "maskGroup")
         return imageView
     }()
-    
+
     private let idBackground: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "idBackground")
         return imageView
     }()
-    
+
     private let pwdBackground: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "pwdBackground")
         return imageView
     }()
-//
-//    private let idTextField: UITextField = {
-//        let textField = UITextField()
-//        return textField
-//    }()
-//
-//    private let pwdTextField: UITextField = {
-//        let textField = UITextField()
-//        return textField
-//    }()
-//
-
-    private let joinButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
+        setLoginButtonUI()
     }
     
+    func setLoginButtonUI() {
+        loginButton.layer.cornerRadius = 8
+        loginButton.tintColor = .mainBlue
+        
+        joinButton.setTitleColor(.gray30, for: .normal)
+        
+    }
     
     func loginAction(){
             
@@ -98,6 +94,12 @@ class LoginVC: UIViewController {
         loginAction()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          self.view.endEditing(true)
+    }
+    
+
+    
 }
 
 extension LoginVC {
@@ -105,6 +107,8 @@ extension LoginVC {
 
         let factor = UIScreen.main.bounds.width / 375
 
+        heightConstraint.constant = factor * 464
+        
         view.addSubview(CharoimageView)
         view.addSubview(idBackground)
         view.addSubview(pwdBackground)

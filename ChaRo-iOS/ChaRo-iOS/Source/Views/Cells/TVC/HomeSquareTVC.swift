@@ -135,51 +135,23 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
                          ,tagArr: element.tags
                          ,isFavorite: element.isFavorite
                          ,postID: element.postID)
-          
-//            switch indexPath.row {
-//            case 0:
-//                if hashTagText1.count == 2{
-//                    hashTagText1.append("")
-//                }
-//                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
-//            case 1:
-//                if hashTagText2.count == 2{
-//                    hashTagText2.append("")
-//                }
-//                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
-//            case 2:
-//                if hashTagText3.count == 2{
-//                    hashTagText3.append("")
-//                }
-//                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
-//            case 3:
-//                if hashTagText4.count == 2{
-//                    hashTagText4.append("")
-//                }
-//                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
-//            default:
-//                print("Error")
-//            }
-//            return cellList[indexPath.row]
+
             
             return cell
             
         }
-//
-//        cell.callback = {
-//            print("button pressed", indexPath.row)
-//            }
+
         return cell
         
     }
     
-    
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        //일단요 ... 고정..
-        //let width = UIScreen.main.bounds.width / 2 - 30
-        let size = CGSize(width: 160, height: 230)
+        let factor = UIScreen.main.bounds.width / 375
+        
+        let size = CGSize(width: 160 * factor, height: 230 * factor)
         
         return size
     }
