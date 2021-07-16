@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Lottie
 
 class MyPageVC: UIViewController {
     @IBOutlet weak var headerView: UIView!
@@ -37,16 +37,32 @@ class MyPageVC: UIViewController {
     var saveCellIsFirstLoaded: Bool = true
     
     var delegate: SetTopTitleDelegate?
+
+    
+    lazy var lottieView : AnimationView = {
+           let animationView = AnimationView(name: "loading")
+           animationView.frame = CGRect(x: 0, y: 0,
+                                        width: 200 , height: 200)
+           animationView.center = self.view.center
+           animationView.contentMode = .scaleAspectFill
+           animationView.stop()
+           animationView.isHidden = true
+       
+           
+           return animationView
+       }()
+       
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setCircleLayout()
         setCollectionView()
         customTabbarInit()
         setDropDown()
         getData()
         self.dismissDropDownWhenTappedAround()
-
+        self.view.addSubview(lottieView)
         // Do any additional setup after loading the view.
     }
     
@@ -125,8 +141,6 @@ class MyPageVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? MyPageDataModel{
-                    
-
                     DispatchQueue.global().sync {
                         self.LikePostData = [response]
                         self.myCellCount = self.LikePostData[0].data.writtenTotal
@@ -195,7 +209,6 @@ extension MyPageVC: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let myCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "MyPagePostCVC", for: indexPath) as? MyPagePostCVC else {return UICollectionViewCell()}
         guard let detailCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         

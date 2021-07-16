@@ -46,7 +46,6 @@ class HomeVC: UIViewController {
         setTableView()
         setHomeNavigationViewLayout()
         setActionToSearchButton()
-        
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
