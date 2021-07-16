@@ -56,7 +56,7 @@
                                         </constraints>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QU8-aY-KNz">
-                                        <rect key="frame" x="124" y="113" width="49" height="27"/>
+                                        <rect key="frame" x="124" y="123" width="49" height="27"/>
                                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -115,14 +115,14 @@
                                 <color key="backgroundColor" red="0.058823529411764705" green="0.43529411764705883" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="pke-ag-0QV" firstAttribute="leading" secondItem="Bkr-2h-Tuo" secondAttribute="trailing" constant="-60" id="9qU-wB-Ymu"/>
-                                    <constraint firstItem="QU8-aY-KNz" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="top" constant="113" id="A8Q-LK-1sl"/>
                                     <constraint firstItem="dzp-dE-G6y" firstAttribute="leading" secondItem="X1z-4M-rqe" secondAttribute="leading" constant="50" id="FRX-SW-vH6"/>
                                     <constraint firstAttribute="bottom" secondItem="pke-ag-0QV" secondAttribute="bottom" constant="20" id="LQg-nd-10Y"/>
                                     <constraint firstItem="Bkr-2h-Tuo" firstAttribute="bottom" secondItem="pke-ag-0QV" secondAttribute="bottom" id="Ned-lP-KC1"/>
-                                    <constraint firstItem="0H7-eJ-w7q" firstAttribute="top" secondItem="QU8-aY-KNz" secondAttribute="bottom" constant="10" id="QSc-TE-Ila"/>
+                                    <constraint firstItem="0H7-eJ-w7q" firstAttribute="top" secondItem="QU8-aY-KNz" secondAttribute="bottom" id="QSc-TE-Ila"/>
                                     <constraint firstItem="pke-ag-0QV" firstAttribute="leading" secondItem="X1z-4M-rqe" secondAttribute="leading" constant="20" id="Qvz-0y-fRf"/>
                                     <constraint firstItem="0H7-eJ-w7q" firstAttribute="centerX" secondItem="dzp-dE-G6y" secondAttribute="centerX" id="bxv-Qd-eRW"/>
                                     <constraint firstItem="rMu-BR-rBt" firstAttribute="centerY" secondItem="dzp-dE-G6y" secondAttribute="centerY" id="fx7-8W-auK"/>
+                                    <constraint firstItem="QU8-aY-KNz" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="top" constant="123" id="jAQ-lB-gQQ"/>
                                     <constraint firstItem="dzp-dE-G6y" firstAttribute="centerX" secondItem="X1z-4M-rqe" secondAttribute="centerX" id="lHd-Jc-4cf"/>
                                     <constraint firstAttribute="trailing" secondItem="rMu-BR-rBt" secondAttribute="trailing" constant="10" id="u47-J9-OCi"/>
                                     <constraint firstItem="dzp-dE-G6y" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="top" constant="58" id="v7q-8z-uaR"/>
