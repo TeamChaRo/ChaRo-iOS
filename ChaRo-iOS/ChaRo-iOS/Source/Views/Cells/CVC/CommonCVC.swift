@@ -89,7 +89,7 @@ class CommonCVC: UICollectionViewCell {
             tagButtonList[index].setTitle(" #\(tagArr[index]) ", for: .normal)
             tagButtonList[index].titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 10)
             tagButtonList[index].setTitleColor(.mainBlue, for: .normal)
-            tagButtonList[index].layer.cornerRadius = 13
+            tagButtonList[index].layer.cornerRadius = 9
             tagButtonList[index].layer.borderWidth = 1
             tagButtonList[index].layer.borderColor = UIColor.mainBlue.cgColor
             tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
