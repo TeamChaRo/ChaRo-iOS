@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,10 +22,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="kds-Zc-lX5">
-                        <rect key="frame" x="0.0" y="0.0" width="326" height="247"/>
+                        <rect key="frame" x="0.0" y="0.0" width="326" height="234"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
-                        <rect key="frame" x="0.0" y="247" width="326" height="50"/>
+                        <rect key="frame" x="0.0" y="234" width="326" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="rXM-hI-63P"/>
                         </constraints>
@@ -35,59 +34,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bb5-sj-Y94">
-                        <rect key="frame" x="0.0" y="297" width="218" height="17"/>
+                        <rect key="frame" x="0.0" y="284" width="146" height="30"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGZ-7n-txT">
-                                <rect key="frame" x="0.0" y="0.0" width="70" height="17"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="차로롱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEb-WK-bhg">
-                                        <rect key="frame" x="22" y="2.5" width="26" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="2sD-al-a4M"/>
-                                    <constraint firstItem="GEb-WK-bhg" firstAttribute="centerX" secondItem="fGZ-7n-txT" secondAttribute="centerX" id="CzI-B8-KqJ"/>
-                                    <constraint firstItem="GEb-WK-bhg" firstAttribute="centerY" secondItem="fGZ-7n-txT" secondAttribute="centerY" id="ZkN-Nu-YIW"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzP-kr-qSQ">
-                                <rect key="frame" x="74" y="0.0" width="70" height="17"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="차로롱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as3-If-mLO">
-                                        <rect key="frame" x="22" y="2.5" width="26" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="UdA-GW-gzR"/>
-                                    <constraint firstItem="as3-If-mLO" firstAttribute="centerX" secondItem="zzP-kr-qSQ" secondAttribute="centerX" id="Z0D-Vf-Euv"/>
-                                    <constraint firstItem="as3-If-mLO" firstAttribute="centerY" secondItem="zzP-kr-qSQ" secondAttribute="centerY" id="m89-Oc-dhw"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEC-oy-FkY">
-                                <rect key="frame" x="148" y="0.0" width="70" height="17"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwB-k6-HwC">
-                                        <rect key="frame" x="26.5" y="2.5" width="17.5" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="DwB-k6-HwC" firstAttribute="centerY" secondItem="jEC-oy-FkY" secondAttribute="centerY" id="3RA-6p-Bds"/>
-                                    <constraint firstItem="DwB-k6-HwC" firstAttribute="centerX" secondItem="jEC-oy-FkY" secondAttribute="centerX" id="KRq-Kh-vSy"/>
-                                    <constraint firstAttribute="height" constant="17" id="VNX-Ub-W5K"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="de2-7j-LiS">
+                                <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbe-Lc-b2a">
+                                <rect key="frame" x="50" y="0.0" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9V-mA-54J">
+                                <rect key="frame" x="100" y="0.0" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xT-Yy-Ygg">
@@ -123,21 +83,13 @@
                 <outlet property="imageView" destination="kds-Zc-lX5" id="SQ4-JG-SKe"/>
                 <outlet property="lengthBtwImgLabel" destination="rBl-ml-mIP" id="2zx-WJ-R7W"/>
                 <outlet property="stackView" destination="bb5-sj-Y94" id="nbk-5z-rti"/>
-                <outlet property="tagLabel1" destination="GEb-WK-bhg" id="DQU-el-aZO"/>
-                <outlet property="tagLabel2" destination="as3-If-mLO" id="aOj-jD-zUF"/>
-                <outlet property="tagLabel3" destination="DwB-k6-HwC" id="UPL-7I-TYZ"/>
-                <outlet property="tagView1" destination="fGZ-7n-txT" id="lyG-ss-A4T"/>
-                <outlet property="tagView2" destination="zzP-kr-qSQ" id="lxk-lB-K4O"/>
-                <outlet property="tagView3" destination="jEC-oy-FkY" id="TJd-vm-JzW"/>
                 <outlet property="titleHeight" destination="rXM-hI-63P" id="m9f-7j-CbG"/>
                 <outlet property="titleLabel" destination="BRj-TE-ZDO" id="qWB-Sg-mMy"/>
+                <outletCollection property="tagButtonList" destination="de2-7j-LiS" collectionClass="NSMutableArray" id="fVv-r2-wE7"/>
+                <outletCollection property="tagButtonList" destination="bbe-Lc-b2a" collectionClass="NSMutableArray" id="3R4-MQ-PzB"/>
+                <outletCollection property="tagButtonList" destination="q9V-mA-54J" collectionClass="NSMutableArray" id="ask-lB-6wQ"/>
             </connections>
             <point key="canvasLocation" x="295.6521739130435" y="188.16964285714286"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
