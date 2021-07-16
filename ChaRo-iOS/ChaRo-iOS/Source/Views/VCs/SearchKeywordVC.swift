@@ -222,16 +222,19 @@ extension SearchKeywordVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchKeywordCell.identifier) as? SearchKeywordCell else {return UITableViewCell()}
         
         if autoCompletedKeywordList.count == 0 {
-            let address = searchHistory[indexPath.row]
-            cell.setContents(addressMadel: address)
-            
-            let addressModel = address.getAddressModel()
-            
-            cell.presentingMapViewClosure = { addressModel in
-                let nextVC = self.getAddressConfirmVC()
-                nextVC.setPresentingAddress(address: addressModel)
-                nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
-                self.navigationController?.pushViewController(nextVC, animated: true)
+            if searchHistory.count != 0 {
+                
+                let address = searchHistory[indexPath.row]
+                cell.setContents(addressMadel: address)
+                
+                let addressModel = address.getAddressModel()
+                
+                cell.presentingMapViewClosure = { addressModel in
+                    let nextVC = self.getAddressConfirmVC()
+                    nextVC.setPresentingAddress(address: addressModel)
+                    nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }
             }
         }else{
             let address = autoCompletedKeywordList[indexPath.row]
