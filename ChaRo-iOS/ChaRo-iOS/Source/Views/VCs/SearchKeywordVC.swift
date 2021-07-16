@@ -93,6 +93,8 @@ class SearchKeywordVC: UIViewController {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
+        keywordTableView.dismissKeyboardWhenTappedAround()
+                         
     }
     
     public func setAddressModel(model: AddressDataModel, cellType: String, index: Int){
