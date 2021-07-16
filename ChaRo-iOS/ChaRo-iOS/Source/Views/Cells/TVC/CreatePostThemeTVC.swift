@@ -16,10 +16,14 @@ class CreatePostThemeTVC: UITableViewCell {
     private var pickerView = UIPickerView()
     private let toolbar = UIToolbar()
     private var textFieldList: [UITextField] = []
-    private var currentIndex = 0 // 현재 선택된 component (0 == city, 1 == region)
+    private var currentIndex = 0 // 현재 선택된 component
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
     private var currentList: [String] = [] //pickerview에 표시 될 List
-    private var filterList: [String] = ["","",""] // pickerview 선택 완료 후에 담길 결과 배열
+    private var filterList: [String] = ["","",""]{
+        didSet{
+            NotificationCenter.default.post(name: .sendNewTheme, object: filterList)
+        }
+    }
     private var pickerSelectFlag: Bool = false
     
     // MARK: UI Components

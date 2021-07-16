@@ -67,7 +67,7 @@ class MyPageVC: UIViewController {
         dropDownTableView.registerCustomXib(xibName: "HotDropDownTVC")
         dropDownTableView.clipsToBounds = true
         dropDownTableView.layer.cornerRadius = 10
-        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+//        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         dropDownTableView.separatorStyle = .none
         
     }
@@ -124,11 +124,12 @@ class MyPageVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? MyPageDataModel{
-                    self.LikePostData = [response]
+                    
 
                     DispatchQueue.global().sync {
-                        self.myCellCount = self.LikePostData[0].data.writtenPost.count
-                        self.saveCellCount = self.LikePostData[0].data.savedPost.count
+                        self.LikePostData = [response]
+                        self.myCellCount = self.LikePostData[0].data.writtenTotal
+                        self.saveCellCount = self.LikePostData[0].data.savedTotal
                         self.setHeaderView()
                     }
                     self.myTableCollectionView.reloadData()
@@ -227,6 +228,8 @@ extension MyPageVC: UICollectionViewDataSource{
                 }
                 else{
                     print(myCellCount, indexPath.row)
+                    myCVCCell?.postCount = myCellCount
+                    myCVCCell?.setLabel()
                     MyCell.setData(image: LikePostData[0].data.writtenPost[indexPath.row-1
                     ].image, title: LikePostData[0].data.writtenPost[indexPath.row-1].title, tagCount: LikePostData[0].data.writtenPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.writtenPost[indexPath.row-1].tags, heart: LikePostData[0].data.writtenPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.writtenPost[indexPath.row-1].saveNum, year: LikePostData[0].data.writtenPost[indexPath.row-1].year, month: LikePostData[0].data.writtenPost[indexPath.row-1].month, day: LikePostData[0].data.writtenPost[indexPath.row-1].day, postID: LikePostData[0].data.writtenPost[indexPath.row-1].postID)
             return MyCell
@@ -241,6 +244,7 @@ extension MyPageVC: UICollectionViewDataSource{
                     saveCellIsFirstLoaded = false
                     saveCVCCell = detailCell
                     saveCVCCell?.postCount = saveCellCount
+                    saveCVCCell?.postCountLabel.text = String(saveCellCount)
                     saveCVCCell?.setLabel()
                 }
                 return saveCVCCell as! UICollectionViewCell
@@ -250,6 +254,8 @@ extension MyPageVC: UICollectionViewDataSource{
                 }
                 else{
                     print(myCellCount, indexPath.row)
+                    saveCVCCell?.postCount = myCellCount
+                    saveCVCCell?.setLabel()
                     MyCell.setData(image: LikePostData[0].data.savedPost[indexPath.row-1
                     ].image, title: LikePostData[0].data.savedPost[indexPath.row-1].title, tagCount: LikePostData[0].data.savedPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.savedPost[indexPath.row-1].tags, heart: LikePostData[0].data.savedPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.savedPost[indexPath.row-1].saveNum, year: LikePostData[0].data.savedPost[indexPath.row-1].year, month: LikePostData[0].data.savedPost[indexPath.row-1].month, day: LikePostData[0].data.savedPost[indexPath.row-1].day, postID: LikePostData[0].data.savedPost[indexPath.row-1].postID)
             return MyCell
@@ -343,9 +349,9 @@ extension MyPageVC: UITableViewDataSource{
 
         default:
             return UITableViewCell()
+        }
     }
-    }
-    
+
 }
 
 extension MyPageVC: MenuClickedDelegate{
@@ -363,8 +369,13 @@ extension MyPageVC: SetTitleDelegate {
             getData()
             self.myCellCount = self.LikePostData[0].data.writtenPost.count
             self.dropDownTableView.isHidden = true
-            myCVCCell?.setTitle(data: "인기순")
-            saveCVCCell?.setTitle(data: "인기순")
+            myCVCCell?.postCount = myCellCount
+            myCVCCell?.setLabel()
+            saveCVCCell?.postCount = saveCellCount
+            saveCVCCell?.setLabel()
+            saveCVCCell?.setSelectName(name: "인기순")
+            myCVCCell?.setSelectName(name: "인기순")
+            
         }
         
         else if cell.name == "최신순"{
@@ -373,9 +384,12 @@ extension MyPageVC: SetTitleDelegate {
             getData()
             self.myCellCount = self.LikePostData[0].data.writtenPost.count
             self.dropDownTableView.isHidden = true
-            myCVCCell?.setTitle(data: "최신순")
-            saveCVCCell?.setTitle(data: "최신순")
-
+            myCVCCell?.postCount = myCellCount
+            myCVCCell?.setLabel()
+            saveCVCCell?.postCount = saveCellCount
+            myCVCCell?.setLabel()
+            saveCVCCell?.setSelectName(name: "최신순")
+            myCVCCell?.setSelectName(name: "최신순")
         }
         
     }

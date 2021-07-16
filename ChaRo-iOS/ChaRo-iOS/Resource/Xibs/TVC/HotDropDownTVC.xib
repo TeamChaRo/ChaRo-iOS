@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -34,12 +35,22 @@
                             <constraint firstAttribute="width" constant="24" id="tjO-tD-rVR"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOW-ty-oBn">
+                        <rect key="frame" x="0.0" y="43" width="320" height="1"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="wEm-Bk-86K"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="jXz-rc-9Iu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="00E-mQ-Rxx"/>
+                    <constraint firstAttribute="trailing" secondItem="EOW-ty-oBn" secondAttribute="trailing" id="MYo-TD-NyI"/>
+                    <constraint firstItem="EOW-ty-oBn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Msv-kf-PF3"/>
                     <constraint firstItem="TXN-Fl-CLr" firstAttribute="centerY" secondItem="jXz-rc-9Iu" secondAttribute="centerY" id="cjf-vf-Foo"/>
                     <constraint firstItem="jXz-rc-9Iu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="db5-zi-SgM"/>
                     <constraint firstAttribute="trailing" secondItem="TXN-Fl-CLr" secondAttribute="trailing" constant="20" id="nsk-rl-4rB"/>
+                    <constraint firstAttribute="bottom" secondItem="EOW-ty-oBn" secondAttribute="bottom" id="xJW-FX-HnS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -52,5 +63,8 @@
     </objects>
     <resources>
         <image name="BlueCheck" width="24" height="24"/>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

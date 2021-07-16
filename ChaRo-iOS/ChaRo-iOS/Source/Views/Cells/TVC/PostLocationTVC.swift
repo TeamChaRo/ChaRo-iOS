@@ -13,7 +13,7 @@ class PostLocationTVC: UITableViewCell {
     
     let titleView = PostCellTitleView(title: "출발지")
     let buttonMultiplier: CGFloat = 248/42
-    public var clickCopyButton: (() -> Void)?
+    public var clickCopyButton: (() -> ())?
     
     let locationTextField: UITextField = {
         let textField = UITextField()

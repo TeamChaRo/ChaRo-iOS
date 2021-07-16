@@ -14,14 +14,24 @@ class CreatePostVC: UIViewController {
     
     static let identifier: String = "CreatePostVC"
     
+    // 데이터 전달
+    public var postTitle: String = ""
+    public var province: String = ""
+    public var region: String = ""
+    public var theme: [String] = ["","",""]
+    public var warning: [Bool] = [false, false, false, false]
+    public var isParking: Bool = false
+    public var parkingDesc: String = ""
+    public var courseDesc: String = ""
+    
     var selectImages: [UIImage] = []
-    var cellHeights: [CGFloat] = []
     
     var itemProviders: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
     
-    //MARK:  components
+    // MARK:  components
     let tableView: UITableView = UITableView()
+    var cellHeights: [CGFloat] = []
     
     let titleView: UIView = {
         let view = UIView()
@@ -114,21 +124,24 @@ extension CreatePostVC {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setPostTitle), name: .sendNewPostTitle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setPostCity), name: .sendNewCity, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setPostRegion), name: .sendNewRegion, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setPostTheme), name: .sendNewTheme, object: nil)
     }
     
     func removeObservers(){
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .callPhotoPicker, object: nil)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func postWriteData() -> WritePostData{ // 밖에서 호출할 때 쓰세요~
+        let writeData = WritePostData(title: self.postTitle, userId: Constants.userId, province: self.province, region: self.region, theme: self.theme, warning: self.warning, isParking: self.isParking, parkingDesc: self.parkingDesc, courseDesc: self.courseDesc, course: [])
+        
+        return writeData
     }
     
     @objc
     func textFieldMoveUp(_ notification: NSNotification){
-        
-        print("tableView.frame.height = \(tableView.frame.height)")
-        print("tableView.bounds.height = \(tableView.bounds.height)")
-        print(notification.object.debugDescription)
-        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
                 self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
@@ -147,6 +160,8 @@ extension CreatePostVC {
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정
         let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
         
+        
+        
         print("===서버통신 시작=====")
         CreatePostService.shared.createPost(model: model, image: images){ result in
             switch result {
@@ -163,6 +178,28 @@ extension CreatePostVC {
             }
         }
     }
+    
+    // MARK: Cell에서 데이터 받아오기
+    @objc // title 받아오기
+    func setPostTitle(_ notification: Notification){
+        postTitle = notification.object as! String
+    }
+    
+    @objc // city 받아오기
+    func setPostCity(_ notification: Notification){
+        province = notification.object as! String
+    }
+    
+    @objc // region 받아오기
+    func setPostRegion(_ notification: Notification){
+        region = notification.object as! String
+    }
+    
+    @objc
+    func setPostTheme(_ notification: Notification){
+        theme = notification.object as! [String]
+    }
+    
     
     // MARK: Layout
     func setMainViewLayout(){
@@ -213,9 +250,22 @@ extension CreatePostVC {
     //MARK: - Button Actions
     @objc
     func xButtonDidTap(sender: UIButton){
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        let alertViewController = UIAlertController(title: "", message: "게시물 작성을 중단하시겠습니까?",
+                                                    preferredStyle: .alert)
+        
+        let dismissAction = UIAlertAction(title: "작성 중단", style: .default){ _ in
+            self.dismiss(animated: true, completion: nil)
 
-        // TODO: Alert 추가 (중단하시겠습니까?)
-
+        }
+        alertViewController.addAction(dismissAction)
+        
+        let cancelAction = UIAlertAction(title: "이어서 작성", style: .default, handler: nil)
+        alertViewController.addAction(cancelAction)
+        
+        self.present(alertViewController, animated: true, completion: nil)
     }
     
     @objc
@@ -224,8 +274,13 @@ extension CreatePostVC {
         guard let vc = storyboard.instantiateViewController(identifier: AddressMainVC.identifier) as? AddressMainVC else {
             return
         }
-        vc.setAddressListData(list: [])
         
+        let images: [UIImage] = [UIImage(named: "dummyMain")!, UIImage(named: "dummyMain")!]
+        //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
+        
+        vc.setAddressListData(list: [])
+        vc.setWritePostDataForServer(data: model, imageList: images)
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -364,12 +419,27 @@ extension CreatePostVC {
     func getCreatePostParkingWarningCell(tableView: UITableView) -> UITableViewCell{
         guard let parkingWarningCell = tableView.dequeueReusableCell(withIdentifier: CreatePostParkingWarningTVC.identifier) as? CreatePostParkingWarningTVC else { return UITableViewCell() }
         
+        // 데이터 전달 closure
+        parkingWarningCell.setParkingInfo = { value in
+            self.isParking = value
+        }
+        parkingWarningCell.setWraningData = { value in
+            self.warning = value
+        }
+        parkingWarningCell.setParkingDesc = { value in
+            self.parkingDesc = value
+            
+        }
+        
         return parkingWarningCell
     }
     
     func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
         guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else { return UITableViewCell() }
         courseDescCell.setContentText(text: "")
+        courseDescCell.setCourseDesc = { value in
+            self.courseDesc = value
+        }
         return courseDescCell
     }
 }
