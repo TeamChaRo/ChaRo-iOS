@@ -47,6 +47,9 @@
 		3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */; };
 		3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EC2690244D0099B684 /* MapService.swift */; };
 		3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */; };
+		3C45B5F126A1B5F30061D64B /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5F026A1B5F30061D64B /* Splash.storyboard */; };
+		3C45B5F326A1B6320061D64B /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45B5F226A1B6320061D64B /* SplashVC.swift */; };
+		3C45B5F526A1C0110061D64B /* lottie_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5F426A1C0110061D64B /* lottie_test.json */; };
 		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
@@ -225,6 +228,9 @@
 		3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailDataModel.swift; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellTitleView.swift; sourceTree = "<group>"; };
+		3C45B5F026A1B5F30061D64B /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		3C45B5F226A1B6320061D64B /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		3C45B5F426A1C0110061D64B /* lottie_test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_test.json; sourceTree = "<group>"; };
 		3C706798269ECE8C0082C852 /* PostResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultService.swift; sourceTree = "<group>"; };
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -486,6 +492,7 @@
 				3C86FA7C2694C7C6009370CD /* Xibs */,
 				3C86FA8C2694C7C6009370CD /* Storyboards */,
 				3C86FA952694C7C6009370CD /* Assets.xcassets */,
+				3C45B5F426A1C0110061D64B /* lottie_test.json */,
 				3C86FA962694C7C6009370CD /* Font */,
 				3C86FAA02694C7C6009370CD /* Info.plist */,
 			);
@@ -569,6 +576,7 @@
 				3CEC0112269E25AB00E9332C /* OnBoard.storyboard */,
 				703DD82F269F3A7E004416A9 /* Login.storyboard */,
 				36071675269F9AE10042256B /* Notification.storyboard */,
+				3C45B5F026A1B5F30061D64B /* Splash.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -680,6 +688,7 @@
 				3CEC0110269E259800E9332C /* OnBoardVC.swift */,
 				703DD831269F3B19004416A9 /* LoginVC.swift */,
 				36071677269F9B030042256B /* NotificationVC.swift */,
+				3C45B5F226A1B6320061D64B /* SplashVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -771,6 +780,7 @@
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */,
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
+				3C45B5F526A1C0110061D64B /* lottie_test.json in Resources */,
 				70D63E272694E2AA0036484B /* ThemePost.storyboard in Resources */,
 				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
 				3C86FAB22694C7C6009370CD /* AddressMain.storyboard in Resources */,
@@ -809,6 +819,7 @@
 				3C86FAB02694C7C6009370CD /* LaunchScreen.storyboard in Resources */,
 				3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */,
 				F4CC1B5C269A2085009A0C01 /* CreatePost.storyboard in Resources */,
+				3C45B5F126A1B5F30061D64B /* Splash.storyboard in Resources */,
 				3C86FAB52694C7C6009370CD /* NotoSansCJKkr-DemiLight.otf in Resources */,
 				F4CC1B96269C960C009A0C01 /* AddressConfirm.storyboard in Resources */,
 				3C86FAB42694C7C6009370CD /* Assets.xcassets in Resources */,
@@ -946,6 +957,7 @@
 				36071678269F9B030042256B /* NotificationVC.swift in Sources */,
 				3CA1CE7E2692C74200D0AFAF /* Extension+UITableViewCell.swift in Sources */,
 				360937AD2699EF7B005392BB /* TabbarCVC.swift in Sources */,
+				3C45B5F326A1B6320061D64B /* SplashVC.swift in Sources */,
 				36D1E5FD269709F00079BD94 /* HomePostDetailCVC.swift in Sources */,
 				70B9E1E7269DC479006DACB2 /* LikeService.swift in Sources */,
 				703DD83E269F8829004416A9 /* UserInfo.swift in Sources */,

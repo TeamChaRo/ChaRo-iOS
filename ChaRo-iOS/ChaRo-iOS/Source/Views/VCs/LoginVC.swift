@@ -62,28 +62,28 @@ class LoginVC: UIViewController {
     
     func loginAction(){
             
-            LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
-                
-                switch result
-                {
-                case .success(let data):
-                    print("여기까진..")
+        LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
             
-                    if let userData = data as? LoginDataModel {
-                        dump(userData)
-                        
-                    }
-                    
-                case .requestErr(let message):
-                        if let message = message as? String {
-                        print(message)
-                    }
+            switch result
+            {
+            case .success(let data):
+                print("여기까진..")
                 
-                default :
-                    print("ERROR")
+                if let userData = data as? LoginDataModel {
+                    dump(userData)
+                    
                 }
+                
+            case .requestErr(let message):
+                if let message = message as? String {
+                    print(message)
+                }
+                
+            default :
+                print("ERROR")
             }
         }
+    }
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
@@ -126,11 +126,6 @@ extension LoginVC {
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(64)
         }
-        
-        
-        
-        
-        
         
     }
 }
