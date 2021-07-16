@@ -22,23 +22,23 @@ class LoginVC: UIViewController {
     static let identifier = "LoginVC"
     
     //MARK: - Component
-//    private let CharoimageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "maskGroup")
-//        return imageView
-//    }()
-//
-//    private let idBackground: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "idBackground")
-//        return imageView
-//    }()
-//
-//    private let pwdBackground: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "pwdBackground")
-//        return imageView
-//    }()
+    private let CharoimageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "maskGroup")
+        return imageView
+    }()
+
+    private let idBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "idBackground")
+        return imageView
+    }()
+
+    private let pwdBackground: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "pwdBackground")
+        return imageView
+    }()
     
     
     

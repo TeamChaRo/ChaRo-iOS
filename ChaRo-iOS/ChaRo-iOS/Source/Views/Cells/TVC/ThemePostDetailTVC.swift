@@ -22,7 +22,6 @@ class ThemePostDetailTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         setLabel()
     }
 
@@ -32,13 +31,14 @@ class ThemePostDetailTVC: UITableViewCell {
         selectLabel.text = selectText
         countLabel.textColor = UIColor.gray50
         selectLabel.textColor = UIColor.gray50
+        selectLabel.font = .notoSansRegularFont(ofSize: 12)
+        countLabel.font = .notoSansRegularFont(ofSize: 12)
+        
     }
     
     func setTitle(data : String) {
-        print(data)
         selectText = data
         selectLabel.text = selectText
-        
     }
     
     func setPostCount(data: Int) {
