@@ -29,6 +29,8 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var heartButton: UIButton!
     
+    var clickedPostCell : ((Int) -> ())?
+    
 
     //MARK: Variable
     var callback : (() -> Void)?
@@ -106,23 +108,7 @@ class CommonCVC: UICollectionViewCell {
     
 
     //MARK:- Function
-    
-//    //setData 익범이꺼
-//    func setData(image: String, title: String, tag1: String, tag2: String, tag3: String, hearth: Bool){
-//
-//        imageView.kf.setImage(with: URL(string: image))
-//
-//        titleLabel.text = title
-//        tagLabel1.text = tag1
-//        tagLabel2.text = tag2
-//        tagLabel3.text = tag3
-//
-//        setTagUI()
-//        setLabelUI()
-//
-//
-        //킹피셔 받아서 이거 처리해야됨
-//    }
+
     
     
     
@@ -216,6 +202,14 @@ class CommonCVC: UICollectionViewCell {
         likeAction()
     }
     
+    override var isSelected: Bool{
+        didSet {
+            if isSelected {
+                print(postID)
+                clickedPostCell?(postID)
+            }
+          }
+    }
     
 }
 
