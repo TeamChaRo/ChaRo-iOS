@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMu-BR-rBt">
-                                        <rect key="frame" x="346" y="47" width="48" height="48"/>
+                                        <rect key="frame" x="356" y="47" width="48" height="48"/>
                                         <state key="normal" backgroundImage="setting2_white"/>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pke-ag-0QV">
@@ -124,7 +124,7 @@
                                     <constraint firstItem="0H7-eJ-w7q" firstAttribute="centerX" secondItem="dzp-dE-G6y" secondAttribute="centerX" id="bxv-Qd-eRW"/>
                                     <constraint firstItem="rMu-BR-rBt" firstAttribute="centerY" secondItem="dzp-dE-G6y" secondAttribute="centerY" id="fx7-8W-auK"/>
                                     <constraint firstItem="dzp-dE-G6y" firstAttribute="centerX" secondItem="X1z-4M-rqe" secondAttribute="centerX" id="lHd-Jc-4cf"/>
-                                    <constraint firstAttribute="trailing" secondItem="rMu-BR-rBt" secondAttribute="trailing" constant="20" id="u47-J9-OCi"/>
+                                    <constraint firstAttribute="trailing" secondItem="rMu-BR-rBt" secondAttribute="trailing" constant="10" id="u47-J9-OCi"/>
                                     <constraint firstItem="dzp-dE-G6y" firstAttribute="top" secondItem="X1z-4M-rqe" secondAttribute="top" constant="58" id="v7q-8z-uaR"/>
                                     <constraint firstAttribute="height" constant="200" id="vbc-lo-kuP"/>
                                     <constraint firstItem="QU8-aY-KNz" firstAttribute="leading" secondItem="80H-KY-tOi" secondAttribute="leading" id="xYH-0k-h2y"/>
