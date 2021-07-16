@@ -71,6 +71,13 @@ class PostDriveCourseTVC: UITableViewCell {
         return label
     }()
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        textView.delegate = self
+        
+        
+    }
+    
     public func setEditingMode(mode: Bool){
         if mode {
             setEditingModeConstraint()
@@ -177,10 +184,7 @@ class PostDriveCourseTVC: UITableViewCell {
     }
     
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        textView.delegate = self
-    }
+   
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

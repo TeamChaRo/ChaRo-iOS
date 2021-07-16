@@ -11,7 +11,7 @@ class PostDetailVC: UIViewController {
 
     static let identifier = "PostDetailVC"
     
-    private var isAuthor = true
+    private var isAuthor = false
     private var isEditingMode = false
     
     private var tableView = UITableView()
@@ -20,6 +20,26 @@ class PostDetailVC: UIViewController {
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [AddressDataModel] = []
     private var imageList: [UIImage] = []
+    
+    private var isFavorite: Bool? {
+        didSet {
+            if isFavorite! {
+                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+            } else {
+                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+            }
+        }
+    }
+    
+    private var isStored: Bool? {
+        didSet {
+            if isStored! {
+                scrapButton.setImage(UIImage(named: "save_active"), for: .normal)
+            } else {
+                scrapButton.setImage(UIImage(named: "save_inactive"), for: .normal)
+            }
+        }
+    }
     
     
     //MARK: For Sending Data
@@ -49,7 +69,7 @@ class PostDetailVC: UIViewController {
     
     private var scrapButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icSaveInactive"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "save_inactive"), for: .normal)
         button.addTarget(self, action: #selector(clickedToScrapButton), for: .touchUpInside)
         return button
     }()
@@ -72,9 +92,7 @@ class PostDetailVC: UIViewController {
         checkModeForSendingServer()
         
         print("PostDetailVC viewDidLoad")
-        setNavigaitionViewConstraints()
         setTableViewConstraints()
-        //self.tabBarController?.tabBar.isHidden = true
     }
     
     
@@ -91,7 +109,6 @@ class PostDetailVC: UIViewController {
     public func setPostMode(isAuthor: Bool, isEditing: Bool){
         self.isAuthor = isAuthor
         self.isEditingMode = isEditing
-        
     }
     
     public func setPostId(id: Int){
@@ -111,7 +128,7 @@ class PostDetailVC: UIViewController {
         let sendedPostDate = PostDetail(title: data.title,
                                   author: Constants.userId,
                                   isAuthor: true,
-                                  profileImage: "",
+                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
                                   postingYear: Date.getCurrentYear(),
                                   postingMonth: Date.getCurrentMonth(),
                                   postingDay: Date.getCurrentDay(),
@@ -154,6 +171,7 @@ class PostDetailVC: UIViewController {
             print("postData = \(postData)")
             print("addressList = \(addressList)")
             print("isAuthor = \(isAuthor)")
+            setNavigaitionViewConstraints()
             configureTableView()
         }else{
             print("그냥 구경하러 왔음")
@@ -167,7 +185,6 @@ class PostDetailVC: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
     }
-    
     private func registerXibs(){
         tableView.registerCustomXib(xibName: PostTitleTVC.identifier)
         tableView.registerCustomXib(xibName: PostImagesTVC.identifier)
@@ -213,6 +230,8 @@ class PostDetailVC: UIViewController {
         
     }
     
+
+    
     
     
 }
@@ -223,13 +242,13 @@ extension PostDetailVC{
     //하트 버튼 눌렀을 때 (좋아요)서버 통신
     @objc func clickedToHeartButton(){
         print("하트 버튼")
-        
-        
+        requestPostLike()
     }
     
     //스크랩 버튼 눌렀을 때 (저장하기) 서버통신
     @objc func clickedToScrapButton(){
         print("스크랩 버튼")
+        requestPostScrap()
     }
     
    
@@ -239,8 +258,8 @@ extension PostDetailVC{
         makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?"){ _ in
             //게시물 작성하기 post 통신 해야함
             self.postCreatePost()
+            self.dismiss(animated: true, completion: nil)
         }
-        
     }
     
     
@@ -293,7 +312,6 @@ extension PostDetailVC{
         print(postData)
         if postData != nil{
             view.addSubview(tableView)
-            
             tableView.snp.makeConstraints{
                 $0.top.equalTo(navigationView.snp.bottom).offset(5)
                 $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -568,9 +586,14 @@ extension PostDetailVC {
     func setPostContentView(data: PostDetail){
         postData = data
         isAuthor = postData!.isAuthor
+        print("----------------------------------")
         print("isAuthor = \(isAuthor)")
+        print("----------------------------------")
+        isFavorite = postData!.isFavorite
+        isStored = postData!.isStored
         refineAddressData()
         configureTableView()
+        setNavigaitionViewConstraints()
         setTableViewConstraints()
     }
     
@@ -616,4 +639,44 @@ extension PostDetailVC {
         }
     }
     
+    func requestPostLike(){
+        LikeService.shared.Like(userId: Constants.userId,
+                                postId: postId) { [self] result in
+                
+            switch result{
+            case .success(let success):
+                if let success = success as? Bool {
+                    self.isFavorite!.toggle()
+                }
+                
+            case .requestErr(let msg):
+                if let msg = msg as? String {
+                    print(msg)
+                }
+            default :
+                print("ERROR")
+            }
+        }
+    }
+   
+    func requestPostScrap(){
+        SaveService.shared.requestScrapPost(userId: Constants.userId,
+                                            postId: postId) { [self] result in
+                
+            switch result{
+            case .success(let success):
+                if let success = success as? Bool {
+                    print("스크랩 성공해서 바뀝니다")
+                    self.isStored!.toggle()
+                }
+                
+            case .requestErr(let msg):
+                if let msg = msg as? String {
+                    print(msg)
+                }
+            default :
+                print("ERROR")
+            }
+        }
+    }
 }

@@ -75,6 +75,7 @@ class PostAttentionTVC: UITableViewCell {
         for i in 0..<list.count{
             if list[i] {
                 changeToActiveButton(button: buttonList[i])
+                buttonList[i].isUserInteractionEnabled = false
             }
         }
     }
