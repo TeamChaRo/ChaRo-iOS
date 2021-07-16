@@ -16,6 +16,7 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
+
     @IBOutlet weak var tagView1: UIView!
     @IBOutlet weak var tagView2: UIView!
     @IBOutlet weak var tagView3: UIView!
@@ -29,6 +30,7 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var heartButton: UIButton!
     
+    var taglist :[String] = []
 
     //MARK: Variable
     var callback : (() -> Void)?
@@ -48,6 +50,7 @@ class CommonCVC: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setLabelUI()
+        print("awakeFromNib = \(taglist)")
     }
 
     
@@ -57,14 +60,27 @@ class CommonCVC: UICollectionViewCell {
         titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
         tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
         tagLabel2.font = UIFont.notoSansRegularFont(ofSize: 10)
-        tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
-
         tagLabel1.textColor = UIColor.mainBlue
         tagLabel2.textColor = UIColor.mainBlue
-        tagLabel3.textColor = UIColor.mainBlue
+        
     }
     
-    func setTagUI() {
+    func setTagUI(taglist: [String]) {
+        print("-----------------------")
+        print(taglist)
+        print("-----------------------")
+        tagView1.layer.cornerRadius = 10
+        tagView2.layer.cornerRadius = 10
+       
+        tagView1.layer.borderColor = UIColor.mainBlue.cgColor
+        tagView2.layer.borderColor = UIColor.mainBlue.cgColor
+        
+        tagView1.layer.borderWidth = 1
+        tagView2.layer.borderWidth = 1
+    
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        
         
         let length1 = CGFloat(tagLabel1.text!.count)
         let length2 = CGFloat(tagLabel2.text!.count)
@@ -84,22 +100,22 @@ class CommonCVC: UICollectionViewCell {
             
         ])
         
+        if taglist.count == 3 {
+            stackView.arrangedSubviews[2].isHidden = false
+            tagView3.isHidden = false
+            tagView3.layer.cornerRadius = 10
+            tagView3.layer.borderColor = UIColor.mainBlue.cgColor
+            tagView3.layer.borderWidth = 1
+            tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
+            tagLabel3.textColor = UIColor.mainBlue
+            tagLabel3.isHidden = false
+        }else {
+            stackView.arrangedSubviews[2].isHidden = true
+            tagView3.isHidden = true
+            tagLabel3.isHidden = true
+            tagLabel3.textColor = .clear
+        }
         
-        tagView1.layer.cornerRadius = 10
-        tagView2.layer.cornerRadius = 10
-        tagView3.layer.cornerRadius = 10
-        
-        tagView1.layer.borderColor = UIColor.mainBlue.cgColor
-        tagView2.layer.borderColor = UIColor.mainBlue.cgColor
-        tagView3.layer.borderColor = UIColor.mainBlue.cgColor
-        
-        tagView1.layer.borderWidth = 1
-        tagView2.layer.borderWidth = 1
-        tagView3.layer.borderWidth = 1
-        
-        
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
         
     }
     
@@ -129,10 +145,27 @@ class CommonCVC: UICollectionViewCell {
     //setData 지원이꺼
     func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
         
+        taglist = tagArr
+        
+        setTagUI(taglist: tagArr)
+        setLabelUI()
+        
         tagLabel1.text = ""
         tagLabel2.text = ""
         tagLabel3.text = ""
         
+        if tagArr.count == 3{
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.textColor = .mainBlue
+            tagLabel3.text = "#\(tagArr[2])"
+        }else{
+            
+            tagLabel1.text = "#\(tagArr[0])"
+            tagLabel2.text = "#\(tagArr[1])"
+            tagLabel3.textColor = .clear
+        }
+            
         //이미지 설정
         guard let url = URL(string: image) else { return }
         self.imageView.kf.setImage(with: url)
@@ -153,18 +186,6 @@ class CommonCVC: UICollectionViewCell {
         self.isFavorite = isFavorite
         
         //태그 설정
-        if tagCount == 2 {
-            tagLabel1.text = "#\(tagArr[0])"
-            tagLabel2.text = "#\(tagArr[1])"
-            tagLabel3.text = ""
-            
-        } else {
-            tagLabel1.text = "#\(tagArr[0])"
-            tagLabel2.text = "#\(tagArr[1])"
-            tagLabel3.text = "#\(tagArr[2])"
-        }
-        
-        setTagUI()
         
     }
     
