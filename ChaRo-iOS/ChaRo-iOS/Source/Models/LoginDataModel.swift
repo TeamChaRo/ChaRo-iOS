@@ -33,5 +33,6 @@ struct UserData: Codable {
     let userId: String
     let nickname: String
     let token: String
+    let profileImage: String
 }
 

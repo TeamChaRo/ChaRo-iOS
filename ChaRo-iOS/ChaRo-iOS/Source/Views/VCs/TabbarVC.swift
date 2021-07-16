@@ -10,6 +10,7 @@ import UIKit
 
 class TabbarVC: UITabBarController {
     
+    static let identifier = "TabbarVC"
     public var addressMainVC: AddressMainVC?
     public var tabs: [UIViewController] = []
     private var comeBackIndex = 0
