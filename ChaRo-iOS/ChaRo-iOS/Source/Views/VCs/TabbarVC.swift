@@ -17,19 +17,21 @@ class TabbarVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTabbarCustomFrame()
         configTabbar()
+        setTabbarCustomFrame()
     }
 
 
-    private func setTabbarCustomFrame(){
+    private func setTabbarCustomFrame() {
 
         let customTabbar = tabBar
         var newFrame = CGRect(x: 0,
-                              y: self.view.frame.size.height - 200,
+                              y: self.view.frame.size.height - 250,
                               width:  self.view.frame.size.width,
-                              height: 200)
+                              height: 250)
         
+        
+        print(newFrame)
         
         // 이 로그는 나중에 지울게요!
        //customTabbar.backgroundImage = UIImage(named: "tabbarBackground")
@@ -57,9 +59,9 @@ class TabbarVC: UITabBarController {
 
             createTab.modalPresentationStyle = .fullScreen
             self.present(createTab, animated: false, completion: nil)
-        }else if item.title == "나의차로"{
+        }else if item.title == "나의 차로" {
             comeBackIndex = 2
-        }else{
+        }else {
             comeBackIndex = 0
         }
         
