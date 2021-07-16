@@ -45,6 +45,21 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     public var setWraningData: (([Bool]) -> Void)?
     public var setParkingDesc: ((String) -> Void)?
     
+    // cell height 동적으로 계산
+    let buttonHeightRatio: CGFloat = 42/164
+    let buttonWidth: CGFloat = (UIScreen.getDeviceWidth() - 47)/2
+    func setDynamicHeight() -> CGFloat {
+        // 주차공간 타이틀 + 인셋 + 버튼높이 + 인셋 + 텍스트뷰 높이 + 인셋 + 주의사항 타이틀 + 인셋 + 버튼1 + 인셋+ 버튼2 + 바텀여백
+        // 22 + 12 + 동적 + 8 + 42 + 33 + 38 + 12 + 동적 + 8 + 동적 + 33
+        // 기본 인셋이나 타이틀 = 166
+        // 동적 버튼, 텍스트들의 기본 높이 = 42*4 = 168
+        let buttonHeight: CGFloat = buttonWidth * buttonHeightRatio
+        let fixedHeight: CGFloat = 208 // 기본 여백, 타이틀 높이
+        let dynamicHeight: CGFloat = buttonHeight * 3 // 버튼 3줄
+        
+        return fixedHeight+dynamicHeight
+    }
+    
     // MARK: UI Components
     private let parkingTitleView = PostCellTitleView(title: "주차 공간은 어땠나요?")
     private let warningTitleView = PostCellTitleView(title: "드라이브 시 주의해야 할 사항이 있으셨나요?", subTitle: "고려해야 할 사항이 있다면 선택해주세요. 선택 사항입니다.")
@@ -277,10 +292,6 @@ extension CreatePostParkingWarningTVC {
     func configureLayout(){
         addSubviews([parkingTitleView, parkingExistButton, parkingNonExistButton, parkingDescTextField, warningLabel])
         
-        let buttonHeightRatio: CGFloat = 42/164
-        let buttonWidth: CGFloat = (UIScreen.getDeviceWidth() - 47)/2
-        let textFieldHeightRatio: CGFloat = 42/335
-        
         parkingTitleView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
@@ -307,7 +318,7 @@ extension CreatePostParkingWarningTVC {
             $0.top.equalTo(parkingExistButton.snp.bottom).offset(8)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
-            $0.height.equalTo(parkingDescTextField.snp.width).multipliedBy(textFieldHeightRatio)
+            $0.height.equalTo(42) // 텍스트필드는 height 고정
         }
         
         warningLabel.snp.makeConstraints{

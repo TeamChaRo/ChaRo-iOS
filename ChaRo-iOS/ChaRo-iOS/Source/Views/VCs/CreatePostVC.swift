@@ -117,7 +117,7 @@ extension CreatePostVC {
     }
     
     func initCellHeight(){
-        cellHeights.append(contentsOf: [89, 255, 125, 125, 334, 408])
+        cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408])
     }
     
     func setNotificationCenter(){
@@ -290,6 +290,7 @@ extension CreatePostVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       
         return cellHeights[indexPath.row]
     }
     
@@ -371,6 +372,8 @@ extension CreatePostVC {
     func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
         
+        
+        
         // 여기서 VC 이미지를 Cell에 전달
         photoCell.receiveImageListfromVC(image: selectImages)
         
@@ -386,12 +389,16 @@ extension CreatePostVC {
     
     func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell{
         guard let courseCell = tableView.dequeueReusableCell(withIdentifier: CreatePostCourseTVC.identifier) as? CreatePostCourseTVC else { return UITableViewCell() }
-        
+
+        cellHeights[2] = courseCell.setDynamicHeight()
+
         return courseCell
     }
     
     func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell{
         guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
+        
+        cellHeights[3] = themeCell.setDynamicHeight()
         
         return themeCell
     }
@@ -408,8 +415,9 @@ extension CreatePostVC {
         }
         parkingWarningCell.setParkingDesc = { value in
             self.parkingDesc = value
-            
         }
+        
+        cellHeights[4] = parkingWarningCell.setDynamicHeight()
         
         return parkingWarningCell
     }
