@@ -70,7 +70,7 @@ class PostDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkModeForSendingServer()
-        getPostDetailData()
+        
         print("PostDetailVC viewDidLoad")
         setNavigaitionViewConstraints()
         setTableViewConstraints()
@@ -104,6 +104,10 @@ class PostDetailVC: UIViewController {
                                        addressList: [AddressDataModel]){
         isEditingMode = true
         isAuthor = true
+        self.addressList = addressList
+        self.imageList = imageList
+        writedPostData = data
+        
         let sendedPostDate = PostDetail(title: data.title,
                                   author: Constants.userId,
                                   isAuthor: true,
@@ -129,10 +133,19 @@ class PostDetailVC: UIViewController {
                                   courseDesc: data.courseDesc)
         
         self.postData = sendedPostDate
-        self.addressList = addressList
-        self.imageList = imageList
-        writedPostData = data
-       
+        
+        dump(writedPostData)
+    
+        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("imageList = \(imageList)")
+        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        
+        var newAddressList :[Address] = []
+        for address in addressList{
+            newAddressList.append(address.getAddressDataModel())
+        }
+        
+        writedPostData?.course = newAddressList
     }
     
     private func checkModeForSendingServer(){
@@ -225,6 +238,7 @@ extension PostDetailVC{
         print("등록 버튼")
         makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?"){ _ in
             //게시물 작성하기 post 통신 해야함
+            self.postCreatePost()
         }
         
     }
@@ -292,7 +306,12 @@ extension PostDetailVC{
     
         navigationView.snp.makeConstraints{
             $0.top.leading.trailing.equalTo(view)
-            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            if UIScreen.hasNotch{
+                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            }else{
+                $0.height.equalTo(93)
+            }
+            
         }
         navigationView.bringSubviewToFront(view)
         setBasicNavigationView()
@@ -576,6 +595,25 @@ extension PostDetailVC {
             }
             
         }
-        
     }
+    
+    func postCreatePost(){
+        dump(writedPostData!)
+        print("===서버통신 시작=====")
+        CreatePostService.shared.createPost(model: writedPostData!, image: imageList){ result in
+            switch result {
+            case .success(let message):
+                print(message)
+            case .requestErr(let message):
+                print(message)
+            case .serverErr:
+                print("서버에러")
+            case .networkFail:
+                print("네트워크에러")
+            default:
+                print("몰라에러")
+            }
+        }
+    }
+    
 }

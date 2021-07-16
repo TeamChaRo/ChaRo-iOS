@@ -132,19 +132,19 @@ ChaRo-iOS
   │   |── Models
   │   |── Services
   │   |── Views
-  │	  │   |── VCs
-  │	  |	  |── Cells
-  │	  |	  └── Components
-  │	  │	  └── Shared
+  │   │   |── VCs
+  │   |   |── Cells
+  │   |   └── Components
+  │   │   └── Shared
   │   └── Supports
-  │			    |── AppDelegate.swift
-  │				└── SceneDelegate.swift
+  │       |── AppDelegate.swift
+  │       └── SceneDelegate.swift
   └── Resource
-  	 |── Storyboards
-  	 |── Xibs
-     |── Assets.xcassets
-     |── LaunchScreen.storyboard
-     └── Info.plist
+      |── Storyboards
+      |── Xibs
+      |── Assets.xcassets
+      |── LaunchScreen.storyboard
+      └── Info.plist
 ```
    
  <br>
