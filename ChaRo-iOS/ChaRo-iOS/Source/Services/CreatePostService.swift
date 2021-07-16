@@ -37,7 +37,9 @@ struct CreatePostService {
             multipartFormData.append(Data(model.userId.utf8), withName: "userId")
             multipartFormData.append(Data(model.province.utf8), withName: "province")
             multipartFormData.append(Data(model.region.utf8), withName: "region")
+            
             model.theme.map{ multipartFormData.append(Data($0.utf8), withName: "theme") }
+
             model.warning.map{ multipartFormData.append(Data(String($0).utf8), withName: "warning") }
             multipartFormData.append(Data(String(model.isParking).utf8), withName: "isParking")
             multipartFormData.append(Data(model.parkingDesc.utf8), withName: "parkingDesc")

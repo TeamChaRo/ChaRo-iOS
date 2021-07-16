@@ -20,7 +20,11 @@ class CreatePostVC: UIViewController {
     public var region: String = ""
     public var theme: [String] = ["","",""]
     public var warning: [Bool] = [false, false, false, false]
-    public var isParking: Bool = false
+    public var isParking: Bool = false {
+        didSet{
+            print("parkingDesc \(isParking) =====")
+        }
+    }
     public var parkingDesc: String = ""
     public var courseDesc: String = ""
     
@@ -133,6 +137,9 @@ extension CreatePostVC {
     }
     
     func getPostWriteData() -> WritePostData{ // 밖에서 호출할 때 쓰세요~
+        
+        theme = theme.filter{ $0 != "" }
+
         let writeData = WritePostData(title: self.postTitle, userId: Constants.userId, province: self.province, region: self.region, theme: self.theme, warning: self.warning, isParking: self.isParking, parkingDesc: self.parkingDesc, courseDesc: self.courseDesc, course: [])
         
         return writeData
@@ -149,7 +156,7 @@ extension CreatePostVC {
         if tableView.contentOffset.y != 0.0 && !titleSelectFlag {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.tableView.transform = CGAffineTransform(translationX: 0, y: self.tableView.contentOffset.y-keyboardSize.height)
+                    self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
                 })
             }
         } else {
@@ -238,8 +245,7 @@ extension CreatePostVC {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         
-        let alertViewController = UIAlertController(title: "", message: "게시물 작성을 중단하시겠습니까?",
-                                                    preferredStyle: .alert)
+        let alertViewController = UIAlertController(title: "", message: "게시물 작성을 중단하시겠습니까?", preferredStyle: .alert)
         
         let dismissAction = UIAlertAction(title: "작성 중단", style: .default){ _ in
             self.dismiss(animated: true, completion: nil)
@@ -261,7 +267,7 @@ extension CreatePostVC {
         }
         
         let images: [UIImage] = selectImages
-        //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        
         let model: WritePostData = getPostWriteData()
         
         vc.setAddressListData(list: [])
@@ -417,6 +423,7 @@ extension CreatePostVC {
         themeCell.setThemeInfo = { value in
             self.theme = value
         }
+        
         return themeCell
     }
     
@@ -441,7 +448,11 @@ extension CreatePostVC {
     
     func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
         guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else { return UITableViewCell() }
-        courseDescCell.setContentText(text: "")
+        
+        if courseDesc == ""{
+            courseDescCell.setContentText(text: "")
+        }
+        
         courseDescCell.setCourseDesc = { value in
             self.courseDesc = value
         }
