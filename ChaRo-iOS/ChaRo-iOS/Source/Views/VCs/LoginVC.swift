@@ -67,11 +67,19 @@ class LoginVC: UIViewController {
                 switch result
                 {
                 case .success(let data):
-                    print("여기까진..")
-            
-                    if let userData = data as? LoginDataModel {
-                        dump(userData)
+                    let loginData = data as? LoginDataModel
+                    let userData = loginData?.data
+                    dump(userData)
+                    
+                    if let user = userData as? UserData {
                         
+                        UserDefaults.standard.set(user.userId, forKey: "userId")
+                        UserDefaults.standard.set(user.nickname, forKey: "nickname")
+                        UserDefaults.standard.set(user.token, forKey: "token")
+                        
+                        print(UserDefaults.standard.string(forKey: "userId"))
+                        print(UserDefaults.standard.string(forKey: "nickname"))
+                        print(UserDefaults.standard.string(forKey: "token"))
                     }
                     
                 case .requestErr(let message):

@@ -122,7 +122,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         //홈에서는 선택되었을 때 색이 들어가면 안됨
         cell?.highLightView.backgroundColor = .systemBackground
         cell?.themeImageView.layer.borderWidth = 0
-        cell?.themeLabel.textColor = .mainBlack
+        cell?.themeLabel.textColor = .gray50
         
 
     }

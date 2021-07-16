@@ -28,15 +28,16 @@ class CommonCVC: UICollectionViewCell {
     //MARK: Variable
     var callback : (() -> Void)?
     var postID: Int = 1
-    var isFavorite: Bool? {
-        didSet {
-            if isFavorite == true {
-                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
-            } else {
-                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
-            }
-        }
-    }
+    var isFavorite = false
+//    var isFavorite: Bool? {
+//        didSet {
+//            if isFavorite! {
+//                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+//            } else {
+//                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+//            }
+//        }
+//    }
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -101,9 +102,13 @@ class CommonCVC: UICollectionViewCell {
             switch result{
             case .success(let success):
                 if let success = success as? Bool {
-                    if success {
-                        isFavorite = !isFavorite!
-                    }
+                    
+                    print(self.isFavorite)
+                    self.isFavorite = success ? !isFavorite : isFavorite
+                    
+                    print(self.isFavorite)
+                    prepareForReuse()
+                    
                 }
             case .requestErr(let msg):
                 

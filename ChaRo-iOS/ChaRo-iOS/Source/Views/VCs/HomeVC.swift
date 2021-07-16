@@ -232,6 +232,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 //MARK: 배너부분 구현
         switch indexPath.row {
         
+        
         case 0:
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.setDelegate()
