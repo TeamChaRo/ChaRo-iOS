@@ -102,7 +102,7 @@ class CommonCVC: UICollectionViewCell {
             
         ])
         
-    
+        
         tagView1.layer.cornerRadius = 10
         tagView2.layer.cornerRadius = 10
         tagView3.layer.cornerRadius = 10
