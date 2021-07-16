@@ -91,7 +91,6 @@ extension PostCourseThemeTVC {
             $0.height.equalTo(70)
             $0.leading.equalTo(self.snp.leading)
             $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
-
         }
         
         regionButton.snp.makeConstraints {

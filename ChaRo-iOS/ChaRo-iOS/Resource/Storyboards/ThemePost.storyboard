@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FSr-K2-YcY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FSr-K2-YcY">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -50,12 +50,12 @@
                                     <constraint firstAttribute="bottom" secondItem="Tno-rF-xZD" secondAttribute="bottom" constant="23" id="wC5-cS-U7e"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GUN-SI-I1O">
-                                <rect key="frame" x="214" y="154" width="180" height="88"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GUN-SI-I1O">
+                                <rect key="frame" x="254" y="260" width="140" height="86"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="Kf3-Ha-SRy"/>
-                                    <constraint firstAttribute="width" constant="180" id="yOf-i8-o3O"/>
+                                    <constraint firstAttribute="height" constant="86" id="Kf3-Ha-SRy"/>
+                                    <constraint firstAttribute="width" constant="140" id="yOf-i8-o3O"/>
                                 </constraints>
                             </tableView>
                         </subviews>
@@ -67,7 +67,7 @@
                             <constraint firstItem="mtt-cJ-16D" firstAttribute="trailing" secondItem="EfI-xp-oZM" secondAttribute="trailing" id="9Lv-MT-k3c"/>
                             <constraint firstItem="GUN-SI-I1O" firstAttribute="trailing" secondItem="EfI-xp-oZM" secondAttribute="trailing" constant="-20" id="Eyl-tv-tgu"/>
                             <constraint firstItem="EfI-xp-oZM" firstAttribute="bottom" secondItem="bB3-pq-LlX" secondAttribute="bottom" id="G93-D8-jIq"/>
-                            <constraint firstItem="GUN-SI-I1O" firstAttribute="top" secondItem="EfI-xp-oZM" secondAttribute="top" constant="110" id="I5e-Gk-Uvu"/>
+                            <constraint firstItem="GUN-SI-I1O" firstAttribute="top" secondItem="ra4-LH-ODE" secondAttribute="top" constant="260" id="I5e-Gk-Uvu"/>
                             <constraint firstItem="bB3-pq-LlX" firstAttribute="trailing" secondItem="EfI-xp-oZM" secondAttribute="trailing" id="NPp-ES-PNf"/>
                             <constraint firstItem="bB3-pq-LlX" firstAttribute="leading" secondItem="EfI-xp-oZM" secondAttribute="leading" id="cVB-h9-KJR"/>
                             <constraint firstItem="mtt-cJ-16D" firstAttribute="top" secondItem="ra4-LH-ODE" secondAttribute="top" id="ndJ-zj-5OP"/>

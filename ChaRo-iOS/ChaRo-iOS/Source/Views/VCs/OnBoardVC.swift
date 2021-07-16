@@ -35,7 +35,7 @@ class OnBoardVC: UIViewController {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
         let rate : CGFloat = UIScreen.getDeviceHeight() / 812
-        
+    
         layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: rate * 624)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0

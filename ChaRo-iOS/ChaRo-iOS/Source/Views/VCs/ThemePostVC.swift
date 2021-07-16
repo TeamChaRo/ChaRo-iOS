@@ -51,6 +51,7 @@ class ThemePostVC: UIViewController {
         setTitleLabelUI()
         setShaow()
         setTableViewTag()
+        setdropDownTableViewUI()
     }
 
     override func viewDidAppear(_ animated: Bool) {

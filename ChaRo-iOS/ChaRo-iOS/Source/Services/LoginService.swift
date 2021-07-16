@@ -69,7 +69,7 @@ struct LoginService {
                 //setUserInfo(data: decodedData.data)
                 print(decodedData.success)
                 print(decodedData.data as? UserData)
-                return .success(decodedData.data as? UserData)
+                return .success(decodedData)
                 
             case 400:
                 print(decodedData.msg)

@@ -29,6 +29,7 @@ class HomePostVC: UIViewController {
     var newPostCount: Int = 0
     var postData: [DetailModel] = []
     var newPostData: [DetailModel] = []
+    var cellLoadFirst: Bool = true
     
     static let identifier : String = "HomePostVC"
     
@@ -55,7 +56,9 @@ class HomePostVC: UIViewController {
     func setRound(){
         dropDownTableview.layer.masksToBounds = true
         dropDownTableview.layer.cornerRadius = 20
-        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+//        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+
+        
     }
 
     override func viewDidLoad() {
@@ -66,7 +69,6 @@ class HomePostVC: UIViewController {
         setRound()
         setNavigationLabel()
         getData()
-        getNewData()
         self.dismissDropDownWhenTappedAround()
 
         // Do any additional setup after loading the view.
@@ -87,8 +89,9 @@ class HomePostVC: UIViewController {
                         self.postCount = response.data.totalCourse
                         self.postData = [response]
                     }
+                    print("ddd", self.postCount)
+                    self.postCount = response.data.totalCourse
                     self.collectionView.reloadData()
-            
                 }
             case .requestErr(let message) :
                 print("requestERR")
@@ -111,9 +114,9 @@ class HomePostVC: UIViewController {
                     
                     DispatchQueue.global().sync {
                         self.postCount = response.data.drive.count
+                        self.newPostCount = response.data.drive.count
                     self.postData = [response]
                     }
-                    
                     self.collectionView.reloadData()
                 }
             case .requestErr(let message) :
@@ -152,8 +155,8 @@ extension HomePostVC: UICollectionViewDelegate{
                 isFirstLoaded = false
                 topCVCCell = topCell
             }
-            topCVCCell!.setLabel()
             topCVCCell?.postCount = postCount
+            topCVCCell?.setLabel()
             return topCVCCell!
         default:
             if postData.count == 0{
@@ -223,6 +226,7 @@ extension HomePostVC: UITableViewDelegate{
             cell.selectedBackgroundView = bgColorView
             cell.setCellName(name: "최신순")
             cell.delegate = self
+
             return cell
 
         default:
@@ -255,13 +259,15 @@ extension HomePostVC: MenuClickedDelegate {
 
 extension HomePostVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
+        
         if cell.name == "인기순"{
             print("인기순 실행")
             self.getData()
             self.cellCount = self.postData[0].data.drive.count
             self.dropDownTableview.isHidden = true
             topCVCCell?.setTitle(data: "인기순")
-            topCVCCell?.setTitle(data: "인기순")
+            topCVCCell?.setTopTitle(name: "인기순")
+            topCVCCell?.setSelectName(name: "인기순")
         }
         
         else if cell.name == "최신순"{
@@ -270,8 +276,8 @@ extension HomePostVC: SetTitleDelegate {
             self.cellCount = self.postData[0].data.drive.count
             self.dropDownTableview.isHidden = true
             topCVCCell?.setTitle(data: "최신순")
-            topCVCCell?.setTitle(data: "최신순")
-            self.collectionView.reloadData()
+            topCVCCell?.setTopTitle(name: "최신순")
+            topCVCCell?.setSelectName(name: "최신순")
 
         }
         

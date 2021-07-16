@@ -138,6 +138,8 @@ class SearchResultVC: UIViewController {
         dropDownTableView.dataSource = self
         dropDownTableView.isHidden = true
         dropDownTableView.separatorStyle = .none
+        dropDownTableView.clipsToBounds = true
+        dropDownTableView.layer.cornerRadius = 20
 
     }
     
