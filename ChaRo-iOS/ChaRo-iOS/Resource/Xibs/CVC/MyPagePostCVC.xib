@@ -29,7 +29,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="539" height="140"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tempImageBig" translatesAutoresizingMaskIntoConstraints="NO" id="kd9-bz-d0z">
-                                <rect key="frame" x="20" y="10" width="269" height="120"/>
+                                <rect key="frame" x="20" y="10" width="276" height="120"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWX-Mj-vdr">
                                 <rect key="frame" x="309" y="10" width="210" height="21"/>
@@ -146,8 +146,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="DMm-r8-EDn" firstAttribute="leading" secondItem="kd9-bz-d0z" secondAttribute="trailing" constant="20" id="11c-tm-VhS"/>
-                            <constraint firstItem="P39-Bv-C2D" firstAttribute="leading" secondItem="kd9-bz-d0z" secondAttribute="trailing" constant="20" id="Dhd-Dp-8p5"/>
+                            <constraint firstItem="DMm-r8-EDn" firstAttribute="leading" secondItem="kd9-bz-d0z" secondAttribute="trailing" constant="13" id="11c-tm-VhS"/>
+                            <constraint firstItem="P39-Bv-C2D" firstAttribute="leading" secondItem="kd9-bz-d0z" secondAttribute="trailing" constant="13" id="Dhd-Dp-8p5"/>
                             <constraint firstItem="DMm-r8-EDn" firstAttribute="top" secondItem="pWX-Mj-vdr" secondAttribute="bottom" id="FoX-GS-Mux"/>
                             <constraint firstAttribute="bottom" secondItem="nws-pp-mBf" secondAttribute="bottom" constant="10" id="IzP-bI-2vy"/>
                             <constraint firstItem="kd9-bz-d0z" firstAttribute="leading" secondItem="G9G-xo-SFy" secondAttribute="leading" constant="20" id="ODb-fs-Sel"/>
@@ -156,7 +156,7 @@
                             <constraint firstItem="pWX-Mj-vdr" firstAttribute="top" secondItem="G9G-xo-SFy" secondAttribute="top" constant="10" id="cwe-u8-AxL"/>
                             <constraint firstAttribute="bottom" secondItem="kd9-bz-d0z" secondAttribute="bottom" constant="10" id="dCG-QG-9wx"/>
                             <constraint firstAttribute="bottom" secondItem="P39-Bv-C2D" secondAttribute="bottom" constant="10" id="jOi-qO-nIe"/>
-                            <constraint firstItem="pWX-Mj-vdr" firstAttribute="leading" secondItem="kd9-bz-d0z" secondAttribute="trailing" constant="20" id="rev-gH-gjN"/>
+                            <constraint firstItem="pWX-Mj-vdr" firstAttribute="leading" secondItem="kd9-bz-d0z" secondAttribute="trailing" constant="13" id="rev-gH-gjN"/>
                             <constraint firstAttribute="trailing" secondItem="pWX-Mj-vdr" secondAttribute="trailing" constant="20" id="vz2-b5-6jm"/>
                         </constraints>
                     </view>
