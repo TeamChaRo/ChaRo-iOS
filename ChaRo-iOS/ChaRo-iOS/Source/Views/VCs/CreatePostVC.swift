@@ -28,6 +28,7 @@ class CreatePostVC: UIViewController {
     
     var itemProviders: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
+    var titleSelectFlag: Bool = false // 제목 textfield 선택했는지 여부
     
     // MARK:  components
     let tableView: UITableView = UITableView()
@@ -124,6 +125,7 @@ extension CreatePostVC {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(touchTitleView), name: .touchTitleTextView, object: nil)
     }
     
     func removeObservers(){
@@ -137,14 +139,21 @@ extension CreatePostVC {
     }
     
     @objc
+    func touchTitleView() {
+        titleSelectFlag = true
+    }
+    
+    @objc
     func textFieldMoveUp(_ notification: NSNotification){
-        
-        if tableView.contentOffset.y != 0.0 {
+
+        if tableView.contentOffset.y != 0.0 && !titleSelectFlag {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+                    self.tableView.transform = CGAffineTransform(translationX: 0, y: self.tableView.contentOffset.y-keyboardSize.height)
                 })
             }
+        } else {
+            titleSelectFlag = false
         }
         
     }
@@ -319,6 +328,7 @@ extension CreatePostVC: UITableViewDataSource {
         }
         
     }
+
 }
 
 // MARK: - PHPicker Extension

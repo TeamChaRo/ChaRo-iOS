@@ -81,6 +81,12 @@ class CreatePostTitleTVC: UITableViewCell {
 }
 
 extension CreatePostTitleTVC: UITextViewDelegate {
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        NotificationCenter.default.post(name: .touchTitleTextView, object: nil)
+        return true
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         titleTextView.text = ""
         titleTextView.textColor = UIColor.black
