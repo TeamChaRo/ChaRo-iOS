@@ -18,6 +18,9 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var famousButton: UIButton!
     @IBOutlet weak var newUpdateButton: UIButton!
     @IBOutlet weak var dropDownTableview: UITableView!
+    @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
+    
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 0
@@ -39,7 +42,8 @@ class HomePostVC: UIViewController {
         collectionView.registerCustomXib(xibName: "CommonCVC")
         collectionView.registerCustomXib(xibName: "HomePostDetailCVC")
     }
-    func setNavigationLabel(){
+    func setNavigationLabel() {
+        self.setDetailNavigationViewUI(height: navigationViewHeight, fromBottomToTitle: fromBottomToLabel)
         NavigationTitleLabel.text = topText
     }
     
@@ -50,14 +54,15 @@ class HomePostVC: UIViewController {
         dropDownTableview.dataSource = self
         dropDownTableview.separatorStyle = .none
     }
+    
     func setShaow(){
         homePostNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
+    
     func setRound(){
         dropDownTableview.layer.masksToBounds = true
         dropDownTableview.layer.cornerRadius = 20
 //        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-
         
     }
 

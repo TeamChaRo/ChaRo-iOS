@@ -306,7 +306,12 @@ extension PostDetailVC{
     
         navigationView.snp.makeConstraints{
             $0.top.leading.trailing.equalTo(view)
-            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            if UIScreen.hasNotch{
+                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            }else{
+                $0.height.equalTo(93)
+            }
+            
         }
         navigationView.bringSubviewToFront(view)
         setBasicNavigationView()

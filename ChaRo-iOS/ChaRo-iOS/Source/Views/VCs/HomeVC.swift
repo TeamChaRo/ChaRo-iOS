@@ -15,6 +15,10 @@ class HomeVC: UIViewController {
     @IBOutlet weak var homeNavigationSearchButton: UIButton!
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
     
+    @IBOutlet weak var homeNavigationHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var charoIconImageView: NSLayoutConstraint!
+    
+    
     var isFirstSetData: Bool = true
     
     
@@ -47,9 +51,13 @@ class HomeVC: UIViewController {
         // Do any additional setup after loading the view.
     }
      
-    func setHomeNavigationViewLayout(){
+    func setHomeNavigationViewLayout() {
         HomeNavigationView.backgroundColor = .none
         homeNavigationNotificationButton.addTarget(self, action: #selector(presentOnBoarding), for: .touchUpInside)
+        
+        self.setMainNavigationViewUI(height: homeNavigationHeightConstraints,
+                                 fromTopToImageView: charoIconImageView)
+        
     }
     
     @objc func presentOnBoarding(){
@@ -140,6 +148,7 @@ class HomeVC: UIViewController {
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true, completion: nil)
     }
+    
     @IBAction func notificationButtonClicked(_ sender: Any) {
         
         guard let notiVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(identifier: "NotificationVC") as? NotificationVC else {return}
@@ -222,6 +231,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         tableIndex = indexPath
 //MARK: 배너부분 구현
         switch indexPath.row {
+        
         
         case 0:
             let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
@@ -380,12 +390,6 @@ extension HomeVC : CollectionViewCellDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
         
-        print("You tapped the cell \(index)")
-        
-        if let labelText = collectionviewcell?.themeLabel.text {
-                print("You tapped the cell \(index) in the row of Label \(labelText)")
-                // 여기서 CVC 클릭했을 때 할 거 쓰기
-            }
         }
     
 }

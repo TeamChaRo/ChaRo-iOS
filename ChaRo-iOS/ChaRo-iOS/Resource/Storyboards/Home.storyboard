@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,6 +70,8 @@
                     <connections>
                         <outlet property="HomeNavigationView" destination="KbL-a3-YBW" id="08y-M0-Mfy"/>
                         <outlet property="HomeTableView" destination="J9H-Uf-xbB" id="4VX-FP-xBA"/>
+                        <outlet property="charoIconImageView" destination="wz2-U4-Okp" id="R97-Fy-Uxl"/>
+                        <outlet property="homeNavigationHeightConstraints" destination="W9a-Mr-TYR" id="P0F-be-4DB"/>
                         <outlet property="homeNavigationLogo" destination="fNn-eX-O7v" id="MKv-Wa-UPa"/>
                         <outlet property="homeNavigationNotificationButton" destination="EGm-mL-gdn" id="YcG-Cc-PfE"/>
                         <outlet property="homeNavigationSearchButton" destination="e3b-4a-hDs" id="dyI-Nv-kIW"/>
