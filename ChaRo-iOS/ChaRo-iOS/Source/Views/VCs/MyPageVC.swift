@@ -286,12 +286,16 @@ extension MyPageVC: UICollectionViewDataSource{
         }
         else {
             if indexPath.row == 0{
-                return CGSize(width: width-40, height: 30)
+                return CGSize(width: width-40, height: 40)
             }
             else{
             return CGSize(width: width, height: 100)
             }
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
 }
