@@ -170,7 +170,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         case 0:
             return UIScreen.main.bounds.height * homeBannerRatio
         case 1:
-            return 353 * factor
+            return 365 * factor
         case 2:
             return 178 * factor
         case 3, 4, 5:

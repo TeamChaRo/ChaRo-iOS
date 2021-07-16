@@ -26,9 +26,9 @@ class TabbarVC: UITabBarController {
 
         let customTabbar = tabBar
         var newFrame = CGRect(x: 0,
-                              y: self.view.frame.size.height-150,
+                              y: self.view.frame.size.height - 200,
                               width:  self.view.frame.size.width,
-                              height: 150)
+                              height: 200)
         
         
         // 이 로그는 나중에 지울게요!
