@@ -18,6 +18,8 @@ class AddressMainVC: UIViewController {
     public var addressCellList: [AddressButtonCell] = []
     
     private var isFirstFinded = true
+    private var sendedPostData: WritePostData?
+    private var imageList: [UIImage] = []
     
     private var tableView = UITableView()
     private var oneCellHeight = 48
@@ -51,6 +53,8 @@ class AddressMainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        makeAlert(title: "",
+                  message: "출발지와 목적지를 입력해 다녀온 드라이브 \n코스를 표현해주세요.\n\n 완성된 경로를 확인 후, 경유지를 추가해\n 원하는 경로로 수정이 가능합니다.")
         getSearchKeywords()
         configureTableView()
         setConstraints()
@@ -59,7 +63,10 @@ class AddressMainVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
+        print("넘겨온 데이터 확인 = \(sendedPostData)")
         displayAddress()
         setMapFrame()
         inputMarkerInMapView()
@@ -73,6 +80,7 @@ class AddressMainVC: UIViewController {
             setRecivedAddressCell()
         }
     }
+
     
     private func isThereStartAddress(){
         if addressList[0].title != ""{
@@ -121,8 +129,28 @@ class AddressMainVC: UIViewController {
     }
     
     @objc func sendDecidedAddress(){
+        let newAddressList = changeAddressData()
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        
+        nextVC.setDataWhenConfirmPost(data: sendedPostData!,
+                                      imageList: imageList,
+                                      addressList: addressList)
         postSearchKeywords()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    func changeAddressData() -> [Address]{
+        print("현재까지 주소 - \(addressList)")
+        var castedToAddressDatalList : [Address] = []
+        
+        for item in addressList {
+            castedToAddressDatalList.append(item.getAddressDataModel())
+        }
+        
+        return castedToAddressDatalList
+    }
+    
 }
 
 
@@ -156,6 +184,10 @@ extension AddressMainVC {
         return cell
     }
     
+    public func setWritePostDataForServer(data: WritePostData, imageList: [UIImage]){
+        sendedPostData = data
+        
+    }
     
     public func setAddressListData(list: [AddressDataModel]){
         isFirstFinded = list.count == 0 ? true : false
@@ -294,30 +326,76 @@ extension AddressMainVC{
         
     }
     
-    private func addPathInMapView(){
+    private func removeAllPolyLines(){
+        for line in polyLineList{
+            line.map = nil
+        }
         polyLineList.removeAll()
+    }
+    
+    private func addPathInMapView(){
+        removeAllPolyLines()
         let pathData = TMapPathData()
         print("count = \(addressList.count)")
+        
         for index in 0..<addressList.count-1{
+            if addressList[index+1].title == "" {
+                return
+            }
             print("index = \(index)")
             pathData.findPathData(startPoint: addressList[index].getPoint(),
                                   endPoint: addressList[index+1].getPoint()) { result, error in
                 guard let polyLine = result else {return}
+                
+                print(" start = \(self.addressList[index]), \(self.addressList[index].title)")
+                print(" end = \(self.addressList[index+1]),\(self.addressList[index+1].title) ")
+                
+                print("경로 들어감")
                 self.polyLineList.append(polyLine)
+                polyLine.strokeColor = .mainBlue
+                DispatchQueue.main.async {
+                    polyLine.map = self.tMapView
+                }
                 
                 if index == self.addressList.count-2{
+                    
+                    print("경로 그려져야함!!!!! = \(index)")
                     DispatchQueue.main.async {
-                        polyLine.strokeColor = .mainBlue
-                        polyLine.map = self.tMapView
                         self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
                         print("befor = \(self.tMapView.getCenter())")
-                        self.tMapView.setCenter(self.getOptimizationCenter())
-                        self.tMapView.setZoom(self.tMapView.getZoom()! - 1)
+                        //self.tMapView.setCenter(self.getOptimizationCenter())
+                        //self.tMapView.setZoom(self.tMapView.getZoom()! - 1)
                     }
                 }
             }
         }
     }
+    
+    
+//    private func addPathInMapView(){
+//        polyLineList.removeAll()
+//        let pathData = TMapPathData()
+//        print("count = \(addressList.count)")
+//        for index in 0..<addressList.count-1{
+//            print("index = \(index)")
+//            pathData.findPathData(startPoint: addressList[index].getPoint(),
+//                                  endPoint: addressList[index+1].getPoint()) { result, error in
+//                guard let polyLine = result else {return}
+//                self.polyLineList.append(polyLine)
+//
+//                if index == self.addressList.count-2{
+//                    DispatchQueue.main.async {
+//                        polyLine.strokeColor = .mainBlue
+//                        polyLine.map = self.tMapView
+//                        self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
+//                        print("befor = \(self.tMapView.getCenter())")
+//                        self.tMapView.setCenter(self.getOptimizationCenter())
+//                        self.tMapView.setZoom(self.tMapView.getZoom()! - 1)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     private func initMapViewStyle(){
         print("initMapViewStyle")
@@ -402,12 +480,14 @@ extension AddressMainVC{
 extension AddressMainVC{
     private func getSearchKeywords(){
         print("getSearchKeywords")
-        SearchKeywordService.shared.getSearchKeywords(userId: "111"){response in
+        SearchKeywordService.shared.getSearchKeywords(userId: Constants.userId){response in
             
             switch(response){
             case .success(let resultData):
                 if let data =  resultData as? SearchResultDataModel{
+                    print("내가 검색한 결과 조회~~~!!")
                     self.searchHistory = data.data!
+                    dump(self.searchHistory)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -423,7 +503,7 @@ extension AddressMainVC{
     
     
     private func postSearchKeywords(){
-
+        print("postSearchKeywords-----------------")
         var searchKeywordList: [SearchHistory] = []
         
         for item in newSearchHistory{
@@ -434,14 +514,16 @@ extension AddressMainVC{
             searchKeywordList.append(address)
         }
         
-        SearchKeywordService.shared.postSearchKeywords(userId: "111",
+        SearchKeywordService.shared.postSearchKeywords(userId: Constants.userId,
                                                        keywords: searchKeywordList){ [self] response in
+            print("결과받음")
             
             switch(response){
-            
             case .success(let resultData):
                 if let data =  resultData as? SearchResultDataModel{
-                    
+                    print("성공했더~!!!!")
+                    dump(data)
+                    print("성공했더~!!!!")
                 }
             case .requestErr(let message):
                 print("requestErr", message)
