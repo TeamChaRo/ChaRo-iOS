@@ -36,18 +36,7 @@ class LoginVC: UIViewController {
         imageView.image = UIImage(named: "pwdBackground")
         return imageView
     }()
-//
-//    private let idTextField: UITextField = {
-//        let textField = UITextField()
-//        return textField
-//    }()
-//
-//    private let pwdTextField: UITextField = {
-//        let textField = UITextField()
-//        return textField
-//    }()
-//
-
+    
     private let joinButton: UIButton = {
         let button = UIButton()
         return button
@@ -97,6 +86,11 @@ class LoginVC: UIViewController {
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+          self.view.endEditing(true)
+    }
+
     
 }
 

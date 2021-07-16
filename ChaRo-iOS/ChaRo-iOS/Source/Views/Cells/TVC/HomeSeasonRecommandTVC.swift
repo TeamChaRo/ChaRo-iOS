@@ -22,16 +22,6 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     var customList: [Drive] = []
     var headerText: String = ""
     
-//
-//    var imageNameText: [String] = []
-//    var titleText: [String] = []
-//    var hashTagText1: [String] = []
-//    var hashTagText2: [String] = []
-//    var hashTagText3: [String] = []
-//    var hashTagText4: [String] = []
-//    var heart: [Bool] = []
-    
-//    var cellList: [CommonCVC] = []
     
     //MARK:- Variable
     static let identifier = "HomeSeasonRecommandTVC"
@@ -54,18 +44,6 @@ class HomeSeasonRecommandTVC: UITableViewCell {
         
     }
     
-//     func cellInit(){
-//             guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
-//             guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
-//             guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}
-//             guard let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,3]) as? CommonCVC else {return}
-//
-//
-//         cellList.append(cell1)
-//         cellList.append(cell2)
-//         cellList.append(cell3)
-//         cellList.append(cell4)
-//     }
     
     func setLabelUI() {
         
@@ -132,50 +110,17 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
                          tagArr: element.tags,
                          isFavorite: element.isFavorite,
                          postID: element.postID)
-//
-//            switch indexPath.row {
-//            case 0:
-//                if hashTagText1.count == 2{
-//                    hashTagText1.append("")
-//                }
-//                cellList[0].setData(image: imageNameText[0], title: titleText[0], tag1: hashTagText1[0] , tag2: hashTagText1[1], tag3: hashTagText1[2] , hearth: heart[0])
-//            case 1:
-//                if hashTagText2.count == 2{
-//                    hashTagText2.append("")
-//                }
-//                cellList[1].setData(image: imageNameText[1], title: titleText[1], tag1: hashTagText2[0] , tag2: hashTagText2[1], tag3: hashTagText2[2] , hearth: heart[1])
-//            case 2:
-//                if hashTagText3.count == 2{
-//                    hashTagText3.append("")
-//                }
-//                cellList[2].setData(image: imageNameText[2], title: titleText[2], tag1: hashTagText3[0] , tag2: hashTagText3[1], tag3: hashTagText3[2] , hearth: heart[2])
-//            case 3:
-//                if hashTagText4.count == 2{
-//                    hashTagText4.append("")
-//                }
-//                cellList[3].setData(image: imageNameText[3], title: titleText[3], tag1: hashTagText4[0] , tag2: hashTagText4[1], tag3: hashTagText4[2] , hearth: heart[3])
-//            default:
-//                print("Error")
-//            }
+
             return cell
             
         }
-        
-//
-//        cell.callback = {
-//            print("button pressed", indexPath.row)
-//            }
-        
-        return cell
+    
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let size = CGSize(width: 160, height: 230)
-        
-        //이거 사이즈를 11pro, se2 - 250 딱맞고 se1 에서 - 230이 딱맞고
-        //해상도 따라 해주기
+        let factor = UIScreen.main.bounds.width / 375
+        let size = CGSize(width: 160 * factor, height: 230 * factor)
         
         return size
     }

@@ -145,7 +145,6 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         
     }
     
-    //375 / 2 = 187 - 27 = 160
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
