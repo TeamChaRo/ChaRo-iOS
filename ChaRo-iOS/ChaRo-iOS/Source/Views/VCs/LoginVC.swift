@@ -47,6 +47,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         setConstraints()
         setLoginButtonUI()
+        setNotificationCenter()
     }
     
     func setLoginButtonUI() {
@@ -57,6 +58,9 @@ class LoginVC: UIViewController {
         
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        removeObservers()
+    }
     
     
     
@@ -100,6 +104,32 @@ class LoginVC: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
           self.view.endEditing(true)
+    }
+    
+    func setNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc
+    func textFieldMoveUp(_ notification: NSNotification){
+        
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            })
+        }
+        
+    }
+    
+    @objc
+    func textFieldMoveDown(_ notification: NSNotification){
+        view.transform = .identity
     }
     
 
