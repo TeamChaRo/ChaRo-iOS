@@ -77,13 +77,14 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.layer.cornerRadius = 10
         cell.lengthBtwImgLabel.constant = 0
-        
-        cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
+    
         
         //요소 변수화
         let element = selectedDriveList[indexPath.row]
         
         cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postID)
+        
+        cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
         
         return cell
 
