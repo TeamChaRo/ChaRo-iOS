@@ -337,6 +337,12 @@ extension ThemePostVC: PostIdDelegate {
     
     func sendPostID(data: Int) {
         print(data)
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        
+        nextVC.setPostId(id: data)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
 }

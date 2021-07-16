@@ -28,16 +28,15 @@ class CommonCVC: UICollectionViewCell {
     //MARK: Variable
     var callback : (() -> Void)?
     var postID: Int = 1
-    var isFavorite = false
-//    var isFavorite: Bool? {
-//        didSet {
-//            if isFavorite! {
-//                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
-//            } else {
-//                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
-//            }
-//        }
-//    }
+    var isFavorite: Bool? {
+        didSet {
+            if isFavorite! {
+                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+            } else {
+                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+            }
+        }
+    }
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -67,12 +66,12 @@ class CommonCVC: UICollectionViewCell {
         titleLabel.numberOfLines = 0
         titleLabel.font = .notoSansRegularFont(ofSize: 14)
     
-//        if titleLabel.numberOfLines == 2{
-//            titleHeight.constant == 25
-//        }
-//        else{
-//            titleHeight.constant = 50
-//        }
+        if titleLabel.numberOfLines == 2 {
+            titleHeight.constant = 25
+        }
+        else {
+            titleHeight.constant = 50
+        }
         
         //하트 설정
         self.isFavorite = isFavorite
@@ -103,13 +102,12 @@ class CommonCVC: UICollectionViewCell {
             case .success(let success):
                 if let success = success as? Bool {
                     
-                    print(self.isFavorite)
-                    self.isFavorite = success ? !isFavorite : isFavorite
+                    self.isFavorite = success ? !isFavorite! : isFavorite
                     
-                    print(self.isFavorite)
                     prepareForReuse()
                     
                 }
+                
             case .requestErr(let msg):
                 
                 if let msg = msg as? String {

@@ -84,6 +84,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
         let themeName = themeList[indexPath.row]
         
+        cell.themeLabel.textColor = .gray50
         cell.setThemeTitle(name: themeName)
         cell.themeImageView?.image = UIImage(named: ThemeDic[themeName] ?? "gear")
         cell.location = .HomeThemeTVC
