@@ -68,7 +68,6 @@ class MyPageVC: UIViewController {
         dropDownTableView.registerCustomXib(xibName: "HotDropDownTVC")
         dropDownTableView.clipsToBounds = true
         dropDownTableView.layer.cornerRadius = 10
-//        dropDownTableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         dropDownTableView.separatorStyle = .none
         
     }
@@ -114,6 +113,15 @@ class MyPageVC: UIViewController {
         customTabbar.registerCustomXib(xibName: "TabbarCVC")
         myTableCollectionView.registerCustomXib(xibName: "MyPagePostCVC")
         myTableCollectionView.registerCustomXib(xibName: "HomePostDetailCVC")
+        
+        myTableCollectionView.registerCustomXib(xibName: "EmptyCVC")
+        
+        
+//        myTableCollectionView.register(CollectionViewFooter.self,
+//                                       forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+//                                       withReuseIdentifier: CollectionViewFooter.identifier)
+//        
+        
         saveTableCollectionView.registerCustomXib(xibName: "MyPagePostCVC")
         saveTableCollectionView.registerCustomXib(xibName: "HomePostDetailCVC")
     
@@ -179,23 +187,35 @@ extension MyPageVC: UICollectionViewDelegate{
         }
         //나중에 누르면 구현되게 여기다가 구현 할 예정
     }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
 }
 
 extension MyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let customTabbarCount: Int = 2
-        switch collectionView.tag {
-        case 1:
-            return customTabbarCount
-        case 2:
-            return myCellCount + 1
-        default:
-            return saveCellCount + 1
+        
+        if section == 0 {
+            let customTabbarCount: Int = 2
+            switch collectionView.tag {
+            case 1:
+                return customTabbarCount
+            case 2:
+                return myCellCount + 1
+            default:
+                return saveCellCount + 1
+            }
+        } else {
+            return 1
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if indexPath.section == 0 {
+            
         guard let myCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "MyPagePostCVC", for: indexPath) as? MyPagePostCVC else {return UICollectionViewCell()}
         guard let detailCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         
@@ -222,6 +242,7 @@ extension MyPageVC: UICollectionViewDataSource{
         //내가 쓴 글
         case 2:
             detailCell.delegate = self
+            
             switch indexPath.row {
             case 0:
                 if myCellIsFirstLoaded {
@@ -235,12 +256,18 @@ extension MyPageVC: UICollectionViewDataSource{
                 if LikePostData.count == 0{
                     return myCell
                 }
-                else{
+                else {
+                    
+                    if indexPath.row == myCellCount {
+                        myCell.setLastCell()
+                    }
+                    
                     print(myCellCount, indexPath.row)
                     myCVCCell?.postCount = myCellCount
                     myCVCCell?.setLabel()
                     myCell.setData(image: LikePostData[0].data.writtenPost[indexPath.row-1
                     ].image, title: LikePostData[0].data.writtenPost[indexPath.row-1].title, tagCount: LikePostData[0].data.writtenPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.writtenPost[indexPath.row-1].tags, heart: LikePostData[0].data.writtenPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.writtenPost[indexPath.row-1].saveNum, year: LikePostData[0].data.writtenPost[indexPath.row-1].year, month: LikePostData[0].data.writtenPost[indexPath.row-1].month, day: LikePostData[0].data.writtenPost[indexPath.row-1].day, postID: LikePostData[0].data.writtenPost[indexPath.row-1].postID)
+                    
             return myCell
                 
             }
@@ -262,6 +289,11 @@ extension MyPageVC: UICollectionViewDataSource{
                     return myCell
                 }
                 else{
+                    
+                    if indexPath.row == myCellCount {
+                        myCell.setLastCell()
+                    }
+                    
                     print(myCellCount, indexPath.row)
                     saveCVCCell?.postCount = saveCellCount
                     saveCVCCell?.setLabel()
@@ -276,27 +308,67 @@ extension MyPageVC: UICollectionViewDataSource{
             print("Error")
         }
         return UICollectionViewCell()
+        }
+        
+        else {
+            
+            guard let emptyCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: EmptyCVC.identifier, for: indexPath) as? EmptyCVC else { return UICollectionViewCell() }
+            
+            return emptyCell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var width = UIScreen.main.bounds.width
         
-        if collectionView.tag == 1{
+        if collectionView.tag == 1 {
         return CGSize(width: width/2, height: 50)
         }
         else {
-            if indexPath.row == 0{
-                return CGSize(width: width-40, height: 40)
+            
+            if indexPath.section == 0 {
+                if indexPath.row == 0 {
+                    return CGSize(width: width-40, height: 40)
+                }
+                else{
+                return CGSize(width: width, height: 100)
+                }
+            } else {
+                
+                return CGSize(width: width, height: 25)
             }
-            else{
-            return CGSize(width: width, height: 100)
-            }
+            
+            
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//
+//        switch kind {
+//        case UICollectionView.elementKindSectionFooter:
+//
+//            let footer = collectionView.dequeueReusableSupplementaryView(
+//                ofKind: UICollectionView.elementKindSectionFooter,
+//                withReuseIdentifier: CollectionViewFooter.identifier,
+//                for: indexPath) as! CollectionViewFooter
+//
+//            footer.configure()
+//            return footer
+//        default:
+//            assert(false, "응 아니야")
+//        }
+//
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+//        return CGSize(width: view.frame.size.width,
+//                      height: 100)
+//    }
+    
     
 }
 

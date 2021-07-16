@@ -22,6 +22,9 @@ class MyPagePostCVC: UICollectionViewCell {
     @IBOutlet weak var saveLabel: UILabel!
     //데이트 ㅋ
     @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var seperatorBar: UIView!
+    
     var postid:Int = 0
     
     var heartText: String = "99"
@@ -112,6 +115,10 @@ class MyPagePostCVC: UICollectionViewCell {
                 clickedPostCell?(postid)
             }
           }
+    }
+    
+    func setLastCell() {
+        seperatorBar.isHidden = true
     }
 
 }
