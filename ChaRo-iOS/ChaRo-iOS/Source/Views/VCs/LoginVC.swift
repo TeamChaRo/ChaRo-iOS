@@ -13,32 +13,33 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var joinButton: UIButton!
     
-    
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
+    
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     static let identifier = "LoginVC"
     
     //MARK: - Component
-    private let CharoimageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "maskGroup")
-        return imageView
-    }()
-
-    private let idBackground: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "idBackground")
-        return imageView
-    }()
-
-    private let pwdBackground: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "pwdBackground")
-        return imageView
-    }()
+//    private let CharoimageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "maskGroup")
+//        return imageView
+//    }()
+//
+//    private let idBackground: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "idBackground")
+//        return imageView
+//    }()
+//
+//    private let pwdBackground: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "pwdBackground")
+//        return imageView
+//    }()
     
     
     
@@ -46,7 +47,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         setConstraints()
         setLoginButtonUI()
-        view.dismissKeyboardWhenTappedAround()
+        setNotificationCenter()
     }
     
     func setLoginButtonUI() {
@@ -56,6 +57,12 @@ class LoginVC: UIViewController {
         joinButton.setTitleColor(.gray30, for: .normal)
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        removeObservers()
+    }
+    
+    
     
     func loginAction(){
             
@@ -106,6 +113,32 @@ class LoginVC: UIViewController {
           self.view.endEditing(true)
     }
     
+    func setNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc
+    func textFieldMoveUp(_ notification: NSNotification){
+        
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            })
+        }
+        
+    }
+    
+    @objc
+    func textFieldMoveDown(_ notification: NSNotification){
+        view.transform = .identity
+    }
+    
 
     
 }
@@ -113,39 +146,51 @@ class LoginVC: UIViewController {
 extension LoginVC {
     func setConstraints() {
 
-        let factor = UIScreen.main.bounds.width / 375
+        if UIScreen.hasNotch {
+            let factor = UIScreen.main.bounds.width / 375
 
-        heightConstraint.constant = factor * 464
-        
-        view.addSubview(CharoimageView)
-        view.addSubview(idBackground)
-        view.addSubview(pwdBackground)
-        
-        view.addSubviews([CharoimageView,
-                          idBackground,
-                          pwdBackground,
-                          idTextField,
-                          pwdTextField,
-                          joinButton])
-
-        CharoimageView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(464 * factor)
-        }
-
-        idBackground.snp.makeConstraints {
-            $0.top.equalTo(CharoimageView.snp.bottom).offset(13)
-            $0.leading.equalToSuperview().offset(14)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.height.equalTo(64)
+            heightConstraint.constant = factor * 464
+        } else {
+            heightConstraint.constant = 356
+            imageView.image = UIImage(named: "maskGroupSE")
+            
         }
         
-        idBackground.snp.makeConstraints {
-            $0.top.equalTo(idBackground.snp.bottom).offset(-5)
-            $0.leading.equalToSuperview().offset(14)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.height.equalTo(64)
-        }
+        
+//        view.addSubview(CharoimageView)
+//        view.addSubview(idBackground)
+//        view.addSubview(pwdBackground)
+//
+//        view.addSubviews([CharoimageView,
+//                          idBackground,
+//                          pwdBackground,
+//                          idTextField,
+//                          pwdTextField,
+//                          joinButton])
+//
+//        CharoimageView.snp.makeConstraints {
+//            $0.top.leading.trailing.equalToSuperview()
+//            $0.height.equalTo(464 * factor)
+//        }
+//
+//        idBackground.snp.makeConstraints {
+//            $0.top.equalTo(CharoimageView.snp.bottom).offset(13)
+//            $0.leading.equalToSuperview().offset(14)
+//            $0.trailing.equalToSuperview().offset(-10)
+//            $0.height.equalTo(64)
+//        }
+//
+//        idBackground.snp.makeConstraints {
+//            $0.top.equalTo(idBackground.snp.bottom).offset(-5)
+//            $0.leading.equalToSuperview().offset(14)
+//            $0.trailing.equalToSuperview().offset(-10)
+//            $0.height.equalTo(64)
+//        }
+        
+        
+        
+        
+        
         
     }
 }

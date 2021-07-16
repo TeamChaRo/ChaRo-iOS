@@ -6,14 +6,14 @@
       "scale" : "1x"
     },
     {
+      "scale" : "2x",
       "filename" : "maskGroup@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
+      "idiom" : "universal"
     },
     {
-      "scale" : "3x",
+      "idiom" : "universal",
       "filename" : "maskGroup@3x.png",
-      "idiom" : "universal"
+      "scale" : "3x"
     }
   ],
   "info" : {
