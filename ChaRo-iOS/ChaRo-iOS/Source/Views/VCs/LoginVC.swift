@@ -46,6 +46,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         setConstraints()
         setLoginButtonUI()
+        view.dismissKeyboardWhenTappedAround()
     }
     
     func setLoginButtonUI() {
@@ -72,28 +73,33 @@ class LoginVC: UIViewController {
                         UserDefaults.standard.set(user.userId, forKey: "userId")
                         UserDefaults.standard.set(user.nickname, forKey: "nickname")
                         UserDefaults.standard.set(user.token, forKey: "token")
+                        UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
                         
                         print(UserDefaults.standard.string(forKey: "userId"))
                         print(UserDefaults.standard.string(forKey: "nickname"))
                         print(UserDefaults.standard.string(forKey: "token"))
+                        print(UserDefaults.standard.string(forKey: "profileImage"))
                     }
                     
+                case .requestErr(let message):
+                    if let message = message as? String {
+                        print(message)
+                    }
+                default :
+                    print("ERROR")
                 }
-                
-            case .requestErr(let message):
-                if let message = message as? String {
-                    print(message)
-                }
-                
-            default :
-                print("ERROR")
             }
         }
-    }
+    
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
+        let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(withIdentifier: TabbarVC.identifier)
+        nextVC.modalPresentationStyle = .fullScreen
+        self.present(nextVC, animated: true, completion: nil)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

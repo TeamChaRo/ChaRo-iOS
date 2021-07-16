@@ -33,6 +33,18 @@ extension UIView {
     func removeShadowView(){
         layer.shadowOpacity = 0
     }
+    
+    func dismissKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.endEditing(true)
+    }
+   
 
 }
 
