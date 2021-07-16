@@ -66,14 +66,8 @@ class CommonCVC: UICollectionViewCell {
         //제목 설정
         self.titleLabel.text = title
         titleLabel.numberOfLines = 0
+        titleLabel.sizeToFit()
         titleLabel.font = .notoSansRegularFont(ofSize: 14)
-    
-        if titleLabel.numberOfLines == 2 {
-            titleHeight.constant = 25
-        }
-        else {
-            titleHeight.constant = 50
-        }
         
         //하트 설정
         self.isFavorite = isFavorite
@@ -95,6 +89,10 @@ class CommonCVC: UICollectionViewCell {
             tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
   
+    }
+    
+    func setLabel(){
+        titleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
     }
     
     func likeAction(){

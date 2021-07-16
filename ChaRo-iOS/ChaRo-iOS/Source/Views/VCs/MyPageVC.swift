@@ -68,7 +68,7 @@ class MyPageVC: UIViewController {
     
     func setHeaderView(){
         headerView.backgroundColor = .mainBlue
-        nameLabel.text = LikePostData[0].data.userInformation.nickname
+        nameLabel.text = "\(LikePostData[0].data.userInformation.nickname) 드라이버님"
         folloerCountButton.setTitle(String(LikePostData[0].data.userInformation.follower), for: .normal)
         followingCountButton.setTitle(String(LikePostData[0].data.userInformation.following), for: .normal)
         guard let url = URL(string: LikePostData[0].data.userInformation.profileImage) else { return }
