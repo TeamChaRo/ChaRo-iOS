@@ -117,7 +117,7 @@ extension CreatePostVC {
     }
     
     func initCellHeight(){
-        cellHeights.append(contentsOf: [89, 255, 125, 125, 334, 408])
+        cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408])
     }
     
     func setNotificationCenter(){
@@ -160,14 +160,13 @@ extension CreatePostVC {
     
     // MARK: 서버통신 .post /writePost
     func postCreatePost(){
-        let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정
         let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
         
         
         
         print("===서버통신 시작=====")
-        CreatePostService.shared.createPost(model: model, image: images){ result in
+        CreatePostService.shared.createPost(model: model, image: selectImages){ result in
             switch result {
             case .success(let message):
                 print(message)
@@ -314,6 +313,7 @@ extension CreatePostVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       
         return cellHeights[indexPath.row]
     }
     
@@ -395,6 +395,8 @@ extension CreatePostVC {
     func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
         
+        
+        
         // 여기서 VC 이미지를 Cell에 전달
         photoCell.receiveImageListfromVC(image: selectImages)
         
@@ -410,12 +412,16 @@ extension CreatePostVC {
     
     func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell{
         guard let courseCell = tableView.dequeueReusableCell(withIdentifier: CreatePostCourseTVC.identifier) as? CreatePostCourseTVC else { return UITableViewCell() }
-        
+
+        cellHeights[2] = courseCell.setDynamicHeight()
+
         return courseCell
     }
     
     func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell{
         guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
+        
+        cellHeights[3] = themeCell.setDynamicHeight()
         
         return themeCell
     }
@@ -432,8 +438,9 @@ extension CreatePostVC {
         }
         parkingWarningCell.setParkingDesc = { value in
             self.parkingDesc = value
-            
         }
+        
+        cellHeights[4] = parkingWarningCell.setDynamicHeight()
         
         return parkingWarningCell
     }
