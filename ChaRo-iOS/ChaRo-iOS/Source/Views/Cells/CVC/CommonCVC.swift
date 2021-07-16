@@ -24,6 +24,8 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var heartButton: UIButton!
     
     var taglist :[String] = []
+    var clickedPostCell : ((Int) -> ())?
+    
 
     //MARK: Variable
     var callback : (() -> Void)?
@@ -124,6 +126,15 @@ class CommonCVC: UICollectionViewCell {
     
     @IBAction func heartButtonClicked(_ sender: UIButton) {
         likeAction()
+    }
+    
+    override var isSelected: Bool{
+        didSet {
+            if isSelected {
+                print(postID)
+                clickedPostCell?(postID)
+            }
+          }
     }
     
 }
