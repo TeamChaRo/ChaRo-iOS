@@ -13,6 +13,7 @@ class NotificationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setShadow()
 
         // Do any additional setup after loading the view.
     }
