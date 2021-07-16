@@ -17,7 +17,6 @@ class PostDriveCourseTVC: UITableViewCell {
     private let titleView = PostCellTitleView(title: "제 드라이브 코스는요")
     
     public var setCourseDesc: ((String) -> Void)?
-    
     public var contentText = "" {
         didSet{
             _ = setCourseDesc?(self.contentText)
