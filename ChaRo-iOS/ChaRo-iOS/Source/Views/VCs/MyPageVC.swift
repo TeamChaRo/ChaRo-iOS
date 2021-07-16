@@ -58,6 +58,7 @@ class MyPageVC: UIViewController {
         guard let url = URL(string: LikePostData[0].data.userInformation.profileImage) else { return }
         self.profileImageView.kf.setImage(with: url)
         setCircleLayout()
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func setDropDown(){
@@ -73,10 +74,10 @@ class MyPageVC: UIViewController {
     }
     
     func customTabbarInit(){
-        guard let MyCell = customTabbar.dequeueReusableCell(withReuseIdentifier: "TabbarCVC", for: [0,0]) as? TabbarCVC else {return}
+        guard let myCell = customTabbar.dequeueReusableCell(withReuseIdentifier: "TabbarCVC", for: [0,0]) as? TabbarCVC else {return}
         guard let SaveCell = customTabbar.dequeueReusableCell(withReuseIdentifier: "TabbarCVC", for: [0,1]) as? TabbarCVC else {return}
         
-        customTabbarList.append(MyCell)
+        customTabbarList.append(myCell)
         customTabbarList.append(SaveCell)
         
     }
@@ -195,8 +196,16 @@ extension MyPageVC: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let MyCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "MyPagePostCVC", for: indexPath) as? MyPagePostCVC else {return UICollectionViewCell()}
+        guard let myCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "MyPagePostCVC", for: indexPath) as? MyPagePostCVC else {return UICollectionViewCell()}
         guard let detailCell = myTableCollectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
+        
+        myCell.clickedPostCell = { postid in
+            let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+            
+            nextVC.setPostId(id: postid)
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
         
         switch collectionView.tag {
         // 커스텀 탭바
@@ -224,15 +233,15 @@ extension MyPageVC: UICollectionViewDataSource{
                 return myCVCCell as! UICollectionViewCell
             default:
                 if LikePostData.count == 0{
-                    return MyCell
+                    return myCell
                 }
                 else{
                     print(myCellCount, indexPath.row)
                     myCVCCell?.postCount = myCellCount
                     myCVCCell?.setLabel()
-                    MyCell.setData(image: LikePostData[0].data.writtenPost[indexPath.row-1
+                    myCell.setData(image: LikePostData[0].data.writtenPost[indexPath.row-1
                     ].image, title: LikePostData[0].data.writtenPost[indexPath.row-1].title, tagCount: LikePostData[0].data.writtenPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.writtenPost[indexPath.row-1].tags, heart: LikePostData[0].data.writtenPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.writtenPost[indexPath.row-1].saveNum, year: LikePostData[0].data.writtenPost[indexPath.row-1].year, month: LikePostData[0].data.writtenPost[indexPath.row-1].month, day: LikePostData[0].data.writtenPost[indexPath.row-1].day, postID: LikePostData[0].data.writtenPost[indexPath.row-1].postID)
-            return MyCell
+            return myCell
                 
             }
             }
@@ -250,15 +259,15 @@ extension MyPageVC: UICollectionViewDataSource{
                 return saveCVCCell as! UICollectionViewCell
             default:
                 if LikePostData.count == 0{
-                    return MyCell
+                    return myCell
                 }
                 else{
                     print(myCellCount, indexPath.row)
-                    saveCVCCell?.postCount = myCellCount
+                    saveCVCCell?.postCount = saveCellCount
                     saveCVCCell?.setLabel()
-                    MyCell.setData(image: LikePostData[0].data.savedPost[indexPath.row-1
+                    myCell.setData(image: LikePostData[0].data.savedPost[indexPath.row-1
                     ].image, title: LikePostData[0].data.savedPost[indexPath.row-1].title, tagCount: LikePostData[0].data.savedPost[indexPath.row-1].tags.count, tagArr: LikePostData[0].data.savedPost[indexPath.row-1].tags, heart: LikePostData[0].data.savedPost[indexPath.row-1].favoriteNum, save: LikePostData[0].data.savedPost[indexPath.row-1].saveNum, year: LikePostData[0].data.savedPost[indexPath.row-1].year, month: LikePostData[0].data.savedPost[indexPath.row-1].month, day: LikePostData[0].data.savedPost[indexPath.row-1].day, postID: LikePostData[0].data.savedPost[indexPath.row-1].postID)
-            return MyCell
+            return myCell
             }
                 
             }
@@ -409,3 +418,4 @@ func dismissDropDownWhenTappedAround() {
         self.dropDownTableView.isHidden = true
     }
 }
+

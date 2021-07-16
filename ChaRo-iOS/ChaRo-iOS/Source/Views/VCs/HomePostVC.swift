@@ -142,6 +142,14 @@ extension HomePostVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
+        cell.clickedPostCell = { postid in
+            let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+            
+            nextVC.setPostId(id: postid)
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
       
         cell.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
         
@@ -297,4 +305,19 @@ func dismissDropDownWhenTappedAround() {
     @objc func dismissDropDown() {
         self.dropDownTableview.isHidden = true
     }
+}
+
+//postID 넘기기 위한 Delegate 구현
+extension HomePostVC: PostIdDelegate {
+    
+    func sendPostID(data: Int) {
+        print("이거임 ~~~~\(data)")
+        
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        
+        nextVC.setPostId(id: data)
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
 }

@@ -31,7 +31,7 @@ class MyPagePostCVC: UICollectionViewCell {
     
     var heartText: String = "99"
     var saveText: String = "99"
-    
+    var clickedPostCell : ((Int) -> ())?
     
     func setRound(){
         postImage.clipsToBounds = true
@@ -148,6 +148,15 @@ class MyPagePostCVC: UICollectionViewCell {
         setLikeLabel()
         setLikeUI()
         
+    }
+    
+    override var isSelected: Bool{
+        didSet {
+            if isSelected {
+                print(postid)
+                clickedPostCell?(postid)
+            }
+          }
     }
 
 }
