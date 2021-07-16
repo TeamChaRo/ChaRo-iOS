@@ -84,7 +84,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         let element = selectedDriveList[indexPath.row]
         
         cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postID)
-//        cell.setTagUI()
         
         return cell
 
