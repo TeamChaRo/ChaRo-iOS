@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PostImagesTVC: UITableViewCell {
     
@@ -85,6 +86,20 @@ extension PostImagesTVC {
         addImageView()
     }
     
+    func setImageAtConfirmView(imageList: [UIImage]){
+        var strArr :[String] = []
+        
+        for item in imageList {
+            strArr.append("")
+        }
+        images = strArr
+        initImagePage()
+        initScrollView()
+        addImageView(imageList: imageList)
+    }
+    
+    
+    
     func initImagePage(){
         pageController.numberOfPages = images.count
         pageController.currentPage = 0 // 시작은 첫 페이지
@@ -114,6 +129,18 @@ extension PostImagesTVC {
             imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * imageHeightRate)
             imageView.contentMode = .scaleAspectFill
             imageView.kf.setImage(with: URL(string: images[i]))
+            scrollView.addSubview(imageView)
+            scrollView.contentSize.width = imageView.frame.width * CGFloat(i+1)
+        }
+    }
+    
+    func addImageView(imageList: [UIImage]){
+        for i in 0..<imageList.count{
+            let imageView = UIImageView()
+            let xPos = UIScreen.main.bounds.width * CGFloat(i)
+            imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * imageHeightRate)
+            imageView.contentMode = .scaleAspectFill
+            imageView.image = imageList[i]
             scrollView.addSubview(imageView)
             scrollView.contentSize.width = imageView.frame.width * CGFloat(i+1)
         }

@@ -28,7 +28,7 @@ struct SearchKeywordService {
                                      parameters: makeParameter(userId: userId, keywords: keywords),
                                      encoding: JSONEncoding.default,
                                      headers: header)
-        
+        print("검색어 post!!!!!!!")
         dataRequest.responseData{ dataResponse in
             switch dataResponse.result{
             case .success:

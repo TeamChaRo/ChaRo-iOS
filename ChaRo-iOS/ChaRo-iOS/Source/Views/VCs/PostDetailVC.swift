@@ -11,15 +11,19 @@ class PostDetailVC: UIViewController {
 
     static let identifier = "PostDetailVC"
     
-    private var isAuthor = false
+    private var isAuthor = true
     private var isEditingMode = false
     
     private var tableView = UITableView()
-    private var postId: Int = 1
+    private var postId: Int = -1
     private var postData : PostDetail?
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [AddressDataModel] = []
     private var imageList: [UIImage] = []
+    
+    
+    //MARK: For Sending Data
+    private var writedPostData: WritePostData?
     
     
     //MARK: UIComponent
@@ -65,10 +69,11 @@ class PostDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkModeForSendingServer()
         getPostDetailData()
         print("PostDetailVC viewDidLoad")
-        setTableViewConstraints()
         setNavigaitionViewConstraints()
+        setTableViewConstraints()
         //self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -81,7 +86,7 @@ class PostDetailVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
-    
+
     
     public func setPostMode(isAuthor: Bool, isEditing: Bool){
         self.isAuthor = isAuthor
@@ -97,6 +102,8 @@ class PostDetailVC: UIViewController {
     public func setDataWhenConfirmPost(data: WritePostData,
                                        imageList: [UIImage],
                                        addressList: [AddressDataModel]){
+        isEditingMode = true
+        isAuthor = true
         let sendedPostDate = PostDetail(title: data.title,
                                   author: Constants.userId,
                                   isAuthor: true,
@@ -120,9 +127,25 @@ class PostDetailVC: UIViewController {
                                   parkingDesc: data.parkingDesc,
                                   warnings: data.warning,
                                   courseDesc: data.courseDesc)
+        
         self.postData = sendedPostDate
         self.addressList = addressList
         self.imageList = imageList
+        writedPostData = data
+       
+    }
+    
+    private func checkModeForSendingServer(){
+        if isEditingMode{
+            print("editing 모드로 넘겨받음")
+            print("postData = \(postData)")
+            print("addressList = \(addressList)")
+            print("isAuthor = \(isAuthor)")
+            configureTableView()
+        }else{
+            print("그냥 구경하러 왔음")
+            getPostDetailData()
+        }
     }
     
     private func configureTableView(){
@@ -188,6 +211,7 @@ extension PostDetailVC{
     @objc func clickedToHeartButton(){
         print("하트 버튼")
         
+        
     }
     
     //스크랩 버튼 눌렀을 때 (저장하기) 서버통신
@@ -199,6 +223,9 @@ extension PostDetailVC{
     //등록 버튼 눌렀을 때 post 서버 통신
     @objc func clickedToSaveButton(){
         print("등록 버튼")
+        makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?"){ _ in
+            //게시물 작성하기 post 통신 해야함
+        }
         
     }
     
@@ -209,7 +236,10 @@ extension PostDetailVC{
         
         let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
+            print(self.driveCell!.contentText)
         })
+        
+        
         let deleteAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
         })
@@ -429,8 +459,12 @@ extension PostDetailVC {
     
     func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
-        
-        cell.setImage(postData!.images)
+        if imageList.isEmpty{
+            print("이미지 없음???")
+            cell.setImage(postData!.images)
+        }else{
+            cell.setImageAtConfirmView(imageList: imageList)
+        }
         cell.selectionStyle = .none
         return cell
     }
