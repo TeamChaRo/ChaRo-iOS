@@ -132,7 +132,9 @@ class AddressMainVC: UIViewController {
         let newAddressList = changeAddressData()
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
-        
+        print("------------------------")
+        print("imagelist = \(imageList) 이거 넘길 거야!!!!")
+        print("------------------------")
         nextVC.setDataWhenConfirmPost(data: sendedPostData!,
                                       imageList: imageList,
                                       addressList: addressList)
@@ -186,7 +188,9 @@ extension AddressMainVC {
     
     public func setWritePostDataForServer(data: WritePostData, imageList: [UIImage]){
         sendedPostData = data
-        
+        self.imageList = imageList
+        dump(imageList)
+        print("-----------받아온 데이터들----------------")
     }
     
     public func setAddressListData(list: [AddressDataModel]){

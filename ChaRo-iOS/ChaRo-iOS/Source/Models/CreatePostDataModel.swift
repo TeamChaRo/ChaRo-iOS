@@ -37,7 +37,7 @@ struct WritePostData {
     let isParking: Bool
     let parkingDesc: String
     let courseDesc: String
-    let course: [Address]
+    var course: [Address]
 }
 
 struct Address {
