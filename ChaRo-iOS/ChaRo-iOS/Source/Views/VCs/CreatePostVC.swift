@@ -152,13 +152,16 @@ extension CreatePostVC {
     
     @objc
     func textFieldMoveUp(_ notification: NSNotification){
-
+        
+//        let currentScrollY = tableView.contentOffset.y
+//        -keyboardSize.height
         if tableView.contentOffset.y != 0.0 && !titleSelectFlag {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+                    self.tableView.transform = CGAffineTransform(translationX: 0, y: -100)
                 })
             }
+            
         } else {
             titleSelectFlag = false
         }
