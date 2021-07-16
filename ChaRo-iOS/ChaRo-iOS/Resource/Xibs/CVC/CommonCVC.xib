@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +27,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="해안도로 정복할 수 있는 포항 드라이브 코스" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
                         <rect key="frame" x="0.0" y="247" width="326" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="rXM-hI-63P"/>
+                            <constraint firstAttribute="height" constant="50" id="zVp-LH-iJA"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="17"/>
                         <nil key="textColor"/>
@@ -52,6 +52,9 @@
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="8nn-0c-gw2"/>
+                        </constraints>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xT-Yy-Ygg">
                         <rect key="frame" x="278" y="0.0" width="48" height="48"/>
@@ -73,20 +76,18 @@
                 <constraint firstItem="BRj-TE-ZDO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NeD-Au-6IT"/>
                 <constraint firstItem="bb5-sj-Y94" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NoT-6n-1Y3"/>
                 <constraint firstAttribute="trailing" secondItem="kds-Zc-lX5" secondAttribute="trailing" id="SEG-32-m7o"/>
+                <constraint firstItem="bb5-sj-Y94" firstAttribute="top" secondItem="BRj-TE-ZDO" secondAttribute="bottom" id="aLY-yf-VRU"/>
                 <constraint firstAttribute="trailing" secondItem="BRj-TE-ZDO" secondAttribute="trailing" id="hIt-Q7-hLn"/>
+                <constraint firstItem="BRj-TE-ZDO" firstAttribute="top" secondItem="kds-Zc-lX5" secondAttribute="bottom" id="jF9-W9-bD9"/>
                 <constraint firstItem="kds-Zc-lX5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kfb-YS-ErK"/>
                 <constraint firstItem="3xT-Yy-Ygg" firstAttribute="top" secondItem="kds-Zc-lX5" secondAttribute="top" id="nVy-f0-rha"/>
-                <constraint firstItem="BRj-TE-ZDO" firstAttribute="top" secondItem="kds-Zc-lX5" secondAttribute="bottom" id="rBl-ml-mIP"/>
-                <constraint firstItem="bb5-sj-Y94" firstAttribute="top" secondItem="BRj-TE-ZDO" secondAttribute="bottom" id="sPt-tw-OfP"/>
                 <constraint firstItem="3xT-Yy-Ygg" firstAttribute="trailing" secondItem="kds-Zc-lX5" secondAttribute="trailing" id="tqH-VS-O3n"/>
             </constraints>
             <size key="customSize" width="326" height="314"/>
             <connections>
                 <outlet property="heartButton" destination="3xT-Yy-Ygg" id="uS8-PY-x7j"/>
                 <outlet property="imageView" destination="kds-Zc-lX5" id="SQ4-JG-SKe"/>
-                <outlet property="lengthBtwImgLabel" destination="rBl-ml-mIP" id="2zx-WJ-R7W"/>
                 <outlet property="stackView" destination="bb5-sj-Y94" id="nbk-5z-rti"/>
-                <outlet property="titleHeight" destination="rXM-hI-63P" id="m9f-7j-CbG"/>
                 <outlet property="titleLabel" destination="BRj-TE-ZDO" id="qWB-Sg-mMy"/>
                 <outletCollection property="tagButtonList" destination="de2-7j-LiS" collectionClass="NSMutableArray" id="fVv-r2-wE7"/>
                 <outletCollection property="tagButtonList" destination="bbe-Lc-b2a" collectionClass="NSMutableArray" id="3R4-MQ-PzB"/>

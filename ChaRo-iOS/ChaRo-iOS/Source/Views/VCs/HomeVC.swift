@@ -42,11 +42,12 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("겟 데이터 실행")
+
         getData()
         setTableView()
         setHomeNavigationViewLayout()
         setActionToSearchButton()
-        
         navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
     }
@@ -64,12 +65,11 @@ class HomeVC: UIViewController {
 //        let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
 //        let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)
         
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+//        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
+//        nextVC.modalPresentationStyle = .fullScreen
+//        present(nextVC, animated: true, completion: nil)
     }
-   
     
     func getData() {
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
@@ -77,6 +77,7 @@ class HomeVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? HomeDataModel {
+                    print("겟 데이터 실행")
                     DispatchQueue.global().sync {
                         let data = response.data
                         
@@ -116,6 +117,7 @@ class HomeVC: UIViewController {
                 print("requestERR")
             case .pathErr :
                 print("pathERR")
+                print("한번 더 실행ㅋ")
             case .serverErr:
                 print("serverERR")
             case .networkFail:
