@@ -275,7 +275,7 @@ extension CreatePostVC {
             return
         }
         
-        let images: [UIImage] = [UIImage(named: "dummyMain")!, UIImage(named: "dummyMain")!]
+        let images: [UIImage] = selectImages
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정
         let model: WritePostData = getPostWriteData()
         
