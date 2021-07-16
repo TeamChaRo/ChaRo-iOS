@@ -13,12 +13,7 @@ class MyPagePostCVC: UICollectionViewCell {
     @IBOutlet weak var postTitle: UILabel!
     
     //TAG뷰~
-    @IBOutlet weak var tagView1: UIView!
-    @IBOutlet weak var tagLabel1: UILabel!
-    @IBOutlet weak var tagView2: UIView!
-    @IBOutlet weak var tagLabel2: UILabel!
-    @IBOutlet weak var tagView3: UIView!
-    @IBOutlet weak var tagLabel3: UILabel!
+    @IBOutlet var tagButtonList: [UIButton]!
     
     //하트랑 세이브 ㅋ.ㅋ.ㅋ.ㅋ
     @IBOutlet weak var heartImage: UIImageView!
@@ -37,15 +32,7 @@ class MyPagePostCVC: UICollectionViewCell {
         postImage.clipsToBounds = true
         postImage.layer.cornerRadius = 10
     }
-    func setLabelUI() {
-        tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
-        tagLabel2.font = UIFont.notoSansRegularFont(ofSize: 10)
-        tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
-
-        tagLabel1.textColor = UIColor.mainBlue
-        tagLabel2.textColor = UIColor.mainBlue
-        tagLabel3.textColor = UIColor.mainBlue
-    }
+   
     
     func setLikeUI(){
         heartImage.image = UIImage(named: "icHeartActive")
@@ -65,39 +52,7 @@ class MyPagePostCVC: UICollectionViewCell {
         heartLabel.font = UIFont.notoSansRegularFont(ofSize: 11)
     }
     
-    func setTagUI() {
-        
-        let length1 = CGFloat(tagLabel1.text!.count)
-        let length2 = CGFloat(tagLabel2.text!.count)
-        let length3 = CGFloat(tagLabel3.text!.count)
-    
-        
-        tagView1.translatesAutoresizingMaskIntoConstraints = false
-        tagView2.translatesAutoresizingMaskIntoConstraints = false
-        tagView3.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        NSLayoutConstraint.activate([
-            
-            tagView1.widthAnchor.constraint(equalToConstant: 11 * length1),
-            tagView2.widthAnchor.constraint(equalToConstant: 11 * length2),
-            tagView3.widthAnchor.constraint(equalToConstant: 11 * length3)
-            
-        ])
-        
-        
-        tagView1.layer.cornerRadius = 10
-        tagView2.layer.cornerRadius = 10
-        tagView3.layer.cornerRadius = 10
-        
-        tagView1.layer.borderColor = UIColor.mainBlue.cgColor
-        tagView2.layer.borderColor = UIColor.mainBlue.cgColor
-        tagView3.layer.borderColor = UIColor.mainBlue.cgColor
-        
-        tagView1.layer.borderWidth = 1
-        tagView2.layer.borderWidth = 1
-        tagView3.layer.borderWidth = 1
-    }
+   
     
     func setTitleLabel(text: String){
         postTitle.text = text
@@ -115,20 +70,21 @@ class MyPagePostCVC: UICollectionViewCell {
         //제목 설정
         self.postTitle.text = title
         
-        //태그 설정
-        if tagCount == 2 {
-            tagLabel1.text = ""
-            tagLabel2.text = ""
-            tagLabel3.text = ""
-            
-            tagLabel1.text = "#\(tagArr[0])"
-            tagLabel2.text = "#\(tagArr[1])"
-            tagLabel3.text = ""
-            
-        } else {
-            tagLabel1.text = "#\(tagArr[0])"
-            tagLabel2.text = "#\(tagArr[1])"
-            tagLabel3.text = "#\(tagArr[2])"
+        //태그설정
+        for index in 0..<3{
+            if index > tagArr.count - 1 {
+                print("\(index)에서 안그려짐")
+                tagButtonList[index].setTitleColor(.clear, for: .normal)
+                tagButtonList[index].layer.borderColor = UIColor.clear.cgColor
+                continue
+            }
+            tagButtonList[index].setTitle(" #\(tagArr[index]) ", for: .normal)
+            tagButtonList[index].titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 10)
+            tagButtonList[index].setTitleColor(.mainBlue, for: .normal)
+            tagButtonList[index].layer.cornerRadius = 9
+            tagButtonList[index].layer.borderWidth = 1
+            tagButtonList[index].layer.borderColor = UIColor.mainBlue.cgColor
+            tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         //하트 수 및 저장 수
         self.heartLabel.text = String(heart)
@@ -136,8 +92,7 @@ class MyPagePostCVC: UICollectionViewCell {
         //날짜
         self.dateLabel.text = "\(year).\(month).\(day)"
 
-        setTagUI()
-        setLabelUI()
+      
     }
     
    
