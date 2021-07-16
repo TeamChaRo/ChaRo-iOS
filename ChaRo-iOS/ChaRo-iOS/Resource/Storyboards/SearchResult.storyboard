@@ -16,19 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pYK-fB-lxv">
-                                <rect key="frame" x="214" y="244" width="180" height="88"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pYK-fB-lxv">
+                                <rect key="frame" x="254" y="185" width="140" height="86"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="YfF-hY-sNx"/>
-                                    <constraint firstAttribute="width" constant="180" id="wya-XE-zj7"/>
+                                    <constraint firstAttribute="height" constant="86" id="YfF-hY-sNx"/>
+                                    <constraint firstAttribute="width" constant="140" id="wya-XE-zj7"/>
                                 </constraints>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pYK-fB-lxv" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="200" id="7U4-1v-QMo"/>
+                            <constraint firstItem="pYK-fB-lxv" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="185" id="7U4-1v-QMo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pYK-fB-lxv" secondAttribute="trailing" constant="20" id="Sfy-qK-VhO"/>
                         </constraints>
                     </view>

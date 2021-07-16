@@ -76,14 +76,13 @@ extension CreatePostPhotoTVC {
     }
 
     func setNotificationCenter(){
-        NotificationCenter.default.addObserver(self, selector: #selector(addPhoto), name: .createPostAddPhotoClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(imageViewDidTap), name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePhoto), name: .createPostDeletePhotoClicked, object: nil)
     }
     
-    @objc
-    func addPhoto(_ notification: Notification) {
-        // notification to CreatePostVC
-        NotificationCenter.default.post(name: .callPhotoPicker, object: nil)
+    func removeObservers(){ // TODO: 얘를 어디서 호출할지..?
+        NotificationCenter.default.removeObserver(self, name: .createPostAddPhotoClicked, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .createPostDeletePhotoClicked, object: nil)
     }
 
     @objc
