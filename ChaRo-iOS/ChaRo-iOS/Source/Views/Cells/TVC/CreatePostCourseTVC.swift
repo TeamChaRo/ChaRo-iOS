@@ -13,15 +13,17 @@ class CreatePostCourseTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostCourseTVC"
     
-    // VC로 데이터 전달
+    // MARK: 데이터 전달 closeur
+    public var setCityInfo: ((String) -> Void)?
+    public var setRegionInfo: ((String) -> Void)?
     private var city: String = ""{
         didSet{
-            NotificationCenter.default.post(name: .sendNewCity, object: city)
+            _ = setCityInfo?(self.city)
         }
     }
     private var region: String = "" {
         didSet{
-            NotificationCenter.default.post(name: .sendNewRegion, object: region)
+            _ = setRegionInfo?(self.region)
         }
     }
     

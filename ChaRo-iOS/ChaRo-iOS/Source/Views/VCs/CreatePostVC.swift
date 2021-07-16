@@ -124,10 +124,6 @@ extension CreatePostVC {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setPostTitle), name: .sendNewPostTitle, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setPostCity), name: .sendNewCity, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setPostRegion), name: .sendNewRegion, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setPostTheme), name: .sendNewTheme, object: nil)
     }
     
     func removeObservers(){
@@ -160,12 +156,10 @@ extension CreatePostVC {
     
     // MARK: 서버통신 .post /writePost
     func postCreatePost(){
-        //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        // test dummy data
         let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
         
         
-        
-        print("===서버통신 시작=====")
         CreatePostService.shared.createPost(model: model, image: selectImages){ result in
             switch result {
             case .success(let message):
@@ -180,27 +174,6 @@ extension CreatePostVC {
                 print("몰라에러")
             }
         }
-    }
-    
-    // MARK: Cell에서 데이터 받아오기
-    @objc // title 받아오기
-    func setPostTitle(_ notification: Notification){
-        postTitle = notification.object as! String
-    }
-    
-    @objc // city 받아오기
-    func setPostCity(_ notification: Notification){
-        province = notification.object as! String
-    }
-    
-    @objc // region 받아오기
-    func setPostRegion(_ notification: Notification){
-        region = notification.object as! String
-    }
-    
-    @objc
-    func setPostTheme(_ notification: Notification){
-        theme = notification.object as! [String]
     }
     
     
@@ -388,14 +361,15 @@ extension CreatePostVC {
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostTitleTVC.identifier) as? CreatePostTitleTVC else { return UITableViewCell() }
         
         titleCell.delegateCell = self
+        titleCell.setTitleInfo = { value in
+            self.postTitle = value
+        }
         
         return titleCell
     }
     
     func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
-        
-        
         
         // 여기서 VC 이미지를 Cell에 전달
         photoCell.receiveImageListfromVC(image: selectImages)
@@ -414,7 +388,14 @@ extension CreatePostVC {
         guard let courseCell = tableView.dequeueReusableCell(withIdentifier: CreatePostCourseTVC.identifier) as? CreatePostCourseTVC else { return UITableViewCell() }
 
         cellHeights[2] = courseCell.setDynamicHeight()
-
+        
+        courseCell.setCityInfo = { value in
+            self.province = value
+        }
+        courseCell.setRegionInfo = { value in
+            self.region = value
+        }
+        
         return courseCell
     }
     
@@ -423,6 +404,9 @@ extension CreatePostVC {
         
         cellHeights[3] = themeCell.setDynamicHeight()
         
+        themeCell.setThemeInfo = { value in
+            self.theme = value
+        }
         return themeCell
     }
     

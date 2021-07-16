@@ -24,6 +24,10 @@ class CreatePostThemeTVC: UITableViewCell {
         return fixedHeight+dynamicHeight
     }
     
+    // MARK: 데이터 전달 closeur
+    public var setThemeInfo: (([String]) -> Void)?
+
+    
     // about pickerview
     private var pickerView = UIPickerView()
     private let toolbar = UIToolbar()
@@ -33,7 +37,7 @@ class CreatePostThemeTVC: UITableViewCell {
     private var currentList: [String] = [] //pickerview에 표시 될 List
     private var filterList: [String] = ["","",""]{
         didSet{
-            NotificationCenter.default.post(name: .sendNewTheme, object: filterList)
+            _ = setThemeInfo?(self.filterList)
         }
     }
     private var pickerSelectFlag: Bool = false
