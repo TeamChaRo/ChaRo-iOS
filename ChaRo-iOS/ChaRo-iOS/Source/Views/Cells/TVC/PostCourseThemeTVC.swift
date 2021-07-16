@@ -41,10 +41,21 @@ class PostCourseThemeTVC: UITableViewCell {
     override func awakeFromNib(){
         selectionStyle = .none
         super.awakeFromNib()
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool){
         super.setSelected(selected, animated: animated)
+    }
+    
+    func setEditingMode(){
+        for item in themeButtonList{
+            item.isUserInteractionEnabled = false
+        }
+        
+        cityButton.isUserInteractionEnabled = false
+        regionButton.isUserInteractionEnabled = false
     }
     
 }

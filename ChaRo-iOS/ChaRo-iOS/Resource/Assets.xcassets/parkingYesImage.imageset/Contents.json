@@ -1,19 +1,19 @@
 {
   "images" : [
     {
+      "filename" : "frame152.png",
       "idiom" : "universal",
-      "filename" : "maskGroup.png",
       "scale" : "1x"
     },
     {
       "scale" : "2x",
-      "filename" : "maskGroup@2x.png",
+      "filename" : "frame152@2x.png",
       "idiom" : "universal"
     },
     {
+      "scale" : "3x",
       "idiom" : "universal",
-      "filename" : "maskGroup@3x.png",
-      "scale" : "3x"
+      "filename" : "frame152@3x.png"
     }
   ],
   "info" : {

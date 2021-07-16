@@ -118,8 +118,9 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        //일단요 ... 고정..
-        let size = CGSize(width: 160, height: 230)
+        let factor = UIScreen.main.bounds.width / 375
+        
+        let size = CGSize(width: 160 * factor, height: 230 * factor)
         
         return size
     }

@@ -147,6 +147,7 @@ class SearchPostVC: UIViewController {
         let button = UIButton()
         button.isUserInteractionEnabled = false
         button.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
+        button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         button.imageView?.contentMode = .scaleToFill
         button.setTitle("찾아보기", for: .normal)
         button.setTitleColor(.mainBlue, for: .normal)
@@ -168,9 +169,21 @@ class SearchPostVC: UIViewController {
         guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.identifier)as? SearchResultVC else {
             return
         }
+    
+        refineFilterList()
+        print("정제됨 -> \(filterList)")
         nextVC.setFilterTagList(list: filterList)
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    func refineFilterList(){
+        for index in 0..<4{
+            if filterList[index] == "선택안함"{
+                filterList[index] = ""
+            }
+        }
+    }
+    
 }
 
 //MARK: TextField

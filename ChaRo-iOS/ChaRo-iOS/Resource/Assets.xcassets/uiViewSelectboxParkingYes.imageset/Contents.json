@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "uiViewSelectboxYes.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "uiViewSelectboxYes@2x.png"
+    },
+    {
+      "filename" : "uiViewSelectboxYes@3x.png",
+      "scale" : "3x",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

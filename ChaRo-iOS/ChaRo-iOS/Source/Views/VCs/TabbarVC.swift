@@ -10,6 +10,7 @@ import UIKit
 
 class TabbarVC: UITabBarController {
     
+    static let identifier = "TabbarVC"
     public var addressMainVC: AddressMainVC?
     public var tabs: [UIViewController] = []
     private var comeBackIndex = 0
@@ -85,12 +86,12 @@ class TabbarVC: UITabBarController {
         
         createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
         createTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-        
 
         
-        
         let myPageStoryboard = UIStoryboard(name: "MyPage", bundle: nil)
-        let myPageTab = myPageStoryboard.instantiateViewController(identifier: "MyPageVC")
+        let myPageVC = myPageStoryboard.instantiateViewController(identifier: "MyPageVC")
+        let myPageTab = UINavigationController(rootViewController: myPageVC)
+        myPageTab.navigationBar.isHidden = true
         myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
 
