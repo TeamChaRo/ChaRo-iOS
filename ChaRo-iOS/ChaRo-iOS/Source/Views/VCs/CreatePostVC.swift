@@ -156,12 +156,11 @@ extension CreatePostVC {
     
     // MARK: 서버통신 .post /writePost
     func postCreatePost(){
-        let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정
         let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
         
         print("===서버통신 시작=====")
-        CreatePostService.shared.createPost(model: model, image: images){ result in
+        CreatePostService.shared.createPost(model: model, image: selectImages){ result in
             switch result {
             case .success(let message):
                 print(message)
