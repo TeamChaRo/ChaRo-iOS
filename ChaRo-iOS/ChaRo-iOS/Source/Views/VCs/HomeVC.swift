@@ -49,8 +49,11 @@ class HomeVC: UIViewController {
         setHomeNavigationViewLayout()
         setActionToSearchButton()
         navigationController?.isNavigationBarHidden = true
-        // Do any additional setup after loading the view.
+        
+        HomeTableView.separatorStyle = .none
     }
+    
+    
      
     func setHomeNavigationViewLayout() {
         HomeNavigationView.backgroundColor = .none
@@ -172,7 +175,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         case 0:
             return UIScreen.main.bounds.height * homeBannerRatio
         case 1:
-            return 353 * factor
+            return 365 * factor
         case 2:
             return 178 * factor
         case 3, 4, 5:
@@ -342,7 +345,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             print("Error")
         }
         return UITableViewCell()
+        
     }
+    
 
 }
 extension HomeVC : IsSelectedCVCDelegate {

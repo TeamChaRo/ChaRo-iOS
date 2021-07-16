@@ -113,6 +113,12 @@ class CommonCVC: UICollectionViewCell {
         titleLabel.numberOfLines = 0
         titleLabel.sizeToFit()
         titleLabel.font = .notoSansRegularFont(ofSize: 14)
+    
+        let attrString = NSMutableAttributedString(string: titleLabel.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 0.1
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        titleLabel.attributedText = attrString
         
         //하트 설정
         self.isFavorite = isFavorite
