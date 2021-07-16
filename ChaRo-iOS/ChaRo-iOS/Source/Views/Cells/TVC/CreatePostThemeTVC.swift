@@ -12,6 +12,22 @@ class CreatePostThemeTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostThemeTVC"
     
+    // cell height 동적으로 계산
+    let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
+    let heightRatio: CGFloat = 42/108
+    func setDynamicHeight() -> CGFloat {
+
+        let buttonHeight: CGFloat = buttonWidth * heightRatio
+        let fixedHeight: CGFloat = 38 + 12 + 33 // 기본 여백, 타이틀 높이
+        let dynamicHeight: CGFloat = buttonHeight
+        
+        return fixedHeight+dynamicHeight
+    }
+    
+    // MARK: 데이터 전달 closeur
+    public var setThemeInfo: (([String]) -> Void)?
+
+    
     // about pickerview
     private var pickerView = UIPickerView()
     private let toolbar = UIToolbar()
@@ -21,7 +37,7 @@ class CreatePostThemeTVC: UITableViewCell {
     private var currentList: [String] = [] //pickerview에 표시 될 List
     private var filterList: [String] = ["","",""]{
         didSet{
-            NotificationCenter.default.post(name: .sendNewTheme, object: filterList)
+            _ = setThemeInfo?(self.filterList)
         }
     }
     private var pickerSelectFlag: Bool = false
@@ -286,10 +302,8 @@ extension CreatePostThemeTVC: UIPickerViewDataSource{
 extension CreatePostThemeTVC{
     private func configureLayout(){
         addSubviews([courseTitleView, themeFirstField, themeSecondField, themeThirdField, themeFirstButton, themeSecondButton, themeThirdButton])
-       
-        let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
+        
         let textWidth: CGFloat = 65
-        let heightRatio: CGFloat = 42/108
         
         courseTitleView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)

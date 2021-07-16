@@ -13,15 +13,30 @@ class CreatePostCourseTVC: UITableViewCell {
 
     static let identifier: String = "CreatePostCourseTVC"
     
+    // MARK: 데이터 전달 closeur
+    public var setCityInfo: ((String) -> Void)?
+    public var setRegionInfo: ((String) -> Void)?
     private var city: String = ""{
         didSet{
-            NotificationCenter.default.post(name: .sendNewCity, object: city)
+            _ = setCityInfo?(self.city)
         }
     }
     private var region: String = "" {
         didSet{
-            NotificationCenter.default.post(name: .sendNewRegion, object: region)
+            _ = setRegionInfo?(self.region)
         }
+    }
+    
+    // cell height 동적으로 계산
+    let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
+    let heightRatio: CGFloat = 42/108
+    func setDynamicHeight() -> CGFloat {
+        
+        let buttonHeight: CGFloat = buttonWidth * heightRatio
+        let fixedHeight: CGFloat = 38 + 12 + 33 // 기본 여백, 타이틀 높이
+        let dynamicHeight: CGFloat = buttonHeight
+        
+        return fixedHeight+dynamicHeight
     }
 
     // about pickerview
@@ -40,6 +55,7 @@ class CreatePostCourseTVC: UITableViewCell {
         let button = UIButton()
         button.tag = 0
         button.setImage(UIImage(named: "unselect"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
     
@@ -47,6 +63,7 @@ class CreatePostCourseTVC: UITableViewCell {
         let button = UIButton()
         button.tag = 1
         button.setImage(UIImage(named: "unselect"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -229,9 +246,7 @@ extension CreatePostCourseTVC {
     private func configureLayout(){
         addSubviews([themeTitleView, cityField, regionField, regionButton, cityButton])
         
-        let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
         let textWidth: CGFloat = 65
-        let heightRatio: CGFloat = 42/108
         
         themeTitleView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
@@ -251,7 +266,7 @@ extension CreatePostCourseTVC {
             $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(cityButton.snp.trailing).offset(6)
             $0.width.equalTo(buttonWidth)
-            $0.height.equalTo(cityButton.snp.width).multipliedBy(heightRatio)
+            $0.height.equalTo(regionButton.snp.width).multipliedBy(heightRatio)
         }
         
         cityField.snp.makeConstraints{
