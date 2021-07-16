@@ -386,8 +386,8 @@
 		3610A8902693730700EFC794 /* CVC */ = {
 			isa = PBXGroup;
 			children = (
-				3610A8912693730700EFC794 /* CommonCVC.swift */,
 				F4CC1B8E269C5EFA009A0C01 /* CreatePostPhotosCVC.swift */,
+				3610A8912693730700EFC794 /* CommonCVC.swift */,
 				3610A8922693730700EFC794 /* HomeAnimationCVC.swift */,
 				3610A8932693730700EFC794 /* HomeThemeCVC.swift */,
 				36D1E5FB269709F00079BD94 /* HomePostDetailCVC.swift */,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,13 +28,13 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="du7-ga-FRg">
-                        <rect key="frame" x="317" y="17" width="31" height="14.5"/>
+                        <rect key="frame" x="317" y="17.5" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwq-Eu-ci2">
-                        <rect key="frame" x="332" y="0.0" width="48" height="48"/>
+                        <rect key="frame" x="332" y="0.5" width="48" height="48"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="48" id="Jg8-ve-s4J"/>
                             <constraint firstAttribute="height" constant="48" id="ja1-Im-Q6z"/>
@@ -55,7 +55,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Bwq-Eu-ci2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4H7-Td-sSh"/>
+                    <constraint firstItem="du7-ga-FRg" firstAttribute="centerY" secondItem="P9S-oK-K4r" secondAttribute="centerY" id="A7v-lt-2N9"/>
                     <constraint firstItem="wF3-Yf-bYB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CCG-aj-p8z"/>
                     <constraint firstItem="P9S-oK-K4r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="DTd-PQ-3Kn"/>
                     <constraint firstAttribute="trailing" secondItem="Bwq-Eu-ci2" secondAttribute="trailing" id="KQb-vI-vzJ"/>

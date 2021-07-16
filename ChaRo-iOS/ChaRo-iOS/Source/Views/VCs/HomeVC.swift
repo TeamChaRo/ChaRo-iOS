@@ -390,12 +390,6 @@ extension HomeVC : CollectionViewCellDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
         
-        print("You tapped the cell \(index)")
-        
-        if let labelText = collectionviewcell?.themeLabel.text {
-                print("You tapped the cell \(index) in the row of Label \(labelText)")
-                // 여기서 CVC 클릭했을 때 할 거 쓰기
-            }
         }
     
 }
