@@ -434,7 +434,7 @@ extension PostDetailVC: UITableViewDelegate{
         case rowAdjustment+3:
             return 159
         case rowAdjustment+4:
-            return 408
+            return 418
         default:
             return 50
         }
