@@ -147,7 +147,12 @@ extension PostImagesTVC {
     }
     
     func setPageArrowButton(){
-        if pageController.currentPage == images.count-1 { // 마지막 페이지
+        print("image!!!!! \(images.count)")
+        
+        if images.count == 1 {
+            nextButton.isHidden = true
+            previousButton.isHidden = true
+        } else if pageController.currentPage == images.count-1 { // 마지막 페이지
             nextButton.isHidden = true
             previousButton.isHidden = false
         } else if pageController.currentPage == 0 { // 첫 페이지

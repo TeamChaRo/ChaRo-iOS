@@ -137,7 +137,7 @@ class PostDetailVC: UIViewController {
                                   likesCount: 0,
                                   images: [""],
                                   province: data.province,
-                                  city: data.province,
+                                  city: data.region,
                                   themes: data.theme,
                                   source: "",
                                   wayPoint: [""],
@@ -269,7 +269,7 @@ extension PostDetailVC{
         
         let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            print(self.driveCell!.contentText)
+
         })
         
         
