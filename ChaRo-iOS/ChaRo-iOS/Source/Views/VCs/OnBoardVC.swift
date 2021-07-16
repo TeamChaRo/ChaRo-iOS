@@ -89,7 +89,11 @@ class OnBoardVC: UIViewController {
     
     
     @objc func dismissAction(){
-        dismiss(animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
+        nextVC.modalPresentationStyle = .fullScreen
+        self.present(nextVC, animated: true, completion: nil)
+       //self.dismiss(animated: false)
     }
 
     private func setConstraints(){

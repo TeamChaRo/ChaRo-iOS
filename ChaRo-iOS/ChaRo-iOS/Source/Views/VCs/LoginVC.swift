@@ -82,16 +82,18 @@ class LoginVC: UIViewController {
                         print(UserDefaults.standard.string(forKey: "token"))
                     }
                     
-                case .requestErr(let message):
-                        if let message = message as? String {
-                        print(message)
-                    }
-                
-                default :
-                    print("ERROR")
                 }
+                
+            case .requestErr(let message):
+                if let message = message as? String {
+                    print(message)
+                }
+                
+            default :
+                print("ERROR")
             }
         }
+    }
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
@@ -134,11 +136,6 @@ extension LoginVC {
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(64)
         }
-        
-        
-        
-        
-        
         
     }
 }
