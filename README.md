@@ -1,6 +1,6 @@
 <img src = "https://user-images.githubusercontent.com/46644241/124638184-9edae000-dec5-11eb-9e9b-fae86bbc6764.png" width="750">  <br>
 
-# 차로 Charo 
+#  차로 Charo 
 > **차에서의 오늘이 최고가 될 수 있게, 당신의 드라이브 메이트 차로** <br>
 > 경험 기반 드라이브 코스 공유 플랫폼
 >
@@ -8,15 +8,10 @@
 > 프로젝트 기간 : 2021.06.27 ~ 2021.07.17
 
 <br>
-<img src ="https://img.shields.io/badge/Swift-5.0-ff69b4">
-<img src ="https://img.shields.io/badge/Xcode-12.5-yellow">
-<img src ="https://img.shields.io/badge/iOS-14.1-blue">
-<a href="https://www.instagram.com/charo_2021_official/">
-      <img alt="Instagram: Charo_Official" src="https://img.shields.io/badge/charo-instagram-9986ee" target="_blank" />
-  </a>
+
 <br>
 
-### Charo iOS Contributors
+##  Charo iOS Contributors
  <img src="https://user-images.githubusercontent.com/46644241/124632757-967fa680-debf-11eb-990e-bbb6c72a8935.png" width="500"> | <img src="https://user-images.githubusercontent.com/46644241/124632766-97b0d380-debf-11eb-9ec7-734b282cbc5d.png" width="500"> | <img src="https://user-images.githubusercontent.com/46644241/124632739-92ec1f80-debf-11eb-8701-f0cc74920397.png" width="500"> | <img src="https://user-images.githubusercontent.com/46644241/124632768-98496a00-debf-11eb-9144-4c3654f7b6e7.png" width="500">
  :---------:|:----------:|:---------:|:---------:
  🍎 장혜령 | 🍎 박익범 | 🍎 이지원 | 🍎 최인정
@@ -25,13 +20,27 @@
 <br>
 <br>
 
-### Using Library & Framework
+## Development Environment and Using Library
+- Development Environment
+<p align="left">
+<img src ="https://img.shields.io/badge/Swift-5.0-ff69b4">
+<img src ="https://img.shields.io/badge/Xcode-12.5-yellow">
+<img src ="https://img.shields.io/badge/iOS-14.1-blue">
+<a href="https://www.instagram.com/charo_2021_official/">
+      <img alt="Instagram: Charo_Official" src="https://img.shields.io/badge/charo-instagram-9986ee" target="_blank" />
+  </a>
+  </p>
+
+- Library
+
 라이브러리 | 사용 목적 | Version
 :---------:|:----------:|:---------:
  Alamofire | 서버 통신 | 5.4
  SnapKit | UI Layout | 5.0.0
  Kingfisher | 이미지 처리 | 6.0
  lottie-ios | 스플래시, 로딩 인디케이터 | -
+
+- framework
 
 프레임워크 | 사용 목적 
 :---------:|:----------:
@@ -177,7 +186,7 @@ ChaRo-iOS
 <br>
 
 ## App Description
-앱 주요 기능 설명
+앱 주요 기능 설명 Comming Soon!
 
 <br>
 
