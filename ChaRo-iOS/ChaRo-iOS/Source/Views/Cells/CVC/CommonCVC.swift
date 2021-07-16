@@ -52,6 +52,8 @@ class CommonCVC: UICollectionViewCell {
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        titleLabel.sizeToFit()
+        
     }
 
     func setImageUrl(_ url: String) {

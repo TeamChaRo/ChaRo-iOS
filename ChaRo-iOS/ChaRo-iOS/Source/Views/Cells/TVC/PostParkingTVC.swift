@@ -11,8 +11,8 @@ import SnapKit
 class PostParkingTVC: UITableViewCell {
 
     static let identifier = "PostParkingTVC"
-    private let deviceWidthRate = UIScreen.main.bounds.width / 375
-    private let deviceHeightRate = UIScreen.main.bounds.height / 896
+    private let deviceWidthRate: CGFloat = UIScreen.getDeviceWidth() / 375
+    private let deviceHeightRate = UIScreen.getDeviceWidth() / 896
     public var hasParking : Bool?
     
     private let titleView = PostCellTitleView(title: "주차공간")
@@ -28,7 +28,7 @@ class PostParkingTVC: UITableViewCell {
     private let yesButton : UIButton = {
             let button = UIButton()
             button.setTitle("있음", for: .normal)
-            button.setBackgroundImage(UIImage(named: "postParkingUnselected"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "uiViewSelectboxParkingNo"), for: .normal)
             button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
             button.setTitleColor(.gray40, for: .normal)
             button.imageView?.contentMode = .scaleAspectFill
@@ -38,7 +38,7 @@ class PostParkingTVC: UITableViewCell {
         private let noButton : UIButton = {
             let button = UIButton()
             button.setTitle("없음", for: .normal)
-            button.setBackgroundImage(UIImage(named: "postParkingUnselected"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "uiViewSelectboxParkingNo"), for: .normal)
             button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
             button.setTitleColor(.gray40, for: .normal)
             button.imageView?.contentMode = .scaleAspectFill
@@ -49,6 +49,8 @@ class PostParkingTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
+        yesButton.isUserInteractionEnabled = false
+        noButton.isUserInteractionEnabled = false
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -70,7 +72,7 @@ class PostParkingTVC: UITableViewCell {
     }
     
     private func setSelectedButtonStyle(button: UIButton){
-       button.setBackgroundImage(UIImage(named: "uiViewSelectboxYes"), for: .normal)
+       button.setBackgroundImage(UIImage(named: "uiViewSelectboxParkingYes"), for: .normal)
        button.setTitleColor(.mainBlue, for: .normal)
     }
        
@@ -88,7 +90,7 @@ class PostParkingTVC: UITableViewCell {
                      noButton,
                      parkingExplanationTextFeild])
         
-        let customGap = Int(175*deviceWidthRate)
+        let customGap = 171 * deviceWidthRate
         
         titleView.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
