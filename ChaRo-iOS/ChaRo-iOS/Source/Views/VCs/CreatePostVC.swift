@@ -142,11 +142,15 @@ extension CreatePostVC {
     
     @objc
     func textFieldMoveUp(_ notification: NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
-            })
+        
+        if tableView.contentOffset.y != 0.0 {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.tableView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+                })
+            }
         }
+        
     }
     
     @objc
