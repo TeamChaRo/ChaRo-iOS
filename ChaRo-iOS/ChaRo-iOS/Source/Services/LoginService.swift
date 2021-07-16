@@ -62,14 +62,9 @@ struct LoginService {
             switch statusCode {
                 
             case 200:
-//                print(decodedData.msg)
-//                print(decodedData.data?.token)
-//                print(decodedData.data?.userId)
-//                print(decodedData.data?.nickname)
-                //setUserInfo(data: decodedData.data)
+                return .success(decodedData)
                 print(decodedData.success)
-                print(decodedData.data as? UserData)
-                return .success(decodedData.data as? UserData)
+                print(decodedData.data)
                 
             case 400:
                 print(decodedData.msg)

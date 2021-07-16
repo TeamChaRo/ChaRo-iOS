@@ -7,12 +7,12 @@
 
 import UIKit
 
-extension UIScreen{
+extension UIScreen {
     
-    public var hasNotch: Bool{
+    class public var hasNotch: Bool {
         let deviceRatio
             = UIScreen.main.bounds.width / UIScreen.main.bounds.height
-        if deviceRatio > 0.5{
+        if deviceRatio > 0.5 {
             return false
         }
         else{

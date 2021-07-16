@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum ThemeLocation {
+    case HomeThemeTVC
+    case ThemeTopTVC
+}
 
 class HomeThemeCVC: UICollectionViewCell {
     
@@ -15,6 +19,7 @@ class HomeThemeCVC: UICollectionViewCell {
     @IBOutlet weak var highLightView: UIView!
     
     static let identifier = "HomeThemeCVC"
+    var location: ThemeLocation?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,15 +32,32 @@ class HomeThemeCVC: UICollectionViewCell {
     override var isSelected: Bool {
         willSet {
             if newValue {
-                themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
-                themeImageView.layer.borderWidth = 1
-                highLightView.backgroundColor = .mainBlue
-                themeLabel.textColor = .mainBlue
+                if location == .HomeThemeTVC {
+                    
+                    themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
+                    highLightView.backgroundColor = .mainBlue
+                    themeLabel.textColor = .mainBlue
+                    
+                } else {
+                    
+                    themeImageView.layer.borderColor = UIColor.mainBlue.cgColor
+                    themeImageView.layer.borderWidth = 1
+                    highLightView.backgroundColor = .mainBlue
+                    themeLabel.textColor = .mainBlue
+                    
+                }
                 
             } else {
-                themeLabel.textColor = .gray40
+                
+                if location == .HomeThemeTVC {
+                    themeLabel.textColor = .gray50
+                } else {
+                    themeLabel.textColor = .gray40
+                }
+                
                 themeImageView.layer.borderWidth = 0
                 highLightView.backgroundColor = .white
+
             }
             
         }
@@ -54,8 +76,14 @@ class HomeThemeCVC: UICollectionViewCell {
         themeImageView.layer.cornerRadius = themeImageView.frame.size.height / 2
     }
     
+    
     public func setThemeTitle(name: String) {
         themeLabel.text = "#\(name)"
+    }
+    
+    public func setData() {
+        
+        
     }
 
 }

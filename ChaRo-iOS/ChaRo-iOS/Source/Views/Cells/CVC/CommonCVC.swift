@@ -16,19 +16,14 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
-    @IBOutlet weak var tagView1: UIView!
-    @IBOutlet weak var tagView2: UIView!
-    @IBOutlet weak var tagView3: UIView!
-    
-    @IBOutlet weak var tagLabel1: UILabel!
-    @IBOutlet weak var tagLabel2: UILabel!
-    @IBOutlet weak var tagLabel3: UILabel!
+    @IBOutlet var tagButtonList: [UIButton]!
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
   
     @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var heartButton: UIButton!
     
+    var taglist :[String] = []
     var clickedPostCell : ((Int) -> ())?
     
 
@@ -37,7 +32,7 @@ class CommonCVC: UICollectionViewCell {
     var postID: Int = 1
     var isFavorite: Bool? {
         didSet {
-            if isFavorite == true {
+            if isFavorite! {
                 heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
             } else {
                 heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
@@ -45,156 +40,87 @@ class CommonCVC: UICollectionViewCell {
         }
     }
     
-    
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        setLabelUI()
     }
 
-    
-    
-    //MARK:- default Setting Function Part
-    func setLabelUI() {
-        titleLabel.font = UIFont.notoSansRegularFont(ofSize: 14)
-        tagLabel1.font = UIFont.notoSansRegularFont(ofSize: 10)
-        tagLabel2.font = UIFont.notoSansRegularFont(ofSize: 10)
-        tagLabel3.font = UIFont.notoSansRegularFont(ofSize: 10)
 
-        tagLabel1.textColor = UIColor.mainBlue
-        tagLabel2.textColor = UIColor.mainBlue
-        tagLabel3.textColor = UIColor.mainBlue
-    }
-    
-    func setTagUI() {
-        
-        let length1 = CGFloat(tagLabel1.text!.count)
-        let length2 = CGFloat(tagLabel2.text!.count)
-        let length3 = CGFloat(tagLabel3.text!.count)
-    
-        
-        tagView1.translatesAutoresizingMaskIntoConstraints = false
-        tagView2.translatesAutoresizingMaskIntoConstraints = false
-        tagView3.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        NSLayoutConstraint.activate([
-            
-            tagView1.widthAnchor.constraint(equalToConstant: 13 * length1),
-            tagView2.widthAnchor.constraint(equalToConstant: 13 * length2),
-            tagView3.widthAnchor.constraint(equalToConstant: 13 * length3)
-            
-        ])
-        
-        
-        tagView1.layer.cornerRadius = 10
-        tagView2.layer.cornerRadius = 10
-        tagView3.layer.cornerRadius = 10
-        
-        tagView1.layer.borderColor = UIColor.mainBlue.cgColor
-        tagView2.layer.borderColor = UIColor.mainBlue.cgColor
-        tagView3.layer.borderColor = UIColor.mainBlue.cgColor
-        
-        tagView1.layer.borderWidth = 1
-        tagView2.layer.borderWidth = 1
-        tagView3.layer.borderWidth = 1
-        
-        
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        
-    }
-    
-    
-
-    //MARK:- Function
-
-    
-    
-    
     //setData 지원이꺼
-    func setData(image: String, title: String, tagCount: Int, tagArr: [String], isFavorite: Bool, postID: Int) {
-        
-        tagLabel1.text = ""
-        tagLabel2.text = ""
-        tagLabel3.text = ""
+    func setData(image: String,
+                 title: String,
+                 tagCount: Int,
+                 tagArr: [String],
+                 isFavorite: Bool,
+                 postID: Int) {
         
         //이미지 설정
         guard let url = URL(string: image) else { return }
         self.imageView.kf.setImage(with: url)
         
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         //postID 설정
         self.postID = postID
         
         //제목 설정
         self.titleLabel.text = title
-        if titleLabel.numberOfLines == 2{
-            titleHeight.constant == 25
+        titleLabel.numberOfLines = 0
+        titleLabel.font = .notoSansRegularFont(ofSize: 14)
+    
+        if titleLabel.numberOfLines == 2 {
+            titleHeight.constant = 25
         }
-        else{
+        else {
             titleHeight.constant = 50
         }
         
         //하트 설정
         self.isFavorite = isFavorite
-        
-        //태그 설정
-        if tagCount == 2 {
-            tagLabel1.text = "#\(tagArr[0])"
-            tagLabel2.text = "#\(tagArr[1])"
-            tagLabel3.text = ""
-            
-        } else {
-            tagLabel1.text = "#\(tagArr[0])"
-            tagLabel2.text = "#\(tagArr[1])"
-            tagLabel3.text = "#\(tagArr[2])"
+       
+        //태그설정
+        for index in 0..<3{
+            if index > tagArr.count - 1 {
+                print("\(index)에서 안그려짐")
+                tagButtonList[index].setTitleColor(.clear, for: .normal)
+                tagButtonList[index].layer.borderColor = UIColor.clear.cgColor
+                continue
+            }
+            tagButtonList[index].setTitle(" #\(tagArr[index]) ", for: .normal)
+            tagButtonList[index].titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 10)
+            tagButtonList[index].setTitleColor(.mainBlue, for: .normal)
+            tagButtonList[index].layer.cornerRadius = 13
+            tagButtonList[index].layer.borderWidth = 1
+            tagButtonList[index].layer.borderColor = UIColor.mainBlue.cgColor
+            tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
-        
-        setTagUI()
-        
+  
     }
     
-    func likeAction()
-    {
+    func likeAction(){
         LikeService.shared.Like(userId: "jieun1211", postId: self.postID) { [self] result in
             
-            switch result
-            {
+            switch result{
             case .success(let success):
-                
                 if let success = success as? Bool {
-                    if success {
-                        isFavorite = !isFavorite!
-                    }
+                    
+                    self.isFavorite = success ? !isFavorite! : isFavorite
+                    
+                    prepareForReuse()
+                    
                 }
-                
                 
             case .requestErr(let msg):
                 
                 if let msg = msg as? String {
                     print(msg)
                 }
-                
-                
             default :
                 print("ERROR")
             }
         }
     }
-    
-//    func setHeartButton() {
-//
-//        let emptyHeartImage = UIImage(named: "icHeartWhiteLine")
-//        let fullHeartImage = UIImage(named: "heart_active")
-//
-//        if self.heartButton.currentImage == emptyHeartImage {
-//            self.heartButton.setImage(fullHeartImage, for: .normal)
-//        } else {
-//            self.heartButton.setImage(emptyHeartImage, for: .normal)
-//        }
-//
-//    }
-    
+
     
     //MARK:- IBAction
     

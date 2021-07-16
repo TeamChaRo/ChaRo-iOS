@@ -358,9 +358,9 @@ extension MyPageVC: UITableViewDataSource{
 
         default:
             return UITableViewCell()
+        }
     }
-    }
-    
+
 }
 
 extension MyPageVC: MenuClickedDelegate{

@@ -134,7 +134,7 @@ extension CreatePostVC {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func postWriteData() -> WritePostData{ // 밖에서 호출할 때 쓰세요~
+    func getPostWriteData() -> WritePostData{ // 밖에서 호출할 때 쓰세요~
         let writeData = WritePostData(title: self.postTitle, userId: Constants.userId, province: self.province, region: self.region, theme: self.theme, warning: self.warning, isParking: self.isParking, parkingDesc: self.parkingDesc, courseDesc: self.courseDesc, course: [])
         
         return writeData
@@ -159,6 +159,8 @@ extension CreatePostVC {
         let images: [UIImage] = [UIImage(named: "testimage")!, UIImage(named: "Mask Group")!]
         //TODO: 작성하기 맵뷰(혜령)와 연결 예정
         let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
+        
+        
         
         print("===서버통신 시작=====")
         CreatePostService.shared.createPost(model: model, image: images){ result in
@@ -248,9 +250,22 @@ extension CreatePostVC {
     //MARK: - Button Actions
     @objc
     func xButtonDidTap(sender: UIButton){
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        let alertViewController = UIAlertController(title: "", message: "게시물 작성을 중단하시겠습니까?",
+                                                    preferredStyle: .alert)
+        
+        let dismissAction = UIAlertAction(title: "작성 중단", style: .default){ _ in
+            self.dismiss(animated: true, completion: nil)
 
-        // TODO: Alert 추가 (중단하시겠습니까?)
-
+        }
+        alertViewController.addAction(dismissAction)
+        
+        let cancelAction = UIAlertAction(title: "이어서 작성", style: .default, handler: nil)
+        alertViewController.addAction(cancelAction)
+        
+        self.present(alertViewController, animated: true, completion: nil)
     }
     
     @objc
@@ -259,8 +274,13 @@ extension CreatePostVC {
         guard let vc = storyboard.instantiateViewController(identifier: AddressMainVC.identifier) as? AddressMainVC else {
             return
         }
-        vc.setAddressListData(list: [])
         
+        let images: [UIImage] = selectImages
+        //TODO: 작성하기 맵뷰(혜령)와 연결 예정
+        let model: WritePostData = getPostWriteData()
+        
+        vc.setAddressListData(list: [])
+        vc.setWritePostDataForServer(data: model, imageList: images)
         self.navigationController?.pushViewController(vc, animated: false)
     }
     

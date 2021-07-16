@@ -28,6 +28,8 @@ class TabbarVC: UITabBarController {
                               y: self.view.frame.size.height-150,
                               width:  self.view.frame.size.width,
                               height: 150)
+        
+        
         // 이 로그는 나중에 지울게요!
        //customTabbar.backgroundImage = UIImage(named: "tabbarBackground")
 //        newFrame.size.height = 150
@@ -76,9 +78,6 @@ class TabbarVC: UITabBarController {
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
         
        
-        
-        
-
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)

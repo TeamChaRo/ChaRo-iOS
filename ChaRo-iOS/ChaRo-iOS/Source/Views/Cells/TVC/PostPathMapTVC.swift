@@ -59,8 +59,9 @@ class PostPathMapTVC: UITableViewCell {
                 print("경로 들어감")
                 self.polyLineList.append(polyLine)
                 polyLine.strokeColor = .mainBlue
-                polyLine.map = self.tMapView
-                
+                DispatchQueue.main.async {
+                    polyLine.map = self.tMapView
+                }
                 
                 if index == self.addressList.count-2{
                     

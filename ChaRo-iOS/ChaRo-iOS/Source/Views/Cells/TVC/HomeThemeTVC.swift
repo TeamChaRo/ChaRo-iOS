@@ -64,6 +64,8 @@ class HomeThemeTVC: UITableViewCell {
         
     }
     
+
+    
     
     //MARK:- Function
     
@@ -82,8 +84,10 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeThemeCVC.identifier, for: indexPath) as? HomeThemeCVC else { return UICollectionViewCell() }
         let themeName = themeList[indexPath.row]
         
+        cell.themeLabel.textColor = .gray50
         cell.setThemeTitle(name: themeName)
         cell.themeImageView?.image = UIImage(named: ThemeDic[themeName] ?? "gear")
+        cell.location = .HomeThemeTVC
         return cell
         
     }
@@ -98,6 +102,7 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 14
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
@@ -118,10 +123,13 @@ extension HomeThemeTVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         //홈에서는 선택되었을 때 색이 들어가면 안됨
         cell?.highLightView.backgroundColor = .systemBackground
         cell?.themeImageView.layer.borderWidth = 0
-        cell?.themeLabel.textColor = .mainBlack
-        
+        cell?.themeLabel.textColor = .gray50
         
 
+    }
+    
+    override func prepareForReuse() {
+        
     }
     
     
