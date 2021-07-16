@@ -18,11 +18,18 @@ class CreatePostTitleTVC: UITableViewCell {
     static let identifier: String = "CreatePostTitleTVC"
     weak var delegateCell: PostTitlecTVCDelegate?
     
+    // MARK: 데이터 전달 closeur
+    public var setTitleInfo: ((String) -> Void)?
+    private var titleContent: String = "" {
+        didSet{
+            _ = setTitleInfo?(self.titleContent)
+        }
+    }
+    
     // MARK: textview maxText check
     private var enterFlag: Bool = false // 20자 이상 감지
     private let limitTextCount: Int = 38
     private let limitLineTextCount: Int = 23
-    private var titleContent: String = ""
     private var isWarning: Bool = false {
         didSet{
             if isWarning {
@@ -74,6 +81,12 @@ class CreatePostTitleTVC: UITableViewCell {
 }
 
 extension CreatePostTitleTVC: UITextViewDelegate {
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        NotificationCenter.default.post(name: .touchTitleTextView, object: nil)
+        return true
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         titleTextView.text = ""
         titleTextView.textColor = UIColor.black
@@ -83,8 +96,6 @@ extension CreatePostTitleTVC: UITextViewDelegate {
         if titleTextView.text.count == 0 {
             textView.text = "제목을 입력해주세요" //placeholder
             textView.textColor = UIColor.gray30
-        } else { // end 될 때마다 VC로 title 전달
-            NotificationCenter.default.post(name: .sendNewPostTitle, object: titleContent)
         }
     }
     
