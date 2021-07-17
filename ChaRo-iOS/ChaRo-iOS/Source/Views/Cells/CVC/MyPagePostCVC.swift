@@ -31,6 +31,9 @@ class MyPagePostCVC: UICollectionViewCell {
     var saveText: String = "99"
     var clickedPostCell : ((Int) -> ())?
     
+    var image : UIImage?
+
+    
     func setRound(){
         postImage.clipsToBounds = true
         postImage.layer.cornerRadius = 10
@@ -60,12 +63,42 @@ class MyPagePostCVC: UICollectionViewCell {
     func setTitleLabel(text: String){
         postTitle.text = text
     }
+    func setImageUrl(_ url: String) {
+        let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
+        
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
+            self.image = cachedImage
+            return
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            if let imageUrl = URL(string: url) {
+                URLSession.shared.dataTask(with: imageUrl) { (data, res, err) in
+                    if let _ = err {
+                        DispatchQueue.main.async {
+                            self.image = UIImage()
+                        }
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        if let data = data, let image = UIImage(data: data) {
+                            ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
+                            self.image = image
+                            self.postImage.image = image
+                        }
+                    }
+                }.resume()
+            }
+        }
+        
+    }
     
     func setData(image: String, title: String, tagCount: Int, tagArr: [String], heart: Int , save: Int, year: String, month: String, day: String, postID: Int) {
         
         //이미지 설정
-        guard let url = URL(string: image) else { return }
-        self.postImage.kf.setImage(with: url)
+//        guard let url = URL(string: image) else { return }
+//        self.postImage.kf.setImage(with: url)
+        self.setImageUrl(image)
         
         //postID 설정
         self.postid = postID

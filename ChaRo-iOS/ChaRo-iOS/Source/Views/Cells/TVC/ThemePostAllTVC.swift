@@ -81,12 +81,8 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         
         switch indexPath.section {
         
-        case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-            
-            cell.imageView.contentMode = .scaleAspectFill
-            cell.imageView.layer.cornerRadius = 10
-            cell.lengthBtwImgLabel.constant = 0
+        cell.imageView.layer.cornerRadius = 10
+        cell.imageView.contentMode = .scaleAspectFill
         
             
             //요소 변수화

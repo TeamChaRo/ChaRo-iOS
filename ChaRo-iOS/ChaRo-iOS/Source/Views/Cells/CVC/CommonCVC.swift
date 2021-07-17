@@ -32,6 +32,7 @@ class CommonCVC: UICollectionViewCell {
     
     var taglist :[String] = []
     var clickedPostCell : ((Int) -> ())?
+    var titleLabelHeight = -1
     
     var image : UIImage?
     
@@ -53,6 +54,11 @@ class CommonCVC: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.sizeToFit()
+         print("titleLabelHeight = \(titleLabelHeight)")
+        if titleLabelHeight != -1 {
+            titleHeight.constant = CGFloat(titleLabelHeight)
+            print("titleLabelHeight \(titleLabelHeight)")
+        }
         
     }
     
@@ -85,6 +91,22 @@ class CommonCVC: UICollectionViewCell {
         }
         
     }
+    
+    //setData 지원이꺼
+    func setData(image: String,
+                 title: String,
+                 tagCount: Int,
+                 tagArr: [String],
+                 isFavorite: Bool,
+                 postID: Int,
+                 height: Int) {
+        
+        setData(image: image, title: title, tagCount: tagCount, tagArr: tagArr, isFavorite: isFavorite, postID: postID)
+        
+        titleLabelHeight = height
+        print("setData -> \(titleLabelHeight)")
+    }
+
     
 
     //setData 지원이꺼
