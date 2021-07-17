@@ -41,9 +41,10 @@ class CreatePostThemeTVC: UITableViewCell {
         }
     }
     private var pickerSelectFlag: Bool = false
-    
+   
     // MARK: UI Components
-    private let courseTitleView = PostCellTitleView(title: "어느 지역으로 다녀오셨나요?", subTitle: "도/광역시, 시 단위로 선택해주세요.")
+    private let courseTitleView = PostCellTitleView(title: "어느 테마의 드라이브였나요?", subTitle: "드라이브 테마를 한 개 이상 선택해주세요.")
+
 
     private let themeFirstButton: UIButton = {
         let button = UIButton()
