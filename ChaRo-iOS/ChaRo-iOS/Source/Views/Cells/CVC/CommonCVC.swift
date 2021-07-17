@@ -55,26 +55,36 @@ class CommonCVC: UICollectionViewCell {
         titleLabel.sizeToFit()
         
     }
-
+    
     func setImageUrl(_ url: String) {
-          
-          let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
-          if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
-            print("캐시 이미지")
-            image = cachedImage
+        let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
+        
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
+            self.image = cachedImage
             return
-          }
-          else{
-          print("newImage")
-        let imageurl = URL(string: url)
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: imageurl!)
-            DispatchQueue.main.async { self.image = UIImage(data: data!) }
-            ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
         }
-        imageView.image = image
-          }
-      }
+        
+        DispatchQueue.global(qos: .background).async {
+            if let imageUrl = URL(string: url) {
+                URLSession.shared.dataTask(with: imageUrl) { (data, res, err) in
+                    if let _ = err {
+                        DispatchQueue.main.async {
+                            self.image = UIImage()
+                        }
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        if let data = data, let image = UIImage(data: data) {
+                            ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
+                            self.image = image
+                            self.imageView.image = image
+                        }
+                    }
+                }.resume()
+            }
+        }
+        
+    }
     
 
     //setData 지원이꺼
