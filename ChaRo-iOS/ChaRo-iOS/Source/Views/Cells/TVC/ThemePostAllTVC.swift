@@ -81,9 +81,13 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         
         switch indexPath.section {
         
-        cell.imageView.layer.cornerRadius = 10
-        cell.imageView.contentMode = .scaleAspectFill
-        
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+            
+            cell.imageView.contentMode = .scaleAspectFill
+            cell.imageView.layer.cornerRadius = 10
+            //cell.lengthBtwImgLabel.constant = 0
+            
             
             //요소 변수화
             let element = selectedDriveList[indexPath.row]
