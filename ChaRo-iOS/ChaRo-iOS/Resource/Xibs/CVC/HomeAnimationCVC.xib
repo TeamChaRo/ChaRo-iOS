@@ -24,13 +24,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="473" height="576"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#날씨도좋은데 #바다와함께라면" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GL-r3-fWB">
-                                <rect key="frame" x="20" y="470.5" width="169" height="18.5"/>
+                                <rect key="frame" x="20" y="430" width="169" height="18.5"/>
                                 <fontDescription key="fontDescription" name="NotoSansOriya" family="Noto Sans Oriya" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="차로와 함께 즐기는 드라이브 코스" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjL-2U-O43">
-                                <rect key="frame" x="20" y="340.5" width="161" height="130"/>
+                                <rect key="frame" x="20" y="300" width="161" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="161" id="k67-ea-xFP"/>
                                     <constraint firstAttribute="height" constant="130" id="oAM-wI-Q9x"/>
@@ -45,7 +45,7 @@
                             <constraint firstAttribute="bottom" secondItem="agf-Ys-6Dc" secondAttribute="bottom" id="0CE-ln-6Al"/>
                             <constraint firstItem="agf-Ys-6Dc" firstAttribute="top" secondItem="hzx-x4-Svm" secondAttribute="top" id="3yR-No-nm4"/>
                             <constraint firstAttribute="trailing" secondItem="agf-Ys-6Dc" secondAttribute="trailing" id="ATG-Iv-5iK"/>
-                            <constraint firstItem="fjL-2U-O43" firstAttribute="top" secondItem="hzx-x4-Svm" secondAttribute="top" constant="340.5" id="CZg-eG-Fpn"/>
+                            <constraint firstItem="fjL-2U-O43" firstAttribute="top" secondItem="hzx-x4-Svm" secondAttribute="top" constant="300" id="CZg-eG-Fpn"/>
                             <constraint firstItem="fjL-2U-O43" firstAttribute="leading" secondItem="hzx-x4-Svm" secondAttribute="leading" constant="20" id="QnC-Ml-8cr"/>
                             <constraint firstItem="agf-Ys-6Dc" firstAttribute="leading" secondItem="hzx-x4-Svm" secondAttribute="leading" id="T9o-qG-k3U"/>
                             <constraint firstItem="0GL-r3-fWB" firstAttribute="top" secondItem="fjL-2U-O43" secondAttribute="bottom" id="ZfQ-rg-E2f"/>

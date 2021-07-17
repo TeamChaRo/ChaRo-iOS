@@ -7,6 +7,13 @@
 
 import UIKit
 
+class ImageCacheManager {
+    
+    static let shared = NSCache<NSString, UIImage>()
+    
+    private init() {}
+}
+
 class CommonCVC: UICollectionViewCell {
 
     //MARK: IBOutlet
@@ -25,6 +32,8 @@ class CommonCVC: UICollectionViewCell {
     
     var taglist :[String] = []
     var clickedPostCell : ((Int) -> ())?
+    
+    var image : UIImage?
     
 
     //MARK: Variable
@@ -46,7 +55,37 @@ class CommonCVC: UICollectionViewCell {
         titleLabel.sizeToFit()
         
     }
-
+    
+    func setImageUrl(_ url: String) {
+        let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
+        
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
+            self.image = cachedImage
+            return
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            if let imageUrl = URL(string: url) {
+                URLSession.shared.dataTask(with: imageUrl) { (data, res, err) in
+                    if let _ = err {
+                        DispatchQueue.main.async {
+                            self.image = UIImage()
+                        }
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        if let data = data, let image = UIImage(data: data) {
+                            ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
+                            self.image = image
+                            self.imageView.image = image
+                        }
+                    }
+                }.resume()
+            }
+        }
+        
+    }
+    
 
     //setData 지원이꺼
     func setData(image: String,
@@ -57,9 +96,23 @@ class CommonCVC: UICollectionViewCell {
                  postID: Int) {
         
         //이미지 설정
-        guard let url = URL(string: image) else { return }
-        self.imageView.kf.setImage(with: url)
+//        guard let url = URL(string: image) else { return }
+//        self.imageView.kf.setImage(with: url)
+        //url에 정확한 이미지 url 주소를 넣는다.
         
+//        let url = URL(string: image)
+//        var image : UIImage?
+//        DispatchQueue.global().async {
+//        let data = try? Data(contentsOf: url!)
+//        DispatchQueue.main.async {
+//        image = UIImage(data: data!)
+//            self.imageView.image = image
+//        }
+//        }
+        self.setImageUrl(image)
+        
+        
+
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         //postID 설정
@@ -68,6 +121,7 @@ class CommonCVC: UICollectionViewCell {
         //제목 설정
         self.titleLabel.text = title
         titleLabel.numberOfLines = 0
+        titleLabel.sizeToFit()
         titleLabel.font = .notoSansRegularFont(ofSize: 14)
     
         let attrString = NSMutableAttributedString(string: titleLabel.text!)
@@ -75,14 +129,6 @@ class CommonCVC: UICollectionViewCell {
         paragraphStyle.lineSpacing = 0.1
         attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
         titleLabel.attributedText = attrString
-        
-        
-        if titleLabel.numberOfLines == 2 {
-            titleHeight.constant = 25
-        }
-        else {
-            titleHeight.constant = 50
-        }
         
         //하트 설정
         self.isFavorite = isFavorite
@@ -104,6 +150,10 @@ class CommonCVC: UICollectionViewCell {
             tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
   
+    }
+    
+    func setLabel(){
+        titleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
     }
     
     func likeAction(){
@@ -149,3 +199,28 @@ class CommonCVC: UICollectionViewCell {
 }
 
 //MARK:- extension
+
+extension UIImageView {
+    
+    func setImageUrl(_ url: String) {
+        
+        DispatchQueue.global(qos: .background).async {
+            if let url = URL(string: url) {
+                URLSession.shared.dataTask(with: url) { (data, res, err) in
+                    if let _ = err {
+                        DispatchQueue.main.async {
+                            self.image = UIImage()
+                        }
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        if let data = data, let image = UIImage(data: data) {
+                            self.image = image
+                        }
+                    }
+                }.resume()
+            }
+        }
+        print(image)
+    }
+ }

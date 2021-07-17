@@ -26,7 +26,7 @@ class HomeAnimationCVC: UICollectionViewCell {
     }
 
     func setTitleConsraint(){
-        let topConstraint =  (Double( homeAnimationView.getDeviceHeight()) * 0.65)*0.5
+        let topConstraint =  (Double( homeAnimationView.getDeviceHeight()) * 0.65)*0.6
         homeTitleLabelTopConstraint.constant = CGFloat(Int(topConstraint))
     }
    

@@ -50,6 +50,7 @@
 		3C45B5F126A1B5F30061D64B /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5F026A1B5F30061D64B /* Splash.storyboard */; };
 		3C45B5F326A1B6320061D64B /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45B5F226A1B6320061D64B /* SplashVC.swift */; };
 		3C45B5F526A1C0110061D64B /* lottie_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5F426A1C0110061D64B /* lottie_test.json */; };
+		3C45B5FB26A256220061D64B /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5FA26A256220061D64B /* loading.json */; };
 		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
@@ -234,6 +235,7 @@
 		3C45B5F026A1B5F30061D64B /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		3C45B5F226A1B6320061D64B /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		3C45B5F426A1C0110061D64B /* lottie_test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_test.json; sourceTree = "<group>"; };
+		3C45B5FA26A256220061D64B /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loading.json; path = ../../../../../Downloads/loading.json; sourceTree = "<group>"; };
 		3C706798269ECE8C0082C852 /* PostResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultService.swift; sourceTree = "<group>"; };
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				3C86FA8C2694C7C6009370CD /* Storyboards */,
 				3C86FA952694C7C6009370CD /* Assets.xcassets */,
 				3C45B5F426A1C0110061D64B /* lottie_test.json */,
+				3C45B5FA26A256220061D64B /* loading.json */,
 				3C86FA962694C7C6009370CD /* Font */,
 				3C86FAA02694C7C6009370CD /* Info.plist */,
 			);
@@ -801,6 +804,7 @@
 				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				703DD830269F3A7E004416A9 /* Login.storyboard in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
+				3C45B5FB26A256220061D64B /* loading.json in Resources */,
 				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
 				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
 				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
@@ -1151,7 +1155,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M2BP76V5D4;
+				DEVELOPMENT_TEAM = U24ZACT97M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1181,7 +1185,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M2BP76V5D4;
+				DEVELOPMENT_TEAM = U24ZACT97M;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
