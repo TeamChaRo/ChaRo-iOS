@@ -140,8 +140,18 @@ class HomePostVC: UIViewController {
     
 }
 extension HomePostVC: UICollectionViewDelegate{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postCount+1
+        if section == 0{
+            return 1
+        }
+        else{
+            return postCount
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,8 +171,7 @@ extension HomePostVC: UICollectionViewDelegate{
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         topCell.delegate = self
         
-     
-        switch indexPath.row {
+        switch indexPath.section{
         case 0:
             if isFirstLoaded {
                 isFirstLoaded = false
@@ -171,46 +180,64 @@ extension HomePostVC: UICollectionViewDelegate{
             topCVCCell?.postCount = postCount
             topCVCCell?.setLabel()
             return topCVCCell!
-        default:
+        case 1:
             if postData.count == 0{
                 return cell
             }
             else{
-                cell.setData(image: postData[0].data.drive[indexPath.row-1].image, title: postData[0].data.drive[indexPath.row-1].title, tagCount: postData[0].data.drive[indexPath.row-1].tags.count, tagArr: postData[0].data.drive[indexPath.row-1].tags, isFavorite: postData[0].data.drive[indexPath.row-1].isFavorite, postID: postData[0].data.drive[indexPath.row-1].postID)
+                cell.setData(image: postData[0].data.drive[indexPath.row].image, title: postData[0].data.drive[indexPath.row].title, tagCount: postData[0].data.drive[indexPath.row].tags.count, tagArr: postData[0].data.drive[indexPath.row].tags, isFavorite: postData[0].data.drive[indexPath.row].isFavorite, postID: postData[0].data.drive[indexPath.row].postID)
                 topCVCCell?.postCount = postCount
+                cell.setLabel()
                 return cell
             }
+        default:
+            print("ERRor")
 
         }
-        
-
+     return UICollectionViewCell()
     }
     
 }
+
+
 extension HomePostVC: UICollectionViewDataSource{
     
 }
 extension HomePostVC: UICollectionViewDelegateFlowLayout{
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let Cellwidth = UIScreen.main.bounds.width-40
-        
-        switch indexPath.row {
-        case 0:
-            print(Cellwidth)
-            return CGSize(width: Cellwidth, height: 55)
-        default:
-            print(Cellwidth)
-            return CGSize(width: Cellwidth, height: 260)
+        if indexPath.section == 0{
+            return CGSize(width: Cellwidth, height: 50)
         }
-        
+        else{
+            return CGSize(width: Cellwidth, height: 260)
+
+        }
     }
 
        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section == 0{
+            return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        }
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
 
        }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if section == 0{
+            return 0
+        }
+        else{
+        return 35
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
 
 extension HomePostVC: UITableViewDelegate{

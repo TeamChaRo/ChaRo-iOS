@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -158,6 +158,7 @@
                 <outlet property="postTitle" destination="pWX-Mj-vdr" id="Ikt-1j-WtK"/>
                 <outlet property="saveImage" destination="eJn-3i-ryn" id="GXS-5u-EeB"/>
                 <outlet property="saveLabel" destination="w2f-mS-7ls" id="GDK-aI-T5M"/>
+                <outlet property="seperatorBar" destination="eRy-9c-K0g" id="Fjn-bm-HQZ"/>
                 <outletCollection property="tagButtonList" destination="zjE-PP-Q0Y" collectionClass="NSMutableArray" id="bTD-4q-JWl"/>
                 <outletCollection property="tagButtonList" destination="aZu-39-rOL" collectionClass="NSMutableArray" id="gKb-bs-1ac"/>
                 <outletCollection property="tagButtonList" destination="y3f-l6-s6a" collectionClass="NSMutableArray" id="7oE-op-k7Z"/>
