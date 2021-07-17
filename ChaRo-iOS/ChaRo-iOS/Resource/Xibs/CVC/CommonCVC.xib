@@ -17,12 +17,12 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="kds-Zc-lX5">
-                        <rect key="frame" x="0.0" y="0.0" width="326" height="247"/>
+                        <rect key="frame" x="0.0" y="0.0" width="326" height="242"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
-                        <rect key="frame" x="0.0" y="247" width="326" height="50"/>
+                        <rect key="frame" x="0.0" y="242" width="326" height="55"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="zVp-LH-iJA"/>
+                            <constraint firstAttribute="height" constant="55" id="zVp-LH-iJA"/>
                         </constraints>
                         <attributedString key="attributedText">
                             <fragment content="해안도로 정복할 수 있는 포항 드라이브 코스">

@@ -185,8 +185,14 @@ extension HomePostVC: UICollectionViewDelegate{
                 return cell
             }
             else{
-                cell.setData(image: postData[0].data.drive[indexPath.row].image, title: postData[0].data.drive[indexPath.row].title, tagCount: postData[0].data.drive[indexPath.row].tags.count, tagArr: postData[0].data.drive[indexPath.row].tags, isFavorite: postData[0].data.drive[indexPath.row].isFavorite, postID: postData[0].data.drive[indexPath.row].postID)
+                cell.setData(image: postData[0].data.drive[indexPath.row].image,
+                             title: postData[0].data.drive[indexPath.row].title,
+                             tagCount: postData[0].data.drive[indexPath.row].tags.count,
+                             tagArr: postData[0].data.drive[indexPath.row].tags,
+                             isFavorite: postData[0].data.drive[indexPath.row].isFavorite,
+                             postID: postData[0].data.drive[indexPath.row].postID, height: 60)
                 topCVCCell?.postCount = postCount
+                //cell.titleHeight?.constant = 60
                 cell.setLabel()
                 return cell
             }
