@@ -28,7 +28,7 @@
                             <fragment content="해안도로 정복할 수 있는 포항 드라이브 코스">
                                 <attributes>
                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <font key="NSFont" size="17" name="NotoSansCJKkr-Regular"/>
+                                    <font key="NSFont" metaFont="system" size="17"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
