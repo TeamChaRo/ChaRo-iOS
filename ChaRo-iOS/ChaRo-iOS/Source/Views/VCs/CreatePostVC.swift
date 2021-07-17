@@ -345,32 +345,37 @@ extension CreatePostVC: PHPickerViewControllerDelegate {
     @available(iOS 14, *)
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
-        
+//        let itemProvider = results.first?.itemProvider
         itemProviders = results.map(\.itemProvider)
-        iterator = itemProviders.makeIterator()
+  
+
+        print("=====image===")
+        var count = 0
         
-        if itemProviders.count + selectImages.count > 6 {
+        if results.count + selectImages.count > 6 {
             // 선택된 사진 갯수가 6개 초과면 alert을 띄워줌
-            let alert = UIAlertController(title: "사진 추가", message: "최대 6개까지 추가할 수 있습니다.", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler : nil )
-            alert.addAction(okAction)
-            present(alert, animated: true, completion: nil)
+            self.makeAlert(title: "사진 용량 초과", message: "사진은 최대 6장까지 추가가 가능합니다.")
         } else {
-            while true {
+            for item in itemProviders {
                 // iterator가 있을 때 까지 selectImages 배열에 append
-                if let itemProvider = iterator?.next(), itemProvider.canLoadObject(ofClass: UIImage.self) {
-                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                        guard let self = self, let image = image as? UIImage else {return}
-                        self.selectImages.append(image)
+                if item.canLoadObject(ofClass: UIImage.self) {
+                    item.loadObject(ofClass: UIImage.self) { (image, error) in
                         DispatchQueue.main.async { // 다 배열에 넣고 reload
-                            self.tableView.reloadData()
+                            if let image = image as? UIImage {
+                                self.selectImages.append(image)
+                                count += 1
+                                if count == results.count {
+                                    self.tableView.reloadData()
+                                }
+                            }
+                            
                         }
                     }
-                } else {
-                    break
                 }
             }
         }
+        
+        
     }
 }
 

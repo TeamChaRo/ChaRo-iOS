@@ -67,7 +67,7 @@ extension CreatePostPhotoTVC {
     }
     
     func receiveImageListfromVC(image: [UIImage]){
-        self.receiveImageList.append(contentsOf: image)
+        self.receiveImageList = image
     }
     
     @objc
