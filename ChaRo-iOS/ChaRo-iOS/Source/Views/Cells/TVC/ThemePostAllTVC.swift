@@ -81,9 +81,8 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         
         switch indexPath.section {
         
-        cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.layer.cornerRadius = 10
-        //cell.lengthBtwImgLabel.constant = 0
+        cell.imageView.contentMode = .scaleAspectFill
         
             
             //요소 변수화
