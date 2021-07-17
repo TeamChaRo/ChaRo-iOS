@@ -10,7 +10,13 @@ import UIKit
 class CreatePostPhotoTVC: UITableViewCell {
     
     static let identifier: String = "CreatePostPhotoTVC"
-    var receiveImageList: [UIImage] = []
+    var receiveImageList: [UIImage] = [] {
+        didSet {
+            print("receiveImageList")
+            print(receiveImageList)
+        }
+    }
+    
     let maxPhotoCount: Int = 6
     
     // MARK: UI Components
@@ -66,7 +72,9 @@ extension CreatePostPhotoTVC {
         emptyImageView.isUserInteractionEnabled = true
     }
     
+
     func receiveImageListfromVC(image: [UIImage]){
+        self.receiveImageList.removeAll()
         self.receiveImageList.append(contentsOf: image)
     }
     
@@ -78,6 +86,7 @@ extension CreatePostPhotoTVC {
     func setNotificationCenter(){
         NotificationCenter.default.addObserver(self, selector: #selector(imageViewDidTap), name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePhoto), name: .createPostDeletePhotoClicked, object: nil)
+    
     }
     
     func removeObservers(){ // TODO: 얘를 어디서 호출할지..?
@@ -87,7 +96,8 @@ extension CreatePostPhotoTVC {
 
     @objc
     func deletePhoto(_ notification: Notification){
-        receiveImageList.remove(at: notification.object as! Int) //선택한 이미지 삭제
+        print("====delete====")
+        self.receiveImageList.remove(at: notification.object as! Int) //선택한 이미지 삭제
         collectionView.reloadData()
     }
     
@@ -132,9 +142,7 @@ extension CreatePostPhotoTVC : UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatePostPhotosCVC.identifier, for: indexPath) as? CreatePostPhotosCVC else {return UICollectionViewCell() }
-        
-        print("컬렉션 로드")
-        print(receiveImageList.count)
+
         
         cell.deleteButton.tag = indexPath.row
         
