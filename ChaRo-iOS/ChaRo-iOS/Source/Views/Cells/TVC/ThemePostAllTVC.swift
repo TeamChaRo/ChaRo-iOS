@@ -43,6 +43,7 @@ class ThemePostAllTVC: UITableViewCell {
     
         collectionView.registerCustomXib(xibName: CommonCVC.identifier)
         collectionView.registerCustomXib(xibName: HomePostDetailCVC.identifier)
+        collectionView.registerCustomXib(xibName: EmptyCVC.identifier)
         collectionView.showsHorizontalScrollIndicator = false
     }
     
@@ -65,28 +66,48 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return cellCount
+        switch section {
+        case 0:
+            return cellCount
+        case 1:
+            return 1
+        default:
+            return 1
+        }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+        switch indexPath.section {
         
-        cell.imageView.image = UIImage(named: "tempImageBig")
-        cell.imageView.contentMode = .scaleAspectFill
-        cell.imageView.layer.cornerRadius = 10
-        cell.lengthBtwImgLabel.constant = 0
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+            
+            cell.imageView.contentMode = .scaleAspectFill
+            cell.imageView.layer.cornerRadius = 10
+            cell.lengthBtwImgLabel.constant = 0
         
-        cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
+            
+            //요소 변수화
+            let element = selectedDriveList[indexPath.row]
+            
+            cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postID)
+            
+            cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
+            
+            return cell
+            
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCVC.identifier, for: indexPath) as? EmptyCVC else { return UICollectionViewCell() }
+            
+            return cell
+            
+        default:
+            return UICollectionViewCell()
+        }
         
-        //요소 변수화
-        let element = selectedDriveList[indexPath.row]
         
-        cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postID)
-        
-        return cell
-
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -98,8 +119,17 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 335, height: 260)
         
+        let factor = UIScreen.main.bounds.width / 375
+        
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: 335 * factor, height: 260 * factor)
+        case 1:
+            return CGSize(width: self.getDeviceWidth(), height: 30)
+        default:
+            return CGSize(width: 0, height: 0)
+        }
 
     }
     
