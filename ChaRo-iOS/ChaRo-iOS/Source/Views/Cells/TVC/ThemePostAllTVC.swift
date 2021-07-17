@@ -76,7 +76,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         cell.imageView.image = UIImage(named: "tempImageBig")
         cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.layer.cornerRadius = 10
-        cell.lengthBtwImgLabel.constant = 0
         
         cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
         
