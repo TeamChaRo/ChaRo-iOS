@@ -81,9 +81,12 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         
         switch indexPath.section {
         
-        cell.imageView.layer.cornerRadius = 10
-        cell.imageView.contentMode = .scaleAspectFill
-        
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+            
+            cell.imageView.contentMode = .scaleAspectFill
+            cell.imageView.layer.cornerRadius = 10
+            
             
             //요소 변수화
             let element = selectedDriveList[indexPath.row]
@@ -102,8 +105,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         default:
             return UICollectionViewCell()
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
