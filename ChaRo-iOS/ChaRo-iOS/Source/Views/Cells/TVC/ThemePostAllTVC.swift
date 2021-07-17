@@ -99,7 +99,9 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 335, height: 260)
+        let factor = UIScreen.main.bounds.width / 375
+            
+        return CGSize(width: 335 * factor, height: 260 * factor)
         
 
     }
