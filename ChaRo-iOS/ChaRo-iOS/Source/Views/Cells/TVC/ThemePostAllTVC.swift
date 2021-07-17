@@ -86,8 +86,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
             
             cell.imageView.contentMode = .scaleAspectFill
             cell.imageView.layer.cornerRadius = 10
-            
-            
             //요소 변수화
             let element = selectedDriveList[indexPath.row]
             

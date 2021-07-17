@@ -49,7 +49,7 @@ class CreatePostCourseTVC: UITableViewCell {
     private var filterList : [String] = ["",""] // pickerview 선택 완료 후에 담길 결과 배열
     
     // MARK: UI Components
-    private let themeTitleView = PostCellTitleView(title: "어느 테마의 드라이브였나요?", subTitle: "드라이브 테마를 한 개 이상 선택해주세요.")
+    private let themeTitleView = PostCellTitleView(title: "어느 지역으로 다녀오셨나요?", subTitle: "도/광역시, 시 단위로 선택해주세요.")
     
     private let cityButton: UIButton = {
         let button = UIButton()
