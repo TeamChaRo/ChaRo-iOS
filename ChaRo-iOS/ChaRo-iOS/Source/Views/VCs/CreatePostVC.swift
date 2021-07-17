@@ -20,16 +20,11 @@ class CreatePostVC: UIViewController {
     public var region: String = ""
     public var theme: [String] = ["","",""]
     public var warning: [Bool] = [false, false, false, false]
-    public var isParking: Bool = false {
-        didSet{
-            print("parkingDesc \(isParking) =====")
-        }
-    }
+    public var isParking: Bool = false
     public var parkingDesc: String = ""
     public var courseDesc: String = ""
     
     var selectImages: [UIImage] = []
-    
     var itemProviders: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
     var titleSelectFlag: Bool = false // 제목 textfield 선택했는지 여부
@@ -345,11 +340,8 @@ extension CreatePostVC: PHPickerViewControllerDelegate {
     @available(iOS 14, *)
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
-//        let itemProvider = results.first?.itemProvider
+        
         itemProviders = results.map(\.itemProvider)
-  
-
-        print("=====image===")
         var count = 0
         
         if results.count + selectImages.count > 6 {
@@ -396,7 +388,9 @@ extension CreatePostVC {
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
         
         // 여기서 VC 이미지를 Cell에 전달
+    
         photoCell.receiveImageListfromVC(image: selectImages)
+        
         
         if selectImages.count > 0 {
             photoCell.photoConfigureLayout()
