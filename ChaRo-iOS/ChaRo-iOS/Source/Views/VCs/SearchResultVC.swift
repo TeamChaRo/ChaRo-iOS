@@ -204,7 +204,7 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.row == 0{
+        if indexPath.row == 0 {
             return CGSize(width: collectionView.frame.size.width-40, height: 30)
         }
         
@@ -226,7 +226,7 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout{
 }
 
 
-extension SearchResultVC{
+extension SearchResultVC {
     
     private func setConstraint(){
         view.addSubview(navigationView)
@@ -239,7 +239,6 @@ extension SearchResultVC{
         setShadowInNavigationView()
         setConstraintsInNavigaitionView()
     }
-    
     
     private func setConstraintsInNavigaitionView(){
         navigationView.addSubviews([backButton,
