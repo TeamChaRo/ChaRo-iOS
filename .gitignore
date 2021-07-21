@@ -111,8 +111,9 @@ iOSInjectionProject/
 #Delete Pods/
 */Pods/
 
-#Delete TmapSDK
-*/TMapSDK.framework
+#피드백을 위해 잠시 깃에 올림
+#Delete TmapSDK 
+#TMapSDK.framework
 
 #Delete privacy file
 */MapService.swift 
