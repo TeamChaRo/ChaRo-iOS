@@ -42,7 +42,7 @@
 		36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */; };
 		36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */; };
 		36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */; };
-		36F3302726A25975009C0173 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 36F3302626A25975009C0173 /* loading.json */; };
+		36F3302926A2A97D009C0173 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 36F3302826A2A97D009C0173 /* loading.json */; };
 		3C117E1E269F45D5005F4646 /* PostResultHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */; };
 		3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */; };
 		3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */; };
@@ -227,7 +227,7 @@
 		36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostDetailCVC.xib; sourceTree = "<group>"; };
 		36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotDropDownTVC.swift; sourceTree = "<group>"; };
 		36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotDropDownTVC.xib; sourceTree = "<group>"; };
-		36F3302626A25975009C0173 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		36F3302826A2A97D009C0173 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultHeaderCVC.swift; sourceTree = "<group>"; };
 		3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostResultHeaderCVC.xib; sourceTree = "<group>"; };
 		3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailDataModel.swift; sourceTree = "<group>"; };
@@ -504,7 +504,7 @@
 				3C86FA8C2694C7C6009370CD /* Storyboards */,
 				3C86FA952694C7C6009370CD /* Assets.xcassets */,
 				3C45B5F426A1C0110061D64B /* lottie_test.json */,
-				36F3302626A25975009C0173 /* loading.json */,
+				36F3302826A2A97D009C0173 /* loading.json */,
 				3C86FA962694C7C6009370CD /* Font */,
 				3C86FAA02694C7C6009370CD /* Info.plist */,
 			);
@@ -810,7 +810,7 @@
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
 				36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */,
-				36F3302726A25975009C0173 /* loading.json in Resources */,
+				36F3302926A2A97D009C0173 /* loading.json in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
 				36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */,
