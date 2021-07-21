@@ -183,7 +183,7 @@ extension MyPageVC: UICollectionViewDelegate{
             customTabbarList[0].setSelectedView()
             customTabbarList[1].setDeselectedView()
             customTabbarList[0].setIcon(data: "write_active")
-            customTabbarList[1].setIcon(data: "save5_inactive")
+            customTabbarList[1].setIcon(data: "save_inactive")
             saveTableCollectionView.isHidden = true
 //            myTableCollectionView.reloadData()
 //            saveTableCollectionView.reloadData()
@@ -191,7 +191,7 @@ extension MyPageVC: UICollectionViewDelegate{
             customTabbarList[0].setDeselectedView()
             customTabbarList[1].setSelectedView()
             customTabbarList[0].setIcon(data: "write_inactive")
-            customTabbarList[1].setIcon(data: "save5_active")
+            customTabbarList[1].setIcon(data: "save_active")
             saveTableCollectionView.isHidden = false
 //            saveTableCollectionView.reloadData()
 //            myTableCollectionView.reloadData()
@@ -250,7 +250,7 @@ extension MyPageVC: UICollectionViewDataSource{
                 return customTabbarList[0]
             }
             if indexPath.row == 1{
-                customTabbarList[1].setIcon(data: "save5_inactive")
+                customTabbarList[1].setIcon(data: "save_inactive")
                 return customTabbarList[1]
             }
         //내가 쓴 글

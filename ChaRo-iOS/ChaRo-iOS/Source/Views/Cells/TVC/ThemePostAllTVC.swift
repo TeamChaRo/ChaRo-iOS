@@ -86,9 +86,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
             
             cell.imageView.contentMode = .scaleAspectFill
             cell.imageView.layer.cornerRadius = 10
-            //cell.lengthBtwImgLabel.constant = 0
-            
-            
             //요소 변수화
             let element = selectedDriveList[indexPath.row]
             
@@ -106,8 +103,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
         default:
             return UICollectionViewCell()
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

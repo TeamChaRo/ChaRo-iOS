@@ -11,7 +11,7 @@ import SnapKit
 class SearchPostVC: UIViewController {
 
     static let identifier = "SearchPostVC"
-    private let userName = "배희진희진"
+    private let userName = Constants.nickName
     
     //MARK: About PickerView
     private var currentIndex = 0

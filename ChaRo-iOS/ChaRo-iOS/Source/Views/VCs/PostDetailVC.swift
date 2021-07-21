@@ -24,9 +24,9 @@ class PostDetailVC: UIViewController {
     private var isFavorite: Bool? {
         didSet {
             if isFavorite! {
-                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+                heartButton.setImage(UIImage(named: "icHeartActive"), for: .normal)
             } else {
-                heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
+                heartButton.setImage(UIImage(named: "icHeartInactive"), for: .normal)
             }
         }
     }
@@ -36,7 +36,7 @@ class PostDetailVC: UIViewController {
             if isStored! {
                 scrapButton.setImage(UIImage(named: "save_active"), for: .normal)
             } else {
-                scrapButton.setImage(UIImage(named: "save_inactive"), for: .normal)
+                scrapButton.setImage(UIImage(named: "icSave5Inactive"), for: .normal)
             }
         }
     }
@@ -61,7 +61,7 @@ class PostDetailVC: UIViewController {
     }()
     
     private var heartButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton() //icHeartActive
         button.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
         button.addTarget(self, action: #selector(clickedToHeartButton), for: .touchUpInside)
         return button
@@ -69,7 +69,7 @@ class PostDetailVC: UIViewController {
     
     private var scrapButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "save_inactive"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "icSave5Inactive"), for: .normal)
         button.addTarget(self, action: #selector(clickedToScrapButton), for: .touchUpInside)
         return button
     }()
@@ -93,6 +93,7 @@ class PostDetailVC: UIViewController {
         
         print("PostDetailVC viewDidLoad")
         setTableViewConstraints()
+        
     }
     
     
@@ -333,6 +334,7 @@ extension PostDetailVC{
         }
         navigationView.bringSubviewToFront(view)
         setBasicNavigationView()
+       // applyTitleViewShadow()
         setShadowInNavigationView()
         
         if isAuthor{
@@ -391,6 +393,12 @@ extension PostDetailVC{
             $0.trailing.equalToSuperview().offset(-11)
             $0.centerY.equalTo(backButton.snp.centerY)
         }
+    }
+    
+    func applyTitleViewShadow(){
+        navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 10), shadowRadius: 6, shadowOpacity: 0.05)
+
+        self.view.bringSubviewToFront(navigationView)
     }
     
     func setShadowInNavigationView(){
