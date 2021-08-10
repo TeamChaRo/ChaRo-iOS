@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1BF746D5C8549F4E027525F3 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */; };
+		330CFE1226C2CBCD005380E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 330CFE1126C2CBCD005380E4 /* GoogleService-Info.plist */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		36071676269F9AE10042256B /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36071675269F9AE10042256B /* Notification.storyboard */; };
@@ -193,6 +194,7 @@
 
 /* Begin PBXFileReference section */
 		31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		330CFE1126C2CBCD005380E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
 		36071675269F9AE10042256B /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				36F3302826A2A97D009C0173 /* loading.json */,
 				3C86FA962694C7C6009370CD /* Font */,
 				3C86FAA02694C7C6009370CD /* Info.plist */,
+				330CFE1126C2CBCD005380E4 /* GoogleService-Info.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1218,6 +1221,7 @@
 				360937AE2699EF7B005392BB /* TabbarCVC.xib in Resources */,
 				3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */,
 				360937A42699E52F005392BB /* MyPage.storyboard in Resources */,
+				330CFE1226C2CBCD005380E4 /* GoogleService-Info.plist in Resources */,
 				7084948626A2441C001B3C2B /* EmptyCVC.xib in Resources */,
 				3C86FAB92694C7C6009370CD /* NotoSansCJKkr-Light.otf in Resources */,
 				3C86FABD2694C7C6009370CD /* LICENSE_OFL.txt in Resources */,
