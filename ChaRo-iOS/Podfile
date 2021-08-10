@@ -12,4 +12,5 @@ target 'ChaRo-iOS' do
   pod 'lottie-ios'
   pod 'Kingfisher', '~> 6.0'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'Firebase/Analytics'
 end
