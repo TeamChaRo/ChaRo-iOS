@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzx-x4-Svm">
                         <rect key="frame" x="0.0" y="0.0" width="473" height="576"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummyMain" translatesAutoresizingMaskIntoConstraints="NO" id="agf-Ys-6Dc">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummyMain" translatesAutoresizingMaskIntoConstraints="NO" id="agf-Ys-6Dc">
                                 <rect key="frame" x="0.0" y="0.0" width="473" height="576"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#날씨도좋은데 #바다와함께라면" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GL-r3-fWB">
