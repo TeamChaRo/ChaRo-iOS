@@ -17,10 +17,17 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var homeNavigationHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var charoIconImageView: NSLayoutConstraint!
+//    @IBOutlet weak var CollectionView: UICollectionView!
+    @IBOutlet weak var bannerScrollView: UIScrollView!
+    @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     
     
     var isFirstSetData: Bool = true
     
+    var kTableHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
+    var headerView: UIView!
+    var images = [#imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "dummyMain"), #imageLiteral(resourceName: "dummyMain")]
+    var imageViews = [UIImageView]()
     
     ///배너 데이타
     var bannerData: [Banner] = []
@@ -40,17 +47,41 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    func setHeader(){
+      
+        HomeTableView.rowHeight = UITableView.automaticDimension
+        headerView = HomeTableView.tableHeaderView
+        HomeTableView.tableHeaderView = nil
+        HomeTableView.addSubview(headerView)
+        HomeTableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
+        HomeTableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        updateHeaderView()
+
+
+    }
+    func updateHeaderView() {
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: HomeTableView.bounds.width, height: kTableHeaderHeight)
+        if HomeTableView.contentOffset.y < kTableHeaderHeight {
+            headerRect.origin.y = HomeTableView.contentOffset.y
+            headerRect.size.height = -HomeTableView.contentOffset.y
+        }
+        headerView.frame = headerRect
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("겟 데이터 실행")
-
         getData()
         setTableView()
         setHomeNavigationViewLayout()
         setActionToSearchButton()
+        setHeader()
         navigationController?.isNavigationBarHidden = true
         
+        updateHeaderView()
         HomeTableView.separatorStyle = .none
+        addContentScrollView()
     }
     
     
@@ -172,13 +203,13 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         let homeBannerRatio: CGFloat = 0.65
         
         switch indextPath.row {
+//        case 0:
+//            return UIScreen.main.bounds.height * homeBannerRatio
         case 0:
-            return UIScreen.main.bounds.height * homeBannerRatio
-        case 1:
             return 365 * factor
-        case 2:
+        case 1:
             return 178 * factor
-        case 3, 4, 5:
+        case 2, 3, 4:
             return 570 * factor
         default:
             return 100
@@ -191,13 +222,47 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         //shadowExtension 예제
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
+    func addContentScrollView() {
+            for i in 0..<images.count {
+                let imageView = UIImageView()
+                let xPos = self.view.frame.width * CGFloat(i)
+                imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.65)
+                imageView.image = images[i]
+                bannerScrollView.addSubview(imageView)
+                bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
+                
+                if HomeTableView.contentOffset.y < 0{
+                    imageView.frame.size.height = -HomeTableView.contentOffset.y
+                }
+            }
+            
+        }
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //스크롤뷰에 따라서 알파값 조정함
+        
+        let originalCarConstant = carMoveConstraint.constant
+        let sideMargin : CGFloat = 24
+        let pageCount : Int = 4
+
         let userHeight = HomeNavigationView.getDeviceHeight()
         let standardHeight = userHeight/2
         let currentHeight = scrollView.contentOffset.y
+        print(scrollView.contentOffset.x)
+        if scrollView.contentOffset.x > 0{
+            print("실행중")
+               if scrollView.contentOffset.x < 10000 {
+                carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
+               } else {
+                carMoveConstraint.constant = originalCarConstant
+               }
+           }
+        else{
+            carMoveConstraint.constant = originalCarConstant
+           }
+        
+        
         if scrollView.contentOffset.y > 0{
                if scrollView.contentOffset.y > 1 {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0.01 + (scrollView.contentOffset.y / CGFloat(standardHeight)))
@@ -221,13 +286,15 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                }
            }
         else{
+            updateHeaderView()
+            addContentScrollView()
             HomeNavigationView.backgroundColor = .none
            }
 
        }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 5
     }
     
 //MARK: 내용 구현 부
@@ -237,31 +304,31 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 //MARK: 배너부분 구현
         switch indexPath.row {
         
-        
-        case 0:
-            let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
-            cell.setDelegate()
-            
-            if bannerData.count == 0 {
-                return cell
-            }
-            
-            else {
-                
-                //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈리다 ....
-                if isFirstSetData {
-                    for i in 0 ... 3 {
-                        cell.setBannerList(inputList: bannerData)
-                    }
-                    isFirstSetData = false
-                    return cell
-                }
-
-                
-            }
+//
+//        case 0:
+//            let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
+//            cell.setDelegate()
+//
+//            if bannerData.count == 0 {
+//                return cell
+//            }
+//
+//            else {
+//
+//                //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈리다 ....
+//                if isFirstSetData {
+//                    for i in 0 ... 3 {
+//                        cell.setBannerList(inputList: bannerData)
+//                    }
+//                    isFirstSetData = false
+//                    return cell
+//                }
+//
+//
+//            }
             
 //MARK: 오늘의 드라이브
-        case 1:
+        case 0:
 
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
@@ -277,7 +344,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        case 2:
+        case 1:
 
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
@@ -285,7 +352,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             
             
 //MARK: 트렌드
-        case 3:
+        case 2:
 
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
@@ -306,7 +373,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
 
             
 //MARK: 커스텀 테마
-        case 4:
+        case 3:
 
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
@@ -327,7 +394,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             }
            
 //MARK: 로컬 테마
-        case 5:
+        case 4:
 
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
@@ -416,3 +483,25 @@ extension HomeVC: PostIdDelegate {
     }
     
 }
+
+//extension HomeVC: UICollectionViewDelegate{
+//
+//}
+//extension HomeVC: UICollectionViewDataSource{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 4
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell: HomeAnimationCVC = collectionView.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: indexPath) as! HomeAnimationCVC
+//
+//        return cell
+//    }
+//
+//
+//}
+//extension HomeVC: UICollectionViewDelegateFlowLayout{
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+//}
