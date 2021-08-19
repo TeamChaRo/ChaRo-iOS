@@ -23,6 +23,16 @@ class SearchPostVC: UIViewController {
     private var filterData = FilterDatas()
     private var currentList: [String] = []
     private var filterList : [String] = ["","","",""]
+    private var canActiveButton = false {
+        didSet{
+            if canActiveButton {
+                changeFindButtonToActive()
+            }
+            else {
+                changeFindButtonToUnactive()
+            }
+        }
+    }
     
     
     //MARK: Component
@@ -147,17 +157,16 @@ extension SearchPostVC {
                                           cityTextField,
                                           themaTextField,
                                           cautionTextField])
-        
-        for textField in textFieldList{
-            textField.textAlignment = .center
-            textField.borderStyle = .none
-            textField.tintColor = .clear
-            textField.addRightPadding(10)
-            textField.font = .notoSansMediumFont(ofSize: 14)
-            textField.textColor = .gray40
-            textField.addTarget(self, action: #selector(clickedTextField), for: .touchDown)
-            textField.inputAccessoryView = toolbar
-            textField.inputView = pickerView
+        textFieldList.forEach{
+            $0.textAlignment = .center
+            $0.borderStyle = .none
+            $0.tintColor = .clear
+            $0.addRightPadding(10)
+            $0.font = .notoSansMediumFont(ofSize: 14)
+            $0.textColor = .gray40
+            $0.addTarget(self, action: #selector(clickedTextField), for: .touchDown)
+            $0.inputAccessoryView = toolbar
+            $0.inputView = pickerView
         }
     }
     
@@ -166,83 +175,12 @@ extension SearchPostVC {
                                           cityImageView,
                                           themaImageView,
                                           cautionImageView])
-    }
-    
-    @objc func clickedTextField(_ sender : UITextField){
-        currentIndex = sender.tag
-        print("currentIndex = \(currentIndex)")
-        pickerView.selectRow(0, inComponent: 0, animated: true)
-        changeCurrentPickerData(index: currentIndex)
         
-        changeToolbarText(index: currentIndex)
-        pickerView.reloadComponent(0)
-    }
-
-
-    func changeFilterActive(index: Int){
-        imageViewList[index].image = UIImage(named: "searchBtnSelect")
-        textFieldList[index].text = filterList[index]
-        textFieldList[index].textColor = .mainBlue
-    }
-    
-    func changeCityFilterUnactive(){
-        textFieldList[1].isUserInteractionEnabled = false
-        imageViewList[1].image = UIImage(named: "searchBtnUnselect")
-        textFieldList[1].text = "지역"
-        textFieldList[1].textColor = .gray40
-        filterList[1] = ""
-    }
-    
- 
-    func canChangeActiveMode() -> Bool{
-        print(filterList)
-        for index in 0..<filterList.count{
-            if index == 0 && filterList[1] != ""{
-                return true
-            }else if index != 0{
-                if filterList[index] != "" && filterList[index] != "선택안함"{
-                    print("이 값은 OK = \(filterList[index]), index = \(index)")
-                    return true
-                }
-            }
-            
-            //4가지 값중 1하나로 들어간 경우
-            
-        }
-    
-        return false
-    }
-    
-//    func isCheckWhenClickedState() -> Bool{
-//
-//        for index in 0..<filterList.count{
-//            print("현재보는 값 = \(filterList[index]), index = \(index)")
-//            if index == 0 && filterList[index] != "선택안함"{
-//                return true
-//            }
-//            if filterList[index] != "" && filterList[index] != "선택안함"{
-//                print("이 값은 OK = \(filterList[index]), index = \(index)")
-//                return true
-//            }
-//        }
-//        return false
-//    }
-    
-    func isCheckWhenStateNonValue(){
-        
-        if filterList[1] == ""{
-            textFieldList[1].isUserInteractionEnabled = true
+        imageViewList.forEach {
+            $0.image = UIImage(named: "searchBtnUnselect")
+            $0.contentMode = .scaleToFill
         }
         
-        if filterList[0] == "선택안함"{
-            changeCityFilterUnactive()
-        }
-        
-//        if isCheckWhenClickedState(){
-//            changeFindButtonToActive()
-//        }else{
-//            changeFindButtonToUnactive()
-//        }
     }
     
     func changeFindButtonToActive(){
@@ -257,6 +195,52 @@ extension SearchPostVC {
         findButton.setTitleColor(.mainBlue, for: .normal)
     }
     
+  
+    @objc func clickedTextField(_ sender : UITextField){
+        currentIndex = sender.tag
+        pickerView.selectRow(0, inComponent: 0, animated: true)
+        changeCurrentPickerData(index: currentIndex)
+        changeToolbarText(index: currentIndex)
+        pickerView.reloadComponent(0)
+    }
+
+    func changeFilterActive(index: Int){
+        imageViewList[index].image = UIImage(named: "searchBtnSelect")
+        textFieldList[index].text = filterList[index]
+        textFieldList[index].textColor = .mainBlue
+    }
+   
+    
+    func observeFilterData(){
+        for index in 1..<4{
+            if filterList[index] != "" && filterList[index] != "선택안함"{
+                print("여기서 찍힘 == \(filterList[index])")
+                canActiveButton = true
+                return
+            }
+        }
+        canActiveButton = false
+    }
+    
+    func isCheckWhenStateNonValue(){
+        if filterList[1] == ""{
+            textFieldList[1].isUserInteractionEnabled = true
+        }
+        
+        if filterList[0] == "선택안함"{
+            changeCityFilterUnactive()
+        }
+    }
+    
+    
+    func changeCityFilterUnactive(){
+        textFieldList[1].isUserInteractionEnabled = false
+        imageViewList[1].image = UIImage(named: "searchBtnUnselect")
+        textFieldList[1].text = "지역"
+        textFieldList[1].textColor = .gray40
+        filterList[1] = ""
+    }
+ 
     
 }
 
@@ -287,19 +271,11 @@ extension SearchPostVC {
     }
     
     @objc func donePresseed(){
-        
-        if canChangeActiveMode(){
-            changeFindButtonToActive()
-        }else{
-            changeFindButtonToUnactive()
-        }
-        
-        changeFilterActive(index: currentIndex)
-    
         if currentIndex == 0{
             isCheckWhenStateNonValue()
         }
-        
+        changeFilterActive(index: currentIndex)
+        observeFilterData()
         self.view.endEditing(true)
     }
     
@@ -341,7 +317,6 @@ extension SearchPostVC: UIPickerViewDelegate{
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(currentList[row])
         if row == 0 {
             filterList[currentIndex] = currentList[0]
         }else{
@@ -357,10 +332,9 @@ extension SearchPostVC: UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return  currentList.count
+        return currentList.count
     }
 }
-
 
 
 //MARK: UI
