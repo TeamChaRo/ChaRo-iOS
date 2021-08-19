@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class SearchPostVC: UIViewController {
 
@@ -28,132 +29,85 @@ class SearchPostVC: UIViewController {
     lazy private var backButton = XmarkDismissButton(toDismiss: self)
     private let titleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색", color: .white)
     
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBackground"))
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
+    private let backgroundImageView = UIImageView().then{
+        $0.image = UIImage(named: "searchBackground")
+        $0.contentMode = .scaleToFill
+    }
     
-    private let userNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansBoldFont(ofSize: 22)
-        label.textColor = .white
-        return label
-    }()
+    private let userNameLabel = UILabel().then{
+        $0.font = .notoSansBoldFont(ofSize: 22)
+        $0.textColor = .white
+    }
     
-    private let userSubLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .white
-        label.text = "맞춤 코스를 찾아 드릴게요"
-        return label
-    }()
+    private let userSubLabel = UILabel().then{
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .white
+        $0.text = "맞춤 코스를 찾아 드릴게요"
+    }
     
-    private let fileterView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "searchBackgroundWhite"))
-        view.contentMode = .scaleToFill
-        return view
-    }()
+    private let fileterView = UIImageView().then{
+        $0.image = UIImage(named: "searchBackgroundWhite")
+        $0.contentMode = .scaleToFill
+    }
     
-    private let filterTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "오늘 드라이브는"
-        label.font = .notoSansBoldFont(ofSize: 19)
-        label.textColor = .gray50
-        return label
-    }()
+    private let filterTitleLabel = UILabel().then{
+        $0.text = "오늘 드라이브는"
+        $0.font = .notoSansBoldFont(ofSize: 19)
+        $0.textColor = .gray50
+    }
     
+    private let stateImageView = UIImageView()
+    private let stateTextField = UITextField().then{
+        $0.tag = 0
+        $0.text = "지역"
+    }
+        
+    private let cityImageView = UIImageView()
+    private let cityTextField = UITextField().then {
+        $0.tag = 1
+        $0.text = "지역"
+        $0.isUserInteractionEnabled = false
+    }
     
-    private let stateImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
+    private let cityLabel = UILabel().then {
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.text = "에 있는"
+    }
     
-    private let stateTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 0
-        textField.text = "지역"
-        return textField
-    }()
+    private let themaImageView = UIImageView()
+    private var themaTextField = UITextField().then {
+        $0.tag = 2
+        $0.text = "테마"
+    }
     
-    private let cityImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
+    private let themaLabel = UILabel().then {
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.text = "에 어울리는 코스로"
+    }
     
-    private let cityTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 1
-        textField.text = "지역"
-        textField.isUserInteractionEnabled = false
-        return textField
-    }()
+    private let cautionImageView = UIImageView()
+    private let cautionTextField = UITextField().then{
+        $0.tag = 3
+        $0.text = "주의사항"
+    }
     
-    private let cityLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .gray50
-        label.text = "에 있는"
-        return label
-    }()
+    private let cautionLabel = UILabel().then{
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.text = "은 피하고 싶어요"
+    }
     
-    private let themaImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
-    
-    private var themaTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 2
-        textField.text = "테마"
-        return textField
-    }()
-    
-    private var testTextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .gray40
-        return textField
-    }()
-    
-    private let themaLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .gray50
-        label.text = "에 어울리는 코스로"
-        return label
-    }()
-    
-    private let cautionImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
-    
-    private let cautionTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 3
-        textField.text = "주의사항"
-        return textField
-    }()
-    
-    private let cautionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .gray50
-        label.text = "은 피하고 싶어요"
-        return label
-    }()
-    
-    private let findButton: UIButton = {
-        let button = UIButton()
-        button.isUserInteractionEnabled = false
-        button.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
-        button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
-        button.imageView?.contentMode = .scaleToFill
-        button.setTitle("찾아보기", for: .normal)
-        button.setTitleColor(.mainBlue, for: .normal)
-        button.addTarget(self, action: #selector(pushNextVC), for: .touchUpInside)
-        return button
-    }()
+    private let findButton = UIButton().then{
+        $0.isUserInteractionEnabled = false
+        $0.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
+        $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+        $0.imageView?.contentMode = .scaleToFill
+        $0.setTitle("찾아보기", for: .normal)
+        $0.setTitleColor(.mainBlue, for: .normal)
+        $0.addTarget(self, action: #selector(pushNextVC), for: .touchUpInside)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
