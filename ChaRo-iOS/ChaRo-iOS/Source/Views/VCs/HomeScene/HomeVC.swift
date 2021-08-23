@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class HomeVC: UIViewController {
 
@@ -35,7 +37,6 @@ class HomeVC: UIViewController {
     var trendyData: [Drive] = []
     var customData: [Drive] = []
     var localData: [Drive] = []
-
     var customText: String = ""
     var localText: String = ""
 
@@ -47,28 +48,6 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    func setHeader(){
-      
-        HomeTableView.rowHeight = UITableView.automaticDimension
-        headerView = HomeTableView.tableHeaderView
-        HomeTableView.tableHeaderView = nil
-        HomeTableView.addSubview(headerView)
-        HomeTableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
-        HomeTableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
-        updateHeaderView()
-
-
-    }
-    func updateHeaderView() {
-        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: HomeTableView.bounds.width, height: kTableHeaderHeight)
-        if HomeTableView.contentOffset.y < kTableHeaderHeight {
-            headerRect.origin.y = HomeTableView.contentOffset.y
-            headerRect.size.height = -HomeTableView.contentOffset.y
-        }
-        headerView.frame = headerRect
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("겟 데이터 실행")
@@ -78,8 +57,7 @@ class HomeVC: UIViewController {
         setActionToSearchButton()
         setHeader()
         navigationController?.isNavigationBarHidden = true
-        
-        updateHeaderView()
+        updateHeaderView() // setHeader 안에 이 함수가 들어가서 또 안써도 될듯?
         HomeTableView.separatorStyle = .none
         addContentScrollView()
     }
@@ -93,6 +71,43 @@ class HomeVC: UIViewController {
         self.setMainNavigationViewUI(height: homeNavigationHeightConstraints,
                                  fromTopToImageView: charoIconImageView)
         
+    }
+    
+    func setHeader(){
+      
+        HomeTableView.rowHeight = UITableView.automaticDimension
+        headerView = HomeTableView.tableHeaderView
+        HomeTableView.tableHeaderView = nil
+        HomeTableView.addSubview(headerView)
+        HomeTableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
+        HomeTableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        updateHeaderView()
+        setupHeaderViewLayout()
+    }
+    
+    func updateHeaderView() {
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: HomeTableView.bounds.width, height: kTableHeaderHeight)
+        if HomeTableView.contentOffset.y < kTableHeaderHeight {
+            headerRect.origin.y = HomeTableView.contentOffset.y
+            headerRect.size.height = -HomeTableView.contentOffset.y
+        }
+        headerView.frame = headerRect
+
+    }
+    
+    func setupHeaderViewLayout(){
+        let bannerTitleLabel = UILabel().then{
+            $0.font = .notoSansBoldFont(ofSize: 28)
+            $0.textColor = .white
+            $0.text = "차로와 함께\n즐기는\n드라이브 코스"
+            $0.numberOfLines = 0
+        }
+        headerView.addSubview(bannerTitleLabel)
+        
+        bannerTitleLabel.snp.makeConstraints{
+            $0.leading.equalToSuperview().offset(24)
+            $0.bottom.equalToSuperview().inset(114)
+        }
     }
     
     @objc func presentOnBoarding(){
@@ -284,8 +299,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                } else {
                 HomeNavigationView.backgroundColor = .none
                }
-           }
-        else{
+        }else{
             updateHeaderView()
             addContentScrollView()
             HomeNavigationView.backgroundColor = .none
