@@ -222,14 +222,17 @@ extension SearchPostVC {
         canActiveButton = false
     }
     
-    func isCheckWhenStateNonValue(){
+    func isCheckWhenStateNonValue() -> Bool{
         if filterList[1] == ""{
             textFieldList[1].isUserInteractionEnabled = true
         }
-        
         if filterList[0] == "선택안함"{
             changeCityFilterUnactive()
+            textFieldList[0].text = "선택안함"
+            print("여기 불림")
+            return true
         }
+        return false
     }
     
     
@@ -272,11 +275,22 @@ extension SearchPostVC {
     
     @objc func donePresseed(){
         if currentIndex == 0{
-            isCheckWhenStateNonValue()
+            if isCheckWhenStateNonValue(){
+                observeFilterData()
+                self.view.endEditing(true)
+                return
+            }
+            changeFilterActive(index: currentIndex)
+            currentIndex = 1
+            pickerView.selectRow(0, inComponent: 0, animated: true)
+            changeCurrentPickerData(index: currentIndex)
+            changeToolbarText(index: currentIndex)
+            pickerView.reloadComponent(0)
+        }else{
+            changeFilterActive(index: currentIndex)
+            observeFilterData()
+            self.view.endEditing(true)
         }
-        changeFilterActive(index: currentIndex)
-        observeFilterData()
-        self.view.endEditing(true)
     }
     
     private func changeCurrentPickerData(index : Int){
