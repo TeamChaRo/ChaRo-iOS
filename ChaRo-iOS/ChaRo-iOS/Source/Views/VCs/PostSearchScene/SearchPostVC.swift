@@ -133,7 +133,6 @@ class SearchPostVC: UIViewController {
         guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.identifier)as? SearchResultVC else {
             return
         }
-    
         refineFilterList()
         print("정제됨 -> \(filterList)")
         nextVC.setFilterTagList(list: filterList)
@@ -261,15 +260,11 @@ extension SearchPostVC {
     }
     
     private func createPickerViewToolbar(){
-        //toolbar
         toolbar.sizeToFit()
-        
-        //bar button item
         let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: nil, action: #selector(donePresseed))
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        
         toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
     }
     
@@ -328,7 +323,6 @@ extension SearchPostVC: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return currentList[row]
     }
-    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row == 0 {
