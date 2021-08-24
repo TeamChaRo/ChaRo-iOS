@@ -28,7 +28,7 @@ class HomeVC: UIViewController {
     
     var kTableHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
-    var images = [#imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "dummyMain"), #imageLiteral(resourceName: "dummyMain")]
+    var images = [#imageLiteral(resourceName: "nightView") , #imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "summer"), #imageLiteral(resourceName: "speed")]
     var imageViews = [UIImageView]()
     
     ///배너 데이타
@@ -238,21 +238,33 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
     func addContentScrollView() {
-            for i in 0..<images.count {
-                let imageView = UIImageView()
-                let xPos = self.view.frame.width * CGFloat(i)
-                imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.65)
-                imageView.image = images[i]
-                bannerScrollView.addSubview(imageView)
-                bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
-                
-                if HomeTableView.contentOffset.y < 0{
-                    imageView.frame.size.height = -HomeTableView.contentOffset.y
-                }
-            }
-            
+        if bannerScrollView.subviews.count > 3{
+            print("4개 이상임 ;;")
+            print(bannerScrollView.subviews)
+            bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
+            bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
+            bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
+            bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
+
         }
+        else{
+            for i in 1..<images.count + 1 {
+                let xPos = self.view.frame.width * CGFloat(i-1)
+                let imageView = UIImageView()
+                imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: kTableHeaderHeight)
+                imageView.image = images[i-1]
+                imageView.tag = i
+                print(i)
+                bannerScrollView.addSubview(imageView)
+                bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i)
+                bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: kTableHeaderHeight)
+                
+            }
+        }
+        }
+   
     
+//MARK: ScrollViewDidScroll
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //스크롤뷰에 따라서 알파값 조정함
@@ -260,15 +272,20 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         let originalCarConstant = carMoveConstraint.constant
         let sideMargin : CGFloat = 24
         let pageCount : Int = 4
+        
+        bannerScrollView.delegate = self
 
         let userHeight = HomeNavigationView.getDeviceHeight()
         let standardHeight = userHeight/2
         let currentHeight = scrollView.contentOffset.y
-        print(scrollView.contentOffset.x)
-        if scrollView.contentOffset.x > 0{
+        print(bannerScrollView.contentOffset.x)
+        print(bannerScrollView.frame)
+        print(bannerScrollView.contentSize)
+        print(bannerScrollView.contentSize)
+        if bannerScrollView.contentOffset.x > 0{
             print("실행중")
-               if scrollView.contentOffset.x < 10000 {
-                carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
+               if bannerScrollView.contentOffset.x < 10000 {
+                carMoveConstraint.constant = (bannerScrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
                } else {
                 carMoveConstraint.constant = originalCarConstant
                }
