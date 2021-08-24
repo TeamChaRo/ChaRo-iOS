@@ -96,18 +96,109 @@ class HomeVC: UIViewController {
     }
     
     func setupHeaderViewLayout(){
-        let bannerTitleLabel = UILabel().then{
+        
+//        let deviceWidth = UIScreen.main.bounds.width
+        
+        let firstBannerTitleLabel = UILabel().then{
             $0.font = .notoSansBoldFont(ofSize: 28)
             $0.textColor = .white
             $0.text = "차로와 함께\n즐기는\n드라이브 코스"
             $0.numberOfLines = 0
         }
-        headerView.addSubview(bannerTitleLabel)
+        let firstHashLabel = UILabel().then{
+            $0.font = .notoSansRegularFont(ofSize: 13)
+            $0.textColor = .white
+            $0.text = "#날씨도좋은데#바다와함께라면"
+            $0.numberOfLines = 0
+        }
         
-        bannerTitleLabel.snp.makeConstraints{
-            $0.leading.equalToSuperview().offset(24)
+        let secondBannerTitleLabel = UILabel().then {
+            $0.font = .notoSansBoldFont(ofSize: 28)
+            $0.textColor = .white
+            $0.text = "박익범\n힘들다\n살려줘"
+            $0.numberOfLines = 0
+        }
+        let secondHashLabel = UILabel().then{
+            $0.font = .notoSansRegularFont(ofSize: 13)
+            $0.textColor = .white
+            $0.text = "#코딩할때별거아닌걸로 어? 금지"
+            $0.numberOfLines = 0
+        }
+        
+        let thirdBannerTitleLabel = UILabel().then {
+            $0.font = .notoSansBoldFont(ofSize: 28)
+            $0.textColor = .white
+            $0.text = "눈물이\n차올라서\n고갤들어"
+            $0.numberOfLines = 0
+        }
+        let thirdHashLabel = UILabel().then{
+            $0.font = .notoSansRegularFont(ofSize: 13)
+            $0.textColor = .white
+            $0.text = "#ㄴr는 ㄱr끔 눈물을 흘린ㄷr"
+            $0.numberOfLines = 0
+        }
+        
+        let fourthBannerTitleLabel = UILabel().then {
+            $0.font = .notoSansBoldFont(ofSize: 28)
+            $0.textColor = .white
+            $0.text = "짱혜령\n갓혜령\n오늘도외쳐~"
+            $0.numberOfLines = 0
+        }
+        let fourthHashLabel = UILabel().then{
+            $0.font = .notoSansRegularFont(ofSize: 13)
+            $0.textColor = .white
+            $0.text = "#음악은 ㄴrㄹrㄱr 허락한 유일한 ㅁr약"
+            $0.numberOfLines = 0
+        }
+        
+        headerView.addSubview(firstBannerTitleLabel)
+        headerView.addSubview(secondBannerTitleLabel)
+        headerView.addSubview(thirdBannerTitleLabel)
+        headerView.addSubview(fourthBannerTitleLabel)
+        headerView.addSubview(firstHashLabel)
+        headerView.addSubview(secondHashLabel)
+        headerView.addSubview(thirdHashLabel)
+        headerView.addSubview(fourthHashLabel)
+        
+        
+        
+//이거 일단 언래핑 해놨는데 나중에 서버에서 이미지 느리게 가져올때 대비만 해놓으면 될듯????! 아니면 앱 강종날듯;;;;
+        firstBannerTitleLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(1)!).offset(24)
             $0.bottom.equalToSuperview().inset(114)
         }
+        firstHashLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(1)!).offset(24)
+            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
+        }
+        
+        secondBannerTitleLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(2)!).offset(24)
+            $0.bottom.equalToSuperview().inset(114)
+        }
+        secondHashLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(2)!).offset(24)
+            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
+        }
+        
+        thirdBannerTitleLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(3)!).offset(24)
+            $0.bottom.equalToSuperview().inset(114)
+        }
+        thirdHashLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(3)!).offset(24)
+            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
+        }
+        
+        fourthBannerTitleLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(4)!).offset(24)
+            $0.bottom.equalToSuperview().inset(114)
+        }
+        fourthHashLabel.snp.makeConstraints{
+            $0.leading.equalTo(bannerScrollView.viewWithTag(4)!).offset(24)
+            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
+        }
+        
     }
     
     @objc func presentOnBoarding(){
@@ -239,7 +330,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
     func addContentScrollView() {
         if bannerScrollView.subviews.count > 3{
-            print("4개 이상임 ;;")
             print(bannerScrollView.subviews)
             bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
@@ -254,7 +344,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: kTableHeaderHeight)
                 imageView.image = images[i-1]
                 imageView.tag = i
-                print(i)
                 bannerScrollView.addSubview(imageView)
                 bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i)
                 bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: kTableHeaderHeight)
