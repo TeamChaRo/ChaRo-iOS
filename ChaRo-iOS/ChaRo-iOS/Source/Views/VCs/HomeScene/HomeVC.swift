@@ -19,14 +19,13 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var homeNavigationHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var charoIconImageView: NSLayoutConstraint!
-//    @IBOutlet weak var CollectionView: UICollectionView!
     @IBOutlet weak var bannerScrollView: UIScrollView!
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     
     
     var isFirstSetData: Bool = true
     
-    var kTableHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
+    var homeTableViewHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
     var images = [#imageLiteral(resourceName: "nightView") , #imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "summer"), #imageLiteral(resourceName: "speed")]
     var imageViews = [UIImageView]()
@@ -79,15 +78,15 @@ class HomeVC: UIViewController {
         headerView = HomeTableView.tableHeaderView
         HomeTableView.tableHeaderView = nil
         HomeTableView.addSubview(headerView)
-        HomeTableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
-        HomeTableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        HomeTableView.contentInset = UIEdgeInsets(top: homeTableViewHeaderHeight, left: 0, bottom: 0, right: 0)
+        HomeTableView.contentOffset = CGPoint(x: 0, y: -homeTableViewHeaderHeight)
         updateHeaderView()
         setupHeaderViewLayout()
     }
     
     func updateHeaderView() {
-        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: HomeTableView.bounds.width, height: kTableHeaderHeight)
-        if HomeTableView.contentOffset.y < kTableHeaderHeight {
+        var headerRect = CGRect(x: 0, y: -homeTableViewHeaderHeight, width: HomeTableView.bounds.width, height: homeTableViewHeaderHeight)
+        if HomeTableView.contentOffset.y < homeTableViewHeaderHeight {
             headerRect.origin.y = HomeTableView.contentOffset.y
             headerRect.size.height = -HomeTableView.contentOffset.y
         }
@@ -96,9 +95,7 @@ class HomeVC: UIViewController {
     }
     
     func setupHeaderViewLayout(){
-        
-//        let deviceWidth = UIScreen.main.bounds.width
-        
+        //여기 서버 연동할때 변수로 바꾸겠습니다.
         let firstBannerTitleLabel = UILabel().then{
             $0.font = .notoSansBoldFont(ofSize: 28)
             $0.textColor = .white
@@ -306,11 +303,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
         
         let factor = UIScreen.main.bounds.width / 375
-        let homeBannerRatio: CGFloat = 0.65
-        
         switch indextPath.row {
-//        case 0:
-//            return UIScreen.main.bounds.height * homeBannerRatio
         case 0:
             return 365 * factor
         case 1:
@@ -341,12 +334,13 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             for i in 1..<images.count + 1 {
                 let xPos = self.view.frame.width * CGFloat(i-1)
                 let imageView = UIImageView()
-                imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: kTableHeaderHeight)
+                imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
+                //여기도 서버 연결할때 이미지 바로 따오겠슴뉘다..
                 imageView.image = images[i-1]
                 imageView.tag = i
                 bannerScrollView.addSubview(imageView)
                 bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i)
-                bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: kTableHeaderHeight)
+                bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: homeTableViewHeaderHeight)
                 
             }
         }
@@ -354,23 +348,15 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
    
     
 //MARK: ScrollViewDidScroll
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//스크롤뷰에 따라서 알파값 조정함
-        
         let originalCarConstant = carMoveConstraint.constant
         let sideMargin : CGFloat = 24
         let pageCount : Int = 4
-        
         bannerScrollView.delegate = self
-
+// 배너 자동차 부릉부릉
         let userHeight = HomeNavigationView.getDeviceHeight()
         let standardHeight = userHeight/2
         let currentHeight = scrollView.contentOffset.y
-        print(bannerScrollView.contentOffset.x)
-        print(bannerScrollView.frame)
-        print(bannerScrollView.contentSize)
-        print(bannerScrollView.contentSize)
         if bannerScrollView.contentOffset.x > 0{
             print("실행중")
                if bannerScrollView.contentOffset.x < 10000 {
@@ -383,18 +369,21 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             carMoveConstraint.constant = originalCarConstant
            }
         
-        
-        if scrollView.contentOffset.y > 0{
-               if scrollView.contentOffset.y > 1 {
-                HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0.01 + (scrollView.contentOffset.y / CGFloat(standardHeight)))
+// 네비게이션바 알파값 조정
+        print(scrollView.contentOffset.y, homeTableViewHeaderHeight, standardHeight, currentHeight)
+        if scrollView.contentOffset.y > -homeTableViewHeaderHeight{
+
+            //수정중
+               if scrollView.contentOffset.y < 0 {
+                HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0.01 + (homeTableViewHeaderHeight*4 / -scrollView.contentOffset.y))
                 
-                if currentHeight >= CGFloat(standardHeight){
+                if currentHeight >= CGFloat(homeTableViewHeaderHeight/2){
                     homeNavigationLogo.image = UIImage(named: "logo.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
                     setNavigationViewShadow()
                 }
-                else if currentHeight <= CGFloat(standardHeight){
+                else if currentHeight <= CGFloat(homeTableViewHeaderHeight/2){
                     homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
@@ -402,7 +391,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
  
                 }
                 
-               } else {
+               }
+               else {
                 HomeNavigationView.backgroundColor = .none
                }
         }else{
@@ -603,25 +593,3 @@ extension HomeVC: PostIdDelegate {
     }
     
 }
-
-//extension HomeVC: UICollectionViewDelegate{
-//
-//}
-//extension HomeVC: UICollectionViewDataSource{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 4
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell: HomeAnimationCVC = collectionView.dequeueReusableCell(withReuseIdentifier: HomeAnimationCVC.identifier, for: indexPath) as! HomeAnimationCVC
-//
-//        return cell
-//    }
-//
-//
-//}
-//extension HomeVC: UICollectionViewDelegateFlowLayout{
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//}
