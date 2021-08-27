@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
     
     var homeTableViewHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
+    //이거도 나중엔 바로 이미지뷰 생성할때 불러올게여 잠시 더미
     var images = [#imageLiteral(resourceName: "nightView") , #imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "summer"), #imageLiteral(resourceName: "speed")]
     var imageViews = [UIImageView]()
     
@@ -56,7 +57,7 @@ class HomeVC: UIViewController {
         setActionToSearchButton()
         setHeader()
         navigationController?.isNavigationBarHidden = true
-        updateHeaderView() // setHeader 안에 이 함수가 들어가서 또 안써도 될듯?
+//        updateHeaderView()
         HomeTableView.separatorStyle = .none
         addContentScrollView()
     }
@@ -73,7 +74,6 @@ class HomeVC: UIViewController {
     }
     
     func setHeader(){
-      
         HomeTableView.rowHeight = UITableView.automaticDimension
         headerView = HomeTableView.tableHeaderView
         HomeTableView.tableHeaderView = nil
@@ -91,7 +91,6 @@ class HomeVC: UIViewController {
             headerRect.size.height = -HomeTableView.contentOffset.y
         }
         headerView.frame = headerRect
-
     }
     
     func setupHeaderViewLayout(){
@@ -322,6 +321,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
     func addContentScrollView() {
+        bannerScrollView.delegate = self
         if bannerScrollView.subviews.count > 3{
             print(bannerScrollView.subviews)
             bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
@@ -352,15 +352,13 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         let originalCarConstant = carMoveConstraint.constant
         let sideMargin : CGFloat = 24
         let pageCount : Int = 4
-        bannerScrollView.delegate = self
 // 배너 자동차 부릉부릉
         let userHeight = HomeNavigationView.getDeviceHeight()
         let standardHeight = userHeight/2
         let currentHeight = scrollView.contentOffset.y
-        if bannerScrollView.contentOffset.x > 0{
-            print("실행중")
-               if bannerScrollView.contentOffset.x < 10000 {
-                carMoveConstraint.constant = (bannerScrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
+        if scrollView.contentOffset.x > 0{
+               if scrollView.contentOffset.x < 10000 {
+                carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
                } else {
                 carMoveConstraint.constant = originalCarConstant
                }
@@ -368,34 +366,42 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         else{
             carMoveConstraint.constant = originalCarConstant
            }
-        
 // 네비게이션바 알파값 조정
-        print(scrollView.contentOffset.y, homeTableViewHeaderHeight, standardHeight, currentHeight)
-        if scrollView.contentOffset.y > -homeTableViewHeaderHeight{
-
-            //수정중
-               if scrollView.contentOffset.y < 0 {
-                HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0.01 + (homeTableViewHeaderHeight*4 / -scrollView.contentOffset.y))
-                
-                if currentHeight >= CGFloat(homeTableViewHeaderHeight/2){
+        print("오프셋 :", scrollView.contentOffset.y, "높이", -homeTableViewHeaderHeight, standardHeight, homeTableViewHeaderHeight/2)
+        if scrollView.contentOffset.y > -homeTableViewHeaderHeight && scrollView.contentOffset.x == 0{
+               if scrollView.contentOffset.y > -homeTableViewHeaderHeight{
+                HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-scrollView.contentOffset.y * 3)))
+                if scrollView.contentOffset.y >= -CGFloat(homeTableViewHeaderHeight/3){
+                    if scrollView.contentOffset.x == 0 && scrollView.contentOffset.y == 0{
+                        homeNavigationLogo.image = UIImage(named: "logoWhite.png")
+                        homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
+                        homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
+                        HomeNavigationView.removeShadowView()
+                    }
+                    else {
                     homeNavigationLogo.image = UIImage(named: "logo.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
                     setNavigationViewShadow()
+                    }
                 }
-                else if currentHeight <= CGFloat(homeTableViewHeaderHeight/2){
+                else if scrollView.contentOffset.y <= -CGFloat(homeTableViewHeaderHeight/3){
                     homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
                     HomeNavigationView.removeShadowView()
  
                 }
+                if scrollView.contentOffset.y > 0{
+                    HomeNavigationView.backgroundColor = UIColor.white
+                }
+                else if scrollView.contentOffset.y < -homeTableViewHeaderHeight{
+                    HomeNavigationView.backgroundColor = .none
+                }
                 
                }
-               else {
-                HomeNavigationView.backgroundColor = .none
-               }
-        }else{
+        }
+        else{
             updateHeaderView()
             addContentScrollView()
             HomeNavigationView.backgroundColor = .none
