@@ -22,9 +22,8 @@ class HomeVC: UIViewController {
     @IBOutlet weak var bannerScrollView: UIScrollView!
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     
-    
     var isFirstSetData: Bool = true
-    
+
     var homeTableViewHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
     //이거도 나중엔 바로 이미지뷰 생성할때 불러올게여 잠시 더미
@@ -57,7 +56,6 @@ class HomeVC: UIViewController {
         setActionToSearchButton()
         setHeader()
         navigationController?.isNavigationBarHidden = true
-//        updateHeaderView()
         HomeTableView.separatorStyle = .none
         addContentScrollView()
     }
@@ -353,12 +351,11 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         let sideMargin : CGFloat = 24
         let pageCount : Int = 4
 // 배너 자동차 부릉부릉
-        let userHeight = HomeNavigationView.getDeviceHeight()
-        let standardHeight = userHeight/2
+        let currentWidth = scrollView.contentOffset.x
         let currentHeight = scrollView.contentOffset.y
         if scrollView.contentOffset.x > 0{
-               if scrollView.contentOffset.x < 10000 {
-                carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
+               if currentWidth < 10000 {
+                carMoveConstraint.constant = (currentWidth - sideMargin)/CGFloat(pageCount)
                } else {
                 carMoveConstraint.constant = originalCarConstant
                }
@@ -367,12 +364,11 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             carMoveConstraint.constant = originalCarConstant
            }
 // 네비게이션바 알파값 조정
-        print("오프셋 :", scrollView.contentOffset.y, "높이", -homeTableViewHeaderHeight, standardHeight, homeTableViewHeaderHeight/2)
-        if scrollView.contentOffset.y > -homeTableViewHeaderHeight && scrollView.contentOffset.x == 0{
-               if scrollView.contentOffset.y > -homeTableViewHeaderHeight{
-                HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-scrollView.contentOffset.y * 3)))
-                if scrollView.contentOffset.y >= -CGFloat(homeTableViewHeaderHeight/3){
-                    if scrollView.contentOffset.x == 0 && scrollView.contentOffset.y == 0{
+        if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
+               if currentHeight > -homeTableViewHeaderHeight{
+                HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
+                if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3){
+                    if currentWidth == 0 && currentHeight == 0{
                         homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                         homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                         homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
@@ -385,17 +381,17 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                     setNavigationViewShadow()
                     }
                 }
-                else if scrollView.contentOffset.y <= -CGFloat(homeTableViewHeaderHeight/3){
+                else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3){
                     homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
                     HomeNavigationView.removeShadowView()
  
                 }
-                if scrollView.contentOffset.y > 0{
+                if currentHeight > 0{
                     HomeNavigationView.backgroundColor = UIColor.white
                 }
-                else if scrollView.contentOffset.y < -homeTableViewHeaderHeight{
+                else if currentHeight < -homeTableViewHeaderHeight{
                     HomeNavigationView.backgroundColor = .none
                 }
                 
@@ -419,30 +415,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         tableIndex = indexPath
 //MARK: 배너부분 구현
         switch indexPath.row {
-        
-//
-//        case 0:
-//            let cell: HomeAnimationTVC = tableView.dequeueReusableCell(for: indexPath)
-//            cell.setDelegate()
-//
-//            if bannerData.count == 0 {
-//                return cell
-//            }
-//
-//            else {
-//
-//                //여기서 isFirstSetData 이게 필요한 걸까 ? 혹시 이게 계속 호출되서 그런걸까? 헷갈리다 ....
-//                if isFirstSetData {
-//                    for i in 0 ... 3 {
-//                        cell.setBannerList(inputList: bannerData)
-//                    }
-//                    isFirstSetData = false
-//                    return cell
-//                }
-//
-//
-//            }
-            
 //MARK: 오늘의 드라이브
         case 0:
 
