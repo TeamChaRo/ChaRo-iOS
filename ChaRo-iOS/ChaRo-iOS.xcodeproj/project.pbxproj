@@ -75,13 +75,11 @@
 		3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA252694B738009370CD /* PostTitleTVC.swift */; };
 		3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA522694C169009370CD /* PostAttentionTVC.swift */; };
 		3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */; };
-		3C86FAA22694C7C6009370CD /* HomeAnimationCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */; };
 		3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA802694C7C6009370CD /* CommonCVC.xib */; };
 		3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA822694C7C6009370CD /* PostTitleTVC.xib */; };
 		3C86FAA52694C7C6009370CD /* AddressButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA832694C7C6009370CD /* AddressButtonCell.xib */; };
 		3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */; };
 		3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA852694C7C6009370CD /* PostImagesTVC.xib */; };
-		3C86FAA82694C7C6009370CD /* HomeAnimationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA862694C7C6009370CD /* HomeAnimationTVC.xib */; };
 		3C86FAA92694C7C6009370CD /* PostParkingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA872694C7C6009370CD /* PostParkingTVC.xib */; };
 		3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */; };
 		3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */; };
@@ -261,13 +259,11 @@
 		3C86FA252694B738009370CD /* PostTitleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleTVC.swift; sourceTree = "<group>"; };
 		3C86FA522694C169009370CD /* PostAttentionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
 		3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
-		3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationCVC.xib; sourceTree = "<group>"; };
 		3C86FA802694C7C6009370CD /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
 		3C86FA822694C7C6009370CD /* PostTitleTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
 		3C86FA832694C7C6009370CD /* AddressButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressButtonCell.xib; sourceTree = "<group>"; };
 		3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostAttentionTVC.xib; sourceTree = "<group>"; };
 		3C86FA852694C7C6009370CD /* PostImagesTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostImagesTVC.xib; sourceTree = "<group>"; };
-		3C86FA862694C7C6009370CD /* HomeAnimationTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAnimationTVC.xib; sourceTree = "<group>"; };
 		3C86FA872694C7C6009370CD /* PostParkingTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostParkingTVC.xib; sourceTree = "<group>"; };
 		3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTodayDriveTVC.xib; sourceTree = "<group>"; };
 		3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSquareTVC.xib; sourceTree = "<group>"; };
@@ -828,7 +824,6 @@
 		3CAE51A626C243F100DB8A41 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
-				3C86FA862694C7C6009370CD /* HomeAnimationTVC.xib */,
 				3C86FAC02694CC37009370CD /* HomeSeasonRecommandTVC.xib */,
 				3C86FAC22694CC47009370CD /* HomeAreaRecommandTVC.xib */,
 				3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */,
@@ -977,7 +972,6 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */,
-				3C86FA7F2694C7C6009370CD /* HomeAnimationCVC.xib */,
 				36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */,
 			);
 			path = HomeScene;
@@ -1178,7 +1172,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */,
-				3C86FAA22694C7C6009370CD /* HomeAnimationCVC.xib in Resources */,
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
 				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
@@ -1188,7 +1181,6 @@
 				70D63E272694E2AA0036484B /* ThemePost.storyboard in Resources */,
 				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
 				3C86FAB22694C7C6009370CD /* AddressMain.storyboard in Resources */,
-				3C86FAA82694C7C6009370CD /* HomeAnimationTVC.xib in Resources */,
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */,
 				F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */,
