@@ -297,12 +297,14 @@ extension AddressMainVC: AddressButtonCellDelegate{
     func addressButtonCellForPreseting(cell: AddressButtonCell) {
         
         let storyboard = UIStoryboard(name: "SearchKeyword", bundle: nil)
-        guard let nextVC =  storyboard.instantiateViewController(identifier: SearchKeywordVC.identifier) as? SearchKeywordVC else {
+//        guard let nextVC =  storyboard.instantiateViewController(identifier: SearchKeywordVC.identifier) as? SearchKeywordVC else {
+//            return
+//        }
+        
+        guard let nextVC =  storyboard.instantiateViewController(identifier: SearchAddressKeywordVC.identifier) as? SearchAddressKeywordVC else {
             return
         }
         let index = cell.getTableCellIndexPath()
-        
-        
         nextVC.setAddressModel(model: addressList[index],
                                cellType: cell.cellType,
                                index: index)
