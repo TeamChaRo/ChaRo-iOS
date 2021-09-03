@@ -8,11 +8,14 @@
 import UIKit
 import SnapKit
 import TMapSDK
+import Then
+
 
 class SearchKeywordVC: UIViewController {
 
     static let identifier = "SearchKeywordVC"
-    public var keyword = "안녕하세요"
+    private let viewModel = SearchKeywordViewModel()
+    
     private let mapView = MapService.getTmapView()
     private var addressIndex = -1
     private var addressType = ""
@@ -24,31 +27,26 @@ class SearchKeywordVC: UIViewController {
     
     private var autoList : [String] = []
     
-    private var backButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
-        button.tintColor = .gray40
-        return button
-    }()
-    private var searchTextField: UITextField = {
-        let textField = UITextField()
-        textField.autocorrectionType = .no
-        textField.font = .notoSansRegularFont(ofSize: 17)
-        textField.textColor = .gray50
-        textField.clearsOnBeginEditing = true
-        textField.clearButtonMode = .whileEditing
-        return textField
-    }()
+    private var backButton = UIButton().then{
+        $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
+        $0.tintColor = .gray40
+    }
     
-    private let separateLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray20
-        return view
-    }()
+    private var searchTextField = UITextField().then{
+        $0.autocorrectionType = .no
+        $0.font = .notoSansRegularFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.clearsOnBeginEditing = true
+        $0.clearButtonMode = .whileEditing
+    }
+    
+    private let separateLine = UIView().then{
+        $0.backgroundColor = .gray20
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraints()
+        setupConstraints()
         setActionToComponent()
         configureTableView()
         navigationController?.isNavigationBarHidden = true
@@ -57,13 +55,12 @@ class SearchKeywordVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("search VC - viewWillDisappear")
         let searchMain = navigationController?.viewControllers[1] as! AddressMainVC
         searchMain.newSearchHistory = self.newSearchHistory + searchMain.newSearchHistory
     }
    
     
-    private func setConstraints(){
+    private func setupConstraints(){
         view.addSubviews([backButton,
                           searchTextField,
                           separateLine,
@@ -199,9 +196,10 @@ extension SearchKeywordVC {
     func setTableViewHeader(){
         var title = ""
         if autoCompletedKeywordList.count == 0{
-            
         }
     }
+    
+    
 
 }
 
@@ -225,12 +223,9 @@ extension SearchKeywordVC: UITableViewDataSource{
         
         if autoCompletedKeywordList.count == 0 {
             if searchHistory.count != 0 {
-                
                 let address = searchHistory[indexPath.row]
                 cell.setContents(addressMadel: address)
-                
                 let addressModel = address.getAddressModel()
-                
                 cell.presentingMapViewClosure = { addressModel in
                     let nextVC = self.getAddressConfirmVC()
                     nextVC.setPresentingAddress(address: addressModel)
@@ -261,6 +256,7 @@ extension SearchKeywordVC: UITextFieldDelegate {
         keywordTableView.reloadData()
         return true
     }
+    
 }
 
 
