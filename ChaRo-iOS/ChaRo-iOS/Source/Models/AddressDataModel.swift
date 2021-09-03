@@ -45,3 +45,10 @@ struct AddressDataModel: Codable {
     }
     
 }
+
+struct AddressData {
+    var title: String
+    var address: String
+    var latitude: String
+    var longitude: String
+}
