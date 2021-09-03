@@ -198,35 +198,35 @@ class PostDetailVC: UIViewController {
     }
     
     func refineAddressData(){
-        let startAddreaa = AddressDataModel(latitude: postData!.latitude[0],
-                                            longitude: postData!.longtitude[0],
-                                            address: postData!.source,
-                                            title: "출발지")
+        let startAddreaa = AddressDataModel(title: postData!.latitude[0],
+                                            address: postData!.longtitude[0],
+                                            latitude: postData!.source,
+                                            longitude: "출발지")
         
         addressList.append(startAddreaa)
         
         
         if postData!.wayPoint[0] != ""{
-           let wayAddress = AddressDataModel(latitude: postData!.latitude[1],
-                                             longitude: postData!.longtitude[1],
-                                             address: postData!.wayPoint[0],
-                                             title: "경유지1")
+            let wayAddress = AddressDataModel(title: postData!.latitude[1],
+                                              address: postData!.longtitude[1],
+                                              latitude: postData!.wayPoint[0],
+                                              longitude: "경유지1")
             addressList.append(wayAddress)
         }
         
         if postData!.wayPoint[1] != ""{
-           let wayAddress = AddressDataModel(latitude: postData!.latitude[2],
-                                             longitude: postData!.longtitude[2],
-                                             address: postData!.wayPoint[1],
-                                             title: "경유지2")
+            let wayAddress = AddressDataModel(title: postData!.latitude[2],
+                                              address: postData!.longtitude[2],
+                                              latitude: postData!.wayPoint[1],
+                                              longitude: "경유지2")
             addressList.append(wayAddress)
         }
         
         
-        let destinationAddress = AddressDataModel(latitude: postData!.latitude[3],
-                                                  longitude: postData!.longtitude[3],
-                                                  address: postData!.destination,
-                                                  title: "도착지")
+        let destinationAddress = AddressDataModel(title: postData!.latitude[3],
+                                                  address: postData!.longtitude[3],
+                                                  latitude: postData!.destination,
+                                                  longitude: "도착지")
         addressList.append(destinationAddress)
         
     }

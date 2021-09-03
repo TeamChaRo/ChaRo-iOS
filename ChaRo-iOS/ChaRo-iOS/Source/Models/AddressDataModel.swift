@@ -10,10 +10,10 @@ import TMapSDK
 
 struct AddressDataModel: Codable {
     
+    var title: String = ""
+    var address: String = ""
     var latitude: String = ""
     var longitude: String = ""
-    var address: String = ""
-    var title: String = ""
     
     
     func displayContent(){

@@ -28,7 +28,6 @@ class AddressConfirmVC: UIViewController {
     }()
     
     private var centerMarkerView = UIImageView()
-
     
     private var bottomView: UIView = {
         let view = UIView()
@@ -201,10 +200,10 @@ class AddressConfirmVC: UIViewController {
                 newTitle = tmp != "" ? tmp : ""
             }
             
-            let newAddress = AddressDataModel(latitude: String(point.latitude),
-                                              longitude: String(point.longitude),
-                                              address: addressDict["fullAddress"] as! String,
-                                              title: newTitle)
+            let newAddress = AddressDataModel(title: String(point.latitude),
+                                              address: String(point.longitude),
+                                              latitude: addressDict["fullAddress"] as! String,
+                                              longitude: newTitle)
             
             DispatchQueue.main.async {
                 self.setAddressLabels(address: newAddress)
