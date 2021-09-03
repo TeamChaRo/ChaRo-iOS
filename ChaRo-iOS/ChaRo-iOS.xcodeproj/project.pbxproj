@@ -54,7 +54,6 @@
 		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
-		3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEAA26881DAA007E8EAD /* ViewController.swift */; };
 		3C7DF0E92699ED8E0021939C /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7DF0E82699ED8E0021939C /* TMapSDK.framework */; };
 		3C7DF0EB2699EE7E0021939C /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7DF0EA2699EE7E0021939C /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */; };
@@ -90,7 +89,6 @@
 		3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */; };
 		3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8E2694C7C6009370CD /* Home.storyboard */; };
 		3C86FAB02694C7C6009370CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8F2694C7C6009370CD /* LaunchScreen.storyboard */; };
-		3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA912694C7C6009370CD /* Main.storyboard */; };
 		3C86FAB22694C7C6009370CD /* AddressMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA932694C7C6009370CD /* AddressMain.storyboard */; };
 		3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA942694C7C6009370CD /* Tabbar.storyboard */; };
 		3C86FAB42694C7C6009370CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA952694C7C6009370CD /* Assets.xcassets */; };
@@ -240,7 +238,6 @@
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3C71FEAA26881DAA007E8EAD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C7DF0E82699ED8E0021939C /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C7DF0EA2699EE7E0021939C /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchPost.storyboard; sourceTree = "<group>"; };
@@ -276,7 +273,6 @@
 		3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		3C86FA8E2694C7C6009370CD /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3C86FA902694C7C6009370CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3C86FA922694C7C6009370CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C86FA932694C7C6009370CD /* AddressMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddressMain.storyboard; sourceTree = "<group>"; };
 		3C86FA942694C7C6009370CD /* Tabbar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		3C86FA952694C7C6009370CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -538,7 +534,6 @@
 				3CAE51C026C24A2B00DB8A41 /* Tabbar */,
 				3CAE51BF26C24A2000DB8A41 /* ThemeScene */,
 				3C86FA8F2694C7C6009370CD /* LaunchScreen.storyboard */,
-				3C86FA912694C7C6009370CD /* Main.storyboard */,
 				36071675269F9AE10042256B /* Notification.storyboard */,
 			);
 			path = Storyboards;
@@ -645,7 +640,6 @@
 				3CAE51AF26C244EA00DB8A41 /* SplashScene */,
 				3CAE51AB26C2448000DB8A41 /* Tabbar */,
 				3CAE51B226C2452500DB8A41 /* ThemeScene */,
-				3C71FEAA26881DAA007E8EAD /* ViewController.swift */,
 				36071677269F9B030042256B /* NotificationVC.swift */,
 			);
 			path = VCs;
@@ -1198,7 +1192,6 @@
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
 				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
 				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
-				3C86FAB12694C7C6009370CD /* Main.storyboard in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
 				36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */,
@@ -1301,7 +1294,6 @@
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
 				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
-				3C71FEAB26881DAA007E8EAD /* ViewController.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* UITableView+.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* UIColor+.swift in Sources */,
 				F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */,
@@ -1406,14 +1398,6 @@
 				3C86FA902694C7C6009370CD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		3C86FA912694C7C6009370CD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C86FA922694C7C6009370CD /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
