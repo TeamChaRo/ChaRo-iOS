@@ -13,4 +13,5 @@ target 'ChaRo-iOS' do
   pod 'Kingfisher', '~> 6.0'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
 end

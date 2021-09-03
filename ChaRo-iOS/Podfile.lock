@@ -7,6 +7,9 @@ PODS:
     - FirebaseAnalytics (~> 8.5.0)
   - Firebase/CoreOnly (8.5.0):
     - FirebaseCore (= 8.5.0)
+  - Firebase/Messaging (8.5.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 8.5.0)
   - FirebaseAnalytics (8.5.0):
     - FirebaseAnalytics/AdIdSupport (= 8.5.0)
     - FirebaseCore (~> 8.0)
@@ -39,6 +42,13 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/UserDefaults (~> 7.4)
     - PromisesObjC (< 3.0, >= 1.2)
+  - FirebaseMessaging (8.5.0):
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Reachability (~> 7.4)
+    - GoogleUtilities/UserDefaults (~> 7.4)
   - GoogleAppMeasurement (8.5.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.5.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
@@ -89,6 +99,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.4)
   - Firebase/Analytics
+  - Firebase/Messaging
   - Kingfisher (~> 6.0)
   - lottie-ios
   - SnapKit (~> 5.0.0)
@@ -102,6 +113,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseInstallations
+    - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -119,6 +131,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 1c1ca72483b59b17050f5b4cec4fb748425a3901
   FirebaseCoreDiagnostics: 7bf55d386f9fc690d971b70a582142321a390eb8
   FirebaseInstallations: f2bc590b291d25fb40a9a05b8281c02a881b5117
+  FirebaseMessaging: 0705ec705c21705efc51c071fba924c8e25c63e7
   GoogleAppMeasurement: 8d10c1c470fcb0e5143ed74fddd164f0a0384800
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
@@ -129,6 +142,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: e1c5f85ddc2b154b8c031e4f08e245cef5d29abb
+PODFILE CHECKSUM: 56b0229b7bc3e1a0186b31d8379206ffbde3adbf
 
 COCOAPODS: 1.10.0
