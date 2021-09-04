@@ -39,6 +39,9 @@ class HomeVC: UIViewController {
     var customText: String = ""
     var localText: String = ""
 
+    var bannerTitleLableList: [UILabel] = []
+    var bannerSubtTtleLabelList: [UILabel] = []
+    
     
     var tableIndex: IndexPath = [0,0]
     
@@ -54,10 +57,11 @@ class HomeVC: UIViewController {
         setTableView()
         setHomeNavigationViewLayout()
         setActionToSearchButton()
-        setHeader()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
         addContentScrollView()
+        setHeader()
+        setupHeaderViewUI()
     }
     
     
@@ -91,109 +95,60 @@ class HomeVC: UIViewController {
         headerView.frame = headerRect
     }
     
-    func setupHeaderViewLayout(){
-        //여기 서버 연동할때 변수로 바꾸겠습니다.
-        let firstBannerTitleLabel = UILabel().then{
-            $0.font = .notoSansBoldFont(ofSize: 28)
-            $0.textColor = .white
-            $0.text = "차로와 함께\n즐기는\n드라이브 코스"
-            $0.numberOfLines = 0
-        }
-        let firstHashLabel = UILabel().then{
-            $0.font = .notoSansRegularFont(ofSize: 13)
-            $0.textColor = .white
-            $0.text = "#날씨도좋은데#바다와함께라면"
-            $0.numberOfLines = 0
-        }
-        
-        let secondBannerTitleLabel = UILabel().then {
-            $0.font = .notoSansBoldFont(ofSize: 28)
-            $0.textColor = .white
-            $0.text = "박익범\n힘들다\n살려줘"
-            $0.numberOfLines = 0
-        }
-        let secondHashLabel = UILabel().then{
-            $0.font = .notoSansRegularFont(ofSize: 13)
-            $0.textColor = .white
-            $0.text = "#코딩할때별거아닌걸로 어? 금지"
-            $0.numberOfLines = 0
-        }
-        
-        let thirdBannerTitleLabel = UILabel().then {
-            $0.font = .notoSansBoldFont(ofSize: 28)
-            $0.textColor = .white
-            $0.text = "눈물이\n차올라서\n고갤들어"
-            $0.numberOfLines = 0
-        }
-        let thirdHashLabel = UILabel().then{
-            $0.font = .notoSansRegularFont(ofSize: 13)
-            $0.textColor = .white
-            $0.text = "#ㄴr는 ㄱr끔 눈물을 흘린ㄷr"
-            $0.numberOfLines = 0
-        }
-        
-        let fourthBannerTitleLabel = UILabel().then {
-            $0.font = .notoSansBoldFont(ofSize: 28)
-            $0.textColor = .white
-            $0.text = "짱혜령\n갓혜령\n오늘도외쳐~"
-            $0.numberOfLines = 0
-        }
-        let fourthHashLabel = UILabel().then{
-            $0.font = .notoSansRegularFont(ofSize: 13)
-            $0.textColor = .white
-            $0.text = "#음악은 ㄴrㄹrㄱr 허락한 유일한 ㅁr약"
-            $0.numberOfLines = 0
+    func setupHeaderViewUI(){
+            let titleList = ["차로와 함께\n즐기는\n드라이브 코스",
+                             "박익범\n힘들다\n살려줘",
+                             "눈물이\n차올라서\n고갤들어",
+                             "짱혜령\n갓혜령\n오늘도외쳐~"]
+            
+            let subTitleList = ["#날씨도좋은데#바다와함께라면",
+                                "#코딩할때별거아닌걸로 어? 금지",
+                                "#ㄴr는 ㄱr끔 눈물을 흘린ㄷr",
+                                "#음악은 ㄴrㄹrㄱr 허락한 유일한 ㅁr약"]
+            
+            var titleLabelList : [UILabel] = []
+            var subTitleLabelList : [UILabel] = []
+            
+            for index in 0..<titleList.count {
+                let titleLabel = UILabel().then{
+                    $0.font = .notoSansBoldFont(ofSize: 28)
+                    $0.textColor = .white
+                    $0.text = titleList[index]
+                    $0.numberOfLines = 0
+                }
+                
+                let subTitleLabel = UILabel().then{
+                    $0.font = .notoSansRegularFont(ofSize: 13)
+                    $0.textColor = .white
+                    $0.text = subTitleList[index]
+                    $0.numberOfLines = 0
+                }
+                
+                titleLabelList.append(titleLabel)
+                subTitleLabelList.append(subTitleLabel)
+            }
+            
+            bannerTitleLableList = titleLabelList
+            bannerSubtTtleLabelList = subTitleLabelList
+            headerView.addSubviews(bannerTitleLableList + bannerSubtTtleLabelList)
+            
+            setupHeaderViewLayout()
         }
         
-        headerView.addSubview(firstBannerTitleLabel)
-        headerView.addSubview(secondBannerTitleLabel)
-        headerView.addSubview(thirdBannerTitleLabel)
-        headerView.addSubview(fourthBannerTitleLabel)
-        headerView.addSubview(firstHashLabel)
-        headerView.addSubview(secondHashLabel)
-        headerView.addSubview(thirdHashLabel)
-        headerView.addSubview(fourthHashLabel)
-        
-        
-        
-//이거 일단 언래핑 해놨는데 나중에 서버에서 이미지 느리게 가져올때 대비만 해놓으면 될듯????! 아니면 앱 강종날듯;;;;
-        firstBannerTitleLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(1)!).offset(24)
-            $0.bottom.equalToSuperview().inset(114)
+        func setupHeaderViewLayout(){
+            for index in 0..<bannerTitleLableList.count {
+                bannerTitleLableList[index].snp.makeConstraints{
+                    $0.leading.equalTo(bannerScrollView.viewWithTag(index+1)!).offset(24)
+                    $0.bottom.equalToSuperview().inset(114)
+                }
+                
+                bannerSubtTtleLabelList[index].snp.makeConstraints{
+                    $0.leading.equalTo(bannerTitleLableList[index].snp.leading)
+                    $0.top.equalTo(bannerTitleLableList[index].snp.bottom).offset(5)
+                }
+            }
         }
-        firstHashLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(1)!).offset(24)
-            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
-        }
-        
-        secondBannerTitleLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(2)!).offset(24)
-            $0.bottom.equalToSuperview().inset(114)
-        }
-        secondHashLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(2)!).offset(24)
-            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
-        }
-        
-        thirdBannerTitleLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(3)!).offset(24)
-            $0.bottom.equalToSuperview().inset(114)
-        }
-        thirdHashLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(3)!).offset(24)
-            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
-        }
-        
-        fourthBannerTitleLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(4)!).offset(24)
-            $0.bottom.equalToSuperview().inset(114)
-        }
-        fourthHashLabel.snp.makeConstraints{
-            $0.leading.equalTo(bannerScrollView.viewWithTag(4)!).offset(24)
-            $0.top.equalTo(firstBannerTitleLabel.snp.bottom).offset(5)
-        }
-        
-    }
+    
     
     @objc func presentOnBoarding(){
 //        let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
@@ -305,10 +260,10 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             return 365 * factor
         case 1:
             return 178 * factor
-        case 2, 3, 4:
-            return 570 * factor
-        default:
+        case 999:
             return 100
+        default:
+            return 570 * factor
         }
         
     }
@@ -347,23 +302,14 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
 //MARK: ScrollViewDidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let originalCarConstant = carMoveConstraint.constant
-        let sideMargin : CGFloat = 24
-        let pageCount : Int = 4
-// 배너 자동차 부릉부릉
-        let currentWidth = scrollView.contentOffset.x
-        let currentHeight = scrollView.contentOffset.y
-        if scrollView.contentOffset.x > 0{
-               if currentWidth < 10000 {
-                carMoveConstraint.constant = (currentWidth - sideMargin)/CGFloat(pageCount)
-               } else {
-                carMoveConstraint.constant = originalCarConstant
-               }
-           }
-        else{
-            carMoveConstraint.constant = originalCarConstant
-           }
-// 네비게이션바 알파값 조정
+        setNavigationAlpah()
+        setMoveCar()
+       }
+    
+    func setNavigationAlpah(){
+        let currentWidth = HomeTableView.contentOffset.x
+        let currentHeight = HomeTableView.contentOffset.y
+        
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
                if currentHeight > -homeTableViewHeaderHeight{
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
@@ -403,7 +349,24 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             HomeNavigationView.backgroundColor = .none
            }
 
-       }
+    }
+    func setMoveCar(){
+        let originalCarConstant = carMoveConstraint.constant
+        let sideMargin : CGFloat = 24
+        let pageCount : Int = 4
+        let currentWidth = bannerScrollView.contentOffset.x
+        if bannerScrollView.contentOffset.x > 0{
+               if currentWidth < 10000 {
+                carMoveConstraint.constant = (currentWidth - sideMargin)/CGFloat(pageCount)
+               } else {
+                carMoveConstraint.constant = originalCarConstant
+               }
+           }
+        else{
+            carMoveConstraint.constant = originalCarConstant
+           }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
