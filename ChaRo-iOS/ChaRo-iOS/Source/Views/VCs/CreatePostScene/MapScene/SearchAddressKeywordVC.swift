@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import TMapSDK
 import Then
 import RxCocoa
 import RxSwift
@@ -37,12 +36,14 @@ class SearchAddressKeywordVC: UIViewController {
     private let separateLine = UIView().then{
         $0.backgroundColor = .gray20
     }
-    private var tableView = UITableView()
+    private var tableView = UITableView().then{
+        $0.registerCustomXib(xibName: SearchKeywordCell.identifier)
+        $0.rowHeight = 72
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConstraints()
-        configureTableView()
         setActionToComponent()
         bindToViewModel()
     }
@@ -100,25 +101,8 @@ class SearchAddressKeywordVC: UIViewController {
         backButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
     }
     
-    
     @objc func dismissAction(){
         self.navigationController?.popViewController(animated: true)
-    }
-    
-}
-
-
-//MARK:- TableView
-extension SearchAddressKeywordVC {
-    func configureTableView(){
-        tableView.registerCustomXib(xibName: SearchKeywordCell.identifier)
-        tableView.rx.setDelegate(self)
-    }
-}
-
-extension SearchAddressKeywordVC: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
     }
 }
 
