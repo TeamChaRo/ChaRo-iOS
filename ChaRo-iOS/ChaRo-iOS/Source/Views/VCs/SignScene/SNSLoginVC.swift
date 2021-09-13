@@ -42,6 +42,9 @@ class SNSLoginVC: UIViewController {
         $0.setTitle("Google 로그인", for: .normal)
         $0.setTitleColor(.mainBlack, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.setImage(UIImage(named: "googleLogo"), for: .normal)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
+        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.borderColor = UIColor.gray30.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
@@ -49,12 +52,19 @@ class SNSLoginVC: UIViewController {
     }
     
     let kakaoLoginBtn = UIButton().then {
+        $0.setImage(UIImage(named: "kakaoLogo"), for: .normal)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
+        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.backgroundColor = UIColor(red: 254.0 / 255.0, green: 229.0 / 255.0, blue: 0.0, alpha: 1.0)
         $0.setTitle("카카오 로그인", for: .normal)
         $0.setTitleColor(.mainBlack, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
+    }
+    
+    let googleLogoImageView = UIImageView().then {
+        $0.image = UIImage(named: "googleLogo")
     }
     
     let emailLoginBtn = UIButton().then {
