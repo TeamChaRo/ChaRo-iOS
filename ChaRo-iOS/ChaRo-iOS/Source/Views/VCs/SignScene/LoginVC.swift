@@ -9,6 +9,8 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+    //여기서 얘네 전체를 컬렉션 뷰로 할지 회원가입만 컬렉션 뷰로 할지 생각했는데 당연히 회원가입만 이겟ㅆ구나!!
+    //VC 만들어서 안에 컬렉션뷰 넣으면 되겠다 근데 차 움직이는 그거 page 컨트롤인가 뭔가로 해야하는지 박익범한테 물어봐야하나??
     //MARK: IBOutlet
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var joinButton: UIButton!
@@ -186,7 +188,6 @@ extension LoginVC {
 //            $0.trailing.equalToSuperview().offset(-10)
 //            $0.height.equalTo(64)
 //        }
-        
         
         
         

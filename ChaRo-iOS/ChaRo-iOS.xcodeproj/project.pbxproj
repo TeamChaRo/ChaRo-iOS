@@ -133,6 +133,7 @@
 		7084948226A23AB7001B3C2B /* CollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084948126A23AB7001B3C2B /* CollectionViewFooter.swift */; };
 		7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084948326A2441C001B3C2B /* EmptyCVC.swift */; };
 		7084948626A2441C001B3C2B /* EmptyCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7084948426A2441C001B3C2B /* EmptyCVC.xib */; };
+		70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */; };
 		70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */; };
 		70B9E1E7269DC479006DACB2 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9E1E6269DC479006DACB2 /* LikeService.swift */; };
 		70D63DED2693938E0036484B /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63DEC2693938D0036484B /* UIImage+.swift */; };
@@ -321,6 +322,7 @@
 		7084948126A23AB7001B3C2B /* CollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFooter.swift; sourceTree = "<group>"; };
 		7084948326A2441C001B3C2B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		7084948426A2441C001B3C2B /* EmptyCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCVC.xib; sourceTree = "<group>"; };
+		70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		70B9E1E4269DC3A6006DACB2 /* LikeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDataModel.swift; sourceTree = "<group>"; };
 		70B9E1E6269DC479006DACB2 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
 		70D63DEC2693938D0036484B /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 			isa = PBXGroup;
 			children = (
 				703DD831269F3B19004416A9 /* LoginVC.swift */,
+				70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */,
 			);
 			path = SignScene;
 			sourceTree = "<group>";
@@ -1346,6 +1349,7 @@
 				3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
+				70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */,
 				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
 				F4FB2ECB269FD7AE000C339B /* UIButton+.swift in Sources */,
 				F4FB2EC8269F8F6C000C339B /* CreatePostParkingWarningTVC.swift in Sources */,
