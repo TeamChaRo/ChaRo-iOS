@@ -78,6 +78,7 @@ class SNSLoginVC: UIViewController {
         $0.setTitle("이메일 로그인", for: .normal)
         $0.setTitleColor(.gray30, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(goToEmailLoginVC), for: .touchUpInside)
     }
     
     let emailJoinBtn  = UIButton().then {
@@ -87,7 +88,19 @@ class SNSLoginVC: UIViewController {
     }
     
     
-    func configureUI() {
+    @objc func goToEmailLoginVC() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
+        nextVC.modalPresentationStyle = .fullScreen
+        self.present(nextVC, animated: true, completion: nil)
+    }
+    
+    @objc func goToEmailJoinVC() {
+        
+    }
+    
+    
+    private func configureUI() {
         
         view.addSubviews([lookAroundBtn,
                           logoImageView,
