@@ -29,15 +29,32 @@ class SNSLoginVC: UIViewController {
     }
     
     let appleLoginBtn = UIButton().then {
-        $0.tintColor = .mainBlack
+        $0.backgroundColor = .mainBlack
+        $0.setTitle("Apple로 로그인", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
     }
     
     let googleLoginBtn = UIButton().then {
-        $0.tintColor = .white
+        $0.backgroundColor = .white
+        $0.setTitle("Google 로그인", for: .normal)
+        $0.setTitleColor(.mainBlack, for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.layer.borderColor = UIColor.gray30.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
     }
     
     let kakaoLoginBtn = UIButton().then {
-        $0.tintColor = .blue
+        $0.backgroundColor = UIColor(red: 254.0 / 255.0, green: 229.0 / 255.0, blue: 0.0, alpha: 1.0)
+        $0.setTitle("카카오 로그인", for: .normal)
+        $0.setTitleColor(.mainBlack, for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
     }
     
     let emailLoginBtn = UIButton().then {
@@ -76,18 +93,27 @@ class SNSLoginVC: UIViewController {
             $0.centerX.equalToSuperview()
         }
         
-//        appleLoginBtn.snp.makeConstraints {
-//
-//        }
-//
-//        googleLoginBtn.snp.makeConstraints {
-//
-//        }
-//
-//        kakaoLoginBtn.snp.makeConstraints {
-//
-//        }
-//
+        appleLoginBtn.snp.makeConstraints {
+            $0.bottom.equalTo(googleLoginBtn.snp.top).offset(-14)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(48)
+        }
+
+        googleLoginBtn.snp.makeConstraints {
+            $0.bottom.equalTo(kakaoLoginBtn.snp.top).offset(-14)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(48)
+        }
+
+        kakaoLoginBtn.snp.makeConstraints {
+            $0.bottom.equalTo(emailLoginBtn.snp.top).offset(-39)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(48)
+        }
+
         emailLoginBtn.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-55)
             $0.width.equalTo(81)
@@ -104,30 +130,5 @@ class SNSLoginVC: UIViewController {
         
     }
     
-    
-//    backgroundImageView.snp.makeConstraints{
-//        $0.top.leading.trailing.bottom.equalToSuperview()
-//    }
-//
-//    backButton.snp.makeConstraints{
-//        $0.top.equalTo(view.safeAreaLayoutGuide).offset(1)
-//        $0.leading.equalTo(view.safeAreaLayoutGuide).offset(7)
-//        $0.height.width.equalTo(48)
-//    }
-//
-//    titleLabel.snp.makeConstraints{
-//        $0.top.equalTo(view.safeAreaLayoutGuide).offset(14)
-//        $0.centerX.equalTo(view.snp.centerX)
-//    }
-//
-//    userNameLabel.snp.makeConstraints{
-//        $0.top.equalTo(titleLabel.snp.bottom).offset(116)
-//        $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-//    }
-    
-    
-    
-    
-
     
 }
