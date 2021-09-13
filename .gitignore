@@ -111,6 +111,9 @@ iOSInjectionProject/
 #Delete Pods/
 */Pods/
 
+#delete .Podfile.swp
+*/.Podfile.swp
+
 #피드백을 위해 잠시 깃에 올림
 #Delete TmapSDK 
 */TMapSDK.framework

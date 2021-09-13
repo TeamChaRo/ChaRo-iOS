@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Then
 
 class SearchKeywordCell: UITableViewCell {
 
@@ -13,31 +14,25 @@ class SearchKeywordCell: UITableViewCell {
     private var addressData : AddressDataModel?
     public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
     
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 16)
-        label.textColor = .gray50
-        return label
-    }()
+    var titleLabel = UILabel().then{
+        $0.font = .notoSansMediumFont(ofSize: 16)
+        $0.textColor = .gray50
+    }
     
-    private var addressLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansRegularFont(ofSize: 14)
-        label.textColor = .gray40
-        return label
-    }()
+    var addressLabel = UILabel().then{
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.textColor = .gray40
+    }
     
-    private var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansRegularFont(ofSize: 12)
-        label.textColor = .gray30
-        label.text = ""
-        return label
-    }()
+    var dateLabel = UILabel().then{
+        $0.font = .notoSansRegularFont(ofSize: 12)
+        $0.textColor = .gray30
+        $0.text = ""
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setConstraints()
+        setupConstraints()
         self.selectionStyle = .none
     }
 
@@ -48,7 +43,7 @@ class SearchKeywordCell: UITableViewCell {
         }
     }
     
-    private func setConstraints(){
+    private func setupConstraints(){
         addSubviews([titleLabel,
                      addressLabel,
                      dateLabel])
@@ -78,10 +73,10 @@ class SearchKeywordCell: UITableViewCell {
     }
     
     public func setContents(addressMadel: KeywordResult){
-        addressData = AddressDataModel(latitude: addressMadel.latitude,
-                                       longitude: addressMadel.longitude,
-                                       address: addressMadel.address,
-                                       title: addressMadel.title)
+        addressData = AddressDataModel(title: addressMadel.latitude,
+                                       address: addressMadel.longitude,
+                                       latitude: addressMadel.address,
+                                       longitude: addressMadel.title)
         titleLabel.text = addressData!.title
         addressLabel.text = addressData!.address
         dateLabel.text = "\(addressMadel.month). \(addressMadel.day)"

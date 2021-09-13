@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class SearchPostVC: UIViewController {
 
@@ -22,138 +23,101 @@ class SearchPostVC: UIViewController {
     private var filterData = FilterDatas()
     private var currentList: [String] = []
     private var filterList : [String] = ["","","",""]
+    private var canActiveButton = false {
+        didSet{
+            if canActiveButton {
+                changeFindButtonToActive()
+            }
+            else {
+                changeFindButtonToUnactive()
+            }
+        }
+    }
     
     
     //MARK: Component
     lazy private var backButton = XmarkDismissButton(toDismiss: self)
     private let titleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색", color: .white)
     
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBackground"))
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
+    private let backgroundImageView = UIImageView().then{
+        $0.image = UIImage(named: "searchBackground")
+        $0.contentMode = .scaleToFill
+    }
     
-    private let userNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansBoldFont(ofSize: 22)
-        label.textColor = .white
-        return label
-    }()
+    private let userNameLabel = UILabel().then{
+        $0.font = .notoSansBoldFont(ofSize: 22)
+        $0.textColor = .white
+    }
     
-    private let userSubLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .white
-        label.text = "맞춤 코스를 찾아 드릴게요"
-        return label
-    }()
+    private let userSubLabel = UILabel().then{
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .white
+        $0.text = "맞춤 코스를 찾아 드릴게요"
+    }
     
-    private let fileterView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "searchBackgroundWhite"))
-        view.contentMode = .scaleToFill
-        return view
-    }()
+    private let fileterView = UIImageView().then{
+        $0.image = UIImage(named: "searchBackgroundWhite")
+        $0.contentMode = .scaleToFill
+    }
     
-    private let filterTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "오늘 드라이브는"
-        label.font = .notoSansBoldFont(ofSize: 19)
-        label.textColor = .gray50
-        return label
-    }()
+    private let filterTitleLabel = UILabel().then{
+        $0.text = "오늘 드라이브는"
+        $0.font = .notoSansBoldFont(ofSize: 19)
+        $0.textColor = .gray50
+    }
     
+    private let stateImageView = UIImageView()
+    private let stateTextField = UITextField().then{
+        $0.tag = 0
+        $0.text = "지역"
+    }
+        
+    private let cityImageView = UIImageView()
+    private let cityTextField = UITextField().then {
+        $0.tag = 1
+        $0.text = "지역"
+        $0.isUserInteractionEnabled = false
+    }
     
-    private let stateImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
+    private let cityLabel = UILabel().then {
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.text = "에 있는"
+    }
     
-    private let stateTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 0
-        textField.text = "지역"
-        return textField
-    }()
+    private let themaImageView = UIImageView()
+    private var themaTextField = UITextField().then {
+        $0.tag = 2
+        $0.text = "테마"
+    }
     
-    private let cityImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
+    private let themaLabel = UILabel().then {
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.text = "에 어울리는 코스로"
+    }
     
-    private let cityTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 1
-        textField.text = "지역"
-        textField.isUserInteractionEnabled = false
-        return textField
-    }()
+    private let cautionImageView = UIImageView()
+    private let cautionTextField = UITextField().then{
+        $0.tag = 3
+        $0.text = "주의사항"
+    }
     
-    private let cityLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .gray50
-        label.text = "에 있는"
-        return label
-    }()
+    private let cautionLabel = UILabel().then{
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.text = "은 피하고 싶어요"
+    }
     
-    private let themaImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
-    
-    private var themaTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 2
-        textField.text = "테마"
-        return textField
-    }()
-    
-    private var testTextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .gray40
-        return textField
-    }()
-    
-    private let themaLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .gray50
-        label.text = "에 어울리는 코스로"
-        return label
-    }()
-    
-    private let cautionImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchBtnUnselect"))
-        return imageView
-    }()
-    
-    private let cautionTextField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 3
-        textField.text = "주의사항"
-        return textField
-    }()
-    
-    private let cautionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 17)
-        label.textColor = .gray50
-        label.text = "은 피하고 싶어요"
-        return label
-    }()
-    
-    private let findButton: UIButton = {
-        let button = UIButton()
-        button.isUserInteractionEnabled = false
-        button.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
-        button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
-        button.imageView?.contentMode = .scaleToFill
-        button.setTitle("찾아보기", for: .normal)
-        button.setTitleColor(.mainBlue, for: .normal)
-        button.addTarget(self, action: #selector(pushNextVC), for: .touchUpInside)
-        return button
-    }()
+    private let findButton = UIButton().then{
+        $0.isUserInteractionEnabled = false
+        $0.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
+        $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+        $0.imageView?.contentMode = .scaleToFill
+        $0.setTitle("찾아보기", for: .normal)
+        $0.setTitleColor(.mainBlue, for: .normal)
+        $0.addTarget(self, action: #selector(pushNextVC), for: .touchUpInside)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,7 +133,6 @@ class SearchPostVC: UIViewController {
         guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.identifier)as? SearchResultVC else {
             return
         }
-    
         refineFilterList()
         print("정제됨 -> \(filterList)")
         nextVC.setFilterTagList(list: filterList)
@@ -193,17 +156,16 @@ extension SearchPostVC {
                                           cityTextField,
                                           themaTextField,
                                           cautionTextField])
-        
-        for textField in textFieldList{
-            textField.textAlignment = .center
-            textField.borderStyle = .none
-            textField.tintColor = .clear
-            textField.addRightPadding(10)
-            textField.font = .notoSansMediumFont(ofSize: 14)
-            textField.textColor = .gray40
-            textField.addTarget(self, action: #selector(clickedTextField), for: .touchDown)
-            textField.inputAccessoryView = toolbar
-            textField.inputView = pickerView
+        textFieldList.forEach{
+            $0.textAlignment = .center
+            $0.borderStyle = .none
+            $0.tintColor = .clear
+            $0.addRightPadding(10)
+            $0.font = .notoSansMediumFont(ofSize: 14)
+            $0.textColor = .gray40
+            $0.addTarget(self, action: #selector(clickedTextField), for: .touchDown)
+            $0.inputAccessoryView = toolbar
+            $0.inputView = pickerView
         }
     }
     
@@ -212,83 +174,12 @@ extension SearchPostVC {
                                           cityImageView,
                                           themaImageView,
                                           cautionImageView])
-    }
-    
-    @objc func clickedTextField(_ sender : UITextField){
-        currentIndex = sender.tag
-        print("currentIndex = \(currentIndex)")
-        pickerView.selectRow(0, inComponent: 0, animated: true)
-        changeCurrentPickerData(index: currentIndex)
         
-        changeToolbarText(index: currentIndex)
-        pickerView.reloadComponent(0)
-    }
-
-
-    func changeFilterActive(index: Int){
-        imageViewList[index].image = UIImage(named: "searchBtnSelect")
-        textFieldList[index].text = filterList[index]
-        textFieldList[index].textColor = .mainBlue
-    }
-    
-    func changeCityFilterUnactive(){
-        textFieldList[1].isUserInteractionEnabled = false
-        imageViewList[1].image = UIImage(named: "searchBtnUnselect")
-        textFieldList[1].text = "지역"
-        textFieldList[1].textColor = .gray40
-        filterList[1] = ""
-    }
-    
- 
-    func canChangeActiveMode() -> Bool{
-        print(filterList)
-        for index in 0..<filterList.count{
-            if index == 0 && filterList[1] != ""{
-                return true
-            }else if index != 0{
-                if filterList[index] != "" && filterList[index] != "선택안함"{
-                    print("이 값은 OK = \(filterList[index]), index = \(index)")
-                    return true
-                }
-            }
-            
-            //4가지 값중 1하나로 들어간 경우
-            
-        }
-    
-        return false
-    }
-    
-//    func isCheckWhenClickedState() -> Bool{
-//
-//        for index in 0..<filterList.count{
-//            print("현재보는 값 = \(filterList[index]), index = \(index)")
-//            if index == 0 && filterList[index] != "선택안함"{
-//                return true
-//            }
-//            if filterList[index] != "" && filterList[index] != "선택안함"{
-//                print("이 값은 OK = \(filterList[index]), index = \(index)")
-//                return true
-//            }
-//        }
-//        return false
-//    }
-    
-    func isCheckWhenStateNonValue(){
-        
-        if filterList[1] == ""{
-            textFieldList[1].isUserInteractionEnabled = true
+        imageViewList.forEach {
+            $0.image = UIImage(named: "searchBtnUnselect")
+            $0.contentMode = .scaleToFill
         }
         
-        if filterList[0] == "선택안함"{
-            changeCityFilterUnactive()
-        }
-        
-//        if isCheckWhenClickedState(){
-//            changeFindButtonToActive()
-//        }else{
-//            changeFindButtonToUnactive()
-//        }
     }
     
     func changeFindButtonToActive(){
@@ -303,6 +194,55 @@ extension SearchPostVC {
         findButton.setTitleColor(.mainBlue, for: .normal)
     }
     
+  
+    @objc func clickedTextField(_ sender : UITextField){
+        currentIndex = sender.tag
+        pickerView.selectRow(0, inComponent: 0, animated: true)
+        changeCurrentPickerData(index: currentIndex)
+        changeToolbarText(index: currentIndex)
+        pickerView.reloadComponent(0)
+    }
+
+    func changeFilterActive(index: Int){
+        imageViewList[index].image = UIImage(named: "searchBtnSelect")
+        textFieldList[index].text = filterList[index]
+        textFieldList[index].textColor = .mainBlue
+    }
+   
+    
+    func observeFilterData(){
+        for index in 1..<4{
+            if filterList[index] != "" && filterList[index] != "선택안함"{
+                print("여기서 찍힘 == \(filterList[index])")
+                canActiveButton = true
+                return
+            }
+        }
+        canActiveButton = false
+    }
+    
+    func isCheckWhenStateNonValue() -> Bool{
+        if filterList[1] == ""{
+            textFieldList[1].isUserInteractionEnabled = true
+        }
+        if filterList[0] == "선택안함"{
+            changeCityFilterUnactive()
+            textFieldList[0].text = "선택안함"
+            print("여기 불림")
+            return true
+        }
+        return false
+    }
+    
+    
+    func changeCityFilterUnactive(){
+        textFieldList[1].isUserInteractionEnabled = false
+        imageViewList[1].image = UIImage(named: "searchBtnUnselect")
+        textFieldList[1].text = "지역"
+        textFieldList[1].textColor = .gray40
+        filterList[1] = ""
+    }
+ 
     
 }
 
@@ -320,33 +260,32 @@ extension SearchPostVC {
     }
     
     private func createPickerViewToolbar(){
-        //toolbar
         toolbar.sizeToFit()
-        
-        //bar button item
         let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: nil, action: #selector(donePresseed))
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        
         toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
     }
     
     @objc func donePresseed(){
-        
-        if canChangeActiveMode(){
-            changeFindButtonToActive()
-        }else{
-            changeFindButtonToUnactive()
-        }
-        
-        changeFilterActive(index: currentIndex)
-    
         if currentIndex == 0{
-            isCheckWhenStateNonValue()
+            if isCheckWhenStateNonValue(){
+                observeFilterData()
+                self.view.endEditing(true)
+                return
+            }
+            changeFilterActive(index: currentIndex)
+            currentIndex = 1
+            pickerView.selectRow(0, inComponent: 0, animated: true)
+            changeCurrentPickerData(index: currentIndex)
+            changeToolbarText(index: currentIndex)
+            pickerView.reloadComponent(0)
+        }else{
+            changeFilterActive(index: currentIndex)
+            observeFilterData()
+            self.view.endEditing(true)
         }
-        
-        self.view.endEditing(true)
     }
     
     private func changeCurrentPickerData(index : Int){
@@ -385,9 +324,7 @@ extension SearchPostVC: UIPickerViewDelegate{
         return currentList[row]
     }
     
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(currentList[row])
         if row == 0 {
             filterList[currentIndex] = currentList[0]
         }else{
@@ -403,10 +340,9 @@ extension SearchPostVC: UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return  currentList.count
+        return currentList.count
     }
 }
-
 
 
 //MARK: UI
