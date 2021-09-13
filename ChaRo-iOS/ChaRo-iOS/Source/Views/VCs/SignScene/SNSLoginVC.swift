@@ -18,6 +18,13 @@ class SNSLoginVC: UIViewController {
         configureUI()
     }
     
+    let lookAroundBtn = UIButton().then {
+        $0.setTitle("둘러보기", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
+        $0.setTitleColor(.mainBlue, for: .normal)
+        $0.contentHorizontalAlignment = .right
+    }
+    
     let logoImageView = UIImageView().then {
         $0.image = UIImage(named: "logo")
     }
@@ -82,13 +89,21 @@ class SNSLoginVC: UIViewController {
     
     func configureUI() {
         
-        view.addSubviews([logoImageView,
+        view.addSubviews([lookAroundBtn,
+                          logoImageView,
                           logoLabel,
                           appleLoginBtn,
                           googleLoginBtn,
                           kakaoLoginBtn,
                           emailLoginBtn,
                           emailJoinBtn])
+        
+        lookAroundBtn.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(55)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(21)
+            $0.width.equalTo(170)
+        }
         
         logoImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(273)
