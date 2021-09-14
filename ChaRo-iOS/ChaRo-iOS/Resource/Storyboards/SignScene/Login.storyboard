@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="39T-Re-Mxg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -71,6 +71,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxn-D7-htc">
+                                <rect key="frame" x="0.0" y="45" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="bAK-6N-D3Q"/>
+                                    <constraint firstAttribute="width" constant="48" id="mfd-RM-LrA"/>
+                                </constraints>
+                                <state key="normal" image="icBack1"/>
+                                <connections>
+                                    <action selector="backButtonClicked:" destination="5Ee-gl-mTX" eventType="touchUpInside" id="aIN-qB-mel"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일 로그인" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Thr-xj-A9K">
+                                <rect key="frame" x="123" y="58" width="168" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="168" id="shI-Gl-OGd"/>
+                                    <constraint firstAttribute="height" constant="21" id="vfW-yk-OF7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="R4E-HG-mgi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -79,6 +100,7 @@
                             <constraint firstItem="R4E-HG-mgi" firstAttribute="trailing" secondItem="x0R-CB-G5C" secondAttribute="trailing" constant="30" id="3Uy-GO-cm5"/>
                             <constraint firstItem="Uzc-JQ-0y7" firstAttribute="centerX" secondItem="rMX-oG-jn3" secondAttribute="centerX" id="8vh-7j-UXx"/>
                             <constraint firstItem="R4E-HG-mgi" firstAttribute="trailing" secondItem="F48-LJ-Bi0" secondAttribute="trailing" id="An1-ar-9ig"/>
+                            <constraint firstItem="wxn-D7-htc" firstAttribute="top" secondItem="rMX-oG-jn3" secondAttribute="top" constant="45" id="DT6-1U-X68"/>
                             <constraint firstItem="Uzc-JQ-0y7" firstAttribute="top" secondItem="htq-Hy-Dhm" secondAttribute="bottom" constant="21" id="DfX-gv-Pq9"/>
                             <constraint firstItem="x0R-CB-G5C" firstAttribute="leading" secondItem="R4E-HG-mgi" secondAttribute="leading" constant="90" id="FgX-dC-vpH"/>
                             <constraint firstItem="dpg-rX-fiZ" firstAttribute="top" secondItem="Kdz-ap-MR5" secondAttribute="bottom" constant="93" id="I9q-VL-icT"/>
@@ -90,20 +112,25 @@
                             <constraint firstItem="R4E-HG-mgi" firstAttribute="trailing" secondItem="htq-Hy-Dhm" secondAttribute="trailing" constant="20" id="ZAN-S5-P8d"/>
                             <constraint firstItem="Kdz-ap-MR5" firstAttribute="leading" secondItem="rMX-oG-jn3" secondAttribute="leading" id="dP8-H1-ThI"/>
                             <constraint firstAttribute="trailing" secondItem="Kdz-ap-MR5" secondAttribute="trailing" id="dzV-uD-38G"/>
+                            <constraint firstItem="Thr-xj-A9K" firstAttribute="centerX" secondItem="rMX-oG-jn3" secondAttribute="centerX" id="gvZ-UK-RUr"/>
                             <constraint firstItem="Kdz-ap-MR5" firstAttribute="top" secondItem="rMX-oG-jn3" secondAttribute="top" id="kcV-N4-udN"/>
+                            <constraint firstItem="Thr-xj-A9K" firstAttribute="top" secondItem="R4E-HG-mgi" secondAttribute="top" constant="14" id="moI-us-OcB"/>
                             <constraint firstItem="F48-LJ-Bi0" firstAttribute="leading" secondItem="R4E-HG-mgi" secondAttribute="leading" id="nSO-NE-6aU"/>
                             <constraint firstItem="R4E-HG-mgi" firstAttribute="trailing" secondItem="dpg-rX-fiZ" secondAttribute="trailing" constant="30" id="pgn-4I-GuK"/>
                             <constraint firstItem="F48-LJ-Bi0" firstAttribute="top" secondItem="Kdz-ap-MR5" secondAttribute="bottom" constant="13" id="pxe-Yx-m37"/>
+                            <constraint firstItem="wxn-D7-htc" firstAttribute="leading" secondItem="R4E-HG-mgi" secondAttribute="leading" id="wqh-1F-O5s"/>
                             <constraint firstItem="htq-Hy-Dhm" firstAttribute="leading" secondItem="R4E-HG-mgi" secondAttribute="leading" constant="20" id="yM2-as-1lC"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="wxn-D7-htc" id="kGL-1n-CbS"/>
                         <outlet property="heightConstraint" destination="M9d-pb-CsY" id="Ubo-kn-OWN"/>
                         <outlet property="idTextField" destination="x0R-CB-G5C" id="SIe-AT-90z"/>
                         <outlet property="imageView" destination="Kdz-ap-MR5" id="9XT-s3-45I"/>
                         <outlet property="joinButton" destination="Uzc-JQ-0y7" id="nJE-i6-XVF"/>
                         <outlet property="loginButton" destination="htq-Hy-Dhm" id="1nj-Td-Ofe"/>
                         <outlet property="pwdTextField" destination="dpg-rX-fiZ" id="ahU-ij-9Nm"/>
+                        <outlet property="titleLabel" destination="Thr-xj-A9K" id="cS4-wF-bHu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19k-N7-DSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -118,6 +145,9 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="3Jv-cf-BbT" kind="relationship" relationship="rootViewController" id="8vP-9I-v44"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Km-5k-d4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -133,6 +163,7 @@
                         <viewLayoutGuide key="safeArea" id="ng7-3D-ErC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="UCa-C4-jV4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MYX-ef-aTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,6 +171,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icBack1" width="48" height="48"/>
         <image name="idBackgroud" width="351" height="64"/>
         <image name="maskGroup" width="375" height="464"/>
         <image name="pwdBackground" width="351" height="64"/>

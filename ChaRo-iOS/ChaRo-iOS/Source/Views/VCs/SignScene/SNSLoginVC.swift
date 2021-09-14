@@ -15,7 +15,9 @@ class SNSLoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationController()
         configureUI()
+        
     }
     
     let lookAroundBtn = UIButton().then {
@@ -90,13 +92,16 @@ class SNSLoginVC: UIViewController {
     
     @objc func goToEmailLoginVC() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
-        nextVC.modalPresentationStyle = .fullScreen
-        self.present(nextVC, animated: true, completion: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: LoginVC.identifier)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func goToEmailJoinVC() {
         
+    }
+    
+    private func configureNavigationController() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     

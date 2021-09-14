@@ -9,11 +9,12 @@ import UIKit
 
 class LoginVC: UIViewController {
 
-    //여기서 얘네 전체를 컬렉션 뷰로 할지 회원가입만 컬렉션 뷰로 할지 생각했는데 당연히 회원가입만 이겟ㅆ구나!!
-    //VC 만들어서 안에 컬렉션뷰 넣으면 되겠다 근데 차 움직이는 그거 page 컨트롤인가 뭔가로 해야하는지 박익범한테 물어봐야하나??
     //MARK: IBOutlet
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var joinButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
@@ -24,27 +25,8 @@ class LoginVC: UIViewController {
     
     static let identifier = "LoginVC"
     
-    //MARK: - Component
-//    private let CharoimageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "maskGroup")
-//        return imageView
-//    }()
-//
-//    private let idBackground: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "idBackground")
-//        return imageView
-//    }()
-//
-//    private let pwdBackground: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "pwdBackground")
-//        return imageView
-//    }()
     
-    
-    
+    //MARK: 생성주기함수
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
@@ -52,18 +34,21 @@ class LoginVC: UIViewController {
         setNotificationCenter()
     }
     
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        removeObservers()
+    }
+    
+    
     func setLoginButtonUI() {
+        titleLabel.font = .notoSansMediumFont(ofSize: 17)
+        
         loginButton.layer.cornerRadius = 8
         loginButton.tintColor = .mainBlue
         
         joinButton.setTitleColor(.gray30, for: .normal)
         
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        removeObservers()
-    }
-    
     
     
     func loginAction(){
@@ -100,6 +85,10 @@ class LoginVC: UIViewController {
             }
         }
     
+    
+    @IBAction func backButtonClicked(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
