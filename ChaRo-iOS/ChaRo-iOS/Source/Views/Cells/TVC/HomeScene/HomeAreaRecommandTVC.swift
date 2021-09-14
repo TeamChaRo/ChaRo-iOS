@@ -21,7 +21,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
     static let identifier = "HomeAreaRecommandTVC"
 
     var headerText: String = ""
-    var LocelList: [Drive] = []
+    var localList: [DriveElement] = []
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -59,10 +59,6 @@ class HomeAreaRecommandTVC: UITableViewCell {
         self.selectionStyle = .none
         titleLabel.text = headerText
         collectionView.reloadData()
-
-
-        
-        
     }
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
         buttonDelegate?.seeMorePushDelegate(data: cellTag)
@@ -78,7 +74,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
 extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return LocelList.count
+        return localList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -95,17 +91,21 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
       
         
-        if LocelList.count == 0 {
+        if localList.count == 0 {
             return cell
         }
         else {
             
-            let element = LocelList[indexPath.row]
+            let element = localList[indexPath.row]
+            
+            var tags = [element.region, element.theme,
+                        element.warning ?? ""] as [String]
+                        
             
             cell.setData(image: element.image,
                          title: element.title,
-                         tagCount: element.tags.count,
-                         tagArr: element.tags,
+                         tagCount: tags.count,
+                         tagArr: tags,
                          isFavorite: element.isFavorite,
                          postID: element.postID)
             
