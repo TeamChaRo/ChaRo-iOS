@@ -88,8 +88,16 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.imageView.layer.cornerRadius = 10
             //요소 변수화
             let element = selectedDriveList[indexPath.row]
+            var tags = [element.drive[indexPath.row].region, element.drive[indexPath.row].theme,
+                        element.drive[indexPath.row].warning ?? ""] as [String]
+                        
             
-            cell.setData(image: element.image, title: element.title, tagCount: element.tags.count, tagArr: element.tags, isFavorite: element.isFavorite, postID: element.postID)
+            cell.setData(image: element.drive[indexPath.row].image,
+                         title: element.drive[indexPath.row].title,
+                         tagCount: tags.count,
+                         tagArr: tags,
+                         isFavorite: element.drive[indexPath.row].isFavorite,
+                         postID: element.drive[indexPath.row].postID)
             
             cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
             

@@ -19,7 +19,7 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     let cellTag : Int = 4
     
     
-    var customList: [Drive] = []
+    var customList: [DriveElement] = []
     var headerText: String = ""
     
     
@@ -103,11 +103,14 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
         else {
             
             let element = customList[indexPath.row]
+            var tags = [element.region, element.theme,
+                        element.warning ?? ""] as [String]
+                        
             
             cell.setData(image: element.image,
                          title: element.title,
-                         tagCount: element.tags.count,
-                         tagArr: element.tags,
+                         tagCount: tags.count,
+                         tagArr: tags,
                          isFavorite: element.isFavorite,
                          postID: element.postID)
 
