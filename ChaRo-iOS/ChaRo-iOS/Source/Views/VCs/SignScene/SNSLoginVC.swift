@@ -20,6 +20,12 @@ class SNSLoginVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    
+    
     let lookAroundBtn = UIButton().then {
         $0.setTitle("둘러보기", for: .normal)
         $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
@@ -87,6 +93,7 @@ class SNSLoginVC: UIViewController {
         $0.setTitle("이메일로 가입", for: .normal)
         $0.setTitleColor(.gray30, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(goToEmailJoinVC), for: .touchUpInside)
     }
     
     
@@ -95,9 +102,12 @@ class SNSLoginVC: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: LoginVC.identifier)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+
     
     @objc func goToEmailJoinVC() {
-        
+        let storyboard = UIStoryboard(name: "Join", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: JoinVC.identifier)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func configureNavigationController() {

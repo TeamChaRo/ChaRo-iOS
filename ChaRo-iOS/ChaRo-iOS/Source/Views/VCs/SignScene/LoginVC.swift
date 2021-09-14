@@ -34,9 +34,12 @@ class LoginVC: UIViewController {
         setNotificationCenter()
     }
     
-    
     override func viewDidDisappear(_ animated: Bool) {
         removeObservers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     
@@ -146,37 +149,6 @@ extension LoginVC {
             imageView.image = UIImage(named: "maskGroupSE")
             
         }
-        
-        
-//        view.addSubview(CharoimageView)
-//        view.addSubview(idBackground)
-//        view.addSubview(pwdBackground)
-//
-//        view.addSubviews([CharoimageView,
-//                          idBackground,
-//                          pwdBackground,
-//                          idTextField,
-//                          pwdTextField,
-//                          joinButton])
-//
-//        CharoimageView.snp.makeConstraints {
-//            $0.top.leading.trailing.equalToSuperview()
-//            $0.height.equalTo(464 * factor)
-//        }
-//
-//        idBackground.snp.makeConstraints {
-//            $0.top.equalTo(CharoimageView.snp.bottom).offset(13)
-//            $0.leading.equalToSuperview().offset(14)
-//            $0.trailing.equalToSuperview().offset(-10)
-//            $0.height.equalTo(64)
-//        }
-//
-//        idBackground.snp.makeConstraints {
-//            $0.top.equalTo(idBackground.snp.bottom).offset(-5)
-//            $0.leading.equalToSuperview().offset(14)
-//            $0.trailing.equalToSuperview().offset(-10)
-//            $0.height.equalTo(64)
-//        }
         
         
         
