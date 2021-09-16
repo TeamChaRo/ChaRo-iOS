@@ -24,8 +24,6 @@ class SNSLoginVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    
-    
     let lookAroundBtn = UIButton().then {
         $0.setTitle("둘러보기", for: .normal)
         $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
