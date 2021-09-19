@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import Kingfisher
+import Lottie
 
 class HomeVC: UIViewController {
 
@@ -40,6 +41,9 @@ class HomeVC: UIViewController {
     var localData: [DriveElement] = []
     var customText: String = ""
     var localText: String = ""
+
+    let lottieView = LottieIndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var delegate: AnimateLottieDelegate?
 
     
     var tableIndex: IndexPath = [0,0]
@@ -125,10 +129,12 @@ class HomeVC: UIViewController {
                 }
             }
         }
-    
-    
+   
     //서버 데이터 받아오는 부분
     func getServerData() {
+        //lottieview
+        delegate = self
+        delegate?.startLottie()
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
             switch response
             {
@@ -169,13 +175,14 @@ class HomeVC: UIViewController {
                         print(data.localTitle)
 
                     }
+                        self.delegate?.endLottie()
                     }
                     self.HomeTableView.reloadData()
                    
                 }
-            case .requestErr(let message) :
+            case .requestErr(let message):
                 print("requestERR")
-            case .pathErr :
+            case .pathErr:
                 print("pathERR")
                 print("한번 더 실행ㅋ")
             case .serverErr:
@@ -517,4 +524,19 @@ extension HomeVC: PostIdDelegate {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
+}
+
+extension HomeVC: AnimateLottieDelegate{
+    func startLottie() {
+        view.addSubview(lottieView)
+        lottieView.isHidden = false
+        lottieView.lottieView.play()
+    }
+    
+    func endLottie() {
+        lottieView.lottieView.stop()
+        lottieView.isHidden = true
+    }
+    
+
 }
