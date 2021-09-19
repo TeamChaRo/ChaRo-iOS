@@ -127,6 +127,10 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
         
         return size
     }
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC
+        cell!.imageView.kf.cancelDownloadTask()
+    }
     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
