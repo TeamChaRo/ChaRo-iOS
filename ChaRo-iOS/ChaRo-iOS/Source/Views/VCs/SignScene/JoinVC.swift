@@ -13,39 +13,51 @@ import Then
 class JoinVC: UIViewController {
 
     static let identifier = "JoinVC"
-    //private var collectionView: UICollectionView!
     
-    var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init()).then {
-        $0.backgroundColor = .red
+    //MARK: - UI Variables
+    var collectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let cv = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
+        cv.backgroundColor = .red
+        return cv
+    }()
+
+    
+    var upperLabel = UILabel().then {
+        $0.text = "이메일 아이디"
+        $0.font = .notoSansBoldFont(ofSize: 17)
+        $0.textColor = .mainBlack
     }
-//    var upperLabel = UILabel().then {
-//        $0.text = "이메일 아이디"
-//        $0.font = .notoSansBoldFont(ofSize: 17)
-//        $0.textColor = .mainBlack
-//    }
-//
-//    var upperSubLabel = UILabel().then {
-//        $0.text = "사용할 이메일을 입력해주세요"
-//        $0.font = .notoSansRegularFont(ofSize: 11)
-//        $0.textColor = .gray40
-//    }
-//
-//    var upperTextField = UITextField().then {
-//        $0.placeholder = "Ex"
-//        $0.backgroundColor = .gray10
-//    }
+
+    var upperSubLabel = UILabel().then {
+        $0.text = "사용할 이메일을 입력해주세요"
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .gray40
+    }
+
+    var upperTextField = UITextField().then {
+        $0.placeholder = "Ex"
+        $0.backgroundColor = .gray10
+    }
     
+    var viewVer1 = UIView().then {
+        $0.backgroundColor = .blue
+    }
+    
+    
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         configureUI()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         configureNavigationConrtroller()
     }
     
+    
+    //MARK: - private func
     private func configureNavigationConrtroller() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         //네비게이션 바 나타나게 하기
@@ -56,6 +68,7 @@ class JoinVC: UIViewController {
         collectionView.dataSource = self
         
         collectionView.register(JoinViewCVC.self, forCellWithReuseIdentifier: JoinViewCVC.identifier)
+        
     }
     
     private func configureUI() {
@@ -73,7 +86,9 @@ class JoinVC: UIViewController {
 
 }
 
-extension JoinVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+//MARK: - Extension
+extension JoinVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
@@ -84,9 +99,20 @@ extension JoinVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: JoinViewCVC.identifier, for: indexPath) as? JoinViewCVC else { return UICollectionViewCell() }
         cell.backgroundColor = .red
-        
+        cell.backgroundView = viewVer1
         return cell
     }
     
     
+}
+
+extension JoinVC: UICollectionViewDelegate {
+    
+}
+
+
+extension JoinVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
+    }
 }
