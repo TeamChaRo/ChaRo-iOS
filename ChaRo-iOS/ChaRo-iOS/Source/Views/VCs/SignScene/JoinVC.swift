@@ -45,6 +45,20 @@ class JoinVC: UIViewController {
         $0.clearButtonMode = .whileEditing
     }
     
+    var nextButton = UIButton().then {
+        $0.setTitle("다음", for: .normal)
+        $0.backgroundColor = .gray30
+        $0.setTitleColor(.white, for: .normal)
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
+    }
+    
+    lazy var navBar = UINavigationBar().then {
+        $0.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 102)
+        $0.backgroundColor = UIColor.white
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.gray20.cgColor
+    }
     
     var EmailView = UIView().then {
         $0.backgroundColor = .white
@@ -60,17 +74,18 @@ class JoinVC: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         configureUI()
+        self.view.addSubview(navBar)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        configureNavigationConrtroller()
+        configureNavigationController()
     }
     
     
     //MARK: - private func
-    private func configureNavigationConrtroller() {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        //네비게이션 바 나타나게 하기
+    private func configureNavigationController() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //네비게이션 바 숨기기
     }
     
     private func setupCollectionView() {
@@ -103,6 +118,7 @@ class JoinVC: UIViewController {
         EmailView.addSubview(upperLabel)
         EmailView.addSubview(upperSubLabel)
         EmailView.addSubview(upperTextField)
+        EmailView.addSubview(nextButton)
         
         upperLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -117,6 +133,12 @@ class JoinVC: UIViewController {
         
         upperTextField.snp.makeConstraints {
             $0.top.equalTo(upperSubLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalTo(upperLabel)
+            $0.height.equalTo(48)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-75)
             $0.leading.trailing.equalTo(upperLabel)
             $0.height.equalTo(48)
         }
