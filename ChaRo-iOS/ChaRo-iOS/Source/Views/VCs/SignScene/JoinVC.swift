@@ -18,7 +18,6 @@ class JoinVC: UIViewController {
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let cv = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
-        cv.backgroundColor = .red
         return cv
     }()
 
@@ -36,12 +35,23 @@ class JoinVC: UIViewController {
     }
 
     var upperTextField = UITextField().then {
-        $0.placeholder = "Ex"
+        $0.placeholder = "ex)charorong@gmail.com"
         $0.backgroundColor = .gray10
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.gray20.cgColor
+        $0.addLeftPadding(14)
+        $0.clearButtonMode = .whileEditing
     }
     
-    var viewVer1 = UIView().then {
-        $0.backgroundColor = .blue
+    
+    var EmailView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    var verifyEmailView = UIView().then {
+        $0.backgroundColor = .white
     }
     
     
@@ -79,6 +89,43 @@ class JoinVC: UIViewController {
             $0.top.equalToSuperview().offset(180)
             $0.bottom.leading.trailing.equalToSuperview()
         }
+        
+        configureVerifyEmailView()
+        
+    }
+    
+    private func configureEmailView() {
+        
+        EmailView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        EmailView.addSubview(upperLabel)
+        EmailView.addSubview(upperSubLabel)
+        EmailView.addSubview(upperTextField)
+        
+        upperLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        upperSubLabel.snp.makeConstraints {
+            $0.top.equalTo(upperLabel.snp.bottom).offset(2)
+            $0.leading.trailing.equalTo(upperLabel)
+        }
+        
+        upperTextField.snp.makeConstraints {
+            $0.top.equalTo(upperSubLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalTo(upperLabel)
+            $0.height.equalTo(48)
+        }
+        
+        EmailView.dismissKeyboardWhenTappedAround()
+    }
+    
+    private func configureVerifyEmailView() {
+        
     }
     
 
@@ -98,8 +145,9 @@ extension JoinVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: JoinViewCVC.identifier, for: indexPath) as? JoinViewCVC else { return UICollectionViewCell() }
-        cell.backgroundColor = .red
-        cell.backgroundView = viewVer1
+        cell.backgroundColor = .white
+        cell.addSubview(EmailView)
+        configureEmailView()
         return cell
     }
     
@@ -113,6 +161,6 @@ extension JoinVC: UICollectionViewDelegate {
 
 extension JoinVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height - 250)
     }
 }
