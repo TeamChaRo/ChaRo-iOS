@@ -21,6 +21,13 @@ class JoinVC: UIViewController {
         return cv
     }()
 
+    var blueCar = UIButton().then {
+        $0.setImage(UIImage(named: "blueCar"), for: .normal)
+    }
+    
+    var blueLine = UIImageView().then {
+        $0.image = UIImage(named: "blueCarLine")
+    }
     
     var upperLabel = UILabel().then {
         $0.text = "이메일 아이디"
@@ -98,28 +105,45 @@ class JoinVC: UIViewController {
         
     }
     
+    //왜 안될까..?
     private func setupNavigationBar() {
         
-        var navItem = UINavigationItem(title: "회원가입")
-        
         self.view.addSubview(navBar)
+//
+//        var navItem = UINavigationItem(title: "회원가입")
         
-        let titleLabel = UILabel().then {
-            $0.text = "회원가입"
-            $0.font = .notoSansRegularFont(ofSize: 17)
-        }
-        
-        navItem.titleView = titleLabel
-        navBar.items = [navItem]
+//        let titleLabel = UILabel().then {
+//            $0.text = "회원가입"
+//            $0.font = .notoSansRegularFont(ofSize: 17)
+//        }
+
+//        navItem.titleView = titleLabel
+//        navBar.items = [navItem]
     }
     
     private func configureUI() {
         
         view.addSubview(collectionView)
         
+        view.addSubview(blueCar)
+        view.addSubview(blueLine)
+        
         collectionView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(180)
             $0.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        blueCar.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(124)
+            $0.leading.equalTo(15)
+            $0.width.equalTo(36)
+            $0.height.equalTo(21)
+        }
+        
+        blueLine.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(131)
+            $0.leading.equalTo(20)
+            $0.trailing.equalTo(-23)
         }
         
         configureVerifyEmailView()
@@ -136,6 +160,7 @@ class JoinVC: UIViewController {
         EmailView.addSubview(upperSubLabel)
         EmailView.addSubview(upperTextField)
         EmailView.addSubview(nextButton)
+        
         
         upperLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
