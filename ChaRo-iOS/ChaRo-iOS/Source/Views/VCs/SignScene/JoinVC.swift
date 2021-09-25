@@ -67,7 +67,7 @@ class JoinVC: UIViewController {
         $0.layer.borderColor = UIColor.gray20.cgColor
     }
     
-    var EmailView = UIView().then {
+    var emailView = UIView().then {
         $0.backgroundColor = .white
     }
     
@@ -152,14 +152,14 @@ class JoinVC: UIViewController {
     
     private func configureEmailView() {
         
-        EmailView.snp.makeConstraints {
+        emailView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        EmailView.addSubview(upperLabel)
-        EmailView.addSubview(upperSubLabel)
-        EmailView.addSubview(upperTextField)
-        EmailView.addSubview(nextButton)
+        emailView.addSubview(upperLabel)
+        emailView.addSubview(upperSubLabel)
+        emailView.addSubview(upperTextField)
+        emailView.addSubview(nextButton)
         
         
         upperLabel.snp.makeConstraints {
@@ -185,17 +185,19 @@ class JoinVC: UIViewController {
             $0.height.equalTo(48)
         }
         
-        EmailView.dismissKeyboardWhenTappedAround()
+        emailView.dismissKeyboardWhenTappedAround()
     }
     
     private func configureVerifyEmailView() {
-        
+        verifyEmailView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
     }
+    
     
     private func setStickyKeyboardButton() {
         
         let stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
-        
         let stickyNextButton = UIButton().then {
             $0.backgroundColor = .mainBlue
             $0.setTitle("다음", for: .normal)
@@ -203,7 +205,6 @@ class JoinVC: UIViewController {
         }
         
         stickyView.addSubview(stickyNextButton)
-        
         stickyNextButton.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
@@ -211,12 +212,6 @@ class JoinVC: UIViewController {
         upperTextField.inputAccessoryView = stickyView
         
     }
-    
-    @objc func doneClicked() {
-        
-    }
-    
-
     
 
 }
@@ -234,7 +229,7 @@ extension JoinVC: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: JoinViewCVC.identifier, for: indexPath) as? JoinViewCVC else { return UICollectionViewCell() }
         cell.backgroundColor = .white
-        cell.addSubview(EmailView)
+        cell.addSubview(emailView)
         configureEmailView()
         return cell
     }
