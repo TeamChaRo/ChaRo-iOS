@@ -82,7 +82,7 @@ class JoinVC: UIViewController {
         setupCollectionView()
         setupNavigationBar()
         configureUI()
-        
+        setStickyKeyboardButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -189,6 +189,30 @@ class JoinVC: UIViewController {
     }
     
     private func configureVerifyEmailView() {
+        
+    }
+    
+    private func setStickyKeyboardButton() {
+        
+        let stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
+        
+        let stickyNextButton = UIButton().then {
+            $0.backgroundColor = .mainBlue
+            $0.setTitle("다음", for: .normal)
+            $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+        }
+        
+        stickyView.addSubview(stickyNextButton)
+        
+        stickyNextButton.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        upperTextField.inputAccessoryView = stickyView
+        
+    }
+    
+    @objc func doneClicked() {
         
     }
     
