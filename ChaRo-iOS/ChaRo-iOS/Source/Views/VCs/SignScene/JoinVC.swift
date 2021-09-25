@@ -36,13 +36,36 @@ class JoinVC: UIViewController {
     }
 
     var upperSubLabel = UILabel().then {
-        $0.text = "사용할 이메일을 입력해주세요"
+        $0.text = "사용할 이메일을 입력해주세요."
         $0.font = .notoSansRegularFont(ofSize: 11)
         $0.textColor = .gray40
     }
 
     var upperTextField = UITextField().then {
         $0.placeholder = "ex)charorong@gmail.com"
+        $0.backgroundColor = .gray10
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.gray20.cgColor
+        $0.addLeftPadding(14)
+        $0.clearButtonMode = .whileEditing
+    }
+    
+    var lowerLabel = UILabel().then {
+        $0.text = "이메일 인증번호"
+        $0.font = .notoSansBoldFont(ofSize: 17)
+        $0.textColor = .mainBlack
+    }
+    
+    var lowerSubLabel = UILabel().then {
+        $0.text = "이메일로 보내드린 인증번호를 입력해주세요."
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .gray40
+    }
+    
+    var lowerTextField = UITextField().then {
+        $0.placeholder = "ex)울랄라"
         $0.backgroundColor = .gray10
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
@@ -145,9 +168,7 @@ class JoinVC: UIViewController {
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-23)
         }
-        
-        configureVerifyEmailView()
-        
+                
     }
     
     private func configureEmailView() {
@@ -189,8 +210,30 @@ class JoinVC: UIViewController {
     }
     
     private func configureVerifyEmailView() {
+        
         verifyEmailView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        emailView.addSubview(lowerLabel)
+        emailView.addSubview(lowerSubLabel)
+        emailView.addSubview(lowerTextField)
+        
+        lowerLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(140)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        lowerSubLabel.snp.makeConstraints {
+            $0.top.equalTo(lowerLabel.snp.bottom).offset(2)
+            $0.leading.trailing.equalTo(lowerLabel)
+        }
+        
+        lowerTextField.snp.makeConstraints {
+            $0.top.equalTo(lowerSubLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalTo(lowerLabel)
+            $0.height.equalTo(48)
         }
     }
     
@@ -199,7 +242,7 @@ class JoinVC: UIViewController {
         
         let stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
         let stickyNextButton = UIButton().then {
-            $0.backgroundColor = .mainBlue
+            $0.backgroundColor = .gray30
             $0.setTitle("다음", for: .normal)
             $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         }
@@ -210,7 +253,7 @@ class JoinVC: UIViewController {
         }
         
         upperTextField.inputAccessoryView = stickyView
-        
+        lowerTextField.inputAccessoryView = stickyView
     }
     
 
@@ -229,8 +272,10 @@ extension JoinVC: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: JoinViewCVC.identifier, for: indexPath) as? JoinViewCVC else { return UICollectionViewCell() }
         cell.backgroundColor = .white
+        cell.addSubview(verifyEmailView)
         cell.addSubview(emailView)
         configureEmailView()
+        configureVerifyEmailView()
         return cell
     }
     
