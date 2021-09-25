@@ -73,8 +73,9 @@ class JoinVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        setupNavigationBar()
         configureUI()
-        self.view.addSubview(navBar)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,12 +89,28 @@ class JoinVC: UIViewController {
         //네비게이션 바 숨기기
     }
     
+    
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.register(JoinViewCVC.self, forCellWithReuseIdentifier: JoinViewCVC.identifier)
         
+    }
+    
+    private func setupNavigationBar() {
+        
+        var navItem = UINavigationItem(title: "회원가입")
+        
+        self.view.addSubview(navBar)
+        
+        let titleLabel = UILabel().then {
+            $0.text = "회원가입"
+            $0.font = .notoSansRegularFont(ofSize: 17)
+        }
+        
+        navItem.titleView = titleLabel
+        navBar.items = [navItem]
     }
     
     private func configureUI() {
