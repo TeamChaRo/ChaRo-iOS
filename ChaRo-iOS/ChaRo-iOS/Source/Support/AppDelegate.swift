@@ -20,10 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        
-        // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
-        // [END set_messaging_delegate]
         
         // [START register_for_notifications]
         if #available(iOS 10.0, *) {
@@ -43,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        // [END register_for_notifications
+        // [END register_for_notifications]
         return true
     }
     
@@ -55,19 +52,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Message ID: \(messageID)")
         }
         
-        // Print full message.
         print(userInfo)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
         
-        // Print full message.
         print(userInfo)
         
         completionHandler(UIBackgroundFetchResult.newData)
@@ -110,10 +104,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
         }
         
-        // Print full message.
         print(userInfo)
         
-        // Change this to your preferred presentation option
         completionHandler([[.alert, .sound]])
     }
     
@@ -129,8 +121,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
         }
         
-        // Print full message.
-        print("hello",userInfo)
+        print(userInfo)
         
         if response.actionIdentifier == UNNotificationDismissActionIdentifier {
             print ("Message Closed")
