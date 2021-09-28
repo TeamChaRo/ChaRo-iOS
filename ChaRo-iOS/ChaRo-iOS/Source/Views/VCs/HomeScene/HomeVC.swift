@@ -9,29 +9,31 @@ import UIKit
 import SnapKit
 import Then
 import Kingfisher
+import Lottie
 
 class HomeVC: UIViewController {
 
+//MARK: Var
     @IBOutlet weak var HomeTableView: UITableView!
     @IBOutlet weak var HomeNavigationView: UIView!
     @IBOutlet weak var homeNavigationLogo: UIImageView!
     @IBOutlet weak var homeNavigationSearchButton: UIButton!
     @IBOutlet weak var homeNavigationNotificationButton: UIButton!
-    
     @IBOutlet weak var homeNavigationHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var charoIconImageView: NSLayoutConstraint!
     @IBOutlet weak var bannerScrollView: UIScrollView!
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     
-    var isFirstSetData: Bool = true
-
+    //배너 관련 변수
     var homeTableViewHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
-    //이거도 나중엔 바로 이미지뷰 생성할때 불러올게여 잠시 더미
-    var images = [#imageLiteral(resourceName: "nightView") , #imageLiteral(resourceName: "dummyMain") , #imageLiteral(resourceName: "summer"), #imageLiteral(resourceName: "speed")]
+    var images: [UIImage] = [#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain")]
     var imageViews = [UIImageView]()
+    var bannerTitleLableList: [UILabel] = []
+    var bannerSubtTtleLabelList: [UILabel] = []
     
-    ///배너 데이타
+    
+    ///데이타
     var bannerData: [Banner] = []
     var todayData: [DriveElement] = []
     var trendyData: [DriveElement] = []
@@ -40,39 +42,22 @@ class HomeVC: UIViewController {
     var customText: String = ""
     var localText: String = ""
 
-    var bannerTitleLableList: [UILabel] = []
-    var bannerSubtTtleLabelList: [UILabel] = []
-    
+    let lottieView = LottieIndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var delegate: AnimateLottieDelegate?
+
     
     var tableIndex: IndexPath = [0,0]
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getServerData()
         setTableView()
-        setHomeNavigationViewLayout()
         setActionToSearchButton()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
         addContentScrollView()
     }
-    
-    
-     
-    func setHomeNavigationViewLayout() {
-        HomeNavigationView.backgroundColor = .none
-        homeNavigationNotificationButton.addTarget(self, action: #selector(presentOnBoarding), for: .touchUpInside)
-        
-        self.setMainNavigationViewUI(height: homeNavigationHeightConstraints,
-                                 fromTopToImageView: charoIconImageView)
-        
-    }
-    
+    //헤더뷰
     func setHeader(){
         HomeTableView.rowHeight = UITableView.automaticDimension
         headerView = HomeTableView.tableHeaderView
@@ -83,7 +68,6 @@ class HomeVC: UIViewController {
         updateHeaderView()
         setupHeaderViewLayout()
     }
-    
     func updateHeaderView() {
         var headerRect = CGRect(x: 0, y: -homeTableViewHeaderHeight, width: HomeTableView.bounds.width, height: homeTableViewHeaderHeight)
         if HomeTableView.contentOffset.y < homeTableViewHeaderHeight {
@@ -97,15 +81,13 @@ class HomeVC: UIViewController {
         var titleList: [String] = []
         var subTitleList: [String] = []
             
-            var titleLabelList : [UILabel] = []
-            var subTitleLabelList : [UILabel] = []
+            var titleLabelList: [UILabel] = []
+            var subTitleLabelList: [UILabel] = []
         for i in 0...3
         {
             titleList.append(bannerData[i].bannerTitle)
             subTitleList.append(bannerData[i].bannerTag)
         }
-        
-        
         
             for index in 0..<titleList.count {
                 let titleLabel = UILabel().then{
@@ -147,19 +129,12 @@ class HomeVC: UIViewController {
                 }
             }
         }
-    
-    
-    @objc func presentOnBoarding(){
-//        let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
-//        let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)
-        
-//        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-//        let nextVC = storyboard.instantiateViewController(identifier: LoginVC.identifier)
-//        nextVC.modalPresentationStyle = .fullScreen
-//        present(nextVC, animated: true, completion: nil)
-    }
-    
+   
+    //서버 데이터 받아오는 부분
     func getServerData() {
+        //lottieview
+        delegate = self
+        delegate?.startLottie()
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
             switch response
             {
@@ -200,13 +175,14 @@ class HomeVC: UIViewController {
                         print(data.localTitle)
 
                     }
+                        self.delegate?.endLottie()
                     }
                     self.HomeTableView.reloadData()
                    
                 }
-            case .requestErr(let message) :
+            case .requestErr(let message):
                 print("requestERR")
-            case .pathErr :
+            case .pathErr:
                 print("pathERR")
                 print("한번 더 실행ㅋ")
             case .serverErr:
@@ -251,25 +227,29 @@ class HomeVC: UIViewController {
 
 }
 
-extension HomeVC : UITableViewDelegate, UITableViewDataSource {
+extension HomeVC : UITableViewDelegate {
     
     func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
         
         let factor = UIScreen.main.bounds.width / 375
         switch indextPath.row {
+        
+        //배너
         case 0:
             return 365 * factor
+        //테마
         case 1:
             return 178 * factor
+        //아무것도 아닌거
         case 999:
             return 100
+        //그 외 섹션
         default:
             return 570 * factor
         }
         
     }
     
-  
     func setNavigationViewShadow(){
         //shadowExtension 예제
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
@@ -290,29 +270,23 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                     let xPos = self.view.frame.width * CGFloat(i-1)
                     let imageView = UIImageView()
                     imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
-                    //여기도 서버 연결할때 이미지 바로 따오겠슴뉘다..
                     print(bannerData.count)
                         guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
                         imageView.kf.setImage(with: url)
-//                    guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
                     imageView.tag = i
                     bannerScrollView.addSubview(imageView)
                     bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i)
                     bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: homeTableViewHeaderHeight)
-                    
                 }
             }
 
         }
         }
-   
-    
 //MARK: ScrollViewDidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNavigationAlpah()
         setMoveCar()
        }
-    
     func setNavigationAlpah(){
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
@@ -383,7 +357,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        //섹션 갯수
+        let sectionNum: Int = 5;
+        return sectionNum
     }
     
 //MARK: 내용 구현 부
@@ -394,7 +370,6 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
 //MARK: 오늘의 드라이브
         case 0:
-
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
             print(todayData)
@@ -484,7 +459,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     
 
 }
-extension HomeVC : IsSelectedCVCDelegate {
+extension HomeVC: UITableViewDataSource{
+}
+extension HomeVC: IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
         print(tableIndex.row)
@@ -517,7 +494,7 @@ extension HomeVC: SeeMorePushDelegate{
 
 }
 
-extension HomeVC : CollectionViewCellDelegate {
+extension HomeVC: CollectionViewCellDelegate {
     
     func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
         
@@ -547,4 +524,19 @@ extension HomeVC: PostIdDelegate {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
+}
+
+extension HomeVC: AnimateLottieDelegate{
+    func startLottie() {
+        view.addSubview(lottieView)
+        lottieView.isHidden = false
+        lottieView.lottieView.play()
+    }
+    
+    func endLottie() {
+        lottieView.lottieView.stop()
+        lottieView.isHidden = true
+    }
+    
+
 }

@@ -112,7 +112,10 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
         
         return CGSize(width: 260, height: 256)
     }
-
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC
+        cell!.imageView.kf.cancelDownloadTask()
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
