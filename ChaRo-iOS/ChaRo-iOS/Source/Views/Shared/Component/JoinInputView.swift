@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum TextFieldType {
+    case normal
+    case password
+}
+
 class JoinInputView: UIView {
     
     var titleLabel = UILabel().then {
