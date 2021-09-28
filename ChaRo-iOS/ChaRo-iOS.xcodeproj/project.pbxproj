@@ -128,6 +128,7 @@
 		703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD839269F810D004416A9 /* LoginDataModel.swift */; };
 		703DD83C269F867D004416A9 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD83B269F867D004416A9 /* LoginService.swift */; };
 		703DD83E269F8829004416A9 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD83D269F8829004416A9 /* UserInfo.swift */; };
+		7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8212702F93000C1CD2E /* JoinInputView.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -320,6 +321,7 @@
 		703DD839269F810D004416A9 /* LoginDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataModel.swift; sourceTree = "<group>"; };
 		703DD83B269F867D004416A9 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		703DD83D269F8829004416A9 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		7062C8212702F93000C1CD2E /* JoinInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinInputView.swift; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */,
 				3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */,
 				3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */,
+				7062C8212702F93000C1CD2E /* JoinInputView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1369,6 +1372,7 @@
 				F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */,
 				70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* UIView+.swift in Sources */,
+				7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */,
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */,
