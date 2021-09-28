@@ -9,6 +9,8 @@ import UIKit
 
 class JoinInputView: UIView {
     
+    var width: CGFloat?
+    
     var titleLabel = UILabel().then {
         $0.font = .notoSansBoldFont(ofSize: 17)
         $0.textColor = .mainBlack
@@ -29,6 +31,24 @@ class JoinInputView: UIView {
         $0.clearButtonMode = .whileEditing
     }
     
+    var nextButton = UIButton().then {
+        $0.setTitle("다음", for: .normal)
+        $0.backgroundColor = .gray30
+        $0.setTitleColor(.white, for: .normal)
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
+    }
+    
+    lazy var stickyView = UIView().then {
+        $0.frame = CGRect(x: 0, y: 0, width: width!, height: 48)
+    }
+
+    let stickyNextButton = UIButton().then {
+        $0.setTitle("다음", for: .normal)
+        $0.backgroundColor = .gray30
+        $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+    }
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -37,20 +57,24 @@ class JoinInputView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, subTitle: String, placeholder: String) {
+    init(title: String, subTitle: String, placeholder: String, width: CGFloat) {
         super.init(frame: .zero)
+        
+        self.width = width
         
         titleLabel.text = title
         subTitleLabel.text = subTitle
         inputTextField.placeholder = placeholder
         
         setConstraints()
+        setStickyKeyboardButton(width: width)
     }
     
     private func setConstraints() {
         addSubviews([titleLabel,
                      subTitleLabel,
-                     inputTextField])
+                     inputTextField,
+                     nextButton])
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
@@ -68,6 +92,25 @@ class JoinInputView: UIView {
             $0.leading.trailing.equalTo(titleLabel)
             $0.height.equalTo(48)
         }
+        
+        nextButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-75)
+            $0.leading.trailing.equalTo(titleLabel)
+            $0.height.equalTo(48)
+        }
+
+    }
+    
+    private func setStickyKeyboardButton(width: CGFloat) {
+        stickyView.addSubview(stickyNextButton)
+        
+        stickyNextButton.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        inputTextField.inputAccessoryView = stickyView
+
     }
 
 }
+
