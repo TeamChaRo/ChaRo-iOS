@@ -8,6 +8,9 @@
 import UIKit
 
 class MyPagePostCVC: UICollectionViewCell {
+    
+    static let identifier: String = "MyPagePostCVC"
+    
     //titleLable 30자까지
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var postTitle: UILabel!
