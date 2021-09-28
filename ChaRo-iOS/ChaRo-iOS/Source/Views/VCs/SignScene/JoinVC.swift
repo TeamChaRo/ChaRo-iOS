@@ -29,43 +29,8 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-    var upperLabel = UILabel().then {
-        $0.text = "이메일 아이디"
-        $0.font = .notoSansBoldFont(ofSize: 17)
-        $0.textColor = .mainBlack
-    }
-
-    var upperSubLabel = UILabel().then {
-        $0.text = "사용할 이메일을 입력해주세요."
-        $0.font = .notoSansRegularFont(ofSize: 11)
-        $0.textColor = .gray40
-    }
-
-    var upperTextField = UITextField().then {
-        $0.placeholder = "ex)charorong@gmail.com"
-        $0.backgroundColor = .gray10
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.gray20.cgColor
-        $0.addLeftPadding(14)
-        $0.clearButtonMode = .whileEditing
-    }
-    
-    var lowerLabel = UILabel().then {
-        $0.text = "이메일 인증번호"
-        $0.font = .notoSansBoldFont(ofSize: 17)
-        $0.textColor = .mainBlack
-    }
-    
-    var lowerSubLabel = UILabel().then {
-        $0.text = "이메일로 보내드린 인증번호를 입력해주세요."
-        $0.font = .notoSansRegularFont(ofSize: 11)
-        $0.textColor = .gray40
-    }
-    
-    var lowerTextField = UITextField().then {
-        $0.placeholder = "ex)울랄라"
+    var commonTextField = UITextField().then {
+        $0.placeholder = "비밀번호를 한번 더 작성해주세요"
         $0.backgroundColor = .gray10
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
@@ -209,15 +174,16 @@ class JoinVC: UIViewController {
         emailView.addSubview(nextButton)
         
         emailInputView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.height.equalTo(117)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
         
         emailVerifyInputView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(180)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(117)
+            $0.leading.trailing.equalTo(emailInputView)
         }
         
         nextButton.snp.makeConstraints {
@@ -239,9 +205,19 @@ class JoinVC: UIViewController {
         passwordView.addSubview(nextButton)
         
         passwordInputView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.height.equalTo(117)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        passwordInputView.addSubview(commonTextField)
+        
+        //기존 뷰에 TF 하나 더 추가 왜 안나오는지 알수가 없음 ... 왜?
+        commonTextField.snp.makeConstraints {
+            $0.top.equalTo(passwordInputView.inputTextField.snp.bottom).offset(10)
+            $0.height.equalTo(48)
+            $0.leading.trailing.equalTo(passwordInputView)
         }
         
         nextButton.snp.makeConstraints {
@@ -265,6 +241,7 @@ class JoinVC: UIViewController {
         emailInputView.inputTextField.inputAccessoryView = stickyView
         emailVerifyInputView.inputTextField.inputAccessoryView = stickyView
         passwordInputView.inputTextField.inputAccessoryView = stickyView
+        commonTextField.inputAccessoryView = stickyView
     }
     
 

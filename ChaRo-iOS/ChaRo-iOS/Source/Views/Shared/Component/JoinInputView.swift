@@ -8,7 +8,6 @@
 import UIKit
 
 class JoinInputView: UIView {
-
     
     var titleLabel = UILabel().then {
         $0.font = .notoSansBoldFont(ofSize: 17)
