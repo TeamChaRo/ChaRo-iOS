@@ -98,6 +98,10 @@ class JoinVC: UIViewController {
         $0.backgroundColor = .white
     }
     
+    var passwordView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -105,7 +109,6 @@ class JoinVC: UIViewController {
         setupCollectionView()
         setupNavigationBar()
         configureUI()
-        setStickyKeyboardButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -177,35 +180,19 @@ class JoinVC: UIViewController {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        emailView.addSubview(upperLabel)
-        emailView.addSubview(upperSubLabel)
-        emailView.addSubview(upperTextField)
-        emailView.addSubview(nextButton)
+        let emailInputView = JoinInputView(title: "이메일 아이디",
+                                           subTitle: "사용할 이메일을 입력해주세요.",
+                                           placeholder: "ex)charorong@gmail.com",
+                                           width: self.view.frame.width)
         
+        emailView.addSubview(emailInputView)
         
-        upperLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
+        emailInputView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
-        
-        upperSubLabel.snp.makeConstraints {
-            $0.top.equalTo(upperLabel.snp.bottom).offset(2)
-            $0.leading.trailing.equalTo(upperLabel)
-        }
-        
-        upperTextField.snp.makeConstraints {
-            $0.top.equalTo(upperSubLabel.snp.bottom).offset(12)
-            $0.leading.trailing.equalTo(upperLabel)
-            $0.height.equalTo(48)
-        }
-        
-        nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-75)
-            $0.leading.trailing.equalTo(upperLabel)
-            $0.height.equalTo(48)
-        }
-        
+
         emailView.dismissKeyboardWhenTappedAround()
     }
     
@@ -237,23 +224,15 @@ class JoinVC: UIViewController {
         }
     }
     
-    
-    private func setStickyKeyboardButton() {
-        
-        let stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
-        let stickyNextButton = UIButton().then {
-            $0.backgroundColor = .gray30
-            $0.setTitle("다음", for: .normal)
-            $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
-        }
-        
-        stickyView.addSubview(stickyNextButton)
-        stickyNextButton.snp.makeConstraints {
+    private func configurePasswordView() {
+        passwordView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        upperTextField.inputAccessoryView = stickyView
-        lowerTextField.inputAccessoryView = stickyView
+        emailView.addSubview(lowerLabel)
+        emailView.addSubview(lowerSubLabel)
+        emailView.addSubview(lowerTextField)
+        
     }
     
 
@@ -272,10 +251,12 @@ extension JoinVC: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: JoinViewCVC.identifier, for: indexPath) as? JoinViewCVC else { return UICollectionViewCell() }
         cell.backgroundColor = .white
-        cell.addSubview(verifyEmailView)
+        //cell.addSubview(passwordView)
+        //cell.addSubview(verifyEmailView)
         cell.addSubview(emailView)
         configureEmailView()
-        configureVerifyEmailView()
+        //configureVerifyEmailView()
+        //configurePasswordView()
         return cell
     }
     
