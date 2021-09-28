@@ -25,6 +25,7 @@ class JoinInputView: UIView {
     }
 
     var inputTextField = UITextField().then {
+        var type: TextFieldType
         $0.backgroundColor = .gray10
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
@@ -32,6 +33,13 @@ class JoinInputView: UIView {
         $0.layer.borderColor = UIColor.gray20.cgColor
         $0.addLeftPadding(14)
         $0.clearButtonMode = .whileEditing
+        
+        switch type {
+        case .normal:
+            $0.
+        case .password:
+            
+        }
     }
     
         
