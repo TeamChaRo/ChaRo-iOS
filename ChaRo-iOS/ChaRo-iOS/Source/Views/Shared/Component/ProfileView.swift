@@ -10,7 +10,7 @@ import UIKit
 class ProfileView: UIView, UIImagePickerControllerDelegate {
 
     var profileImageView = UIImageView().then {
-        $0.image = UIImage(named: "")
+        $0.image = UIImage(named: "profileImage")
     }
     
     var cameraButton = UIButton().then {
