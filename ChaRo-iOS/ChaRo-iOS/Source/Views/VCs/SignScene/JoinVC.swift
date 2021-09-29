@@ -82,7 +82,11 @@ class JoinVC: UIViewController {
                                           placeholder: "5이상 15자 이내의 영문과 숫자",
                                           type: .password)
     
+    var profileNicknameView = UIView().then {
+        $0.backgroundColor = .white
+    }
     
+    let profileView = ProfileView()
     
     
     //MARK: - Life Cycle
@@ -223,6 +227,20 @@ class JoinVC: UIViewController {
         passwordView.dismissKeyboardWhenTappedAround()
     }
     
+    private func configureProfileNicknameView() {
+        profileNicknameView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        profileNicknameView.addSubview(profileView)
+        
+        profileView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(30)
+            $0.leading.equalToSuperview().offset(20)
+        }
+    }
+    
+    
     private func setStickyKeyboardButton() {
         let stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
         
@@ -254,10 +272,12 @@ extension JoinVC: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: JoinViewCVC.identifier, for: indexPath) as? JoinViewCVC else { return UICollectionViewCell() }
         cell.backgroundColor = .white
-        cell.addSubview(passwordView)
         //cell.addSubview(emailView)
         //configureEmailView()
-        configurePasswordView()
+        //cell.addSubview(passwordView)
+        //configurePasswordView()
+        cell.addSubview(profileNicknameView)
+        configureProfileNicknameView()
         return cell
     }
     

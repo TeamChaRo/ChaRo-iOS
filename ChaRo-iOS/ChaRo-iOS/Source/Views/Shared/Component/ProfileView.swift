@@ -14,6 +14,7 @@ class ProfileView: UIView, UIImagePickerControllerDelegate {
     }
     
     var cameraButton = UIButton().then {
+        $0.setImage(UIImage(named: "icCamera"), for: .normal)
         $0.addTarget(self, action: #selector(carmeraButtonClicked), for: .touchUpInside)
     }
     
