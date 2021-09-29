@@ -130,6 +130,7 @@
 		703DD83E269F8829004416A9 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD83D269F8829004416A9 /* UserInfo.swift */; };
 		7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8212702F93000C1CD2E /* JoinInputView.swift */; };
 		7062C8262703194300C1CD2E /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8252703194300C1CD2E /* InputTextField.swift */; };
+		7062C8282704BA5500C1CD2E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8272704BA5500C1CD2E /* ProfileView.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -324,6 +325,7 @@
 		703DD83D269F8829004416A9 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		7062C8212702F93000C1CD2E /* JoinInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinInputView.swift; sourceTree = "<group>"; };
 		7062C8252703194300C1CD2E /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
+		7062C8272704BA5500C1CD2E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 				3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */,
 				7062C8212702F93000C1CD2E /* JoinInputView.swift */,
 				7062C8252703194300C1CD2E /* InputTextField.swift */,
+				7062C8272704BA5500C1CD2E /* ProfileView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1412,6 +1415,7 @@
 				36C1C33126A0C28500F34750 /* SavePostService.swift in Sources */,
 				36B8B497269B6E03008DC781 /* HomeDataService.swift in Sources */,
 				36CEE5B8269DFA8400974EFF /* DatailDataService.swift in Sources */,
+				7062C8282704BA5500C1CD2E /* ProfileView.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3CEC010F269E1C0700E9332C /* Contants.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
