@@ -20,15 +20,8 @@ class JoinInputView: UIView {
         $0.textColor = .gray40
     }
 
-    var inputTextField = UITextField().then {
-        $0.backgroundColor = .gray10
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.gray20.cgColor
-        $0.addLeftPadding(14)
-        $0.clearButtonMode = .whileEditing
-    }
+    
+    var inputTextField: InputTextField?
     
         
     override init(frame: CGRect) {
@@ -39,13 +32,12 @@ class JoinInputView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, subTitle: String, placeholder: String) {
+    init(title: String, subTitle: String, placeholder: String, type: InputTextFieldType) {
         super.init(frame: .zero)
     
-        
         titleLabel.text = title
         subTitleLabel.text = subTitle
-        inputTextField.placeholder = placeholder
+        inputTextField = InputTextField(type: .normal, placeholder: "s???")
         
         setConstraints()
     }
@@ -53,7 +45,7 @@ class JoinInputView: UIView {
     private func setConstraints() {
         addSubviews([titleLabel,
                      subTitleLabel,
-                     inputTextField])
+                     inputTextField!])
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
@@ -66,7 +58,7 @@ class JoinInputView: UIView {
             $0.leading.trailing.equalTo(titleLabel)
         }
         
-        inputTextField.snp.makeConstraints {
+        inputTextField!.snp.makeConstraints {
             $0.top.equalTo(subTitleLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalTo(titleLabel)
             $0.height.equalTo(48)

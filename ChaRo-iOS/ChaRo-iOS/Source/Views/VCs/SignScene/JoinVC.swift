@@ -29,16 +29,7 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-    var commonTextField = UITextField().then {
-        $0.placeholder = "비밀번호를 한번 더 작성해주세요"
-        $0.backgroundColor = .gray10
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.gray20.cgColor
-        $0.addLeftPadding(14)
-        $0.clearButtonMode = .whileEditing
-    }
+    var commonTextField = InputTextField(type: .password, placeholder: "나온다 !!!!!!!!!!")
     
     var nextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
@@ -68,7 +59,8 @@ class JoinVC: UIViewController {
     
     let emailInputView = JoinInputView(title: "이메일 아이디",
                                        subTitle: "사용할 이메일을 입력해주세요.",
-                                       placeholder: "ex)charorong@gmail.com")
+                                       placeholder: "ex)charorong@gmail.com",
+                                       type: .normal)
     
     
     var verifyEmailView = UIView().then {
@@ -77,7 +69,8 @@ class JoinVC: UIViewController {
     
     let emailVerifyInputView = JoinInputView(title: "이메일 인증번호",
                                         subTitle: "이메일로 보내드린 인증번호를 입력해주세요.",
-                                        placeholder: "ex)울랄라")
+                                        placeholder: "ex)울랄라",
+                                        type: .normal)
     
     
     var passwordView = UIView().then {
@@ -86,7 +79,8 @@ class JoinVC: UIViewController {
     
     let passwordInputView = JoinInputView(title: "비밀번호 486",
                                           subTitle: "5자 이상 15자 이내의 비밀번호를 입력해주세요.",
-                                          placeholder: "5이상 15자 이내의 영문과 숫자")
+                                          placeholder: "5이상 15자 이내의 영문과 숫자",
+                                          type: .password)
     
     
     
@@ -215,7 +209,7 @@ class JoinVC: UIViewController {
         
         //기존 뷰에 TF 하나 더 추가 왜 안나오는지 알수가 없음 ... 왜?
         commonTextField.snp.makeConstraints {
-            $0.top.equalTo(passwordInputView.inputTextField.snp.bottom).offset(10)
+            $0.top.equalTo(passwordInputView.inputTextField!.snp.bottom).offset(10)
             $0.height.equalTo(48)
             $0.leading.trailing.equalTo(passwordInputView)
         }
@@ -238,9 +232,9 @@ class JoinVC: UIViewController {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        emailInputView.inputTextField.inputAccessoryView = stickyView
-        emailVerifyInputView.inputTextField.inputAccessoryView = stickyView
-        passwordInputView.inputTextField.inputAccessoryView = stickyView
+        emailInputView.inputTextField!.inputAccessoryView = stickyView
+        emailVerifyInputView.inputTextField!.inputAccessoryView = stickyView
+        passwordInputView.inputTextField!.inputAccessoryView = stickyView
         commonTextField.inputAccessoryView = stickyView
     }
     

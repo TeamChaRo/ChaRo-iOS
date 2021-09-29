@@ -56,6 +56,7 @@ class InputTextField: UITextField {
         let eyeOnImage = UIImage(named: "icEyeOn")
         let eyeOffImage = UIImage(named: "icEyeOff")
         
+        //눈 이미지 TextField 위에 생성
         iconImageView.image = eyeOffImage
         
         let contentView = UIView()
