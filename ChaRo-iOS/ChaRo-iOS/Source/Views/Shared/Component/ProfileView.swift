@@ -15,7 +15,7 @@ class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControl
     
     var cameraButton = UIButton().then {
         $0.setImage(UIImage(named: "icCamera"), for: .normal)
-        $0.addTarget(self, action: #selector(carmeraButtonClicked), for: .touchUpInside)
+        //$0.addTarget(self, action: #selector(carmeraButtonClicked), for: .touchUpInside)
     }
     
     var callingViewController: UIViewController?
@@ -54,17 +54,17 @@ class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControl
         }
     }
     
-    @objc func carmeraButtonClicked() {
-        
-        print("dddd")
-        
-        let picker = UIImagePickerController()
-        
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        picker.delegate = callingViewController! as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        
-        callingViewController?.present(picker, animated: true)
-    }
+//    @objc func carmeraButtonClicked() {
+//
+//        print("dddd")
+//
+//        let picker = UIImagePickerController()
+//
+//        picker.sourceType = .photoLibrary
+//        picker.allowsEditing = true
+//        picker.delegate = callingViewController! as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+//
+//        callingViewController?.present(picker, animated: true)
+//    }
 
 }

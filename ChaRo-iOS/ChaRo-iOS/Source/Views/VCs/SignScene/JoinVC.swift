@@ -86,7 +86,7 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         $0.backgroundColor = .white
     }
     
-    let profileView = ProfileView(viewController: self)
+    let profileView = ProfileView()
     //이걸 뷰컨에 넘길 수 없어서 에러가 나는데 나는 중복을 줄이고 싶단 말이다!
     
     //MARK: - Life Cycle
