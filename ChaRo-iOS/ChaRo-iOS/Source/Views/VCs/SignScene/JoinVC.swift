@@ -87,7 +87,6 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     }
     
     let profileView = ProfileView()
-    //이걸 뷰컨에 넘길 수 없어서 에러가 나는데 나는 중복을 줄이고 싶단 말이다!
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -239,6 +238,10 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             $0.bottom.equalToSuperview().offset(-100)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        profileView.imagePickerPresentClosure = { picker in
+            self.present(picker, animated: true)
         }
     
     }

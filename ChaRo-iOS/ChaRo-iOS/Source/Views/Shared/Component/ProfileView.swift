@@ -10,15 +10,15 @@ import UIKit
 class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     var profileImageView = UIImageView().then {
-        $0.image = UIImage(named: "profileImage")
+        $0.image = UIImage(named: "icProfile")
     }
     
     var cameraButton = UIButton().then {
         $0.setImage(UIImage(named: "icCamera"), for: .normal)
-        //$0.addTarget(self, action: #selector(carmeraButtonClicked), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(carmeraButtonClicked), for: .touchUpInside)
     }
     
-    var callingViewController: UIViewController?
+    var imagePickerPresentClosure: ((UIImagePickerController) -> Void)?
     
     
     override init(frame: CGRect) {
@@ -33,7 +33,7 @@ class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControl
     
     init(viewController: UIViewController) {
         super.init(frame: .zero)
-        self.callingViewController = viewController
+        
     }
     
     
@@ -54,17 +54,15 @@ class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControl
         }
     }
     
-//    @objc func carmeraButtonClicked() {
-//
-//        print("dddd")
-//
-//        let picker = UIImagePickerController()
-//
-//        picker.sourceType = .photoLibrary
-//        picker.allowsEditing = true
-//        picker.delegate = callingViewController! as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
-//
-//        callingViewController?.present(picker, animated: true)
-//    }
+    @objc func carmeraButtonClicked() {
+        
+        let picker = UIImagePickerController()
+        
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        //클로져 함수 실행
+        self.imagePickerPresentClosure!(picker)
+    }
 
 }
