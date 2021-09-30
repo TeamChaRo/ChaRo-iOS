@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileView: UIView, UIImagePickerControllerDelegate {
+class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     var profileImageView = UIImageView().then {
         $0.image = UIImage(named: "profileImage")
@@ -18,6 +18,9 @@ class ProfileView: UIView, UIImagePickerControllerDelegate {
         $0.addTarget(self, action: #selector(carmeraButtonClicked), for: .touchUpInside)
     }
     
+    var callingViewController: UIViewController?
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
@@ -26,6 +29,13 @@ class ProfileView: UIView, UIImagePickerControllerDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    init(viewController: UIViewController) {
+        super.init(frame: .zero)
+        self.callingViewController = viewController
+    }
+    
     
     private func setConstraints() {
         addSubviews([profileImageView,
@@ -46,6 +56,15 @@ class ProfileView: UIView, UIImagePickerControllerDelegate {
     
     @objc func carmeraButtonClicked() {
         
+        print("dddd")
+        
+        let picker = UIImagePickerController()
+        
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = callingViewController! as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        
+        callingViewController?.present(picker, animated: true)
     }
 
 }

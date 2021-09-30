@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 //컬렉션 뷰 안에 뷰 만들기 컬렉션 뷰 위에 차 만들어서 인덱스 ?? 해서 움직이게 하면 될듯
-class JoinVC: UIViewController {
+class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     static let identifier = "JoinVC"
     
@@ -86,8 +86,8 @@ class JoinVC: UIViewController {
         $0.backgroundColor = .white
     }
     
-    let profileView = ProfileView()
-    
+    let profileView = ProfileView(viewController: self)
+    //이걸 뷰컨에 넘길 수 없어서 에러가 나는데 나는 중복을 줄이고 싶단 말이다!
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -236,8 +236,11 @@ class JoinVC: UIViewController {
         
         profileView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
+            $0.bottom.equalToSuperview().offset(-100)
             $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
+    
     }
     
     
