@@ -29,7 +29,21 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-    var commonTextField = InputTextField(type: .password, placeholder: "나온다 !!!!!!!!!!")
+    //이걸 하나로 줄일 방법은 없을까? 뷰 만드는 거 빼고
+    var profileLabel = UILabel().then {
+        $0.text = "프로필 사진"
+        $0.font = .notoSansBoldFont(ofSize: 17)
+        $0.textColor = .mainBlack
+    }
+    
+    var nicknameLabel = UILabel().then {
+        $0.text = "닉네임 작성"
+        $0.font = .notoSansBoldFont(ofSize: 17)
+        $0.textColor = .mainBlack
+    }
+    
+    var commonPasswordTextField = InputTextField(type: .password, placeholder: "이것은 패쓰워드")
+    var commonNormalTextField = InputTextField(type: .normal, placeholder: "이것은 노멀")
     
     var nextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
@@ -209,10 +223,10 @@ class JoinVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
-        passwordInputView.addSubview(commonTextField)
+        passwordInputView.addSubview(commonPasswordTextField)
         
         //기존 뷰에 TF 하나 더 추가 왜 안나오는지 알수가 없음 ... 왜?
-        commonTextField.snp.makeConstraints {
+        commonPasswordTextField.snp.makeConstraints {
             $0.top.equalTo(passwordInputView.inputTextField!.snp.bottom).offset(10)
             $0.height.equalTo(48)
             $0.leading.trailing.equalTo(passwordInputView)
@@ -227,13 +241,32 @@ class JoinVC: UIViewController {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        profileNicknameView.addSubviews([profileView])
+        profileNicknameView.addSubviews([profileView,
+                                         profileLabel,
+                                         nicknameLabel,
+                                         commonNormalTextField])
+        
+        profileLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
         
         profileView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
             $0.bottom.equalToSuperview().offset(-100)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.leading.trailing.equalTo(profileLabel)
+        }
+        
+        nicknameLabel.snp.makeConstraints {
+            $0.top.equalTo(profileView.cameraButton.snp.bottom).offset(21)
+            $0.leading.trailing.equalTo(profileLabel)
+        }
+        
+        commonNormalTextField.snp.makeConstraints {
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalTo(profileLabel)
+            $0.height.equalTo(48)
         }
         
         
@@ -257,7 +290,8 @@ class JoinVC: UIViewController {
         emailInputView.inputTextField!.inputAccessoryView = stickyView
         emailVerifyInputView.inputTextField!.inputAccessoryView = stickyView
         passwordInputView.inputTextField!.inputAccessoryView = stickyView
-        commonTextField.inputAccessoryView = stickyView
+        commonPasswordTextField.inputAccessoryView = stickyView
+        commonNormalTextField.inputAccessoryView = stickyView
     }
     
 

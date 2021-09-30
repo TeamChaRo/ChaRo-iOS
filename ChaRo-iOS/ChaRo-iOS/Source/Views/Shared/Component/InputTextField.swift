@@ -28,6 +28,7 @@ class InputTextField: UITextField {
     init(type: InputTextFieldType, placeholder: String) {
         super.init(frame: .zero)
         
+        //self.frame = CGRect(x: 0, y: 0, width: frame.width, height: 48)
         self.placeholder = placeholder
         self.backgroundColor = .gray10
         self.clipsToBounds = true
