@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 //컬렉션 뷰 안에 뷰 만들기 컬렉션 뷰 위에 차 만들어서 인덱스 ?? 해서 움직이게 하면 될듯
-class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class JoinVC: UIViewController {
 
     static let identifier = "JoinVC"
     
@@ -139,6 +139,7 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
         view.addSubview(blueCar)
         view.addSubview(blueLine)
+        view.addSubview(nextButton)
         
         collectionView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(180)
@@ -157,6 +158,13 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-23)
         }
+        
+        nextButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(690)
+            $0.leading.equalTo(20)
+            $0.trailing.equalTo(-20)
+            $0.height.equalTo(48)
+        }
                 
     }
     
@@ -168,7 +176,6 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
         emailView.addSubview(emailInputView)
         emailView.addSubview(emailVerifyInputView)
-        emailView.addSubview(nextButton)
         
         emailInputView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -183,11 +190,6 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             $0.leading.trailing.equalTo(emailInputView)
         }
         
-        nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-75)
-            $0.leading.trailing.equalTo(emailInputView)
-            $0.height.equalTo(48)
-        }
         
         emailView.dismissKeyboardWhenTappedAround()
     }
@@ -199,7 +201,6 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         }
         
         passwordView.addSubview(passwordInputView)
-        passwordView.addSubview(nextButton)
         
         passwordInputView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -217,11 +218,6 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             $0.leading.trailing.equalTo(passwordInputView)
         }
         
-        nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-75)
-            $0.leading.trailing.equalTo(passwordInputView)
-            $0.height.equalTo(48)
-        }
         
         passwordView.dismissKeyboardWhenTappedAround()
     }
@@ -231,7 +227,7 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        profileNicknameView.addSubview(profileView)
+        profileNicknameView.addSubviews([profileView])
         
         profileView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
@@ -240,7 +236,9 @@ class JoinVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             $0.trailing.equalToSuperview().offset(-20)
         }
         
+        
         profileView.imagePickerPresentClosure = { picker in
+            picker.delegate = self
             self.present(picker, animated: true)
         }
     
@@ -298,5 +296,28 @@ extension JoinVC: UICollectionViewDelegate {
 extension JoinVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height - 250)
+    }
+}
+
+
+//이미지 피커 extension
+extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        //이미지 선택 Cancel
+        picker.dismiss(animated: true) { () in
+            self.makeAlert(title: "", message: "이미지 선택이 취소되었습니다.")
+        }
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        //이미지 Choose
+        picker.dismiss(animated: false) { () in
+            let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            self.profileView.profileImageView.image = image
+        }
+        
     }
 }

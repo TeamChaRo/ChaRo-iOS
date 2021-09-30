@@ -7,10 +7,12 @@
 
 import UIKit
 
-class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ProfileView: UIView {
 
     var profileImageView = UIImageView().then {
         $0.image = UIImage(named: "icProfile")
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 112 / 2
     }
     
     var cameraButton = UIButton().then {
@@ -18,6 +20,7 @@ class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControl
         $0.addTarget(self, action: #selector(carmeraButtonClicked), for: .touchUpInside)
     }
     
+    //picker 생성을 위한 클로져
     var imagePickerPresentClosure: ((UIImagePickerController) -> Void)?
     
     
@@ -60,7 +63,6 @@ class ProfileView: UIView, UIImagePickerControllerDelegate & UINavigationControl
         
         picker.sourceType = .photoLibrary
         picker.allowsEditing = true
-        picker.delegate = self
         //클로져 함수 실행
         self.imagePickerPresentClosure!(picker)
     }
