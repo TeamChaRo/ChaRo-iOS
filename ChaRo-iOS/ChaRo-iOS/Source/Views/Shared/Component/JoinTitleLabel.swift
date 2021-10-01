@@ -22,8 +22,21 @@ class JoinTitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init() {
+    init(type: JoinTitleLabelType, title: String) {
         super.init(frame: .zero)
+        
+        self.text = title
+        
+        switch type {
+        
+        case .boldTitle:
+            self.font = .notoSansBoldFont(ofSize: 17)
+            self.textColor = .mainBlack
+            
+        case .normalTitle:
+            self.font = .notoSansRegularFont(ofSize: 14)
+            self.textColor = .gray50
+        }
     }
     
 
