@@ -29,7 +29,7 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-    //이걸 하나로 줄일 방법은 없을까? 뷰 만드는 거 빼고
+    //이걸 하나로 줄일 방법은 없을까? 뷰 만드는 거 빼고 -> 그냥 뷰를 만들까 고민중 이 레이블 종류가 두개니까 init 에서 초기화해주는 방향으로 생각해보기
     var profileLabel = UILabel().then {
         $0.text = "프로필 사진"
         $0.font = .notoSansBoldFont(ofSize: 17)
@@ -42,6 +42,12 @@ class JoinVC: UIViewController {
         $0.textColor = .mainBlack
     }
     
+    var contractLabel = UILabel().then {
+        $0.text = "약관동의"
+        $0.font = .notoSansBoldFont(ofSize: 17)
+        $0.textColor = .mainBlack
+    }
+        
     var commonPasswordTextField = InputTextField(type: .password, placeholder: "이것은 패쓰워드")
     var commonNormalTextField = InputTextField(type: .normal, placeholder: "이것은 노멀")
     
@@ -101,6 +107,18 @@ class JoinVC: UIViewController {
     }
     
     let profileView = ProfileView()
+    
+    var contractView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    var contractInputView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    let contractBackgroundImageView = UIImageView().then {
+        $0.image = UIImage(named: "rectangle243")
+    }
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -277,6 +295,32 @@ class JoinVC: UIViewController {
     
     }
     
+    private func configureContractView() {
+        contractView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        contractView.addSubviews([contractLabel, contractInputView])
+        
+        contractLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        contractInputView.snp.makeConstraints {
+            $0.top.equalTo(contractLabel.snp.bottom).offset(16)
+            $0.leading.trailing.equalTo(contractLabel)
+            $0.height.equalTo(196)
+        }
+        
+        contractInputView.addSubviews([contractBackgroundImageView])
+        
+        contractBackgroundImageView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+    }
+    
     
     private func setStickyKeyboardButton() {
         let stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
@@ -314,8 +358,10 @@ extension JoinVC: UICollectionViewDataSource {
         //configureEmailView()
         //cell.addSubview(passwordView)
         //configurePasswordView()
-        cell.addSubview(profileNicknameView)
-        configureProfileNicknameView()
+        //cell.addSubview(profileNicknameView)
+        //configureProfileNicknameView()
+        cell.addSubview(contractView)
+        configureContractView()
         return cell
     }
     
