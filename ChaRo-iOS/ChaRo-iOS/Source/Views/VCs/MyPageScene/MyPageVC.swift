@@ -9,22 +9,82 @@ import UIKit
 import Lottie
 import SnapKit
 import Then
+import Kingfisher
 
 class MyPageVC: UIViewController {
 //MARK: VAR
     //var
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
-    var userName: String = "드라이버"
-    var followerNumber: String = "999"
-    var followNumber: String = "999"
     var tabbarBottomConstraint: Int = 0
     
+    var userProfileData: [UserInformation] = []
+    var writenPostData: [MyPagePost] = []
+    var savePostData: [MyPagePost] = []
+    
     //headerView
-    var headerViewList: [UIView] = []
-    var headerImageViewList: [UIImageView] = []
-    var headerLabelList: [UILabel] = []
-    var headerButtonList: [UIButton] = []
+    private let profileImageView = UIImageView().then{
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.layer.masksToBounds = true
+        $0.layer.borderColor = UIColor.white.cgColor
+        $0.layer.borderWidth = 3
+        $0.image = UIImage(named: "myimage")
+        $0.layer.cornerRadius = 32
+    }
+    private let headerBackgroundView = UIView().then{
+        $0.backgroundColor = UIColor.mainBlue
+    }
+
+    private let headerTitleLabel = UILabel().then{
+        $0.textColor = UIColor.white
+        $0.font = UIFont.notoSansMediumFont(ofSize: 17)
+        $0.text = "MY PAGE"
+    }
+    
+    private let settingButton = UIButton().then{
+        $0.setBackgroundImage(UIImage(named: "setting2_white"), for: .normal)
+    }
+    
+    private let userNameLabel = UILabel().then{
+        $0.textColor = UIColor.white
+        $0.font = UIFont.notoSansBoldFont(ofSize: 18)
+        $0.textAlignment = .left
+        $0.text = "none 드라이버님"
+    }
+    
+    private let followerButton = UIButton().then{
+        $0.backgroundColor = .none
+        $0.setTitle("팔로워", for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
+        $0.titleLabel?.textColor = UIColor.white
+        $0.contentHorizontalAlignment = .left
+    }
+    
+    private let followerNumButton = UIButton().then{
+        $0.backgroundColor = .none
+        $0.setTitle("0", for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
+        $0.titleLabel?.textColor = UIColor.white
+        $0.contentHorizontalAlignment = .left
+    }
+    
+    private let followButton = UIButton().then{
+        $0.backgroundColor = .none
+        $0.setTitle("팔로우", for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
+        $0.titleLabel?.textColor = UIColor.white
+        $0.contentHorizontalAlignment = .left
+    }
+    
+    private let followNumButton = UIButton().then{
+        $0.backgroundColor = .none
+        $0.setTitle("0", for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
+        $0.titleLabel?.textColor = UIColor.white
+        $0.contentHorizontalAlignment = .left
+    }
+
     
     //tabbarUI
     private let tabbarBackgroundView = UIView().then{
@@ -51,7 +111,20 @@ class MyPageVC: UIViewController {
     private let tabbarSaveBottomView = UIView().then{
         $0.backgroundColor = .none
     }
+    
+    
     //collectionView
+    private let collectionViewHeaderView = UIView().then{
+        $0.backgroundColor = UIColor.white
+    }
+    private let collectionVeiwHeaderButton = UIButton().then{
+        $0.setBackgroundImage(UIImage(named: "icDown"), for: .normal)
+    }
+    private let collectionviewHeaderLabel = UILabel().then{
+        $0.text = "인기순"
+        $0.font = UIFont.notoSansRegularFont(ofSize: 13)
+        $0.textColor = UIColor.gray50
+    }
     private let collectionScrollView = UIScrollView().then{
         $0.tag = 1
         $0.isPagingEnabled = true
@@ -95,10 +168,10 @@ class MyPageVC: UIViewController {
 //MARK: ViewdidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHeaderUI()
         setHeaderLayout()
         setTabbarLayout()
         setCollectionViewLayout()
+        getProfileData()
     }
     
     
@@ -121,6 +194,39 @@ class MyPageVC: UIViewController {
             tabbarWriteButton.setImage(UIImage(named: "write_active"), for: .normal)
             tabbarSaveButton.setImage(UIImage(named: "save_inactive"), for: .normal)
         }
+    }
+    
+    func setHeaderData(){
+        guard let url = URL(string: userProfileData[0].profileImage) else { return }
+        userNameLabel.text = userProfileData[0].nickname
+        profileImageView.kf.setImage(with: url)
+        followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
+        followNumButton.setTitle(String(userProfileData[0].following), for: .normal) 
+    }
+    
+    func getProfileData(){
+        GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
+                   switch response
+                   {
+                   case .success(let data) :
+                       if let response = data as? MyPageDataModel{
+                           self.userProfileData.append(response.data.userInformation)
+                           self.writenPostData.append(response.data.writtenPost)
+                           self.savePostData.append(response.data.savedPost)
+                           self.setHeaderData()
+                           self.writeCollectionView.reloadData()
+                           self.saveCollectioinView.reloadData()
+                       }
+                   case .requestErr(let message) :
+                       print("requestERR")
+                   case .pathErr :
+                       print("pathERR")
+                   case .serverErr:
+                       print("serverERR")
+                   case .networkFail:
+                       print("networkFail")
+                   }
+               }
     }
 
 //MARK: buttonClicked
@@ -173,6 +279,9 @@ class MyPageVC: UIViewController {
         collectionScrollView.addSubview(writeView)
         collectionScrollView.addSubview(saveView)
         writeView.addSubview(writeCollectionView)
+        writeCollectionView.addSubview(collectionViewHeaderView)
+        collectionViewHeaderView.addSubview(collectionVeiwHeaderButton)
+        collectionViewHeaderView.addSubview(collectionviewHeaderLabel)
         saveView.addSubview(saveCollectioinView)
        
         collectionScrollView.snp.makeConstraints{
@@ -217,7 +326,7 @@ class MyPageVC: UIViewController {
         tabbarBackgroundView.addSubview(tabbarSaveBottomView)
         
         tabbarBackgroundView.snp.makeConstraints{
-            $0.top.equalTo(headerViewList[0].snp.bottom).offset(0)
+            $0.top.equalTo(headerBackgroundView.snp.bottom).offset(0)
             $0.leading.equalToSuperview().offset(0)
             $0.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(50)
@@ -255,147 +364,75 @@ class MyPageVC: UIViewController {
         
     }
 //MARK: HeaderViewLayout
-    func setHeaderUI(){
-        let headerBackgroundView = UIView().then{
-            $0.backgroundColor = UIColor.mainBlue
-        }
-        headerViewList.append(headerBackgroundView)
-        
-        let headerTitleLabel = UILabel().then{
-            $0.textColor = UIColor.white
-            $0.font = UIFont.notoSansMediumFont(ofSize: 17)
-            $0.text = "MY PAGE"
-        }
-        headerLabelList.append(headerTitleLabel)
-        
-        // buttonlist[0]
-        let settingButton = UIButton().then{
-            $0.setBackgroundImage(UIImage(named: "setting2_white"), for: .normal)
-        }
-        headerButtonList.append(settingButton)
-        
-        let profileImageView = UIImageView().then{
-            $0.contentMode = .scaleAspectFit
-            $0.clipsToBounds = true
-            $0.layer.masksToBounds = true
-            $0.layer.borderColor = UIColor.white.cgColor
-            $0.layer.borderWidth = 3
-            $0.image = UIImage(named: "myimage")
-            $0.layer.cornerRadius = 32
-        }
-        headerImageViewList.append(profileImageView)
-        
-        //1
-        let userNameLabel = UILabel().then{
-            $0.textColor = UIColor.white
-            $0.font = UIFont.notoSansBoldFont(ofSize: 18)
-            $0.textAlignment = .left
-            $0.text = "\(userName) 드라이버님"
-        }
-        headerLabelList.append(userNameLabel)
-        
-        // buttonlist[1]
-        let followerButton = UIButton().then{
-            $0.backgroundColor = .none
-            $0.setTitle("팔로워", for: .normal)
-            $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
-            $0.titleLabel?.textColor = UIColor.white
-            $0.contentHorizontalAlignment = .left
-        }
-        headerButtonList.append(followerButton)
-        
-        // buttonlist[2]
-        let followerNumButton = UIButton().then{
-            $0.backgroundColor = .none
-            $0.setTitle(followerNumber, for: .normal)
-            $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
-            $0.titleLabel?.textColor = UIColor.white
-            $0.contentHorizontalAlignment = .left
-        }
-        headerButtonList.append(followerNumButton)
-        
-        // buttonlist[3]
-        let followButton = UIButton().then{
-            $0.backgroundColor = .none
-            $0.setTitle("팔로우", for: .normal)
-            $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
-            $0.titleLabel?.textColor = UIColor.white
-            $0.contentHorizontalAlignment = .left
-        }
-        headerButtonList.append(followButton)
-        
-        // buttonlist[4]
-        let followNumButton = UIButton().then{
-            $0.backgroundColor = .none
-            $0.setTitle(followNumber, for: .normal)
-            $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
-            $0.titleLabel?.textColor = UIColor.white
-            $0.contentHorizontalAlignment = .left
-        }
-        headerButtonList.append(followNumButton)
-        
+    
+    func setHeaderLayout(){
         self.view.addSubview(headerBackgroundView)
         headerBackgroundView.addSubview(profileImageView)
-        headerBackgroundView.addSubviews(headerButtonList + headerLabelList)
-    }
-    func setHeaderLayout(){
+        headerBackgroundView.addSubview(headerTitleLabel)
+        headerBackgroundView.addSubview(userNameLabel)
+        headerBackgroundView.addSubview(settingButton)
+        headerBackgroundView.addSubview(followButton)
+        headerBackgroundView.addSubview(followNumButton)
+        headerBackgroundView.addSubview(followerButton)
+        headerBackgroundView.addSubview(followerNumButton)
+        
         let headerViewHeight = userheight * 0.27
-        print(userheight)
+        
         //backgroundView
-        headerViewList[0].snp.makeConstraints{
+        headerBackgroundView.snp.makeConstraints{
             $0.top.equalToSuperview().offset(0)
             $0.leading.equalToSuperview().offset(0)
             $0.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(headerViewHeight)
         }
         //MYPAGELabel
-        headerLabelList[0].snp.makeConstraints{
+        headerTitleLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(58)
             $0.centerX.equalToSuperview()
         }
         //settingButton
-        headerButtonList[0].snp.makeConstraints{
+        settingButton.snp.makeConstraints{
             $0.width.equalTo(48)
             $0.height.equalTo(48)
             $0.top.equalToSuperview().offset(58)
-            $0.centerY.equalTo(headerLabelList[0])
+            $0.centerY.equalTo(headerTitleLabel)
             $0.trailing.equalToSuperview().offset(-6)
         }
         //profileImage
-        headerImageViewList[0].snp.makeConstraints{
+        profileImageView.snp.makeConstraints{
             $0.width.equalTo(62)
             $0.height.equalTo(62)
             $0.leading.equalToSuperview().offset(27)
-            $0.top.equalTo(headerLabelList[0].snp.bottom).offset(29)
+            $0.top.equalTo(headerTitleLabel.snp.bottom).offset(29)
         }
         //userName
-        headerLabelList[1].snp.makeConstraints{
-            $0.leading.equalTo(headerImageViewList[0].snp.trailing).offset(27)
-            $0.top.equalTo(headerLabelList[0].snp.bottom).offset(34)
+        userNameLabel.snp.makeConstraints{
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(27)
+            $0.top.equalTo(headerTitleLabel.snp.bottom).offset(34)
             $0.width.equalTo(180)
         }
         //followerButton
-        headerButtonList[1].snp.makeConstraints{
-            $0.top.equalTo(headerLabelList[1].snp.bottom).offset(11)
-            $0.leading.equalTo(headerImageViewList[0].snp.trailing).offset(27)
+        followerButton.snp.makeConstraints{
+            $0.top.equalTo(userNameLabel.snp.bottom).offset(11)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(27)
             $0.width.equalTo(45)
         }
         //followerNumButton
-        headerButtonList[2].snp.makeConstraints{
-            $0.centerY.equalTo(headerButtonList[1])
-            $0.leading.equalTo(headerButtonList[1].snp.trailing).offset(3)
+        followerNumButton.snp.makeConstraints{
+            $0.centerY.equalTo(followerButton)
+            $0.leading.equalTo(followerButton.snp.trailing).offset(3)
             $0.width.equalTo(25)
         }
         //followButton
-        headerButtonList[3].snp.makeConstraints{
-            $0.centerY.equalTo(headerButtonList[1])
-            $0.leading.equalTo(headerButtonList[2].snp.trailing).offset(21)
+        followButton.snp.makeConstraints{
+            $0.centerY.equalTo(followerButton)
+            $0.leading.equalTo(followerNumButton.snp.trailing).offset(21)
             $0.width.equalTo(45)
         }
         //followNumButton
-        headerButtonList[4].snp.makeConstraints{
-            $0.centerY.equalTo(headerButtonList[1])
-            $0.leading.equalTo(headerButtonList[3].snp.trailing).offset(3)
+        followNumButton.snp.makeConstraints{
+            $0.centerY.equalTo(followButton)
+            $0.leading.equalTo(followButton.snp.trailing).offset(3)
             $0.width.equalTo(25)
         }
     }
@@ -413,23 +450,49 @@ extension MyPageVC: UICollectionViewDelegate{
 }
 extension MyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var cellCount = 10
+        var writeCellCount = 0
+        var saveCellCount = 0
+        
+        if(writenPostData.count == 0){
+            writeCellCount = 0
+        }
+        else{
+            writeCellCount = writenPostData[0].drive.count
+        }
+        
+        if(savePostData.count == 0){
+            saveCellCount = 0
+        }
+        else{
+            saveCellCount = savePostData[0].drive.count
+        }
+        
         switch collectionView.tag{
         case 1:
-            return 2
+            return writeCellCount
         case 2:
-            return cellCount
+            return saveCellCount
         default:
             return 0
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath)
+        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
         
+
         switch collectionView.tag{
+            
         case 1:
+            let writenElement = writenPostData[0].drive[indexPath.row]
+            var writenTags = [writenElement.region, writenElement.theme,
+                        writenElement.warning ?? ""] as [String]
+            
+            cell.setData(image: writenPostData[0].drive[indexPath.row].image, title: writenPostData[0].drive[indexPath.row].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostData[0].drive[indexPath.row].favoriteNum, save: writenPostData[0].drive[indexPath.row].saveNum, year: writenPostData[0].drive[indexPath.row].year, month: writenPostData[0].drive[indexPath.row].month, day: writenPostData[0].drive[indexPath.row].day, postID: writenPostData[0].drive[indexPath.row].postID)
             return cell
         case 2:
+            let saveElement = savePostData[0].drive[indexPath.row]
+            var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
+            cell.setData(image: savePostData[0].drive[indexPath.row].image, title: savePostData[0].drive[indexPath.row].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostData[0].drive[indexPath.row].favoriteNum, save: savePostData[0].drive[indexPath.row].saveNum, year: savePostData[0].drive[indexPath.row].year, month: savePostData[0].drive[indexPath.row].month, day: savePostData[0].drive[indexPath.row].day, postID: savePostData[0].drive[indexPath.row].postID)
             return cell
         default:
             return UICollectionViewCell()
