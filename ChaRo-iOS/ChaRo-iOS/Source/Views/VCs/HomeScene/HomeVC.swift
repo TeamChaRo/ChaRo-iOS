@@ -11,7 +11,7 @@ import Then
 import Kingfisher
 import Lottie
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController{
 
 //MARK: Var
     @IBOutlet weak var HomeTableView: UITableView!
@@ -33,7 +33,7 @@ class HomeVC: UIViewController {
     var bannerSubtTtleLabelList: [UILabel] = []
     
     
-    ///데이타
+    //데이타
     var bannerData: [Banner] = []
     var todayData: [DriveElement] = []
     var trendyData: [DriveElement] = []
@@ -42,13 +42,13 @@ class HomeVC: UIViewController {
     var customText: String = ""
     var localText: String = ""
 
-    let lottieView = LottieIndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-    var delegate: AnimateLottieDelegate?
+    let lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var delegate: AnimateIndicatorDelegate?
 
     
     var tableIndex: IndexPath = [0,0]
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         getServerData()
         setTableView()
@@ -131,10 +131,10 @@ class HomeVC: UIViewController {
         }
    
     //서버 데이터 받아오는 부분
-    func getServerData() {
+    func getServerData(){
         //lottieview
         delegate = self
-        delegate?.startLottie()
+        delegate?.startIndicator()
         GetHomeDataService.HomeData.getRecommendInfo{ (response) in
             switch response
             {
@@ -175,7 +175,7 @@ class HomeVC: UIViewController {
                         print(data.localTitle)
 
                     }
-                        self.delegate?.endLottie()
+                        self.delegate?.endIndicator()
                     }
                     self.HomeTableView.reloadData()
                    
@@ -283,7 +283,7 @@ extension HomeVC : UITableViewDelegate {
         }
         }
 //MARK: ScrollViewDidScroll
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
         setNavigationAlpah()
         setMoveCar()
        }
@@ -461,7 +461,7 @@ extension HomeVC : UITableViewDelegate {
 }
 extension HomeVC: UITableViewDataSource{
 }
-extension HomeVC: IsSelectedCVCDelegate {
+extension HomeVC: IsSelectedCVCDelegate{
     func isSelectedCVC(indexPath: IndexPath) {
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
         print(tableIndex.row)
@@ -494,7 +494,7 @@ extension HomeVC: SeeMorePushDelegate{
 
 }
 
-extension HomeVC: CollectionViewCellDelegate {
+extension HomeVC: CollectionViewCellDelegate{
     
     func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
         
@@ -512,7 +512,7 @@ extension HomeVC: CollectionViewCellDelegate {
 
 
 //postID 넘기기 위한 Delegate 구현
-extension HomeVC: PostIdDelegate {
+extension HomeVC: PostIdDelegate{
     
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
@@ -526,17 +526,15 @@ extension HomeVC: PostIdDelegate {
     
 }
 
-extension HomeVC: AnimateLottieDelegate{
-    func startLottie() {
+extension HomeVC: AnimateIndicatorDelegate{
+    func startIndicator() {
         view.addSubview(lottieView)
         lottieView.isHidden = false
         lottieView.lottieView.play()
     }
     
-    func endLottie() {
+    func endIndicator() {
         lottieView.lottieView.stop()
         lottieView.isHidden = true
     }
-    
-
 }
