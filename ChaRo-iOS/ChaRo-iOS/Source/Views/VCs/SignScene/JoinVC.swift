@@ -29,27 +29,19 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-    //이걸 하나로 줄일 방법은 없을까? 뷰 만드는 거 빼고 -> 그냥 뷰를 만들까 고민중 이 레이블 종류가 두개니까 init 에서 초기화해주는 방향으로 생각해보기
-    var profileLabel = UILabel().then {
-        $0.text = "프로필 사진"
-        $0.font = .notoSansBoldFont(ofSize: 17)
-        $0.textColor = .mainBlack
-    }
-    
-    var nicknameLabel = UILabel().then {
-        $0.text = "닉네임 작성"
-        $0.font = .notoSansBoldFont(ofSize: 17)
-        $0.textColor = .mainBlack
-    }
-    
-    var contractLabel = UILabel().then {
-        $0.text = "약관동의"
-        $0.font = .notoSansBoldFont(ofSize: 17)
-        $0.textColor = .mainBlack
-    }
+    var profileLabel = JoinTitleLabel(type: .boldTitle, title: "프로필 사진")
+    var nicknameLabel = JoinTitleLabel(type: .boldTitle, title: "닉네임 작성")
+    var contractLabel = JoinTitleLabel(type: .boldTitle, title: "약관동의")
         
     var commonPasswordTextField = InputTextField(type: .password, placeholder: "이것은 패쓰워드")
     var commonNormalTextField = InputTextField(type: .normal, placeholder: "이것은 노멀")
+    
+    var agreeAllLabel = JoinTitleLabel(type: .normalTitle, title: "전체 동의")
+    var agreeLine = UIView().then {
+        $0.backgroundColor = .gray20
+    }
+    var agreePushLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 푸시 수신 동의")
+    var agreeEmailLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 이메일 수신 동의")
     
     var nextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
@@ -314,11 +306,42 @@ class JoinVC: UIViewController {
             $0.height.equalTo(196)
         }
         
-        contractInputView.addSubviews([contractBackgroundImageView])
+        contractInputView.addSubviews([contractBackgroundImageView,
+                                       agreeAllLabel,
+                                       agreeLine,
+                                       agreePushLabel,
+                                       agreeEmailLabel])
         
         contractBackgroundImageView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
+        
+        agreeAllLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(30)
+            $0.leading.equalToSuperview().offset(60)
+            $0.height.equalTo(22)
+        }
+        
+        agreeLine.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().offset(-24)
+            $0.top.equalToSuperview().offset(76)
+            $0.height.equalTo(1)
+        }
+        
+        agreePushLabel.snp.makeConstraints {
+            $0.top.equalTo(agreeLine.snp.bottom).offset(25)
+            $0.leading.equalTo(agreeAllLabel.snp.leading)
+            $0.height.equalTo(22)
+        }
+        
+        agreeEmailLabel.snp.makeConstraints {
+            $0.top.equalTo(agreePushLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(agreeAllLabel.snp.leading)
+            $0.height.equalTo(22)
+        }
+        
+        
     }
     
     
