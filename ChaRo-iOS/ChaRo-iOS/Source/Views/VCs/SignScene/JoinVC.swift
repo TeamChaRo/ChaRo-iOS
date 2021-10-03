@@ -43,6 +43,11 @@ class JoinVC: UIViewController {
     var agreePushLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 푸시 수신 동의")
     var agreeEmailLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 이메일 수신 동의")
     
+    var agreeAllButton = JoinAgreeButton(isBig: true)
+    var agreePushButton = JoinAgreeButton(isBig: false)
+    var agreeEmailButton = JoinAgreeButton(isBig: false)
+    
+    
     var nextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
         $0.backgroundColor = .gray30
@@ -310,7 +315,10 @@ class JoinVC: UIViewController {
                                        agreeAllLabel,
                                        agreeLine,
                                        agreePushLabel,
-                                       agreeEmailLabel])
+                                       agreeEmailLabel,
+                                       agreeAllButton,
+                                       agreePushButton,
+                                       agreeEmailButton])
         
         contractBackgroundImageView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
@@ -320,6 +328,12 @@ class JoinVC: UIViewController {
             $0.top.equalToSuperview().offset(30)
             $0.leading.equalToSuperview().offset(60)
             $0.height.equalTo(22)
+        }
+        
+        agreeAllButton.snp.makeConstraints {
+            $0.width.height.equalTo(48)
+            $0.top.equalToSuperview().offset(17)
+            $0.leading.equalToSuperview().offset(12)
         }
         
         agreeLine.snp.makeConstraints {
@@ -335,11 +349,23 @@ class JoinVC: UIViewController {
             $0.height.equalTo(22)
         }
         
+        agreePushButton.snp.makeConstraints {
+            $0.height.width.equalTo(36)
+            $0.top.equalTo(agreeLine.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(18)
+        }
+        
         agreeEmailLabel.snp.makeConstraints {
             $0.top.equalTo(agreePushLabel.snp.bottom).offset(20)
             $0.leading.equalTo(agreeAllLabel.snp.leading)
             $0.height.equalTo(22)
         }
+        
+        agreeEmailButton.snp.makeConstraints {
+            $0.height.width.leading.equalTo(agreePushButton)
+            $0.top.equalTo(agreeLine.snp.bottom).offset(58)
+        }
+    
         
         
     }

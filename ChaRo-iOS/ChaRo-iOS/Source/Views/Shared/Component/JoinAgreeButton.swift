@@ -10,6 +10,7 @@ import UIKit
 class JoinAgreeButton: UIButton {
     
     var Agreed = false
+    var isBig = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,6 +22,8 @@ class JoinAgreeButton: UIButton {
     
     init(isBig: Bool) {
         super.init(frame: .zero)
+        
+        self.isBig = isBig
         
         if isBig {
             self.setBackgroundImage(UIImage(named: "icSignupDisagreeBig"), for: .normal)
@@ -35,12 +38,24 @@ class JoinAgreeButton: UIButton {
     
     @objc func buttonClicked() {
         
-        if Agreed {
-            self.setBackgroundImage(UIImage(named: "icSignupAgreeBig"), for: .normal)
-        } else {
-            self.setBackgroundImage(UIImage(named: "icSignupAgreeSmall"), for: .normal)
+        switch isBig {
+        case true:
+            Agreed = !Agreed
+            if Agreed {
+                self.setBackgroundImage(UIImage(named: "icSignupAgreeBig"), for: .normal)
+            } else {
+                self.setBackgroundImage(UIImage(named: "icSignupDisagreeBig"), for: .normal)
+            }
+            
+        case false:
+            Agreed = !Agreed
+            if Agreed {
+                self.setBackgroundImage(UIImage(named: "icSignupAgreeSmall"), for: .normal)
+            } else {
+                self.setBackgroundImage(UIImage(named: "icSignupDisagreeSmall"), for: .normal)
+            }
         }
-        Agreed = !Agreed
+        
         
     }
     
