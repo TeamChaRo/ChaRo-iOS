@@ -114,17 +114,6 @@ class MyPageVC: UIViewController {
     
     
     //collectionView
-    private let collectionViewHeaderView = UIView().then{
-        $0.backgroundColor = UIColor.white
-    }
-    private let collectionVeiwHeaderButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "icDown"), for: .normal)
-    }
-    private let collectionviewHeaderLabel = UILabel().then{
-        $0.text = "인기순"
-        $0.font = UIFont.notoSansRegularFont(ofSize: 13)
-        $0.textColor = UIColor.gray50
-    }
     private let collectionScrollView = UIScrollView().then{
         $0.tag = 1
         $0.isPagingEnabled = true
@@ -274,15 +263,16 @@ class MyPageVC: UIViewController {
         
         writeCollectionView.registerCustomXib(xibName: "MyPagePostCVC")
         saveCollectioinView.registerCustomXib(xibName: "MyPagePostCVC")
+        writeCollectionView.registerCustomXib(xibName: "HomePostDetailCVC")
+        saveCollectioinView.registerCustomXib(xibName: "HomePostDetailCVC")
+             
         
         self.view.addSubview(collectionScrollView)
         collectionScrollView.addSubview(writeView)
         collectionScrollView.addSubview(saveView)
         writeView.addSubview(writeCollectionView)
-        writeCollectionView.addSubview(collectionViewHeaderView)
-        collectionViewHeaderView.addSubview(collectionVeiwHeaderButton)
-        collectionViewHeaderView.addSubview(collectionviewHeaderLabel)
         saveView.addSubview(saveCollectioinView)
+        
        
         collectionScrollView.snp.makeConstraints{
             $0.top.equalTo(tabbarBottomView.snp.bottom).offset(0)
@@ -443,11 +433,18 @@ class MyPageVC: UIViewController {
 extension MyPageVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
                             UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.row == 0{
+            return CGSize(width: userWidth-35, height: 42)
+        }
+        else{
         return CGSize(width: collectionView.frame.width, height: 100)
-        
+        }
     }
     
+
+    
 }
+//MARK: Extension
 extension MyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var writeCellCount = 0
@@ -457,14 +454,14 @@ extension MyPageVC: UICollectionViewDataSource{
             writeCellCount = 0
         }
         else{
-            writeCellCount = writenPostData[0].drive.count
+            writeCellCount = writenPostData[0].drive.count + 1
         }
         
         if(savePostData.count == 0){
             saveCellCount = 0
         }
         else{
-            saveCellCount = savePostData[0].drive.count
+            saveCellCount = savePostData[0].drive.count + 1
         }
         
         switch collectionView.tag{
@@ -478,22 +475,36 @@ extension MyPageVC: UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
+        let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
         
 
         switch collectionView.tag{
             
         case 1:
-            let writenElement = writenPostData[0].drive[indexPath.row]
-            var writenTags = [writenElement.region, writenElement.theme,
-                        writenElement.warning ?? ""] as [String]
-            
-            cell.setData(image: writenPostData[0].drive[indexPath.row].image, title: writenPostData[0].drive[indexPath.row].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostData[0].drive[indexPath.row].favoriteNum, save: writenPostData[0].drive[indexPath.row].saveNum, year: writenPostData[0].drive[indexPath.row].year, month: writenPostData[0].drive[indexPath.row].month, day: writenPostData[0].drive[indexPath.row].day, postID: writenPostData[0].drive[indexPath.row].postID)
+            if(indexPath.row == 0){
+                detailCell.postCountLabel.text = ""
+                return detailCell
+            }
+            else{
+                let writenElement = writenPostData[0].drive[indexPath.row-1]
+                var writenTags = [writenElement.region, writenElement.theme,
+                            writenElement.warning ?? ""] as [String]
+            cell.setData(image: writenPostData[0].drive[indexPath.row-1].image, title: writenPostData[0].drive[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostData[0].drive[indexPath.row-1].favoriteNum, save: writenPostData[0].drive[indexPath.row-1].saveNum, year: writenPostData[0].drive[indexPath.row-1].year, month: writenPostData[0].drive[indexPath.row-1].month, day: writenPostData[0].drive[indexPath.row-1].day, postID: writenPostData[0].drive[indexPath.row-1].postID)
             return cell
+            }
         case 2:
-            let saveElement = savePostData[0].drive[indexPath.row]
-            var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
-            cell.setData(image: savePostData[0].drive[indexPath.row].image, title: savePostData[0].drive[indexPath.row].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostData[0].drive[indexPath.row].favoriteNum, save: savePostData[0].drive[indexPath.row].saveNum, year: savePostData[0].drive[indexPath.row].year, month: savePostData[0].drive[indexPath.row].month, day: savePostData[0].drive[indexPath.row].day, postID: savePostData[0].drive[indexPath.row].postID)
+            if(indexPath.row == 0){
+                detailCell.postCountLabel.text = ""
+                return detailCell
+            }
+            
+            else{
+                let saveElement = savePostData[0].drive[indexPath.row-1]
+                var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
+                
+            cell.setData(image: savePostData[0].drive[indexPath.row-1].image, title: savePostData[0].drive[indexPath.row-1].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostData[0].drive[indexPath.row].favoriteNum, save: savePostData[0].drive[indexPath.row].saveNum, year: savePostData[0].drive[indexPath.row].year, month: savePostData[0].drive[indexPath.row].month, day: savePostData[0].drive[indexPath.row].day, postID: savePostData[0].drive[indexPath.row].postID)
             return cell
+            }
         default:
             return UICollectionViewCell()
             
