@@ -8,13 +8,43 @@
 import UIKit
 
 class JoinAgreeButton: UIButton {
+    
+    var Agreed = false
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-    */
+   
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(isBig: Bool) {
+        super.init(frame: .zero)
+        
+        if isBig {
+            self.setBackgroundImage(UIImage(named: "icSignupDisagreeBig"), for: .normal)
+        } else {
+            self.setBackgroundImage(UIImage(named: "icSignupDisagreeSmall"), for: .normal)
+        }
+        
+        self.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        
+        
+    }
+    
+    @objc func buttonClicked() {
+        
+        if Agreed {
+            self.setBackgroundImage(UIImage(named: "icSignupAgreeBig"), for: .normal)
+        } else {
+            self.setBackgroundImage(UIImage(named: "icSignupAgreeSmall"), for: .normal)
+        }
+        Agreed = !Agreed
+        
+    }
+    
+    
+
 
 }
