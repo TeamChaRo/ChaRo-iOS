@@ -133,6 +133,8 @@
 		7062C8282704BA5500C1CD2E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8272704BA5500C1CD2E /* ProfileView.swift */; };
 		7062C82A2706FAA300C1CD2E /* JoinTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8292706FAA300C1CD2E /* JoinTitleLabel.swift */; };
 		7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */; };
+		7062C830270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C82F270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift */; };
+		7062C832270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C831270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -330,6 +332,8 @@
 		7062C8272704BA5500C1CD2E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7062C8292706FAA300C1CD2E /* JoinTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTitleLabel.swift; sourceTree = "<group>"; };
 		7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAgreeButton.swift; sourceTree = "<group>"; };
+		7062C82F270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputTextFieldLabel+Normal.swift"; sourceTree = "<group>"; };
+		7062C831270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldLabel_Password.swift; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -743,6 +747,8 @@
 				7062C8272704BA5500C1CD2E /* ProfileView.swift */,
 				7062C8292706FAA300C1CD2E /* JoinTitleLabel.swift */,
 				7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */,
+				7062C82F270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift */,
+				7062C831270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1384,6 +1390,7 @@
 				F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */,
 				70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* UIView+.swift in Sources */,
+				7062C832270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift in Sources */,
 				7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */,
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
@@ -1423,6 +1430,7 @@
 				36C1C33126A0C28500F34750 /* SavePostService.swift in Sources */,
 				36B8B497269B6E03008DC781 /* HomeDataService.swift in Sources */,
 				36CEE5B8269DFA8400974EFF /* DatailDataService.swift in Sources */,
+				7062C830270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift in Sources */,
 				7062C8282704BA5500C1CD2E /* ProfileView.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
 				3CEC010F269E1C0700E9332C /* Contants.swift in Sources */,
