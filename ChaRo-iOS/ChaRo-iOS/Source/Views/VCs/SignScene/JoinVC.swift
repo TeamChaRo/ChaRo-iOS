@@ -248,15 +248,12 @@ class JoinVC: UIViewController {
             $0.height.equalTo(200)
         }
         
-//        passwordInputView.addSubview(commonPasswordTextField)
-//        
-//        //기존 뷰에 TF 하나 더 추가 왜 안나오는지 알수가 없음 ... 왜?
-//        commonPasswordTextField.snp.makeConstraints {
-//            $0.top.equalTo(passwordInputView.inputTextField!.snp.bottom).offset(10)
-//            $0.height.equalTo(48)
-//            $0.leading.trailing.equalTo(passwordInputView)
-//        }
-//        
+        testView.enableNextButtonClosure = {
+            self.nextButton.setTitle("됐다!!!", for: .normal)
+        }
+        testView.unableNextButtonClosure = {
+            self.nextButton.setTitle("다음", for: .normal)
+        }
         
         passwordView.dismissKeyboardWhenTappedAround()
     }

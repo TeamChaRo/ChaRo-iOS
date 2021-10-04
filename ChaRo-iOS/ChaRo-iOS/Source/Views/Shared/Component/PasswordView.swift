@@ -9,12 +9,18 @@ import UIKit
 
 class PasswordView: UIView, UITextFieldDelegate {
 
+    var isFirstPassed = false
+    var isSecondPassed = false
     var firstTextField = InputTextField(type: .password, placeholder: "5이상 15자 이내의 영문과 숫자")
     var secondTextField = InputTextField(type: .password, placeholder: "비밀번호를 한번 더 작성해주세요")
     var statusLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .mainOrange
     }
+    
+    var enableNextButtonClosure: (() -> Void)?
+    var unableNextButtonClosure: (() -> Void)?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,9 +73,11 @@ class PasswordView: UIView, UITextFieldDelegate {
         let textField = textField as! InputTextField
         if textField == firstTextField {
             if validpassword(password: textField.text!) {
+                isFirstPassed = true
                 textField.setBlueBorderWithText()
                 setLabelBlueWithText(text: "사용가능한 비밀번호 입니다.")
             } else {
+                isFirstPassed = false
                 textField.setOrangeBorderWithText()
                 secondTextField.setOrangeBorderWithText()
                 setLabelOrangeWithText(text: "5자 이상 15자 이내로 작성해 주세요.")
@@ -79,12 +87,20 @@ class PasswordView: UIView, UITextFieldDelegate {
         
         else {
             if textField.text == firstTextField.text {
+                isSecondPassed = true
                 textField.setBlueBorderWithText()
                 setLabelBlueWithText(text: "비밀번호가 일치합니다.")
             } else {
+                isSecondPassed = false
                 textField.setOrangeBorderWithText()
                 setLabelOrangeWithText(text: "비밀번호가 일치하지 않습니다.")
             }
+        }
+        
+        if isFirstPassed && isSecondPassed {
+            self.enableNextButtonClosure!()
+        } else {
+            self.unableNextButtonClosure!()
         }
     }
     
