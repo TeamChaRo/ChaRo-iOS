@@ -395,10 +395,10 @@ extension JoinVC: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: JoinViewCVC.identifier, for: indexPath) as? JoinViewCVC else { return UICollectionViewCell() }
         cell.backgroundColor = .white
-        //cell.addSubview(emailView)
-        //configureEmailView()
-        cell.addSubview(passwordView)
-        configurePasswordView()
+        cell.addSubview(emailView)
+        configureEmailView()
+        //cell.addSubview(passwordView)
+        //configurePasswordView()
         //cell.addSubview(profileNicknameView)
         //configureProfileNicknameView()
         //cell.addSubview(contractView)
