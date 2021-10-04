@@ -117,6 +117,7 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "rectangle243")
     }
     
+    
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,7 +230,9 @@ class JoinVC: UIViewController {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        passwordView.addSubview(passwordInputView)
+        passwordView.addSubviews([passwordInputView])
+        
+        passwordInputView.inputTextField?.isHidden = true
         
         passwordInputView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -238,15 +241,21 @@ class JoinVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
-        passwordInputView.addSubview(commonPasswordTextField)
+//        testView.snp.makeConstraints {
+//            $0.top.equalToSuperview().offset(51)
+//            $0.leading.trailing.equalTo(passwordInputView)
+//            $0.height.equalTo(200)
+//        }
         
-        //기존 뷰에 TF 하나 더 추가 왜 안나오는지 알수가 없음 ... 왜?
-        commonPasswordTextField.snp.makeConstraints {
-            $0.top.equalTo(passwordInputView.inputTextField!.snp.bottom).offset(10)
-            $0.height.equalTo(48)
-            $0.leading.trailing.equalTo(passwordInputView)
-        }
-        
+//        passwordInputView.addSubview(commonPasswordTextField)
+//        
+//        //기존 뷰에 TF 하나 더 추가 왜 안나오는지 알수가 없음 ... 왜?
+//        commonPasswordTextField.snp.makeConstraints {
+//            $0.top.equalTo(passwordInputView.inputTextField!.snp.bottom).offset(10)
+//            $0.height.equalTo(48)
+//            $0.leading.trailing.equalTo(passwordInputView)
+//        }
+//        
         
         passwordView.dismissKeyboardWhenTappedAround()
     }
