@@ -111,11 +111,11 @@ class InputTextField: UITextField {
     }
     
     //사용자에게 텍스트와 함께 테두리 색상을 변경. 텍스트의 위치 조정을 위해 type 과 isFirst 인자를 받음, type이 normal일 때는 isFirst에 nil
-    public func setBlueBorderWithText(text: String, type: InputTextFieldType, isFirst: Bool?) {
+    public func setBlueBorderWithText() {
         self.layer.borderColor = UIColor.mainBlue.cgColor
     }
     
-    public func setRedBorderWithText(text: String, type: InputTextFieldType, isFirst: Bool?) {
+    public func setOrangeBorderWithText() {
         self.layer.borderColor = UIColor.mainOrange.cgColor
     }
     

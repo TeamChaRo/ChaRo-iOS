@@ -117,6 +117,8 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "rectangle243")
     }
     
+    var testView = PasswordView()
+    
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -220,7 +222,6 @@ class JoinVC: UIViewController {
             $0.leading.trailing.equalTo(emailInputView)
         }
         
-        
         emailView.dismissKeyboardWhenTappedAround()
     }
     
@@ -230,7 +231,7 @@ class JoinVC: UIViewController {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        passwordView.addSubviews([passwordInputView])
+        passwordView.addSubviews([passwordInputView, testView])
         
         passwordInputView.inputTextField?.isHidden = true
         
@@ -241,11 +242,11 @@ class JoinVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
-//        testView.snp.makeConstraints {
-//            $0.top.equalToSuperview().offset(51)
-//            $0.leading.trailing.equalTo(passwordInputView)
-//            $0.height.equalTo(200)
-//        }
+        testView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(51)
+            $0.leading.trailing.equalTo(passwordInputView)
+            $0.height.equalTo(200)
+        }
         
 //        passwordInputView.addSubview(commonPasswordTextField)
 //        
