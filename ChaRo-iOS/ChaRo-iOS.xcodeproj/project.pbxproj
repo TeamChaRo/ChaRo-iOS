@@ -134,7 +134,7 @@
 		7062C82A2706FAA300C1CD2E /* JoinTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8292706FAA300C1CD2E /* JoinTitleLabel.swift */; };
 		7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */; };
 		7062C830270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C82F270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift */; };
-		7062C832270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C831270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift */; };
+		7062C834270B50A200C1CD2E /* InputTextFieldLabel+Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C833270B50A200C1CD2E /* InputTextFieldLabel+Password.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -333,7 +333,7 @@
 		7062C8292706FAA300C1CD2E /* JoinTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTitleLabel.swift; sourceTree = "<group>"; };
 		7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAgreeButton.swift; sourceTree = "<group>"; };
 		7062C82F270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputTextFieldLabel+Normal.swift"; sourceTree = "<group>"; };
-		7062C831270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldLabel_Password.swift; sourceTree = "<group>"; };
+		7062C833270B50A200C1CD2E /* InputTextFieldLabel+Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputTextFieldLabel+Password.swift"; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -748,7 +748,7 @@
 				7062C8292706FAA300C1CD2E /* JoinTitleLabel.swift */,
 				7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */,
 				7062C82F270B4FD900C1CD2E /* InputTextFieldLabel+Normal.swift */,
-				7062C831270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift */,
+				7062C833270B50A200C1CD2E /* InputTextFieldLabel+Password.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1390,7 +1390,6 @@
 				F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */,
 				70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* UIView+.swift in Sources */,
-				7062C832270B4FE200C1CD2E /* InputTextFieldLabel_Password.swift in Sources */,
 				7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */,
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
@@ -1437,6 +1436,7 @@
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				36B8B495269B6DB8008DC781 /* HomeDataModel.swift in Sources */,
 				3C840BF72696F08F001CAFE5 /* UIScreen+.swift in Sources */,
+				7062C834270B50A200C1CD2E /* InputTextFieldLabel+Password.swift in Sources */,
 				707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */,
 				3C879BF7268B14E300C41BB8 /* UIFont+.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
