@@ -19,11 +19,14 @@ class JoinInputView: UIView {
         $0.font = .notoSansRegularFont(ofSize: 11)
         $0.textColor = .gray40
     }
-
     
     var inputTextField: InputTextField?
     
-        
+    var statusLabel = UILabel().then {
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .mainOrange
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -32,17 +35,25 @@ class JoinInputView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, subTitle: String, placeholder: String, type: InputTextFieldType) {
+    init(title: String, subTitle: String, placeholder: String) {
         super.init(frame: .zero)
     
         titleLabel.text = title
         subTitleLabel.text = subTitle
         inputTextField = InputTextField(type: .normal, placeholder: "s???")
         
-        setConstraints()
+        setConstraints(hasSubtitle: true)
     }
     
-    private func setConstraints() {
+    init(title: String, placeholder: String) {
+        super.init(frame: .zero)
+        
+        titleLabel.text = title
+        inputTextField = InputTextField(type: .normal, placeholder: "s2???")
+        setConstraints(hasSubtitle: false)
+    }
+    
+    private func setConstraints(hasSubtitle: Bool) {
         addSubviews([titleLabel,
                      subTitleLabel,
                      inputTextField!])

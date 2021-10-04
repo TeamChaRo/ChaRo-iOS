@@ -76,8 +76,7 @@ class JoinVC: UIViewController {
     
     let emailInputView = JoinInputView(title: "이메일 아이디",
                                        subTitle: "사용할 이메일을 입력해주세요.",
-                                       placeholder: "ex)charorong@gmail.com",
-                                       type: .normal)
+                                       placeholder: "ex)charorong@gmail.com")
     
     
     var verifyEmailView = UIView().then {
@@ -86,18 +85,12 @@ class JoinVC: UIViewController {
     
     let emailVerifyInputView = JoinInputView(title: "이메일 인증번호",
                                         subTitle: "이메일로 보내드린 인증번호를 입력해주세요.",
-                                        placeholder: "ex)울랄라",
-                                        type: .normal)
+                                        placeholder: "ex)울랄라")
     
     
     var passwordView = UIView().then {
         $0.backgroundColor = .white
     }
-    
-    let passwordInputView = JoinInputView(title: "비밀번호 486",
-                                          subTitle: "5자 이상 15자 이내의 비밀번호를 입력해주세요.",
-                                          placeholder: "5이상 15자 이내의 영문과 숫자",
-                                          type: .password)
     
     var profileNicknameView = UIView().then {
         $0.backgroundColor = .white
@@ -117,7 +110,7 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "rectangle243")
     }
     
-    var testView = PasswordView()
+    var passwordInputView = PasswordView(title: "비밀번호", subTitle: "5자 이상 15자 이내의 비밀번호를 입력해주세요.")
     
     
     //MARK: - Life Cycle
@@ -231,27 +224,19 @@ class JoinVC: UIViewController {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        passwordView.addSubviews([passwordInputView, testView])
-        
-        passwordInputView.inputTextField?.isHidden = true
+        passwordView.addSubviews([passwordInputView])
         
         passwordInputView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.height.equalTo(117)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-        }
-        
-        testView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(51)
-            $0.leading.trailing.equalTo(passwordInputView)
             $0.height.equalTo(200)
         }
         
-        testView.enableNextButtonClosure = {
+        passwordInputView.enableNextButtonClosure = {
             self.nextButton.setTitle("됐다!!!", for: .normal)
         }
-        testView.unableNextButtonClosure = {
+        passwordInputView.unableNextButtonClosure = {
             self.nextButton.setTitle("다음", for: .normal)
         }
         
@@ -389,7 +374,7 @@ class JoinVC: UIViewController {
         
         emailInputView.inputTextField!.inputAccessoryView = stickyView
         emailVerifyInputView.inputTextField!.inputAccessoryView = stickyView
-        passwordInputView.inputTextField!.inputAccessoryView = stickyView
+        //passwordInputView.inputTextField!.inputAccessoryView = stickyView
         commonPasswordTextField.inputAccessoryView = stickyView
         commonNormalTextField.inputAccessoryView = stickyView
     }

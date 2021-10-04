@@ -11,6 +11,14 @@ class PasswordView: UIView, UITextFieldDelegate {
 
     var isFirstPassed = false
     var isSecondPassed = false
+    var titleLabel = UILabel().then {
+        $0.font = .notoSansBoldFont(ofSize: 17)
+        $0.textColor = .mainBlack
+    }
+    var subTitleLabel = UILabel().then {
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .gray40
+    }
     var firstTextField = InputTextField(type: .password, placeholder: "5이상 15자 이내의 영문과 숫자")
     var secondTextField = InputTextField(type: .password, placeholder: "비밀번호를 한번 더 작성해주세요")
     var statusLabel = UILabel().then {
@@ -30,8 +38,10 @@ class PasswordView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init() {
+    init(title: String, subTitle: String) {
         super.init(frame: .zero)
+        titleLabel.text = title
+        subTitleLabel.text = subTitle
         configureTextField()
         setConstraints()
     }
@@ -44,14 +54,26 @@ class PasswordView: UIView, UITextFieldDelegate {
     
     private func setConstraints() {
         
-        addSubviews([firstTextField,
+        addSubviews([titleLabel,
+                     subTitleLabel,
+                     firstTextField,
                      secondTextField,
                      statusLabel])
         
-        firstTextField.snp.makeConstraints {
+        titleLabel.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading)
             $0.trailing.equalTo(self.snp.trailing)
+        }
+        
+        subTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(2)
+            $0.leading.trailing.equalTo(titleLabel)
+        }
+        
+        firstTextField.snp.makeConstraints {
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalTo(titleLabel)
             $0.height.equalTo(48)
         }
         
