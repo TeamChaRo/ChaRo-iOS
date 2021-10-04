@@ -15,7 +15,17 @@ class JoinVC: UIViewController {
     static let identifier = "JoinVC"
     
     var navigationView = UIView().then {
-        $0.backgroundColor = .red
+        $0.backgroundColor = .white
+    }
+    
+    var navigationViewTitleLabel = UILabel().then {
+        $0.text = "회원가입"
+        $0.font = .notoSansMediumFont(ofSize: 17)
+        $0.textColor = .mainBlack
+    }
+    
+    var backButton = UIButton().then {
+        $0.setImage(UIImage(named: "icBackButton"), for: .normal)
     }
     
     //MARK: - UI Variables
@@ -171,10 +181,25 @@ class JoinVC: UIViewController {
         view.addSubview(blueLine)
         view.addSubview(nextButton)
         
+        navigationView.addSubview(navigationViewTitleLabel)
+        navigationView.addSubview(backButton)
+        
         navigationView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(102)
+        }
+        
+        navigationViewTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(58)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(21)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(45)
+            $0.width.height.equalTo(48)
+            $0.leading.equalToSuperview()
         }
         
         collectionView.snp.makeConstraints {
