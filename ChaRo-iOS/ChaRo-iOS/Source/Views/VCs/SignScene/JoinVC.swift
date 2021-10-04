@@ -405,12 +405,12 @@ extension JoinVC: UICollectionViewDataSource {
         cell.backgroundColor = .white
         //cell.addSubview(emailView)
         //configureEmailView()
-        //cell.addSubview(passwordView)
-        //configurePasswordView()
+        cell.addSubview(passwordView)
+        configurePasswordView()
         //cell.addSubview(profileNicknameView)
         //configureProfileNicknameView()
-        cell.addSubview(contractView)
-        configureContractView()
+        //cell.addSubview(contractView)
+        //configureContractView()
         return cell
     }
     

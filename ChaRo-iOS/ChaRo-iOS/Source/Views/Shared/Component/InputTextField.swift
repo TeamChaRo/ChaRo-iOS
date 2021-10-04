@@ -27,7 +27,10 @@ class InputTextField: UITextField {
     
     init(type: InputTextFieldType, placeholder: String) {
         super.init(frame: .zero)
-        
+        configureProperty(type: type, placeholder: placeholder)
+    }
+    
+    private func configureProperty(type: InputTextFieldType, placeholder: String) {
         //self.frame = CGRect(x: 0, y: 0, width: frame.width, height: 48)
         self.placeholder = placeholder
         self.backgroundColor = .gray10
@@ -50,6 +53,15 @@ class InputTextField: UITextField {
             configureShowPasswordButton()
         }
     }
+    
+//    private func configureStatusLabel() {
+//        statusLabel.font = .notoSansRegularFont(ofSize: 11)
+//        statusLabel.text = "테스트"
+//        statusLabel.textColor = .black
+//        //statusLabel.isHidden = true
+//
+//        statusLabel.frame = CGRect(x: 55, y: 0, width: 130, height: 40)
+//    }
     
     private func configureShowPasswordButton() {
         
@@ -106,6 +118,7 @@ class InputTextField: UITextField {
     public func setRedBorderWithText(text: String, type: InputTextFieldType, isFirst: Bool?) {
         self.layer.borderColor = UIColor.mainOrange.cgColor
     }
+    
     
     
 }
