@@ -14,6 +14,10 @@ class JoinVC: UIViewController {
 
     static let identifier = "JoinVC"
     
+    var navigationView = UIView().then {
+        $0.backgroundColor = .red
+    }
+    
     //MARK: - UI Variables
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -62,13 +66,13 @@ class JoinVC: UIViewController {
         $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         $0.setTitleColor(.white, for: .normal)
     }
-    
-    lazy var navBar = UINavigationBar().then {
-        $0.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 102)
-        $0.backgroundColor = UIColor.white
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.gray20.cgColor
-    }
+//
+//    lazy var navBar = UINavigationBar().then {
+//        $0.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 102)
+//        $0.backgroundColor = UIColor.white
+//        $0.layer.borderWidth = 1
+//        $0.layer.borderColor = UIColor.gray20.cgColor
+//    }
     
     var emailView = UIView().then {
         $0.backgroundColor = .white
@@ -117,7 +121,7 @@ class JoinVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupNavigationBar()
+        setupNavigationView()
         configureUI()
         setStickyKeyboardButton()
     }
@@ -143,9 +147,9 @@ class JoinVC: UIViewController {
     }
     
     //왜 안될까..?
-    private func setupNavigationBar() {
+    private func setupNavigationView() {
         
-        self.view.addSubview(navBar)
+//        self.view.addSubview(navBar)
 //
 //        var navItem = UINavigationItem(title: "회원가입")
         
@@ -160,11 +164,18 @@ class JoinVC: UIViewController {
     
     private func configureUI() {
         
+        view.addSubview(navigationView)
         view.addSubview(collectionView)
         
         view.addSubview(blueCar)
         view.addSubview(blueLine)
         view.addSubview(nextButton)
+        
+        navigationView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(102)
+        }
         
         collectionView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(180)
