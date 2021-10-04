@@ -46,8 +46,21 @@ struct Constants {
     /// 게시물 상세보기
     static let detailPostURL = baseURL + "/postDetail/" + userId + "/"
     
-    static let loginURL = baseURL + "/sign/signIn"
-    
     /// 저장하기
     static let saveURL = baseURL + "/post/save"
+    
+    //- 이메일 중복체크, 인증, 닉네임 중복체크
+    static let duplicateEmailURL = baseURL + "/user/check/email/:userEmail"
+    static let validateEmailURL = baseURL + "/user/auth"
+    static let duplicateNicknameURL = baseURL + "/user/check/nickname/:nickname"
+    
+    //회원가입, 로그인, 소셜로그인
+    static let JoinURL = baseURL + "/user/register"
+    static let loginURL = baseURL + "/user/login"
+    static let snsLoginURL = baseURL + "/user/socialLogin"
+    
+    //카카오, 구글, 애플 로그인
+    static let kakaoLoginURL = baseURL + "/user/register/kakao"
+    static let googleLoginURL = baseURL + "/user/register/google"
+    static let appleLoginURL = baseURL + "/user/register/apple"
 }
