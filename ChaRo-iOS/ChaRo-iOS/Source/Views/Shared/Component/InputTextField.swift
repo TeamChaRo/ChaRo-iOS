@@ -54,15 +54,6 @@ class InputTextField: UITextField {
         }
     }
     
-//    private func configureStatusLabel() {
-//        statusLabel.font = .notoSansRegularFont(ofSize: 11)
-//        statusLabel.text = "테스트"
-//        statusLabel.textColor = .black
-//        //statusLabel.isHidden = true
-//
-//        statusLabel.frame = CGRect(x: 55, y: 0, width: 130, height: 40)
-//    }
-    
     private func configureShowPasswordButton() {
         
         let iconImageView = UIImageView()
@@ -110,7 +101,7 @@ class InputTextField: UITextField {
         }
     }
     
-    //사용자에게 텍스트와 함께 테두리 색상을 변경. 텍스트의 위치 조정을 위해 type 과 isFirst 인자를 받음, type이 normal일 때는 isFirst에 nil
+    //테두리 색상을 변경
     public func setBlueBorderWithText() {
         self.layer.borderColor = UIColor.mainBlue.cgColor
     }
