@@ -11,7 +11,7 @@ class HomeAnimationTVC: UITableViewCell {
 
     @IBOutlet weak var animationCollectionview: UICollectionView!
     static let identifier : String = "HomeAnimationTVC"
-    @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     @IBOutlet weak var homeAnimationView: UIView!
     
     public static var collectionIndexPath: IndexPath = [0,0]
@@ -71,32 +71,32 @@ class HomeAnimationTVC: UITableViewCell {
         animationCollectionview.registerCustomXib(xibName: "HomeAnimationCVC")
         //cellInit()
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//여기부분 약간 수정해야됨,,, 기기마다 몬가 값이 다 다를거같아서 일단 보류!
-        let originalCarConstant = carMoveConstraint.constant
-        let sideMargin : CGFloat = 24
-        let pageCount : Int = 4
-
-        if scrollView.contentOffset.x > 0{
-               if scrollView.contentOffset.x < 10000 {
-                carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
-               } else {
-                carMoveConstraint.constant = originalCarConstant
-               }
-           }
-        else{
-            carMoveConstraint.constant = originalCarConstant
-           }
-
-       }
+//    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+////여기부분 약간 수정해야됨,,, 기기마다 몬가 값이 다 다를거같아서 일단 보류!
+//        let originalCarConstant = carMoveConstraint.constant
+//        let sideMargin : CGFloat = 24
+//        let pageCount : Int = 4
+//
+//        if scrollView.contentOffset.x > 0{
+//               if scrollView.contentOffset.x < 10000 {
+//                carMoveConstraint.constant = (scrollView.contentOffset.x - sideMargin)/CGFloat(pageCount)
+//               } else {
+//                carMoveConstraint.constant = originalCarConstant
+//               }
+//           }
+//        else{
+//            carMoveConstraint.constant = originalCarConstant
+//           }
+//
+//       }
 }
 
 
 //MARK: - extension
 extension HomeAnimationTVC : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bannerList.count
+        return 4
     }
     
     
