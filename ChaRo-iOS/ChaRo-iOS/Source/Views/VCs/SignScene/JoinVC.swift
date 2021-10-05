@@ -28,6 +28,10 @@ class JoinVC: UIViewController {
         $0.setImage(UIImage(named: "icBackButton"), for: .normal)
     }
     
+    var naviBarLine = UIView().then {
+        $0.backgroundColor = .gray20
+    }
+    
     //MARK: - UI Variables
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -76,13 +80,6 @@ class JoinVC: UIViewController {
         $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         $0.setTitleColor(.white, for: .normal)
     }
-//
-//    lazy var navBar = UINavigationBar().then {
-//        $0.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 102)
-//        $0.backgroundColor = UIColor.white
-//        $0.layer.borderWidth = 1
-//        $0.layer.borderColor = UIColor.gray20.cgColor
-//    }
     
     var emailView = UIView().then {
         $0.backgroundColor = .white
@@ -131,7 +128,6 @@ class JoinVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupNavigationView()
         configureUI()
         setStickyKeyboardButton()
     }
@@ -157,32 +153,12 @@ class JoinVC: UIViewController {
     }
     
     //왜 안될까..?
-    private func setupNavigationView() {
+    private func setupNavigationViewUI() {
         
-//        self.view.addSubview(navBar)
-//
-//        var navItem = UINavigationItem(title: "회원가입")
-        
-//        let titleLabel = UILabel().then {
-//            $0.text = "회원가입"
-//            $0.font = .notoSansRegularFont(ofSize: 17)
-//        }
+        navigationView.addSubviews([navigationViewTitleLabel,
+                                   backButton,
+                                   naviBarLine])
 
-//        navItem.titleView = titleLabel
-//        navBar.items = [navItem]
-    }
-    
-    private func configureUI() {
-        
-        view.addSubview(navigationView)
-        view.addSubview(collectionView)
-        
-        view.addSubview(blueCar)
-        view.addSubview(blueLine)
-        view.addSubview(nextButton)
-        
-        navigationView.addSubview(navigationViewTitleLabel)
-        navigationView.addSubview(backButton)
         
         navigationView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -201,6 +177,26 @@ class JoinVC: UIViewController {
             $0.width.height.equalTo(48)
             $0.leading.equalToSuperview()
         }
+        
+        naviBarLine.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+
+    }
+    
+    private func configureUI() {
+        
+        view.addSubview(navigationView)
+        view.addSubview(collectionView)
+        
+        setupNavigationViewUI()
+        
+        view.addSubview(blueCar)
+        view.addSubview(blueLine)
+        view.addSubview(nextButton)
+        
         
         collectionView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(180)
@@ -252,6 +248,7 @@ class JoinVC: UIViewController {
         }
         
         emailView.dismissKeyboardWhenTappedAround()
+        
     }
     
     
