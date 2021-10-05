@@ -81,6 +81,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         //초기에 아래 뷰 가리기
         emailVerifyInputView.isHidden = true
         
+        self.dismissKeyboardWhenTappedAround()
     }
     
     private func configureClosure() {

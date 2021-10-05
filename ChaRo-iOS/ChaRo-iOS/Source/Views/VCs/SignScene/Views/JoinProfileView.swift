@@ -7,15 +7,15 @@
 
 import UIKit
 
-class JoinProfileView: UIView {
+class JoinProfileView: UIView, UITextFieldDelegate {
 
     var profileLabel = JoinTitleLabel(type: .boldTitle, title: "프로필 사진")
     
     let profileView = ProfileView()
     let nicknameView = JoinInputView(title: "닉네임 작성", placeholder: "5자 이내 한글")
     
-    let nextButton = NextButton(isSticky: false, isTheLast: true)
-    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
+    let nextButton = NextButton(isSticky: false, isTheLast: false)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
     var stickyView: UIView?
     
     override init(frame: CGRect) {
@@ -31,6 +31,16 @@ class JoinProfileView: UIView {
         super.init(frame: .zero)
         configureUI()
         configureStickyView()
+        configureClosure()
+    }
+    
+    private func configureClosure() {
+        self.nextButton.nextViewClosure = {
+            self.IsDuplicatedNickname(nickname: (self.nicknameView.inputTextField?.text!)!)
+        }
+        self.stickyNextButton.nextViewClosure = {
+            //서버연결
+        }
     }
     
     private func configureUI() {
@@ -81,5 +91,28 @@ class JoinProfileView: UIView {
         nicknameView.inputTextField!.inputAccessoryView = stickyView
         
     }
+    
+    
+    //MARK: - 서버 연결 함수
+    private func IsDuplicatedNickname(nickname: String) {
+        IsDuplicatedNicknameService.shared.getNicknameInfo(nickname: nickname) { (response) in
+            
+            switch(response)
+            {
+            case .success(let success):
+                print(success)
+            case .requestErr(let message) :
+                print("requestERR", message)
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    
 
 }

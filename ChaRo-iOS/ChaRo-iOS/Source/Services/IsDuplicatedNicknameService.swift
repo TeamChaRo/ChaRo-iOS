@@ -11,10 +11,10 @@ import Alamofire
 struct IsDuplicatedNicknameService {
     static let shared = IsDuplicatedNicknameService()
     
-//    private func makeParameter(email : String) -> Parameters
-//    {
-//        return ["nickname" : email]
-//    }
+    private func makeParameter(nickname : String) -> Parameters
+    {
+        return ["nickname" : nickname]
+    }
     
     func getNicknameInfo(nickname: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
@@ -22,12 +22,12 @@ struct IsDuplicatedNicknameService {
         let URL = Constants.duplicateNicknameURL
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         
-        let dataRequest = AF.request(URL + nickname,
+        let dataRequest = AF.request(URL,
                                      method: .get,
+                                     parameters: makeParameter(nickname: nickname),
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
-        print(URL + nickname)
         
         dataRequest.responseData { dataResponse in
             
@@ -51,7 +51,7 @@ struct IsDuplicatedNicknameService {
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         
         let decoder = JSONDecoder()
-        
+                
         guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
         else {
             print("패쓰에러")
