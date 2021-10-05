@@ -140,6 +140,7 @@
 		7062C845270C63F500C1CD2E /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C844270C63F500C1CD2E /* NextButton.swift */; };
 		7062C847270CBF4F00C1CD2E /* ValidateEmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C846270CBF4F00C1CD2E /* ValidateEmailService.swift */; };
 		7062C849270CC04500C1CD2E /* ValidationEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */; };
+		7062C84B270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C84A270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -344,6 +345,7 @@
 		7062C844270C63F500C1CD2E /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		7062C846270CBF4F00C1CD2E /* ValidateEmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateEmailService.swift; sourceTree = "<group>"; };
 		7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationEmailModel.swift; sourceTree = "<group>"; };
+		7062C84A270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsDuplicatedNicknameService.swift; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				36C1C33026A0C28500F34750 /* SavePostService.swift */,
 				7062C842270C5A4200C1CD2E /* IsDuplicatedEmailService.swift */,
 				7062C846270CBF4F00C1CD2E /* ValidateEmailService.swift */,
+				7062C84A270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1426,6 +1429,7 @@
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
 				70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */,
+				7062C84B270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift in Sources */,
 				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
 				F4FB2ECB269FD7AE000C339B /* UIButton+.swift in Sources */,
 				F4FB2EC8269F8F6C000C339B /* CreatePostParkingWarningTVC.swift in Sources */,
