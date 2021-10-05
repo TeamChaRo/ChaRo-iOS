@@ -133,6 +133,7 @@
 		7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */; };
 		7062C836270B5A0B00C1CD2E /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C835270B5A0B00C1CD2E /* PasswordView.swift */; };
 		7062C839270C3EFB00C1CD2E /* JoinEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C838270C3EFB00C1CD2E /* JoinEmailView.swift */; };
+		7062C83B270C415400C1CD2E /* JoinPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C83A270C415400C1CD2E /* JoinPasswordView.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -330,6 +331,7 @@
 		7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAgreeButton.swift; sourceTree = "<group>"; };
 		7062C835270B5A0B00C1CD2E /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		7062C838270C3EFB00C1CD2E /* JoinEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinEmailView.swift; sourceTree = "<group>"; };
+		7062C83A270C415400C1CD2E /* JoinPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPasswordView.swift; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -1147,6 +1149,7 @@
 			isa = PBXGroup;
 			children = (
 				7062C838270C3EFB00C1CD2E /* JoinEmailView.swift */,
+				7062C83A270C415400C1CD2E /* JoinPasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1454,6 +1457,7 @@
 				707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */,
 				3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */,
 				3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */,
+				7062C83B270C415400C1CD2E /* JoinPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
