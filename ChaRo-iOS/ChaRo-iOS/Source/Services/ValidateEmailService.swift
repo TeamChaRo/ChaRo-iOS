@@ -1,30 +1,30 @@
 //
-//  IsDuplicatedEmailService.swift
+//  ValidateEmailService.swift
 //  ChaRo-iOS
 //
-//  Created by JEN Lee on 2021/10/05.
+//  Created by JEN Lee on 2021/10/06.
 //
 
 import Foundation
 import Alamofire
 
-
-struct IsDuplicatedEmailService {
-    static let shared = IsDuplicatedEmailService()
+struct ValidateEmailService {
+    
+    static let shared = ValidateEmailService()
     
     private func makeParameter(email : String) -> Parameters
     {
         return ["userEmail" : email]
     }
     
-    func getEmailInfo(email: String, completion : @escaping (NetworkResult<Any>) -> Void)
+    func postValidationNumber(email: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         
         let URL = Constants.duplicateEmailURL
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         
         let dataRequest = AF.request(URL,
-                                     method: .get,
+                                     method: .post,
                                      parameters: makeParameter(email: email),
                                      encoding: JSONEncoding.default,
                                      headers: header)
@@ -49,6 +49,7 @@ struct IsDuplicatedEmailService {
         
     }
     
+    
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         
         let decoder = JSONDecoder()
@@ -70,5 +71,4 @@ struct IsDuplicatedEmailService {
         }
         
     }
-    
 }
