@@ -17,6 +17,9 @@ class JoinEmailView: UIView, UITextFieldDelegate {
                                         subTitle: "이메일로 보내드린 인증번호를 입력해주세요.",
                                         placeholder: "ex)울랄라")
     
+    let nextButton = NextButton(isSticky: false)
+    let stickyNextButton = NextButton(isSticky: true)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -34,7 +37,8 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     private func configureUI() {
                 
         self.addSubviews([emailInputView,
-                          emailVerifyInputView])
+                          emailVerifyInputView,
+                          nextButton])
         
         emailInputView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -46,6 +50,12 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         emailVerifyInputView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(180)
             $0.height.equalTo(117)
+            $0.leading.trailing.equalTo(emailInputView)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-73)
+            $0.height.equalTo(48)
             $0.leading.trailing.equalTo(emailInputView)
         }
         

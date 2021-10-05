@@ -10,6 +10,9 @@ import UIKit
 class JoinPasswordView: UIView {
 
     let passwordInputView = PasswordView(title: "비밀번호", subTitle: "5자 이상 15자 이내의 비밀번호를 입력해주세요.")
+    let nextButton = NextButton(isSticky: false)
+    let stickyNextButton = NextButton(isSticky: true)
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +30,7 @@ class JoinPasswordView: UIView {
     
     private func configureUI() {
                 
-        self.addSubviews([passwordInputView])
+        self.addSubviews([passwordInputView, nextButton])
         
         passwordInputView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -35,6 +38,13 @@ class JoinPasswordView: UIView {
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(200)
         }
+        
+        nextButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-73)
+            $0.height.equalTo(48)
+            $0.leading.trailing.equalTo(passwordInputView)
+        }
+        
         
         passwordInputView.enableNextButtonClosure = {
             //self.nextButton.setTitle("됐다!!!", for: .normal)

@@ -14,6 +14,9 @@ class JoinProfileView: UIView {
     let profileView = ProfileView()
     let nicknameView = JoinInputView(title: "닉네임 작성", placeholder: "5자 이내 한글")
     
+    let nextButton = NextButton(isSticky: false)
+    let stickyNextButton = NextButton(isSticky: true)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -32,7 +35,8 @@ class JoinProfileView: UIView {
         
         self.addSubviews([profileView,
                           profileLabel,
-                          nicknameView])
+                          nicknameView,
+                          nextButton])
         
         profileLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -51,6 +55,13 @@ class JoinProfileView: UIView {
             $0.leading.trailing.equalTo(profileLabel)
             $0.height.equalTo(150)
         }
+        
+        nextButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-73)
+            $0.height.equalTo(48)
+            $0.leading.trailing.equalTo(profileLabel)
+        }
+        
         
         self.dismissKeyboardWhenTappedAround()
         

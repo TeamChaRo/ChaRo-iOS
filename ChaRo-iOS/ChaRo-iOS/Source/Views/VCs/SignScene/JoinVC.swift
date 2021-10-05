@@ -47,13 +47,13 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-    var nextButton = UIButton().then {
-        $0.setTitle("다음", for: .normal)
-        $0.backgroundColor = .gray30
-        $0.setTitleColor(.white, for: .normal)
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
-    }
+//    var nextButton = UIButton().then {
+//        $0.setTitle("다음", for: .normal)
+//        $0.backgroundColor = .gray30
+//        $0.setTitleColor(.white, for: .normal)
+//        $0.clipsToBounds = true
+//        $0.layer.cornerRadius = 10
+//    }
     
     var stickyNextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
@@ -138,7 +138,7 @@ class JoinVC: UIViewController {
         
         view.addSubview(blueCar)
         view.addSubview(blueLine)
-        view.addSubview(nextButton)
+//        view.addSubview(nextButton)
         
         
         collectionView.snp.makeConstraints {
@@ -159,12 +159,12 @@ class JoinVC: UIViewController {
             $0.trailing.equalTo(-23)
         }
         
-        nextButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(690)
-            $0.leading.equalTo(20)
-            $0.trailing.equalTo(-20)
-            $0.height.equalTo(48)
-        }
+//        nextButton.snp.makeConstraints {
+//            $0.top.equalToSuperview().offset(690)
+//            $0.leading.equalTo(20)
+//            $0.trailing.equalTo(-20)
+//            $0.height.equalTo(48)
+//        }
                 
     }
     
@@ -231,6 +231,11 @@ extension JoinVC: UICollectionViewDataSource {
                           contractView])
         
         configureViewsUI()
+        
+        passwordView.isHidden = true
+        profileView.isHidden = true
+        contractView.isHidden = true
+        
         return cell
     }
     

@@ -17,17 +17,23 @@ class NextButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(toPop vc: UIViewController) {
+    init(isSticky: Bool) {
         super.init(frame: .zero)
-        configureUI()
+        configureUI(isSticky: isSticky)
     }
     
-    private func configureUI() {
+    private func configureUI(isSticky: Bool) {
+        
         self.setTitle("다음", for: .normal)
-        self.backgroundColor = .gray30
         self.setTitleColor(.white, for: .normal)
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 10
+        self.backgroundColor = .gray30
+        
+        if isSticky {
+            self.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+        } else {
+            self.clipsToBounds = true
+            self.layer.cornerRadius = 10
+        }
     }
 
 }

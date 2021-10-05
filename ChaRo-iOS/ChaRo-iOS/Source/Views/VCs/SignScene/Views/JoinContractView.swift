@@ -30,6 +30,8 @@ class JoinContractView: UIView {
     var agreePushButton = JoinAgreeButton(isBig: false)
     var agreeEmailButton = JoinAgreeButton(isBig: false)
     
+    let nextButton = NextButton(isSticky: false)
+    let stickyNextButton = NextButton(isSticky: true)
     
     
     override init(frame: CGRect) {
@@ -48,7 +50,7 @@ class JoinContractView: UIView {
     
     private func configureUI() {
         
-        self.addSubviews([contractLabel, contractInputView])
+        self.addSubviews([contractLabel, contractInputView, nextButton])
         
         contractLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -69,7 +71,8 @@ class JoinContractView: UIView {
                                        agreeEmailLabel,
                                        agreeAllButton,
                                        agreePushButton,
-                                       agreeEmailButton])
+                                       agreeEmailButton,
+                                       nextButton])
         
         contractBackgroundImageView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
@@ -115,6 +118,12 @@ class JoinContractView: UIView {
         agreeEmailButton.snp.makeConstraints {
             $0.height.width.leading.equalTo(agreePushButton)
             $0.top.equalTo(agreeLine.snp.bottom).offset(58)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-73)
+            $0.height.equalTo(48)
+            $0.leading.trailing.equalTo(contractLabel)
         }
     
     }
