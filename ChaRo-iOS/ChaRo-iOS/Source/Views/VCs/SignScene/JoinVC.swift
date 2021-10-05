@@ -13,6 +13,7 @@ import Then
 class JoinVC: UIViewController {
 
     static let identifier = "JoinVC"
+    var pageNumber: Int = 1
     
     //MARK: - UI Variables
     var navigationView = UIView().then {
@@ -27,6 +28,7 @@ class JoinVC: UIViewController {
     
     var backButton = UIButton().then {
         $0.setImage(UIImage(named: "icBackButton"), for: .normal)
+        $0.addTarget(self, action: #selector(moveBack), for: .touchUpInside)
     }
     
     var naviBarLine = UIView().then {
@@ -47,14 +49,6 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-//    var nextButton = UIButton().then {
-//        $0.setTitle("다음", for: .normal)
-//        $0.backgroundColor = .gray30
-//        $0.setTitleColor(.white, for: .normal)
-//        $0.clipsToBounds = true
-//        $0.layer.cornerRadius = 10
-//    }
-    
     var stickyNextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
         $0.backgroundColor = .gray30
@@ -72,7 +66,7 @@ class JoinVC: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         configureUI()
-        setStickyKeyboardButton()
+        showView(number: pageNumber)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +74,7 @@ class JoinVC: UIViewController {
     }
     
     
-    //MARK: - private func
+    //MARK: - configure 함수
     private func configureNavigationController() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         //네비게이션 바 숨기기
@@ -95,7 +89,46 @@ class JoinVC: UIViewController {
         
     }
     
-    //왜 안될까..?
+    //MARK: - Custom 함수
+    private func showView(number: Int) {
+        
+        if number == 0 {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        switch number {
+        case 1:
+            emailView.isHidden = false
+            passwordView.isHidden = true
+            profileView.isHidden = true
+            contractView.isHidden = true
+        case 2:
+            emailView.isHidden = true
+            passwordView.isHidden = false
+            profileView.isHidden = true
+            contractView.isHidden = true
+        case 3:
+            emailView.isHidden = true
+            passwordView.isHidden = true
+            profileView.isHidden = false
+            contractView.isHidden = true
+        case 4:
+            emailView.isHidden = true
+            passwordView.isHidden = true
+            profileView.isHidden = true
+            contractView.isHidden = false
+        default:
+            print("엥")
+        }
+        
+    }
+    
+    @objc func moveBack() {
+        showView(number: pageNumber - 1)
+    }
+    
+    
+    //MARK: - UI 관련 코드
     private func setupNavigationViewUI() {
         
         navigationView.addSubviews([navigationViewTitleLabel,
@@ -138,7 +171,6 @@ class JoinVC: UIViewController {
         
         view.addSubview(blueCar)
         view.addSubview(blueLine)
-//        view.addSubview(nextButton)
         
         
         collectionView.snp.makeConstraints {
@@ -158,17 +190,10 @@ class JoinVC: UIViewController {
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-23)
         }
-        
-//        nextButton.snp.makeConstraints {
-//            $0.top.equalToSuperview().offset(690)
-//            $0.leading.equalTo(20)
-//            $0.trailing.equalTo(-20)
-//            $0.height.equalTo(48)
-//        }
+    
                 
     }
-    
-    
+
     
     private func configureViewsUI() {
         emailView.snp.makeConstraints {
@@ -189,31 +214,13 @@ class JoinVC: UIViewController {
             self.present(picker, animated: true)
         }
     }
-
-    
-   
-    private func setStickyKeyboardButton() {
-        let stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
-        
-        stickyView.addSubview(stickyNextButton)
-        
-        stickyNextButton.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
-        }
-        
-        //emailInputView.inputTextField!.inputAccessoryView = stickyView
-        //emailVerifyInputView.inputTextField!.inputAccessoryView = stickyView
-        //passwordInputView.inputTextField!.inputAccessoryView = stickyView
-        //commonPasswordTextField.inputAccessoryView = stickyView
-        //commonNormalTextField.inputAccessoryView = stickyView
-    }
     
 
 }
 
 
 //MARK: - Extension
-extension JoinVC: UICollectionViewDataSource {
+extension JoinVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
@@ -241,10 +248,6 @@ extension JoinVC: UICollectionViewDataSource {
     
 }
 
-extension JoinVC: UICollectionViewDelegate {
-    
-}
-
 
 extension JoinVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -253,7 +256,7 @@ extension JoinVC: UICollectionViewDelegateFlowLayout {
 }
 
 
-//이미지 피커 extension
+//MARK: -이미지 피커 extension
 extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
