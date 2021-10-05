@@ -87,11 +87,12 @@ class JoinInputView: UIView {
                 $0.height.equalTo(48)
             }
             
-            statusLabel.snp.makeConstraints {
-                $0.top.equalTo(inputTextField!.snp.bottom).offset(4)
-                $0.leading.equalToSuperview().offset(6)
-                $0.height.equalTo(14)
-            }
+        }
+        
+        statusLabel.snp.makeConstraints {
+            $0.top.equalTo(inputTextField!.snp.bottom).offset(4)
+            $0.leading.equalToSuperview().offset(6)
+            $0.height.equalTo(14)
         }
     }
     
