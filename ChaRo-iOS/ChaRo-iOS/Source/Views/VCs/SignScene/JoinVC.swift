@@ -229,7 +229,6 @@ extension JoinVC: UICollectionViewDataSource {
                           passwordView,
                           profileView,
                           contractView])
-        
         configureViewsUI()
         
         passwordView.isHidden = true

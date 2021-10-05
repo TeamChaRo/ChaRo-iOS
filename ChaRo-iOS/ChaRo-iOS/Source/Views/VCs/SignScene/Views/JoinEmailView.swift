@@ -20,6 +20,8 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     let nextButton = NextButton(isSticky: false)
     let stickyNextButton = NextButton(isSticky: true)
     
+    var verifyNumber: Int?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -31,7 +33,13 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     
     init() {
         super.init(frame: .zero)
+        configureDelegate()
         configureUI()
+    }
+    
+    private func configureDelegate() {
+        emailInputView.inputTextField?.delegate = self
+        emailVerifyInputView.inputTextField?.delegate = self
     }
     
     private func configureUI() {
@@ -59,9 +67,50 @@ class JoinEmailView: UIView, UITextFieldDelegate {
             $0.leading.trailing.equalTo(emailInputView)
         }
         
+        //초기에 아래 뷰 가리기
+        emailVerifyInputView.isHidden = true
+        
         self.dismissKeyboardWhenTappedAround()
         
         
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField == emailInputView.inputTextField {
+            
+            if textField.text == "" {
+                emailInputView.setOrangeTFLabelColorWithText(text: "이메일을 입력해주세요.")
+            } else {
+                //이거 물어봐야됨 형식이 어캐되는지???
+                IsDuplicatedEmail(email: textField.text!)
+            }
+            
+        }
+    }
+    
+    private func IsDuplicatedEmail(email: String) {
+        
+        IsDuplicatedEmailService.shared.getEmailInfo(email: email) { (response) in
+            
+            switch(response)
+            {
+            case .success(let success):
+                if let success = success as? Bool {
+                    print(success)
+                }
+            case .requestErr(let message) :
+                print("requestERR", message)
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+        
+    }
 
 }
+
