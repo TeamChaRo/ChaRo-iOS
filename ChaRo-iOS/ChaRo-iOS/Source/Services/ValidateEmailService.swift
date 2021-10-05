@@ -54,7 +54,7 @@ struct ValidateEmailService {
         
         let decoder = JSONDecoder()
         
-        guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
+        guard let decodedData = try? decoder.decode(ValidationEmailModel.self, from: data)
         else {
             print("패쓰에러")
             return .pathErr
