@@ -20,7 +20,7 @@ struct ValidateEmailService {
     func postValidationNumber(email: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         
-        let URL = Constants.duplicateEmailURL
+        let URL = Constants.validateEmailURL
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         
         let dataRequest = AF.request(URL,
@@ -64,7 +64,7 @@ struct ValidateEmailService {
         switch statusCode {
         case 200:
             print("--- 데이터 받기 성공")
-            return .success(decodedData.success)
+            return .success(decodedData)
         case 400: return .requestErr(decodedData.msg)
         case 500: return .serverErr
         default: return .networkFail

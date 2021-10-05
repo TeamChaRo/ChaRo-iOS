@@ -18,9 +18,11 @@ class JoinEmailView: UIView, UITextFieldDelegate {
                                         placeholder: "ex)울랄라")
     
     let nextButton = NextButton(isSticky: false)
-    let stickyNextButton = NextButton(isSticky: true)
     
-    var verifyNumber: Int?
+    let stickyNextButton = NextButton(isSticky: true)
+    var stickyView: UIView?
+    
+    var verifyNumber: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,6 +37,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         super.init(frame: .zero)
         configureDelegate()
         configureUI()
+        configureStickyView()
     }
     
     private func configureDelegate() {
@@ -68,25 +71,70 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         }
         
         //초기에 아래 뷰 가리기
-        emailVerifyInputView.isHidden = true
+        //emailVerifyInputView.isHidden = true
+        
+    }
+    
+    private func configureStickyView() {
+        
+        stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 48))
+        stickyView!.addSubview(stickyNextButton)
+        
+        stickyNextButton.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        emailInputView.inputTextField!.inputAccessoryView = stickyView
+        emailVerifyInputView.inputTextField!.inputAccessoryView = stickyView
         
         self.dismissKeyboardWhenTappedAround()
         
+    }
+
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         
+        let text = textField.text
+        
+        switch textField {
+        
+        case emailInputView.inputTextField:
+            print("ㅇㅇ")
+            
+        case emailVerifyInputView.inputTextField:
+            if verifyNumber == text {
+                emailVerifyInputView.setBlueTFLabelColorWithText(text: "인증되었습니다.")
+            }
+        default:
+            print(text)
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if textField == emailInputView.inputTextField {
-            
+        let text = textField.text
+        
+        switch textField {
+        
+        case emailInputView.inputTextField:
             if textField.text == "" {
                 emailInputView.setOrangeTFLabelColorWithText(text: "이메일을 입력해주세요.")
             } else {
-                //이거 물어봐야됨 형식이 어캐되는지???
+                //이거 물어봐야됨 형식이 어캐되는지??? 이거 잘 오면 view 가린거 없애고 다음버튼도 회색만들기
                 IsDuplicatedEmail(email: textField.text!)
             }
             
+        case emailVerifyInputView.inputTextField:
+            if textField.text == "" {
+                emailVerifyInputView.setOrangeTFLabelColorWithText(text: "인증번호를 입력해주세요.")
+            } else {
+                ValidateEmail(email: textField.text!)
+            }
+            
+        default:
+            print(text)
         }
+        
     }
     
     private func IsDuplicatedEmail(email: String) {
@@ -110,6 +158,28 @@ class JoinEmailView: UIView, UITextFieldDelegate {
             }
         }
         
+    }
+    
+
+    private func ValidateEmail(email: String) {
+        ValidateEmailService.shared.postValidationNumber(email: email) { (response) in
+            
+            switch(response)
+            {
+            case .success(let data):
+                if let data = data as? ValidationEmailModel {
+                    self.verifyNumber = data.data
+                }
+            case .requestErr(let message) :
+                print("requestERR", message)
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 
 }
