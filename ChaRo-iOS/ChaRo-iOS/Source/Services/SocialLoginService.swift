@@ -1,32 +1,30 @@
 //
-//  LoginService.swift
+//  SocialLoginService.swift
 //  ChaRo-iOS
 //
-//  Created by JEN Lee on 2021/07/15.
+//  Created by JEN Lee on 2021/10/06.
 //
 
 import Foundation
 import Alamofire
 
-struct LoginService {
+struct SocialLoginService {
     
     static let shared = LoginService()
     
-    private func makeParameter(id : String, password : String) -> Parameters
+    private func makeParameter(email : String) -> Parameters
     {
-        return ["id" : id,
-                "password" : password]
+        return ["userEmail" : email]
     }
     
-    func login(id : String,
-               password : String,
-               completion : @escaping (NetworkResult<Any>) -> Void)
+    
+    func socialLogin(email : String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         
         let dataRequest = AF.request(Constants.loginURL,
                                      method: .post,
-                                     parameters: makeParameter(id: id, password: password),
+                                     parameters: makeParameter(email: email),
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
@@ -75,13 +73,5 @@ struct LoginService {
             
         default: return .networkFail
         }
-    }
-    
-    
-    func setUserInfo(data: UserData) {
-        let userInfo = UserInfo.shared
-        userInfo.id = data.userId
-        userInfo.nickname = data.nickname
-        userInfo.token = data.token
     }
 }
