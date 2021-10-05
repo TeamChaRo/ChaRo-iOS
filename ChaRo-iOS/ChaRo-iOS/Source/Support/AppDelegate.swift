@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [START register_for_notifications]
         if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -37,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
-            
         }
         
         // [END register_for_notifications]
@@ -63,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         print(userInfo)
-        
         completionHandler(UIBackgroundFetchResult.newData)
     }
     
@@ -93,7 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    // Receive displayed notifications for iOS 10 devices.
     // 앱이 foreground상태일 때, 알림이 온 경우 어떻게 표시할 것인지 처리
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
@@ -109,8 +105,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         completionHandler([[.alert, .sound]])
     }
     
-    // push가 온 경우 처리
-    // 앱을 실행한 적이 있을 때 처리되는 곳
+    // push가 온 경우 처리. 앱을 실행한 적이 있을 때 처리되는 곳
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
