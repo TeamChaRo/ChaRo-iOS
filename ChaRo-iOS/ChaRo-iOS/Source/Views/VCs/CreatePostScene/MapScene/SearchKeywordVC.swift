@@ -8,47 +8,49 @@
 import UIKit
 import SnapKit
 import TMapSDK
+import Then
+import RxCocoa
+import RxSwift
 
 class SearchKeywordVC: UIViewController {
 
     static let identifier = "SearchKeywordVC"
-    public var keyword = "안녕하세요"
+    private let viewModel = SearchKeywordViewModel()
+    private var disposeBag = DisposeBag()
+    
     private let mapView = MapService.getTmapView()
     private var addressIndex = -1
     private var addressType = ""
     private var resultAddress : AddressDataModel?
-    private var keywordTableView = UITableView()
+    
     private var searchHistory : [KeywordResult] = []
     private var newSearchHistory : [KeywordResult] = []
-    private var autoCompletedKeywordList : [AddressDataModel] = []
+    private var autoCompletedKeywordList : [AddressDataModel] = [AddressDataModel()]
     
     private var autoList : [String] = []
     
-    private var backButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
-        button.tintColor = .gray40
-        return button
-    }()
-    private var searchTextField: UITextField = {
-        let textField = UITextField()
-        textField.autocorrectionType = .no
-        textField.font = .notoSansRegularFont(ofSize: 17)
-        textField.textColor = .gray50
-        textField.clearsOnBeginEditing = true
-        textField.clearButtonMode = .whileEditing
-        return textField
-    }()
+    private var backButton = UIButton().then{
+        $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
+        $0.tintColor = .gray40
+    }
     
-    private let separateLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray20
-        return view
-    }()
+    private var searchTextField = UITextField().then{
+        $0.autocorrectionType = .no
+        $0.font = .notoSansRegularFont(ofSize: 17)
+        $0.textColor = .gray50
+        $0.clearsOnBeginEditing = true
+        $0.clearButtonMode = .whileEditing
+    }
+    
+    private let separateLine = UIView().then{
+        $0.backgroundColor = .gray20
+    }
+    
+    private var keywordTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraints()
+        setupConstraints()
         setActionToComponent()
         configureTableView()
         navigationController?.isNavigationBarHidden = true
@@ -57,46 +59,10 @@ class SearchKeywordVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("search VC - viewWillDisappear")
         let searchMain = navigationController?.viewControllers[1] as! AddressMainVC
         searchMain.newSearchHistory = self.newSearchHistory + searchMain.newSearchHistory
     }
    
-    
-    private func setConstraints(){
-        view.addSubviews([backButton,
-                          searchTextField,
-                          separateLine,
-                          keywordTableView])
-        
-        backButton.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(13)
-            $0.leading.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(48)
-            $0.width.equalTo(48)
-        }
-        
-        searchTextField.snp.makeConstraints{
-            $0.centerY.equalTo(backButton.snp.centerY)
-            $0.leading.equalTo(backButton.snp.trailing)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-26)
-        }
-        
-        separateLine.snp.makeConstraints{
-            $0.top.equalTo(backButton.snp.bottom).offset(11)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(1)
-        }
-        
-        keywordTableView.snp.makeConstraints{
-            $0.top.equalTo(separateLine.snp.bottom)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        keywordTableView.dismissKeyboardWhenTappedAround()
-                         
-    }
-    
     public func setAddressModel(model: AddressDataModel, cellType: String, index: Int){
         resultAddress = model
         searchTextField.placeholder = "\(cellType)를 입력해주세요"
@@ -107,12 +73,15 @@ class SearchKeywordVC: UIViewController {
     public func setSearchKeyword(list: [KeywordResult]){
         searchHistory = list
         print(searchHistory)
-        print("setSearchKeyword")
     }
     
     public func setActionToComponent(){
         backButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc func dismissAction(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func getAddressConfirmVC() -> AddressConfirmVC{
@@ -123,10 +92,30 @@ class SearchKeywordVC: UIViewController {
         return nextVC
     }
     
-    @objc func dismissAction(){
-        self.navigationController?.popViewController(animated: true)
-    }
+   
     
+    private func bindToViewModel(){
+        viewModel
+            .addressSubject
+            .bind(to: keywordTableView.rx.items(cellIdentifier: SearchKeywordCell.identifier,
+                                                cellType: SearchKeywordCell.self)){ row, element, cell in
+                cell.titleLabel.text = element.title
+                cell.addressLabel.text = element.address
+                cell.dateLabel.text = self.viewModel.getCurrentDate()
+            }.disposed(by: disposeBag)
+        
+        keywordTableView.rx.modelSelected(AddressDataModel.self)
+            .subscribe(onNext: {
+                print("선택된 주소 - \($0.address)")
+                print("---------------------------")
+//                let nextVC = self.getAddressConfirmVC()
+//                nextVC.setPresentingAddress(address: $0)
+//                nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
+//                self.navigationController?.pushViewController(nextVC, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+    }
     
     private func reloadTableViewData(){
         print("reloadTableViewData")
@@ -156,10 +145,12 @@ class SearchKeywordVC: UIViewController {
                             }
                             break
                         }
-                        let poiItem = AddressDataModel(latitude: String(poi.coordinate?.latitude ?? 0),
-                                                       longitude: String(poi.coordinate?.longitude ?? 0) ,
+                        
+                        let poiItem = AddressDataModel(title: poi.name ?? "이름없음",
                                                        address: poi.address ?? "주소안뜸",
-                                                       title: poi.name ?? "이름없음")
+                                                       latitude: String(poi.coordinate?.longitude ?? 0),
+                                                       longitude: String(poi.coordinate?.latitude ?? 0))
+
                         self.autoCompletedKeywordList.append(poiItem)
                         results += 1
                         print(results)
@@ -171,18 +162,22 @@ class SearchKeywordVC: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField.text == ""{
-            keywordTableView.reloadData()
-        }else{
-            let pathData = TMapPathData()
-            print("search Keyword = \(textField.text)")
-            let searchKeyword = textField.text!
-            DispatchQueue.global().sync {
-                pathData.autoComplete(searchKeyword){results , error in
-                    self.searchKeywordPOI(keywordList: results, pathData: pathData)
-                }
-            }
+        if let text = textField.text {
+            viewModel.findAutoCompleteAddressList(keyword: text)
         }
+        
+//        if textField.text == ""{
+//            keywordTableView.reloadData()
+//        }else{
+//            let pathData = TMapPathData()
+//            print("search Keyword = \(textField.text)")
+//            let searchKeyword = textField.text!
+//            DispatchQueue.global().sync {
+//                pathData.autoComplete(searchKeyword){results , error in
+//                    self.searchKeywordPOI(keywordList: results, pathData: pathData)
+//                }
+//            }
+//        }
     }
 }
 
@@ -199,10 +194,9 @@ extension SearchKeywordVC {
     func setTableViewHeader(){
         var title = ""
         if autoCompletedKeywordList.count == 0{
-            
         }
     }
-
+    
 }
 
 extension SearchKeywordVC: UITableViewDelegate{
@@ -225,12 +219,9 @@ extension SearchKeywordVC: UITableViewDataSource{
         
         if autoCompletedKeywordList.count == 0 {
             if searchHistory.count != 0 {
-                
                 let address = searchHistory[indexPath.row]
                 cell.setContents(addressMadel: address)
-                
                 let addressModel = address.getAddressModel()
-                
                 cell.presentingMapViewClosure = { addressModel in
                     let nextVC = self.getAddressConfirmVC()
                     nextVC.setPresentingAddress(address: addressModel)
@@ -260,6 +251,43 @@ extension SearchKeywordVC: UITextFieldDelegate {
         autoCompletedKeywordList = []
         keywordTableView.reloadData()
         return true
+    }
+}
+
+
+//MARK: Layout
+extension SearchKeywordVC {
+    private func setupConstraints(){
+        view.addSubviews([backButton,
+                          searchTextField,
+                          separateLine,
+                          keywordTableView])
+        
+        backButton.snp.makeConstraints{
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(13)
+            $0.leading.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(48)
+            $0.width.equalTo(48)
+        }
+        
+        searchTextField.snp.makeConstraints{
+            $0.centerY.equalTo(backButton.snp.centerY)
+            $0.leading.equalTo(backButton.snp.trailing)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(26)
+        }
+        
+        separateLine.snp.makeConstraints{
+            $0.top.equalTo(backButton.snp.bottom).offset(11)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(1)
+        }
+        
+        keywordTableView.snp.makeConstraints{
+            $0.top.equalTo(separateLine.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        keywordTableView.dismissKeyboardWhenTappedAround()
     }
 }
 

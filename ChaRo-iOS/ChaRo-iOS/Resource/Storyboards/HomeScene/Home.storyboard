@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,6 +19,33 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J9H-Uf-xbB">
                                 <rect key="frame" x="0.0" y="-50" width="414" height="946"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="7qs-nN-Uoz">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMW-xI-gCZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
+                                        </scrollView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="road" translatesAutoresizingMaskIntoConstraints="NO" id="AZE-f0-P9w">
+                                            <rect key="frame" x="12" y="582" width="392" height="50"/>
+                                        </imageView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="charoCar" translatesAutoresizingMaskIntoConstraints="NO" id="DwC-fX-Dye">
+                                            <rect key="frame" x="0.0" y="580" width="66" height="39"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="PMW-xI-gCZ" firstAttribute="top" secondItem="7qs-nN-Uoz" secondAttribute="top" id="3vD-Ky-Lji"/>
+                                        <constraint firstItem="PMW-xI-gCZ" firstAttribute="bottom" secondItem="DwC-fX-Dye" secondAttribute="bottom" constant="25" id="4vw-dj-u9P"/>
+                                        <constraint firstItem="AZE-f0-P9w" firstAttribute="leading" secondItem="7qs-nN-Uoz" secondAttribute="leading" constant="12" id="BSA-9R-aeQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="PMW-xI-gCZ" secondAttribute="bottom" id="Wny-Mq-Lkn"/>
+                                        <constraint firstAttribute="bottom" secondItem="AZE-f0-P9w" secondAttribute="bottom" constant="12" id="hGQ-Vq-Eic"/>
+                                        <constraint firstAttribute="trailing" secondItem="AZE-f0-P9w" secondAttribute="trailing" constant="10" id="r4w-QA-uVh"/>
+                                        <constraint firstItem="PMW-xI-gCZ" firstAttribute="leading" secondItem="7qs-nN-Uoz" secondAttribute="leading" id="sW4-m1-VlP"/>
+                                        <constraint firstAttribute="trailing" secondItem="PMW-xI-gCZ" secondAttribute="trailing" id="u6d-Xf-kxk"/>
+                                        <constraint firstItem="DwC-fX-Dye" firstAttribute="leading" secondItem="7qs-nN-Uoz" secondAttribute="leading" id="w9P-Qv-YB4"/>
+                                    </constraints>
+                                </view>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KbL-a3-YBW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -70,6 +97,8 @@
                     <connections>
                         <outlet property="HomeNavigationView" destination="KbL-a3-YBW" id="08y-M0-Mfy"/>
                         <outlet property="HomeTableView" destination="J9H-Uf-xbB" id="4VX-FP-xBA"/>
+                        <outlet property="bannerScrollView" destination="PMW-xI-gCZ" id="u4f-RD-jao"/>
+                        <outlet property="carMoveConstraint" destination="w9P-Qv-YB4" id="aeG-r4-5vm"/>
                         <outlet property="charoIconImageView" destination="wz2-U4-Okp" id="R97-Fy-Uxl"/>
                         <outlet property="homeNavigationHeightConstraints" destination="W9a-Mr-TYR" id="P0F-be-4DB"/>
                         <outlet property="homeNavigationLogo" destination="fNn-eX-O7v" id="MKv-Wa-UPa"/>
@@ -83,9 +112,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="charoCar" width="66" height="39"/>
         <image name="icAlarmWhite" width="44" height="44"/>
         <image name="icSearchWhite" width="44" height="44"/>
         <image name="logoWhite" width="127" height="44"/>
+        <image name="road" width="353" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

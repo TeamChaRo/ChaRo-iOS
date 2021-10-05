@@ -62,10 +62,10 @@ struct KeywordResult: Codable {
     let year, month, day: String
 
     func getAddressModel() -> AddressDataModel {
-        return AddressDataModel(latitude: latitude,
-                                longitude: longitude,
-                                address: address,
-                                title: title)
+        return AddressDataModel(title: latitude,
+                                address: longitude,
+                                latitude: address,
+                                longitude: title)
     }
     
     

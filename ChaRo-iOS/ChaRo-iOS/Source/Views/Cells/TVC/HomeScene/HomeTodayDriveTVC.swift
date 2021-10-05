@@ -20,7 +20,7 @@ class HomeTodayDriveTVC: UITableViewCell {
     //MARK:- Variable
     static let identifier = "HomeTodayDriveTVC"
     
-    var todayDriveList: [Drive] = []
+    var todayDriveList: [DriveElement] = []
     
     var postDelegate: PostIdDelegate?
     
@@ -92,13 +92,16 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
     
             
             let element = todayDriveList[indexPath.row]
-            
-            cell.setData(image: element.image
-                         ,title: element.title
-                         ,tagCount: element.tags.count
-                         ,tagArr: element.tags
-                         ,isFavorite: element.isFavorite
-                         ,postID: element.postID)
+        var tags = [element.region, element.theme,
+                    element.warning ?? ""] as [String]
+                    
+        
+        cell.setData(image: element.image,
+                     title: element.title,
+                     tagCount: tags.count,
+                     tagArr: tags,
+                     isFavorite: element.isFavorite,
+                     postID: element.postID)
     
             return cell
             

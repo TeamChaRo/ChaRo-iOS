@@ -10,16 +10,16 @@ import Foundation
 struct Constants {
     
     // MARK: - BASE URL
-    static let baseURL = "http://18.223.21.6:5000"
+    static let baseURL = "http://charo-server.o-r.kr"
     
-    static let userId = UserDefaults.standard.string(forKey: "userId") ?? "jieun1211"
+    static let userId = UserDefaults.standard.string(forKey: "userId") ?? "ios"
     static let nickName = UserDefaults.standard.string(forKey: "nickname") ?? "지으니"
     static let profileName = UserDefaults.standard.string(forKey: "profileImage") ?? "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/jieun.JPG"
 
     
     // MARK: - Feature URL
     ///1. 홈 데이터 URL 여기에 + 유저 아이디(111,222,333) 해줘야 함 // 일단은 111로 해놓을겡~!
-    static let HomeURL = baseURL + "/getMain/" + userId
+    static let HomeURL = baseURL + "/post/main/" + userId
     static let CreatePostURL = baseURL + "/writePost"
     
     ///2. 더보기 뷰 URL
