@@ -61,37 +61,6 @@ class CommonCVC: UICollectionViewCell {
         }
         
     }
-    
-    func setImageUrl(_ url: String) {
-        let cacheKey = NSString(string: url) // 캐시에 사용될 Key 값
-        
-        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) { // 해당 Key 에 캐시이미지가 저장되어 있으면 이미지를 사용
-            self.image = cachedImage
-            return
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            if let imageUrl = URL(string: url) {
-                URLSession.shared.dataTask(with: imageUrl) { (data, res, err) in
-                    if let _ = err {
-                        DispatchQueue.main.async {
-                            self.image = UIImage()
-                        }
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        if let data = data, let image = UIImage(data: data) {
-                            ImageCacheManager.shared.setObject(image, forKey: cacheKey) // 다운로드된 이미지를 캐시에 저장
-                            self.image = image
-                            self.imageView.image = image
-                        }
-                    }
-                }.resume()
-            }
-        }
-        
-    }
-    
     //setData 지원이꺼
     func setData(image: String,
                  title: String,
@@ -118,22 +87,11 @@ class CommonCVC: UICollectionViewCell {
                  postID: Int) {
         
         //이미지 설정
-//        guard let url = URL(string: image) else { return }
-//        self.imageView.kf.setImage(with: url)
-        //url에 정확한 이미지 url 주소를 넣는다.
+        guard let url = URL(string: image) else { return }
+        self.imageView.kf.indicatorType = .activity
+        self.imageView.kf.setImage(with: url, options: [.forceTransition, .keepCurrentImageWhileLoading])
         
-//        let url = URL(string: image)
-//        var image : UIImage?
-//        DispatchQueue.global().async {
-//        let data = try? Data(contentsOf: url!)
-//        DispatchQueue.main.async {
-//        image = UIImage(data: data!)
-//            self.imageView.image = image
-//        }
-//        }
-        self.setImageUrl(image)
-        
-        
+     
 
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
