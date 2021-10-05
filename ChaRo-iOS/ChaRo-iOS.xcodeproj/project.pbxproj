@@ -137,6 +137,7 @@
 		7062C83D270C42FE00C1CD2E /* JoinProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C83C270C42FE00C1CD2E /* JoinProfileView.swift */; };
 		7062C83F270C465300C1CD2E /* JoinContractView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C83E270C465300C1CD2E /* JoinContractView.swift */; };
 		7062C843270C5A4200C1CD2E /* IsDuplicatedEmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C842270C5A4200C1CD2E /* IsDuplicatedEmailService.swift */; };
+		7062C845270C63F500C1CD2E /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C844270C63F500C1CD2E /* NextButton.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -338,6 +339,7 @@
 		7062C83C270C42FE00C1CD2E /* JoinProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinProfileView.swift; sourceTree = "<group>"; };
 		7062C83E270C465300C1CD2E /* JoinContractView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinContractView.swift; sourceTree = "<group>"; };
 		7062C842270C5A4200C1CD2E /* IsDuplicatedEmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsDuplicatedEmailService.swift; sourceTree = "<group>"; };
+		7062C844270C63F500C1CD2E /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				7062C8292706FAA300C1CD2E /* JoinTitleLabel.swift */,
 				7062C82B270A34AE00C1CD2E /* JoinAgreeButton.swift */,
 				7062C835270B5A0B00C1CD2E /* PasswordView.swift */,
+				7062C844270C63F500C1CD2E /* NextButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1429,6 +1432,7 @@
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */,
 				F468C0FA269E1C410019B1B3 /* CreatePostService.swift in Sources */,
+				7062C845270C63F500C1CD2E /* NextButton.swift in Sources */,
 				3610A89D2693730700EFC794 /* HomeAnimationCVC.swift in Sources */,
 				7084948226A23AB7001B3C2B /* CollectionViewFooter.swift in Sources */,
 				360937B12699F15A005392BB /* MyPagePostCVC.swift in Sources */,
