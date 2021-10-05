@@ -11,7 +11,7 @@ import Then
 
 //컬렉션 뷰 안에 뷰 만들기 컬렉션 뷰 위에 차 만들어서 인덱스 ?? 해서 움직이게 하면 될듯
 class JoinVC: UIViewController {
-
+    
     static let identifier = "JoinVC"
     var pageNumber: Int = 1
     
@@ -34,13 +34,13 @@ class JoinVC: UIViewController {
     var naviBarLine = UIView().then {
         $0.backgroundColor = .gray20
     }
-
+    
     var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let cv = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
         return cv
     }()
-
+    
     var blueCar = UIButton().then {
         $0.setImage(UIImage(named: "blueCar"), for: .normal)
     }
@@ -49,13 +49,6 @@ class JoinVC: UIViewController {
         $0.image = UIImage(named: "blueCarLine")
     }
     
-    var stickyNextButton = UIButton().then {
-        $0.setTitle("다음", for: .normal)
-        $0.backgroundColor = .gray30
-        $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
-        $0.setTitleColor(.white, for: .normal)
-    }
-
     var emailView = JoinEmailView()
     var passwordView = JoinPasswordView()
     var profileView = JoinProfileView()
@@ -66,6 +59,8 @@ class JoinVC: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         configureUI()
+        configureClosure()
+        
         showView(number: pageNumber)
     }
     
@@ -89,12 +84,44 @@ class JoinVC: UIViewController {
         
     }
     
+    private func configureClosure() {
+        emailView.nextButton.nextPageClosure = {
+            self.showView(number: 2)
+        }
+        emailView.stickyNextButton.nextPageClosure = {
+            self.showView(number: 2)
+        }
+        
+        passwordView.nextButton.nextPageClosure = {
+            self.showView(number: 3)
+        }
+        passwordView.stickyNextButton.nextPageClosure = {
+            self.showView(number: 3)
+        }
+        
+        profileView.nextButton.nextPageClosure = {
+            self.showView(number: 4)
+        }
+        profileView.stickyNextButton.nextPageClosure = {
+            self.showView(number: 4)
+        }
+        
+        contractView.nextButton.nextPageClosure = {
+            self.navigationController?.popViewController(animated: true)
+        }
+        contractView.stickyNextButton.nextPageClosure = {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     //MARK: - Custom 함수
     private func showView(number: Int) {
         
         if number == 0 {
             self.navigationController?.popViewController(animated: true)
         }
+        
+        pageNumber = number
         
         switch number {
         case 1:
@@ -132,9 +159,9 @@ class JoinVC: UIViewController {
     private func setupNavigationViewUI() {
         
         navigationView.addSubviews([navigationViewTitleLabel,
-                                   backButton,
-                                   naviBarLine])
-
+                                    backButton,
+                                    naviBarLine])
+        
         
         navigationView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -159,7 +186,7 @@ class JoinVC: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
-
+        
     }
     
     private func configureUI() {
@@ -190,10 +217,11 @@ class JoinVC: UIViewController {
             $0.leading.equalTo(20)
             $0.trailing.equalTo(-23)
         }
-    
-                
+        
+        
+        
     }
-
+    
     
     private func configureViewsUI() {
         emailView.snp.makeConstraints {
@@ -215,7 +243,7 @@ class JoinVC: UIViewController {
         }
     }
     
-
+    
 }
 
 
@@ -268,7 +296,7 @@ extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelega
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+        
         //이미지 Choose
         picker.dismiss(animated: false) { () in
             let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
@@ -276,4 +304,12 @@ extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelega
         }
         
     }
+}
+
+extension JoinVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }

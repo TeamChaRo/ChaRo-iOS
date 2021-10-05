@@ -14,8 +14,9 @@ class JoinProfileView: UIView {
     let profileView = ProfileView()
     let nicknameView = JoinInputView(title: "닉네임 작성", placeholder: "5자 이내 한글")
     
-    let nextButton = NextButton(isSticky: false)
-    let stickyNextButton = NextButton(isSticky: true)
+    let nextButton = NextButton(isSticky: false, isTheLast: true)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
+    var stickyView: UIView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +30,7 @@ class JoinProfileView: UIView {
     init() {
         super.init(frame: .zero)
         configureUI()
+        configureStickyView()
     }
     
     private func configureUI() {
@@ -64,6 +66,19 @@ class JoinProfileView: UIView {
         
         
         self.dismissKeyboardWhenTappedAround()
+        
+    }
+    
+    private func configureStickyView() {
+        
+        stickyView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 48))
+        stickyView!.addSubview(stickyNextButton)
+        
+        stickyNextButton.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        nicknameView.inputTextField!.inputAccessoryView = stickyView
         
     }
 

@@ -9,6 +9,10 @@ import UIKit
 
 class JoinEmailView: UIView, UITextFieldDelegate {
 
+    
+    var verifyNumber: String?
+    
+    //MARK: - UI Variables
     let emailInputView = JoinInputView(title: "이메일 아이디",
                                        subTitle: "사용할 이메일을 입력해주세요.",
                                        placeholder: "ex)charorong@gmail.com")
@@ -17,13 +21,14 @@ class JoinEmailView: UIView, UITextFieldDelegate {
                                         subTitle: "이메일로 보내드린 인증번호를 입력해주세요.",
                                         placeholder: "ex)울랄라")
     
-    let nextButton = NextButton(isSticky: false)
+    let nextButton = NextButton(isSticky: false, isTheLast: false)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
     
-    let stickyNextButton = NextButton(isSticky: true)
     var stickyView: UIView?
     
-    var verifyNumber: String?
+
     
+    //MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -38,8 +43,11 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         configureDelegate()
         configureUI()
         configureStickyView()
+        configureClosure()
     }
     
+    
+    //MARK: - configure 함수
     private func configureDelegate() {
         emailInputView.inputTextField?.delegate = self
         emailVerifyInputView.inputTextField?.delegate = self
@@ -71,8 +79,17 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         }
         
         //초기에 아래 뷰 가리기
-        //emailVerifyInputView.isHidden = true
+        emailVerifyInputView.isHidden = true
         
+    }
+    
+    private func configureClosure() {
+        self.nextButton.nextViewClosure = {
+            self.emailVerifyInputView.isHidden = false
+        }
+        self.stickyNextButton.nextViewClosure = {
+            self.emailVerifyInputView.isHidden = false
+        }
     }
     
     private func configureStickyView() {
@@ -87,11 +104,11 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         emailInputView.inputTextField!.inputAccessoryView = stickyView
         emailVerifyInputView.inputTextField!.inputAccessoryView = stickyView
         
-        self.dismissKeyboardWhenTappedAround()
         
     }
 
     
+    //MARK: - textFieldDelegate 함수
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
         let text = textField.text
@@ -137,6 +154,8 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         
     }
     
+    
+    //MARK: - 서버 요청 함수
     private func IsDuplicatedEmail(email: String) {
         
         IsDuplicatedEmailService.shared.getEmailInfo(email: email) { (response) in

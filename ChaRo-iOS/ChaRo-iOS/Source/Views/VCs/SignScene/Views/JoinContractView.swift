@@ -30,9 +30,8 @@ class JoinContractView: UIView {
     var agreePushButton = JoinAgreeButton(isBig: false)
     var agreeEmailButton = JoinAgreeButton(isBig: false)
     
-    let nextButton = NextButton(isSticky: false)
-    let stickyNextButton = NextButton(isSticky: true)
-    
+    let nextButton = NextButton(isSticky: false, isTheLast: true)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -127,5 +126,6 @@ class JoinContractView: UIView {
         }
     
     }
+
 
 }

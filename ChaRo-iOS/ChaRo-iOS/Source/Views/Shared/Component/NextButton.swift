@@ -11,6 +11,7 @@ class NextButton: UIButton {
 
     var nextPageClosure: (() -> Void)?
     var nextViewClosure: (() -> Void)?
+    var isTheLast: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,20 +21,24 @@ class NextButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(isSticky: Bool) {
+    init(isSticky: Bool, isTheLast: Bool) {
         super.init(frame: .zero)
+        self.isTheLast = isTheLast
         configureUI(isSticky: isSticky)
-        self.addTarget(self, action: #selector(nextButtonClicked(isTheLast:)), for: .touchUpInside)
+        self.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
     }
+    
     
     //다음 버튼이 마지막 단계일 경우 다음 페이지 뷰로 이동 -> JoinVC에서 클로저 구현
     //다음 단계가 있을 경우 -> 각 View에서 클로저 구현
-    @objc func nextButtonClicked(isTheLast: Bool) {
+    @objc func nextButtonClicked() {
         
         if isTheLast {
             self.nextPageClosure!()
-        } else {
+        }
+        else {
             self.nextViewClosure!()
+            isTheLast.toggle()
         }
         
     }
