@@ -78,10 +78,10 @@ struct LoginService {
     }
     
     
-    func setUserInfo(data: UserData) {
-        let userInfo = UserInfo.shared
-        userInfo.id = data.userId
-        userInfo.nickname = data.nickname
-        userInfo.token = data.token
-    }
+//    func setUserInfo(data: UserData) {
+//        let userInfo = UserInfo.shared
+//        userInfo.id = data.userId
+//        userInfo.nickname = data.nickname
+//        userInfo.token = data.token
+//    }
 }

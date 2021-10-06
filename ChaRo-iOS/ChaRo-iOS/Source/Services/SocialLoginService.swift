@@ -10,7 +10,7 @@ import Alamofire
 
 struct SocialLoginService {
     
-    static let shared = LoginService()
+    static let shared = SocialLoginService()
     
     private func makeParameter(email : String) -> Parameters
     {
@@ -22,7 +22,7 @@ struct SocialLoginService {
     {
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         
-        let dataRequest = AF.request(Constants.loginURL,
+        let dataRequest = AF.request(Constants.snsLoginURL,
                                      method: .post,
                                      parameters: makeParameter(email: email),
                                      encoding: JSONEncoding.default,
@@ -52,10 +52,15 @@ struct SocialLoginService {
         
         let decoder = JSONDecoder()
         
+        print(data)
+        
         guard let decodedData = try? decoder.decode(LoginDataModel.self, from: data)
         else {
             return .pathErr
         }
+        
+        print(decodedData)
+        print(statusCode)
         
         switch statusCode {
         

@@ -50,9 +50,9 @@ struct Constants {
     static let saveURL = baseURL + "/post/save"
     
     //- 이메일 중복체크, 인증, 닉네임 중복체크
-    static let duplicateEmailURL = baseURL + "/user/check/email/:userEmail"
+    static let duplicateEmailURL = baseURL + "/user/check/email/"
     static let validateEmailURL = baseURL + "/user/auth"
-    static let duplicateNicknameURL = baseURL + "/user/check/nickname/:nickname"
+    static let duplicateNicknameURL = baseURL + "/user/check/nickname/"
     
     //회원가입, 로그인, 소셜로그인
     static let JoinURL = baseURL + "/user/register"

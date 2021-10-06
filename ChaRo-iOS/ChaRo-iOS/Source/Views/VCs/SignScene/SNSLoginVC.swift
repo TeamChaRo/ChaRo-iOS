@@ -62,6 +62,29 @@ class SNSLoginVC: UIViewController {
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
+        $0.addTarget(self, action: #selector(testlogin), for: .touchUpInside)
+    }
+    
+    @objc func testlogin() {
+        SocialLoginService.shared.socialLogin(email: "and@naver.com") { (response) in
+            
+            switch(response)
+            {
+            case .success(let success):
+                if let success = success as? Bool {
+                    print(success)
+                }
+            case .requestErr(let message) :
+                print("requestERR", message)
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+            
+        }
     }
     
     let kakaoLoginBtn = UIButton().then {

@@ -8,7 +8,7 @@
 import UIKit
 
 class LoginVC: UIViewController {
-
+    
     //MARK: IBOutlet
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var joinButton: UIButton!
@@ -55,38 +55,38 @@ class LoginVC: UIViewController {
     
     
     func loginAction(){
-            
-            LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
-                
-                switch result
-                {
-                case .success(let data):
-                    let loginData = data as? LoginDataModel
-                    let userData = loginData?.data
-                    dump(userData)
-                    
-                    if let user = userData as? UserData {
-                        
-                        UserDefaults.standard.set(user.userId, forKey: "userId")
-                        UserDefaults.standard.set(user.nickname, forKey: "nickname")
-                        UserDefaults.standard.set(user.token, forKey: "token")
-                        UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
-                        
-                        print(UserDefaults.standard.string(forKey: "userId"))
-                        print(UserDefaults.standard.string(forKey: "nickname"))
-                        print(UserDefaults.standard.string(forKey: "token"))
-                        print(UserDefaults.standard.string(forKey: "profileImage"))
-                    }
-                    
-                case .requestErr(let message):
-                    if let message = message as? String {
-                        print(message)
-                    }
-                default :
-                    print("ERROR")
-                }
-            }
-        }
+        
+//        LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
+//
+//            switch result
+//            {
+//            case .success(let data):
+//                let loginData = data as? LoginDataModel
+//                let userData = loginData?.data
+//                dump(userData)
+//
+//                if let user = userData as? UserData {
+//
+//                    UserDefaults.standard.set(user.userId, forKey: "userId")
+//                    UserDefaults.standard.set(user.nickname, forKey: "nickname")
+//                    UserDefaults.standard.set(user.token, forKey: "token")
+//                    UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
+//
+//                    print(UserDefaults.standard.string(forKey: "userId"))
+//                    print(UserDefaults.standard.string(forKey: "nickname"))
+//                    print(UserDefaults.standard.string(forKey: "token"))
+//                    print(UserDefaults.standard.string(forKey: "profileImage"))
+//                }
+//
+//            case .requestErr(let message):
+//                if let message = message as? String {
+//                    print(message)
+//                }
+//            default :
+//                print("ERROR")
+//            }
+//        }
+    }
     
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
@@ -104,7 +104,7 @@ class LoginVC: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-          self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     func setNotificationCenter(){
@@ -133,16 +133,16 @@ class LoginVC: UIViewController {
         view.transform = .identity
     }
     
-
+    
     
 }
 
 extension LoginVC {
     func setConstraints() {
-
+        
         if UIScreen.hasNotch {
             let factor = UIScreen.main.bounds.width / 375
-
+            
             heightConstraint.constant = factor * 464
         } else {
             heightConstraint.constant = 356
