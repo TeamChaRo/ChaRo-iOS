@@ -12,20 +12,22 @@ import Alamofire
 struct IsDuplicatedEmailService {
     static let shared = IsDuplicatedEmailService()
     
-    private func makeParameter(email : String) -> Parameters
-    {
-        return ["userEmail" : email]
-    }
-    
     func getEmailInfo(email: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         
-        let URL = Constants.duplicateEmailURL
+        let original = Constants.duplicateEmailURL + email
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         
-        let dataRequest = AF.request(URL,
+        guard let target = original.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return
+        }
+        
+        guard let url = URL(string: target) else {
+            return
+        }
+                
+        let dataRequest = AF.request(url,
                                      method: .get,
-                                     parameters: makeParameter(email: email),
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
@@ -52,6 +54,9 @@ struct IsDuplicatedEmailService {
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         
         let decoder = JSONDecoder()
+        
+
+        print(data)
         
         guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
         else {

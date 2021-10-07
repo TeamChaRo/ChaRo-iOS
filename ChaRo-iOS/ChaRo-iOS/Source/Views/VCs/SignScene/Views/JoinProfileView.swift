@@ -97,6 +97,8 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     private func IsDuplicatedNickname(nickname: String) {
         IsDuplicatedNicknameService.shared.getNicknameInfo(nickname: nickname) { (response) in
             
+            print(response)
+            
             switch(response)
             {
             case .success(let success):

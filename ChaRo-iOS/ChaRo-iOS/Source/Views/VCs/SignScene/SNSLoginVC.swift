@@ -85,6 +85,7 @@ class SNSLoginVC: UIViewController {
             }
             
         }
+        
     }
     
     let kakaoLoginBtn = UIButton().then {
