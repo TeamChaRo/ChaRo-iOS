@@ -64,6 +64,7 @@ struct IsDuplicatedEmailService {
             return .pathErr
         }
         
+        print(statusCode)
         print("일단 여기까지 왔음")
         switch statusCode {
         case 200:
