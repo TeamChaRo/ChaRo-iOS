@@ -33,6 +33,7 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     
     init() {
         super.init(frame: .zero)
+        configureDelegate()
         configureUI()
         configureStickyView()
         configureClosure()
@@ -40,6 +41,12 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     
     
     //MARK: - configure 함수
+    
+    private func configureDelegate() {
+        nicknameView.inputTextField?.delegate = self
+    }
+    
+    
     private func configureClosure() {
         self.nextButton.nextViewClosure = {
         }
@@ -108,11 +115,40 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         stickyNextButton.backgroundColor = .gray30
     }
     
+    private func isOnlyHanguel(text: String) -> Bool {
+        // String -> Array
+        let arr = Array(text)
+        // 정규식 pattern. 한글만 있어야함
+        let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ]$"
+        if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
+            var index = 0
+            while index < arr.count { // string 내 각 문자 하나하나 마다 정규식 체크 후 충족하지 못한것은 제거.
+                let results = regex.matches(in: String(arr[index]), options: [], range: NSRange(location: 0, length: 1))
+                if results.count == 0 {
+                    return false
+                } else {
+                    index += 1
+                }
+            }
+        }
+        return true
+        
+    }
+    
     
     //MARK: - TextField Delegate 함수
     func textFieldDidEndEditing(_ textField: UITextField) {
         //이것도 Rx로 해야할까나 ...
-        self.IsDuplicatedNickname(nickname: (self.nicknameView.inputTextField?.text!)!)
+        if textField.text == "" {
+            nicknameView.setOrangeTFLabelColorWithText(text: "닉네임을 작성해주세요.")
+        } else if textField.text!.count > 5 {
+            nicknameView.setOrangeTFLabelColorWithText(text: "5자 이내로 작성해주세요.")
+        } else if !isOnlyHanguel(text: textField.text!) {
+            nicknameView.setOrangeTFLabelColorWithText(text: "한글만 사용해주세요.")
+        }
+        else {
+            self.IsDuplicatedNickname(nickname: (self.nicknameView.inputTextField?.text!)!)
+        }
     }
     
     
@@ -123,6 +159,7 @@ class JoinProfileView: UIView, UITextFieldDelegate {
             switch(response)
             {
             case .success(_):
+                self.nicknameView.setBlueTFLabelColorWithText(text: "사용 가능한 닉네임입니다.")
                 self.makeButtonsBlue()
             case .requestErr(let message) :
                 print("requestERR", message)
