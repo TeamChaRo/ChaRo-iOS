@@ -94,6 +94,8 @@ class PasswordView: UIView, UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let textField = textField as! InputTextField
         if textField == firstTextField {
+            isSecondPassed = false
+            
             if validpassword(password: textField.text!) {
                 isFirstPassed = true
                 textField.setBlueBorderWithText()

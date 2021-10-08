@@ -48,12 +48,10 @@ class JoinPasswordView: UIView {
         
         
         passwordInputView.enableNextButtonClosure = {
-            //self.nextButton.setTitle("됐다!!!", for: .normal)
-            print("나중에 자기 버튼 만들어서 넣기")
+            self.makeButtonsBlue()
         }
         passwordInputView.unableNextButtonClosure = {
-            //self.nextButton.setTitle("다음", for: .normal)
-            print("나중에 자기 버튼 만들어서 넣기")
+            self.makeButtonsGray()
         }
         
         self.dismissKeyboardWhenTappedAround()
@@ -74,6 +72,16 @@ class JoinPasswordView: UIView {
         
         self.dismissKeyboardWhenTappedAround()
         
+    }
+    
+    private func makeButtonsBlue() {
+        nextButton.backgroundColor = .mainBlue
+        stickyNextButton.backgroundColor = .mainBlue
+    }
+    
+    private func makeButtonsGray() {
+        nextButton.backgroundColor = .gray30
+        stickyNextButton.backgroundColor = .gray30
     }
 
 }
