@@ -12,14 +12,19 @@ struct EmailJoinService {
     
     static let shared = EmailJoinService()
     
-    func EmailJoin(model: JoinDataModel, image: UIImage, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func EmailJoin(userEmail: String,
+                   password: String,
+                   nickname: String,
+                   marketingPush: Bool,
+                   marketingEmail: Bool,
+                   image: UIImage, completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let parameters: [String: Any] = [
-            "userEmail": model.userEmail,
-            "nickname": model.nickname,
-            "password": model.password,
-            "marketingEmail": model.marketingEmail,
-            "marketingPush": model.marketingPush,
+            "userEmail": userEmail,
+            "nickname": nickname,
+            "password": password,
+            "marketingEmail": marketingEmail,
+            "marketingPush": marketingPush,
         ]
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
@@ -56,12 +61,25 @@ struct EmailJoinService {
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         
-        guard let decodedData = try? decoder.decode(CreatePostDataModel.self, from: data)
-        else { return .pathErr}
+        print(data)
         
+        //do - catch 문으로
+//        do {
+//            let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
+//        } catch {
+//            guard let error = error as? DecodingError else { return .networkFail }
+//        }
+        print(statusCode)
+
+        guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
+        else { print("디코딩에러")
+            return .pathErr
+
+        }
+
         switch statusCode {
-        case 200...299: return .success(decodedData.message)
-        case 400...499: return .requestErr(decodedData.message)
+        case 200...299: return .success("되엇군")
+        case 400...499: return .requestErr("리퀘스트에러")
         case 500: return .serverErr
         default: return .networkFail
         }

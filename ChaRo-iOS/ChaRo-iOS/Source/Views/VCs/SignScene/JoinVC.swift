@@ -14,7 +14,6 @@ class JoinVC: UIViewController {
     
     static let identifier = "JoinVC"
     var pageNumber: Int = 1
-    var joinData = JoinDataModel()
     
     //MARK: - UI Variables
     var navigationView = UIView().then {
@@ -109,7 +108,15 @@ class JoinVC: UIViewController {
         
         contractView.nextButton.nextPageClosure = {
             self.navigationController?.popViewController(animated: true)
+            
+            self.postJoin(userEmail: "gggg0321@naver.com",
+                          password: "111111",
+                          nickname: "아잉",
+                          marketingPush: true,
+                          marketingEmail: true,
+                          image: UIImage(named: "icBackButton")!)
         }
+        
         contractView.stickyNextButton.nextPageClosure = {
             self.navigationController?.popViewController(animated: true)
         }
@@ -245,6 +252,38 @@ class JoinVC: UIViewController {
     }
     
     
+    private func postJoin(userEmail: String,
+                          password: String,
+                          nickname: String,
+                          marketingPush: Bool,
+                          marketingEmail: Bool,
+                          image: UIImage) {
+        
+        EmailJoinService.shared.EmailJoin(userEmail: userEmail,
+                                          password: password,
+                                          nickname: nickname,
+                                          marketingPush: marketingPush,
+                                          marketingEmail: marketingEmail,
+                                          image: image) { result in
+            switch result {
+            
+            case .success(let msg):
+                print("success", msg)
+            case .requestErr(let msg):
+                print("requestERR", msg)
+            case .pathErr:
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            
+        }
+    }
+    
+    
 }
 
 
@@ -306,6 +345,7 @@ extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelega
         
     }
 }
+
 
 extension JoinVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

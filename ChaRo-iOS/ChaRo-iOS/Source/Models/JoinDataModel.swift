@@ -7,16 +7,6 @@
 
 import Foundation
 
-
 struct JoinDataModel: Codable {
-    let password: String
-    let userEmail: String
-    
-    let nickname: String
-    let marketingPush: Bool
-    let marketingEmail: Bool
-    
-    init() {
-        self.init()
-    }
+    let msg: String
 }
