@@ -9,11 +9,14 @@ import UIKit
 
 class JoinPasswordView: UIView {
 
+    //MARK: - UI Variables
     let passwordInputView = PasswordView(title: "비밀번호", subTitle: "5자 이상 15자 이내의 비밀번호를 입력해주세요.")
     let nextButton = NextButton(isSticky: false, isTheLast: true)
     let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
     var stickyView: UIView?
     
+    
+    //MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -29,6 +32,8 @@ class JoinPasswordView: UIView {
         configureStickyView()
     }
     
+    
+    //MARK: - configure 함수
     private func configureUI() {
                 
         self.addSubviews([passwordInputView, nextButton])

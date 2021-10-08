@@ -9,6 +9,8 @@ import UIKit
 
 class JoinProfileView: UIView, UITextFieldDelegate {
 
+    
+    //MARK: - UI Variables
     var profileLabel = JoinTitleLabel(type: .boldTitle, title: "프로필 사진")
     
     let profileView = ProfileView()
@@ -18,6 +20,8 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
     var stickyView: UIView?
     
+    
+    //MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -34,15 +38,17 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         configureClosure()
     }
     
+    
+    //MARK: - configure 함수
     private func configureClosure() {
         self.nextButton.nextViewClosure = {
-            self.IsDuplicatedNickname(nickname: (self.nicknameView.inputTextField?.text!)!)
         }
         self.stickyNextButton.nextViewClosure = {
             //서버연결
         }
     }
     
+
     private func configureUI() {
         
         self.addSubviews([profileView,
@@ -92,17 +98,32 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         
     }
     
+    private func makeButtonsBlue() {
+        nextButton.backgroundColor = .mainBlue
+        stickyNextButton.backgroundColor = .mainBlue
+    }
+    
+    private func makeButtonsGray() {
+        nextButton.backgroundColor = .gray30
+        stickyNextButton.backgroundColor = .gray30
+    }
+    
+    
+    //MARK: - TextField Delegate 함수
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        //이것도 Rx로 해야할까나 ...
+        self.IsDuplicatedNickname(nickname: (self.nicknameView.inputTextField?.text!)!)
+    }
+    
     
     //MARK: - 서버 연결 함수
     private func IsDuplicatedNickname(nickname: String) {
         IsDuplicatedNicknameService.shared.getNicknameInfo(nickname: nickname) { (response) in
             
-            print(response)
-            
             switch(response)
             {
-            case .success(let success):
-                print(success)
+            case .success(_):
+                self.makeButtonsBlue()
             case .requestErr(let message) :
                 print("requestERR", message)
             case .pathErr :
