@@ -14,6 +14,7 @@ class JoinVC: UIViewController {
     
     static let identifier = "JoinVC"
     var pageNumber: Int = 1
+    var joinData = JoinDataModel()
     
     //MARK: - UI Variables
     var navigationView = UIView().then {

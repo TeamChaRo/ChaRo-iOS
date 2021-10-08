@@ -15,4 +15,8 @@ struct JoinDataModel: Codable {
     let nickname: String
     let marketingPush: Bool
     let marketingEmail: Bool
+    
+    init() {
+        self.init()
+    }
 }
