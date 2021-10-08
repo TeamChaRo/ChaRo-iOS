@@ -142,6 +142,7 @@
 		7062C849270CC04500C1CD2E /* ValidationEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */; };
 		7062C84B270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C84A270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift */; };
 		7062C84D270CE46400C1CD2E /* SocialLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C84C270CE46400C1CD2E /* SocialLoginService.swift */; };
+		7062C8532710C01100C1CD2E /* JoinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062C8522710C01000C1CD2E /* JoinDataModel.swift */; };
 		706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706A671526F35945001AB884 /* JoinViewCVC.swift */; };
 		707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */; };
 		707A7D50269C1B900033C40F /* GetThemeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A7D4F269C1B900033C40F /* GetThemeDataService.swift */; };
@@ -348,6 +349,7 @@
 		7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationEmailModel.swift; sourceTree = "<group>"; };
 		7062C84A270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsDuplicatedNicknameService.swift; sourceTree = "<group>"; };
 		7062C84C270CE46400C1CD2E /* SocialLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginService.swift; sourceTree = "<group>"; };
+		7062C8522710C01000C1CD2E /* JoinDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDataModel.swift; sourceTree = "<group>"; };
 		706A671526F35945001AB884 /* JoinViewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewCVC.swift; sourceTree = "<group>"; };
 		707A7D4A269C16BF0033C40F /* ThemeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataModel.swift; sourceTree = "<group>"; };
 		707A7D4F269C1B900033C40F /* GetThemeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThemeDataService.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 				3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */,
 				362BC9F6269ED387008EF625 /* MyPageDataModel.swift */,
 				7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */,
+				7062C8522710C01000C1CD2E /* JoinDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1397,6 +1400,7 @@
 				7062C847270CBF4F00C1CD2E /* ValidateEmailService.swift in Sources */,
 				3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */,
 				70D63E3426963C810036484B /* ThemePostThemeTVC.swift in Sources */,
+				7062C8532710C01100C1CD2E /* JoinDataModel.swift in Sources */,
 				3C6F8A6226E2358D006E3895 /* SearchAddressKeywordVC.swift in Sources */,
 				3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
