@@ -9,6 +9,7 @@ import UIKit
 
 class JoinProfileView: UIView, UITextFieldDelegate {
 
+    var isNicknamePassed = false
     
     //MARK: - UI Variables
     var profileLabel = JoinTitleLabel(type: .boldTitle, title: "프로필 사진")
@@ -87,6 +88,7 @@ class JoinProfileView: UIView, UITextFieldDelegate {
             $0.leading.trailing.equalTo(profileLabel)
         }
         
+        makeButtonsGray()
         
         self.dismissKeyboardWhenTappedAround()
         
@@ -108,11 +110,15 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     private func makeButtonsBlue() {
         nextButton.backgroundColor = .mainBlue
         stickyNextButton.backgroundColor = .mainBlue
+        nextButton.isEnabled = true
+        stickyNextButton.isEnabled = true
     }
     
     private func makeButtonsGray() {
         nextButton.backgroundColor = .gray30
         stickyNextButton.backgroundColor = .gray30
+        nextButton.isEnabled = false
+        stickyNextButton.isEnabled = false
     }
     
     private func isOnlyHanguel(text: String) -> Bool {
@@ -140,15 +146,25 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         //이것도 Rx로 해야할까나 ...
         if textField.text == "" {
+            isNicknamePassed = false
+            self.makeButtonsGray()
             nicknameView.setOrangeTFLabelColorWithText(text: "닉네임을 작성해주세요.")
         } else if textField.text!.count > 5 {
+            isNicknamePassed = false
+            self.makeButtonsGray()
             nicknameView.setOrangeTFLabelColorWithText(text: "5자 이내로 작성해주세요.")
         } else if !isOnlyHanguel(text: textField.text!) {
+            isNicknamePassed = false
+            self.makeButtonsGray()
             nicknameView.setOrangeTFLabelColorWithText(text: "한글만 사용해주세요.")
         }
         else {
             self.IsDuplicatedNickname(nickname: (self.nicknameView.inputTextField?.text!)!)
         }
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        isNicknamePassed = false
     }
     
     
@@ -159,8 +175,9 @@ class JoinProfileView: UIView, UITextFieldDelegate {
             switch(response)
             {
             case .success(_):
-                self.nicknameView.setBlueTFLabelColorWithText(text: "사용 가능한 닉네임입니다.")
+                self.isNicknamePassed = true
                 self.makeButtonsBlue()
+                self.nicknameView.setBlueTFLabelColorWithText(text: "사용 가능한 닉네임입니다.")
             case .requestErr(let message) :
                 print("requestERR", message)
             case .pathErr :

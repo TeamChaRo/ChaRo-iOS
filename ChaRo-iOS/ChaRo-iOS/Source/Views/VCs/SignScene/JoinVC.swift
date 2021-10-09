@@ -115,9 +115,12 @@ class JoinVC: UIViewController {
             self.showView(number: 4)
             self.moveCar(toPage: 4)
         }
+        
         profileView.stickyNextButton.nextPageClosure = {
-            self.showView(number: 4)
-            self.moveCar(toPage: 4)
+            if self.profileView.isNicknamePassed {
+                self.showView(number: 4)
+                self.moveCar(toPage: 4)
+            }
         }
         
         contractView.nextButton.nextPageClosure = {
