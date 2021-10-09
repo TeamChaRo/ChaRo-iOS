@@ -33,7 +33,6 @@ class JoinContractView: UIView {
     var agreeEmailButton = JoinAgreeButton(isBig: false)
     
     let nextButton = NextButton(isSticky: false, isTheLast: true)
-    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
     
     
     //MARK: - Life Cycle
@@ -53,16 +52,12 @@ class JoinContractView: UIView {
     
     private func makeButtonBlue() {
         self.nextButton.backgroundColor = .mainBlue
-        self.stickyNextButton.backgroundColor = .mainBlue
         nextButton.isEnabled = true
-        stickyNextButton.isEnabled = true
     }
     
     private func makeButtonsGray() {
         nextButton.backgroundColor = .gray30
-        stickyNextButton.backgroundColor = .gray30
         nextButton.isEnabled = false
-        stickyNextButton.isEnabled = false
     }
     
     

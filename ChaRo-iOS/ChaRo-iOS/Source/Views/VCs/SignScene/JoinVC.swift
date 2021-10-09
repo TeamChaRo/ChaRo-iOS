@@ -86,29 +86,23 @@ class JoinVC: UIViewController {
     
     private func configureClosure() {
         emailView.nextButton.nextPageClosure = {
-            if self.emailView.DuplicateCheck && self.emailView.ValidateCheck {
                 self.showView(number: 2)
                 self.moveCar(toPage: 2)
-            }
         }
+        
         emailView.stickyNextButton.nextPageClosure = {
-            if self.emailView.DuplicateCheck && self.emailView.ValidateCheck {
                 self.showView(number: 2)
                 self.moveCar(toPage: 2)
-            }
         }
         
         passwordView.nextButton.nextPageClosure = {
-            if self.passwordView.passwordInputView.isFirstPassed && self.passwordView.passwordInputView.isSecondPassed {
                 self.showView(number: 3)
                 self.moveCar(toPage: 3)
-            }
         }
+        
         passwordView.stickyNextButton.nextPageClosure = {
-            if self.passwordView.passwordInputView.isFirstPassed && self.passwordView.passwordInputView.isSecondPassed {
                 self.showView(number: 3)
                 self.moveCar(toPage: 3)
-            }
         }
         
         profileView.nextButton.nextPageClosure = {
@@ -117,14 +111,12 @@ class JoinVC: UIViewController {
         }
         
         profileView.stickyNextButton.nextPageClosure = {
-            if self.profileView.isNicknamePassed {
                 self.showView(number: 4)
                 self.moveCar(toPage: 4)
-            }
         }
         
         contractView.nextButton.nextPageClosure = {
-            
+            //회원가입 요청
             let userEmail = self.emailView.emailInputView.inputTextField?.text
             let password = self.passwordView.passwordInputView.secondTextField.text
             let nickname = self.profileView.nicknameView.inputTextField?.text
@@ -139,13 +131,8 @@ class JoinVC: UIViewController {
                           marketingPush: marketingPush,
                           marketingEmail: marketingEmail,
                           image: (image ?? UIImage(named: "icProfile"))!)
-        
-            
         }
         
-        contractView.stickyNextButton.nextPageClosure = {
-            self.navigationController?.popViewController(animated: true)
-        }
     }
     
     //MARK: - Custom 함수

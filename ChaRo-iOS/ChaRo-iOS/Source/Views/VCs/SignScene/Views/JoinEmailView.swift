@@ -123,11 +123,15 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     private func makeButtonsBlue() {
         nextButton.backgroundColor = .mainBlue
         stickyNextButton.backgroundColor = .mainBlue
+        nextButton.isEnabled = true
+        stickyNextButton.isEnabled = true
     }
     
     private func makeButtonsGray() {
         nextButton.backgroundColor = .gray30
         stickyNextButton.backgroundColor = .gray30
+        nextButton.isEnabled = false
+        stickyNextButton.isEnabled = false
     }
 
     
