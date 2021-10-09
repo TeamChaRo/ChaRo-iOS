@@ -27,17 +27,24 @@ struct EmailJoinService {
             "marketingPush": marketingPush,
         ]
         
+        var test: [String: Any] = [:]
+        
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         
         AF.upload(multipartFormData: { multipartFormData in
             
             for (key, value) in parameters {
                 multipartFormData.append("\(value)".data(using: .utf8, allowLossyConversion: false)!, withName: "\(key)")
+                test.updateValue(value, forKey: "\(key)")
             }
            
             if let imageData = image.jpegData(compressionQuality: 1) {
-                multipartFormData.append(imageData, withName: "profileImage", fileName: ".jpeg", mimeType: "image/jpeg")
+                multipartFormData.append(imageData, withName: "image", fileName: "gg.jpeg", mimeType: "image/jpeg")
+                test.updateValue(imageData, forKey: "profileImage")
             }
+            
+            print(test)
+        
             
         }, to: Constants.JoinURL
         , usingThreshold: UInt64.init()
@@ -46,7 +53,7 @@ struct EmailJoinService {
             
             switch dataResponse.result {
             case .success:
-                
+                print("----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value!)
