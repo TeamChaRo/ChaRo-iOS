@@ -9,6 +9,8 @@ import UIKit
 
 class JoinContractView: UIView {
 
+    
+    //MARK: - UI Variables
     var contractLabel = JoinTitleLabel(type: .boldTitle, title: "약관동의")
     
     let contractBackgroundImageView = UIImageView().then {
@@ -33,6 +35,8 @@ class JoinContractView: UIView {
     let nextButton = NextButton(isSticky: false, isTheLast: true)
     let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
     
+    
+    //MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -47,6 +51,22 @@ class JoinContractView: UIView {
         configureUI()
     }
     
+    private func makeButtonBlue() {
+        self.nextButton.backgroundColor = .mainBlue
+        self.stickyNextButton.backgroundColor = .mainBlue
+        nextButton.isEnabled = true
+        stickyNextButton.isEnabled = true
+    }
+    
+    private func makeButtonsGray() {
+        nextButton.backgroundColor = .gray30
+        stickyNextButton.backgroundColor = .gray30
+        nextButton.isEnabled = false
+        stickyNextButton.isEnabled = false
+    }
+    
+    
+    //MARK: - configure 함수
     private func configureUI() {
         
         self.addSubviews([contractLabel, contractInputView, nextButton])
@@ -70,8 +90,7 @@ class JoinContractView: UIView {
                                        agreeEmailLabel,
                                        agreeAllButton,
                                        agreePushButton,
-                                       agreeEmailButton,
-                                       nextButton])
+                                       agreeEmailButton])
         
         contractBackgroundImageView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
@@ -124,6 +143,8 @@ class JoinContractView: UIView {
             $0.height.equalTo(48)
             $0.leading.trailing.equalTo(contractLabel)
         }
+        
+        makeButtonBlue()
     
     }
 
