@@ -38,7 +38,7 @@ struct IsDuplicatedEmailService {
             switch dataResponse.result {
             case .success:
                 
-                print("----- 데이터 요청 성공")
+                print("중복 이메일 ----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value)
@@ -60,17 +60,17 @@ struct IsDuplicatedEmailService {
         
         guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
         else {
-            print("패쓰에러")
             return .pathErr
         }
         
         print(statusCode)
-        print("일단 여기까지 왔음")
+
         switch statusCode {
         case 200:
-            print("--- 데이터 받기 성공")
+            print("중복 이메일 --- 데이터 받기 성공")
             return .success(decodedData.success)
         case 400: return .requestErr(decodedData.msg)
+        case 409: return .success(decodedData.success)
         case 500: return .serverErr
         default: return .networkFail
         }

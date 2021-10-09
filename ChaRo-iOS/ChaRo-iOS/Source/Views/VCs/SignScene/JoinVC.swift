@@ -87,23 +87,29 @@ class JoinVC: UIViewController {
     private func configureClosure() {
         emailView.nextButton.nextPageClosure = {
             self.showView(number: 2)
+            self.moveCar(toPage: 2)
         }
         emailView.stickyNextButton.nextPageClosure = {
             self.showView(number: 2)
+            self.moveCar(toPage: 2)
         }
         
         passwordView.nextButton.nextPageClosure = {
             self.showView(number: 3)
+            self.moveCar(toPage: 3)
         }
         passwordView.stickyNextButton.nextPageClosure = {
             self.showView(number: 3)
+            self.moveCar(toPage: 3)
         }
         
         profileView.nextButton.nextPageClosure = {
             self.showView(number: 4)
+            self.moveCar(toPage: 4)
         }
         profileView.stickyNextButton.nextPageClosure = {
             self.showView(number: 4)
+            self.moveCar(toPage: 4)
         }
         
         contractView.nextButton.nextPageClosure = {
@@ -160,7 +166,39 @@ class JoinVC: UIViewController {
     
     @objc func moveBack() {
         showView(number: pageNumber - 1)
+        moveCar(toPage: pageNumber)
     }
+    
+    private func moveCar(toPage: Int) {
+        let carLocation_1 = CGFloat(15)
+        let carLocation_2 = (self.view.frame.width - 30) / 4
+        let carLocation_3 = carLocation_1 + carLocation_2 * 2
+        let carLocation_4 = carLocation_1 + carLocation_2 * 3
+        
+        var destination = (self.view.frame.width - 30) / 4
+        
+        switch toPage {
+        case 1:
+            destination = carLocation_1
+            break
+        case 2:
+            destination = carLocation_2
+            break
+        case 3:
+            destination = carLocation_3
+            break
+        case 4:
+            destination = carLocation_4
+            break
+        default:
+            break
+        }
+        
+        UIView.animate(withDuration: 1.0) {
+            self.blueCar.transform = CGAffineTransform(translationX: destination, y: 0)
+        }
+    }
+
     
     
     //MARK: - UI 관련 코드
