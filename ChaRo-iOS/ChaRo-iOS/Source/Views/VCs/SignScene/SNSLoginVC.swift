@@ -42,10 +42,13 @@ class SNSLoginVC: UIViewController {
     }
     
     let appleLoginBtn = UIButton().then {
-        $0.backgroundColor = .mainBlack
+        $0.backgroundColor = .black
         $0.setTitle("Apple로 로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.setImage(UIImage(named: "appleLogo"), for: .normal)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
+        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
     }
