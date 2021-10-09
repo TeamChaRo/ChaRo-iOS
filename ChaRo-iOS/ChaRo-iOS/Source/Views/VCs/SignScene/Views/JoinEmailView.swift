@@ -11,6 +11,8 @@ class JoinEmailView: UIView, UITextFieldDelegate {
 
     
     var verifyNumber: String?
+    var DuplicateCheck: Bool = false
+    var ValidateCheck: Bool = false
     
     //MARK: - UI Variables
     let emailInputView = JoinInputView(title: "이메일 아이디",
@@ -88,14 +90,18 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         //다음 버튼을 눌렀을 때 JoinEMailView 내 에서의 클로져 정의.
         //다음 뒤에 나올 뷰가 있으면 이 nextViewClosure 가 실행되고 다음 페이지로 넘어가야 하면 JoinVC에 있는 nextPageClosure 가 실행됨
         self.nextButton.nextViewClosure = {
-            self.emailVerifyInputView.isHidden = false
-            self.ValidateEmail(email: (self.emailInputView.inputTextField?.text!)!)
-            self.makeButtonsGray()
+            if self.DuplicateCheck {
+                self.emailVerifyInputView.isHidden = false
+                self.ValidateEmail(email: (self.emailInputView.inputTextField?.text!)!)
+                self.makeButtonsGray()
+            }
         }
         self.stickyNextButton.nextViewClosure = {
-            self.emailVerifyInputView.isHidden = false
-            self.ValidateEmail(email: (self.emailInputView.inputTextField?.text!)!)
-            self.makeButtonsGray()
+            if self.DuplicateCheck {
+                self.emailVerifyInputView.isHidden = false
+                self.ValidateEmail(email: (self.emailInputView.inputTextField?.text!)!)
+                self.makeButtonsGray()
+            }
         }
     }
     
@@ -120,8 +126,8 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     }
     
     private func makeButtonsGray() {
-        nextButton.backgroundColor = .gray20
-        stickyNextButton.backgroundColor = .gray20
+        nextButton.backgroundColor = .gray30
+        stickyNextButton.backgroundColor = .gray30
     }
 
     
@@ -133,13 +139,16 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         switch textField {
         
         case emailInputView.inputTextField:
+            DuplicateCheck = false
             break
         
         case emailVerifyInputView.inputTextField:
             if verifyNumber == text {
+                ValidateCheck = true
                 emailVerifyInputView.setBlueTFLabelColorWithText(text: "인증되었습니다.")
                 makeButtonsBlue()
             } else {
+                ValidateCheck = false
                 emailVerifyInputView.setOrangeTFLabelColorWithText(text: "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요.")
                 makeButtonsGray()
             }
@@ -157,6 +166,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         case emailInputView.inputTextField:
             if textField.text == "" {
                 emailInputView.setOrangeTFLabelColorWithText(text: "이메일을 입력해주세요.")
+                makeButtonsGray()
             } else {
                 IsDuplicatedEmail(email: textField.text!)
             }
@@ -164,7 +174,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         case emailVerifyInputView.inputTextField:
             if textField.text == "" {
                 emailVerifyInputView.setOrangeTFLabelColorWithText(text: "인증번호를 입력해주세요.")
-                print(verifyNumber)
+                makeButtonsGray()
             }
             
         default:
@@ -182,8 +192,18 @@ class JoinEmailView: UIView, UITextFieldDelegate {
             switch(response)
             {
             case .success(let success):
-                self.emailInputView.setBlueTFLabelColorWithText(text: "사용가능한 이메일 형식입니다.")
-                self.makeButtonsBlue()
+                
+                if let success = success as? Bool {
+                    if success {
+                        self.DuplicateCheck = true
+                        self.emailInputView.setBlueTFLabelColorWithText(text: "사용가능한 이메일 형식입니다.")
+                        self.makeButtonsBlue()
+                    } else {
+                        self.DuplicateCheck = false
+                        self.emailInputView.setOrangeTFLabelColorWithText(text: "중복되는 이메일이 존재합니다.")
+                        self.makeButtonsGray()
+                    }
+                }
             case .requestErr(let message) :
                 print("requestERR", message)
             case .pathErr :
@@ -207,6 +227,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
             case .success(let data):
                 if let data = data as? ValidationEmailModel {
                     self.verifyNumber = data.data
+                    print(data.data)
                 }
             case .requestErr(let message) :
                 print("requestERR", message)

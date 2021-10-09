@@ -86,12 +86,16 @@ class JoinVC: UIViewController {
     
     private func configureClosure() {
         emailView.nextButton.nextPageClosure = {
-            self.showView(number: 2)
-            self.moveCar(toPage: 2)
+            if self.emailView.DuplicateCheck && self.emailView.ValidateCheck {
+                self.showView(number: 2)
+                self.moveCar(toPage: 2)
+            }
         }
         emailView.stickyNextButton.nextPageClosure = {
-            self.showView(number: 2)
-            self.moveCar(toPage: 2)
+            if self.emailView.DuplicateCheck && self.emailView.ValidateCheck {
+                self.showView(number: 2)
+                self.moveCar(toPage: 2)
+            }
         }
         
         passwordView.nextButton.nextPageClosure = {
