@@ -11,6 +11,7 @@ class PasswordView: UIView, UITextFieldDelegate {
 
     var isFirstPassed = false
     var isSecondPassed = false
+    
     var titleLabel = UILabel().then {
         $0.font = .notoSansBoldFont(ofSize: 17)
         $0.textColor = .mainBlack

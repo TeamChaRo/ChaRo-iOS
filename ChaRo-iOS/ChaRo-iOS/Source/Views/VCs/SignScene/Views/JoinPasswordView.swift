@@ -9,6 +9,7 @@ import UIKit
 
 class JoinPasswordView: UIView {
 
+    
     //MARK: - UI Variables
     let passwordInputView = PasswordView(title: "비밀번호", subTitle: "5자 이상 15자 이내의 비밀번호를 입력해주세요.")
     let nextButton = NextButton(isSticky: false, isTheLast: true)

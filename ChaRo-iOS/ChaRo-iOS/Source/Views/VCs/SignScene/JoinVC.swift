@@ -99,12 +99,16 @@ class JoinVC: UIViewController {
         }
         
         passwordView.nextButton.nextPageClosure = {
-            self.showView(number: 3)
-            self.moveCar(toPage: 3)
+            if self.passwordView.passwordInputView.isFirstPassed && self.passwordView.passwordInputView.isSecondPassed {
+                self.showView(number: 3)
+                self.moveCar(toPage: 3)
+            }
         }
         passwordView.stickyNextButton.nextPageClosure = {
-            self.showView(number: 3)
-            self.moveCar(toPage: 3)
+            if self.passwordView.passwordInputView.isFirstPassed && self.passwordView.passwordInputView.isSecondPassed {
+                self.showView(number: 3)
+                self.moveCar(toPage: 3)
+            }
         }
         
         profileView.nextButton.nextPageClosure = {
