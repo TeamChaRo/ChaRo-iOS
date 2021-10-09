@@ -67,21 +67,10 @@ struct EmailJoinService {
     
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        
-        print(data)
-        
-        //do - catch 문으로
-//        do {
-//            let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
-//        } catch {
-//            guard let error = error as? DecodingError else { return .networkFail }
-//        }
-        print(statusCode)
-
+       
         guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
-        else { print("디코딩에러")
+        else {
             return .pathErr
-
         }
 
         switch statusCode {
