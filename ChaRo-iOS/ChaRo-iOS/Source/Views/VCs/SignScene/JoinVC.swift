@@ -124,14 +124,23 @@ class JoinVC: UIViewController {
         }
         
         contractView.nextButton.nextPageClosure = {
-            self.navigationController?.popViewController(animated: true)
             
-            self.postJoin(userEmail: "gggg0321@naver.com",
-                          password: "111111",
-                          nickname: "아잉",
-                          marketingPush: true,
-                          marketingEmail: true,
-                          image: UIImage(named: "icBackButton")!)
+            let userEmail = self.emailView.emailInputView.inputTextField?.text
+            let password = self.passwordView.passwordInputView.secondTextField.text
+            let nickname = self.profileView.nicknameView.inputTextField?.text
+            let image = self.profileView.profileView.profileImageView.image
+            let marketingPush = self.contractView.agreePushButton.Agreed
+            let marketingEmail = self.contractView.agreeEmailButton.Agreed
+            
+            
+            self.postJoin(userEmail: userEmail!,
+                          password: password!,
+                          nickname: nickname!,
+                          marketingPush: marketingPush,
+                          marketingEmail: marketingEmail,
+                          image: (image ?? UIImage(named: "icProfile"))!)
+        
+            
         }
         
         contractView.stickyNextButton.nextPageClosure = {
@@ -318,6 +327,7 @@ class JoinVC: UIViewController {
             
             case .success(let msg):
                 print("success", msg)
+                self.navigationController?.popViewController(animated: true)
             case .requestErr(let msg):
                 print("requestERR", msg)
             case .pathErr:

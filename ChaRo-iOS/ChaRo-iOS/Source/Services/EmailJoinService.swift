@@ -74,7 +74,7 @@ struct EmailJoinService {
         }
 
         switch statusCode {
-        case 200...299: return .success("되엇군")
+        case 200...299: return .success("회원가입 성공 되엇군 !!!!!!!!")
         case 400...499: return .requestErr("리퀘스트에러")
         case 500: return .serverErr
         default: return .networkFail
