@@ -22,6 +22,10 @@ class MyPageVC: UIViewController {
     var writenPostData: [MyPagePost] = []
     var savePostData: [MyPagePost] = []
     
+    let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
+    var topCVCCell : HomePostDetailCVC?
+    var currentState: String = "인기순"
+    
     //headerView
     private let profileImageView = UIImageView().then{
         $0.contentMode = .scaleAspectFill
@@ -139,7 +143,7 @@ class MyPageVC: UIViewController {
         layout.scrollDirection = .vertical
         collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.backgroundColor = UIColor.white
-        collectionView.bounces = false
+        collectionView.bounces = true
         return collectionView
     }()
     private var saveCollectioinView: UICollectionView = {
@@ -150,7 +154,7 @@ class MyPageVC: UIViewController {
         layout.scrollDirection = .vertical
         collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.backgroundColor = UIColor.white
-        collectionView.bounces = false
+        collectionView.bounces = true
         return collectionView
     }()
     
@@ -160,7 +164,9 @@ class MyPageVC: UIViewController {
         setHeaderLayout()
         setTabbarLayout()
         setCollectionViewLayout()
-        getProfileData()
+        getMypageData()
+        filterTableViewLayout()
+        self.dismissDropDownWhenTappedAround()
     }
     
     
@@ -192,8 +198,8 @@ class MyPageVC: UIViewController {
         followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
         followNumButton.setTitle(String(userProfileData[0].following), for: .normal) 
     }
-    
-    func getProfileData(){
+//마이페이지 데이터 받아오는 함수
+    func getMypageData(){
         GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                    switch response
                    {
@@ -218,6 +224,8 @@ class MyPageVC: UIViewController {
                }
     }
 
+
+
 //MARK: buttonClicked
    @objc private func saveButtonClicked(_ sender: UIButton){
        collectionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
@@ -231,25 +239,44 @@ class MyPageVC: UIViewController {
      }
 //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(writeCollectionView.contentOffset.x, writeCollectionView.contentOffset.y)
+        
+        if(collectionScrollView.contentOffset.x > 0 && collectionScrollView.contentOffset.y < 0){
+            collectionScrollView.contentOffset.y = 0
+        }
+        
         //바텀뷰 이동
         setTabbarBottomViewMove()
         //아래 스크롤 방지
         if collectionScrollView.contentOffset.y > 0{
             collectionScrollView.contentOffset.y = 0
         }
-        //위스크롤 방지
+//        위스크롤 방지
         if collectionScrollView.contentOffset.y > writeCollectionView.contentSize.height
         {
             collectionScrollView.contentOffset.y = 0;
         }
         //옆스크롤 방지
-        if scrollView.contentOffset.x < 0{
-            scrollView.contentOffset.x = 0;
+        if collectionScrollView.contentOffset.x < 0{
+            collectionScrollView.contentOffset.x = 0;
+        }
+    }
+//MARK: filterTableView
+    func filterTableViewLayout(){
+        filterTableView.delegate = self
+        filterTableView.clickDelegate = self
+        filterTableView.isHidden = true
+        self.view.addSubview(filterTableView)
+        filterTableView.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(310)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(97)
+            $0.width.equalTo(180)
         }
     }
 //MARK: CollectionViewLayout
     func setCollectionViewLayout(){
-
+        
         let collectionviewHeight  = userheight - (userheight * 0.27 + 130)
                 
         collectionScrollView.delegate = self
@@ -476,8 +503,8 @@ extension MyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
         let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
-        
-
+        detailCell.delegate = self
+        detailCell.setSelectName(name: currentState)
         switch collectionView.tag{
             
         case 1:
@@ -525,4 +552,46 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
+}
+
+
+extension MyPageVC: MenuClickedDelegate{
+    func menuClicked(){
+        filterTableView.isHidden = false
+    }
+    
+    
+}
+extension MyPageVC{
+func dismissDropDownWhenTappedAround() {
+        let tap: UITapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissDropDown() {
+        self.filterTableView.isHidden = true
+    }
+}
+
+extension MyPageVC: NewHotFilterClickedDelegate{
+    func filterClicked(row: Int) {
+        switch row {
+        case 0:
+            GetMyPageDataService.URL = Constants.myPageLikeURL
+            getMypageData()
+            currentState = "인기순"
+            writeCollectionView.reloadData()
+            saveCollectioinView.reloadData()
+        default:
+            GetMyPageDataService.URL = Constants.myPageNewURL
+            getMypageData()
+            currentState = "최신순"
+            writeCollectionView.reloadData()
+            saveCollectioinView.reloadData()
+        }
+    }
+    
+
 }
