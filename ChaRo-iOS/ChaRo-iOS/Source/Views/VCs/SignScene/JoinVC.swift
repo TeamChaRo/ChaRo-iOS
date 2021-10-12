@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import GoogleSignIn
 
 //컬렉션 뷰 안에 뷰 만들기 컬렉션 뷰 위에 차 만들어서 인덱스 ?? 해서 움직이게 하면 될듯
 class JoinVC: UIViewController {

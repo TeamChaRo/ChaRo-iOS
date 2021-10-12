@@ -8,9 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import GoogleSignIn
 
 class SNSLoginVC: UIViewController {
 
+    let signInConfig = GIDConfiguration.init(clientID: "com.googleusercontent.apps.278013610969-pmisnn93vofvfhk25q9a86eeu84ns1ll")
     static let identifier = "SNSLoginVC"
     
     override func viewDidLoad() {
@@ -65,10 +67,31 @@ class SNSLoginVC: UIViewController {
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
-        $0.addTarget(self, action: #selector(testlogin), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
     }
     
-    @objc func testlogin() {
+    let kakaoLoginBtn = UIButton().then {
+        $0.setImage(UIImage(named: "kakaoLogo"), for: .normal)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
+        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
+        $0.backgroundColor = UIColor(red: 254.0 / 255.0, green: 229.0 / 255.0, blue: 0.0, alpha: 1.0)
+        $0.setTitle("카카오 로그인", for: .normal)
+        $0.setTitleColor(.mainBlack, for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
+    }
+    
+    @objc func googleLogin() {
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+            guard error == nil else { return }
+            print("로긘 성공")
+            let userEmail = user?.profile?.email
+            print("사용자 이메일은 \(userEmail)")
+        }
+    }
+    
+    @objc func socialLogin() {
         SocialLoginService.shared.socialLogin(email: "and@naver.com") { (response) in
             
             switch(response)
@@ -90,22 +113,8 @@ class SNSLoginVC: UIViewController {
         }
         
     }
+
     
-    let kakaoLoginBtn = UIButton().then {
-        $0.setImage(UIImage(named: "kakaoLogo"), for: .normal)
-        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
-        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
-        $0.backgroundColor = UIColor(red: 254.0 / 255.0, green: 229.0 / 255.0, blue: 0.0, alpha: 1.0)
-        $0.setTitle("카카오 로그인", for: .normal)
-        $0.setTitleColor(.mainBlack, for: .normal)
-        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-        $0.layer.cornerRadius = 10
-        $0.clipsToBounds = true
-    }
-    
-    let googleLogoImageView = UIImageView().then {
-        $0.image = UIImage(named: "googleLogo")
-    }
     
     let emailLoginBtn = UIButton().then {
         $0.setTitle("이메일 로그인", for: .normal)
