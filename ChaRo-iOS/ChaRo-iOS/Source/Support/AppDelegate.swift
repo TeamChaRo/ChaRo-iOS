@@ -7,12 +7,14 @@
 
 import UIKit
 import GoogleSignIn
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        KakaoSDKCommon.initSDK(appKey: "d0dfcb0748764955e307f1a4dc9ce45co")
         return true
     }
 
