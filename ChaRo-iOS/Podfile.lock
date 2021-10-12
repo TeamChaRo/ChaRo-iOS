@@ -22,6 +22,8 @@ PODS:
   - KakaoSDKCommon/Network (2.6.0):
     - Alamofire (~> 5.1)
     - KakaoSDKCommon/Common (= 2.6.0)
+  - KakaoSDKUser (2.6.0):
+    - KakaoSDKAuth (= 2.6.0)
   - Kingfisher (6.3.0)
   - lottie-ios (3.2.3)
   - RxCocoa (6.2.0):
@@ -37,8 +39,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.4)
   - GoogleSignIn
-  - KakaoSDKAuth
-  - KakaoSDKCommon
+  - KakaoSDKUser
   - Kingfisher (~> 6.0)
   - lottie-ios
   - RxCocoa (= 6.2.0)
@@ -56,6 +57,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - KakaoSDKAuth
     - KakaoSDKCommon
+    - KakaoSDKUser
     - Kingfisher
     - lottie-ios
     - RxCocoa
@@ -73,6 +75,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   KakaoSDKAuth: 037e6260f4468cbc3bde89a802864d6b58c5271c
   KakaoSDKCommon: 38154188336a1118f1b757f0fec54ff989365ddc
+  KakaoSDKUser: ff9d7436ccbf0d65615bc56f3f4e31fb06830db2
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
@@ -82,6 +85,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 416ad9d788c2788fd97938da1aa7e590974c3c44
+PODFILE CHECKSUM: ec17c5f07753cf4bbf1f7fb4490fdd0feeeba151
 
 COCOAPODS: 1.10.2

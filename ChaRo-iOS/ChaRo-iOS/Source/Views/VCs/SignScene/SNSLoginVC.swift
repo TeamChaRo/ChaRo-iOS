@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import GoogleSignIn
+import KakaoSDKUser
 
 class SNSLoginVC: UIViewController {
 
@@ -80,6 +81,7 @@ class SNSLoginVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
+        $0.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
     }
     
     @objc func googleLogin() {
@@ -88,6 +90,70 @@ class SNSLoginVC: UIViewController {
             print("로긘 성공")
             let userEmail = user?.profile?.email
             print("사용자 이메일은 \(userEmail)")
+        }
+    }
+    
+    @objc func kakaoLogin() {
+//        if (UserApi.isKakaoTalkLoginAvailable()) {
+//            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+//                if let error = error {
+//                    print(error)
+//                }
+//                else {
+//                    print("loginWithKakaoTalk() success.")
+//                    _ = oauthToken
+//                   let accessToken = oauthToken?.accessToken
+//                }
+//            }
+//          }
+        
+        print("카카오 로그인 called")
+        
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                
+                else {
+                    print("login success")
+                    print(oauthToken) //토큰 정보
+                    print(UserApi.shared.me() { (user, error) in
+                        if let error = error {
+                            print(error)
+                        }
+                        else {
+                            
+                            var scopes = [String]()
+                            if (user?.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
+                            if scopes.count != 0 {
+                                UserApi.shared.loginWithKakaoAccount(scopes: scopes) { (_, error) in
+                                    if let error = error {
+                                        print(error)
+                                    } else {
+                                        UserApi.shared.me() { (user, error) in
+                                            if let error = error {
+                                                print(error)
+                                            } else {
+                                                
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            else {
+                                print("사용자 이메일은 \(user?.kakaoAccount?.email!)")
+                            }
+                        }
+                        
+                    })
+                }
+                
+            }
+        }
+        else {
+            print("미설치")
         }
     }
     
