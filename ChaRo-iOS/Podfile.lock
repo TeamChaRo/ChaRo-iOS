@@ -1,5 +1,18 @@
 PODS:
   - Alamofire (5.4.3)
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
+  - GoogleSignIn (6.0.2):
+    - AppAuth (~> 1.4)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GTMAppAuth (1.2.2):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - GTMSessionFetcher/Core (1.5.0)
   - Kingfisher (6.3.0)
   - lottie-ios (3.2.3)
   - RxCocoa (6.2.0):
@@ -14,6 +27,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
+  - GoogleSignIn
   - Kingfisher (~> 6.0)
   - lottie-ios
   - RxCocoa (= 6.2.0)
@@ -25,6 +39,10 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AppAuth
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
     - Kingfisher
     - lottie-ios
     - RxCocoa
@@ -36,6 +54,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  GoogleSignIn: fd381840dbe7c1137aa6dc30849a5c3e070c034a
+  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
@@ -45,6 +67,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 3a052e8b9285380a760221ef3e638e452d4b721c
+PODFILE CHECKSUM: 7b204eb7c5f1afc7826ada861476879a5436cfd4
 
 COCOAPODS: 1.10.2
