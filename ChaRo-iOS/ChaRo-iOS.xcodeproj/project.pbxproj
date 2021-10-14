@@ -334,6 +334,7 @@
 		703DD839269F810D004416A9 /* LoginDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataModel.swift; sourceTree = "<group>"; };
 		703DD83B269F867D004416A9 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		703DD83D269F8829004416A9 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		704606AF27188EB50025136E /* ChaRo-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChaRo-iOS.entitlements"; sourceTree = "<group>"; };
 		7062C8212702F93000C1CD2E /* JoinInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinInputView.swift; sourceTree = "<group>"; };
 		7062C8252703194300C1CD2E /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		7062C8272704BA5500C1CD2E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -514,6 +515,7 @@
 		3C71FEA526881DAA007E8EAD /* ChaRo-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				704606AF27188EB50025136E /* ChaRo-iOS.entitlements */,
 				3C879BDF268B132300C41BB8 /* Source */,
 				3C86FA7B2694C7C6009370CD /* Resource */,
 			);
@@ -1641,6 +1643,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZS26WP93H;
@@ -1671,6 +1674,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2ZS26WP93H;
