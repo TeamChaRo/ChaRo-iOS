@@ -55,7 +55,7 @@ class SNSLoginVC: UIViewController {
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
-        $0.addTarget(self, action: #selector(appleLogin), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(testLogin), for: .touchUpInside)
     }
     
     let googleLoginBtn = UIButton().then {
@@ -84,6 +84,10 @@ class SNSLoginVC: UIViewController {
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
         $0.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
+    }
+    
+    @objc func testLogin() {
+        socialLogin(email: "wonee0321@gmail.com")
     }
     
     @objc func appleLogin() {
@@ -172,14 +176,23 @@ class SNSLoginVC: UIViewController {
 //        }
     }
     
-    @objc func socialLogin() {
-        SocialLoginService.shared.socialLogin(email: "and@naver.com") { (response) in
+    @objc func socialLogin(email: String) {
+        SocialLoginService.shared.socialLogin(email: email) { (response) in
             
             switch(response)
             {
             case .success(let success):
                 if let success = success as? Bool {
-                    print(success)
+                    if success {
+                        print("로그인 성공")
+                        let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
+                        let nextVC = storyboard.instantiateViewController(withIdentifier: TabbarVC.identifier)
+                        nextVC.modalPresentationStyle = .fullScreen
+                        self.present(nextVC, animated: true, completion: nil)
+                    } else {
+                        print("회원가입 갈겨")
+                    }
+                    
                 }
             case .requestErr(let message) :
                 print("requestERR", message)
@@ -304,9 +317,11 @@ class SNSLoginVC: UIViewController {
 extension SNSLoginVC : ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            print(credential.user)
             let user = credential.user
+            print("👨‍🍳 \(user)")
             if let email = credential.email {
-                print("애플 로그인 이메일 : \(email)")
+                socialLogin(email: email)
             }
         }
     }
