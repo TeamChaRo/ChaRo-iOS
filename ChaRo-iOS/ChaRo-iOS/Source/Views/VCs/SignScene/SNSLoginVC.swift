@@ -8,11 +8,12 @@
 import UIKit
 import SnapKit
 import Then
+import AuthenticationServices
 import GoogleSignIn
 import KakaoSDKUser
 
 class SNSLoginVC: UIViewController {
-
+    
     let signInConfig = GIDConfiguration.init(clientID: "com.googleusercontent.apps.278013610969-pmisnn93vofvfhk25q9a86eeu84ns1ll")
     static let identifier = "SNSLoginVC"
     
@@ -54,6 +55,7 @@ class SNSLoginVC: UIViewController {
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
+        $0.addTarget(self, action: #selector(appleLogin), for: .touchUpInside)
     }
     
     let googleLoginBtn = UIButton().then {
@@ -84,6 +86,16 @@ class SNSLoginVC: UIViewController {
         $0.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
     }
     
+    @objc func appleLogin() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.fullName, .email]
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
+        controller.performRequests()
+    }
+    
+    
     @objc func googleLogin() {
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
@@ -94,18 +106,18 @@ class SNSLoginVC: UIViewController {
     }
     
     @objc func kakaoLogin() {
-//        if (UserApi.isKakaoTalkLoginAvailable()) {
-//            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
-//                if let error = error {
-//                    print(error)
-//                }
-//                else {
-//                    print("loginWithKakaoTalk() success.")
-//                    _ = oauthToken
-//                   let accessToken = oauthToken?.accessToken
-//                }
-//            }
-//          }
+        //        if (UserApi.isKakaoTalkLoginAvailable()) {
+        //            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+        //                if let error = error {
+        //                    print(error)
+        //                }
+        //                else {
+        //                    print("loginWithKakaoTalk() success.")
+        //                    _ = oauthToken
+        //                   let accessToken = oauthToken?.accessToken
+        //                }
+        //            }
+        //          }
         
         print("카카오 로그인 called")
         
@@ -179,7 +191,7 @@ class SNSLoginVC: UIViewController {
         }
         
     }
-
+    
     
     
     let emailLoginBtn = UIButton().then {
@@ -202,7 +214,7 @@ class SNSLoginVC: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: LoginVC.identifier)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     
     @objc func goToEmailJoinVC() {
         let storyboard = UIStoryboard(name: "Join", bundle: nil)
@@ -252,21 +264,21 @@ class SNSLoginVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(48)
         }
-
+        
         googleLoginBtn.snp.makeConstraints {
             $0.bottom.equalTo(kakaoLoginBtn.snp.top).offset(-14)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(48)
         }
-
+        
         kakaoLoginBtn.snp.makeConstraints {
             $0.bottom.equalTo(emailLoginBtn.snp.top).offset(-39)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(48)
         }
-
+        
         emailLoginBtn.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-55)
             $0.width.equalTo(81)
@@ -284,4 +296,20 @@ class SNSLoginVC: UIViewController {
     }
     
     
+}
+
+extension SNSLoginVC : ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let user = credential.user
+            print("👨‍🍳 \(user)")
+            if let email = credential.email {
+                print("✉️ \(email)")
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("error \(error)")
+    }
 }
