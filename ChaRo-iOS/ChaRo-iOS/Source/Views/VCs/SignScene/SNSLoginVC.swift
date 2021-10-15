@@ -106,67 +106,70 @@ class SNSLoginVC: UIViewController {
     }
     
     @objc func kakaoLogin() {
-        //        if (UserApi.isKakaoTalkLoginAvailable()) {
-        //            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
-        //                if let error = error {
-        //                    print(error)
-        //                }
-        //                else {
-        //                    print("loginWithKakaoTalk() success.")
-        //                    _ = oauthToken
-        //                   let accessToken = oauthToken?.accessToken
-        //                }
-        //            }
-        //          }
-        
-        print("카카오 로그인 called")
-        
+        print("카카오톡 로그인 시도합니다")
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
+            print("카카오톡 로그인 실행가능")
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
                     print(error)
                 }
-                
                 else {
-                    print("login success")
-                    print(oauthToken) //토큰 정보
-                    print(UserApi.shared.me() { (user, error) in
-                        if let error = error {
-                            print(error)
-                        }
-                        else {
-                            
-                            var scopes = [String]()
-                            if (user?.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
-                            if scopes.count != 0 {
-                                UserApi.shared.loginWithKakaoAccount(scopes: scopes) { (_, error) in
-                                    if let error = error {
-                                        print(error)
-                                    } else {
-                                        UserApi.shared.me() { (user, error) in
-                                            if let error = error {
-                                                print(error)
-                                            } else {
-                                                
-                                            }
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                            else {
-                                print("사용자 이메일은 \(user?.kakaoAccount?.email!)")
-                            }
-                        }
-                        
-                    })
+                    print("loginWithKakaoTalk() success.")
+                    _ = oauthToken
+                    let accessToken = oauthToken?.accessToken
                 }
-                
             }
         }
-        else {
-            print("미설치")
-        }
+        
+//        print("카카오 로그인 called")
+//
+//        if (UserApi.isKakaoTalkLoginAvailable()) {
+//            UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
+//                if let error = error {
+//                    print("1. 에러 \(error)")
+//                }
+//
+//                else {
+//                    print("login success")
+//                    print(oauthToken) //토큰 정보
+//                    print(UserApi.shared.me() { (user, error) in
+//                        if let error = error {
+//                            print("2. 에러 \(error)")
+//                        }
+//                        else {
+//
+//                            var scopes = [String]()
+//                            if (user?.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
+//                            if scopes.count != 0 {
+//                                UserApi.shared.loginWithKakaoAccount(scopes: scopes) { (_, error) in
+//                                    if let error = error {
+//                                        print("3. 에러 \(error)")
+//                                    } else {
+//                                        UserApi.shared.me() { (user, error) in
+//                                            if let error = error {
+//                                                print("4. 에러 \(error)")
+//                                            } else {
+//
+//                                            }
+//                                        }
+//                                    }
+//
+//                                }
+//                            }
+//                            else {
+//                                print("로그인 딘듯")
+//                                print("사용자 이메일은 \(user?.kakaoAccount?.email!)")
+//                            }
+//                        }
+//
+//                    })
+//                }
+//
+//            }
+//        }
+//        else {
+//            print("미설치")
+//        }
     }
     
     @objc func socialLogin() {
@@ -302,9 +305,8 @@ extension SNSLoginVC : ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             let user = credential.user
-            print("👨‍🍳 \(user)")
             if let email = credential.email {
-                print("✉️ \(email)")
+                print("애플 로그인 이메일 : \(email)")
             }
         }
     }

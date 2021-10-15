@@ -98,6 +98,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <!-- 카카오톡으로 로그인 -->
+        <string>kakaokompassauth</string>
+        <!-- 카카오링크 -->
+        <string>kakaolink</string>
+    </array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>

@@ -17,5 +17,7 @@ target 'ChaRo-iOS' do
   pod 'RxCocoa', '6.2.0'
   pod 'GoogleSignIn'
   pod 'KakaoSDKUser'
+  pod 'KakaoSDKCommon'
+  pod 'KakaoSDKAuth'
 end
 

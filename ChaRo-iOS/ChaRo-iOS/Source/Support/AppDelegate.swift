@@ -14,24 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        KakaoSDKCommon.initSDK(appKey: "d0dfcb0748764955e307f1a4dc9ce45co")
+        KakaoSDKCommon.initSDK(appKey: "d0dfcb0748764955e307f1a4dc9ce45c")
         return true
     }
-
+    
+    
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         var handled: Bool
-
-          handled = GIDSignIn.sharedInstance.handle(url)
-          if handled {
+        
+        handled = GIDSignIn.sharedInstance.handle(url)
+        if handled {
             return true
-          }
-
-          // Handle other custom URL types.
-
-          // If not handled by this app, return false.
-          return false
-
+        }
+        return false
+        
+        
+        // Handle other custom URL types.
+        
+        // If not handled by this app, return false.
+        
     }
     // MARK: UISceneSession Lifecycle
 

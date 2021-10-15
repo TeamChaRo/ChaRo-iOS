@@ -39,6 +39,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.4)
   - GoogleSignIn
+  - KakaoSDKAuth
+  - KakaoSDKCommon
   - KakaoSDKUser
   - Kingfisher (~> 6.0)
   - lottie-ios
@@ -85,6 +87,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: ec17c5f07753cf4bbf1f7fb4490fdd0feeeba151
+PODFILE CHECKSUM: 2d9d1cf11f3f284700e48791d763e09112740248
 
 COCOAPODS: 1.10.2
