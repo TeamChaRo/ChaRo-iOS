@@ -88,7 +88,7 @@ class SNSLoginVC: UIViewController {
     
     @objc func testLogin() {
         snsType = "A"
-        socialLogin(email: "yyyyaaaaong222@naver.com")
+        socialLogin(email: "yyyyeeaaaaong222@naver.com")
     }
     
     @objc func appleLogin() {
@@ -147,7 +147,7 @@ class SNSLoginVC: UIViewController {
                         self.present(nextVC, animated: true, completion: nil)
                     } else {
                         print("회원가입 갈겨")
-                        self.snsJoin()
+                        self.snsJoin(email: email, profileImage: nil, nickname: nil)
                         
                     }
                     
@@ -166,16 +166,39 @@ class SNSLoginVC: UIViewController {
         
     }
     
-    func snsJoin() {
+    func snsJoin(email: String, profileImage: String?, nickname: String?) {
         
         let storyboard = UIStoryboard(name: "Join", bundle: nil)
         let nextVC = storyboard.instantiateViewController(withIdentifier: SNSJoinVC.identifier) as? SNSJoinVC
         self.navigationController?.pushViewController(nextVC!, animated: true)
             
         nextVC?.contractView.nextButton.nextPageClosure = {
+            let isPushAgree = nextVC?.contractView.agreePushButton.Agreed
+            let isEmailAgree = nextVC?.contractView.agreeEmailButton.Agreed
             switch self.snsType {
             case "A":
-                print("여기서 애플 회원가입 api 날리기")
+                SocialJoinService.shared.appleJoin(email: email,
+                                                   pushAgree: isPushAgree!,
+                                                   emailAgree: isEmailAgree!) { result in
+                    
+                    print(isPushAgree)
+                    print(isEmailAgree)
+                    
+                    switch result {
+                    
+                    case .success(let msg):
+                        print("success", msg)
+                    case .requestErr(let msg):
+                        print("requestERR", msg)
+                    case .pathErr:
+                        print("pathERR")
+                    case .serverErr:
+                        print("serverERR")
+                    case .networkFail:
+                        print("networkFail")
+                    }
+                    
+                }
                 break
                 
             case "G":
