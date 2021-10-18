@@ -16,12 +16,12 @@ class SNSLoginVC: UIViewController {
     
     let signInConfig = GIDConfiguration.init(clientID: "com.googleusercontent.apps.278013610969-pmisnn93vofvfhk25q9a86eeu84ns1ll")
     static let identifier = "SNSLoginVC"
+    var snsType: String = "DEFAULT"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationController()
         configureUI()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,10 +87,12 @@ class SNSLoginVC: UIViewController {
     }
     
     @objc func testLogin() {
-        socialLogin(email: "wonee0321@gmail.com")
+        snsType = "A"
+        socialLogin(email: "yyyyaaaaong222@naver.com")
     }
     
     @objc func appleLogin() {
+        snsType = "A"
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
         let controller = ASAuthorizationController(authorizationRequests: [request])
@@ -101,6 +103,7 @@ class SNSLoginVC: UIViewController {
     
     
     @objc func googleLogin() {
+        snsType = "G"
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
             print("로긘 성공")
@@ -110,6 +113,8 @@ class SNSLoginVC: UIViewController {
     }
     
     @objc func kakaoLogin() {
+        snsType = "K"
+        
         print("카카오톡 로그인 시도합니다")
         if (UserApi.isKakaoTalkLoginAvailable()) {
             print("카카오톡 로그인 실행가능")
@@ -124,56 +129,7 @@ class SNSLoginVC: UIViewController {
                 }
             }
         }
-        
-//        print("카카오 로그인 called")
-//
-//        if (UserApi.isKakaoTalkLoginAvailable()) {
-//            UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
-//                if let error = error {
-//                    print("1. 에러 \(error)")
-//                }
-//
-//                else {
-//                    print("login success")
-//                    print(oauthToken) //토큰 정보
-//                    print(UserApi.shared.me() { (user, error) in
-//                        if let error = error {
-//                            print("2. 에러 \(error)")
-//                        }
-//                        else {
-//
-//                            var scopes = [String]()
-//                            if (user?.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
-//                            if scopes.count != 0 {
-//                                UserApi.shared.loginWithKakaoAccount(scopes: scopes) { (_, error) in
-//                                    if let error = error {
-//                                        print("3. 에러 \(error)")
-//                                    } else {
-//                                        UserApi.shared.me() { (user, error) in
-//                                            if let error = error {
-//                                                print("4. 에러 \(error)")
-//                                            } else {
-//
-//                                            }
-//                                        }
-//                                    }
-//
-//                                }
-//                            }
-//                            else {
-//                                print("로그인 딘듯")
-//                                print("사용자 이메일은 \(user?.kakaoAccount?.email!)")
-//                            }
-//                        }
-//
-//                    })
-//                }
-//
-//            }
-//        }
-//        else {
-//            print("미설치")
-//        }
+
     }
     
     @objc func socialLogin(email: String) {
@@ -191,6 +147,8 @@ class SNSLoginVC: UIViewController {
                         self.present(nextVC, animated: true, completion: nil)
                     } else {
                         print("회원가입 갈겨")
+                        self.snsJoin()
+                        
                     }
                     
                 }
@@ -208,7 +166,26 @@ class SNSLoginVC: UIViewController {
         
     }
     
-    
+    func snsJoin() {
+        switch snsType {
+        case "A":
+            print(snsType)
+            
+            break
+            
+        case "G":
+            print(snsType)
+            break
+            
+        case "K":
+            print(snsType)
+            break
+            
+        default:
+            print(snsType)
+            break
+        }
+    }
     
     let emailLoginBtn = UIButton().then {
         $0.setTitle("이메일 로그인", for: .normal)
