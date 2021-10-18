@@ -167,23 +167,34 @@ class SNSLoginVC: UIViewController {
     }
     
     func snsJoin() {
-        switch snsType {
-        case "A":
-            print(snsType)
+        
+        let storyboard = UIStoryboard(name: "Join", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(withIdentifier: SNSJoinVC.identifier) as? SNSJoinVC
+        //nextVC?.modalPresentationStyle = .fullScreen
+        //self.present(nextVC!, animated: true, completion: nil)
+        self.navigationController?.pushViewController(nextVC!, animated: true)
             
-            break
+        nextVC?.contractView.nextButton.nextPageClosure = {
+            switch self.snsType {
+            case "A":
+                print(self.snsType)
+                print("여기서 애플 회원가입 api 날리기")
+                break
+                
+            case "G":
+                
+                break
+                
+            case "K":
+                
+                break
+                
+            default:
+                print(self.snsType)
+                break
+            }
             
-        case "G":
-            print(snsType)
-            break
-            
-        case "K":
-            print(snsType)
-            break
-            
-        default:
-            print(snsType)
-            break
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
