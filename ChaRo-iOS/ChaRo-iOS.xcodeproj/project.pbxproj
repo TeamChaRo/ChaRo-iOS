@@ -165,6 +165,7 @@
 		70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E36269646D30036484B /* ThemePostAllTVC.swift */; };
 		70D63E39269646D30036484B /* ThemePostAllTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E37269646D30036484B /* ThemePostAllTVC.xib */; };
 		70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */; };
+		70F5D7BB271D9DBC00FF9229 /* SocialJoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
@@ -375,6 +376,7 @@
 		70D63E36269646D30036484B /* ThemePostAllTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostAllTVC.swift; sourceTree = "<group>"; };
 		70D63E37269646D30036484B /* ThemePostAllTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostAllTVC.xib; sourceTree = "<group>"; };
 		70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSJoinVC.swift; sourceTree = "<group>"; };
+		70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialJoinService.swift; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				7062C84A270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift */,
 				7062C84C270CE46400C1CD2E /* SocialLoginService.swift */,
 				7062C8562710C99400C1CD2E /* EmailJoinService.swift */,
+				70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1399,6 +1402,7 @@
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
 				7062C84D270CE46400C1CD2E /* SocialLoginService.swift in Sources */,
 				70D63DED2693938E0036484B /* UIImage+.swift in Sources */,
+				70F5D7BB271D9DBC00FF9229 /* SocialJoinService.swift in Sources */,
 				3C7DF0F7269AEE7D0021939C /* SearchResultVC.swift in Sources */,
 				F468C0F6269DDA290019B1B3 /* Notification.Name.swift in Sources */,
 				70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */,
