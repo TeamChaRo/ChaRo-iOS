@@ -164,6 +164,7 @@
 		70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E3326963C810036484B /* ThemePostThemeTVC.xib */; };
 		70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E36269646D30036484B /* ThemePostAllTVC.swift */; };
 		70D63E39269646D30036484B /* ThemePostAllTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E37269646D30036484B /* ThemePostAllTVC.xib */; };
+		70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
@@ -373,6 +374,7 @@
 		70D63E3326963C810036484B /* ThemePostThemeTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostThemeTVC.xib; sourceTree = "<group>"; };
 		70D63E36269646D30036484B /* ThemePostAllTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostAllTVC.swift; sourceTree = "<group>"; };
 		70D63E37269646D30036484B /* ThemePostAllTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostAllTVC.xib; sourceTree = "<group>"; };
+		70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSJoinVC.swift; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
@@ -954,6 +956,7 @@
 				703DD831269F3B19004416A9 /* LoginVC.swift */,
 				70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */,
 				70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */,
+				70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */,
 			);
 			path = SignScene;
 			sourceTree = "<group>";
@@ -1454,6 +1457,7 @@
 				7062C82A2706FAA300C1CD2E /* JoinTitleLabel.swift in Sources */,
 				7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
+				70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */,
 				7062C8572710C99400C1CD2E /* EmailJoinService.swift in Sources */,
