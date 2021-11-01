@@ -59,10 +59,14 @@ struct SocialJoinService {
             
             switch dataResponse.result {
             case .success:
-                
+            
                 print("애플 회원가입----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
+                
+                print(statusCode)
+                print(value)
+                
                 let networkResult = self.judgeStatus(by: statusCode, value)
                 completion(networkResult)
                 
@@ -158,7 +162,7 @@ struct SocialJoinService {
         
         let decoder = JSONDecoder()
         
-        guard let decodedData = try? decoder.decode(ValidationEmailModel.self, from: data)
+        guard let decodedData = try? decoder.decode(LoginJoinResponseDataModel.self, from: data)
         else {
             print("패쓰에러")
             return .pathErr

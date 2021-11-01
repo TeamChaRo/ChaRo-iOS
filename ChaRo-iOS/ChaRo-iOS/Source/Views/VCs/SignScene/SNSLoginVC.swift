@@ -88,7 +88,7 @@ class SNSLoginVC: UIViewController {
     
     @objc func testLogin() {
         snsType = "A"
-        socialLogin(email: "yyyyeeaaaaong222@naver.com")
+        socialLogin(email: "yyaggdgaaaong22hh2@naver.com")
     }
     
     @objc func appleLogin() {
@@ -181,9 +181,7 @@ class SNSLoginVC: UIViewController {
                                                    pushAgree: isPushAgree!,
                                                    emailAgree: isEmailAgree!) { result in
                     
-                    print(isPushAgree)
-                    print(isEmailAgree)
-                    
+
                     switch result {
                     
                     case .success(let msg):
