@@ -263,6 +263,7 @@ extension HomeVC : UITableViewDelegate {
     }
     func addContentScrollView() {
         bannerScrollView.delegate = self
+        bannerScrollView.bounces = false
         if bannerScrollView.subviews.count > 3{
             print(bannerScrollView.subviews)
             bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
