@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+struct GenericResponse<T: Codable>: Codable {
+    let success: Bool
+    let msg: String
+    let data: T?
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case msg = "message"
+        case data
+    }
+}
