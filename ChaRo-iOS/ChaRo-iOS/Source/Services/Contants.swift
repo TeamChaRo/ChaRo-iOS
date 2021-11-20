@@ -15,6 +15,7 @@ struct Constants {
     static let userId = UserDefaults.standard.string(forKey: "userId") ?? "ios"
     static let nickName = UserDefaults.standard.string(forKey: "nickname") ?? "지으니"
     static let profileName = UserDefaults.standard.string(forKey: "profileImage") ?? "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/jieun.JPG"
+    static let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "ios@gmail.com"
 
     
     // MARK: - Feature URL
@@ -44,7 +45,7 @@ struct Constants {
     static let searchKeywordURL = baseURL + "/searchHistory"
 
     /// 게시물 상세보기
-    static let detailPostURL = baseURL + "/postDetail/" + userId + "/"
+    static let detailPostURL = baseURL + "/post/detail/" + userEmail + "/"
     
     static let loginURL = baseURL + "/sign/signIn"
     
