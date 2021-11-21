@@ -33,6 +33,8 @@ struct Constants {
     static let ThemeNewURL = baseURL + "/preview/new/\(userId)/1?value="
     static let likeURL = baseURL + "/post/like"
     
+    ///myPage
+    static let myPageURL = baseURL + "/user/myPage/"
     static let myPageLikeURL = baseURL + "/user/myPage/like/" + userId
     static let myPageNewURL = baseURL + "/user/myPage/new/" + userId
     

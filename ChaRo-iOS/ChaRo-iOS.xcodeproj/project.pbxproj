@@ -27,6 +27,8 @@
 		361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361C6A24269E241600EA4A58 /* NetworkResult.swift */; };
 		362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362BC9F6269ED387008EF625 /* MyPageDataModel.swift */; };
 		362BC9F9269ED39A008EF625 /* MyPageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362BC9F8269ED39A008EF625 /* MyPageDataService.swift */; };
+		367B318B274A725C007A2C18 /* MypageInfinityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */; };
+		367B318D274A74C7007A2C18 /* MypageInfinityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B318C274A74C7007A2C18 /* MypageInfinityService.swift */; };
 		367D598F26F768EB0072C7C9 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D598E26F768EB0072C7C9 /* IndicatorView.swift */; };
 		3691C4F227440DF400A712C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3691C4F127440DF400A712C9 /* GoogleService-Info.plist */; };
 		3691C4F52744102B00A712C9 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3691C4F32744100E00A712C9 /* TMapSDK.framework */; platformFilter = ios; };
@@ -213,6 +215,8 @@
 		361C6A24269E241600EA4A58 /* NetworkResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		362BC9F6269ED387008EF625 /* MyPageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDataModel.swift; sourceTree = "<group>"; };
 		362BC9F8269ED39A008EF625 /* MyPageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDataService.swift; sourceTree = "<group>"; };
+		367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageInfinityDataModel.swift; sourceTree = "<group>"; };
+		367B318C274A74C7007A2C18 /* MypageInfinityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageInfinityService.swift; sourceTree = "<group>"; };
 		367D598E26F768EB0072C7C9 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		3691C4F127440DF400A712C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3691C4F32744100E00A712C9 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = SOURCE_ROOT; };
@@ -428,6 +432,14 @@
 			path = TVC;
 			sourceTree = "<group>";
 		};
+		367B3189274A5474007A2C18 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		3C3AF5EB269024280099B684 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,6 +457,7 @@
 				3C706798269ECE8C0082C852 /* PostResultService.swift */,
 				703DD83B269F867D004416A9 /* LoginService.swift */,
 				36C1C33026A0C28500F34750 /* SavePostService.swift */,
+				367B318C274A74C7007A2C18 /* MypageInfinityService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -457,6 +470,7 @@
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
 				51F8E7201D91686D6929C9DE /* Frameworks */,
+				367B3189274A5474007A2C18 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -637,6 +651,7 @@
 				703DD83D269F8829004416A9 /* UserInfo.swift */,
 				3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */,
 				362BC9F6269ED387008EF625 /* MyPageDataModel.swift */,
+				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1360,6 +1375,7 @@
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
 				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
 				F4FB2ECB269FD7AE000C339B /* UIButton+.swift in Sources */,
+				367B318D274A74C7007A2C18 /* MypageInfinityService.swift in Sources */,
 				F4FB2EC8269F8F6C000C339B /* CreatePostParkingWarningTVC.swift in Sources */,
 				361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */,
 				36CEE5BC269E168500974EFF /* NewDetailDataService.swift in Sources */,
@@ -1405,6 +1421,7 @@
 				707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */,
 				3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */,
 				3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */,
+				367B318B274A725C007A2C18 /* MypageInfinityDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
