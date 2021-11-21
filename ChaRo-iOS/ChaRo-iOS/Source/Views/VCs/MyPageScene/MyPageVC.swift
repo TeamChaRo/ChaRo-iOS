@@ -19,12 +19,21 @@ class MyPageVC: UIViewController {
     var tabbarBottomConstraint: Int = 0
     
     var userProfileData: [UserInformation] = []
-    var writenPostData: [MyPagePost] = []
-    var savePostData: [MyPagePost] = []
+    //var writenPostData: [MyPagePost] = []
+    var writenPostDriveData: [MyPageDrive] = []
+    var savePostDriveData: [MyPageDrive] = []
+    
     
     let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
     var topCVCCell : HomePostDetailCVC?
     var currentState: String = "인기순"
+    
+    //무한스크롤을 위함
+    var lastId: Int = 0
+    var lastFavorite: Int = 0
+    var isLast: Bool = false
+    var lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var delegate: AnimateIndicatorDelegate?
     
     //headerView
     private let profileImageView = UIImageView().then{
@@ -127,7 +136,7 @@ class MyPageVC: UIViewController {
         $0.bounces = false
         $0.contentSize.width = UIScreen.main.bounds.width
         
-        //아무튼 아이폰 12에서는 잘 돌아가는데 이거 기기마다 테스트 매우 필요한 항목일듯요,, 스크롤뷰랑 컬렉션뷰의 설정된 heigth가 조금이라도 다르면 화면 지혼자 휙휙 돌아감...
+        //아무튼 아이폰 12에서는 잘 돌아가는데 이거 기기마다 테스트 매우 필요한 항목일듯요,, 스크롤뷰랑 컬렉션뷰의 설정된 heigth가 조금이라도 다르면 화면 지혼자 휙휙 돌아감...이걸 우짠담..제발 다른기기에서도 잘 돌아갔으면 좋겟다 제발 제발 제발 제발 제발 제발
         $0.contentSize = CGSize(width: UIScreen.main.bounds.width*2, height: userHeigth - (userHeigth * 0.27 + 151))
         $0.backgroundColor = UIColor.white
         $0.showsHorizontalScrollIndicator = false
@@ -203,6 +212,7 @@ class MyPageVC: UIViewController {
         followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
         followNumButton.setTitle(String(userProfileData[0].following), for: .normal) 
     }
+//MARK: Server
 //마이페이지 데이터 받아오는 함수
     func getMypageData(){
         GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
@@ -211,11 +221,48 @@ class MyPageVC: UIViewController {
                    case .success(let data) :
                        if let response = data as? MyPageDataModel{
                            self.userProfileData.append(response.data.userInformation)
-                           self.writenPostData.append(response.data.writtenPost)
-                           self.savePostData.append(response.data.savedPost)
+                           //self.writenPostData.append(response.data.writtenPost)
+                           self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
+                           self.savePostDriveData.append(contentsOf: response.data.savedPost.drive)
                            self.setHeaderData()
                            self.writeCollectionView.reloadData()
                            self.saveCollectioinView.reloadData()
+                       }
+                   case .requestErr(let message) :
+                       print("requestERR")
+                   case .pathErr :
+                       print("pathERR")
+                   case .serverErr:
+                       print("serverERR")
+                   case .networkFail:
+                       print("networkFail")
+                   }
+               }
+    }
+    
+    func getInfinityData(){
+        delegate = self
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo{ (response) in
+                   switch response
+                   {
+                   case .success(let data) :
+                       self.delegate?.startIndicator()
+                       print("start")
+                       if let response = data as? MypageInpinityModel{
+                           if response.data.drive.count == 0{
+                               self.isLast = true
+                               self.delegate?.endIndicator()
+                           }
+                           else{
+                               self.isLast = false
+                           }
+                           self.writenPostDriveData.append(contentsOf: response.data.drive)
+                           if self.isLast == false{
+                               self.writeCollectionView.reloadData()
+                               self.saveCollectioinView.reloadData()
+                               self.delegate?.endIndicator()
+                           }
+
                        }
                    case .requestErr(let message) :
                        print("requestERR")
@@ -246,6 +293,9 @@ class MyPageVC: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(writeCollectionView.contentOffset.x, saveCollectioinView.contentOffset.y, collectionScrollView.contentOffset.y)
         
+        let writeContentHeigth = writeCollectionView.contentSize.height
+        let saveContentHeigth = saveCollectioinView.contentSize.height
+        
         if(collectionScrollView.contentOffset.x > 0 && collectionScrollView.contentOffset.y < 0){
             collectionScrollView.contentOffset.y = 0
         }
@@ -264,6 +314,64 @@ class MyPageVC: UIViewController {
         if collectionScrollView.contentOffset.x < 0{
             collectionScrollView.contentOffset.x = 0;
         }
+        //작성글 무한스크롤
+        if(writeCollectionView.contentOffset.y > writeContentHeigth - writeCollectionView.frame.height){
+            let lastcount = writenPostDriveData.count
+            
+            if lastcount > 0{
+
+            lastId =  writenPostDriveData[lastcount-1].postID
+            lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
+            
+            if currentState == "인기순"{
+                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                MypageInfinityService.likeOrNew = "like/"
+                MypageInfinityService.addURL = "/write/\(lastId)/\(lastFavorite)"
+                //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
+                //MypageInfinityService.addURL = "/write/11/0"
+                    getInfinityData()
+
+            }
+            else if currentState == "최신순"{
+                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                MypageInfinityService.likeOrNew = "new/"
+                MypageInfinityService.addURL = "/write/\(lastId)"
+                //MypageInfinityService.addURL = "/write/5/0"
+                    getInfinityData()
+            }
+                
+            }
+        }
+        
+        if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height){
+            let lastcount = savePostDriveData.count
+            
+            if lastcount > 0{
+            
+            lastId =  savePostDriveData[lastcount-1].postID
+            lastFavorite = savePostDriveData[lastcount-1].favoriteNum
+            
+            if currentState == "인기순"{
+                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                MypageInfinityService.likeOrNew = "like/"
+                MypageInfinityService.addURL = "/write/\(lastId)/\(lastFavorite)"
+                //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
+                //MypageInfinityService.addURL = "/write/5/0"
+                getInfinityData()
+            }
+            else if currentState == "최신순"{
+                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                MypageInfinityService.likeOrNew = "new/"
+                MypageInfinityService.addURL = "/write/\(lastId)"
+                //MypageInfinityService.addURL = "/write/5/0"
+                getInfinityData()
+
+            }
+            
+        }
+        }
+        
+        
     }
 //MARK: filterTableView
     func filterTableViewLayout(){
@@ -481,18 +589,18 @@ extension MyPageVC: UICollectionViewDataSource{
         var writeCellCount = 0
         var saveCellCount = 0
         
-        if(writenPostData.count == 0){
-            writeCellCount = 0
+        if(writenPostDriveData.count == 0){
+            writeCellCount = 1
         }
         else{
-            writeCellCount = writenPostData[0].drive.count + 1
+            writeCellCount = writenPostDriveData.count + 1
         }
         
-        if(savePostData.count == 0){
-            saveCellCount = 0
+        if(savePostDriveData.count == 0){
+            saveCellCount = 1
         }
         else{
-            saveCellCount = savePostData[0].drive.count + 1
+            saveCellCount = savePostDriveData.count + 1
         }
         
         switch collectionView.tag{
@@ -505,6 +613,9 @@ extension MyPageVC: UICollectionViewDataSource{
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+     
+        
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
         let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
         detailCell.delegate = self
@@ -517,10 +628,12 @@ extension MyPageVC: UICollectionViewDataSource{
                 return detailCell
             }
             else{
-                let writenElement = writenPostData[0].drive[indexPath.row-1]
+                let writenElement = writenPostDriveData[indexPath.row-1]
                 var writenTags = [writenElement.region, writenElement.theme,
                             writenElement.warning ?? ""] as [String]
-            cell.setData(image: writenPostData[0].drive[indexPath.row-1].image, title: writenPostData[0].drive[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostData[0].drive[indexPath.row-1].favoriteNum, save: writenPostData[0].drive[indexPath.row-1].saveNum, year: writenPostData[0].drive[indexPath.row-1].year, month: writenPostData[0].drive[indexPath.row-1].month, day: writenPostData[0].drive[indexPath.row-1].day, postID: writenPostData[0].drive[indexPath.row-1].postID)
+            cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
+                
+               
             return cell
             }
         case 2:
@@ -530,10 +643,10 @@ extension MyPageVC: UICollectionViewDataSource{
             }
             
             else{
-                let saveElement = savePostData[0].drive[indexPath.row-1]
+                let saveElement = savePostDriveData[indexPath.row-1]
                 var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
                 
-            cell.setData(image: savePostData[0].drive[indexPath.row-1].image, title: savePostData[0].drive[indexPath.row-1].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostData[0].drive[indexPath.row].favoriteNum, save: savePostData[0].drive[indexPath.row].saveNum, year: savePostData[0].drive[indexPath.row].year, month: savePostData[0].drive[indexPath.row].month, day: savePostData[0].drive[indexPath.row].day, postID: savePostData[0].drive[indexPath.row].postID)
+            cell.setData(image: savePostDriveData[indexPath.row-1].image, title: savePostDriveData[indexPath.row-1].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostDriveData[indexPath.row].favoriteNum, save: savePostDriveData[indexPath.row].saveNum, year: savePostDriveData[indexPath.row].year, month: savePostDriveData[indexPath.row].month, day: savePostDriveData[indexPath.row].day, postID: savePostDriveData[indexPath.row].postID)
             return cell
             }
         default:
@@ -584,12 +697,16 @@ extension MyPageVC: NewHotFilterClickedDelegate{
         switch row {
         case 0:
             GetMyPageDataService.URL = Constants.myPageLikeURL
+            writenPostDriveData = []
+            savePostDriveData = []
             getMypageData()
             currentState = "인기순"
             writeCollectionView.reloadData()
             saveCollectioinView.reloadData()
         default:
             GetMyPageDataService.URL = Constants.myPageNewURL
+            writenPostDriveData = []
+            savePostDriveData = []
             getMypageData()
             currentState = "최신순"
             writeCollectionView.reloadData()
@@ -598,4 +715,16 @@ extension MyPageVC: NewHotFilterClickedDelegate{
     }
     
 
+}
+extension MyPageVC: AnimateIndicatorDelegate{
+    func startIndicator() {
+        view.addSubview(lottieView)
+        lottieView.isHidden = false
+        lottieView.lottieView.play()
+    }
+
+    func endIndicator() {
+        lottieView.lottieView.stop()
+        lottieView.isHidden = true
+    }
 }
