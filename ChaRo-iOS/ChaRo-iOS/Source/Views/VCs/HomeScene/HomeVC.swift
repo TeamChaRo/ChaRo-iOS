@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import Kingfisher
 import Lottie
+import SwiftUI
 
 class HomeVC: UIViewController{
 
@@ -55,7 +56,6 @@ class HomeVC: UIViewController{
         setActionToSearchButton()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
-        addContentScrollView()
     }
     //헤더뷰
     func setHeader(){
@@ -112,7 +112,6 @@ class HomeVC: UIViewController{
             bannerSubtTtleLabelList = subTitleLabelList
             headerView.addSubviews(bannerTitleLableList + bannerSubtTtleLabelList)
             
-            setupHeaderViewLayout()
         }
         
         func setupHeaderViewLayout(){
@@ -190,6 +189,14 @@ class HomeVC: UIViewController{
             case .networkFail:
                 print("networkFail")
             }
+            //shot out to 'Jang PARTZZANG'
+            DispatchQueue.main.async { [weak self] in
+                self?.addContentScrollView()
+                self?.HomeTableView.reloadData()
+                self?.setupHeaderViewLayout()
+            }
+            
+            
         }
     }
     func setTableView(){
@@ -256,6 +263,7 @@ extension HomeVC : UITableViewDelegate {
     }
     func addContentScrollView() {
         bannerScrollView.delegate = self
+        bannerScrollView.bounces = false
         if bannerScrollView.subviews.count > 3{
             print(bannerScrollView.subviews)
             bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
