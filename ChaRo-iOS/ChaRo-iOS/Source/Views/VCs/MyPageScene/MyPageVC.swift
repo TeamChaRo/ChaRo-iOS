@@ -119,11 +119,16 @@ class MyPageVC: UIViewController {
     
     //collectionView
     private let collectionScrollView = UIScrollView().then{
+        
+        let userHeigth = UIScreen.main.bounds.height
+        
         $0.tag = 1
         $0.isPagingEnabled = true
         $0.bounces = false
         $0.contentSize.width = UIScreen.main.bounds.width
-        $0.contentSize = CGSize(width: UIScreen.main.bounds.width*2, height: UIScreen.main.bounds.height)
+        
+        //아무튼 아이폰 12에서는 잘 돌아가는데 이거 기기마다 테스트 매우 필요한 항목일듯요,, 스크롤뷰랑 컬렉션뷰의 설정된 heigth가 조금이라도 다르면 화면 지혼자 휙휙 돌아감...
+        $0.contentSize = CGSize(width: UIScreen.main.bounds.width*2, height: userHeigth - (userHeigth * 0.27 + 151))
         $0.backgroundColor = UIColor.white
         $0.showsHorizontalScrollIndicator = false
         $0.showsVerticalScrollIndicator = false
@@ -239,19 +244,18 @@ class MyPageVC: UIViewController {
      }
 //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(writeCollectionView.contentOffset.x, writeCollectionView.contentOffset.y)
+        print(writeCollectionView.contentOffset.x, saveCollectioinView.contentOffset.y, collectionScrollView.contentOffset.y)
         
         if(collectionScrollView.contentOffset.x > 0 && collectionScrollView.contentOffset.y < 0){
             collectionScrollView.contentOffset.y = 0
         }
-        
         //바텀뷰 이동
         setTabbarBottomViewMove()
         //아래 스크롤 방지
         if collectionScrollView.contentOffset.y > 0{
             collectionScrollView.contentOffset.y = 0
         }
-//        위스크롤 방지
+        //위스크롤 방지
         if collectionScrollView.contentOffset.y > writeCollectionView.contentSize.height
         {
             collectionScrollView.contentOffset.y = 0;
