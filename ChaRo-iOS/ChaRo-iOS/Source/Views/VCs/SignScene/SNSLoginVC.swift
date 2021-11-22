@@ -90,7 +90,7 @@ class SNSLoginVC: UIViewController {
     
     @objc func testLogin() {
         snsType = "A"
-        socialLogin(email: "yyaggdgggffaa3ao4ng22hh2@naver.com")
+        socialLogin(email: "yyaggdgggffaa3ao4ng22hh2@naver.com", profileImage: nil, nickname: nil)
     }
     
     @objc func appleLogin() {
@@ -108,9 +108,19 @@ class SNSLoginVC: UIViewController {
         snsType = "G"
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
-            print("로긘 성공")
+            print("구글 로긘 성공")
             let userEmail = user?.profile?.email
+            
+            //여기 유저 이미지 ... String 으로 변환
+//            do {
+//                var userProfileImageString = try String(contentsOf: URL(string: (user?.profile?.imageURL(withDimension: 320)!)!)!)
+//            }
+//            catch let error {
+//                print("URL 인코딩 에러")
+//            }
             print("사용자 이메일은 \(userEmail)")
+            
+            self.socialLogin(email: "woneeeeee0222@gmail.com", profileImage: nil, nickname: nil)
         }
     }
     
@@ -134,7 +144,7 @@ class SNSLoginVC: UIViewController {
 
     }
     
-    @objc func socialLogin(email: String) {
+    @objc func socialLogin(email: String, profileImage: String?, nickname: String?) {
         SocialLoginService.shared.socialLogin(email: email) { (response) in
             
             switch(response)
@@ -146,7 +156,7 @@ class SNSLoginVC: UIViewController {
                         self.goToHomeVC()
                     } else {
                         print("회원가입 갈겨")
-                        self.snsJoin(email: email, profileImage: nil, nickname: nil)
+                        self.snsJoin(email: email, profileImage: profileImage, nickname: nickname)
                         
                     }
                     
@@ -209,11 +219,41 @@ class SNSLoginVC: UIViewController {
                 break
                 
             case "G":
-                
+                print("구글 소셜 회원가입")
+                SocialJoinService.shared.googleJoin(email: email,
+                                                    profileImage: "",
+                                                    pushAgree: isPushAgree!,
+                                                    emailAgree: isEmailAgree!) { result in
+                    
+
+                    switch result {
+                    
+                    case .success(let data):
+                        if let personData = data as? UserInitialInfo {
+                            print("출력한다")
+                            print(personData.email)
+                            print(personData.nickname)
+                            print(personData.profileImage)
+                        }
+                        self.navigationController?.popViewController(animated: true)
+                        self.goToHomeVC()
+                        
+                        
+                    case .requestErr(let msg):
+                        print("requestERR", msg)
+                    case .pathErr:
+                        print("pathERR")
+                    case .serverErr:
+                        print("serverERR")
+                    case .networkFail:
+                        print("networkFail")
+                    }
+                    
+                }
                 break
                 
             case "K":
-                
+                //여기서 nickname 인자까지 넣은 snsJoin 날리면 됨
                 break
                 
             default:
@@ -343,7 +383,7 @@ extension SNSLoginVC : ASAuthorizationControllerDelegate {
             let user = credential.user
             print("👨‍🍳 \(user)")
             if let email = credential.email {
-                socialLogin(email: email)
+                socialLogin(email: email, profileImage: nil, nickname: nil)
             }
         }
     }
