@@ -14,7 +14,8 @@ import KakaoSDKUser
 
 class SNSLoginVC: UIViewController {
     
-    let signInConfig = GIDConfiguration.init(clientID: "com.googleusercontent.apps.278013610969-pmisnn93vofvfhk25q9a86eeu84ns1ll")
+    let signInConfig = GIDConfiguration.init(clientID: "316255098127-usdg37h4sgpondqjh818cl3n002vaach.apps.googleusercontent.com")
+    
     static let identifier = "SNSLoginVC"
     var snsType: String = "DEFAULT"
     
@@ -86,9 +87,10 @@ class SNSLoginVC: UIViewController {
         $0.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
     }
     
+    
     @objc func testLogin() {
         snsType = "A"
-        socialLogin(email: "yyaggdgaaaong22hh2@naver.com")
+        socialLogin(email: "yyaggdgggffaa3ao4ng22hh2@naver.com")
     }
     
     @objc func appleLogin() {
@@ -141,10 +143,7 @@ class SNSLoginVC: UIViewController {
                 if let success = success as? Bool {
                     if success {
                         print("로그인 성공")
-                        let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
-                        let nextVC = storyboard.instantiateViewController(withIdentifier: TabbarVC.identifier)
-                        nextVC.modalPresentationStyle = .fullScreen
-                        self.present(nextVC, animated: true, completion: nil)
+                        self.goToHomeVC()
                     } else {
                         print("회원가입 갈겨")
                         self.snsJoin(email: email, profileImage: nil, nickname: nil)
@@ -175,6 +174,7 @@ class SNSLoginVC: UIViewController {
         nextVC?.contractView.nextButton.nextPageClosure = {
             let isPushAgree = nextVC?.contractView.agreePushButton.Agreed
             let isEmailAgree = nextVC?.contractView.agreeEmailButton.Agreed
+            
             switch self.snsType {
             case "A":
                 SocialJoinService.shared.appleJoin(email: email,
@@ -184,8 +184,17 @@ class SNSLoginVC: UIViewController {
 
                     switch result {
                     
-                    case .success(let msg):
-                        print("success", msg)
+                    case .success(let data):
+                        if let personData = data as? UserInitialInfo {
+                            print("출력한다")
+                            print(personData.email)
+                            print(personData.nickname)
+                            print(personData.profileImage)
+                        }
+                        self.navigationController?.popViewController(animated: true)
+                        self.goToHomeVC()
+                        
+                        
                     case .requestErr(let msg):
                         print("requestERR", msg)
                     case .pathErr:
@@ -212,9 +221,9 @@ class SNSLoginVC: UIViewController {
                 break
             }
             
-            self.navigationController?.popViewController(animated: true)
         }
     }
+    
     
     let emailLoginBtn = UIButton().then {
         $0.setTitle("이메일 로그인", for: .normal)
@@ -242,6 +251,13 @@ class SNSLoginVC: UIViewController {
         let storyboard = UIStoryboard(name: "Join", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: JoinVC.identifier)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func goToHomeVC() {
+        let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(withIdentifier: TabbarVC.identifier)
+        nextVC.modalPresentationStyle = .fullScreen
+        self.present(nextVC, animated: true, completion: nil)
     }
     
     private func configureNavigationController() {

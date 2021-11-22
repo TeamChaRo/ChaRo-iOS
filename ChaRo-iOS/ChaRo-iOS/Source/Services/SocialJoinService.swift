@@ -171,7 +171,8 @@ struct SocialJoinService {
         switch statusCode {
         case 200:
             print("소셜 회원가입 --- 데이터 받기 성공")
-            return .success(decodedData)
+            return .success(decodedData.data)
+            
         case 400: return .requestErr(decodedData.msg)
         case 500: return .serverErr
         default: return .networkFail

@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>278013610969-pmisnn93vofvfhk25q9a86eeu84ns1ll.apps.googleusercontent.com</string>
+				<string>com.googleusercontent.apps.316255098127-usdg37h4sgpondqjh818cl3n002vaach</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,6 +37,11 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakaokompassauth</string>
+		<string>kakaolink</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -98,13 +103,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <!-- 카카오톡으로 로그인 -->
-        <string>kakaokompassauth</string>
-        <!-- 카카오링크 -->
-        <string>kakaolink</string>
-    </array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>
