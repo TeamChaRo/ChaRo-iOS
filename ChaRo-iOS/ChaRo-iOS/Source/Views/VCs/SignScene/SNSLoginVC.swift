@@ -111,7 +111,7 @@ class SNSLoginVC: UIViewController {
             print("구글 로긘 성공")
             let userEmail = user?.profile?.email
             
-            //여기 유저 이미지 ... String 으로 변환
+            //여기 유저 이미지 ... String 으로 변환 모루겟다
 //            do {
 //                var userProfileImageString = try String(contentsOf: URL(string: (user?.profile?.imageURL(withDimension: 320)!)!)!)
 //            }
@@ -132,6 +132,7 @@ class SNSLoginVC: UIViewController {
             print("카카오톡 로그인 실행가능")
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
+                    print("에러남")
                     print(error)
                 }
                 else {
