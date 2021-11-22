@@ -89,9 +89,8 @@ struct PostResultService {
     }
     
     private func judgeStatusPostDetail(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-        let decoder = JSONDecoder()
-        
-        guard let decodeData = try? decoder.decode(PostDatailDataModel.self, from: data) else {
+        guard let decodeData = try? JSONDecoder().decode(PostDatailDataModel.self, from: data) else {
+            print("-----------여기서 걸리는 건가?")
             return .pathErr
         }
         
