@@ -134,10 +134,10 @@ class AddressMainVC: UIViewController {
         let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
         print("------------------------")
         print("imagelist = \(imageList) 이거 넘길 거야!!!!")
-        print("------------------------")
-        nextVC.setDataWhenConfirmPost(data: sendedPostData!,
-                                      imageList: imageList,
-                                      addressList: addressList)
+//        print("------------------------")
+//        nextVC.setDataWhenConfirmPost(data: sendedPostData!,
+//                                      imageList: imageList,
+//                                      addressList: addressList)
         postSearchKeywords()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
