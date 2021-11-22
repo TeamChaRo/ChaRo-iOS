@@ -17,8 +17,9 @@ class PostDetailVC: UIViewController {
     private var tableView = UITableView()
     private var postId: Int = -1
     private var postData : PostDetail?
+    private var postDetailData : PostDetailData?
     private var driveCell: PostDriveCourseTVC?
-    private var addressList: [AddressDataModel] = []
+    private var addressList: [Course] = []
     private var imageList: [UIImage] = []
     
     private var isFavorite: Bool? {
@@ -117,54 +118,55 @@ class PostDetailVC: UIViewController {
         postId = id
     }
     
-    public func setDataWhenConfirmPost(data: WritePostData,
-                                       imageList: [UIImage],
-                                       addressList: [AddressDataModel]){
-        isEditingMode = true
-        isAuthor = true
-        self.addressList = addressList
-        self.imageList = imageList
-        writedPostData = data
-        
-        let sendedPostDate = PostDetail(title: data.title,
-                                  author: Constants.userId,
-                                  isAuthor: true,
-                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
-                                  postingYear: Date.getCurrentYear(),
-                                  postingMonth: Date.getCurrentMonth(),
-                                  postingDay: Date.getCurrentDay(),
-                                  isStored: false,
-                                  isFavorite: false,
-                                  likesCount: 0,
-                                  images: [""],
-                                  province: data.province,
-                                  city: data.region,
-                                  themes: data.theme,
-                                  source: "",
-                                  wayPoint: [""],
-                                  destination: "",
-                                  longtitude: [""],
-                                  latitude: [""],
-                                  isParking: data.isParking,
-                                  parkingDesc: data.parkingDesc,
-                                  warnings: data.warning,
-                                  courseDesc: data.courseDesc)
-        
-        self.postData = sendedPostDate
-        
-        dump(writedPostData)
+//    public func setDataWhenConfirmPost(data: WritePostData,
+//                                       imageList: [UIImage],
+//                                       addressList: [AddressDataModel]){
+//        isEditingMode = true
+//        isAuthor = true
+//        self.addressList = addressList
+//        self.imageList = imageList
+//        writedPostData = data
+//
+//        let sendedPostDate = PostDetail(title: data.title,
+//                                  author: Constants.userId,
+//                                  isAuthor: true,
+//                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
+//                                  postingYear: Date.getCurrentYear(),
+//                                  postingMonth: Date.getCurrentMonth(),
+//                                  postingDay: Date.getCurrentDay(),
+//                                  isStored: false,
+//                                  isFavorite: false,
+//                                  likesCount: 0,
+//                                  images: [""],
+//                                  province: data.province,
+//                                  city: data.region,
+//                                  themes: data.theme,
+//                                  source: "",
+//                                  wayPoint: [""],
+//                                  destination: "",
+//                                  longtitude: [""],
+//                                  latitude: [""],
+//                                  isParking: data.isParking,
+//                                  parkingDesc: data.parkingDesc,
+//                                  warnings: data.warning,
+//                                  courseDesc: data.courseDesc)
+//
+//        self.postData = sendedPostDate
+//
+//        dump(writedPostData)
+//
+//        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//        print("imageList = \(imageList)")
+//        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//
+//        var newAddressList :[Address] = []
+//        for address in addressList{
+//            newAddressList.append(address.getAddressDataModel())
+//        }
+//
+//        writedPostData?.course = newAddressList
+//    }
     
-        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print("imageList = \(imageList)")
-        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        
-        var newAddressList :[Address] = []
-        for address in addressList{
-            newAddressList.append(address.getAddressDataModel())
-        }
-        
-        writedPostData?.course = newAddressList
-    }
     
     private func checkModeForSendingServer(){
         if isEditingMode{
@@ -196,44 +198,6 @@ class PostDetailVC: UIViewController {
         tableView.registerCustomXib(xibName: PostLocationTVC.identifier)
         tableView.registerCustomXib(xibName: PostPathMapTVC.identifier)
     }
-    
-    func refineAddressData(){
-        let startAddreaa = AddressDataModel(title: postData!.latitude[0],
-                                            address: postData!.longtitude[0],
-                                            latitude: postData!.source,
-                                            longitude: "출발지")
-        
-        addressList.append(startAddreaa)
-        
-        
-        if postData!.wayPoint[0] != ""{
-            let wayAddress = AddressDataModel(title: postData!.latitude[1],
-                                              address: postData!.longtitude[1],
-                                              latitude: postData!.wayPoint[0],
-                                              longitude: "경유지1")
-            addressList.append(wayAddress)
-        }
-        
-        if postData!.wayPoint[1] != ""{
-            let wayAddress = AddressDataModel(title: postData!.latitude[2],
-                                              address: postData!.longtitude[2],
-                                              latitude: postData!.wayPoint[1],
-                                              longitude: "경유지2")
-            addressList.append(wayAddress)
-        }
-        
-        
-        let destinationAddress = AddressDataModel(title: postData!.latitude[3],
-                                                  address: postData!.longtitude[3],
-                                                  latitude: postData!.destination,
-                                                  longitude: "도착지")
-        addressList.append(destinationAddress)
-        
-    }
-    
-
-    
-    
     
 }
 
@@ -305,12 +269,9 @@ extension PostDetailVC{
     
 }
 
-
-
 extension PostDetailVC{
     
     func setTableViewConstraints(){
-        print(postData)
         if postData != nil{
             view.addSubview(tableView)
             tableView.snp.makeConstraints{
@@ -322,7 +283,6 @@ extension PostDetailVC{
 
     private func setNavigaitionViewConstraints(){
         view.addSubview(navigationView)
-    
         navigationView.snp.makeConstraints{
             $0.top.leading.trailing.equalTo(view)
             if UIScreen.hasNotch{
@@ -556,7 +516,7 @@ extension PostDetailVC {
     
     func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathMapTVC.identifier) as? PostPathMapTVC else {return UITableViewCell()}
-        cell.setAddressList(list: addressList, height: 451)
+        cell.setcourseList(list: addressList, height: 451)
         cell.selectionStyle = .none
         return cell
     }
@@ -591,15 +551,14 @@ extension PostDetailVC {
 
 //MARK: Network
 extension PostDetailVC {
-    func setPostContentView(data: PostDetail){
-        postData = data
-        isAuthor = postData!.isAuthor
-        print("----------------------------------")
-        print("isAuthor = \(isAuthor)")
-        print("----------------------------------")
-        isFavorite = postData!.isFavorite
-        isStored = postData!.isStored
-        refineAddressData()
+  
+    func setPostContentView(postData: PostDetailData?){
+        postDetailData = postData
+        isAuthor = postDetailData?.isAuthor ?? false
+        isFavorite = postDetailData?.isFavorite == 0 ? false : true
+        isStored = postDetailData?.isStored == 0 ? false : true
+        addressList = postDetailData?.course ?? []
+        //refineAddressData()
         configureTableView()
         setNavigaitionViewConstraints()
         setTableViewConstraints()
@@ -607,14 +566,18 @@ extension PostDetailVC {
     
     func getPostDetailData(){
         print("getPostDetailData 넘겨진 postId = \(self.postId)")
-        print("현재 보낼 URL = \(Constants.detailURL)\(self.postId)")
+        print("현재 보낼 URL = \(Constants.detailPostURL)\(self.postId)")
         PostResultService.shared.getPostDetail(postId: postId){ response in
             print("getPostDetailData postId = \(self.postId)")
             switch(response){
             case .success(let resultData):
                 if let data =  resultData as? PostDatailDataModel{
-                    self.setPostContentView(data: data.data[0])
+                    print("response = \(data)")
+                    self.setPostContentView(postData: data.data)
+                }else{
+                    print("안됐다,,")
                 }
+                
             case .requestErr(let message):
                 print("requestErr", message)
             case .pathErr:
