@@ -24,7 +24,8 @@ class SearchResultVC: UIViewController {
     @IBOutlet weak var dropDownTableView: UITableView!
     private lazy var backButton = LeftBackButton(toPop: self)
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
-                                                            color: .mainBlack)    
+                                                            color: .mainBlack)
+    private let separateLineView = UIView()
     private var collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: UICollectionViewFlowLayout())
@@ -46,44 +47,10 @@ class SearchResultVC: UIViewController {
         return collectionView
     }()
     
-    private let closeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("닫기", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
-        button.setTitleColor(.mainBlue, for: .normal)
-        button.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
-        return button
-    }()
-    
-    
-    //MARK: Result non view
-    private let searchNoImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchNoImage"))
-        imageView.contentMode = .scaleAspectFit
-        
-        return imageView
-    }()
-    
-    private let searchNoLabel :UILabel = {
-        let label = UILabel()
-        label.text = "검색하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = .notoSansRegularFont(ofSize: 14)
-        label.textColor = .gray50
-        return label
-    }()
-    
-    private let searchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("드라이브 코스 작성하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .mainBlue
-        button.addTarget(self, action: #selector(presentToCreatePostVC), for: .touchUpInside)
-        return button
-    }()
+    private let closeButton = UIButton()
+    private let searchNoImageView = UIImageView()
+    private let searchNoLabel = UILabel()
+    private let searchButton = UIButton()
     
     
     override func viewDidLoad() {
@@ -187,6 +154,14 @@ extension SearchResultVC: UICollectionViewDataSource{
             return UICollectionReusableView()
         }
         header.setStackViewData(list: filterResultList)
+        header.add(separateLineView) {
+            $0.backgroundColor = .gray20
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.bottom.equalToSuperview()
+                $0.height.equalTo(1)
+            }
+        }
         return header
         
     }
@@ -226,34 +201,41 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout{
 extension SearchResultVC {
     
     private func setConstraint(){
-        view.addSubview(navigationView)
-    
-        navigationView.snp.makeConstraints{
-            $0.top.leading.trailing.equalTo(view)
-            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+        view.add(navigationView){
+            $0.snp.makeConstraints{
+                $0.top.leading.trailing.equalTo(self.view)
+                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            }
         }
         setConstraintsInNavigaitionView()
     }
     
     private func setConstraintsInNavigaitionView(){
-        navigationView.addSubviews([backButton,
-                                    navigationTitleLabel
-                                    ,closeButton])
-        
-        backButton.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
-            $0.leading.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-9)
+        navigationView.add(backButton){
+            $0.snp.makeConstraints{
+                $0.centerY.equalToSuperview()
+                $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
+                $0.leading.equalToSuperview()
+                $0.bottom.equalToSuperview().offset(-9)
+            }
         }
         
-        navigationTitleLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(navigationTitleLabel){
+            $0.snp.makeConstraints{
+                $0.centerX.equalToSuperview()
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
         
-        closeButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(closeButton){
+            $0.setTitle("닫기", for: .normal)
+            $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
+            $0.setTitleColor(.mainBlue, for: .normal)
+            $0.addTarget(self, action: #selector(self.dismissAction), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalToSuperview().offset(-20)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
     }
     
@@ -266,36 +248,60 @@ extension SearchResultVC {
     }
     
     private func setEmptyViewConstraint(){
-        view.addSubviews([searchNoImageView,
-                          searchNoLabel,
-                          searchButton])
-        
-        searchNoImageView.snp.makeConstraints{
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(navigationView.snp.bottom).offset(28)
+        view.add(separateLineView){
+            $0.backgroundColor = .gray20
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.top.equalTo(self.navigationView.snp.bottom)
+                $0.height.equalTo(1)
+            }
         }
         
-        searchNoLabel.snp.makeConstraints{
-            $0.top.equalTo(searchNoImageView.snp.bottom).offset(19)
-            $0.centerX.equalTo(view.snp.centerX)
+        view.add(searchNoImageView) {
+            $0.image =  UIImage(named: "searchNoImage")
+            $0.contentMode = .scaleAspectFit
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.top.equalTo(self.navigationView.snp.bottom).offset(28)
+            }
         }
         
-        searchButton.snp.makeConstraints{
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.height.equalTo(48)
+        view.add(searchNoLabel) {
+            $0.text = "검색하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?"
+            $0.numberOfLines = 0
+            $0.textAlignment = .center
+            $0.font = .notoSansRegularFont(ofSize: 14)
+            $0.textColor = .gray50
+            $0.snp.makeConstraints{
+                $0.top.equalTo(self.searchNoImageView.snp.bottom).offset(19)
+                $0.centerX.equalTo(self.view.snp.centerX)
+            }
+        }
+        
+        view.add(searchButton){
+            $0.setTitle("드라이브 코스 작성하기", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+            $0.layer.cornerRadius = 8
+            $0.backgroundColor = .mainBlue
+            $0.addTarget(self, action: #selector(self.presentToCreatePostVC), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.leading.equalTo(self.view.safeAreaLayoutGuide).offset(20)
+                $0.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+                $0.height.equalTo(48)
+            }
         }
     }
     
     private func setResultViewConstraint(){
-        view.addSubview(collectionView)
-        view.addSubview(dropDownTableView)
-        collectionView.snp.makeConstraints{
-            $0.top.equalTo(navigationView.snp.bottom).offset(15)
-            $0.leading.trailing.bottom.equalToSuperview()
+        view.add(collectionView){
+            $0.snp.makeConstraints{
+                $0.top.equalTo(self.navigationView.snp.bottom).offset(15)
+                print("navigationView.frame.height\(self.navigationView.frame.height)")
+                $0.leading.trailing.bottom.equalToSuperview()
+            }
         }
-        
     }
 }
 
