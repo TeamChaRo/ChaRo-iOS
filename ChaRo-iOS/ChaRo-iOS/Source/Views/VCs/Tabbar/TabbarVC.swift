@@ -74,6 +74,7 @@ class TabbarVC: UITabBarController {
         
         let customTabbar = tabBar
         customTabbar.tintColor = .blue
+        customTabbar.backgroundColor = UIColor.white
 
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeVC = homeStoryboard.instantiateViewController(identifier: "HomeVC")
