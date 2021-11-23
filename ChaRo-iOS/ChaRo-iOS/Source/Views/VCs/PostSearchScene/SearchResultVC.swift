@@ -8,12 +8,12 @@
 import UIKit
 
 class SearchResultVC: UIViewController {
-
     static let identifier = "SearchResultVC"
     
     //MARK: Result Data
+    public var lastPostId : Int = 0
     public var postCount: Int = 0
-    public var postData : [DetailDrive] = []
+    public var postData : [DriveElement] = []
     public var filterResultList: [String] = []
     var myCellIsFirstLoaded: Bool = true
     
@@ -24,8 +24,7 @@ class SearchResultVC: UIViewController {
     @IBOutlet weak var dropDownTableView: UITableView!
     private lazy var backButton = LeftBackButton(toPop: self)
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
-                                                            color: .mainBlack)
-    
+                                                            color: .mainBlack)    
     private var collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: UICollectionViewFlowLayout())
@@ -89,10 +88,9 @@ class SearchResultVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postSearchPost(type: "like")
+        postSearchPost(type: "new")
         setConstraint()
         configureCollectionView()
-        setShadowInNavigationView()
         configureDropDown()
         
     }
@@ -129,9 +127,8 @@ class SearchResultVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = false
-        
-       
     }
+    
     func configureDropDown(){
         dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
         dropDownTableView.delegate = self
@@ -174,11 +171,11 @@ extension SearchResultVC: UICollectionViewDataSource{
                 topCVCCell?.postCount = postCount
                 topCVCCell?.setLabel()
             }
-            return topCVCCell as! UICollectionViewCell
+            return topCVCCell ?? UICollectionViewCell()
         }
         cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
-        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
-        
+//        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
+//
         
         return cell!
     }
@@ -235,8 +232,6 @@ extension SearchResultVC {
             $0.top.leading.trailing.equalTo(view)
             $0.height.equalTo(UIScreen.getNotchHeight() + 58)
         }
-        
-        setShadowInNavigationView()
         setConstraintsInNavigaitionView()
     }
     
@@ -302,49 +297,29 @@ extension SearchResultVC {
         }
         
     }
-    
-
-    func setShadowInNavigationView(){
-        navigationView.backgroundColor = .white
-
-        navigationView.layer.shadowOpacity = 0.05
-        navigationView.layer.shadowColor = UIColor.black.cgColor
-        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        navigationView.layer.shadowRadius = 6
-        navigationView.layer.masksToBounds = false
-        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
-                                                                           width: UIScreen.getDeviceWidth(),
-                                                                           height: UIScreen.getNotchHeight()+58),
-                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
-    }
 }
 
 
 //MARK: Network
 extension SearchResultVC{
-    
-    func refinePostResultData(data: DetailDataClass, type: String){
-        postData = data.drive
-        dump(postData)
+    func refinePostResultData(data: Drive?){
+        postData = data?.drive ?? []
+        self.collectionView.reloadData()
         setContentViewConstraint()
     }
     
     func postSearchPost(type: String){
-        PostResultService.shared.postSearchKeywords(userId: "jieun1211",
-                                                    region: filterResultList[1],
-                                                    theme: filterResultList[2],
-                                                    warning: filterResultList[3],
+        let warningEng = CommonData.warningDataDic[filterResultList[3]] ?? ""
+        print("warningEng = \(warningEng)")
+        PostResultService.shared.postSearchKeywords(region: filterResultList[1],
+                                                    theme: "lake",
+                                                    warning: warningEng,
                                                     type: type){ response in
             
             switch(response){
             case .success(let resultData):
-                if let data =  resultData as? DetailModel{
-                    DispatchQueue.global().sync {
-                    self.refinePostResultData(data: data.data, type: type)
-                    self.postCount = data.data.totalCourse
-                    }
-                    print(self.postData)
-                        self.collectionView.reloadData()
+                if let data =  resultData as? Drive{
+                    self.refinePostResultData(data: data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -358,7 +333,6 @@ extension SearchResultVC{
         }
     }
 }
-
 
 
 extension SearchResultVC: UITableViewDelegate{
@@ -422,7 +396,6 @@ extension SearchResultVC: SetTitleDelegate{
 }
 extension SearchResultVC: MenuClickedDelegate {
     func menuClicked(){
-        print("딜리게이트 실행됨?")
         dropDownTableView.isHidden = false
     }
 }
