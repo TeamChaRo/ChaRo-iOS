@@ -39,7 +39,7 @@ struct Constants {
     
     
     ///필터 검색 결과 조회
-    static let searchPostURL = baseURL + "/search/"
+    static let searchPostURL = baseURL + "/post/search/"
     
     /// 최근 검색 결과 관련
     static let searchKeywordURL = baseURL + "/searchHistory"
