@@ -135,7 +135,7 @@ class SNSLoginVC: UIViewController {
                     print(error)
                 }
                 else {
-                    print("loginWithKakaoTalk() success.")
+                    print("카카오 로긘 성공")
                     _ = oauthToken
                     let accessToken = oauthToken?.accessToken
                     self.setUserInfo()
@@ -152,7 +152,7 @@ class SNSLoginVC: UIViewController {
                         print(error)
                     }
                     else {
-                        print("me() success.")
+                        print("me() 성공")
                         
                         // ✅ 닉네임, 이메일 정보
                         let nickname = user?.kakaoAccount?.profile?.nickname
@@ -164,7 +164,7 @@ class SNSLoginVC: UIViewController {
                         self.setUserInfo(email: email!, nickname: nickname, profileImage: nil, token: nil)
                         
                         //로그인
-                        self.socialLogin(email: "dwwwwww@naver.com", profileImage: nil, nickname: nickname)
+                        self.socialLogin(email: email!, profileImage: nil, nickname: nickname)
                     }
                 }
     }
@@ -230,10 +230,12 @@ class SNSLoginVC: UIViewController {
                     
                     case .success(let data):
                         if let personData = data as? UserInitialInfo {
-                            print("출력한다")
-                            print(personData.email)
-                            print(personData.nickname)
-                            print(personData.profileImage)
+                            
+                            self.setUserInfo(email: personData.email,
+                                             nickname: personData.nickname,
+                                             profileImage: personData.profileImage,
+                                             token: nil)
+                            
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -264,10 +266,13 @@ class SNSLoginVC: UIViewController {
                     
                     case .success(let data):
                         if let personData = data as? UserInitialInfo {
-                            print("출력한다")
-                            print(personData.email)
-                            print(personData.nickname)
-                            print(personData.profileImage)
+                            
+                            self.setUserInfo(email: personData.email,
+                                             nickname: personData.nickname,
+                                             profileImage: personData.profileImage,
+                                             token: nil)
+
+                            
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -298,10 +303,12 @@ class SNSLoginVC: UIViewController {
                     
                     case .success(let data):
                         if let personData = data as? UserInitialInfo {
-                            print("출력한다")
-                            print(personData.email)
-                            print(personData.nickname)
-                            print(personData.profileImage)
+                            
+                            self.setUserInfo(email: personData.email,
+                                             nickname: personData.nickname,
+                                             profileImage: personData.profileImage,
+                                             token: nil)
+                            
                         }
                         
                         self.navigationController?.popViewController(animated: true)
