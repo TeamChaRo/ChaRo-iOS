@@ -17,4 +17,11 @@ struct GenericResponse<T: Codable>: Codable {
         case msg = "message"
         case data
     }
+    
+    init(from decoder : Decoder) throws{
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        success = (try? values.decode(Bool.self, forKey: .success)) ?? false
+        msg = (try? values.decode(String.self, forKey: .msg)) ?? ""
+        data = (try? values.decode(T.self, forKey: .data)) ?? nil
+    }
 }
