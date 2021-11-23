@@ -28,7 +28,10 @@ class JoinContractView: UIView {
     var agreePushLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 푸시 수신 동의")
     var agreeEmailLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 이메일 수신 동의")
     
-    var agreeAllButton = JoinAgreeButton(isBig: true)
+    var agreeAllButton = JoinAgreeButton(isBig: true).then {
+        $0.addTarget(self, action: #selector(allButtonClicked), for: .touchUpInside)
+    }
+
     var agreePushButton = JoinAgreeButton(isBig: false)
     var agreeEmailButton = JoinAgreeButton(isBig: false)
     
@@ -60,6 +63,10 @@ class JoinContractView: UIView {
         nextButton.isEnabled = false
     }
     
+    @objc func allButtonClicked() {
+        agreePushButton.buttonClicked()
+        agreeEmailButton.buttonClicked()
+    }
     
     //MARK: - configure 함수
     private func configureUI() {

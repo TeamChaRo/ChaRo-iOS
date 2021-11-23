@@ -58,10 +58,8 @@ struct IsDuplicatedNicknameService {
             return .pathErr
         }
         
-        print("일단 여기까지 왔음")
         switch statusCode {
         case 200:
-            print("--- 데이터 받기 성공")
             return .success(decodedData.success)
         case 400: return .requestErr(decodedData.msg)
         case 500: return .serverErr
