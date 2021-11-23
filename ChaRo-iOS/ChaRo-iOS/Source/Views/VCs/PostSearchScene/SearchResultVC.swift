@@ -55,7 +55,7 @@ class SearchResultVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        postSearchPost(type: "new")
+        postSearchPost(type: "like")
         setConstraint()
         configureCollectionView()
         configureDropDown()
@@ -141,6 +141,13 @@ extension SearchResultVC: UICollectionViewDataSource{
             return topCVCCell ?? UICollectionViewCell()
         }
         cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
+        let post = postData[indexPath.row-1]
+        
+        cell?.setData(image: post.image,
+                      title: post.title,
+                      tagCount: 3, tagArr: ["배열이","있는데","개수를왜"],
+                      isFavorite: post.isFavorite,
+                      postID: post.postID)
 //        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
 //
         
@@ -310,15 +317,17 @@ extension SearchResultVC {
 extension SearchResultVC{
     func refinePostResultData(data: Drive?){
         postData = data?.drive ?? []
-        self.collectionView.reloadData()
+        print("post data = \(postData)")
         setContentViewConstraint()
+        self.collectionView.reloadData()
     }
     
     func postSearchPost(type: String){
-        let warningEng = CommonData.warningDataDic[filterResultList[3]] ?? ""
-        print("warningEng = \(warningEng)")
+        let themeEng = CommonData.themeDict[filterResultList[2]] ?? ""
+        let warningEng = CommonData.warningDataDict[filterResultList[3]] ?? ""
+        print("themeEng =\(themeEng), warningEng = \(warningEng)")
         PostResultService.shared.postSearchKeywords(region: filterResultList[1],
-                                                    theme: "lake",
+                                                    theme: themeEng,
                                                     warning: warningEng,
                                                     type: type){ response in
             
