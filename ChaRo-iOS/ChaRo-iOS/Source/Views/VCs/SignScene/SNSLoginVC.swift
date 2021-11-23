@@ -14,6 +14,7 @@ import KakaoSDKUser
 
 class SNSLoginVC: UIViewController {
     
+    let userInfo = UserInfo.shared
     let signInConfig = GIDConfiguration.init(clientID: "316255098127-usdg37h4sgpondqjh818cl3n002vaach.apps.googleusercontent.com")
     
     static let identifier = "SNSLoginVC"
@@ -118,31 +119,62 @@ class SNSLoginVC: UIViewController {
 //            catch let error {
 //                print("URL 인코딩 에러")
 //            }
-            print("사용자 이메일은 \(userEmail)")
+
             
-            self.socialLogin(email: "woneeeeee0222@gmail.com", profileImage: nil, nickname: nil)
+            //로그인
+            self.socialLogin(email: userEmail!, profileImage: nil, nickname: nil)
         }
     }
     
     @objc func kakaoLogin() {
         snsType = "K"
         
-        print("카카오톡 로그인 시도합니다")
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            print("카카오톡 로그인 실행가능")
-            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+            UserApi.shared.loginWithKakaoTalk { [self] (oauthToken, error) in
                 if let error = error {
-                    print("에러남")
                     print(error)
                 }
                 else {
                     print("loginWithKakaoTalk() success.")
                     _ = oauthToken
                     let accessToken = oauthToken?.accessToken
+                    self.setUserInfo()
+                    
                 }
             }
         }
 
+    }
+    
+    private func setUserInfo() {
+        UserApi.shared.me() { (user, error) in
+                    if let error = error {
+                        print(error)
+                    }
+                    else {
+                        print("me() success.")
+                        
+                        // ✅ 닉네임, 이메일 정보
+                        let nickname = user?.kakaoAccount?.profile?.nickname
+                        let email = user?.kakaoAccount?.email
+                        let profile = user?.kakaoAccount?.profile?.profileImageUrl
+                        //여기서도 URL 을 String 으로 바꾸는 법을 모르겠군요 ...
+                        
+                        //유저 정보 싱글톤에 저장
+                        self.setUserInfo(email: email!, nickname: nickname, profileImage: nil, token: nil)
+                        
+                        //로그인
+                        self.socialLogin(email: "dwwwwww@naver.com", profileImage: nil, nickname: nickname)
+                    }
+                }
+    }
+    
+    //사용자 정보를 싱글톤 객체에 저장하는 함수
+    private func setUserInfo(email: String, nickname: String?, profileImage: String?, token: String?) {
+        userInfo.email = email
+        userInfo.nickname = nickname
+        userInfo.profileImage = profileImage
+        userInfo.token = token
     }
     
     @objc func socialLogin(email: String, profileImage: String?, nickname: String?) {
@@ -188,6 +220,7 @@ class SNSLoginVC: UIViewController {
             
             switch self.snsType {
             case "A":
+                print("애플 소셜 회원가입")
                 SocialJoinService.shared.appleJoin(email: email,
                                                    pushAgree: isPushAgree!,
                                                    emailAgree: isEmailAgree!) { result in
@@ -254,7 +287,38 @@ class SNSLoginVC: UIViewController {
                 break
                 
             case "K":
-                //여기서 nickname 인자까지 넣은 snsJoin 날리면 됨
+                print("카카오 소셜 회원가입")
+                SocialJoinService.shared.kakaoJoin(email: email,
+                                                   profileImage: "",
+                                                   pushAgree: isPushAgree!,
+                                                   emailAgree: isEmailAgree!,
+                                                   nickname: nickname!) { result in
+                    
+                    switch result {
+                    
+                    case .success(let data):
+                        if let personData = data as? UserInitialInfo {
+                            print("출력한다")
+                            print(personData.email)
+                            print(personData.nickname)
+                            print(personData.profileImage)
+                        }
+                        
+                        self.navigationController?.popViewController(animated: true)
+                        self.goToHomeVC()
+                        
+                        
+                    case .requestErr(let msg):
+                        print("requestERR", msg)
+                    case .pathErr:
+                        print("pathERR")
+                    case .serverErr:
+                        print("serverERR")
+                    case .networkFail:
+                        print("networkFail")
+                    }
+                    
+                }
                 break
                 
             default:
