@@ -46,6 +46,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
         configureUI()
         configureStickyView()
         configureClosure()
+        makeButtonsGray()
     }
     
     

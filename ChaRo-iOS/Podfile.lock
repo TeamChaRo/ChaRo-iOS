@@ -5,25 +5,6 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-  - GoogleSignIn (6.0.2):
-    - AppAuth (~> 1.4)
-    - GTMAppAuth (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GTMAppAuth (1.2.2):
-    - AppAuth/Core (~> 1.4)
-    - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.5.0)
-  - KakaoSDKAuth (2.6.0):
-    - KakaoSDKCommon (= 2.6.0)
-  - KakaoSDKCommon (2.6.0):
-    - KakaoSDKCommon/Common (= 2.6.0)
-    - KakaoSDKCommon/Network (= 2.6.0)
-  - KakaoSDKCommon/Common (2.6.0)
-  - KakaoSDKCommon/Network (2.6.0):
-    - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.6.0)
-  - KakaoSDKUser (2.6.0):
-    - KakaoSDKAuth (= 2.6.0)
   - Firebase/Analytics (8.5.0):
     - Firebase/Core
   - Firebase/Core (8.5.0):
@@ -90,6 +71,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleSignIn (6.0.2):
+    - AppAuth (~> 1.4)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.5.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -109,6 +94,21 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
+  - GTMAppAuth (1.2.2):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - GTMSessionFetcher/Core (1.5.0)
+  - KakaoSDKAuth (2.6.0):
+    - KakaoSDKCommon (= 2.6.0)
+  - KakaoSDKCommon (2.6.0):
+    - KakaoSDKCommon/Common (= 2.6.0)
+    - KakaoSDKCommon/Network (= 2.6.0)
+  - KakaoSDKCommon/Common (2.6.0)
+  - KakaoSDKCommon/Network (2.6.0):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.6.0)
+  - KakaoSDKUser (2.6.0):
+    - KakaoSDKAuth (= 2.6.0)
   - Kingfisher (6.3.1)
   - lottie-ios (3.2.3)
   - nanopb (2.30908.0):
@@ -129,12 +129,12 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
+  - Firebase/Analytics
+  - Firebase/Messaging
   - GoogleSignIn
   - KakaoSDKAuth
   - KakaoSDKCommon
   - KakaoSDKUser
-  - Firebase/Analytics
-  - Firebase/Messaging
   - Kingfisher (~> 6.0)
   - lottie-ios
   - RxCocoa (= 6.2.0)
@@ -147,12 +147,6 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AppAuth
-    - GoogleSignIn
-    - GTMAppAuth
-    - GTMSessionFetcher
-    - KakaoSDKAuth
-    - KakaoSDKCommon
-    - KakaoSDKUser
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -161,7 +155,13 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleDataTransport
+    - GoogleSignIn
     - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - Kingfisher
     - lottie-ios
     - nanopb
@@ -175,6 +175,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Firebase: ff8c73105b90e33e1dc6c8e5445d7adc2ccdc7c1
   FirebaseAnalytics: 96325c1e0acbd2bb805c6a613028b1fe599d6a37
   FirebaseCore: 1c1ca72483b59b17050f5b4cec4fb748425a3901
@@ -183,15 +184,14 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 0705ec705c21705efc51c071fba924c8e25c63e7
   GoogleAppMeasurement: 8d10c1c470fcb0e5143ed74fddd164f0a0384800
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
-  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
-  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
-  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   GoogleSignIn: fd381840dbe7c1137aa6dc30849a5c3e070c034a
+  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   KakaoSDKAuth: 037e6260f4468cbc3bde89a802864d6b58c5271c
   KakaoSDKCommon: 38154188336a1118f1b757f0fec54ff989365ddc
   KakaoSDKUser: ff9d7436ccbf0d65615bc56f3f4e31fb06830db2
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
@@ -202,6 +202,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 3a052e8b9285380a760221ef3e638e452d4b721c
+PODFILE CHECKSUM: 3baf91ff22435eef246660870ce3bfb421091f7b
 
 COCOAPODS: 1.10.2

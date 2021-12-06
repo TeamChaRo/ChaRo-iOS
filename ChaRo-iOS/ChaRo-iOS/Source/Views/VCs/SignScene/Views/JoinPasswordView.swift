@@ -31,6 +31,7 @@ class JoinPasswordView: UIView {
         super.init(frame: .zero)
         configureUI()
         configureStickyView()
+        makeButtonsGray()
     }
     
     
