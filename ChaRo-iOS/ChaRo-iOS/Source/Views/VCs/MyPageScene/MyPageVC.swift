@@ -32,6 +32,7 @@ class MyPageVC: UIViewController {
     var lastId: Int = 0
     var lastFavorite: Int = 0
     var isLast: Bool = false
+    var scrollTriger: Bool = false
     var lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     var delegate: AnimateIndicatorDelegate?
     
@@ -221,7 +222,6 @@ class MyPageVC: UIViewController {
                    case .success(let data) :
                        if let response = data as? MyPageDataModel{
                            self.userProfileData.append(response.data.userInformation)
-                           //self.writenPostData.append(response.data.writtenPost)
                            self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
                            self.savePostDriveData.append(contentsOf: response.data.savedPost.drive)
                            self.setHeaderData()
@@ -240,24 +240,23 @@ class MyPageVC: UIViewController {
                }
     }
     
-    func getInfinityData(){
+    func getInfinityData(addUrl: String, LikeOrNew: String){
         delegate = self
-        MypageInfinityService.MyPageInfinityData.getRecommendInfo{ (response) in
+        self.delegate?.startIndicator()
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo(addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
                    switch response
                    {
                    case .success(let data) :
-                       self.delegate?.startIndicator()
-                       print("start")
                        if let response = data as? MypageInpinityModel{
-                           if response.data.drive.count == 0{
+                           if response.data.lastID == 0{
                                self.isLast = true
                                self.delegate?.endIndicator()
                            }
                            else{
                                self.isLast = false
                            }
-                           self.writenPostDriveData.append(contentsOf: response.data.drive)
                            if self.isLast == false{
+                               self.writenPostDriveData.append(contentsOf: response.data.drive)
                                self.writeCollectionView.reloadData()
                                self.saveCollectioinView.reloadData()
                                self.delegate?.endIndicator()
@@ -291,8 +290,6 @@ class MyPageVC: UIViewController {
      }
 //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(writeCollectionView.contentOffset.x, saveCollectioinView.contentOffset.y, collectionScrollView.contentOffset.y)
-        
         let writeContentHeigth = writeCollectionView.contentSize.height
         let saveContentHeigth = saveCollectioinView.contentSize.height
         
@@ -317,59 +314,64 @@ class MyPageVC: UIViewController {
         //작성글 무한스크롤
         if(writeCollectionView.contentOffset.y > writeContentHeigth - writeCollectionView.frame.height){
             let lastcount = writenPostDriveData.count
-            
-            if lastcount > 0{
-
+            var likeOrNew = ""
+            var addURL = ""
+            if lastcount > 0 && scrollTriger == false{
+            scrollTriger = true
             lastId =  writenPostDriveData[lastcount-1].postID
             lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
             
             if currentState == "인기순"{
-                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
-                MypageInfinityService.likeOrNew = "like/"
-                MypageInfinityService.addURL = "/write/\(lastId)/\(lastFavorite)"
+                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                likeOrNew = "like/"
+                addURL = "/write/\(lastId)/\(lastFavorite)"
                 //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
                 //MypageInfinityService.addURL = "/write/11/0"
-                    getInfinityData()
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
             }
             else if currentState == "최신순"{
-                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
-                MypageInfinityService.likeOrNew = "new/"
-                MypageInfinityService.addURL = "/write/\(lastId)"
+                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                likeOrNew = "new/"
+                addURL = "/write/\(lastId)"
                 //MypageInfinityService.addURL = "/write/5/0"
-                    getInfinityData()
+                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
             }
                 
             }
         }
-        
-        if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height){
+        //저장글 무한스크롤
+        else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height){
             let lastcount = savePostDriveData.count
+            var likeOrNew = ""
+            var addURL = ""
             
-            if lastcount > 0{
-            
+            if lastcount > 0 && scrollTriger == false{
+                scrollTriger = true
             lastId =  savePostDriveData[lastcount-1].postID
             lastFavorite = savePostDriveData[lastcount-1].favoriteNum
             
             if currentState == "인기순"{
-                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
-                MypageInfinityService.likeOrNew = "like/"
-                MypageInfinityService.addURL = "/write/\(lastId)/\(lastFavorite)"
+                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                likeOrNew = "like/"
+                addURL = "/write/\(lastId)/\(lastFavorite)"
                 //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
                 //MypageInfinityService.addURL = "/write/5/0"
-                getInfinityData()
+                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
             }
             else if currentState == "최신순"{
-                print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
-                MypageInfinityService.likeOrNew = "new/"
-                MypageInfinityService.addURL = "/write/\(lastId)"
+                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                likeOrNew = "new/"
+                addURL = "/write/\(lastId)"
                 //MypageInfinityService.addURL = "/write/5/0"
-                getInfinityData()
-
+                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
             }
             
         }
         }
+        
+        if(writeCollectionView.contentOffset.y < writeContentHeigth - writeCollectionView.frame.height){scrollTriger = false}
+        if(saveCollectioinView.contentOffset.y < saveContentHeigth - saveCollectioinView.frame.height){scrollTriger = false}
         
         
     }
