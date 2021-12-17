@@ -5,18 +5,14 @@ import Foundation
 
 struct MypageInfinityService
 {
-    static var likeOrNew: String = ""
-    static var addURL: String = ""
-    static var userId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
-    var URL = Constants.myPageURL + likeOrNew + userId + addURL;
+    var userId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     
     static let MyPageInfinityData = MypageInfinityService()
-    func getRecommendInfo(completion : @escaping (NetworkResult<Any>) -> Void)
+    func getRecommendInfo(addURL: String, likeOrNew: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
-        
+        var URL = Constants.myPageURL + likeOrNew + userId + addURL;
         let header : HTTPHeaders = ["Content-Type": "application/json"]
-
         let dataRequest = AF.request(URL,
                                      method: .get,
                                      encoding: JSONEncoding.default,
@@ -56,10 +52,7 @@ struct MypageInfinityService
         guard let decodedData = try? decoder.decode(MypageInpinityModel.self, from: data)
         else {return .pathErr}
         // 우선 PersonDataModel 형태로 decode(해독)을 한번 거칩니다. 실패하면 pathErr
-        // 해독에 성공하면 Person data를 success에 넣어줍니다.
-
-        print("무한스크롤 ON ㅋㅋ", decodedData.data)
-        
+        // 해독에 성공하면 Person data를 success에 넣어줍니다.        
         
         
         return .success(decodedData)
