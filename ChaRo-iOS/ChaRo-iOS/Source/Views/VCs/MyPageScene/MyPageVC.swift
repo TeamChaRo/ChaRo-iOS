@@ -587,6 +587,21 @@ extension MyPageVC: UICollectionViewDelegate{
 }
 //MARK: Extension
 extension MyPageVC: UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: "PostDetailVC") as? PostDetailVC else {return}
+        //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
+        if collectionView.tag == 1{
+            detailVC.setPostId(id: writenPostDriveData[indexPath.row].postID)
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+        else{
+            detailVC.setPostId(id: savePostDriveData[indexPath.row].postID)
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var writeCellCount = 0
         var saveCellCount = 0
@@ -615,8 +630,6 @@ extension MyPageVC: UICollectionViewDataSource{
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-     
         
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
         let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
