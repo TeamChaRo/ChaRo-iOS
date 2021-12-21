@@ -12,7 +12,7 @@ struct Constants {
     // MARK: - BASE URL
     static let baseURL = "http://charo-server.o-r.kr"
     
-    static let userId = UserDefaults.standard.string(forKey: "userId") ?? "ios"
+    static let userId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     static let nickName = UserDefaults.standard.string(forKey: "nickname") ?? "지으니"
     static let profileName = UserDefaults.standard.string(forKey: "profileImage") ?? "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/jieun.JPG"
 
@@ -33,8 +33,10 @@ struct Constants {
     static let ThemeNewURL = baseURL + "/preview/new/\(userId)/1?value="
     static let likeURL = baseURL + "/post/like"
     
-    static let myPageLikeURL = baseURL + "/myPage/like/" + userId
-    static let myPageNewURL = baseURL + "/myPage/new/" + userId
+    ///myPage
+    static let myPageURL = baseURL + "/user/myPage/"
+    static let myPageLikeURL = baseURL + "/user/myPage/like/" + userId
+    static let myPageNewURL = baseURL + "/user/myPage/new/" + userId
     
     
     ///필터 검색 결과 조회
