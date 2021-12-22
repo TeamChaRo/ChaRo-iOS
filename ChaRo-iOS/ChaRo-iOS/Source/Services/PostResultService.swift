@@ -92,14 +92,14 @@ struct PostResultService {
     }
     
     private func judgeStatusPostDetail(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-        guard let decodeData = try? JSONDecoder().decode(PostDatailDataModel.self, from: data) else {
+        guard let decodeData = try? JSONDecoder().decode(GenericResponse<PostDetailData>.self, from: data) else {
             print("-----------여기서 걸리는 건가?")
             return .pathErr
         }
         
         switch statusCode {
-        case 200: return .success(decodeData)
-        case 400: return .requestErr(decodeData)
+        case 200: return .success(decodeData.data)
+        case 400: return .requestErr(decodeData.data)
         case 500: return .serverErr
         default:
             return .networkFail
