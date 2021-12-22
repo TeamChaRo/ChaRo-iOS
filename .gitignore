@@ -122,3 +122,6 @@ iOSInjectionProject/
 #*/MapService.swift 
 #./ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
 #ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
+
+#delete Podfile.lock
+ChaRo-iOS/Podfile.lock
