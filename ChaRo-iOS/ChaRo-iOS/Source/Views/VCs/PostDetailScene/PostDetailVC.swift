@@ -18,6 +18,7 @@ class PostDetailVC: UIViewController {
     private var postId: Int = -1
     private var postData : PostDetail?
     private var postDetailData : PostDetailData?
+    private var additionalDataOfPost: DriveElement?
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [Course] = []
     private var imageList: [UIImage] = []
@@ -49,11 +50,11 @@ class PostDetailVC: UIViewController {
     
     //MARK: UIComponent
     private let navigationView = UIView()
-    private lazy var backButton = LeftBackButton(toPop: self)
+    private lazy var backButton = LeftBackButton(toPop: self, isModal: true)
     private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
                                                             color: .mainBlack)
     
-    
+    private let separateLineView = UIView()
     private var modifyButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
@@ -84,8 +85,6 @@ class PostDetailVC: UIViewController {
         return button
     }()
     
-    
-   // var location: [String] = ["출발지", "경유지", "경유지", "도착지"]
     let cellFixedCount: Int = 3 // 0~2 cell은 무조건 존재
     
     override func viewDidLoad() {
@@ -116,6 +115,11 @@ class PostDetailVC: UIViewController {
     public func setPostId(id: Int){
         print("setPost PostDetailVC - \(id)")
         postId = id
+    }
+    
+    public func setAdditionalDataOfPost(data: DriveElement?){
+        additionalDataOfPost = data
+        print("넘어온 데이터 = \(additionalDataOfPost)")
     }
     
 //    public func setDataWhenConfirmPost(data: WritePostData,
@@ -282,20 +286,26 @@ extension PostDetailVC{
     }
 
     private func setNavigaitionViewConstraints(){
-        view.addSubview(navigationView)
-        navigationView.snp.makeConstraints{
-            $0.top.leading.trailing.equalTo(view)
-            if UIScreen.hasNotch{
-                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
-            }else{
-                $0.height.equalTo(93)
+        view.add(navigationView){
+            $0.snp.makeConstraints{
+                $0.top.leading.trailing.equalTo(self.view)
+                if UIScreen.hasNotch{
+                    $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+                }else{
+                    $0.height.equalTo(93)
+                }
             }
-            
+        }
+        view.add(separateLineView){
+            $0.backgroundColor = .gray20
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.top.equalTo(self.navigationView.snp.bottom)
+                $0.height.equalTo(1)
+            }
         }
         navigationView.bringSubviewToFront(view)
         setBasicNavigationView()
-       // applyTitleViewShadow()
-        setShadowInNavigationView()
         
         if isAuthor{
             navigationTitleLabel.text = "내가 작성한 글"
@@ -354,26 +364,6 @@ extension PostDetailVC{
             $0.centerY.equalTo(backButton.snp.centerY)
         }
     }
-    
-    func applyTitleViewShadow(){
-        navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 10), shadowRadius: 6, shadowOpacity: 0.05)
-
-        self.view.bringSubviewToFront(navigationView)
-    }
-    
-    func setShadowInNavigationView(){
-        navigationView.backgroundColor = .white
-        navigationView.layer.shadowOpacity = 0.05
-        navigationView.layer.shadowColor = UIColor.black.cgColor
-        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        navigationView.layer.shadowRadius = 6
-        navigationView.layer.masksToBounds = false
-        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
-                                                                           width: UIScreen.getDeviceWidth(),
-                                                                           height: UIScreen.getNotchHeight()+58),
-                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
-    }
- 
 }
 
 
@@ -558,26 +548,19 @@ extension PostDetailVC {
         isFavorite = postDetailData?.isFavorite == 0 ? false : true
         isStored = postDetailData?.isStored == 0 ? false : true
         addressList = postDetailData?.course ?? []
-        //refineAddressData()
         configureTableView()
         setNavigaitionViewConstraints()
         setTableViewConstraints()
     }
     
     func getPostDetailData(){
-        print("getPostDetailData 넘겨진 postId = \(self.postId)")
-        print("현재 보낼 URL = \(Constants.detailPostURL)\(self.postId)")
         PostResultService.shared.getPostDetail(postId: postId){ response in
-            print("getPostDetailData postId = \(self.postId)")
             switch(response){
             case .success(let resultData):
-                if let data =  resultData as? PostDatailDataModel{
+                if let data =  resultData as? PostDetailData{
                     print("response = \(data)")
-                    self.setPostContentView(postData: data.data)
-                }else{
-                    print("안됐다,,")
+                    self.setPostContentView(postData: data)
                 }
-                
             case .requestErr(let message):
                 print("requestErr", message)
             case .pathErr:
