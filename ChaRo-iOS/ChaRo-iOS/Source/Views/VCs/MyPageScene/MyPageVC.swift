@@ -49,6 +49,7 @@ class MyPageVC: UIViewController {
     private let headerBackgroundView = UIView().then{
         $0.backgroundColor = UIColor.mainBlue
     }
+    //팔로우 버튼하나 추가 하고, 밑에 컬뷰 하나 넣고 끝 내일 마무리 치기
 
     private let headerTitleLabel = UILabel().then{
         $0.textColor = UIColor.white
