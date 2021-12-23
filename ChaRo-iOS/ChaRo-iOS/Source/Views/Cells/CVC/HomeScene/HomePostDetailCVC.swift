@@ -40,8 +40,7 @@ class HomePostDetailCVC: UICollectionViewCell {
         delegate?.menuClicked()
 //        isButtonClicked.toggle()
         print("HomePostDetailCVC")
-        print("버튼 눌림")
-        
+        print("버튼 눌림", selectText)        
     }
     
     override func awakeFromNib() {
@@ -53,6 +52,7 @@ class HomePostDetailCVC: UICollectionViewCell {
     func setSelectName(name: String){
         selectLabel.text = name
         selectText = name
+        print(selectText , "이거됨?")
     }
 
 }
