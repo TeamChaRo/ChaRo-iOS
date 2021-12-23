@@ -90,16 +90,12 @@ class PostDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkModeForSendingServer()
-        
-        print("PostDetailVC viewDidLoad")
         setTableViewConstraints()
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -238,9 +234,7 @@ extension PostDetailVC{
         
         let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-
         })
-        
         
         let deleteAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -276,8 +270,9 @@ extension PostDetailVC{
 extension PostDetailVC{
     
     func setTableViewConstraints(){
-        if postData != nil{
+        if postDetailData != nil{
             view.addSubview(tableView)
+            print("table 잘 들어갔나?")
             tableView.snp.makeConstraints{
                 $0.top.equalTo(navigationView.snp.bottom).offset(5)
                 $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -444,22 +439,35 @@ extension PostDetailVC {
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: PostTitleTVC.identifier)
         as? PostTitleTVC else { return UITableViewCell() }
         
-        titleCell.setTitle(title: postData!.title,
-                           userName: postData!.author,
-                           date: "\(postData!.postingYear)년 \(postData!.postingMonth)월 \(postData!.postingDay)일",
-                           imageName: postData?.profileImage ?? "",
-                           likedCount: String(postData?.likesCount ?? -1))
+        guard let additionalData = additionalDataOfPost, let postData = postDetailData else {return UITableViewCell()}
+        
+        titleCell.setTitle(title: additionalData.title,
+                           userName: postData.author,
+                           date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
+                           imageName: postData.profileImage,
+                           likedCount: String(postData.likesCount))
+        
+//
+//        titleCell.setTitle(title: additionalDataOfPost?.title ?? "",
+//                           userName: postDetailData?.author ?? "",
+//                           date: "\(additionalDataOfPost?.year ?? "")년 \(additionalDataOfPost?.month)월 \(additionalDataOfPost?.day)일",
+//                           imageName: postData?.profileImage ?? "",
+//                           likedCount: String(postData?.likesCount ?? -1))
         return titleCell
     }
     
     func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
-        if imageList.isEmpty{
-            print("이미지 없음???")
-            cell.setImage(postData!.images)
-        }else{
-            cell.setImageAtConfirmView(imageList: imageList)
-        }
+        
+        
+    
+        
+//        if imageList.isEmpty{
+//            print("이미지 없음???")
+//            cell.setImage(postData!.images)
+//        }else{
+//            cell.setImageAtConfirmView(imageList: imageList)
+//        }
         cell.selectionStyle = .none
         return cell
     }
@@ -543,6 +551,7 @@ extension PostDetailVC {
 extension PostDetailVC {
   
     func setPostContentView(postData: PostDetailData?){
+        print("additionalDataOfPost = \(additionalDataOfPost)")
         postDetailData = postData
         isAuthor = postDetailData?.isAuthor ?? false
         isFavorite = postDetailData?.isFavorite == 0 ? false : true
@@ -602,7 +611,6 @@ extension PostDetailVC {
                 if let success = success as? Bool {
                     self.isFavorite!.toggle()
                 }
-                
             case .requestErr(let msg):
                 if let msg = msg as? String {
                     print(msg)
@@ -623,7 +631,6 @@ extension PostDetailVC {
                     print("스크랩 성공해서 바뀝니다")
                     self.isStored!.toggle()
                 }
-                
             case .requestErr(let msg):
                 if let msg = msg as? String {
                     print(msg)
