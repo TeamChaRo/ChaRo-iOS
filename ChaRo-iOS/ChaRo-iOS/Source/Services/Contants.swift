@@ -38,6 +38,9 @@ struct Constants {
     static let myPageLikeURL = baseURL + "/user/myPage/like/" + userId
     static let myPageNewURL = baseURL + "/user/myPage/new/" + userId
     
+    ///otherMyPage
+    static let otherMyPageURL = baseURL + "/user/myPage/like/"
+    static let otherMyPageNewURL = baseURL + "/user/myPage/new/"
     
     ///필터 검색 결과 조회
     static let searchPostURL = baseURL + "/search/"

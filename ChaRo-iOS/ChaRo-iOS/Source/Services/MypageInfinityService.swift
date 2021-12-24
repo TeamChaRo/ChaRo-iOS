@@ -5,13 +5,11 @@ import Foundation
 
 struct MypageInfinityService
 {
-    var userId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
-    
     static let MyPageInfinityData = MypageInfinityService()
-    func getRecommendInfo(addURL: String, likeOrNew: String, completion : @escaping (NetworkResult<Any>) -> Void)
+    func getRecommendInfo(userID: String, addURL: String, likeOrNew: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
-        var URL = Constants.myPageURL + likeOrNew + userId + addURL;
+        var URL = Constants.myPageURL + likeOrNew + userID + addURL;
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         let dataRequest = AF.request(URL,
                                      method: .get,

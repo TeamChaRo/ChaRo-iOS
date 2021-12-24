@@ -25,10 +25,10 @@ class MyPageVC: UIViewController {
     
     
     let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
-    var topCVCCell : HomePostDetailCVC?
     var currentState: String = "인기순"
     
     //무한스크롤을 위함
+    var myId: String = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     var lastId: Int = 0
     var lastFavorite: Int = 0
     var isLast: Bool = false
@@ -50,6 +50,7 @@ class MyPageVC: UIViewController {
         $0.backgroundColor = UIColor.mainBlue
     }
     //팔로우 버튼하나 추가 하고, 밑에 컬뷰 하나 넣고 끝 내일 마무리 치기
+
 
     private let headerTitleLabel = UILabel().then{
         $0.textColor = UIColor.white
@@ -244,7 +245,7 @@ class MyPageVC: UIViewController {
     func getInfinityData(addUrl: String, LikeOrNew: String){
         delegate = self
         self.delegate?.startIndicator()
-        MypageInfinityService.MyPageInfinityData.getRecommendInfo(addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: myId, addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
                    switch response
                    {
                    case .success(let data) :
@@ -328,7 +329,7 @@ class MyPageVC: UIViewController {
                 addURL = "/write/\(lastId)/\(lastFavorite)"
                 //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
                 //MypageInfinityService.addURL = "/write/11/0"
-                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
             }
             else if currentState == "최신순"{
