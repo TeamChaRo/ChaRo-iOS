@@ -10,8 +10,23 @@ import SnapKit
 import Then
 
 class OtherMyPageVC: UIViewController {
+    
+    var userProfileData: [UserInformation] = []
+    var writenPostDriveData: [MyPageDrive] = []
+    
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
+    
+    var currentState: String = "인기순"
+    
+    var otherUserID: String = "and@naver.com"
+    
+    var lastId: Int = 0
+    var lastFavorite: Int = 0
+    var isLast: Bool = false
+    var scrollTriger: Bool = false
+    var lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var delegate: AnimateIndicatorDelegate?
 
     //헤더뷰 유아이
     private let profileImageView = UIImageView().then{
@@ -75,6 +90,7 @@ class OtherMyPageVC: UIViewController {
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
     }
+    //컬렉션 뷰
     private var collectionview: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
@@ -86,11 +102,19 @@ class OtherMyPageVC: UIViewController {
         collectionView.bounces = true
         return collectionView
     }()
+    //인기순 최신순 필터
+    private let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
+
+    
+    
     //MARK: viewdidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderViewLayout()
         setCollectionviewLayout()
+        filterTableViewLayout()
+        getMypageData()
+        self.dismissDropDownWhenTappedAround()
     }
     
     
@@ -177,20 +201,166 @@ class OtherMyPageVC: UIViewController {
     
     }
     
-    //MARK: Function
+    func filterTableViewLayout(){
+        filterTableView.delegate = self
+        filterTableView.clickDelegate = self
+        filterTableView.isHidden = true
+        self.view.addSubview(filterTableView)
+        filterTableView.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(280)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(97)
+            $0.width.equalTo(180)
+        }
+    }
+    //MARK: function
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let writeContentHeight = collectionview.contentSize.height
+        
+        if(collectionview.contentOffset.y > writeContentHeight - collectionview.frame.height){
+            let lastcount = writenPostDriveData.count
+            var likeOrNew = ""
+            var addURL = ""
+            if lastcount > 0 && scrollTriger == false{
+            scrollTriger = true
+            lastId =  writenPostDriveData[lastcount-1].postID
+            lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
+            
+            if currentState == "인기순"{
+                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                likeOrNew = "like/"
+                addURL = "/write/\(lastId)/\(lastFavorite)"
+                //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
+                //MypageInfinityService.addURL = "/write/11/0"
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
+            }
+            else if currentState == "최신순"{
+                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                likeOrNew = "new/"
+                addURL = "/write/\(lastId)"
+                //MypageInfinityService.addURL = "/write/5/0"
+                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+            }
+                
+            }
+        }
+        
+        if(collectionview.contentOffset.y < writeContentHeight - collectionview.frame.height){scrollTriger = false}
+    }
+    
+    func setOtherUserID(userID: String){
+        otherUserID = userID
+    }
+    
+    
+    func setHeaderData(){
+        guard let url = URL(string: userProfileData[0].profileImage) else { return }
+        userNameLabel.text = userProfileData[0].nickname
+        profileImageView.kf.setImage(with: url)
+        followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
+        followNumButton.setTitle(String(userProfileData[0].following), for: .normal)
+    }
+    
+    //MARK: Server
+    //마이페이지 데이터 받아오는 함수
+        func getMypageData(){
+            GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
+            GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
+                       switch response
+                       {
+                       case .success(let data) :
+                           if let response = data as? MyPageDataModel{
+                               self.userProfileData.append(response.data.userInformation)
+                               self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
+                               self.setHeaderData()
+                               self.collectionview.reloadData()
+                           }
+                       case .requestErr(let message) :
+                           print("requestERR")
+                       case .pathErr :
+                           print("pathERR")
+                       case .serverErr:
+                           print("serverERR")
+                       case .networkFail:
+                           print("networkFail")
+                       }
+                   }
+        }
+    
+    func getInfinityData(addUrl: String, LikeOrNew: String){
+        delegate = self
+        self.delegate?.startIndicator()
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: otherUserID, addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
+                   switch response
+                   {
+                   case .success(let data) :
+                       if let response = data as? MypageInpinityModel{
+                           if response.data.lastID == 0{
+                               self.isLast = true
+                               self.delegate?.endIndicator()
+                           }
+                           else{
+                               self.isLast = false
+                           }
+                           if self.isLast == false{
+                               self.writenPostDriveData.append(contentsOf: response.data.drive)
+                               self.collectionview.reloadData()
+                               self.delegate?.endIndicator()
+                           }
+
+                       }
+                   case .requestErr(let message) :
+                       print("requestERR")
+                   case .pathErr :
+                       print("pathERR")
+                   case .serverErr:
+                       print("serverERR")
+                   case .networkFail:
+                       print("networkFail")
+                   }
+               }
+    }
+    
+    
 }
 
 
+//MARK: Extension
 extension OtherMyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        var cellCount = 0
+        
+        if(writenPostDriveData.count == 0){
+            cellCount = 1
+        }
+        else{
+            cellCount = writenPostDriveData.count + 1
+        }
+        return cellCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
         let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
+        detailCell.delegate = self
+        detailCell.setSelectName(name: currentState)
+    
+        if(indexPath.row == 0){
+            detailCell.postCountLabel.text = ""
+            return detailCell
+        }
+        else{
+            let writenElement = writenPostDriveData[indexPath.row-1]
+            var writenTags = [writenElement.region, writenElement.theme,
+                        writenElement.warning ?? ""] as [String]
+        cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
+            
+           
         return cell
+        
+        }
     }
     
     
@@ -218,5 +388,55 @@ extension OtherMyPageVC: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+}
+extension OtherMyPageVC{
+func dismissDropDownWhenTappedAround() {
+        let tap: UITapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissDropDown() {
+        self.filterTableView.isHidden = true
+    }
+}
+
+extension OtherMyPageVC: NewHotFilterClickedDelegate{
+    func filterClicked(row: Int) {
+        switch row {
+        case 0:
+            GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
+            writenPostDriveData = []
+            getMypageData()
+            currentState = "인기순"
+            collectionview.reloadData()
+        default:
+            GetMyPageDataService.URL = Constants.otherMyPageNewURL + otherUserID
+            writenPostDriveData = []
+            getMypageData()
+            currentState = "최신순"
+            collectionview.reloadData()
+        }
+    }
+    
+
+}
+extension OtherMyPageVC: MenuClickedDelegate{
+    func menuClicked(){
+        filterTableView.isHidden = false
+    }
+}
+extension OtherMyPageVC: AnimateIndicatorDelegate{
+    func startIndicator() {
+        view.addSubview(lottieView)
+        lottieView.isHidden = false
+        lottieView.lottieView.play()
+    }
+
+    func endIndicator() {
+        lottieView.lottieView.stop()
+        lottieView.isHidden = true
     }
 }
