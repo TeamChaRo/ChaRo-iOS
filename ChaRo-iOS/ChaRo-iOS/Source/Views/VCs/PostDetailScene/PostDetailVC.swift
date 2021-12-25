@@ -11,7 +11,6 @@ import Then
 class PostDetailVC: UIViewController {
 
     static let identifier = "PostDetailVC"
-    
     private var isAuthor = false
     private var isEditingMode = false
     private var tableView = UITableView()
@@ -45,26 +44,10 @@ class PostDetailVC: UIViewController {
     private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
                                                             color: .mainBlack)
     private let separateLineView = UIView()
-    private var modifyButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
-        $0.addTarget(self, action: #selector(registActionSheet), for: .touchUpInside)
-    }
-    private var heartButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
-        $0.addTarget(self, action: #selector(clickedToHeartButton), for: .touchUpInside)
-    }
-    private var scrapButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "icSave5Inactive"), for: .normal)
-        $0.addTarget(self, action: #selector(clickedToScrapButton), for: .touchUpInside)
-    }
-    
-    private let saveButton = UIButton().then{
-        $0.setTitle("등록", for: .normal)
-        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
-        $0.setTitleColor(.mainBlue, for: .normal)
-        $0.addTarget(self, action: #selector(clickedToSaveButton), for: .touchUpInside)
-    }
-    
+    private var modifyButton = UIButton()
+    private var heartButton = UIButton()
+    private var scrapButton = UIButton()
+    private let saveButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -256,19 +239,25 @@ extension PostDetailVC{
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(backButton.snp.centerY)
         }
-        
     }
     
     func setNavigationViewInSaveMode(){
-        navigationView.addSubview(saveButton)
-        saveButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(saveButton){
+            $0.setTitle("등록", for: .normal)
+            $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
+            $0.setTitleColor(.mainBlue, for: .normal)
+            $0.addTarget(self, action: #selector(self.clickedToSaveButton), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalToSuperview().offset(-20)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
     }
     
     func setNavigationViewInConfirmMode(){
         navigationView.add(modifyButton){
+            $0.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
+            $0.addTarget(self, action: #selector(self.registActionSheet), for: .touchUpInside)
             $0.snp.makeConstraints{
                 $0.trailing.equalToSuperview().offset(-11)
                 $0.centerY.equalTo(self.backButton.snp.centerY)
@@ -277,14 +266,21 @@ extension PostDetailVC{
     }
     
     func setNavigationViewInWatchMode(){
-        navigationView.addSubviews([heartButton, scrapButton])
-        heartButton.snp.makeConstraints{
-            $0.trailing.equalTo(scrapButton.snp.leading)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(scrapButton){
+            $0.setBackgroundImage(UIImage(named: "icSave5Inactive"), for: .normal)
+            $0.addTarget(self, action: #selector(self.clickedToScrapButton), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalToSuperview().offset(-11)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
-        scrapButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-11)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(heartButton){
+            $0.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
+            $0.addTarget(self, action: #selector(self.clickedToHeartButton), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalTo(self.scrapButton.snp.leading)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
     }
     
