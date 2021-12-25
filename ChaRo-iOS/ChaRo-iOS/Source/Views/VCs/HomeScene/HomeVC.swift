@@ -388,14 +388,9 @@ extension HomeVC : UITableViewDelegate {
             }
             else {
                 cell.todayDriveList = todayData
-
-                
             return cell
-            
         }
-        
         case 1:
-
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
