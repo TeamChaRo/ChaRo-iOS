@@ -120,7 +120,6 @@ class OtherMyPageVC: UIViewController {
         filterTableViewLayout()
         getMypageData()
         getFollowData()
-        postFollowUser()
         self.dismissDropDownWhenTappedAround()
     }
     
@@ -214,7 +213,7 @@ class OtherMyPageVC: UIViewController {
         filterTableView.isHidden = true
         self.view.addSubview(filterTableView)
         filterTableView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(280)
+            $0.top.equalToSuperview().offset(250)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)
             $0.width.equalTo(180)
@@ -254,7 +253,8 @@ class OtherMyPageVC: UIViewController {
             }
         }
         
-        if(collectionview.contentOffset.y < writeContentHeight - collectionview.frame.height){scrollTriger = false}
+        if(collectionview.contentOffset.y < writeContentHeight - collectionview.frame.height){scrollTriger = false
+        }
     }
     
     func setOtherUserID(userID: String){
@@ -319,6 +319,14 @@ class OtherMyPageVC: UIViewController {
                    case .success(let data):
                        if let response = data as? DoFollowDataModel{
                            self.isFollow = response.data.isFollow
+                           if self.isFollow == false{
+                               self.isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+                               self.getMypageData()
+                           }
+                           else{
+                               self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
+                               self.getMypageData()
+                           }
                        }
                    case .requestErr(let message) :
                        print("requestERR")
@@ -384,7 +392,9 @@ class OtherMyPageVC: UIViewController {
                     else{
                         self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
                         self.getMypageData()
-                    }                }
+                    }
+                    
+                }
             case .requestErr(let message):
                 print(message)
             case .serverErr:
@@ -433,6 +443,26 @@ extension OtherMyPageVC: UICollectionViewDataSource{
         
         }
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
+        //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
+            detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
+            detailVC.setAdditionalDataOfPost(data: DriveElement.init(
+                postID: writenPostDriveData[indexPath.row-1].postID,
+                title: writenPostDriveData[indexPath.row-1].title,
+                image: writenPostDriveData[indexPath.row-1].image,
+                region: writenPostDriveData[indexPath.row-1].region,
+                theme: writenPostDriveData[indexPath.row-1].theme,
+                warning: writenPostDriveData[indexPath.row-1].warning,
+                year: writenPostDriveData[indexPath.row-1].year,
+                month: writenPostDriveData[indexPath.row-1].month,
+                day: writenPostDriveData[indexPath.row-1].day,
+                isFavorite: writenPostDriveData[indexPath.row-1].isFavorite))
+            self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
     
     
 }
