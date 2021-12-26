@@ -19,7 +19,8 @@ class PostPathMapTVC: UITableViewCell {
     //MARK: TMapView
     private let tMapView = TMapView()
     private var markerList : [TMapMarker] = []
-    private var addressList : [AddressDataModel] = []
+    //private var courseList : [AddressDataModel] = []
+    private var courseList : [Course] = []
     private var polyLineList: [TMapPolyline] = []
     private var viewHeight : CGFloat = 0
     
@@ -36,25 +37,32 @@ class PostPathMapTVC: UITableViewCell {
     }
     
     
-    public func setAddressList(list: [AddressDataModel], height: CGFloat){
-        addressList = list
+//    public func setcourseList(list: [AddressDataModel], height: CGFloat){
+//        courseList = list
+//        tMapView.delegate = self
+//        tMapView.setApiKey(MapService.mapkey)
+//        viewHeight = height
+//
+//    }
+    
+    public func setcourseList(list: [Course], height: CGFloat){
+        courseList = list
         tMapView.delegate = self
         tMapView.setApiKey(MapService.mapkey)
         viewHeight = height
-        
     }
     
     private func addPathInMapView(){
         let pathData = TMapPathData()
-        print("count = \(addressList.count)")
-        for index in 0..<addressList.count-1{
+        print("count = \(courseList.count)")
+        for index in 0..<courseList.count-1{
             print("index = \(index)")
-            pathData.findPathData(startPoint: addressList[index].getPoint(),
-                                  endPoint: addressList[index+1].getPoint()) { result, error in
+            pathData.findPathData(startPoint: courseList[index].getPoint(),
+                                  endPoint: courseList[index+1].getPoint()) { result, error in
                 guard let polyLine = result else {return}
                 
-                print(" start = \(self.addressList[index])")
-                print(" end = \(self.addressList[index+1])")
+                print(" start = \(self.courseList[index])")
+                print(" end = \(self.courseList[index+1])")
                 
                 print("경로 들어감")
                 self.polyLineList.append(polyLine)
@@ -63,7 +71,7 @@ class PostPathMapTVC: UITableViewCell {
                     polyLine.map = self.tMapView
                 }
                 
-                if index == self.addressList.count-2{
+                if index == self.courseList.count-2{
                     
                     print("경로 그려져야함!!!!! = \(index)")
                     DispatchQueue.main.async {
@@ -78,12 +86,12 @@ class PostPathMapTVC: UITableViewCell {
     }
     
     private func addMarkerInMapView(){
-        for index in 0..<addressList.count {
-            let marker = TMapMarker(position: addressList[index].getPoint())
+        for index in 0..<courseList.count {
+            let marker = TMapMarker(position: courseList[index].getPoint())
             
             if index == 0 {
                 marker.icon = UIImage(named: "icRouteStart")
-            }else if index == addressList.count - 1{
+            }else if index == courseList.count - 1{
                 marker.icon = UIImage(named: "icRouteEnd")
             }else{
                 marker.icon = UIImage(named: "icRouteWaypoint")
@@ -122,7 +130,7 @@ extension PostPathMapTVC: TMapViewDelegate{
     func mapViewDidFinishLoadingMap() {
         print("befor = \(self.tMapView.getCenter())")
         print("mapViewDidFinishLoadingMap")
-        dump(addressList)
+        dump(courseList)
         let mapWidth: CGFloat = UIScreen.getDeviceWidth() - 40
         let mapHeight: CGFloat = viewHeight - 40
         tMapView.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight)

@@ -52,7 +52,7 @@ class SearchPostVC: UIViewController {
     private let userSubLabel = UILabel().then{
         $0.font = .notoSansMediumFont(ofSize: 17)
         $0.textColor = .white
-        $0.text = "맞춤 코스를 찾아 드릴게요"
+        $0.text = "원하는 코스를 검색해보세요"
     }
     
     private let fileterView = UIImageView().then{
@@ -64,6 +64,12 @@ class SearchPostVC: UIViewController {
         $0.text = "오늘 드라이브는"
         $0.font = .notoSansBoldFont(ofSize: 19)
         $0.textColor = .gray50
+    }
+    
+    private let filterSubtitleLabel = UILabel().then{
+        $0.text = "3가지 요소 중 하나 이상만 입력해도 검색할 수 있어요!"
+        $0.font = .notoSansMediumFont(ofSize: 13)
+        $0.textColor = .gray30
     }
     
     private let stateImageView = UIImageView()
@@ -397,10 +403,17 @@ extension SearchPostVC {
     }
     
     func setConstraintsInFileterView(){
-        fileterView.addSubviews([filterTitleLabel])
+        fileterView.addSubviews([filterTitleLabel
+                                 ,filterSubtitleLabel])
         
         filterTitleLabel.snp.makeConstraints{
-            $0.top.equalTo(fileterView.snp.top).offset(48)
+            $0.top.equalTo(fileterView.snp.top).offset(37)
+            $0.leading.equalTo(fileterView.snp.leading).offset(33)
+        }
+        
+        
+        filterSubtitleLabel.snp.makeConstraints{
+            $0.top.equalTo(filterTitleLabel.snp.bottom).offset(2)
             $0.leading.equalTo(fileterView.snp.leading).offset(33)
         }
         
@@ -417,7 +430,7 @@ extension SearchPostVC {
                                  cityLabel])
         
         stateImageView.snp.makeConstraints{
-            $0.top.equalTo(filterTitleLabel.snp.bottom).offset(11)
+            $0.top.equalTo(filterTitleLabel.snp.bottom).offset(30)
             $0.leading.equalTo(fileterView.snp.leading).offset(22)
         }
         
@@ -430,7 +443,7 @@ extension SearchPostVC {
         }
       
         cityImageView.snp.makeConstraints{
-            $0.top.equalTo(filterTitleLabel.snp.bottom).offset(11)
+            $0.top.equalTo(filterTitleLabel.snp.bottom).offset(30)
             $0.leading.equalTo(stateImageView.snp.leading).offset(116)
         }
         

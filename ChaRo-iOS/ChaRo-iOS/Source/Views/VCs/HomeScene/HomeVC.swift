@@ -388,14 +388,9 @@ extension HomeVC : UITableViewDelegate {
             }
             else {
                 cell.todayDriveList = todayData
-
-                
             return cell
-            
         }
-        
         case 1:
-
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
@@ -503,35 +498,36 @@ extension HomeVC: SeeMorePushDelegate{
 }
 
 extension HomeVC: CollectionViewCellDelegate{
-    
     func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
-        
         let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
-        
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
-        
         vc.setSelectedTheme(name: (collectionviewcell?.themeLabel.text)!)
-        
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        }
-    
+    }
 }
 
 
 //postID 넘기기 위한 Delegate 구현
 extension HomeVC: PostIdDelegate{
-    
+
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
-        
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
-        
         nextVC.setPostId(id: data)
-        navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.modalPresentationStyle = .currentContext
+        tabBarController?.present(nextVC, animated: true, completion: nil)
+        //navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    func sendPostDriveElement(data: DriveElement?) {
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        nextVC.setAdditionalDataOfPost(data: data)
+        print("sendPostDriveElement | 이거 잘 불렸나?? \(data)")
+        nextVC.modalPresentationStyle = .currentContext
+        tabBarController?.present(nextVC, animated: true, completion: nil)
+    }
 }
 
 extension HomeVC: AnimateIndicatorDelegate{

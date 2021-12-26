@@ -8,12 +8,12 @@
 import UIKit
 
 class SearchResultVC: UIViewController {
-
     static let identifier = "SearchResultVC"
     
     //MARK: Result Data
+    public var lastPostId : Int = 0
     public var postCount: Int = 0
-    public var postData : [DetailDrive] = []
+    public var postData : [DriveElement] = []
     public var filterResultList: [String] = []
     var myCellIsFirstLoaded: Bool = true
     
@@ -25,7 +25,7 @@ class SearchResultVC: UIViewController {
     private lazy var backButton = LeftBackButton(toPop: self)
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
                                                             color: .mainBlack)
-    
+    private let separateLineView = UIView()
     private var collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: UICollectionViewFlowLayout())
@@ -47,44 +47,10 @@ class SearchResultVC: UIViewController {
         return collectionView
     }()
     
-    private let closeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("닫기", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
-        button.setTitleColor(.mainBlue, for: .normal)
-        button.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
-        return button
-    }()
-    
-    
-    //MARK: Result non view
-    private let searchNoImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "searchNoImage"))
-        imageView.contentMode = .scaleAspectFit
-        
-        return imageView
-    }()
-    
-    private let searchNoLabel :UILabel = {
-        let label = UILabel()
-        label.text = "검색하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = .notoSansRegularFont(ofSize: 14)
-        label.textColor = .gray50
-        return label
-    }()
-    
-    private let searchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("드라이브 코스 작성하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .mainBlue
-        button.addTarget(self, action: #selector(presentToCreatePostVC), for: .touchUpInside)
-        return button
-    }()
+    private let closeButton = UIButton()
+    private let searchNoImageView = UIImageView()
+    private let searchNoLabel = UILabel()
+    private let searchButton = UIButton()
     
     
     override func viewDidLoad() {
@@ -92,7 +58,6 @@ class SearchResultVC: UIViewController {
         postSearchPost(type: "like")
         setConstraint()
         configureCollectionView()
-        setShadowInNavigationView()
         configureDropDown()
         
     }
@@ -129,9 +94,8 @@ class SearchResultVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = false
-        
-       
     }
+    
     func configureDropDown(){
         dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
         dropDownTableView.delegate = self
@@ -174,11 +138,18 @@ extension SearchResultVC: UICollectionViewDataSource{
                 topCVCCell?.postCount = postCount
                 topCVCCell?.setLabel()
             }
-            return topCVCCell as! UICollectionViewCell
+            return topCVCCell ?? UICollectionViewCell()
         }
         cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
-        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
+        let post = postData[indexPath.row-1]
         
+        cell?.setData(image: post.image,
+                      title: post.title,
+                      tagCount: 3, tagArr: ["배열이","있는데","개수를왜"],
+                      isFavorite: post.isFavorite,
+                      postID: post.postID)
+//        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
+//
         
         return cell!
     }
@@ -190,6 +161,14 @@ extension SearchResultVC: UICollectionViewDataSource{
             return UICollectionReusableView()
         }
         header.setStackViewData(list: filterResultList)
+        header.add(separateLineView) {
+            $0.backgroundColor = .gray20
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.bottom.equalToSuperview()
+                $0.height.equalTo(1)
+            }
+        }
         return header
         
     }
@@ -229,36 +208,41 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout{
 extension SearchResultVC {
     
     private func setConstraint(){
-        view.addSubview(navigationView)
-    
-        navigationView.snp.makeConstraints{
-            $0.top.leading.trailing.equalTo(view)
-            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+        view.add(navigationView){
+            $0.snp.makeConstraints{
+                $0.top.leading.trailing.equalTo(self.view)
+                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            }
         }
-        
-        setShadowInNavigationView()
         setConstraintsInNavigaitionView()
     }
     
     private func setConstraintsInNavigaitionView(){
-        navigationView.addSubviews([backButton,
-                                    navigationTitleLabel
-                                    ,closeButton])
-        
-        backButton.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
-            $0.leading.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-9)
+        navigationView.add(backButton){
+            $0.snp.makeConstraints{
+                $0.centerY.equalToSuperview()
+                $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
+                $0.leading.equalToSuperview()
+                $0.bottom.equalToSuperview().offset(-9)
+            }
         }
         
-        navigationTitleLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(navigationTitleLabel){
+            $0.snp.makeConstraints{
+                $0.centerX.equalToSuperview()
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
         
-        closeButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(closeButton){
+            $0.setTitle("닫기", for: .normal)
+            $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
+            $0.setTitleColor(.mainBlue, for: .normal)
+            $0.addTarget(self, action: #selector(self.dismissAction), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalToSuperview().offset(-20)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
     }
     
@@ -271,80 +255,86 @@ extension SearchResultVC {
     }
     
     private func setEmptyViewConstraint(){
-        view.addSubviews([searchNoImageView,
-                          searchNoLabel,
-                          searchButton])
-        
-        searchNoImageView.snp.makeConstraints{
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(navigationView.snp.bottom).offset(28)
+        view.add(separateLineView){
+            $0.backgroundColor = .gray20
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.top.equalTo(self.navigationView.snp.bottom)
+                $0.height.equalTo(1)
+            }
         }
         
-        searchNoLabel.snp.makeConstraints{
-            $0.top.equalTo(searchNoImageView.snp.bottom).offset(19)
-            $0.centerX.equalTo(view.snp.centerX)
+        view.add(searchNoImageView) {
+            $0.image =  UIImage(named: "searchNoImage")
+            $0.contentMode = .scaleAspectFit
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.top.equalTo(self.navigationView.snp.bottom).offset(28)
+            }
         }
         
-        searchButton.snp.makeConstraints{
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.height.equalTo(48)
+        view.add(searchNoLabel) {
+            $0.text = "검색하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?"
+            $0.numberOfLines = 0
+            $0.textAlignment = .center
+            $0.font = .notoSansRegularFont(ofSize: 14)
+            $0.textColor = .gray50
+            $0.snp.makeConstraints{
+                $0.top.equalTo(self.searchNoImageView.snp.bottom).offset(19)
+                $0.centerX.equalTo(self.view.snp.centerX)
+            }
+        }
+        
+        view.add(searchButton){
+            $0.setTitle("드라이브 코스 작성하기", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+            $0.layer.cornerRadius = 8
+            $0.backgroundColor = .mainBlue
+            $0.addTarget(self, action: #selector(self.presentToCreatePostVC), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.leading.equalTo(self.view.safeAreaLayoutGuide).offset(20)
+                $0.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+                $0.height.equalTo(48)
+            }
         }
     }
     
     private func setResultViewConstraint(){
-        view.addSubview(collectionView)
-        view.addSubview(dropDownTableView)
-        collectionView.snp.makeConstraints{
-            $0.top.equalTo(navigationView.snp.bottom).offset(15)
-            $0.leading.trailing.bottom.equalToSuperview()
+        view.add(collectionView){
+            $0.snp.makeConstraints{
+                $0.top.equalTo(self.navigationView.snp.bottom).offset(15)
+                print("navigationView.frame.height\(self.navigationView.frame.height)")
+                $0.leading.trailing.bottom.equalToSuperview()
+            }
         }
-        
-    }
-    
-
-    func setShadowInNavigationView(){
-        navigationView.backgroundColor = .white
-
-        navigationView.layer.shadowOpacity = 0.05
-        navigationView.layer.shadowColor = UIColor.black.cgColor
-        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        navigationView.layer.shadowRadius = 6
-        navigationView.layer.masksToBounds = false
-        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
-                                                                           width: UIScreen.getDeviceWidth(),
-                                                                           height: UIScreen.getNotchHeight()+58),
-                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
     }
 }
 
 
 //MARK: Network
 extension SearchResultVC{
-    
-    func refinePostResultData(data: DetailDataClass, type: String){
-        postData = data.drive
-        dump(postData)
+    func refinePostResultData(data: Drive?){
+        postData = data?.drive ?? []
+        print("post data = \(postData)")
         setContentViewConstraint()
+        self.collectionView.reloadData()
     }
     
     func postSearchPost(type: String){
-        PostResultService.shared.postSearchKeywords(userId: "jieun1211",
-                                                    region: filterResultList[1],
-                                                    theme: filterResultList[2],
-                                                    warning: filterResultList[3],
+        let themeEng = CommonData.themeDict[filterResultList[2]] ?? ""
+        let warningEng = CommonData.warningDataDict[filterResultList[3]] ?? ""
+        print("themeEng =\(themeEng), warningEng = \(warningEng)")
+        PostResultService.shared.postSearchKeywords(region: filterResultList[1],
+                                                    theme: themeEng,
+                                                    warning: warningEng,
                                                     type: type){ response in
             
             switch(response){
             case .success(let resultData):
-                if let data =  resultData as? DetailModel{
-                    DispatchQueue.global().sync {
-                    self.refinePostResultData(data: data.data, type: type)
-                    self.postCount = data.data.totalCourse
-                    }
-                    print(self.postData)
-                        self.collectionView.reloadData()
+                if let data =  resultData as? Drive{
+                    self.refinePostResultData(data: data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -358,7 +348,6 @@ extension SearchResultVC{
         }
     }
 }
-
 
 
 extension SearchResultVC: UITableViewDelegate{
@@ -422,7 +411,6 @@ extension SearchResultVC: SetTitleDelegate{
 }
 extension SearchResultVC: MenuClickedDelegate {
     func menuClicked(){
-        print("딜리게이트 실행됨?")
         dropDownTableView.isHidden = false
     }
 }
