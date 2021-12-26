@@ -716,6 +716,7 @@
 				7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */,
 				7062C8582710DCC800C1CD2E /* JoinDataModel.swift */,
 				70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */,
+				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
