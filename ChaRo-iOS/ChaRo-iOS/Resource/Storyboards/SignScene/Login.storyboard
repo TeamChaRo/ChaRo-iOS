@@ -92,6 +92,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2r2-jN-fGK">
+                                <rect key="frame" x="294" y="794" width="52" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="비번찾기"/>
+                                <connections>
+                                    <action selector="findPwdButtonClicked:" destination="5Ee-gl-mTX" eventType="touchUpInside" id="kBU-nN-Iqs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="R4E-HG-mgi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -124,6 +132,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="wxn-D7-htc" id="kGL-1n-CbS"/>
+                        <outlet property="findPasswordButton" destination="2r2-jN-fGK" id="EBX-Nc-NKe"/>
                         <outlet property="heightConstraint" destination="M9d-pb-CsY" id="Ubo-kn-OWN"/>
                         <outlet property="idTextField" destination="x0R-CB-G5C" id="SIe-AT-90z"/>
                         <outlet property="imageView" destination="Kdz-ap-MR5" id="9XT-s3-45I"/>
@@ -136,6 +145,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19k-N7-DSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="404" y="35"/>
+        </scene>
+        <!--Find PasswordVC-->
+        <scene sceneID="YE1-Hw-Zs2">
+            <objects>
+                <viewController storyboardIdentifier="FindPasswordVC" id="27i-0J-Smb" customClass="FindPasswordVC" customModule="ChaRo_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="osR-Ce-9hE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="PVB-7G-wUe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zf5-Yf-PDk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1217" y="35"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zU7-Fu-17N">

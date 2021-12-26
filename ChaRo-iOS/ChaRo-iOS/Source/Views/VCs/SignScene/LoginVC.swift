@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var findPasswordButton: UIButton!
     
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
@@ -94,6 +95,15 @@ class LoginVC: UIViewController {
     }
     
     
+    @IBAction func findPwdButtonClicked(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: FindPasswordVC.identifier) as? FindPasswordVC else {
+            return
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
         let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
@@ -102,6 +112,7 @@ class LoginVC: UIViewController {
         self.present(nextVC, animated: true, completion: nil)
         
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
