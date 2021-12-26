@@ -34,7 +34,6 @@ struct LikeService {
             switch dataResponse.result {
             case .success:
                 
-                print("----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 print(dataRequest.response?.statusCode)
                 guard let value = dataResponse.value else {return}
