@@ -18,7 +18,11 @@ class OtherMyPageVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     
     var currentState: String = "인기순"
+    var isFollow: Bool = false
+    var followerNum: Int = 0
+    var followingNum: Int = 0
     
+    let myId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     var otherUserID: String = "and@naver.com"
     
     var lastId: Int = 0
@@ -50,6 +54,7 @@ class OtherMyPageVC: UIViewController {
     
     private let isFollowButton = UIButton().then{
         $0.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+        $0.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let userNameLabel = UILabel().then{
@@ -114,6 +119,8 @@ class OtherMyPageVC: UIViewController {
         setCollectionviewLayout()
         filterTableViewLayout()
         getMypageData()
+        getFollowData()
+        postFollowUser()
         self.dismissDropDownWhenTappedAround()
     }
     
@@ -256,12 +263,26 @@ class OtherMyPageVC: UIViewController {
     
     
     func setHeaderData(){
+        followerNum = userProfileData[0].follower
+        followingNum = userProfileData[0].following
         guard let url = URL(string: userProfileData[0].profileImage) else { return }
         userNameLabel.text = userProfileData[0].nickname
         profileImageView.kf.setImage(with: url)
-        followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
-        followNumButton.setTitle(String(userProfileData[0].following), for: .normal)
+        followerNumButton.setTitle(String(followerNum), for: .normal)
+        followNumButton.setTitle(String(followingNum), for: .normal)
     }
+    
+    
+    @objc private func doFollowButtonClicked(_ sender: UIButton){
+        if isFollow == false{
+            isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+        }
+        else{
+            isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
+        }
+        postFollowUser()
+        getMypageData()
+   }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
@@ -272,9 +293,12 @@ class OtherMyPageVC: UIViewController {
                        {
                        case .success(let data) :
                            if let response = data as? MyPageDataModel{
+                               self.userProfileData = []
+                               self.writenPostDriveData = []
                                self.userProfileData.append(response.data.userInformation)
                                self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
                                self.setHeaderData()
+                               print("follower",self.userProfileData[0].follower,"following",self.userProfileData[0].following)
                                self.collectionview.reloadData()
                            }
                        case .requestErr(let message) :
@@ -288,6 +312,27 @@ class OtherMyPageVC: UIViewController {
                        }
                    }
         }
+    func getFollowData(){
+        FollowCheckService.followData.getRecommendInfo(userId: myId, otherId: otherUserID){ (response) in
+                   switch response
+                   {
+                   case .success(let data):
+                       if let response = data as? DoFollowDataModel{
+                           self.isFollow = response.data.isFollow
+                       }
+                   case .requestErr(let message) :
+                       print("requestERR")
+                   case .pathErr :
+                       print("pathERR")
+                   case .serverErr:
+                       print("serverERR")
+                   case .networkFail:
+                       print("networkFail")
+                   }
+               }
+        
+    }
+    
     
     func getInfinityData(addUrl: String, LikeOrNew: String){
         delegate = self
@@ -320,10 +365,38 @@ class OtherMyPageVC: UIViewController {
                    case .networkFail:
                        print("networkFail")
                    }
+            
                }
+        self.delegate?.endIndicator()
     }
-    
-    
+    func postFollowUser(){
+        delegate = self
+        self.delegate?.startIndicator()
+        DoFollowService.shared.followService(follower: myId, followed: otherUserID){ result in
+            switch result {
+            case .success(let data):
+                if let response = data as? DoFollowDataModel{
+                    self.isFollow = response.data.isFollow
+                    if self.isFollow == false{
+                        self.isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+                        self.getMypageData()
+                    }
+                    else{
+                        self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
+                        self.getMypageData()
+                    }                }
+            case .requestErr(let message):
+                print(message)
+            case .serverErr:
+                print("서버에러")
+            case .networkFail:
+                print("네트워크에러")
+            default:
+                print("에러임니다")
+            }
+        }
+        self.delegate?.endIndicator()
+    }
 }
 
 
@@ -356,8 +429,6 @@ extension OtherMyPageVC: UICollectionViewDataSource{
             var writenTags = [writenElement.region, writenElement.theme,
                         writenElement.warning ?? ""] as [String]
         cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
-            
-           
         return cell
         
         }
