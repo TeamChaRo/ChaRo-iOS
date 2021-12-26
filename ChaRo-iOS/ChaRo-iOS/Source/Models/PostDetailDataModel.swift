@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import TMapSDK
 
 // MARK: - Welcome
 struct PostDatailDataModel: Codable {
     let success: Bool
     let msg: String
-    let data: [PostDetail]
+    let data: PostDetailData?
 }
 
-// MARK: - Datum
+//// MARK: - Datum
 struct PostDetail: Codable {
     let title, author: String
     let isAuthor: Bool
@@ -33,4 +34,28 @@ struct PostDetail: Codable {
     let parkingDesc: String
     let warnings: [Bool]
     let courseDesc: String
+}
+
+// MARK: - DataClass
+struct PostDetailData: Codable {
+    let images: [String]
+    let province: String
+    let isParking: Bool
+    let parkingDesc, courseDesc: String
+    let themes: [String]
+    let warnings: [Bool]
+    let author: String
+    let isAuthor: Bool
+    let profileImage: String
+    let likesCount, isFavorite, isStored: Int
+    let course: [Course]
+}
+
+// MARK: - Course
+struct Course: Codable {
+    let address, latitude, longitude: String
+    
+    func getPoint() -> CLLocationCoordinate2D{
+        return CLLocationCoordinate2D(latitude: Double(latitude)!, longitude: Double(longitude)!)
+    }
 }

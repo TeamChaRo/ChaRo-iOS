@@ -1,17 +1,15 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-
 target 'ChaRo-iOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for ChaRo-iOS
-  pod 'SnapKit', '~> 5.0.0'
+pod 'SnapKit', '~> 5.0.0'
   pod 'Alamofire', '~> 5.4'
   pod 'lottie-ios'
   pod 'Kingfisher', '~> 6.0'
-  pod 'SwiftyJSON', '~> 4.0'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'Then'
@@ -22,4 +20,3 @@ target 'ChaRo-iOS' do
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
 end
-
