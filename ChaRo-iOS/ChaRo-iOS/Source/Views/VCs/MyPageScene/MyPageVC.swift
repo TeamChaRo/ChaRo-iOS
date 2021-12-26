@@ -591,14 +591,36 @@ extension MyPageVC: UICollectionViewDelegate{
 extension MyPageVC: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: "PostDetailVC") as? PostDetailVC else {return}
+        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
         //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
         if collectionView.tag == 1{
-            detailVC.setPostId(id: writenPostDriveData[indexPath.row].postID)
+            detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
+            detailVC.setAdditionalDataOfPost(data: DriveElement.init(
+                postID: writenPostDriveData[indexPath.row-1].postID,
+                title: writenPostDriveData[indexPath.row-1].title,
+                image: writenPostDriveData[indexPath.row-1].image,
+                region: writenPostDriveData[indexPath.row-1].region,
+                theme: writenPostDriveData[indexPath.row-1].theme,
+                warning: writenPostDriveData[indexPath.row-1].warning,
+                year: writenPostDriveData[indexPath.row-1].year,
+                month: writenPostDriveData[indexPath.row-1].month,
+                day: writenPostDriveData[indexPath.row-1].day,
+                isFavorite: writenPostDriveData[indexPath.row-1].isFavorite))
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
         else{
-            detailVC.setPostId(id: savePostDriveData[indexPath.row].postID)
+            detailVC.setPostId(id: savePostDriveData[indexPath.row-1].postID)
+            detailVC.setAdditionalDataOfPost(data: DriveElement.init(
+                postID: savePostDriveData[indexPath.row-1].postID,
+                title: savePostDriveData[indexPath.row-1].title,
+                image: savePostDriveData[indexPath.row-1].image,
+                region: savePostDriveData[indexPath.row-1].region,
+                theme: savePostDriveData[indexPath.row-1].theme,
+                warning: savePostDriveData[indexPath.row-1].warning,
+                year: savePostDriveData[indexPath.row-1].year,
+                month: savePostDriveData[indexPath.row-1].month,
+                day: savePostDriveData[indexPath.row-1].day,
+                isFavorite: savePostDriveData[indexPath.row-1].isFavorite))
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
         
@@ -745,3 +767,4 @@ extension MyPageVC: AnimateIndicatorDelegate{
         lottieView.isHidden = true
     }
 }
+
