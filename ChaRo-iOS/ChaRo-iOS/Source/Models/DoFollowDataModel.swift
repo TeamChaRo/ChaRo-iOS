@@ -1,8 +1,13 @@
-//
-//  DoFollowDataModel.swift
-//  ChaRo-iOS
-//
-//  Created by 박익범 on 2021/12/26.
-//
-
 import Foundation
+
+// MARK: - DoFollowDataModel
+struct DoFollowDataModel: Codable {
+    let success: Bool
+    let msg: String
+    let data: DoFollowData
+}
+
+// MARK: - DataClass
+struct DoFollowData: Codable {
+    let isFollow: Bool
+}
