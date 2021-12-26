@@ -89,7 +89,9 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
         
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
         let postid = cell!.postID
+        let sengingData = findDriveElementFrom(postId: postid)
         postDelegate?.sendPostID(data: postid)
+        postDelegate?.sendPostDriveElement(data: sengingData)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -145,5 +147,15 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
         return 15
     }
     
-    
+}
+
+extension HomeSeasonRecommandTVC {
+    func findDriveElementFrom(postId: Int) -> DriveElement?{
+        for driveElement in customList {
+            if driveElement.postID == postId {
+                return driveElement
+            }
+        }
+        return nil
+    }
 }

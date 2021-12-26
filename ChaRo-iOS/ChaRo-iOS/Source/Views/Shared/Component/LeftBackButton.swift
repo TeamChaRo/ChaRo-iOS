@@ -17,19 +17,24 @@ class LeftBackButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(toPop vc: UIViewController) {
+    init(toPop vc: UIViewController, isModal: Bool = false) {
         super.init(frame: .zero)
         setBackgroundImage()
-        initAction(vc: vc)
+        initAction(vc: vc, isModal: isModal)
     }
     
    private func setBackgroundImage(){
         setBackgroundImage(UIImage(named: "icBackButton"), for: .normal)
     }
     
-    private func initAction(vc: UIViewController) {
+    private func initAction(vc: UIViewController, isModal: Bool = false) {
+        
         let popAction = UIAction { _ in
-            vc.navigationController?.popViewController(animated: true)
+            if isModal {
+                vc.dismiss(animated: true)
+            }else{
+                vc.navigationController?.popViewController(animated: true)
+            }
         }
         addAction(popAction, for: .touchUpInside)
     }
