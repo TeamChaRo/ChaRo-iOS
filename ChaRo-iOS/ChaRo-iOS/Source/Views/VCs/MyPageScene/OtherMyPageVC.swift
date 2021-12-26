@@ -21,6 +21,7 @@ class OtherMyPageVC: UIViewController {
     var isFollow: Bool = false
     var followerNum: Int = 0
     var followingNum: Int = 0
+    var updateFollowNum: Bool = false
     
     let myId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     var otherUserID: String = "and@naver.com"
@@ -239,7 +240,7 @@ class OtherMyPageVC: UIViewController {
                 addURL = "/write/\(lastId)/\(lastFavorite)"
                 //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
                 //MypageInfinityService.addURL = "/write/11/0"
-                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
             }
             else if currentState == "최신순"{
@@ -274,19 +275,13 @@ class OtherMyPageVC: UIViewController {
     
     
     @objc private func doFollowButtonClicked(_ sender: UIButton){
-        if isFollow == false{
-            isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
-        }
-        else{
-            isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
-        }
         postFollowUser()
-        getMypageData()
    }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
         func getMypageData(){
+            print(updateFollowNum, "adsf")
             GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
             GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                        switch response
@@ -294,12 +289,12 @@ class OtherMyPageVC: UIViewController {
                        case .success(let data) :
                            if let response = data as? MyPageDataModel{
                                self.userProfileData = []
-                               self.writenPostDriveData = []
+                               //팔로우 수만 업데이트 할때
+                               if self.updateFollowNum == false{self.writenPostDriveData = []}
                                self.userProfileData.append(response.data.userInformation)
                                self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
+                               if self.updateFollowNum == false{self.collectionview.reloadData()}
                                self.setHeaderData()
-                               print("follower",self.userProfileData[0].follower,"following",self.userProfileData[0].following)
-                               self.collectionview.reloadData()
                            }
                        case .requestErr(let message) :
                            print("requestERR")
@@ -321,11 +316,9 @@ class OtherMyPageVC: UIViewController {
                            self.isFollow = response.data.isFollow
                            if self.isFollow == false{
                                self.isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
-                               self.getMypageData()
                            }
                            else{
                                self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
-                               self.getMypageData()
                            }
                        }
                    case .requestErr(let message) :
@@ -343,6 +336,7 @@ class OtherMyPageVC: UIViewController {
     
     
     func getInfinityData(addUrl: String, LikeOrNew: String){
+        updateFollowNum = false
         delegate = self
         self.delegate?.startIndicator()
         MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: otherUserID, addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
@@ -378,6 +372,7 @@ class OtherMyPageVC: UIViewController {
         self.delegate?.endIndicator()
     }
     func postFollowUser(){
+        self.updateFollowNum = true
         delegate = self
         self.delegate?.startIndicator()
         DoFollowService.shared.followService(follower: myId, followed: otherUserID){ result in
@@ -447,7 +442,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
-        //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
+        if indexPath.row > 0{
             detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
             detailVC.setAdditionalDataOfPost(data: DriveElement.init(
                 postID: writenPostDriveData[indexPath.row-1].postID,
@@ -461,6 +456,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
                 day: writenPostDriveData[indexPath.row-1].day,
                 isFavorite: writenPostDriveData[indexPath.row-1].isFavorite))
             self.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
     
     
@@ -508,12 +504,14 @@ extension OtherMyPageVC: NewHotFilterClickedDelegate{
     func filterClicked(row: Int) {
         switch row {
         case 0:
+            updateFollowNum = false
             GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
             writenPostDriveData = []
             getMypageData()
             currentState = "인기순"
             collectionview.reloadData()
         default:
+            updateFollowNum = false
             GetMyPageDataService.URL = Constants.otherMyPageNewURL + otherUserID
             writenPostDriveData = []
             getMypageData()
