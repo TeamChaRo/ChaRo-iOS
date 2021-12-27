@@ -223,9 +223,13 @@ class MyPageVC: UIViewController {
                    {
                    case .success(let data) :
                        if let response = data as? MyPageDataModel{
+                           var driveData = MyPageDrive()
+                           
+                           
                            self.userProfileData.append(response.data.userInformation)
                            self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
                            self.savePostDriveData.append(contentsOf: response.data.savedPost.drive)
+                           print(response.data.writtenPost,"진짜 뭔데")
                            self.setHeaderData()
                            self.writeCollectionView.reloadData()
                            self.saveCollectioinView.reloadData()
@@ -592,42 +596,30 @@ extension MyPageVC: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
+        var driveData = MyPageDrive()
         //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
         if collectionView.tag == 1{
-            if indexPath.row > 0{
             detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
-            detailVC.setAdditionalDataOfPost(data: DriveElement.init(
-                postID: writenPostDriveData[indexPath.row-1].postID,
-                title: writenPostDriveData[indexPath.row-1].title,
-                image: writenPostDriveData[indexPath.row-1].image,
-                region: writenPostDriveData[indexPath.row-1].region,
-                theme: writenPostDriveData[indexPath.row-1].theme,
-                warning: writenPostDriveData[indexPath.row-1].warning,
-                year: writenPostDriveData[indexPath.row-1].year,
-                month: writenPostDriveData[indexPath.row-1].month,
-                day: writenPostDriveData[indexPath.row-1].day,
-                isFavorite: writenPostDriveData[indexPath.row-1].isFavorite))
-            self.navigationController?.pushViewController(detailVC, animated: true)
-            }
+            driveData = writenPostDriveData[indexPath.row-1]
         }
         else{
-            if indexPath.row > 0{
             detailVC.setPostId(id: savePostDriveData[indexPath.row-1].postID)
-            detailVC.setAdditionalDataOfPost(data: DriveElement.init(
-                postID: savePostDriveData[indexPath.row-1].postID,
-                title: savePostDriveData[indexPath.row-1].title,
-                image: savePostDriveData[indexPath.row-1].image,
-                region: savePostDriveData[indexPath.row-1].region,
-                theme: savePostDriveData[indexPath.row-1].theme,
-                warning: savePostDriveData[indexPath.row-1].warning,
-                year: savePostDriveData[indexPath.row-1].year,
-                month: savePostDriveData[indexPath.row-1].month,
-                day: savePostDriveData[indexPath.row-1].day,
-                isFavorite: savePostDriveData[indexPath.row-1].isFavorite))
-            self.navigationController?.pushViewController(detailVC, animated: true)
-            }
+                driveData = savePostDriveData[indexPath.row-1]
         }
-        
+        detailVC.setAdditionalDataOfPost(data: DriveElement(
+                                    postID: driveData.postID,
+                                    title: driveData.title,
+                                    image: driveData.image,
+                                    region: driveData.region,
+                                    theme: driveData.theme,
+                                    warning: driveData.warning,
+                                    year: driveData.year,
+                                    month: driveData.month,
+                                    day: driveData.day,
+                                    isFavorite: driveData.isFavorite))
+        if indexPath.row > 0{
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -674,9 +666,8 @@ extension MyPageVC: UICollectionViewDataSource{
                 let writenElement = writenPostDriveData[indexPath.row-1]
                 var writenTags = [writenElement.region, writenElement.theme,
                             writenElement.warning ?? ""] as [String]
+                print(writenPostDriveData, "왜 안뜨냐?")
             cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
-                
-               
             return cell
             }
         case 2:
