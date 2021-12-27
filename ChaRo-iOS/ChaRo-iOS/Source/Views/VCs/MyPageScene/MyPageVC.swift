@@ -300,11 +300,13 @@ class MyPageVC: UIViewController {
      }
     @objc private func followerButtonClicked(_ sender: UIButton){
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+        followVC.setData(userName: userProfileData[0].nickname, isFollower: true)
         self.navigationController?.pushViewController(followVC, animated: true)
         
      }
     @objc private func followingButtonClicked(_ sender: UIButton){
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+        followVC.setData(userName: userProfileData[0].nickname, isFollower: false)
         self.navigationController?.pushViewController(followVC, animated: true)
      }
 //MARK: ScrollViewdidScroll
