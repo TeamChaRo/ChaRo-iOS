@@ -358,4 +358,12 @@ extension HomePostVC: PostIdDelegate {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    func sendPostDriveElement(data: DriveElement?) {
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        nextVC.setAdditionalDataOfPost(data: data)
+        nextVC.modalPresentationStyle = .currentContext
+        tabBarController?.present(nextVC, animated: true, completion: nil)
+    }
+    
 }

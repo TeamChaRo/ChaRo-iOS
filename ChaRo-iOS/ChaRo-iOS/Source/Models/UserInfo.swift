@@ -11,8 +11,9 @@ class UserInfo {
     
     static let shared = UserInfo()
     
-    var id: String?
+    var email: String?
     var nickname: String?
+    var profileImage: String?
     var token: String?
     
     private init() { }

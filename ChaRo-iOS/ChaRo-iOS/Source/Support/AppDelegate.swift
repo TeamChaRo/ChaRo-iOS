@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GoogleSignIn
+import KakaoSDKCommon
 import Firebase
 import FirebaseMessaging
 import UserNotifications
@@ -39,41 +41,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // [END register_for_notifications]
+        KakaoSDKCommon.initSDK(appKey: "fe470f9e3a4348f2b8dad52d2014efcc")
         return true
     }
     
-    // [START receive_message]
-    // 앱이 꺼져있을 때도 pushAlarm 받는 함수
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+    
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+        var handled: Bool
+        
+        handled = GIDSignIn.sharedInstance.handle(url)
+        if handled {
+            return true
         }
+        return false
         
-        print(userInfo)
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
+        // Handle other custom URL types.
         
-        print(userInfo)
-        completionHandler(UIBackgroundFetchResult.newData)
+        // If not handled by this app, return false.
+        
     }
-    
-    // [END receive_message]
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Unable to register for remote notifications: \(error.localizedDescription)")
-    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("APNs token retrieved: \(deviceToken)")
-    }
-    
-    
     // MARK: UISceneSession Lifecycle
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.

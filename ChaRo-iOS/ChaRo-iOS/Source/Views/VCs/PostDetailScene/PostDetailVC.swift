@@ -6,106 +6,62 @@
 //
 
 import UIKit
+import Then
 
 class PostDetailVC: UIViewController {
 
     static let identifier = "PostDetailVC"
-    
     private var isAuthor = false
     private var isEditingMode = false
-    
     private var tableView = UITableView()
     private var postId: Int = -1
     private var postData : PostDetail?
+    private var postDetailData : PostDetailData?
+    private var additionalDataOfPost: DriveElement?
     private var driveCell: PostDriveCourseTVC?
-    private var addressList: [AddressDataModel] = []
+    private var addressList: [Course] = []
     private var imageList: [UIImage] = []
+    let cellFixedCount: Int = 3 // 0~2 cell은 무조건 존재
     
     private var isFavorite: Bool? {
         didSet {
-            if isFavorite! {
-                heartButton.setImage(UIImage(named: "icHeartActive"), for: .normal)
-            } else {
-                heartButton.setImage(UIImage(named: "icHeartInactive"), for: .normal)
-            }
+            isFavorite! ? heartButton.setImage(UIImage(named: "icHeartActive"), for: .normal) : heartButton.setImage(UIImage(named: "icHeartInactive"), for: .normal)
         }
     }
     
     private var isStored: Bool? {
         didSet {
-            if isStored! {
-                scrapButton.setImage(UIImage(named: "save_active"), for: .normal)
-            } else {
-                scrapButton.setImage(UIImage(named: "icSave5Inactive"), for: .normal)
-            }
+            isStored! ? scrapButton.setImage(UIImage(named: "save_active"), for: .normal) : scrapButton.setImage(UIImage(named: "icSave5Inactive"), for: .normal)
         }
     }
-    
     
     //MARK: For Sending Data
     private var writedPostData: WritePostData?
     
-    
     //MARK: UIComponent
     private let navigationView = UIView()
-    private lazy var backButton = LeftBackButton(toPop: self)
+    private lazy var backButton = LeftBackButton(toPop: self, isModal: true)
     private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
                                                             color: .mainBlack)
-    
-    
-    private var modifyButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
-        button.addTarget(self, action: #selector(registActionSheet), for: .touchUpInside)
-        return button
-    }()
-    
-    private var heartButton: UIButton = {
-        let button = UIButton() //icHeartActive
-        button.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
-        button.addTarget(self, action: #selector(clickedToHeartButton), for: .touchUpInside)
-        return button
-    }()
-    
-    private var scrapButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icSave5Inactive"), for: .normal)
-        button.addTarget(self, action: #selector(clickedToScrapButton), for: .touchUpInside)
-        return button
-    }()
-    
-    private let saveButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("등록", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
-        button.setTitleColor(.mainBlue, for: .normal)
-        button.addTarget(self, action: #selector(clickedToSaveButton), for: .touchUpInside)
-        return button
-    }()
-    
-    
-   // var location: [String] = ["출발지", "경유지", "경유지", "도착지"]
-    let cellFixedCount: Int = 3 // 0~2 cell은 무조건 존재
+    private let separateLineView = UIView()
+    private var modifyButton = UIButton()
+    private var heartButton = UIButton()
+    private var scrapButton = UIButton()
+    private let saveButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkModeForSendingServer()
-        
-        print("PostDetailVC viewDidLoad")
         setTableViewConstraints()
-        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
-
     
     public func setPostMode(isAuthor: Bool, isEditing: Bool){
         self.isAuthor = isAuthor
@@ -117,54 +73,12 @@ class PostDetailVC: UIViewController {
         postId = id
     }
     
-    public func setDataWhenConfirmPost(data: WritePostData,
-                                       imageList: [UIImage],
-                                       addressList: [AddressDataModel]){
-        isEditingMode = true
-        isAuthor = true
-        self.addressList = addressList
-        self.imageList = imageList
-        writedPostData = data
-        
-        let sendedPostDate = PostDetail(title: data.title,
-                                  author: Constants.userId,
-                                  isAuthor: true,
-                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
-                                  postingYear: Date.getCurrentYear(),
-                                  postingMonth: Date.getCurrentMonth(),
-                                  postingDay: Date.getCurrentDay(),
-                                  isStored: false,
-                                  isFavorite: false,
-                                  likesCount: 0,
-                                  images: [""],
-                                  province: data.province,
-                                  city: data.region,
-                                  themes: data.theme,
-                                  source: "",
-                                  wayPoint: [""],
-                                  destination: "",
-                                  longtitude: [""],
-                                  latitude: [""],
-                                  isParking: data.isParking,
-                                  parkingDesc: data.parkingDesc,
-                                  warnings: data.warning,
-                                  courseDesc: data.courseDesc)
-        
-        self.postData = sendedPostDate
-        
-        dump(writedPostData)
-    
-        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print("imageList = \(imageList)")
-        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        
-        var newAddressList :[Address] = []
-        for address in addressList{
-            newAddressList.append(address.getAddressDataModel())
-        }
-        
-        writedPostData?.course = newAddressList
+    public func setAdditionalDataOfPost(data: DriveElement?){
+        additionalDataOfPost = data
+        print("넘어온 데이터 = \(additionalDataOfPost)")
     }
+    
+    
     
     private func checkModeForSendingServer(){
         if isEditingMode{
@@ -197,44 +111,6 @@ class PostDetailVC: UIViewController {
         tableView.registerCustomXib(xibName: PostPathMapTVC.identifier)
     }
     
-    func refineAddressData(){
-        let startAddreaa = AddressDataModel(title: postData!.latitude[0],
-                                            address: postData!.longtitude[0],
-                                            latitude: postData!.source,
-                                            longitude: "출발지")
-        
-        addressList.append(startAddreaa)
-        
-        
-        if postData!.wayPoint[0] != ""{
-            let wayAddress = AddressDataModel(title: postData!.latitude[1],
-                                              address: postData!.longtitude[1],
-                                              latitude: postData!.wayPoint[0],
-                                              longitude: "경유지1")
-            addressList.append(wayAddress)
-        }
-        
-        if postData!.wayPoint[1] != ""{
-            let wayAddress = AddressDataModel(title: postData!.latitude[2],
-                                              address: postData!.longtitude[2],
-                                              latitude: postData!.wayPoint[1],
-                                              longitude: "경유지2")
-            addressList.append(wayAddress)
-        }
-        
-        
-        let destinationAddress = AddressDataModel(title: postData!.latitude[3],
-                                                  address: postData!.longtitude[3],
-                                                  latitude: postData!.destination,
-                                                  longitude: "도착지")
-        addressList.append(destinationAddress)
-        
-    }
-    
-
-    
-    
-    
 }
 
 //MARK: Button Action
@@ -251,7 +127,6 @@ extension PostDetailVC{
         print("스크랩 버튼")
         requestPostScrap()
     }
-    
    
     //등록 버튼 눌렀을 때 post 서버 통신
     @objc func clickedToSaveButton(){
@@ -270,9 +145,7 @@ extension PostDetailVC{
         
         let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-
         })
-        
         
         let deleteAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -302,16 +175,13 @@ extension PostDetailVC{
         self.view.addSubview(toastLabel)
         UIView.animate(withDuration: 2.0, delay: 0.5, options: .curveEaseOut, animations: { toastLabel.alpha = 0.0 }, completion: {(isCompleted) in toastLabel.removeFromSuperview() })
     }
-    
 }
 
-
-
+//MARK: UI
 extension PostDetailVC{
     
     func setTableViewConstraints(){
-        print(postData)
-        if postData != nil{
+        if postDetailData != nil{
             view.addSubview(tableView)
             tableView.snp.makeConstraints{
                 $0.top.equalTo(navigationView.snp.bottom).offset(5)
@@ -321,21 +191,26 @@ extension PostDetailVC{
     }
 
     private func setNavigaitionViewConstraints(){
-        view.addSubview(navigationView)
-    
-        navigationView.snp.makeConstraints{
-            $0.top.leading.trailing.equalTo(view)
-            if UIScreen.hasNotch{
-                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
-            }else{
-                $0.height.equalTo(93)
+        view.add(navigationView){
+            $0.snp.makeConstraints{
+                $0.top.leading.trailing.equalTo(self.view)
+                if UIScreen.hasNotch{
+                    $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+                }else{
+                    $0.height.equalTo(93)
+                }
             }
-            
+        }
+        view.add(separateLineView){
+            $0.backgroundColor = .gray20
+            $0.snp.makeConstraints{
+                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                $0.top.equalTo(self.navigationView.snp.bottom)
+                $0.height.equalTo(1)
+            }
         }
         navigationView.bringSubviewToFront(view)
         setBasicNavigationView()
-       // applyTitleViewShadow()
-        setShadowInNavigationView()
         
         if isAuthor{
             navigationTitleLabel.text = "내가 작성한 글"
@@ -364,56 +239,100 @@ extension PostDetailVC{
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(backButton.snp.centerY)
         }
-        
     }
     
     func setNavigationViewInSaveMode(){
-        navigationView.addSubview(saveButton)
-        saveButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(saveButton){
+            $0.setTitle("등록", for: .normal)
+            $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
+            $0.setTitleColor(.mainBlue, for: .normal)
+            $0.addTarget(self, action: #selector(self.clickedToSaveButton), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalToSuperview().offset(-20)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
     }
     
     func setNavigationViewInConfirmMode(){
-        navigationView.addSubview(modifyButton)
-        modifyButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-11)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(modifyButton){
+            $0.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
+            $0.addTarget(self, action: #selector(self.registActionSheet), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalToSuperview().offset(-11)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
     }
     
     func setNavigationViewInWatchMode(){
-        navigationView.addSubviews([heartButton, scrapButton])
-        heartButton.snp.makeConstraints{
-            $0.trailing.equalTo(scrapButton.snp.leading)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(scrapButton){
+            $0.setBackgroundImage(UIImage(named: "icSave5Inactive"), for: .normal)
+            $0.addTarget(self, action: #selector(self.clickedToScrapButton), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalToSuperview().offset(-11)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
-        scrapButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-11)
-            $0.centerY.equalTo(backButton.snp.centerY)
+        navigationView.add(heartButton){
+            $0.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
+            $0.addTarget(self, action: #selector(self.clickedToHeartButton), for: .touchUpInside)
+            $0.snp.makeConstraints{
+                $0.trailing.equalTo(self.scrapButton.snp.leading)
+                $0.centerY.equalTo(self.backButton.snp.centerY)
+            }
         }
     }
     
-    func applyTitleViewShadow(){
-        navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 10), shadowRadius: 6, shadowOpacity: 0.05)
+    //    public func setDataWhenConfirmPost(data: WritePostData,
+    //                                       imageList: [UIImage],
+    //                                       addressList: [AddressDataModel]){
+    //        isEditingMode = true
+    //        isAuthor = true
+    //        self.addressList = addressList
+    //        self.imageList = imageList
+    //        writedPostData = data
+    //
+    //        let sendedPostDate = PostDetail(title: data.title,
+    //                                  author: Constants.userId,
+    //                                  isAuthor: true,
+    //                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
+    //                                  postingYear: Date.getCurrentYear(),
+    //                                  postingMonth: Date.getCurrentMonth(),
+    //                                  postingDay: Date.getCurrentDay(),
+    //                                  isStored: false,
+    //                                  isFavorite: false,
+    //                                  likesCount: 0,
+    //                                  images: [""],
+    //                                  province: data.province,
+    //                                  city: data.region,
+    //                                  themes: data.theme,
+    //                                  source: "",
+    //                                  wayPoint: [""],
+    //                                  destination: "",
+    //                                  longtitude: [""],
+    //                                  latitude: [""],
+    //                                  isParking: data.isParking,
+    //                                  parkingDesc: data.parkingDesc,
+    //                                  warnings: data.warning,
+    //                                  courseDesc: data.courseDesc)
+    //
+    //        self.postData = sendedPostDate
+    //
+    //        dump(writedPostData)
+    //
+    //        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    //        print("imageList = \(imageList)")
+    //        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    //
+    //        var newAddressList :[Address] = []
+    //        for address in addressList{
+    //            newAddressList.append(address.getAddressDataModel())
+    //        }
+    //
+    //        writedPostData?.course = newAddressList
+    //    }
 
-        self.view.bringSubviewToFront(navigationView)
-    }
-    
-    func setShadowInNavigationView(){
-        navigationView.backgroundColor = .white
-        navigationView.layer.shadowOpacity = 0.05
-        navigationView.layer.shadowColor = UIColor.black.cgColor
-        navigationView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        navigationView.layer.shadowRadius = 6
-        navigationView.layer.masksToBounds = false
-        navigationView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
-                                                                           width: UIScreen.getDeviceWidth(),
-                                                                           height: UIScreen.getNotchHeight()+58),
-                                                       cornerRadius: navigationView.layer.cornerRadius).cgPath
-    }
- 
 }
 
 
@@ -494,21 +413,23 @@ extension PostDetailVC {
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: PostTitleTVC.identifier)
         as? PostTitleTVC else { return UITableViewCell() }
         
-        titleCell.setTitle(title: postData!.title,
-                           userName: postData!.author,
-                           date: "\(postData!.postingYear)년 \(postData!.postingMonth)월 \(postData!.postingDay)일",
-                           imageName: postData?.profileImage ?? "",
-                           likedCount: String(postData?.likesCount ?? -1))
+        guard let additionalData = additionalDataOfPost, let postData = postDetailData else {return UITableViewCell()}
+        
+        titleCell.setTitle(title: additionalData.title,
+                           userName: postData.author,
+                           date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
+                           imageName: postData.profileImage,
+                           likedCount: String(postData.likesCount))
         return titleCell
     }
     
     func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
-        if imageList.isEmpty{
-            print("이미지 없음???")
-            cell.setImage(postData!.images)
+        
+        if imageList.isEmpty {
+            cell.setImage(postDetailData?.images ?? [])
         }else{
-            cell.setImageAtConfirmView(imageList: imageList)
+            cell.setImageAtConfirmView(imageList: [])
         }
         cell.selectionStyle = .none
         return cell
@@ -516,9 +437,9 @@ extension PostDetailVC {
     
     func getPostCourseThemeCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCourseThemeTVC.identifier) as? PostCourseThemeTVC else {return UITableViewCell()}
-        
-        cell.setCourse(city: postData!.province, region: postData!.city)
-        cell.setTheme(theme: postData!.themes)
+        cell.setCourse(city: postDetailData?.province ?? "" ,
+                       region: additionalDataOfPost?.region ?? "" )
+        cell.setTheme(theme: postDetailData?.themes ?? [])
         cell.configureLayout()
         cell.themeButtonConfigureLayer()
         cell.selectionStyle = .none
@@ -556,7 +477,7 @@ extension PostDetailVC {
     
     func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathMapTVC.identifier) as? PostPathMapTVC else {return UITableViewCell()}
-        cell.setAddressList(list: addressList, height: 451)
+        cell.setcourseList(list: addressList, height: 451)
         cell.selectionStyle = .none
         return cell
     }
@@ -564,9 +485,8 @@ extension PostDetailVC {
     
     func getPostParkingCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostParkingTVC.identifier) as? PostParkingTVC else {return UITableViewCell()}
-        print(postData?.parkingDesc)
-        cell.setParkingStatus(status: postData!.isParking)
-        cell.setParkingExplanation(text: postData!.parkingDesc)
+        cell.setParkingStatus(status: postDetailData?.isParking ?? false)
+        cell.setParkingExplanation(text: postDetailData?.parkingDesc ?? "")
         cell.idEditMode(isEditing: false)
         cell.selectionStyle = .none
         return cell
@@ -574,15 +494,14 @@ extension PostDetailVC {
     
     func getPostAttensionCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostAttentionTVC.identifier) as? PostAttentionTVC else { return UITableViewCell()}
-        cell.setAttentionList(list: postData!.warnings)
+        cell.setAttentionList(list: postDetailData?.warnings ?? [])
         cell.selectionStyle = .none
         return cell
     }
 
     func getPostDriveCourceCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else {return UITableViewCell()}
-        print(postData!.courseDesc)
-        cell.setContentText(text: postData!.courseDesc)
+        cell.setContentText(text: postDetailData?.courseDesc ?? "")
         cell.selectionStyle = .none
         return cell
     }
@@ -591,29 +510,26 @@ extension PostDetailVC {
 
 //MARK: Network
 extension PostDetailVC {
-    func setPostContentView(data: PostDetail){
-        postData = data
-        isAuthor = postData!.isAuthor
-        print("----------------------------------")
-        print("isAuthor = \(isAuthor)")
-        print("----------------------------------")
-        isFavorite = postData!.isFavorite
-        isStored = postData!.isStored
-        refineAddressData()
+  
+    func setPostContentView(postData: PostDetailData?){
+        print("additionalDataOfPost = \(additionalDataOfPost)")
+        postDetailData = postData
+        isAuthor = postDetailData?.isAuthor ?? false
+        isFavorite = postDetailData?.isFavorite == 0 ? false : true
+        isStored = postDetailData?.isStored == 0 ? false : true
+        addressList = postDetailData?.course ?? []
         configureTableView()
         setNavigaitionViewConstraints()
         setTableViewConstraints()
     }
     
     func getPostDetailData(){
-        print("getPostDetailData 넘겨진 postId = \(self.postId)")
-        print("현재 보낼 URL = \(Constants.detailURL)\(self.postId)")
         PostResultService.shared.getPostDetail(postId: postId){ response in
-            print("getPostDetailData postId = \(self.postId)")
             switch(response){
             case .success(let resultData):
-                if let data =  resultData as? PostDatailDataModel{
-                    self.setPostContentView(data: data.data[0])
+                if let data =  resultData as? PostDetailData{
+                    print("response = \(data)")
+                    self.setPostContentView(postData: data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -650,13 +566,11 @@ extension PostDetailVC {
     func requestPostLike(){
         LikeService.shared.Like(userId: Constants.userId,
                                 postId: postId) { [self] result in
-                
             switch result{
             case .success(let success):
                 if let success = success as? Bool {
                     self.isFavorite!.toggle()
                 }
-                
             case .requestErr(let msg):
                 if let msg = msg as? String {
                     print(msg)
@@ -677,7 +591,6 @@ extension PostDetailVC {
                     print("스크랩 성공해서 바뀝니다")
                     self.isStored!.toggle()
                 }
-                
             case .requestErr(let msg):
                 if let msg = msg as? String {
                     print(msg)

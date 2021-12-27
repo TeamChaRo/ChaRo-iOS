@@ -30,16 +30,17 @@ class CreatePostVC: UIViewController {
     var titleSelectFlag: Bool = false // 제목 textfield 선택했는지 여부
     
     // MARK:  components
+
     let tableView: UITableView = UITableView()
     var cellHeights: [CGFloat] = []
     
-    let titleView: UIView = {
+    private let titleView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         return view
     }()
     
-    let xButton: UIButton = {
+    private let xButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "close"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
@@ -47,7 +48,7 @@ class CreatePostVC: UIViewController {
         return button
     }()
     
-    let nextButton: UIButton = {
+    private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
@@ -57,7 +58,7 @@ class CreatePostVC: UIViewController {
         return button
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "작성하기"
         label.textAlignment = .center
@@ -65,6 +66,10 @@ class CreatePostVC: UIViewController {
         label.textColor = .subBlack
         return label
     }()
+
+    private let separatorView: UIView = UIView().then {
+        $0.backgroundColor = UIColor.gray20
+    }
     
     //MARK:  viewDidLoad
     override func viewDidLoad() {
@@ -73,7 +78,6 @@ class CreatePostVC: UIViewController {
         setNotificationCenter() // Noti
         setMainViewLayout() // Layout
         configureConponentLayout() // Layout
-        applyTitleViewShadow() // 상단바 그림자 적용
         initCellHeight()
         
         configureTableView()
@@ -103,17 +107,11 @@ extension CreatePostVC {
         tableView.registerCustomXib(xibName: CreatePostCourseTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostThemeTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostParkingWarningTVC.identifier)
-        tableView.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
+        tableView.registerCustomXib(xibName: CreatePostDriveCourseTVC.identifier)
     }
     
     func setNavigationBar(){
         self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    func applyTitleViewShadow(){
-        titleView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 10), shadowRadius: 6, shadowOpacity: 0.05)
-
-        self.view.bringSubviewToFront(titleView)
     }
     
     func initCellHeight(){
@@ -193,18 +191,24 @@ extension CreatePostVC {
     
     // MARK: Layout
     func setMainViewLayout(){
-        self.view.addSubviews([titleView,tableView])
+        self.view.addSubviews([self.titleView, self.tableView, self.separatorView])
         
         let titleRatio: CGFloat = 102/375
         
-        titleView.snp.makeConstraints{
+        self.titleView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaInsets)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(UIScreen.getDeviceWidth()*titleRatio)
         }
-        
-        tableView.snp.makeConstraints{
+
+        self.separatorView.snp.makeConstraints {
+            $0.height.equalTo(1)
+            $0.top.equalTo(self.titleView.snp.bottom)
+            $0.leading.equalTo(self.titleView.snp.leading)
+            $0.trailing.equalTo(self.titleView.snp.trailing)
+        }
+        self.tableView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaInsets).offset(UIScreen.getDeviceWidth()*titleRatio)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -213,7 +217,7 @@ extension CreatePostVC {
     }
     
     func configureConponentLayout(){
-        titleView.addSubviews([titleLabel, xButton, nextButton])
+        titleView.addSubviews([self.titleLabel, self.xButton, self.nextButton])
         
         titleLabel.snp.makeConstraints{
             $0.bottom.equalTo(titleView.snp.bottom).inset(23)
@@ -230,11 +234,10 @@ extension CreatePostVC {
         }
         
         nextButton.snp.makeConstraints{
-            $0.trailing.equalTo(titleView.snp.trailing).offset(-20)
+            $0.trailing.equalTo(titleView.snp.trailing).inset(20)
             $0.height.equalTo(22)
             $0.centerY.equalTo(titleLabel.snp.centerY)
         }
-        
     }
     
     //MARK: - Button Actions
@@ -449,9 +452,9 @@ extension CreatePostVC {
     }
     
     func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
-        guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else { return UITableViewCell() }
+        guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: CreatePostDriveCourseTVC.identifier) as? CreatePostDriveCourseTVC else { return UITableViewCell() }
         
-        if courseDesc == ""{
+        if courseDesc == "" {
             courseDescCell.setContentText(text: "")
         }
         
