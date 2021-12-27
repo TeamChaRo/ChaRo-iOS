@@ -73,7 +73,7 @@ class FollowFollwingVC: UIViewController {
     
     
     //TableView
-    private let TableScrollView = UIScrollView().then{
+    private let tableScrollView = UIScrollView().then{
         let userHeigth = UIScreen.main.bounds.height
         $0.tag = 1
         $0.isPagingEnabled = true
@@ -100,22 +100,100 @@ class FollowFollwingVC: UIViewController {
     override func viewDidLoad(){
         setHeaderLayout()
         setTabbarLayout()
+        setTableViewLayout()
         super.viewDidLoad()
 
     }
 //MARK: Func
-       @objc private func followerButtonClicked(_ sender: UIButton){
-           TableScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-           followerButton.setTitleColor(UIColor.mainBlue, for: .normal)
-           followingButton.setTitleColor(UIColor.gray40, for: .normal)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        setTabbarBottomViewMove()
+    }
+    func setTabbarBottomViewMove(){
+        var contentOffsetX = tableScrollView.contentOffset.x
+        tabbarWriteBottomView.snp.remakeConstraints{
+            $0.leading.equalTo(tableScrollView.contentOffset.x / 2)
+            $0.bottom.equalTo(tabbarBottomView.snp.top).offset(0)
+            $0.width.equalTo(userWidth/2)
+            $0.height.equalTo(2)
         }
-        @objc private func followingButtonClicked(_ sender: UIButton){
-            TableScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
+        if contentOffsetX > userWidth/3{
             followerButton.setTitleColor(UIColor.gray40, for: .normal)
             followingButton.setTitleColor(UIColor.mainBlue, for: .normal)
-         }
+        }
+        else{
+            followerButton.setTitleColor(UIColor.mainBlue, for: .normal)
+            followingButton.setTitleColor(UIColor.gray40, for: .normal)
+        }
+    }
+    
+    
+   @objc private func followerButtonClicked(_ sender: UIButton){
+       tableScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+       followerButton.setTitleColor(UIColor.mainBlue, for: .normal)
+       followingButton.setTitleColor(UIColor.gray40, for: .normal)
+    }
+    @objc private func followingButtonClicked(_ sender: UIButton){
+        tableScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
+        followerButton.setTitleColor(UIColor.gray40, for: .normal)
+        followingButton.setTitleColor(UIColor.mainBlue, for: .normal)
+     }
 
 //MARK: layoutFunction
+    func setTableViewLayout(){
+        
+        let tableViewHeight  = userheight - (userheight * 0.15 + 130)
+        
+        tableScrollView.delegate = self
+        followerTableView.delegate = self
+        followerTableView.dataSource = self
+        followingTableView.delegate = self
+        followingTableView.dataSource = self
+        followerTableView.separatorStyle = .none
+        followingTableView.separatorStyle = .none
+
+        followerTableView.tag = 1
+        followingTableView.tag = 2
+        
+        followerTableView.registerCustomXib(xibName: "FollowFollowingTVC")
+        followingTableView.registerCustomXib(xibName: "FollowFollowingTVC")
+        
+        self.view.addSubview(tableScrollView)
+        tableScrollView.addSubviews([followerView, followingView])
+        followerView.addSubview(followerTableView)
+        followingView.addSubview(followingTableView)
+        
+        tableScrollView.snp.makeConstraints{
+            $0.top.equalTo(tabbarBottomView.snp.bottom).offset(0)
+            $0.trailing.equalTo(view).offset(0)
+            $0.leading.equalTo(view).offset(0)
+            $0.bottom.equalTo(view).offset(0)
+        }
+        followerView.snp.makeConstraints{
+            $0.top.equalTo(tableScrollView.snp.top).offset(0)
+            $0.leading.equalTo(tableScrollView.snp.leading).offset(0)
+            $0.width.equalTo(userWidth)
+            $0.height.equalTo(tableViewHeight)
+        }
+        followerTableView.snp.makeConstraints{
+            $0.top.equalTo(followerView.snp.top).offset(0)
+            $0.bottom.equalTo(followerView.snp.bottom).offset(0)
+            $0.leading.equalTo(followerView.snp.leading).offset(0)
+            $0.trailing.equalTo(followerView.snp.trailing).offset(0)
+        }
+        followingView.snp.makeConstraints{
+            $0.top.equalTo(tableScrollView.snp.top).offset(0)
+            $0.leading.equalTo(followerView.snp.trailing).offset(0)
+            $0.width.equalTo(userWidth)
+            $0.height.equalTo(tableViewHeight)
+        }
+        followingTableView.snp.makeConstraints{
+            $0.top.equalTo(followingView.snp.top).offset(0)
+            $0.bottom.equalTo(followingView.snp.bottom).offset(0)
+            $0.leading.equalTo(followingView.snp.leading).offset(0)
+            $0.trailing.equalTo(followingView.snp.trailing).offset(0)
+        }
+    }
+    
     func setHeaderLayout(){
         self.view.addSubview(headerBackgroundView)
         headerBackgroundView.addSubview(headerTitleLabel)
@@ -193,4 +271,23 @@ class FollowFollwingVC: UIViewController {
         
         
     }
+}
+
+extension FollowFollwingVC: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 61
+    }
+    
+}
+extension FollowFollwingVC: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FollowFollowingTVC.identifier) as? FollowFollowingTVC else {return UITableViewCell()}
+        return cell
+    }
+    
+    
 }

@@ -30,6 +30,8 @@
 		367B318B274A725C007A2C18 /* MypageInfinityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */; };
 		367B318D274A74C7007A2C18 /* MypageInfinityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B318C274A74C7007A2C18 /* MypageInfinityService.swift */; };
 		367D598F26F768EB0072C7C9 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D598E26F768EB0072C7C9 /* IndicatorView.swift */; };
+		368EC8E82779C48B0076BF5E /* FollowFollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */; };
+		368EC8E92779C48B0076BF5E /* FollowFollowingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */; };
 		3691C4F52744102B00A712C9 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3691C4F32744100E00A712C9 /* TMapSDK.framework */; platformFilter = ios; };
 		3691C4F62744102B00A712C9 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3691C4F32744100E00A712C9 /* TMapSDK.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36B69F802775DC2F00FEEAAE /* FollowFollwingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B69F7F2775DC2F00FEEAAE /* FollowFollwingVC.swift */; };
@@ -247,6 +249,8 @@
 		367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageInfinityDataModel.swift; sourceTree = "<group>"; };
 		367B318C274A74C7007A2C18 /* MypageInfinityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageInfinityService.swift; sourceTree = "<group>"; };
 		367D598E26F768EB0072C7C9 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
+		368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowFollowingTVC.swift; sourceTree = "<group>"; };
+		368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowFollowingTVC.xib; sourceTree = "<group>"; };
 		3691C4F32744100E00A712C9 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = SOURCE_ROOT; };
 		36B69F7F2775DC2F00FEEAAE /* FollowFollwingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowFollwingVC.swift; sourceTree = "<group>"; };
 		36B69F822775DC6500FEEAAE /* FollowFollowing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FollowFollowing.storyboard; sourceTree = "<group>"; };
@@ -482,6 +486,7 @@
 		3610A8952693730700EFC794 /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				368EC8E52779C4690076BF5E /* FollowScene */,
 				3CAE51A026C2433900DB8A41 /* CreatePostScene */,
 				3CAE519826C2411F00DB8A41 /* HomeScene */,
 				3CAE519326C23FD100DB8A41 /* PostDetailScene */,
@@ -497,6 +502,22 @@
 				31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		368EC8E52779C4690076BF5E /* FollowScene */ = {
+			isa = PBXGroup;
+			children = (
+				368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */,
+			);
+			path = FollowScene;
+			sourceTree = "<group>";
+		};
+		368EC8EA2779C4960076BF5E /* FollowScene */ = {
+			isa = PBXGroup;
+			children = (
+				368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */,
+			);
+			path = FollowScene;
 			sourceTree = "<group>";
 		};
 		36B69F7E2775DC0D00FEEAAE /* FollowScene */ = {
@@ -618,6 +639,7 @@
 		3C86FA812694C7C6009370CD /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				368EC8EA2779C4960076BF5E /* FollowScene */,
 				3CAE519F26C2431D00DB8A41 /* CreatePostScene */,
 				3CAE51A626C243F100DB8A41 /* HomeScene */,
 				3CAE51A526C243BD00DB8A41 /* PostDetailScene */,
@@ -735,7 +757,6 @@
 				3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */,
 				362BC9F6269ED387008EF625 /* MyPageDataModel.swift */,
 				3C5B15B72749802600F178A8 /* GenericResponse.swift */,
-				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
 				7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */,
 				7062C8582710DCC800C1CD2E /* JoinDataModel.swift */,
 				70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */,
@@ -1326,6 +1347,7 @@
 			files = (
 				3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */,
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
+				368EC8E92779C48B0076BF5E /* FollowFollowingTVC.xib in Resources */,
 				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */,
@@ -1543,6 +1565,7 @@
 				703DD832269F3B19004416A9 /* LoginVC.swift in Sources */,
 				36C1C33126A0C28500F34750 /* SavePostService.swift in Sources */,
 				36B8B497269B6E03008DC781 /* HomeDataService.swift in Sources */,
+				368EC8E82779C48B0076BF5E /* FollowFollowingTVC.swift in Sources */,
 				36CEE5B8269DFA8400974EFF /* DatailDataService.swift in Sources */,
 				7062C8282704BA5500C1CD2E /* ProfileView.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
