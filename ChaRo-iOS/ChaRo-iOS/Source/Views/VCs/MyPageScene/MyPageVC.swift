@@ -73,6 +73,7 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let followerNumButton = UIButton().then{
@@ -81,14 +82,16 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let followButton = UIButton().then{
         $0.backgroundColor = .none
-        $0.setTitle("팔로우", for: .normal)
+        $0.setTitle("팔로잉", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let followNumButton = UIButton().then{
@@ -97,6 +100,7 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
 
     
@@ -287,6 +291,15 @@ class MyPageVC: UIViewController {
         collectionScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
         tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
         tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
+     }
+    @objc private func followerButtonClicked(_ sender: UIButton){
+        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+        self.navigationController?.pushViewController(followVC, animated: true)
+        
+     }
+    @objc private func followingButtonClicked(_ sender: UIButton){
+        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+        self.navigationController?.pushViewController(followVC, animated: true)
      }
 //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
