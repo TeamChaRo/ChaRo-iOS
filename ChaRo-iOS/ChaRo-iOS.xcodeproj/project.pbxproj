@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BF746D5C8549F4E027525F3 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */; };
+		2175815489F55B7BDC8C3F99 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26574A164B0B3DB6B6CF4C31 /* Pods_ChaRo_iOS.framework */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		36071676269F9AE10042256B /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36071675269F9AE10042256B /* Notification.storyboard */; };
@@ -24,6 +24,7 @@
 		3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8972693730700EFC794 /* HomeSquareTVC.swift */; };
 		3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8982693730700EFC794 /* HomeThemeTVC.swift */; };
 		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
+		361986BF27778C2700B031F8 /* FollowCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361986BE27778C2700B031F8 /* FollowCheckService.swift */; };
 		361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361C6A24269E241600EA4A58 /* NetworkResult.swift */; };
 		362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362BC9F6269ED387008EF625 /* MyPageDataModel.swift */; };
 		362BC9F9269ED39A008EF625 /* MyPageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362BC9F8269ED39A008EF625 /* MyPageDataService.swift */; };
@@ -34,6 +35,8 @@
 		368EC8E92779C48B0076BF5E /* FollowFollowingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */; };
 		3691C4F52744102B00A712C9 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3691C4F32744100E00A712C9 /* TMapSDK.framework */; platformFilter = ios; };
 		3691C4F62744102B00A712C9 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3691C4F32744100E00A712C9 /* TMapSDK.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36B69F7A2772420D00FEEAAE /* OtherMyPage.storyboard */; };
+		36B69F7D2772429F00FEEAAE /* OtherMyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B69F7C2772429F00FEEAAE /* OtherMyPageVC.swift */; };
 		36B69F802775DC2F00FEEAAE /* FollowFollwingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B69F7F2775DC2F00FEEAAE /* FollowFollwingVC.swift */; };
 		36B69F832775DC6500FEEAAE /* FollowFollowing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36B69F822775DC6500FEEAAE /* FollowFollowing.storyboard */; };
 		36B8B495269B6DB8008DC781 /* HomeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B8B494269B6DB8008DC781 /* HomeDataModel.swift */; };
@@ -51,6 +54,8 @@
 		36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */; };
 		36F3302926A2A97D009C0173 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 36F3302826A2A97D009C0173 /* loading.json */; };
 		36F8F6C127134D4800092338 /* NewHotFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F8F6C027134D4800092338 /* NewHotFilterView.swift */; };
+		36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */; };
+		36FB8BA727777E3100C2E642 /* DoFollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB8BA627777E3100C2E642 /* DoFollowService.swift */; };
 		3C117E1E269F45D5005F4646 /* PostResultHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */; };
 		3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */; };
 		3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */; };
@@ -225,7 +230,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		26574A164B0B3DB6B6CF4C31 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		336D2CFC26E72F0900E64042 /* ChaRo-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChaRo-iOS.entitlements"; sourceTree = "<group>"; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
@@ -243,6 +248,7 @@
 		3610A8972693730700EFC794 /* HomeSquareTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSquareTVC.swift; sourceTree = "<group>"; };
 		3610A8982693730700EFC794 /* HomeThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeTVC.swift; sourceTree = "<group>"; };
 		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
+		361986BE27778C2700B031F8 /* FollowCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCheckService.swift; sourceTree = "<group>"; };
 		361C6A24269E241600EA4A58 /* NetworkResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		362BC9F6269ED387008EF625 /* MyPageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDataModel.swift; sourceTree = "<group>"; };
 		362BC9F8269ED39A008EF625 /* MyPageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDataService.swift; sourceTree = "<group>"; };
@@ -252,6 +258,8 @@
 		368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowFollowingTVC.swift; sourceTree = "<group>"; };
 		368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowFollowingTVC.xib; sourceTree = "<group>"; };
 		3691C4F32744100E00A712C9 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = SOURCE_ROOT; };
+		36B69F7A2772420D00FEEAAE /* OtherMyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OtherMyPage.storyboard; sourceTree = "<group>"; };
+		36B69F7C2772429F00FEEAAE /* OtherMyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherMyPageVC.swift; sourceTree = "<group>"; };
 		36B69F7F2775DC2F00FEEAAE /* FollowFollwingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowFollwingVC.swift; sourceTree = "<group>"; };
 		36B69F822775DC6500FEEAAE /* FollowFollowing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FollowFollowing.storyboard; sourceTree = "<group>"; };
 		36B8B494269B6DB8008DC781 /* HomeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataModel.swift; sourceTree = "<group>"; };
@@ -271,6 +279,8 @@
 		36F8F6AE27133F8800092338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		36F8F6B92713444600092338 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		36F8F6C027134D4800092338 /* NewHotFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHotFilterView.swift; sourceTree = "<group>"; };
+		36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoFollowDataModel.swift; sourceTree = "<group>"; };
+		36FB8BA627777E3100C2E642 /* DoFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoFollowService.swift; sourceTree = "<group>"; };
 		3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultHeaderCVC.swift; sourceTree = "<group>"; };
 		3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostResultHeaderCVC.xib; sourceTree = "<group>"; };
 		3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailDataModel.swift; sourceTree = "<group>"; };
@@ -351,6 +361,7 @@
 		3CEC0112269E25AB00E9332C /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		3CEC0114269E277A00E9332C /* OnBoardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardCVC.swift; sourceTree = "<group>"; };
 		3CEC0115269E277A00E9332C /* OnBoardCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardCVC.xib; sourceTree = "<group>"; };
+		6EAAA0587FAF0BFEB459D9B7 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		4E2246E525D4F1EFC17A4AC3 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		642CE65B65382A738CB51338 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		703DD82F269F3A7E004416A9 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -439,7 +450,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BF746D5C8549F4E027525F3 /* Pods_ChaRo_iOS.framework in Frameworks */,
 				3691C4F52744102B00A712C9 /* TMapSDK.framework in Frameworks */,
 				7139DCFBB8D0555166AED750 /* Pods_ChaRo_iOS.framework in Frameworks */,
 			);
@@ -499,7 +509,6 @@
 		367B3189274A5474007A2C18 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				31C665F80D2B7254A39F9896 /* Pods_ChaRo_iOS.framework */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -561,6 +570,8 @@
 				70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */,
 				3C45E636274C85640069E272 /* CommonData.swift */,
 				367B318C274A74C7007A2C18 /* MypageInfinityService.swift */,
+				36FB8BA627777E3100C2E642 /* DoFollowService.swift */,
+				361986BE27778C2700B031F8 /* FollowCheckService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -757,6 +768,8 @@
 				3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */,
 				362BC9F6269ED387008EF625 /* MyPageDataModel.swift */,
 				3C5B15B72749802600F178A8 /* GenericResponse.swift */,
+				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
+				36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */,
 				7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */,
 				7062C8582710DCC800C1CD2E /* JoinDataModel.swift */,
 				70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */,
@@ -1062,6 +1075,7 @@
 			isa = PBXGroup;
 			children = (
 				360937A52699ECEB005392BB /* MyPageVC.swift */,
+				36B69F7C2772429F00FEEAAE /* OtherMyPageVC.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -1170,6 +1184,7 @@
 			isa = PBXGroup;
 			children = (
 				360937A32699E52F005392BB /* MyPage.storyboard */,
+				36B69F7A2772420D00FEEAAE /* OtherMyPage.storyboard */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -1292,12 +1307,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C71FEB726881DAB007E8EAD /* Build configuration list for PBXNativeTarget "ChaRo-iOS" */;
 			buildPhases = (
-				9958DA3E218CDC4D767B3E8B /* [CP] Check Pods Manifest.lock */,
+				BBD94621979C0E0EB329C1DE /* [CP] Check Pods Manifest.lock */,
 				3C71FE9F26881DAA007E8EAD /* Sources */,
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
-				2E8AB33AEB16D5C4061C803D /* [CP] Embed Pods Frameworks */,
 				36F8F6BD2713445200092338 /* Embed Frameworks */,
+				12E7D82FFD8128D59F9B41C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1364,6 +1379,7 @@
 				703DD830269F3A7E004416A9 /* Login.storyboard in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
 				3C86FAC72694DFC6009370CD /* SearchKeyword.storyboard in Resources */,
+				36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */,
 				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
@@ -1417,7 +1433,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2E8AB33AEB16D5C4061C803D /* [CP] Embed Pods Frameworks */ = {
+		12E7D82FFD8128D59F9B41C7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1434,7 +1450,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9958DA3E218CDC4D767B3E8B /* [CP] Check Pods Manifest.lock */ = {
+		BBD94621979C0E0EB329C1DE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1493,6 +1509,7 @@
 				3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */,
 				70D63E3426963C810036484B /* ThemePostThemeTVC.swift in Sources */,
 				3C6F8A6226E2358D006E3895 /* SearchAddressKeywordVC.swift in Sources */,
+				36FB8BA727777E3100C2E642 /* DoFollowService.swift in Sources */,
 				3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* UITextFeild+.swift in Sources */,
@@ -1523,6 +1540,7 @@
 				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */,
+				361986BF27778C2700B031F8 /* FollowCheckService.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* UICollectionView+.swift in Sources */,
 				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */,
@@ -1578,6 +1596,7 @@
 				3C879BF7268B14E300C41BB8 /* UIFont+.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				7062C8262703194300C1CD2E /* InputTextField.swift in Sources */,
+				36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */,
 				362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */,
 				F4CC1AE92697570A009A0C01 /* PostPathMapTVC.swift in Sources */,
 				703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */,
@@ -1590,6 +1609,7 @@
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
 				3C45E637274C85640069E272 /* CommonData.swift in Sources */,
 				707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */,
+				36B69F7D2772429F00FEEAAE /* OtherMyPageVC.swift in Sources */,
 				3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */,
 				3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */,
 				7062C83B270C415400C1CD2E /* JoinPasswordView.swift in Sources */,
@@ -1764,7 +1784,7 @@
 		};
 		3C71FEB926881DAB007E8EAD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E2246E525D4F1EFC17A4AC3 /* Pods-ChaRo-iOS.release.xcconfig */;
+			baseConfigurationReference = 83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

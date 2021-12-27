@@ -3,21 +3,20 @@
 import Alamofire
 import Foundation
 
-struct MypageInfinityService
+struct FollowCheckService
 {
-    static let MyPageInfinityData = MypageInfinityService()
-    func getRecommendInfo(userID: String, addURL: String, likeOrNew: String, completion : @escaping (NetworkResult<Any>) -> Void)
+    
+    static let followData = FollowCheckService()
+    func getRecommendInfo(userId: String, otherId: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
-        var URL = Constants.myPageURL + likeOrNew + userID + addURL;
-        let header : HTTPHeaders = ["Content-Type": "application/json"]
-        let dataRequest = AF.request(URL,
+        let dataRequest = AF.request(Constants.followCheckURL + userId + "&targetEmail=" + otherId,
                                      method: .get,
                                      encoding: JSONEncoding.default,
-                                     headers: header)
+                                     headers: ["Content-Type": "application/json"])
 
         dataRequest.responseData { dataResponse in
-//            dump(dataResponse)
+            //dump(dataResponse)
             switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else {return}
@@ -26,8 +25,6 @@ struct MypageInfinityService
                 completion(networkResult)
             case .failure: completion(.pathErr)
                 print("실패 사유")
-
-                
             }
         }
                                             
@@ -42,9 +39,8 @@ struct MypageInfinityService
     }
     
     private func isValidData(data : Data) -> NetworkResult<Any> {
-        
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(MypageInpinityModel.self, from: data)
+        guard let decodedData = try? decoder.decode(DoFollowDataModel.self, from: data)
         else {return .pathErr}
         return .success(decodedData)
 
