@@ -14,6 +14,7 @@ class CreatePostCourseTVC: UITableViewCell {
     static let identifier: String = "CreatePostCourseTVC"
     
     // MARK: 데이터 전달 closeur
+
     public var setCityInfo: ((String) -> Void)?
     public var setRegionInfo: ((String) -> Void)?
     private var city: String = ""{

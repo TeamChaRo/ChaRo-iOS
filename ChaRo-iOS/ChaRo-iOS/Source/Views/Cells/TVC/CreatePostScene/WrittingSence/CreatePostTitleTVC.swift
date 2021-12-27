@@ -51,7 +51,7 @@ class CreatePostTitleTVC: UITableViewCell {
         textView.font = .notoSansRegularFont(ofSize: 14)
         textView.layer.borderWidth = 1.0
         textView.layer.borderColor = UIColor.gray20.cgColor
-        textView.layer.cornerRadius = 8.0
+        textView.layer.cornerRadius = 12.0
         textView.isScrollEnabled = false
         textView.addPadding(left: 17, right: 17)
         
