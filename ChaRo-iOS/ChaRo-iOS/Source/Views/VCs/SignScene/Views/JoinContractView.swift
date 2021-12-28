@@ -51,7 +51,7 @@ class JoinContractView: UIView {
     init() {
         super.init(frame: .zero)
         configureUI()
-        makeButtonsGray()
+        makeButtonBlue()
     }
     
     private func makeButtonBlue() {
