@@ -343,7 +343,7 @@ class OtherMyPageVC: UIViewController {
                    switch response
                    {
                    case .success(let data) :
-                       if let response = data as? MypageInpinityModel{
+                       if let response = data as? MypageInfinityModel{
                            if response.data.lastID == 0{
                                self.isLast = true
                                self.delegate?.endIndicator()
