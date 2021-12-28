@@ -44,7 +44,7 @@ struct MypageInfinityService
     private func isValidData(data : Data) -> NetworkResult<Any> {
         
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(MypageInpinityModel.self, from: data)
+        guard let decodedData = try? decoder.decode(MypageInfinityModel.self, from: data)
         else {return .pathErr}
         return .success(decodedData)
 
