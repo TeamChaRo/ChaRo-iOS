@@ -73,7 +73,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.titleLabel?.textAlignment = .center
         button.setEmptyTitleColor()
-        button.setGray20Border(8)
+        button.setGray20Border(21)
         return button
     }()
     
@@ -84,7 +84,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.titleLabel?.textAlignment = .center
         button.setEmptyTitleColor()
-        button.setGray20Border(8)
+        button.setGray20Border(21)
         return button
     }()
     
@@ -94,7 +94,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         textField.addLeftPadding(16)
         textField.textColor = .gray50
         textField.font = .notoSansRegularFont(ofSize: 14)
-        textField.setGray20Border(8)
+        textField.setGray20Border(12)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -367,5 +367,4 @@ extension CreatePostParkingWarningTVC {
             $0.bottom.equalTo(self.snp.bottom).inset(33)
         }
     }
-    
 }
