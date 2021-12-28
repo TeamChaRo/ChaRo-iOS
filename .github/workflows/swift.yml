@@ -14,7 +14,7 @@ jobs:
     - name: Run tests
       run: |
         pod install --repo-update --clean-install --project-directory=./ChaRo-iOS
-        xcodebuild test -workspace ./ChaRo-iOS.xcworkspace -scheme Charo-iOSTests -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest'
+        xcodebuild test -workspace ./ChaRo-iOS/ChaRo-iOS.xcworkspace -scheme Charo-iOS -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest'
         xcpretty --test --color
 
     - name: Notify in Slack 
