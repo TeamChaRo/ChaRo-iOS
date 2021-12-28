@@ -9,10 +9,17 @@ import UIKit
 import SnapKit
 import Then
 
+protocol isFollowButtonClickedDelegate {
+    func isFollowButtonClicked()
+}
+
 class FollowFollowingTVC: UITableViewCell {
     //MARK: Var
+    let myId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
+    var otherUserID: String = "and@naver.com"
+    var delegate: isFollowButtonClickedDelegate?
     
-   static let identifier: String = "FollowFollowingTVC"
+    static let identifier: String = "FollowFollowingTVC"
     
     private let profileImageView = UIImageView().then{
         $0.image = UIImage(named: "myimage")
@@ -31,6 +38,7 @@ class FollowFollowingTVC: UITableViewCell {
     }
     private let followButton = UIButton().then{
         $0.setBackgroundImage(UIImage(named: "FollowButtonImage"), for: .normal)
+        $0.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
     }
 //MARK: awakeFromNib
     override func awakeFromNib() {
@@ -40,18 +48,50 @@ class FollowFollowingTVC: UITableViewCell {
     }
     
 //MARK: function
-    func setData(image: String, userName: String, isFollow: Bool){
+    func setData(image: String, userName: String, isFollow: Bool, userEmail: String){
         guard let url = URL(string: image) else { return }
         userNameLabel.text = userName
+        otherUserID = userEmail
         profileImageView.kf.setImage(with: url)
-        if isFollow{
-            followButton.setBackgroundImage(UIImage(named: "FollowingButtonImage"), for: .normal)
+        if isFollow == true{
+            followButton.setBackgroundImage(UIImage(named: "followingButtonImage"), for: .normal)
         }
         else{
             followButton.setBackgroundImage(UIImage(named: "FollowButtonImage"), for: .normal)
         }
     }
     
+    func postFollowData(){
+        DoFollowService.shared.followService(follower: myId, followed: otherUserID){ result in
+            switch result {
+            case .success(let data):
+                if let response = data as? DoFollowDataModel{
+                    print(response.data.isFollow)
+//                    if response.data.isFollow == true{
+//                        self.followButton.setBackgroundImage(UIImage(named: "followingButtonImage"), for: .normal)
+//                    }
+//                    else{
+//                        self.followButton.setBackgroundImage(UIImage(named: "FollowButtonImage"), for: .normal)
+//                    }
+                    self.delegate?.isFollowButtonClicked()
+                }
+            case .requestErr(let message):
+                print(message)
+            case .serverErr:
+                print("서버에러")
+            case .networkFail:
+                print("네트워크에러")
+            default:
+                print("에러임니다")
+            }
+        }
+    }
+    
+    
+    
+    @objc private func followButtonClicked(_ sender: UIButton){
+        postFollowData()
+    }
 //MARK: layoutFunction
     func setLayout(){
         addSubviews([profileImageView, userNameLabel, followButton])
