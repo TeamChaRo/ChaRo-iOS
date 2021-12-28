@@ -8,13 +8,23 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
       run: |
-        pod install --repo-update --clean-install --project-directory=./
-        xcodebuild test -workspace ./Gachisaja-iOS.xcworkspace -scheme Gachisaja-iOSTests -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest'
+        pod install --repo-update --clean-install --project-directory=./ChaRo-iOS
+        xcodebuild test -workspace ./ChaRo-iOS/ChaRo-iOS.xcworkspace -scheme Charo-iOSTests -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest'
         xcpretty --test --color
+
+    - name: Notify in Slack 
+      if: always()
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        fields: workflow,job,commit,repo,ref,author,took
+        mention: here
+        if_mention: failure,cancelled
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+ 
