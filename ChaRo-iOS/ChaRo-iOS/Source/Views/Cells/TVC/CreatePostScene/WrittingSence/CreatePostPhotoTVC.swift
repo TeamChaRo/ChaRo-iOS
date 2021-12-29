@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Then
 
 class CreatePostPhotoTVC: UITableViewCell {
     
@@ -17,16 +18,29 @@ class CreatePostPhotoTVC: UITableViewCell {
         }
     }
     
-    let maxPhotoCount: Int = 6
+    private let maxPhotoCount: Int = 6
     
     // MARK: UI Components
-    let emptyImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "writeEmptyImage")
-        imageView.layer.cornerRadius = 8
-        
-        return imageView
-    }()
+
+    private let photoBackgroundView: UIView = UIView().then {
+        $0.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+    }
+
+    private let photoSubBackgroundView: UIView = UIView().then {
+        $0.backgroundColor = UIColor.white
+    }
+
+    private let emptyImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(named: "photo1")
+    }
+
+    private let discriptionText: UILabel = UILabel().then {
+        $0.text = "이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요  (0/6)"
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.numberOfLines = 2
+        $0.textAlignment = .center
+        $0.textColor = UIColor.gray40
+    }
     
     let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -38,12 +52,11 @@ class CreatePostPhotoTVC: UITableViewCell {
         return collectionView
     }()
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        setNotificationCenter()
-        setImageGesture()
+        self.setNotificationCenter()
+        self.setImageGesture()
+        self.setLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -56,20 +69,27 @@ class CreatePostPhotoTVC: UITableViewCell {
 extension CreatePostPhotoTVC {
     
     // MARK:- Functions
-    func setCollcetionView(){
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.registerCustomXib(xibName: CreatePostPhotosCVC.identifier)
-        collectionView.showsHorizontalScrollIndicator = false
+
+    func setCollcetionView() {
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.registerCustomXib(xibName: CreatePostPhotosCVC.identifier)
+        self.collectionView.showsHorizontalScrollIndicator = false
         
-        collectionView.reloadData()
+        self.collectionView.reloadData()
     }
     
-    func setImageGesture(){
+    private func setImageGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewDidTap))
-                                                
-        emptyImageView.addGestureRecognizer(tapGesture)
-        emptyImageView.isUserInteractionEnabled = true
+        self.emptyImageView.addGestureRecognizer(tapGesture)
+        self.emptyImageView.isUserInteractionEnabled = true
+    }
+
+    private func setLayout() {
+        self.photoBackgroundView.layer.cornerRadius = 12.0
+        self.photoSubBackgroundView.layer.borderWidth = 1.0
+        self.photoSubBackgroundView.layer.borderColor = UIColor.gray20.cgColor
+        self.photoSubBackgroundView.layer.cornerRadius = 10.0
     }
     
 
@@ -103,13 +123,37 @@ extension CreatePostPhotoTVC {
     
     // MARK:- Layout
     func emptyConfigureLayout(){
-        addSubview(emptyImageView)
-        
-        emptyImageView.snp.makeConstraints{
+
+        addSubviews([
+            self.photoBackgroundView,
+            self.photoSubBackgroundView,
+            self.discriptionText,
+            self.emptyImageView
+        ])
+
+        self.photoBackgroundView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.bottom.equalTo(self.snp.bottom).inset(33)
+        }
+        self.photoSubBackgroundView.snp.makeConstraints {
+            $0.top.equalTo(self.photoBackgroundView.snp.top).inset(33)
+            $0.width.equalTo(110)
+            $0.height.equalTo(self.photoSubBackgroundView.snp.width).multipliedBy(1.0)
+            $0.centerX.equalTo(self.photoBackgroundView.snp.centerX)
+        }
+        self.discriptionText.snp.makeConstraints {
+            $0.top.equalTo(self.photoSubBackgroundView.snp.bottom).offset(8)
+            $0.height.equalTo(44)
+            $0.width.equalTo(240)
+            $0.centerX.equalTo(self.photoBackgroundView.snp.centerX)
+        }
+        self.emptyImageView.snp.makeConstraints {
+            $0.top.equalTo(self.photoSubBackgroundView.snp.top).inset(31)
+            $0.height.equalTo(48)
+            $0.width.equalTo(self.emptyImageView.snp.height).multipliedBy(1)
+            $0.centerX.equalTo(self.photoSubBackgroundView.snp.centerX)
         }
     }
     

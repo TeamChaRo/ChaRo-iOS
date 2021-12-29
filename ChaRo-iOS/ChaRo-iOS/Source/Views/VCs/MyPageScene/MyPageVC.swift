@@ -25,10 +25,10 @@ class MyPageVC: UIViewController {
     
     
     let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
-    var topCVCCell : HomePostDetailCVC?
     var currentState: String = "인기순"
     
     //무한스크롤을 위함
+    var myId: String = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     var lastId: Int = 0
     var lastFavorite: Int = 0
     var isLast: Bool = false
@@ -49,6 +49,8 @@ class MyPageVC: UIViewController {
     private let headerBackgroundView = UIView().then{
         $0.backgroundColor = UIColor.mainBlue
     }
+    //팔로우 버튼하나 추가 하고, 밑에 컬뷰 하나 넣고 끝 내일 마무리 치기
+
 
     private let headerTitleLabel = UILabel().then{
         $0.textColor = UIColor.white
@@ -221,9 +223,13 @@ class MyPageVC: UIViewController {
                    {
                    case .success(let data) :
                        if let response = data as? MyPageDataModel{
+                           var driveData = MyPageDrive()
+                           
+                           
                            self.userProfileData.append(response.data.userInformation)
                            self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
                            self.savePostDriveData.append(contentsOf: response.data.savedPost.drive)
+                           print(response.data.writtenPost,"진짜 뭔데")
                            self.setHeaderData()
                            self.writeCollectionView.reloadData()
                            self.saveCollectioinView.reloadData()
@@ -243,11 +249,11 @@ class MyPageVC: UIViewController {
     func getInfinityData(addUrl: String, LikeOrNew: String){
         delegate = self
         self.delegate?.startIndicator()
-        MypageInfinityService.MyPageInfinityData.getRecommendInfo(addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: myId, addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
                    switch response
                    {
                    case .success(let data) :
-                       if let response = data as? MypageInpinityModel{
+                       if let response = data as? MypageInfinityModel{
                            if response.data.lastID == 0{
                                self.isLast = true
                                self.delegate?.endIndicator()
@@ -327,7 +333,7 @@ class MyPageVC: UIViewController {
                 addURL = "/write/\(lastId)/\(lastFavorite)"
                 //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
                 //MypageInfinityService.addURL = "/write/11/0"
-                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
             }
             else if currentState == "최신순"{
@@ -589,17 +595,31 @@ extension MyPageVC: UICollectionViewDelegate{
 extension MyPageVC: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: "PostDetailVC") as? PostDetailVC else {return}
+        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
+        var driveData = MyPageDrive()
         //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
         if collectionView.tag == 1{
-            detailVC.setPostId(id: writenPostDriveData[indexPath.row].postID)
-            self.navigationController?.pushViewController(detailVC, animated: true)
+            detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
+            driveData = writenPostDriveData[indexPath.row-1]
         }
         else{
-            detailVC.setPostId(id: savePostDriveData[indexPath.row].postID)
-            self.navigationController?.pushViewController(detailVC, animated: true)
+            detailVC.setPostId(id: savePostDriveData[indexPath.row-1].postID)
+                driveData = savePostDriveData[indexPath.row-1]
         }
-        
+        detailVC.setAdditionalDataOfPost(data: DriveElement(
+                                    postID: driveData.postID,
+                                    title: driveData.title,
+                                    image: driveData.image,
+                                    region: driveData.region,
+                                    theme: driveData.theme,
+                                    warning: driveData.warning,
+                                    year: driveData.year,
+                                    month: driveData.month,
+                                    day: driveData.day,
+                                    isFavorite: driveData.isFavorite))
+        if indexPath.row > 0{
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -646,9 +666,8 @@ extension MyPageVC: UICollectionViewDataSource{
                 let writenElement = writenPostDriveData[indexPath.row-1]
                 var writenTags = [writenElement.region, writenElement.theme,
                             writenElement.warning ?? ""] as [String]
+                print(writenPostDriveData, "왜 안뜨냐?")
             cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
-                
-               
             return cell
             }
         case 2:
@@ -743,3 +762,4 @@ extension MyPageVC: AnimateIndicatorDelegate{
         lottieView.isHidden = true
     }
 }
+
