@@ -18,6 +18,8 @@ class MyPageVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
+    var isLogin: Bool = UserDefaults.standard.bool(forKey: "isLogin") ?? false
+    
     private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
     private var writenPostDriveData: [MyPageDrive] = []
@@ -43,7 +45,7 @@ class MyPageVC: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = 3
-        $0.image = UIImage(named: "myimage")
+        $0.image = UIImage(named: "defaultImage")
         $0.layer.cornerRadius = 32
     }
     private let headerBackgroundView = UIView().then{
@@ -66,7 +68,7 @@ class MyPageVC: UIViewController {
         $0.textColor = UIColor.white
         $0.font = UIFont.notoSansBoldFont(ofSize: 18)
         $0.textAlignment = .left
-        $0.text = "none 드라이버님"
+        $0.text = "로그인 해주세요 >"
     }
     
     private let followerButton = UIButton().then{
@@ -80,7 +82,7 @@ class MyPageVC: UIViewController {
     
     private let followerNumButton = UIButton().then{
         $0.backgroundColor = .none
-        $0.setTitle("0", for: .normal)
+        $0.setTitle("-", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
@@ -98,16 +100,26 @@ class MyPageVC: UIViewController {
     
     private let followNumButton = UIButton().then{
         $0.backgroundColor = .none
-        $0.setTitle("0", for: .normal)
+        $0.setTitle("-", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
         $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
-    private let noDataImage = UIImageView().then{
+    private let noWritenDataImage = UIImageView().then{
         $0.image = UIImage(named: "no_img")
     }
-    private let noDataLabel = UILabel().then{
+    private let noSaveDataImage = UIImageView().then{
+        $0.image = UIImage(named: "no_img")
+    }
+    private let noWritenDataLabel = UILabel().then{
+        $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n작성해보는 것은 어떠신가요?"
+        $0.textColor = UIColor.gray50
+        $0.font = UIFont.notoSansRegularFont(ofSize: 14)
+        $0.textAlignment = .center
+        $0.numberOfLines = 3
+    }
+    private let noSaveDataLabel = UILabel().then{
         $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n작성해보는 것은 어떠신가요?"
         $0.textColor = UIColor.gray50
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
@@ -200,7 +212,14 @@ class MyPageVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getMypageData()
+        if isLogin == true{
+            getMypageData()
+        }
+        else{
+            isNoData()
+            noSaveDataLabel.isHidden = true
+            noWritenDataLabel.isHidden = true
+        }
     }
     
 //MARK: function
@@ -232,28 +251,43 @@ class MyPageVC: UIViewController {
     }
     
     func isNoData(){
-        writeView.addSubviews([noDataImage, noDataLabel])
-        saveView.addSubviews([noDataImage, noDataLabel])
-        noDataImage.isHidden = true
-        noDataLabel.isHidden = true
-        noDataImage.snp.makeConstraints{
+        saveView.addSubviews([noSaveDataImage, noSaveDataLabel])
+        writeView.addSubviews([noWritenDataImage, noWritenDataLabel])
+        
+        noSaveDataImage.isHidden = true
+        noSaveDataLabel.isHidden = true
+        noWritenDataImage.isHidden = true
+        noWritenDataLabel.isHidden = true
+        
+        noSaveDataImage.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
         }
-        noDataLabel.snp.makeConstraints{
-            $0.top.equalTo(noDataImage.snp.bottom).offset(19)
+        noSaveDataLabel.snp.makeConstraints{
+            $0.top.equalTo(noSaveDataImage.snp.bottom).offset(19)
+            $0.leading.equalToSuperview().offset(71)
+            $0.trailing.equalToSuperview().offset(-71)
+            $0.height.equalTo(66)
+        }
+        noWritenDataImage.snp.makeConstraints{
+            $0.top.leading.trailing.equalToSuperview().offset(0)
+            $0.width.equalTo(userWidth)
+            $0.height.equalTo(259)
+        }
+        noWritenDataLabel.snp.makeConstraints{
+            $0.top.equalTo(noWritenDataImage.snp.bottom).offset(19)
             $0.leading.equalToSuperview().offset(71)
             $0.trailing.equalToSuperview().offset(-71)
             $0.height.equalTo(66)
         }
         if writenPostDriveData.isEmpty == true{
-            noDataImage.isHidden = false
-            noDataLabel.isHidden = false
+            noWritenDataImage.isHidden = false
+            noWritenDataLabel.isHidden = false
         }
-        else if savePostDriveData.isEmpty == true{
-            noDataImage.isHidden = false
-            noDataLabel.isHidden = false
+        if savePostDriveData.isEmpty == true{
+            noSaveDataImage.isHidden = false
+            noSaveDataLabel.isHidden = false
         }
     }
 //MARK: Server
@@ -326,27 +360,38 @@ class MyPageVC: UIViewController {
 
 
 //MARK: buttonClicked
-   @objc private func saveButtonClicked(_ sender: UIButton){
+   @objc private func saveButtonClicked(_ sender: UIButton) {
        collectionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
        tabbarWriteButton.setImage(UIImage(named: "write_active"), for: .normal)
        tabbarSaveButton.setImage(UIImage(named: "save_inactive"), for: .normal)
     }
-    @objc private func writeButtonClicked(_ sender: UIButton){
+    @objc private func writeButtonClicked(_ sender: UIButton) {
         collectionScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
         tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
         tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
      }
-    @objc private func followerButtonClicked(_ sender: UIButton){
+    @objc private func followerButtonClicked(_ sender: UIButton) {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
-        followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: myId)
-        self.navigationController?.pushViewController(followVC, animated: true)
-        
+        if isLogin == true {
+            followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: myId)
+            self.navigationController?.pushViewController(followVC, animated: true)
+        }
      }
-    @objc private func followingButtonClicked(_ sender: UIButton){
+    @objc private func followingButtonClicked(_ sender: UIButton) {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
-        followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: myId)
-        self.navigationController?.pushViewController(followVC, animated: true)
+        if isLogin == true {
+            followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: myId)
+            self.navigationController?.pushViewController(followVC, animated: true)
+        }
      }
+    @objc func nameLabelClicked(sender: UITapGestureRecognizer) {
+        guard let LoginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: LoginVC.identifier) as? LoginVC else {return}
+        if isLogin == false{
+            self.navigationController?.pushViewController(LoginVC, animated: true)
+        }
+    }
+
+    
 //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let writeContentHeigth = writeCollectionView.contentSize.height
@@ -601,6 +646,9 @@ class MyPageVC: UIViewController {
             $0.top.equalTo(headerTitleLabel.snp.bottom).offset(34)
             $0.width.equalTo(180)
         }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(nameLabelClicked(sender:)))
+        userNameLabel.isUserInteractionEnabled = true
+        userNameLabel.addGestureRecognizer(tapGesture)
         //followerButton
         followerButton.snp.makeConstraints{
             $0.top.equalTo(userNameLabel.snp.bottom).offset(11)
@@ -682,14 +730,14 @@ extension MyPageVC: UICollectionViewDataSource{
         var saveCellCount = 0
         
         if(writenPostDriveData.count == 0){
-            writeCellCount = 1
+            writeCellCount = 0
         }
         else{
             writeCellCount = writenPostDriveData.count + 1
         }
         
         if(savePostDriveData.count == 0){
-            saveCellCount = 1
+            saveCellCount = 0
         }
         else{
             saveCellCount = savePostDriveData.count + 1
