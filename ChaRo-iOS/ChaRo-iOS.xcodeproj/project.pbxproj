@@ -48,6 +48,11 @@
 		36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */; };
 		36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */; };
 		36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */; };
+		36E445B3277CA160008E31BE /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E445B2277CA160008E31BE /* SettingVC.swift */; };
+		36E445B5277CA17E008E31BE /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36E445B4277CA17E008E31BE /* Setting.storyboard */; };
+		36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E445B6277CA1F3008E31BE /* SettingTVC.swift */; };
+		36E445B9277CA1F3008E31BE /* SettingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E445B7277CA1F3008E31BE /* SettingTVC.xib */; };
+		36E445BB277CD6A2008E31BE /* SettingViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */; };
 		36F3302926A2A97D009C0173 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 36F3302826A2A97D009C0173 /* loading.json */; };
 		36F8F6C127134D4800092338 /* NewHotFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F8F6C027134D4800092338 /* NewHotFilterView.swift */; };
 		36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */; };
@@ -280,6 +285,11 @@
 		36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostDetailCVC.xib; sourceTree = "<group>"; };
 		36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotDropDownTVC.swift; sourceTree = "<group>"; };
 		36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotDropDownTVC.xib; sourceTree = "<group>"; };
+		36E445B2277CA160008E31BE /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		36E445B4277CA17E008E31BE /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		36E445B6277CA1F3008E31BE /* SettingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTVC.swift; sourceTree = "<group>"; };
+		36E445B7277CA1F3008E31BE /* SettingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTVC.xib; sourceTree = "<group>"; };
+		36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewDataModel.swift; sourceTree = "<group>"; };
 		36F3302826A2A97D009C0173 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		36F8F6AE27133F8800092338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		36F8F6B92713444600092338 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
@@ -516,6 +526,7 @@
 		3610A8952693730700EFC794 /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				36E445AF277CA117008E31BE /* SettingScene */,
 				3CAE51A026C2433900DB8A41 /* CreatePostScene */,
 				3CAE519826C2411F00DB8A41 /* HomeScene */,
 				3CAE519326C23FD100DB8A41 /* PostDetailScene */,
@@ -530,6 +541,38 @@
 			children = (
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		36E445AE277CA102008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B2277CA160008E31BE /* SettingVC.swift */,
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
+		36E445AF277CA117008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B6277CA1F3008E31BE /* SettingTVC.swift */,
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
+		36E445B0277CA124008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B4277CA17E008E31BE /* Setting.storyboard */,
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
+		36E445B1277CA12F008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B7277CA1F3008E31BE /* SettingTVC.xib */,
+			);
+			path = SettingScene;
 			sourceTree = "<group>";
 		};
 		3C3AF5EB269024280099B684 /* Services */ = {
@@ -639,6 +682,7 @@
 		3C86FA812694C7C6009370CD /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				36E445B1277CA12F008E31BE /* SettingScene */,
 				3CAE519F26C2431D00DB8A41 /* CreatePostScene */,
 				3CAE51A626C243F100DB8A41 /* HomeScene */,
 				3CAE51A526C243BD00DB8A41 /* PostDetailScene */,
@@ -651,6 +695,7 @@
 		3C86FA8C2694C7C6009370CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				36E445B0277CA124008E31BE /* SettingScene */,
 				3CAE51BC26C2474000DB8A41 /* CreatePostScene */,
 				3CAE51BD26C2478300DB8A41 /* HomeScene */,
 				3CAE51BE26C249FE00DB8A41 /* MyPageScene */,
@@ -760,6 +805,7 @@
 				7062C8582710DCC800C1CD2E /* JoinDataModel.swift */,
 				70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */,
 				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
+				36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -767,6 +813,7 @@
 		3C879BE9268B13C300C41BB8 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				36E445AE277CA102008E31BE /* SettingScene */,
 				3CAE51A826C2442E00DB8A41 /* CreatePostScene */,
 				3CAE51B326C2453400DB8A41 /* HomeScene */,
 				3CAE51B026C244F900DB8A41 /* MyPageScene */,
@@ -1408,6 +1455,7 @@
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
 				70876CD0275E08EB00096C51 /* GoogleService-Info.plist in Resources */,
+				36E445B5277CA17E008E31BE /* Setting.storyboard in Resources */,
 				36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */,
 				3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */,
 				70A37C6026F07BB1006CCEA9 /* Join.storyboard in Resources */,
@@ -1442,6 +1490,7 @@
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
 				F4CC1B9A269D3E67009A0C01 /* CreatePostCourseTVC.xib in Resources */,
 				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
+				36E445B9277CA1F3008E31BE /* SettingTVC.xib in Resources */,
 				F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */,
 				F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */,
 				3C86FAA52694C7C6009370CD /* AddressButtonCell.xib in Resources */,
@@ -1553,6 +1602,7 @@
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
 				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* UITableView+.swift in Sources */,
+				36E445BB277CD6A2008E31BE /* SettingViewDataModel.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* UIColor+.swift in Sources */,
 				F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */,
 				7062C83D270C42FE00C1CD2E /* JoinProfileView.swift in Sources */,
@@ -1627,6 +1677,7 @@
 				3C117E1E269F45D5005F4646 /* PostResultHeaderCVC.swift in Sources */,
 				7062C82A2706FAA300C1CD2E /* JoinTitleLabel.swift in Sources */,
 				7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */,
+				36E445B3277CA160008E31BE /* SettingVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
@@ -1662,6 +1713,7 @@
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				7062C8262703194300C1CD2E /* InputTextField.swift in Sources */,
 				36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */,
+				36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */,
 				362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */,
 				F4CC1AE92697570A009A0C01 /* PostPathMapTVC.swift in Sources */,
 				703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */,
