@@ -60,6 +60,8 @@ class MyPageVC: UIViewController {
     
     private let settingButton = UIButton().then{
         $0.setBackgroundImage(UIImage(named: "setting2_white"), for: .normal)
+        $0.addTarget(self, action: #selector(settingButtonClicked(_:)), for: .touchUpInside)
+
     }
     
     private let userNameLabel = UILabel().then{
@@ -293,6 +295,11 @@ class MyPageVC: UIViewController {
         collectionScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
         tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
         tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
+     }
+    @objc private func settingButtonClicked(_ sender: UIButton){
+        guard let setVC = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "SettingVC") as? SettingVC else {return}
+        
+        self.navigationController?.pushViewController(setVC, animated: true)
      }
 //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
