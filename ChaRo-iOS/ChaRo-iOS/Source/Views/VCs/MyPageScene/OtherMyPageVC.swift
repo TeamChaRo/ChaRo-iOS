@@ -11,8 +11,8 @@ import Then
 
 class OtherMyPageVC: UIViewController {
     
-    var userProfileData: [UserInformation] = []
-    var writenPostDriveData: [MyPageDrive] = []
+    private var userProfileData: [UserInformation] = []
+    private var writenPostDriveData: [MyPageDrive] = []
     
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
@@ -83,7 +83,7 @@ class OtherMyPageVC: UIViewController {
     
     private let followButton = UIButton().then{
         $0.backgroundColor = .none
-        $0.setTitle("팔로우", for: .normal)
+        $0.setTitle("팔로잉", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
@@ -95,6 +95,10 @@ class OtherMyPageVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+    }
+    private let backButton = UIButton().then{
+        $0.setBackgroundImage(UIImage(named: "icBack1"), for: .normal)
+        $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     //컬렉션 뷰
     private var collectionview: UICollectionView = {
@@ -144,7 +148,7 @@ class OtherMyPageVC: UIViewController {
     
     func setHeaderViewLayout(){
         self.view.addSubview(headerBackgroundView)
-        headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton])
+        headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton, backButton])
         
         let headerViewHeight = userheight * 0.27
         
@@ -204,6 +208,12 @@ class OtherMyPageVC: UIViewController {
             $0.centerY.equalTo(followButton)
             $0.leading.equalTo(followButton.snp.trailing).offset(3)
             $0.width.equalTo(25)
+        }
+        //뒤로가기 버튼
+        backButton.snp.makeConstraints{
+            $0.width.height.equalTo(48)
+            $0.leading.equalToSuperview().offset(0)
+            $0.centerY.equalTo(headerTitleLabel)
         }
     
     }
@@ -277,11 +287,13 @@ class OtherMyPageVC: UIViewController {
     @objc private func doFollowButtonClicked(_ sender: UIButton){
         postFollowUser()
    }
+    @objc private func backButtonClicked(_ sender: UIButton){
+        self.navigationController?.popViewController(animated: true)
+   }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
         func getMypageData(){
-            print(updateFollowNum, "adsf")
             GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
             GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                        switch response

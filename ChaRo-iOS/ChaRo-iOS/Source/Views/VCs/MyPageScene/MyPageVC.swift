@@ -18,10 +18,10 @@ class MyPageVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
-    var userProfileData: [UserInformation] = []
+    private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
-    var writenPostDriveData: [MyPageDrive] = []
-    var savePostDriveData: [MyPageDrive] = []
+    private var writenPostDriveData: [MyPageDrive] = []
+    private var savePostDriveData: [MyPageDrive] = []
     
     
     let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
@@ -75,6 +75,7 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let followerNumButton = UIButton().then{
@@ -83,14 +84,16 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let followButton = UIButton().then{
         $0.backgroundColor = .none
-        $0.setTitle("팔로우", for: .normal)
+        $0.setTitle("팔로잉", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let followNumButton = UIButton().then{
@@ -99,6 +102,7 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
+        $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
 
     
@@ -181,12 +185,14 @@ class MyPageVC: UIViewController {
         setHeaderLayout()
         setTabbarLayout()
         setCollectionViewLayout()
-        getMypageData()
+//        getMypageData()
         filterTableViewLayout()
         self.dismissDropDownWhenTappedAround()
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        getMypageData()
+    }
     
 //MARK: function
     //탭바 쉬트 이동 및 버튼클릭시 애니메이션
@@ -213,23 +219,23 @@ class MyPageVC: UIViewController {
         userNameLabel.text = userProfileData[0].nickname
         profileImageView.kf.setImage(with: url)
         followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
-        followNumButton.setTitle(String(userProfileData[0].following), for: .normal) 
+        followNumButton.setTitle(String(userProfileData[0].following), for: .normal)
     }
 //MARK: Server
 //마이페이지 데이터 받아오는 함수
     func getMypageData(){
+        GetMyPageDataService.URL = Constants.myPageLikeURL
         GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                    switch response
                    {
                    case .success(let data) :
                        if let response = data as? MyPageDataModel{
-                           var driveData = MyPageDrive()
-                           
-                           
+                           self.userProfileData = []
+                           self.writenPostDriveData = []
+                           self.savePostDriveData = []
                            self.userProfileData.append(response.data.userInformation)
                            self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
                            self.savePostDriveData.append(contentsOf: response.data.savedPost.drive)
-                           print(response.data.writtenPost,"진짜 뭔데")
                            self.setHeaderData()
                            self.writeCollectionView.reloadData()
                            self.saveCollectioinView.reloadData()
@@ -293,6 +299,17 @@ class MyPageVC: UIViewController {
         collectionScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
         tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
         tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
+     }
+    @objc private func followerButtonClicked(_ sender: UIButton){
+        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+        followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: myId)
+        self.navigationController?.pushViewController(followVC, animated: true)
+        
+     }
+    @objc private func followingButtonClicked(_ sender: UIButton){
+        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+        followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: myId)
+        self.navigationController?.pushViewController(followVC, animated: true)
      }
 //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -598,6 +615,7 @@ extension MyPageVC: UICollectionViewDataSource{
         guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
         var driveData = MyPageDrive()
         //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
+        if indexPath.row > 0{
         if collectionView.tag == 1{
             detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
             driveData = writenPostDriveData[indexPath.row-1]
@@ -617,6 +635,7 @@ extension MyPageVC: UICollectionViewDataSource{
                                     month: driveData.month,
                                     day: driveData.day,
                                     isFavorite: driveData.isFavorite))
+        }
         if indexPath.row > 0{
         self.navigationController?.pushViewController(detailVC, animated: true)
         }
@@ -731,16 +750,12 @@ extension MyPageVC: NewHotFilterClickedDelegate{
         switch row {
         case 0:
             GetMyPageDataService.URL = Constants.myPageLikeURL
-            writenPostDriveData = []
-            savePostDriveData = []
             getMypageData()
             currentState = "인기순"
             writeCollectionView.reloadData()
             saveCollectioinView.reloadData()
         default:
             GetMyPageDataService.URL = Constants.myPageNewURL
-            writenPostDriveData = []
-            savePostDriveData = []
             getMypageData()
             currentState = "최신순"
             writeCollectionView.reloadData()
