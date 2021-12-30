@@ -145,13 +145,10 @@ class ThemePostVC: UIViewController {
                     switch(response)
                     {
                     case .success(let driveData):
-                        
+                        print(driveData)
                         if let object = driveData as? TotalDrive {
-                            self.cellCount = object.totalCourse
-                                                    
-                            if let drive = object.drive as? [Drive] {
-                                self.selectedDriveList = drive
-                            }
+                            self.cellCount = object.drive.count
+                            self.selectedDriveList = object.drive
                             
                             self.tableView.reloadData()
                         }
