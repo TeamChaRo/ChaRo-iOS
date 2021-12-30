@@ -104,6 +104,16 @@ class MyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
         $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
+    private let noDataImage = UIImageView().then{
+        $0.image = UIImage(named: "no_img")
+    }
+    private let noDataLabel = UILabel().then{
+        $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n작성해보는 것은 어떠신가요?"
+        $0.textColor = UIColor.gray50
+        $0.font = UIFont.notoSansRegularFont(ofSize: 14)
+        $0.textAlignment = .center
+        $0.numberOfLines = 3
+    }
 
     
     //tabbarUI
@@ -163,7 +173,7 @@ class MyPageVC: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
         collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = .none
         collectionView.bounces = true
         return collectionView
     }()
@@ -174,7 +184,7 @@ class MyPageVC: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
         collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = .none
         collectionView.bounces = true
         return collectionView
     }()
@@ -185,7 +195,6 @@ class MyPageVC: UIViewController {
         setHeaderLayout()
         setTabbarLayout()
         setCollectionViewLayout()
-//        getMypageData()
         filterTableViewLayout()
         self.dismissDropDownWhenTappedAround()
     }
@@ -221,6 +230,32 @@ class MyPageVC: UIViewController {
         followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
         followNumButton.setTitle(String(userProfileData[0].following), for: .normal)
     }
+    
+    func isNoData(){
+        writeView.addSubviews([noDataImage, noDataLabel])
+        saveView.addSubviews([noDataImage, noDataLabel])
+        noDataImage.isHidden = true
+        noDataLabel.isHidden = true
+        noDataImage.snp.makeConstraints{
+            $0.top.leading.trailing.equalToSuperview().offset(0)
+            $0.width.equalTo(userWidth)
+            $0.height.equalTo(259)
+        }
+        noDataLabel.snp.makeConstraints{
+            $0.top.equalTo(noDataImage.snp.bottom).offset(19)
+            $0.leading.equalToSuperview().offset(71)
+            $0.trailing.equalToSuperview().offset(-71)
+            $0.height.equalTo(66)
+        }
+        if writenPostDriveData.isEmpty == true{
+            noDataImage.isHidden = false
+            noDataLabel.isHidden = false
+        }
+        else if savePostDriveData.isEmpty == true{
+            noDataImage.isHidden = false
+            noDataLabel.isHidden = false
+        }
+    }
 //MARK: Server
 //마이페이지 데이터 받아오는 함수
     func getMypageData(){
@@ -239,6 +274,7 @@ class MyPageVC: UIViewController {
                            self.setHeaderData()
                            self.writeCollectionView.reloadData()
                            self.saveCollectioinView.reloadData()
+                           self.isNoData()
                        }
                    case .requestErr(let message) :
                        print("requestERR")
