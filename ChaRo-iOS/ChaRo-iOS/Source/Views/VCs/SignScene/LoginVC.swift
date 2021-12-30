@@ -92,11 +92,13 @@ class LoginVC: UIViewController {
     
     
     @IBAction func findPwdButtonClicked(_ sender: UIButton) {
+        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: FindPasswordVC.identifier) as? FindPasswordVC else {
             return
         }
         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
