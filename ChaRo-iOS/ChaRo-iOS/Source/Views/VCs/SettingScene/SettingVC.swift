@@ -62,6 +62,9 @@ class SettingVC: UIViewController {
 
     }
 //MARK: Function
+    func isNotificationOn(){
+        
+    }
 //MARK: ServerFunction
 //MARK: LayoutFunction
     func setHeaderLayout(){
@@ -192,18 +195,24 @@ extension SettingVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTVC.identifier) as? SettingTVC else {return UITableViewCell()}
         var settingData = settingDataModel()
-        
+        //각섹션 별 파트입니다.
         switch indexPath.section{
+            //0 접근허용
         case 0:
             settingData = permissionModel[indexPath.row]
+            //1 마케팅 활용 및 광고 수신 동의
         case 1:
             settingData = permissionModel[2]
+            //2 계정
         case 2:
             settingData = accountModel[indexPath.row]
+            //3 정보
         case 3:
             settingData = infoInquiryModel[0]
+            //4 고객센터
         case 4:
             settingData = infoInquiryModel[1]
+            //5 약관
         case 5:
             settingData = termsModel[indexPath.row]
         default:
@@ -225,5 +234,5 @@ extension SettingVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    }
+}
 
