@@ -32,19 +32,19 @@ class SettingVC: UIViewController {
                       settingDataModel(titleString: "회원탈퇴", titleLabelColor: UIColor.mainOrange)]
 //MARK: Var
     //headerView
-    private let settingBackgroundView = UIView().then{
+    private let settingBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
-    private let headerTitleLabel = UILabel().then{
+    private let headerTitleLabel = UILabel().then {
         $0.text = "설정"
         $0.font = UIFont.notoSansRegularFont(ofSize: 17)
         $0.textColor = UIColor.black
         
     }
-    private let backButton = UIButton().then{
+    private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
     }
-    private let bottomView = UIView().then{
+    private let bottomView = UIView().then {
         $0.backgroundColor = UIColor.gray20
     }
     //tableView
@@ -62,38 +62,35 @@ class SettingVC: UIViewController {
 
     }
 //MARK: Function
-    func isNotificationOn(){
-        
-    }
 //MARK: ServerFunction
 //MARK: LayoutFunction
-    func setHeaderLayout(){
+    func setHeaderLayout() {
         let headerHeigth = userheight * 0.15
         self.view.addSubview(settingBackgroundView)
         settingBackgroundView.addSubviews([headerTitleLabel, backButton, bottomView])
         
-        settingBackgroundView.snp.makeConstraints{
+        settingBackgroundView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(headerHeigth)
         }
-        headerTitleLabel.snp.makeConstraints{
+        headerTitleLabel.snp.makeConstraints {
             $0.centerX.equalTo(settingBackgroundView)
             $0.bottom.equalToSuperview().offset(-25)
             $0.width.equalTo(32)
         }
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.width.height.equalTo(48)
             $0.leading.equalToSuperview().offset(0)
             $0.centerY.equalTo(headerTitleLabel)
         }
-        bottomView.snp.makeConstraints{
+        bottomView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
 
     }
     
-    func setTableViewLayout(){
+    func setTableViewLayout() {
         
         settingTableView.style
         self.view.addSubview(settingTableView)
@@ -103,7 +100,7 @@ class SettingVC: UIViewController {
         settingTableView.registerCustomXib(xibName: "SettingTVC")
         
         
-        settingTableView.snp.makeConstraints{
+        settingTableView.snp.makeConstraints {
             $0.top.equalTo(settingBackgroundView.snp.bottom).offset(0)
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
         }
@@ -115,15 +112,15 @@ class SettingVC: UIViewController {
 }
 
 
-extension SettingVC: UITableViewDelegate{
+extension SettingVC: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let bottomView = UIView().then{
+        let bottomView = UIView().then {
             $0.backgroundColor = UIColor.gray20
         }
-        let titleLabel = UILabel().then{
+        let titleLabel = UILabel().then {
             $0.text = ""
             $0.font = UIFont.notoSansRegularFont(ofSize: 12)
             $0.textColor = UIColor.gray50
@@ -133,17 +130,17 @@ extension SettingVC: UITableViewDelegate{
             $0.backgroundColor = UIColor.white
         }
         view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(18)
             $0.leading.equalToSuperview().offset(19)
             $0.width.equalTo(150)
         }
         view.addSubview(bottomView)
-        bottomView.snp.makeConstraints{
+        bottomView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
-        switch section{
+        switch section {
         case 0:
             titleLabel.text = "접근허용"
             bottomView.backgroundColor = UIColor.white
@@ -168,7 +165,7 @@ extension SettingVC: UITableViewDelegate{
         return 1
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView().then{
+        let view = UIView().then {
             $0.backgroundColor = UIColor.white
         }
         return view
@@ -176,7 +173,7 @@ extension SettingVC: UITableViewDelegate{
 }
     
     
-extension SettingVC: UITableViewDataSource{
+extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section{
         case 0:

@@ -14,21 +14,21 @@ class SettingTVC: UITableViewCell {
     
     static let identifier: String = "SettingTVC"
     
-    private let backGroundView = UIView().then{
+    private let backGroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
     
-    private let titleLabel = UILabel().then{
+    private let titleLabel = UILabel().then {
         $0.text = "adfsfsa"
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textColor = UIColor.black
         
     }
-    private let toggle = UISwitch().then{
+    private let toggle = UISwitch().then {
         $0.tintColor = UIColor.mainBlue
         $0.onTintColor = UIColor.mainBlue
     }
-    private let subLabel = UILabel().then{
+    private let subLabel = UILabel().then {
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textAlignment = .right
         $0.textColor = UIColor.black
@@ -36,12 +36,12 @@ class SettingTVC: UITableViewCell {
 
     //MARK: setData
     
-    func setData(isToggle: Bool, toggleData: Bool, isSubLabel: Bool, subLabelString: String, titleString: String, titleLabelColor: UIColor, subLabelColor: UIColor){
+    func setData(isToggle: Bool, toggleData: Bool, isSubLabel: Bool, subLabelString: String, titleString: String, titleLabelColor: UIColor, subLabelColor: UIColor) {
         addSubview(backGroundView)
         backGroundView.addSubview(titleLabel)
         
         //배경화면
-        backGroundView.snp.makeConstraints{
+        backGroundView.snp.makeConstraints {
             $0.leading.trailing.bottom.top.equalToSuperview().offset(0)
         }
         
@@ -50,14 +50,14 @@ class SettingTVC: UITableViewCell {
         titleLabel.text = titleString
         titleLabel.textColor = titleLabelColor
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.centerY.equalTo(backGroundView)
             $0.leading.equalToSuperview().offset(19)
             $0.width.equalTo(150)
         }
         
         //토글 존재시
-        if isToggle == true{
+        if isToggle == true {
             addSubview(toggle)
             toggle.isOn = toggleData
             toggle.snp.makeConstraints{
@@ -67,7 +67,7 @@ class SettingTVC: UITableViewCell {
         }
         
         //서브라벨 존재시
-        if isSubLabel == true{
+        if isSubLabel == true {
             addSubview(subLabel)
             subLabel.text = subLabelString
             subLabel.textColor = subLabelColor
