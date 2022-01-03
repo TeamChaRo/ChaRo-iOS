@@ -13,24 +13,24 @@ import CoreMIDI
 class SettingVC: UIViewController {
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
-    
-    var permissionModel = [settingDataModel(titleString: "알림", isToggle: true, toggleData: true),
-                           settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
-                           settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
-    
-    var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
-                        settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
-                        settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: UserDefaults.standard.string(forKey: "userId") ?? "ios@gamil.com", subLabelColor: UIColor.black)]
-    
-    var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
-                            settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
-    var termsModel = [settingDataModel(titleString: "개인정보 처리방침", titleLabelColor: UIColor.black),
-                      settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
-                      settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
-                      settingDataModel(titleString: "버전 정보", titleLabelColor: UIColor.gray30, isSubLabel: true, subLabelString: "1.0", subLabelColor: UIColor.gray30),
-                      settingDataModel(titleString: "로그아웃", titleLabelColor: UIColor.mainBlue),
-                      settingDataModel(titleString: "회원탈퇴", titleLabelColor: UIColor.mainOrange)]
 //MARK: Var
+        var permissionModel = [settingDataModel(titleString: "알림", isToggle: true, toggleData: true),
+                               settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
+                               settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
+        
+        var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
+                            settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
+                            settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: UserDefaults.standard.string(forKey: "userId") ?? "ios@gamil.com", subLabelColor: UIColor.black)]
+        
+        var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
+                                settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
+        var termsModel = [settingDataModel(titleString: "개인정보 처리방침", titleLabelColor: UIColor.black),
+                          settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
+                          settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
+                          settingDataModel(titleString: "버전 정보", titleLabelColor: UIColor.gray30, isSubLabel: true, subLabelString: "1.0", subLabelColor: UIColor.gray30),
+                          settingDataModel(titleString: "로그아웃", titleLabelColor: UIColor.mainBlue),
+                          settingDataModel(titleString: "회원탈퇴", titleLabelColor: UIColor.mainOrange)]
+    
     //headerView
     private let settingBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
