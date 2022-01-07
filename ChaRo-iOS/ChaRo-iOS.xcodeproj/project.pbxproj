@@ -54,6 +54,11 @@
 		36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */; };
 		36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */; };
 		36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */; };
+		36E445B3277CA160008E31BE /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E445B2277CA160008E31BE /* SettingVC.swift */; };
+		36E445B5277CA17E008E31BE /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36E445B4277CA17E008E31BE /* Setting.storyboard */; };
+		36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E445B6277CA1F3008E31BE /* SettingTVC.swift */; };
+		36E445B9277CA1F3008E31BE /* SettingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E445B7277CA1F3008E31BE /* SettingTVC.xib */; };
+		36E445BB277CD6A2008E31BE /* SettingViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */; };
 		36F3302926A2A97D009C0173 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 36F3302826A2A97D009C0173 /* loading.json */; };
 		36F8F6C127134D4800092338 /* NewHotFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F8F6C027134D4800092338 /* NewHotFilterView.swift */; };
 		36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */; };
@@ -185,6 +190,7 @@
 		70F5D7BB271D9DBC00FF9229 /* SocialJoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */; };
 		70F5D7BF271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */; };
 		8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */; };
+		DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
@@ -291,6 +297,11 @@
 		36D1E5FC269709F00079BD94 /* HomePostDetailCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePostDetailCVC.xib; sourceTree = "<group>"; };
 		36D1E5FF269739FD0079BD94 /* HotDropDownTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotDropDownTVC.swift; sourceTree = "<group>"; };
 		36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotDropDownTVC.xib; sourceTree = "<group>"; };
+		36E445B2277CA160008E31BE /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		36E445B4277CA17E008E31BE /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		36E445B6277CA1F3008E31BE /* SettingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTVC.swift; sourceTree = "<group>"; };
+		36E445B7277CA1F3008E31BE /* SettingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTVC.xib; sourceTree = "<group>"; };
+		36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewDataModel.swift; sourceTree = "<group>"; };
 		36F3302826A2A97D009C0173 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		36F8F6AE27133F8800092338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		36F8F6B92713444600092338 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
@@ -431,7 +442,7 @@
 		70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginJoinResponseDataModel.swift; sourceTree = "<group>"; };
 		83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DEDC4DFE60BBABC33F20E019 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
@@ -473,7 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3691C4F52744102B00A712C9 /* TMapSDK.framework in Frameworks */,
-				2929FDF79B3247F20B238EC8 /* Pods_ChaRo_iOS.framework in Frameworks */,
+				DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +539,7 @@
 		3610A8952693730700EFC794 /* TVC */ = {
 			isa = PBXGroup;
 			children = (
+				36E445AF277CA117008E31BE /* SettingScene */,
 				368EC8E52779C4690076BF5E /* FollowScene */,
 				3CAE51A026C2433900DB8A41 /* CreatePostScene */,
 				3CAE519826C2411F00DB8A41 /* HomeScene */,
@@ -575,6 +587,38 @@
 				36B69F822775DC6500FEEAAE /* FollowFollowing.storyboard */,
 			);
 			path = FollowScene;
+			sourceTree = "<group>";
+		};
+		36E445AE277CA102008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B2277CA160008E31BE /* SettingVC.swift */,
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
+		36E445AF277CA117008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B6277CA1F3008E31BE /* SettingTVC.swift */,
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
+		36E445B0277CA124008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B4277CA17E008E31BE /* Setting.storyboard */,
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
+		36E445B1277CA12F008E31BE /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+				36E445B7277CA1F3008E31BE /* SettingTVC.xib */,
+			);
+			path = SettingScene;
 			sourceTree = "<group>";
 		};
 		3C3AF5EB269024280099B684 /* Services */ = {
@@ -686,6 +730,7 @@
 			isa = PBXGroup;
 			children = (
 				368EC8EA2779C4960076BF5E /* FollowScene */,
+				36E445B1277CA12F008E31BE /* SettingScene */,
 				3CAE519F26C2431D00DB8A41 /* CreatePostScene */,
 				3CAE51A626C243F100DB8A41 /* HomeScene */,
 				3CAE51A526C243BD00DB8A41 /* PostDetailScene */,
@@ -699,6 +744,7 @@
 			isa = PBXGroup;
 			children = (
 				36B69F812775DC3C00FEEAAE /* FollowScene */,
+				36E445B0277CA124008E31BE /* SettingScene */,
 				3CAE51BC26C2474000DB8A41 /* CreatePostScene */,
 				3CAE51BD26C2478300DB8A41 /* HomeScene */,
 				3CAE51BE26C249FE00DB8A41 /* MyPageScene */,
@@ -809,6 +855,7 @@
 				70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */,
 				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
 				368EC8ED277A16700076BF5E /* GetFollowDataModel.swift */,
+				36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -817,6 +864,7 @@
 			isa = PBXGroup;
 			children = (
 				36B69F7E2775DC0D00FEEAAE /* FollowScene */,
+				36E445AE277CA102008E31BE /* SettingScene */,
 				3CAE51A826C2442E00DB8A41 /* CreatePostScene */,
 				3CAE51B326C2453400DB8A41 /* HomeScene */,
 				3CAE51B026C244F900DB8A41 /* MyPageScene */,
@@ -1322,7 +1370,7 @@
 			isa = PBXGroup;
 			children = (
 				A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */,
-				DEDC4DFE60BBABC33F20E019 /* Pods_ChaRo_iOS.framework */,
+				D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1459,6 +1507,7 @@
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
 				70876CD0275E08EB00096C51 /* GoogleService-Info.plist in Resources */,
+				36E445B5277CA17E008E31BE /* Setting.storyboard in Resources */,
 				36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */,
 				3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */,
 				70A37C6026F07BB1006CCEA9 /* Join.storyboard in Resources */,
@@ -1494,6 +1543,7 @@
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
 				F4CC1B9A269D3E67009A0C01 /* CreatePostCourseTVC.xib in Resources */,
 				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
+				36E445B9277CA1F3008E31BE /* SettingTVC.xib in Resources */,
 				F42DA8102694D4C5003DA0DC /* PostCourseThemeTVC.xib in Resources */,
 				F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */,
 				3C86FAA52694C7C6009370CD /* AddressButtonCell.xib in Resources */,
@@ -1605,6 +1655,7 @@
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
 				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* UITableView+.swift in Sources */,
+				36E445BB277CD6A2008E31BE /* SettingViewDataModel.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* UIColor+.swift in Sources */,
 				F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */,
 				7062C83D270C42FE00C1CD2E /* JoinProfileView.swift in Sources */,
@@ -1680,6 +1731,7 @@
 				3C117E1E269F45D5005F4646 /* PostResultHeaderCVC.swift in Sources */,
 				7062C82A2706FAA300C1CD2E /* JoinTitleLabel.swift in Sources */,
 				7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */,
+				36E445B3277CA160008E31BE /* SettingVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */,
 				368EC8EC277A15B20076BF5E /* GetFollowDataService.swift in Sources */,
@@ -1718,6 +1770,7 @@
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				7062C8262703194300C1CD2E /* InputTextField.swift in Sources */,
 				36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */,
+				36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */,
 				362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */,
 				F4CC1AE92697570A009A0C01 /* PostPathMapTVC.swift in Sources */,
 				703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */,
