@@ -18,7 +18,8 @@ class MyPageVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
-    var isLogin: Bool = UserDefaults.standard.bool(forKey: "isLogin") ?? false
+//    var isLogin: Bool = UserDefaults.standard.bool(forKey: "isLogin") ?? true
+    var isLogin: Bool = false
     
     private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
@@ -106,10 +107,10 @@ class MyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
         $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
-    private let noWritenDataImage = UIImageView().then{
+    private let noWritenDataImageView = UIImageView().then{
         $0.image = UIImage(named: "no_img")
     }
-    private let noSaveDataImage = UIImageView().then{
+    private let noSaveDataImageView = UIImageView().then{
         $0.image = UIImage(named: "no_img")
     }
     private let noWritenDataLabel = UILabel().then{
@@ -251,42 +252,42 @@ class MyPageVC: UIViewController {
     }
     
     func isNoData(){
-        saveView.addSubviews([noSaveDataImage, noSaveDataLabel])
-        writeView.addSubviews([noWritenDataImage, noWritenDataLabel])
+        saveView.addSubviews([noSaveDataImageView, noSaveDataLabel])
+        writeView.addSubviews([noWritenDataImageView, noWritenDataLabel])
         
-        noSaveDataImage.isHidden = true
+        noSaveDataImageView.isHidden = true
         noSaveDataLabel.isHidden = true
-        noWritenDataImage.isHidden = true
+        noWritenDataImageView.isHidden = true
         noWritenDataLabel.isHidden = true
         
-        noSaveDataImage.snp.makeConstraints{
+        noSaveDataImageView.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
         }
         noSaveDataLabel.snp.makeConstraints{
-            $0.top.equalTo(noSaveDataImage.snp.bottom).offset(19)
+            $0.top.equalTo(noSaveDataImageView.snp.bottom).offset(19)
             $0.leading.equalToSuperview().offset(71)
             $0.trailing.equalToSuperview().offset(-71)
             $0.height.equalTo(66)
         }
-        noWritenDataImage.snp.makeConstraints{
+        noWritenDataImageView.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
         }
         noWritenDataLabel.snp.makeConstraints{
-            $0.top.equalTo(noWritenDataImage.snp.bottom).offset(19)
+            $0.top.equalTo(noWritenDataImageView.snp.bottom).offset(19)
             $0.leading.equalToSuperview().offset(71)
             $0.trailing.equalToSuperview().offset(-71)
             $0.height.equalTo(66)
         }
         if writenPostDriveData.isEmpty == true{
-            noWritenDataImage.isHidden = false
+            noWritenDataImageView.isHidden = false
             noWritenDataLabel.isHidden = false
         }
         if savePostDriveData.isEmpty == true{
-            noSaveDataImage.isHidden = false
+            noSaveDataImageView.isHidden = false
             noSaveDataLabel.isHidden = false
         }
     }

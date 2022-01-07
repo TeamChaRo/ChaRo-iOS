@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2929FDF79B3247F20B238EC8 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDC4DFE60BBABC33F20E019 /* Pods_ChaRo_iOS.framework */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		36071676269F9AE10042256B /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36071675269F9AE10042256B /* Notification.storyboard */; };
@@ -430,6 +431,7 @@
 		70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginJoinResponseDataModel.swift; sourceTree = "<group>"; };
 		83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEDC4DFE60BBABC33F20E019 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVC.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
@@ -471,7 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3691C4F52744102B00A712C9 /* TMapSDK.framework in Frameworks */,
-				7139DCFBB8D0555166AED750 /* Pods_ChaRo_iOS.framework in Frameworks */,
+				2929FDF79B3247F20B238EC8 /* Pods_ChaRo_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,8 +1321,8 @@
 		5871AE65ECA530CBED32CC7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				26574A164B0B3DB6B6CF4C31 /* Pods_ChaRo_iOS.framework */,
 				A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */,
+				DEDC4DFE60BBABC33F20E019 /* Pods_ChaRo_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1887,7 +1889,7 @@
 		};
 		3C71FEB826881DAB007E8EAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE8A84E6F142F5166DD69A6A /* Pods-ChaRo-iOS.debug.xcconfig */;
+			baseConfigurationReference = 6EAAA0587FAF0BFEB459D9B7 /* Pods-ChaRo-iOS.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1919,6 +1921,7 @@
 		};
 		3C71FEB926881DAB007E8EAD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
