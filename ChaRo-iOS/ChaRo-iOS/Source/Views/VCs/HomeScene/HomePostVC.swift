@@ -159,7 +159,7 @@ extension HomePostVC: UICollectionViewDelegate{
         
         cell.clickedPostCell = { postid in
             let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-            let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+            let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
             
             nextVC.setPostId(id: postid)
             self.navigationController?.pushViewController(nextVC, animated: true)
@@ -352,7 +352,7 @@ extension HomePostVC: PostIdDelegate {
         print("이거임 ~~~~\(data)")
         
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
         
         nextVC.setPostId(id: data)
         navigationController?.pushViewController(nextVC, animated: true)
@@ -360,7 +360,7 @@ extension HomePostVC: PostIdDelegate {
     
     func sendPostDriveElement(data: DriveElement?) {
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
         nextVC.setAdditionalDataOfPost(data: data)
         nextVC.modalPresentationStyle = .currentContext
         tabBarController?.present(nextVC, animated: true, completion: nil)

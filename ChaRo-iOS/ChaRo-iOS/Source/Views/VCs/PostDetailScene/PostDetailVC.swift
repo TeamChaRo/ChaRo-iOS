@@ -10,7 +10,6 @@ import Then
 
 class PostDetailVC: UIViewController {
 
-    static let identifier = "PostDetailVC"
     private var isAuthor = false
     private var isEditingMode = false
     private var tableView = UITableView()
@@ -43,6 +42,7 @@ class PostDetailVC: UIViewController {
     private lazy var backButton = LeftBackButton(toPop: self, isModal: true)
     private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
                                                             color: .mainBlack)
+    private var bottomView = PostDetailBottomView()
     private let separateLineView = UIView()
     private var modifyButton = UIButton()
     private var heartButton = UIButton()
@@ -182,10 +182,17 @@ extension PostDetailVC{
     
     func setTableViewConstraints(){
         if postDetailData != nil{
+            view.addSubview(bottomView)
+            bottomView.snp.makeConstraints{
+                $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+                $0.height.equalTo(54)
+            }
+            
             view.addSubview(tableView)
             tableView.snp.makeConstraints{
                 $0.top.equalTo(navigationView.snp.bottom).offset(5)
-                $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                $0.bottom.equalTo(bottomView.snp.top)
             }
         }
     }
