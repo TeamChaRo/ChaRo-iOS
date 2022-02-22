@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class PostDetailBottomView: UIView{
     
@@ -45,7 +46,7 @@ class PostDetailBottomView: UIView{
         likeButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(7)
             $0.leading.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(5)
+            $0.height.equalTo(42)
         }
         
         likeLabel.snp.makeConstraints{
@@ -56,14 +57,23 @@ class PostDetailBottomView: UIView{
         shareButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(7)
             $0.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(5)
+            $0.height.equalTo(42)
         }
         
         scrapButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(7)
             $0.trailing.equalTo(shareButton.snp.leading).offset(-14)
-            $0.bottom.equalToSuperview().inset(5)
+            $0.height.equalTo(42)
         }
+        drawBackgroundShadow()
     }
+    
+    private func drawBackgroundShadow(){
+        self.backgroundColor = .white
+        self.layer.shadowOffset = CGSize(width: -1, height: -1)
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowRadius = 5
+    }
+    
     
 }
