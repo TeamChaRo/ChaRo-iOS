@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "backgroundWhite.png",
+      "filename" : "bigsave5_inactive.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "backgroundWhite@2x.png",
+      "filename" : "bigsave5_inactive@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "backgroundWhite@3x.png",
+      "filename" : "bigsave5_inactive@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
