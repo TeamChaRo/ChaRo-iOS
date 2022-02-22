@@ -10,13 +10,12 @@ import UIKit
 enum ImageLiterals {
     //MARK: - icon
     static var icHeartActive: UIImage{ .load(name: "icHeartActive") }
-    static var icHeartInactive: UIImage{ .load(name: "icHeartInactive") }
+    static var icHeartInactive: UIImage{ .load(name: "bigheartInactive") }
     static var icScrapActive: UIImage{ .load(name: "icSaveActive") }
-    static var icScrapInactive: UIImage{ .load(name: "icSaveInactive") }
+    static var icScrapInactive: UIImage{ .load(name: "bigsaveInactive") }
     static var icShare: UIImage{ .load(name: "icShare") }
     
     //MARK: - image
-    
 }
 
 extension UIImage {
