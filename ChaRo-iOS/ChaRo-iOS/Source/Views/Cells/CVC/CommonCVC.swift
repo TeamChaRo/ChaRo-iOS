@@ -90,7 +90,7 @@ class CommonCVC: UICollectionViewCell {
         guard let url = URL(string: image) else { return }
         self.imageView.kf.indicatorType = .activity
         self.imageView.kf.setImage(with: url, options: [.forceTransition, .keepCurrentImageWhileLoading])
-        
+                                
      
 
         imageView.layer.cornerRadius = 10

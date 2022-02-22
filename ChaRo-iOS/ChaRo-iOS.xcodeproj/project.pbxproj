@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2929FDF79B3247F20B238EC8 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDC4DFE60BBABC33F20E019 /* Pods_ChaRo_iOS.framework */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		36071676269F9AE10042256B /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36071675269F9AE10042256B /* Notification.storyboard */; };
@@ -528,6 +527,7 @@
 				3CAE519D26C241D300DB8A41 /* MyPageScene */,
 				3CAE519726C240E100DB8A41 /* OnBoardScene */,
 				3CAE519C26C241B500DB8A41 /* PostSearchScene */,
+				36A2FECE278F206800B1D87A /* New Group */,
 				3610A8912693730700EFC794 /* CommonCVC.swift */,
 				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
 				7084948126A23AB7001B3C2B /* CollectionViewFooter.swift */,
@@ -571,6 +571,13 @@
 				368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */,
 			);
 			path = FollowScene;
+			sourceTree = "<group>";
+		};
+		36A2FECE278F206800B1D87A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		36B69F7E2775DC0D00FEEAAE /* FollowScene */ = {
