@@ -527,6 +527,7 @@
 				3CAE519D26C241D300DB8A41 /* MyPageScene */,
 				3CAE519726C240E100DB8A41 /* OnBoardScene */,
 				3CAE519C26C241B500DB8A41 /* PostSearchScene */,
+				36A2FECE278F206800B1D87A /* New Group */,
 				3610A8912693730700EFC794 /* CommonCVC.swift */,
 				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
 				7084948126A23AB7001B3C2B /* CollectionViewFooter.swift */,
@@ -570,6 +571,13 @@
 				368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */,
 			);
 			path = FollowScene;
+			sourceTree = "<group>";
+		};
+		36A2FECE278F206800B1D87A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		36B69F7E2775DC0D00FEEAAE /* FollowScene */ = {

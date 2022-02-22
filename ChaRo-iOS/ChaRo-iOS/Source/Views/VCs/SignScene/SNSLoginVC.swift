@@ -353,6 +353,7 @@ class SNSLoginVC: UIViewController {
     
     
     @objc func goToEmailLoginVC() {
+        print(self.navigationController)
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: LoginVC.identifier)
         self.navigationController?.pushViewController(vc, animated: true)
@@ -378,7 +379,7 @@ class SNSLoginVC: UIViewController {
     
     
     private func configureUI() {
-        
+        view.backgroundColor = UIColor.white
         view.addSubviews([lookAroundBtn,
                           logoImageView,
                           logoLabel,
