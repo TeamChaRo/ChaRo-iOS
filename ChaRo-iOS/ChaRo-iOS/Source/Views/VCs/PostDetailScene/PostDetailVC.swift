@@ -7,9 +7,11 @@
 
 import UIKit
 import Then
+import RxSwift
 
 class PostDetailVC: UIViewController {
-
+    private let disposeBag = DisposeBag()
+    
     private var isAuthor = false
     private var isEditingMode = false
     private var tableView = UITableView()
@@ -24,13 +26,13 @@ class PostDetailVC: UIViewController {
     
     private var isFavorite: Bool? {
         didSet {
-            isFavorite! ? heartButton.setImage(UIImage(named: "icHeartActive"), for: .normal) : heartButton.setImage(UIImage(named: "icHeartInactive"), for: .normal)
+            bottomView.likeButton.isSelected = isFavorite! ? true : false
         }
     }
     
     private var isStored: Bool? {
         didSet {
-            isStored! ? scrapButton.setImage(UIImage(named: "save_active"), for: .normal) : scrapButton.setImage(UIImage(named: "icSave5Inactive"), for: .normal)
+            bottomView.likeButton.isSelected = isStored! ? true : false
         }
     }
     
@@ -45,8 +47,6 @@ class PostDetailVC: UIViewController {
     private var bottomView = PostDetailBottomView()
     private let separateLineView = UIView()
     private var modifyButton = UIButton()
-    private var heartButton = UIButton()
-    private var scrapButton = UIButton()
     private let saveButton = UIButton()
     
     override func viewDidLoad() {
@@ -77,7 +77,6 @@ class PostDetailVC: UIViewController {
         additionalDataOfPost = data
         print("넘어온 데이터 = \(additionalDataOfPost)")
     }
-    
     
     
     private func checkModeForSendingServer(){
@@ -116,30 +115,15 @@ class PostDetailVC: UIViewController {
 //MARK: Button Action
 extension PostDetailVC{
     
-    //하트 버튼 눌렀을 때 (좋아요)서버 통신
-    @objc func clickedToHeartButton(){
-        print("하트 버튼")
-        requestPostLike()
-    }
-    
-    //스크랩 버튼 눌렀을 때 (저장하기) 서버통신
-    @objc func clickedToScrapButton(){
-        print("스크랩 버튼")
-        requestPostScrap()
-    }
-   
     //등록 버튼 눌렀을 때 post 서버 통신
     @objc func clickedToSaveButton(){
         print("등록 버튼")
         makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?"){ _ in
-            //게시물 작성하기 post 통신 해야함
             self.postCreatePost()
             self.dismiss(animated: true, completion: nil)
         }
     }
     
-    
-    // ... 버튼 눌렀을 때 actionSheet 뜨도록 수정
     @objc func registActionSheet(){
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -182,32 +166,26 @@ extension PostDetailVC{
     
     func setTableViewConstraints(){
         if postDetailData != nil{
-            view.addSubview(bottomView)
-            bottomView.snp.makeConstraints{
-                $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-                $0.height.equalTo(54)
-            }
-            
             view.addSubview(tableView)
             tableView.snp.makeConstraints{
                 $0.top.equalTo(navigationView.snp.bottom).offset(5)
                 $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-                $0.bottom.equalTo(bottomView.snp.top)
+                $0.bottom.equalToSuperview().inset(88)
             }
         }
     }
 
     private func setNavigaitionViewConstraints(){
-        view.add(navigationView){
-            $0.snp.makeConstraints{
-                $0.top.leading.trailing.equalTo(self.view)
-                if UIScreen.hasNotch{
-                    $0.height.equalTo(UIScreen.getNotchHeight() + 58)
-                }else{
-                    $0.height.equalTo(93)
-                }
+        view.addSubview(navigationView)
+        navigationView.snp.makeConstraints{
+            $0.top.leading.trailing.equalTo(self.view)
+            if UIScreen.hasNotch{
+                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            }else{
+                $0.height.equalTo(93)
             }
         }
+        
         view.add(separateLineView){
             $0.backgroundColor = .gray20
             $0.snp.makeConstraints{
@@ -228,7 +206,6 @@ extension PostDetailVC{
             }
         }else{
             navigationTitleLabel.text = "구경하기"
-            setNavigationViewInWatchMode()
         }
     }
     
@@ -267,25 +244,6 @@ extension PostDetailVC{
             $0.addTarget(self, action: #selector(self.registActionSheet), for: .touchUpInside)
             $0.snp.makeConstraints{
                 $0.trailing.equalToSuperview().offset(-11)
-                $0.centerY.equalTo(self.backButton.snp.centerY)
-            }
-        }
-    }
-    
-    func setNavigationViewInWatchMode(){
-        navigationView.add(scrapButton){
-            $0.setBackgroundImage(UIImage(named: "icSave5Inactive"), for: .normal)
-            $0.addTarget(self, action: #selector(self.clickedToScrapButton), for: .touchUpInside)
-            $0.snp.makeConstraints{
-                $0.trailing.equalToSuperview().offset(-11)
-                $0.centerY.equalTo(self.backButton.snp.centerY)
-            }
-        }
-        navigationView.add(heartButton){
-            $0.setBackgroundImage(UIImage(named: "icHeartInactive"), for: .normal)
-            $0.addTarget(self, action: #selector(self.clickedToHeartButton), for: .touchUpInside)
-            $0.snp.makeConstraints{
-                $0.trailing.equalTo(self.scrapButton.snp.leading)
                 $0.centerY.equalTo(self.backButton.snp.centerY)
             }
         }
@@ -340,6 +298,38 @@ extension PostDetailVC{
     //        writedPostData?.course = newAddressList
     //    }
 
+}
+
+//MARK: - Bottom View
+extension PostDetailVC {
+    private func configureBottomView(){
+        view.addSubview(bottomView)
+        bottomView.snp.makeConstraints{
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(88)
+        }
+        bottomView.likeLabel.text = "\(postDetailData?.likesCount ?? 0)명이 좋아해요"
+        bindToBottomView()
+    }
+    
+    private func bindToBottomView(){
+        bottomView.likeButton.rx.tap
+            .bind{ [weak self] _ in
+                self?.bottomView.likeButton.isSelected.toggle()
+                self?.requestPostLike()
+            }.disposed(by: disposeBag)
+        
+        bottomView.scrapButton.rx.tap
+            .bind{ [weak self] _ in
+                self?.bottomView.scrapButton.isSelected.toggle()
+                self?.requestPostScrap()
+            }.disposed(by: disposeBag)
+        
+        bottomView.shareButton.rx.tap
+            .bind{ _ in
+                print("shareButton 눌림")
+            }.disposed(by: disposeBag)
+    }
 }
 
 
@@ -528,6 +518,7 @@ extension PostDetailVC {
         configureTableView()
         setNavigaitionViewConstraints()
         setTableViewConstraints()
+        configureBottomView()
     }
     
     func getPostDetailData(){
@@ -547,7 +538,6 @@ extension PostDetailVC {
             case .networkFail:
                 print("networkFail")
             }
-            
         }
     }
     
