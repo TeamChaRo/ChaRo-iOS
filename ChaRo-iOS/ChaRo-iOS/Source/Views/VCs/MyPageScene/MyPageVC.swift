@@ -394,9 +394,14 @@ class MyPageVC: UIViewController {
         }
      }
     @objc func nameLabelClicked(sender: UITapGestureRecognizer) {
-        guard let LoginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: LoginVC.identifier) as? LoginVC else {return}
+        guard let LoginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: SNSLoginVC.identifier)
+                as? SNSLoginVC else {return}
+        let navController = UINavigationController(rootViewController: LoginVC)
+        
         if isLogin == false{
-            self.navigationController?.pushViewController(LoginVC, animated: true)
+//요 녀석은 일단 이 뷰에 들어가면 빠져나올수가 없어서 잠시 빼놓겠습니다!
+//            LoginVC.modalPresentationStyle = .overFullScreen
+            self.present(navController, animated: true, completion: nil)
         }
     }
 
