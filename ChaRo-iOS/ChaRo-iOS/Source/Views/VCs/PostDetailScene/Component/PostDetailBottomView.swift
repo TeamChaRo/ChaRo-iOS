@@ -26,6 +26,7 @@ class PostDetailBottomView: UIView{
     var likeLabel = UILabel().then{
         $0.font = .notoSansRegularFont(ofSize: 12)
         $0.textColor = .gray30
+        $0.text = "18명이 좋아합니다"
     }
     
     override init(frame: CGRect){
@@ -60,7 +61,7 @@ class PostDetailBottomView: UIView{
         
         scrapButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(7)
-            $0.trailing.equalTo(shareButton.snp.leading).inset(14)
+            $0.trailing.equalTo(shareButton.snp.leading).offset(-14)
             $0.bottom.equalToSuperview().inset(5)
         }
     }
