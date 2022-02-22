@@ -217,11 +217,11 @@ class MyPageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if isLogin == true{
             getMypageData()
+            setEmptyDataLayout()
         }
         else{
-            isNoData()
-            noSaveDataLabel.isHidden = true
-            noWritenDataLabel.isHidden = true
+            setEmptyDataLayout()
+            isEmptyData()
         }
     }
     
@@ -252,8 +252,7 @@ class MyPageVC: UIViewController {
         followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
         followNumButton.setTitle(String(userProfileData[0].following), for: .normal)
     }
-    
-    func isNoData() {
+    func setEmptyDataLayout() {
         saveView.addSubviews([noSaveDataImageView, noSaveDataLabel])
         writeView.addSubviews([noWritenDataImageView, noWritenDataLabel])
         
@@ -284,6 +283,8 @@ class MyPageVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-71)
             $0.height.equalTo(66)
         }
+    }
+    func isEmptyData() {
         if writenPostDriveData.isEmpty == true {
             noWritenDataImageView.isHidden = false
             noWritenDataLabel.isHidden = false
@@ -311,7 +312,7 @@ class MyPageVC: UIViewController {
                            self.setHeaderData()
                            self.writeCollectionView.reloadData()
                            self.saveCollectioinView.reloadData()
-                           self.isNoData()
+                           self.isEmptyData()
                        }
                    case .requestErr(let message) :
                        print("requestERR")
