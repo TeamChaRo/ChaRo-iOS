@@ -38,7 +38,7 @@ class SNSLoginVC: UIViewController {
     }
     
     let logoImageView = UIImageView().then {
-        $0.image = UIImage(named: "logo")
+        $0.image = ImageLiterals.icCharoLogo
     }
     
     let logoLabel = UILabel().then {

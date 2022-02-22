@@ -54,7 +54,7 @@ class OtherMyPageVC: UIViewController {
     }
     
     private let isFollowButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
         $0.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
     }
     
@@ -97,7 +97,7 @@ class OtherMyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
     }
     private let backButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "icBack1"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icBackWhite, for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     //컬렉션 뷰
@@ -327,7 +327,7 @@ class OtherMyPageVC: UIViewController {
                        if let response = data as? DoFollowDataModel{
                            self.isFollow = response.data.isFollow
                            if self.isFollow == false{
-                               self.isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+                               self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
                            }
                            else{
                                self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
@@ -393,7 +393,7 @@ class OtherMyPageVC: UIViewController {
                 if let response = data as? DoFollowDataModel{
                     self.isFollow = response.data.isFollow
                     if self.isFollow == false{
-                        self.isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+                        self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
                         self.getMypageData()
                     }
                     else{

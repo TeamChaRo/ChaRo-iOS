@@ -37,7 +37,7 @@ class FollowFollowingTVC: UITableViewCell {
         $0.textColor = UIColor.black
     }
     private let followButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "FollowButtonImage"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icFollowButtonGray, for: .normal)
         $0.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
     }
 //MARK: awakeFromNib
@@ -57,7 +57,7 @@ class FollowFollowingTVC: UITableViewCell {
             followButton.setBackgroundImage(UIImage(named: "followingButtonImage"), for: .normal)
         }
         else{
-            followButton.setBackgroundImage(UIImage(named: "FollowButtonImage"), for: .normal)
+            followButton.setBackgroundImage(ImageLiterals.icFollowButtonGray, for: .normal)
         }
     }
     
