@@ -10,6 +10,7 @@
 		330B8A70274C7B89007FB132 /* ThemePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */; };
 		339DEED4277A3E8B002749B2 /* TransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED3277A3E8B002749B2 /* TransitionVC.swift */; };
 		339DEED6277A44C3002749B2 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED5277A44C3002749B2 /* PresentationController.swift */; };
+		33E1E19427C7CE370057C066 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1E19327C7CE370057C066 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		36071676269F9AE10042256B /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36071675269F9AE10042256B /* Notification.storyboard */; };
@@ -220,6 +221,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				33E1E19427C7CE370057C066 /* TMapSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +233,7 @@
 		336D2CFC26E72F0900E64042 /* ChaRo-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChaRo-iOS.entitlements"; sourceTree = "<group>"; };
 		339DEED3277A3E8B002749B2 /* TransitionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionVC.swift; sourceTree = "<group>"; };
 		339DEED5277A44C3002749B2 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		33E1E19327C7CE370057C066 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
 		36071675269F9AE10042256B /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
@@ -539,6 +542,7 @@
 		3C71FE9A26881DAA007E8EAD = {
 			isa = PBXGroup;
 			children = (
+				33E1E19327C7CE370057C066 /* TMapSDK.framework */,
 				3C71FEA526881DAA007E8EAD /* ChaRo-iOS */,
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
