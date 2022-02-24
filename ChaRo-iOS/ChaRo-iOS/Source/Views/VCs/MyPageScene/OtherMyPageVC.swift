@@ -11,8 +11,8 @@ import Then
 
 class OtherMyPageVC: UIViewController {
     
-    var userProfileData: [UserInformation] = []
-    var writenPostDriveData: [MyPageDrive] = []
+    private var userProfileData: [UserInformation] = []
+    private var writenPostDriveData: [MyPageDrive] = []
     
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
@@ -83,7 +83,7 @@ class OtherMyPageVC: UIViewController {
     
     private let followButton = UIButton().then{
         $0.backgroundColor = .none
-        $0.setTitle("팔로우", for: .normal)
+        $0.setTitle("팔로잉", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
@@ -96,7 +96,17 @@ class OtherMyPageVC: UIViewController {
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
     }
+    private let backButton = UIButton().then{
+        $0.setBackgroundImage(UIImage(named: "icBack1"), for: .normal)
+        $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
+    }
     //컬렉션 뷰
+    private let collectionBackgroundView = UIView().then{
+        $0.backgroundColor = UIColor.white
+    }
+    private let noDataImageView = UIImageView().then{
+        $0.image = UIImage(named: "no_img")
+    }
     private var collectionview: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
@@ -104,7 +114,7 @@ class OtherMyPageVC: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
         collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = .none
         collectionView.bounces = true
         return collectionView
     }()
@@ -125,26 +135,31 @@ class OtherMyPageVC: UIViewController {
     }
     
     
-    
     //MARK: setUI
     
     func setCollectionviewLayout(){
-        self.view.addSubview(collectionview)
+        self.view.addSubview(collectionBackgroundView)
+        collectionBackgroundView.addSubview(collectionview)
         collectionview.delegate = self
         collectionview.dataSource = self
         
         collectionview.registerCustomXib(xibName: "MyPagePostCVC")
         collectionview.registerCustomXib(xibName: "HomePostDetailCVC")
         
-        collectionview.snp.makeConstraints{
+        collectionBackgroundView.snp.makeConstraints {
             $0.top.equalTo(headerBackgroundView.snp.bottom).offset(0)
+            $0.leading.trailing.bottom.equalToSuperview().offset(0)
+        }
+        
+        collectionview.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(0)
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
         }
     }
     
     func setHeaderViewLayout(){
         self.view.addSubview(headerBackgroundView)
-        headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton])
+        headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton, backButton])
         
         let headerViewHeight = userheight * 0.27
         
@@ -204,6 +219,12 @@ class OtherMyPageVC: UIViewController {
             $0.centerY.equalTo(followButton)
             $0.leading.equalTo(followButton.snp.trailing).offset(3)
             $0.width.equalTo(25)
+        }
+        //뒤로가기 버튼
+        backButton.snp.makeConstraints{
+            $0.width.height.equalTo(48)
+            $0.leading.equalToSuperview().offset(0)
+            $0.centerY.equalTo(headerTitleLabel)
         }
     
     }
@@ -272,16 +293,33 @@ class OtherMyPageVC: UIViewController {
         followerNumButton.setTitle(String(followerNum), for: .normal)
         followNumButton.setTitle(String(followingNum), for: .normal)
     }
-    
+    func isNoData(){
+        collectionBackgroundView.addSubview(noDataImageView)
+        
+        noDataImageView.isHidden = true
+        
+        noDataImageView.snp.makeConstraints{
+            $0.top.leading.trailing.equalToSuperview().offset(0)
+            $0.width.equalTo(userWidth)
+            $0.height.equalTo(259)
+        }
+      
+        if writenPostDriveData.isEmpty == true{
+            noDataImageView.isHidden = false
+        }
+      
+    }
     
     @objc private func doFollowButtonClicked(_ sender: UIButton){
         postFollowUser()
+   }
+    @objc private func backButtonClicked(_ sender: UIButton){
+        self.navigationController?.popViewController(animated: true)
    }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
         func getMypageData(){
-            print(updateFollowNum, "adsf")
             GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
             GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                        switch response
@@ -295,6 +333,11 @@ class OtherMyPageVC: UIViewController {
                                self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
                                if self.updateFollowNum == false{self.collectionview.reloadData()}
                                self.setHeaderData()
+                               
+                               if self.writenPostDriveData.isEmpty == true{
+                                   self.isNoData()
+                                   
+                               }
                            }
                        case .requestErr(let message) :
                            print("requestERR")
@@ -343,7 +386,7 @@ class OtherMyPageVC: UIViewController {
                    switch response
                    {
                    case .success(let data) :
-                       if let response = data as? MypageInpinityModel{
+                       if let response = data as? MypageInfinityModel{
                            if response.data.lastID == 0{
                                self.isLast = true
                                self.delegate?.endIndicator()
@@ -411,7 +454,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
         var cellCount = 0
         
         if(writenPostDriveData.count == 0){
-            cellCount = 1
+            cellCount = 0
         }
         else{
             cellCount = writenPostDriveData.count + 1

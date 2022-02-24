@@ -116,12 +116,10 @@ iOSInjectionProject/
 
 #피드백을 위해 잠시 깃에 올림
 #Delete TmapSDK 
-*/TMapSDK.framework
+#*/TMapSDK.framework
 
 #Delete privacy file
 #*/MapService.swift 
 #./ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
 #ChaRo-iOS/ChaRo-iOS/Source/Service/MapService.swift
 
-#delete Podfile.lock
-ChaRo-iOS/Podfile.lock

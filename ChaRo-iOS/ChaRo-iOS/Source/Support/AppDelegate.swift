@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // [END register_for_notifications]
-        KakaoSDKCommon.initSDK(appKey: "fe470f9e3a4348f2b8dad52d2014efcc")
+        KakaoSDK.initSDK(appKey: "fe470f9e3a4348f2b8dad52d2014efcc")
         return true
     }
     
