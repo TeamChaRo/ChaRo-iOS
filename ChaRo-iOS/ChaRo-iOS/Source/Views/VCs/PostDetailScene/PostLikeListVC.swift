@@ -5,4 +5,149 @@
 //  Created by 장혜령 on 2022/03/02.
 //
 
-import Foundation
+import UIKit
+import RxSwift
+
+class PostLikeListVC: UIViewController{
+    
+    private let disposeBag = DisposeBag()
+    private let viewModel = PostLikeListViewModel()
+    private let viewModelInput = PostLikeListViewModel.Input()
+    
+    
+    //MARK: - Properties
+    private let backgroundView = UIView().then{
+        $0.backgroundColor = .mainBlack.withAlphaComponent(0.8)
+    }
+    
+    private let containerView = UIView().then{
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 15
+        $0.clipsToBounds = true
+    }
+    
+    private lazy var tableView = UITableView().then{
+        $0.registerCustomXib(xibName: FollowFollowingTVC.className)
+    }
+    
+    private lazy var xmarkButton = XmarkDismissButton(toDismiss: self)
+    private let titleLabel = UILabel().then{
+        $0.text = "좋아요"
+        $0.font = .notoSansMediumFont(ofSize: 17)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupConstraints()
+        configureUI()
+        setupPanGesture()
+        bindViewModel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animateShowDimmedView()
+        animatePresentContainer()
+    }
+    
+    private func setupConstraints(){
+        view.addSubviews([backgroundView, containerView])
+        backgroundView.snp.makeConstraints{
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints{
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(viewModel.defaultHeight)
+        }
+        
+        containerView.addSubviews([xmarkButton, titleLabel, tableView])
+        xmarkButton.snp.makeConstraints{
+            $0.top.leading.equalToSuperview().inset(7)
+            $0.width.height.equalTo(48)
+        }
+        
+        titleLabel.snp.makeConstraints{
+            $0.top.equalToSuperview().inset(19)
+            $0.centerX.equalToSuperview()
+        }
+        
+        tableView.snp.makeConstraints{
+            $0.top.equalTo(xmarkButton.snp.bottom).inset(4)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    private func configureUI(){
+        view.backgroundColor = .clear
+        xmarkButton.setBackgroundImage(ImageLiterals.icClose, for: .normal)
+    }
+    
+    private func setupPanGesture(){
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
+        panGesture.delaysTouchesBegan = false
+        panGesture.delaysTouchesEnded = false
+        self.view.addGestureRecognizer(panGesture)
+    }
+    
+    @objc
+    func handlePanGesture(gesture: UIPanGestureRecognizer){
+        let transionY = gesture.translation(in: self.view).y
+        
+        
+        switch gesture.state{
+        case .changed:
+            viewModelInput.transionYOffsetSubject.onNext((transionY, true))
+            print("gesture changed")
+        case .ended:
+            viewModelInput.transionYOffsetSubject.onNext((transionY, false))
+            print("gesture ended")
+        default:
+            break
+        }
+    }
+    
+    private func updateContainerView(height: CGFloat){
+        containerView.snp.updateConstraints{
+            $0.height.equalTo(height)
+        }
+    }
+    
+    private func bindViewModel(){
+        let output = viewModel.transform(form: viewModelInput)
+        output.newHeightSubject
+            .bind(onNext: { [weak self] newHeight, isEnded in
+                isEnded ? self?.animateContainerHeight(newHeight) : self?.updateContainerView(height: newHeight)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    
+    func animateContainerHeight(_ height: CGFloat) {
+        print("animateContainerHeight========")
+        UIView.animate(withDuration: 0.4) {
+            self.updateContainerView(height: height)
+            self.view.layoutIfNeeded()
+        }
+        viewModel.currentContainerHeight = height
+    }
+}
+
+//MARK: - Animation
+extension PostLikeListVC{
+    func animatePresentContainer() {
+        UIView.animate(withDuration: 0.3) {
+            self.containerView.snp.updateConstraints{
+                $0.height.equalTo(400)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func animateShowDimmedView() {
+        backgroundView.alpha = 0
+        UIView.animate(withDuration: 0.4) {
+            self.backgroundView.alpha = 0.8
+        }
+    }
+}
