@@ -101,6 +101,12 @@ class OtherMyPageVC: UIViewController {
         $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     //컬렉션 뷰
+    private let collectionBackgroundView = UIView().then{
+        $0.backgroundColor = UIColor.white
+    }
+    private let noDataImageView = UIImageView().then{
+        $0.image = UIImage(named: "no_img")
+    }
     private var collectionview: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
@@ -108,7 +114,7 @@ class OtherMyPageVC: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
         collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = .none
         collectionView.bounces = true
         return collectionView
     }()
@@ -129,19 +135,24 @@ class OtherMyPageVC: UIViewController {
     }
     
     
-    
     //MARK: setUI
     
     func setCollectionviewLayout(){
-        self.view.addSubview(collectionview)
+        self.view.addSubview(collectionBackgroundView)
+        collectionBackgroundView.addSubview(collectionview)
         collectionview.delegate = self
         collectionview.dataSource = self
         
         collectionview.registerCustomXib(xibName: "MyPagePostCVC")
         collectionview.registerCustomXib(xibName: "HomePostDetailCVC")
         
-        collectionview.snp.makeConstraints{
+        collectionBackgroundView.snp.makeConstraints {
             $0.top.equalTo(headerBackgroundView.snp.bottom).offset(0)
+            $0.leading.trailing.bottom.equalToSuperview().offset(0)
+        }
+        
+        collectionview.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(0)
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
         }
     }
@@ -282,7 +293,22 @@ class OtherMyPageVC: UIViewController {
         followerNumButton.setTitle(String(followerNum), for: .normal)
         followNumButton.setTitle(String(followingNum), for: .normal)
     }
-    
+    func isNoData(){
+        collectionBackgroundView.addSubview(noDataImageView)
+        
+        noDataImageView.isHidden = true
+        
+        noDataImageView.snp.makeConstraints{
+            $0.top.leading.trailing.equalToSuperview().offset(0)
+            $0.width.equalTo(userWidth)
+            $0.height.equalTo(259)
+        }
+      
+        if writenPostDriveData.isEmpty == true{
+            noDataImageView.isHidden = false
+        }
+      
+    }
     
     @objc private func doFollowButtonClicked(_ sender: UIButton){
         postFollowUser()
@@ -307,6 +333,11 @@ class OtherMyPageVC: UIViewController {
                                self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
                                if self.updateFollowNum == false{self.collectionview.reloadData()}
                                self.setHeaderData()
+                               
+                               if self.writenPostDriveData.isEmpty == true{
+                                   self.isNoData()
+                                   
+                               }
                            }
                        case .requestErr(let message) :
                            print("requestERR")
@@ -423,7 +454,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
         var cellCount = 0
         
         if(writenPostDriveData.count == 0){
-            cellCount = 1
+            cellCount = 0
         }
         else{
             cellCount = writenPostDriveData.count + 1
