@@ -9,6 +9,8 @@ import UIKit
 
 class ChangePasswordVC: UIViewController {
 
+    static let identifier = "ChangePasswordVC"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

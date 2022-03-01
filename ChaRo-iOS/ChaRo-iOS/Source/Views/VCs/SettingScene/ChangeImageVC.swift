@@ -9,9 +9,11 @@ import UIKit
 
 class ChangeImageVC: UIViewController {
 
+    
+    static let identifier = "ChangeImageVC"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
