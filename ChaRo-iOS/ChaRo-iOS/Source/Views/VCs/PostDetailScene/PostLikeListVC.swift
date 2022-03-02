@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Alamofire
 
 class PostLikeListVC: UIViewController{
     
@@ -30,7 +31,9 @@ class PostLikeListVC: UIViewController{
         $0.registerCustomXib(xibName: FollowFollowingTVC.className)
     }
     
-    private lazy var xmarkButton = XmarkDismissButton(toDismiss: self)
+    private let xmarkButton = UIButton().then{
+        $0.setBackgroundImage(ImageLiterals.icClose, for: .normal)
+    }
     private let titleLabel = UILabel().then{
         $0.text = "좋아요"
         $0.font = .notoSansMediumFont(ofSize: 17)
@@ -42,6 +45,7 @@ class PostLikeListVC: UIViewController{
         configureUI()
         setupPanGesture()
         bindViewModel()
+        bind()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,7 +84,6 @@ class PostLikeListVC: UIViewController{
     
     private func configureUI(){
         view.backgroundColor = .clear
-        xmarkButton.setBackgroundImage(ImageLiterals.icClose, for: .normal)
     }
     
     private func setupPanGesture(){
@@ -93,15 +96,11 @@ class PostLikeListVC: UIViewController{
     @objc
     func handlePanGesture(gesture: UIPanGestureRecognizer){
         let transionY = gesture.translation(in: self.view).y
-        
-        
         switch gesture.state{
         case .changed:
             viewModelInput.transionYOffsetSubject.onNext((transionY, true))
-            print("gesture changed")
         case .ended:
             viewModelInput.transionYOffsetSubject.onNext((transionY, false))
-            print("gesture ended")
         default:
             break
         }
@@ -126,8 +125,8 @@ class PostLikeListVC: UIViewController{
     private func bind(){
         xmarkButton.rx.tap
             .asDriver()
-            .drive(onNext:{
-                
+            .drive(onNext:{[weak self] in
+                self?.animateDismissView()
             }).disposed(by: disposeBag)
     }
 }
@@ -145,7 +144,7 @@ extension PostLikeListVC{
     func animatebackgroundView() {
         backgroundView.alpha = 0
         animator.addAnimations {
-            self.backgroundView.alpha = 0.8
+            self.backgroundView.alpha = self.viewModel.maxBackgroundAlpha
         }
         animator.startAnimation()
     }
@@ -156,6 +155,19 @@ extension PostLikeListVC{
             self.view.layoutIfNeeded()
         }
         viewModel.currentContainerHeight = height
+        animator.startAnimation()
+    }
+    
+    func animateDismissView() {
+        backgroundView.alpha = viewModel.maxBackgroundAlpha
+        animator.addAnimations {
+            self.backgroundView.alpha = 0
+            self.updateContainerView(height: 0)
+            self.view.layoutIfNeeded()
+        }
+        animator.addCompletion { _ in
+            self.dismiss(animated: false)
+        }
         animator.startAnimation()
     }
 }
