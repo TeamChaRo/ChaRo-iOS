@@ -14,8 +14,8 @@ class PostLikeListVC: UIViewController{
     private let viewModel = PostLikeListViewModel()
     private let viewModelInput = PostLikeListViewModel.Input()
     
-    
     //MARK: - Properties
+    private var animator = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
     private let backgroundView = UIView().then{
         $0.backgroundColor = .mainBlack.withAlphaComponent(0.8)
     }
@@ -46,7 +46,7 @@ class PostLikeListVC: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        animateShowDimmedView()
+        animatebackgroundView()
         animatePresentContainer()
     }
     
@@ -58,7 +58,7 @@ class PostLikeListVC: UIViewController{
         
         containerView.snp.makeConstraints{
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(viewModel.defaultHeight)
+            $0.height.equalTo(300)
         }
         
         containerView.addSubviews([xmarkButton, titleLabel, tableView])
@@ -117,37 +117,45 @@ class PostLikeListVC: UIViewController{
         let output = viewModel.transform(form: viewModelInput)
         output.newHeightSubject
             .bind(onNext: { [weak self] newHeight, isEnded in
-                isEnded ? self?.animateContainerHeight(newHeight) : self?.updateContainerView(height: newHeight)
+                isEnded ? self?.animateContainerView(height: newHeight)
+                : self?.updateContainerView(height: newHeight)
             })
             .disposed(by: disposeBag)
     }
     
-    
-    func animateContainerHeight(_ height: CGFloat) {
-        print("animateContainerHeight========")
-        UIView.animate(withDuration: 0.4) {
-            self.updateContainerView(height: height)
-            self.view.layoutIfNeeded()
-        }
-        viewModel.currentContainerHeight = height
+    private func bind(){
+        xmarkButton.rx.tap
+            .asDriver()
+            .drive(onNext:{
+                
+            }).disposed(by: disposeBag)
     }
 }
 
 //MARK: - Animation
 extension PostLikeListVC{
     func animatePresentContainer() {
-        UIView.animate(withDuration: 0.3) {
-            self.containerView.snp.updateConstraints{
-                $0.height.equalTo(400)
-            }
+        animator.addAnimations {
+            self.updateContainerView(height: self.viewModel.defaultHeight)
             self.view.layoutIfNeeded()
         }
+        animator.startAnimation()
     }
     
-    func animateShowDimmedView() {
+    func animatebackgroundView() {
         backgroundView.alpha = 0
-        UIView.animate(withDuration: 0.4) {
+        animator.addAnimations {
             self.backgroundView.alpha = 0.8
         }
+        animator.startAnimation()
+    }
+    
+    func animateContainerView(height: CGFloat) {
+        animator.addAnimations {
+            self.updateContainerView(height: height)
+            self.view.layoutIfNeeded()
+        }
+        viewModel.currentContainerHeight = height
+        animator.startAnimation()
     }
 }
