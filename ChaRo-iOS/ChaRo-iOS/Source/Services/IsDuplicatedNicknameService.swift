@@ -59,7 +59,7 @@ struct IsDuplicatedNicknameService {
         }
         
         switch statusCode {
-        case 200:
+        case 200...299:
             return .success(decodedData.success)
         case 400: return .requestErr(decodedData.msg)
         case 500: return .serverErr

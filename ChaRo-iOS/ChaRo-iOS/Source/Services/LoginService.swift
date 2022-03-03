@@ -14,7 +14,7 @@ struct LoginService {
     
     private func makeParameter(id : String, password : String) -> Parameters
     {
-        return ["id" : id,
+        return ["userEmail" : id,
                 "password" : password]
     }
     
@@ -37,6 +37,7 @@ struct LoginService {
             
             case .success:
                 
+                print("일반 로그인 ----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else { return }
                 guard let value = dataResponse.value else { return }
                 
@@ -61,13 +62,12 @@ struct LoginService {
         
         switch statusCode {
         
-        case 200:
+        case 200...299:
+            print("일반 로그인 --- 데이터 받기 성공")
             return .success(decodedData)
-            print(decodedData.success)
-            print(decodedData.data)
             
-        case 400:
-            print(decodedData.msg)
+        case 400...499:
+            print("일반 로그인 --- 데이터 받기 실패 - \(decodedData.msg)")
             return .requestErr(decodedData.msg)
             
         case 500:
