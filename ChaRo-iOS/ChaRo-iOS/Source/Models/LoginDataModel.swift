@@ -30,8 +30,9 @@ struct LoginDataModel: Codable {
 
 // MARK: - UserData
 struct UserData: Codable {
-    let userEmail: String
+    let email: String
     let nickname: String
     let profileImage: String
+    let isSocial: Bool
 }
 

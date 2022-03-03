@@ -66,7 +66,7 @@ struct IsDuplicatedEmailService {
         print(statusCode)
 
         switch statusCode {
-        case 200:
+        case 200...299:
             print("중복 이메일 --- 데이터 받기 성공")
             return .success(decodedData.success)
         case 400: return .requestErr(decodedData.msg)
