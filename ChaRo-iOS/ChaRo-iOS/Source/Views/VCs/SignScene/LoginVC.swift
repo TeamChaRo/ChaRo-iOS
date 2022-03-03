@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var findPasswordButton: UIButton!
     
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
@@ -56,41 +57,48 @@ class LoginVC: UIViewController {
     
     func loginAction(){
         
-//        LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) { result in
-//
-//            switch result
-//            {
-//            case .success(let data):
-//                let loginData = data as? LoginDataModel
-//                let userData = loginData?.data
-//                dump(userData)
-//
-//                if let user = userData as? UserData {
-//
-//                    UserDefaults.standard.set(user.userId, forKey: "userId")
-//                    UserDefaults.standard.set(user.nickname, forKey: "nickname")
-//                    UserDefaults.standard.set(user.token, forKey: "token")
-//                    UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
-//
-//                    print(UserDefaults.standard.string(forKey: "userId"))
-//                    print(UserDefaults.standard.string(forKey: "nickname"))
-//                    print(UserDefaults.standard.string(forKey: "token"))
-//                    print(UserDefaults.standard.string(forKey: "profileImage"))
-//                }
-//
-//            case .requestErr(let message):
-//                if let message = message as? String {
-//                    print(message)
-//                }
-//            default :
-//                print("ERROR")
-//            }
-//        }
+        LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) {
+            result in
+
+            switch result
+            {
+            case .success(let data):
+                print("일반 로그인 성공 \(data)")
+                let loginData = data as? LoginDataModel
+                let userData = loginData?.data
+
+                //UserDefaults에 이메일, 닉네임, 프로필 사진, 소셜 로그인 여부 저장
+                if let user = userData {
+                    UserDefaults.standard.set(user.email, forKey: "userId")
+                    UserDefaults.standard.set(user.nickname, forKey: "nickname")
+                    UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
+                    UserDefaults.standard.set(user.isSocial, forKey: "isSocial")
+                }
+
+            case .requestErr(let message):
+                if let message = message as? String {
+                    print(message)
+                }
+            default :
+                print("ERROR")
+            }
+        }
     }
     
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    @IBAction func findPwdButtonClicked(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: FindPasswordVC.identifier) as? FindPasswordVC else {
+            return
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
@@ -102,6 +110,7 @@ class LoginVC: UIViewController {
         self.present(nextVC, animated: true, completion: nil)
         
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
