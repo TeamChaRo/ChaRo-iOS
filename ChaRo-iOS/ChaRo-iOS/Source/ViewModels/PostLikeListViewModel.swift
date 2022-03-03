@@ -9,8 +9,7 @@ import RxSwift
 import UIKit
 
 class PostLikeListViewModel{
-    private let disposeBag = DisposeBag()
-    
+
     //MARK: - Properties
     let defaultHeight: CGFloat = UIScreen.getDeviceHeight() / 2
     let dismissibleHeight: CGFloat = 200
@@ -27,7 +26,7 @@ class PostLikeListViewModel{
         let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
     }
     
-    func transform(form input: Input) -> Output{
+    func transform(form input: Input, disposeBag: DisposeBag) -> Output{
         let output = Output()
         input.transionYOffsetSubject
             .bind(onNext: { [weak self] (yOffset, isDragging) in
@@ -36,7 +35,7 @@ class PostLikeListViewModel{
                     .onNext((self.calculateHeight(yOffset: yOffset, isDragging: isDragging),
                                                 !isDragging))
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         return output
     }
     

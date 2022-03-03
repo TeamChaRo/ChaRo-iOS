@@ -113,7 +113,7 @@ class PostLikeListVC: UIViewController{
     }
     
     private func bindViewModel(){
-        let output = viewModel.transform(form: viewModelInput)
+        let output = viewModel.transform(form: viewModelInput, disposeBag: disposeBag)
         output.newHeightSubject
             .bind(onNext: { [weak self] newHeight, isEnded in
                 isEnded ? self?.animateContainerView(height: newHeight)
