@@ -57,4 +57,25 @@ class PostLikeListViewModel{
         }
         return -1
     }
+    
+    func getPostLikeList(){
+        PostResultService.shared.getPostLikeList(postId: 6){ response in
+            switch response{
+            case .success(let resultData):
+                dump(resultData)
+                if let data =  resultData as? [Follow]{
+                    print("response = \(data)")
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
 }
+

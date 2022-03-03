@@ -41,6 +41,7 @@ class PostLikeListVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.getPostLikeList()
         setupConstraints()
         configureUI()
         setupPanGesture()
