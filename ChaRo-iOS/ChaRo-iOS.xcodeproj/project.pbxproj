@@ -176,6 +176,7 @@
 		7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084948326A2441C001B3C2B /* EmptyCVC.swift */; };
 		7084948626A2441C001B3C2B /* EmptyCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7084948426A2441C001B3C2B /* EmptyCVC.xib */; };
 		70876CD0275E08EB00096C51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70876CCF275E08EB00096C51 /* GoogleService-Info.plist */; };
+		70A18FA92778E4370069B1E5 /* FindPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */; };
 		70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */; };
 		70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */; };
 		70A37C6026F07BB1006CCEA9 /* Join.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70A37C5F26F07BB1006CCEA9 /* Join.storyboard */; };
@@ -431,6 +432,7 @@
 		7084948326A2441C001B3C2B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		7084948426A2441C001B3C2B /* EmptyCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCVC.xib; sourceTree = "<group>"; };
 		70876CCF275E08EB00096C51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordVC.swift; sourceTree = "<group>"; };
 		70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginVC.swift; sourceTree = "<group>"; };
 		70A37C5F26F07BB1006CCEA9 /* Join.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Join.storyboard; sourceTree = "<group>"; };
@@ -1161,6 +1163,7 @@
 				70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */,
 				70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */,
 				70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */,
+				70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */,
 			);
 			path = SignScene;
 			sourceTree = "<group>";
@@ -1665,6 +1668,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70A18FA92778E4370069B1E5 /* FindPasswordVC.swift in Sources */,
 				F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */,
 				3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */,
 				36CEE5B6269DF9A900974EFF /* DetailModel.swift in Sources */,

@@ -23,8 +23,8 @@ struct EmailJoinService {
             "userEmail": userEmail,
             "nickname": nickname,
             "password": password,
-            "marketingEmail": marketingEmail,
-            "marketingPush": marketingPush,
+            "emailAgree": marketingEmail,
+            "pushAgree": marketingPush,
         ]
         
         var test: [String: Any] = [:]
@@ -57,6 +57,7 @@ struct EmailJoinService {
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value!)
+                print(statusCode)
                 completion(networkResult)
                 
             case .failure: completion(.pathErr)

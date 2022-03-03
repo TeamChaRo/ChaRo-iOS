@@ -18,6 +18,7 @@ class JoinInputView: UIView {
     var subTitleLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 11)
         $0.textColor = .gray40
+        $0.numberOfLines = 0
     }
     
     var inputTextField: InputTextField?
