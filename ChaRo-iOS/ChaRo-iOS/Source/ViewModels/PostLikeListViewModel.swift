@@ -5,8 +5,8 @@
 //  Created by 장혜령 on 2022/03/02.
 //
 
-import RxSwift
 import UIKit
+import RxSwift
 
 class PostLikeListViewModel{
 
@@ -24,14 +24,16 @@ class PostLikeListViewModel{
     
     struct Output{
         let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
+        let postLikeListSubject = PublishSubject<[Follow]>()
     }
     
+    let output = Output()
+    
     func transform(form input: Input, disposeBag: DisposeBag) -> Output{
-        let output = Output()
         input.transionYOffsetSubject
             .bind(onNext: { [weak self] (yOffset, isDragging) in
                 guard let self = self else {return}
-                output.newHeightSubject
+                self.output.newHeightSubject
                     .onNext((self.calculateHeight(yOffset: yOffset, isDragging: isDragging),
                                                 !isDragging))
             })
@@ -58,13 +60,14 @@ class PostLikeListViewModel{
         return -1
     }
     
-    func getPostLikeList(){
-        PostResultService.shared.getPostLikeList(postId: 6){ response in
+    func getPostLikeList(postId: Int){
+        PostResultService.shared.getPostLikeList(postId: postId){ [weak self] response in
             switch response{
             case .success(let resultData):
                 dump(resultData)
                 if let data =  resultData as? [Follow]{
                     print("response = \(data)")
+                    self?.output.postLikeListSubject.onNext(data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
