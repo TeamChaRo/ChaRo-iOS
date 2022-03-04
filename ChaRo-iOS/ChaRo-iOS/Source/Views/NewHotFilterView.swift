@@ -71,28 +71,13 @@ extension NewHotFilterView: UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-                case 0:
-                    let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-                    var bgColorView = UIView()
-                    bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-                    cell.selectedBackgroundView = bgColorView
-                    cell.setLabel()
-                    cell.setCellName(name: "인기순")
-                    return cell
-
-                case 1:
-                    let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-                    var bgColorView = UIView()
-                    bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-                    cell.selectedBackgroundView = bgColorView
-                    cell.setLabel()
-                    cell.setCellName(name: "최신순")
-                    return cell
-
-                default:
-                    return UITableViewCell()
-                }
-            }
+        let cell = tableView.dequeueReusableCell(withType: HotDropDownTVC.self, for: indexPath)
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+        cell.selectedBackgroundView = bgColorView
+        cell.setLabel()
+        cell.setCellName(name: indexPath.row == 0 ? "인기순" : "최신순")
+        return cell
+    }
     
 }
