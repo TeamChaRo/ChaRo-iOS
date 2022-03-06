@@ -20,6 +20,7 @@ class AddressMainVC: UIViewController {
     private var isFirstFinded = true
     private var sendedPostData: WritePostData?
     private var imageList: [UIImage] = []
+    private let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
     
     private lazy var tableView = UITableView().then{
         $0.registerCustomXib(xibName: AddressButtonCell.identifier)
@@ -30,12 +31,14 @@ class AddressMainVC: UIViewController {
     private var oneCellHeight: CGFloat = 48
     private var tableViewHeight: CGFloat  = 96
     private var tableViewBottomOffset: CGFloat  = 19
+    private var isFirstOpen = true
     
-    //MARK:- About Map
+    //MARK: - About Map
     private let tMapView = TMapView()
     private var markerList : [TMapMarker] = []
     private var polyLineList: [TMapPolyline] = []
     
+    //MARK: UI Component
     private let backButton = UIButton().then{
         $0.setBackgroundImage(UIImage(named: "icGrayBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
@@ -65,6 +68,11 @@ class AddressMainVC: UIViewController {
         setMapFrame()
         inputMarkerInMapView()
         isThereStartAddress()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupGuideAnimationView()
     }
     
     private func configureCells(){
@@ -140,6 +148,35 @@ class AddressMainVC: UIViewController {
         }
         return castedToAddressDatalList
     }
+}
+
+// MARK: - Guide Animation
+extension AddressMainVC{
+    func setupGuideAnimationView(){
+        if !isFirstOpen {return}
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .mainBlack.withAlphaComponent(0.8)
+        let imageView = UIImageView(image: ImageLiterals.imgMapFirstGuide)
+        view.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints{
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+            
+        }
+        backgroundView.addSubview(imageView)
+        imageView.snp.makeConstraints{
+            $0.top.equalToSuperview().inset(225)
+            $0.leading.equalToSuperview().inset(18)
+            $0.trailing.equalToSuperview().inset(22)
+        }
+        animator.addAnimations {
+            backgroundView.alpha = 0
+            imageView.alpha = 0
+        }
+        animator.startAnimation()
+        isFirstOpen = false
+    }
+    
 }
 
 
