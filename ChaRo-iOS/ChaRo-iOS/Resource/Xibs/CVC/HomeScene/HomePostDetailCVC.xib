@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,12 +26,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfe-od-Idw">
                         <rect key="frame" x="0.0" y="0.0" width="311" height="50"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5HJ-c8-Sp7">
-                                <rect key="frame" x="0.0" y="16" width="31" height="18"/>
-                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEb-sk-P0q">
                                 <rect key="frame" x="279" y="4" width="42" height="42"/>
                                 <state key="normal" backgroundImage="icDown"/>
@@ -50,9 +45,7 @@
                             <constraint firstAttribute="trailing" secondItem="DEb-sk-P0q" secondAttribute="trailing" constant="-10" id="G2N-oI-Ulm"/>
                             <constraint firstItem="DEb-sk-P0q" firstAttribute="centerY" secondItem="tfe-od-Idw" secondAttribute="centerY" id="IBZ-Mu-IOC"/>
                             <constraint firstItem="DEb-sk-P0q" firstAttribute="leading" secondItem="TTx-eG-1V4" secondAttribute="trailing" constant="-10" id="IzC-Qj-oAN"/>
-                            <constraint firstItem="5HJ-c8-Sp7" firstAttribute="centerY" secondItem="tfe-od-Idw" secondAttribute="centerY" id="KBW-Ed-wS5"/>
                             <constraint firstItem="TTx-eG-1V4" firstAttribute="centerY" secondItem="tfe-od-Idw" secondAttribute="centerY" id="g03-Jn-fJQ"/>
-                            <constraint firstItem="5HJ-c8-Sp7" firstAttribute="leading" secondItem="tfe-od-Idw" secondAttribute="leading" id="kQS-fe-Xmw"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -66,7 +59,6 @@
             </constraints>
             <size key="customSize" width="311" height="61"/>
             <connections>
-                <outlet property="postCountLabel" destination="5HJ-c8-Sp7" id="lvf-bL-Gzc"/>
                 <outlet property="selectButton" destination="DEb-sk-P0q" id="sFe-zL-PsH"/>
                 <outlet property="selectLabel" destination="TTx-eG-1V4" id="p35-95-nXx"/>
             </connections>
