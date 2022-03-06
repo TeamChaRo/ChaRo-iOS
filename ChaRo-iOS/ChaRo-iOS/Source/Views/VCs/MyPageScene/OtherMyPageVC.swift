@@ -469,7 +469,6 @@ extension OtherMyPageVC: UICollectionViewDataSource{
         detailCell.setSelectName(name: currentState)
     
         if(indexPath.row == 0){
-            detailCell.postCountLabel.text = ""
             return detailCell
         }
         else{

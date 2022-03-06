@@ -136,7 +136,6 @@ extension SearchResultVC: UICollectionViewDataSource{
                 myCellIsFirstLoaded = false
                 topCVCCell = dropDownCell
                 topCVCCell?.postCount = postCount
-                topCVCCell?.setLabel()
             }
             return topCVCCell ?? UICollectionViewCell()
         }

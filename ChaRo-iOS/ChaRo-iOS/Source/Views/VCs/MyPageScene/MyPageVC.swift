@@ -776,7 +776,6 @@ extension MyPageVC: UICollectionViewDataSource {
             
         case 1:
             if(indexPath.row == 0) {
-                detailCell.postCountLabel.text = ""
                 return detailCell
             }
             else {
@@ -789,7 +788,6 @@ extension MyPageVC: UICollectionViewDataSource {
             }
         case 2:
             if(indexPath.row == 0) {
-                detailCell.postCountLabel.text = ""
                 return detailCell
             }
             
@@ -860,8 +858,6 @@ extension MyPageVC: NewHotFilterClickedDelegate{
             saveCollectioinView.reloadData()
         }
     }
-    
-
 }
 extension MyPageVC: AnimateIndicatorDelegate {
     func startIndicator() {
