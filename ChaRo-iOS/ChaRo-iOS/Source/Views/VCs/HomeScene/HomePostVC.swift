@@ -6,6 +6,8 @@
 //
 import Foundation
 import UIKit
+import SnapKit
+import Then
 
 protocol SetTopTitleDelegate {
     func setTopTitle(name: String)
@@ -36,6 +38,17 @@ class HomePostVC: UIViewController {
     
     static let identifier : String = "HomePostVC"
     
+    func setHeaderBottomView() {
+        let bottomView = UIView().then{
+            $0.backgroundColor = UIColor.gray20
+        }
+        homePostNavigationView.addSubview(bottomView)
+        bottomView.snp.makeConstraints{
+            $0.bottom.leading.trailing.equalToSuperview().offset(0)
+            $0.height.equalTo(1)
+        }
+    }
+    
     func setTableView(){
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -55,25 +68,22 @@ class HomePostVC: UIViewController {
         dropDownTableview.separatorStyle = .none
     }
     
-    func setShaow(){
-        homePostNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
-    }
+  
     
     func setRound(){
         dropDownTableview.layer.masksToBounds = true
         dropDownTableview.layer.cornerRadius = 20
 //        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-        setShaow()
         setDropdown()
         setRound()
         setNavigationLabel()
         getData()
+        setHeaderBottomView()
         self.dismissDropDownWhenTappedAround()
 
         // Do any additional setup after loading the view.
@@ -94,7 +104,6 @@ class HomePostVC: UIViewController {
                         self.postCount = response.data.totalCourse
                         self.postData = [response]
                     }
-                    print("ddd", self.postCount)
                     self.postCount = response.data.totalCourse
                     self.collectionView.reloadData()
                 }
