@@ -254,89 +254,12 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
     }
 }
 
-//extension HomePostVC: UITableViewDelegate{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 2
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        cellIndexpath = indexPath
-//
-//        switch indexPath.row {
-//        case 0:
-//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-//            var bgColorView = UIView()
-//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-//            cell.selectedBackgroundView = bgColorView
-//            cell.setLabel()
-//            cell.setCellName(name: "인기순")
-//            cell.delegate = self
-//            return cell
-//
-//        case 1:
-//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-//            var bgColorView = UIView()
-//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-//            cell.selectedBackgroundView = bgColorView
-//            cell.setCellName(name: "최신순")
-//            cell.delegate = self
-//
-//            return cell
-//
-//        default:
-//            return UITableViewCell()
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let HotCell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-//        if indexPath.row == 0 {
-//            HotCell.setSelectedCell()
-//
-//        }
-//
-//    }
-//
-//}
-//
-//extension HomePostVC: UITableViewDataSource{
-//
-//}
-
 extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
         filterTableView.isHidden = false
     }
     
 }
-
-//extension HomePostVC: SetTitleDelegate {
-//    func setTitle(cell: HotDropDownTVC) {
-//        
-//        if cell.name == "인기순"{
-//            print("인기순 실행")
-//            self.getData()
-//            self.cellCount = self.postData[0].data.drive.count
-//            self.dropDownTableview.isHidden = true
-//            topCVCCell?.setTitle(data: "인기순")
-//            topCVCCell?.setTopTitle(name: "인기순")
-//            topCVCCell?.setSelectName(name: "인기순")
-//        }
-//        
-//        else if cell.name == "최신순"{
-//            print("최신순 실행")
-//            self.getNewData()
-//            self.cellCount = self.postData[0].data.drive.count
-//            self.dropDownTableview.isHidden = true
-//            topCVCCell?.setTitle(data: "최신순")
-//            topCVCCell?.setTopTitle(name: "최신순")
-//            topCVCCell?.setSelectName(name: "최신순")
-//
-//        }
-//        
-//    }
-//    
-//}
 
 extension HomePostVC{
 
