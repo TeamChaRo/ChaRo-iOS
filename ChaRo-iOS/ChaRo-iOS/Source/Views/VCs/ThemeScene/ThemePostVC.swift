@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
-
+import Then
+import SnapKit
 
 class ThemePostVC: UIViewController {
     
@@ -16,7 +16,6 @@ class ThemePostVC: UIViewController {
     @IBOutlet weak var navigationView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dropDownTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
     
@@ -24,7 +23,7 @@ class ThemePostVC: UIViewController {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToTitle: NSLayoutConstraint!
     
-    
+    let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
     
     
     //MARK:- Variable
@@ -37,6 +36,7 @@ class ThemePostVC: UIViewController {
     var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 0
+    var currentState: String = "인기순"
     private var selectedTheme = ""
     private var selectedDriveList: [Drive] = []
     
@@ -46,12 +46,10 @@ class ThemePostVC: UIViewController {
     //MARK:- Life Cycle
     override func viewDidLoad() {
         setTableView()
-        setdropDownTableView()
-        setdropDownTableViewUI()
         setTitleLabelUI()
-        setShaow()
-        setTableViewTag()
-        setdropDownTableViewUI()
+        setHeaderBottomView()
+        filterTableViewLayout()
+        dismissDropDownWhenTappedAround()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -71,11 +69,7 @@ class ThemePostVC: UIViewController {
 
     
     //MARK:- default Setting Function Part
-    func setTableViewTag(){
-        tableView.tag = 1
-        dropDownTableView.tag = 2
-    }
-    
+
     func setTableView() {
         
         tableView.delegate = self
@@ -90,30 +84,29 @@ class ThemePostVC: UIViewController {
         tableView.separatorStyle = .none
         
     }
-    
-    func setShaow(){
-        
-        //SE일 때 설정
-        self.setDetailNavigationViewUI(height: heightConstraint,
-                                       fromBottomToTitle: fromBottomToTitle)
-        
-        navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
+    func filterTableViewLayout() {
+        filterTableView.delegate = self
+        filterTableView.clickDelegate = self
+        filterTableView.isHidden = true
+        self.view.addSubview(filterTableView)
+        filterTableView.snp.makeConstraints{
+            $0.top.equalTo(navigationView.snp.bottom).offset(168)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(97)
+            $0.width.equalTo(180)
+        }
     }
     
-    func setdropDownTableView() {
-        dropDownTableView.delegate = self
-        dropDownTableView.dataSource = self
-        dropDownTableView.isHidden = true
-        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
+    func setHeaderBottomView() {
+        let bottomView = UIView().then{
+            $0.backgroundColor = UIColor.gray20
+        }
+        navigationView.addSubview(bottomView)
+        bottomView.snp.makeConstraints{
+            $0.bottom.leading.trailing.equalToSuperview().offset(0)
+            $0.height.equalTo(1)
+        }
     }
-    
-    
-    func setdropDownTableViewUI() {
-        dropDownTableView.clipsToBounds = true
-        dropDownTableView.layer.cornerRadius = 20
-        dropDownTableView.separatorStyle = .none
-    }
-    
     
     func setTitleLabel(name: String) {
         titleLabel.text = name
@@ -176,49 +169,13 @@ class ThemePostVC: UIViewController {
 //MARK:- extension
 
 extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if tableView.tag == 2 {
-            return 2
-        } else {
-            return 3
+      return 3
         }
         
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
     UITableViewCell {
-                
-        if tableView.tag == 2 {
-            
-            let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
-            
-            let bgColorView = UIView()
-            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-            cell.selectedBackgroundView = bgColorView
-            cell.setLabel()
-            
             switch indexPath.row {
-            case 0:
-                cell.setCellName(name: "인기순")
-            case 1:
-                cell.setCellName(name: "최신순")
-            default:
-                break
-            }
-            
-            cell.delegate = self
-            cell.themeDelegate = self
-            
-            return cell
-            
-        }
-        
-        if tableView.tag == 1 {
-            
-            switch indexPath.row {
-            
             case 0:
                 let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
                 
@@ -240,7 +197,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 }
 
                 cell.selectionStyle = .none
-                cell.setPostCount(data: cellCount)
+                cell.setTitle(data: currentState)
                 cell.setLabel()
 
                 return cell
@@ -256,32 +213,13 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             default:
                 return UITableViewCell()
             }
-        }
         return UITableViewCell()
-        
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if tableView.tag == 2 {
-            
-            let HotCell: HotDropDownTVC = (tableView.dequeueReusableCell(withIdentifier: HotDropDownTVC.identifier) as? HotDropDownTVC)!
-            
-            if indexPath.row == 0 {
-                HotCell.setSelectedCell()
-                
-            }
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if tableView.tag == 2 {
-            return 44
-        }
-        
-        
         var topBarHeight = 100
         let factor = UIScreen.main.bounds.width / 375
         
@@ -306,22 +244,11 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
 
 extension ThemePostVC: MenuClickedDelegate{
     func menuClicked() {
-        dropDownTableView.isHidden = false
+        filterTableView.isHidden = false
     }
     
     
 }
-
-extension ThemePostVC: SetTitleDelegate {
-    func setTitle(cell: HotDropDownTVC) {
-        delegate?.setTopTitle(name: cell.name)
-        dropDownTableView.isHidden = true
-        topTVCCell?.setTitle(data: cell.name)
-        
-    }
-    
-}
-
 
 extension ThemePostVC: ThemeNetworkDelegate {
     
@@ -359,4 +286,31 @@ extension ThemePostVC: SetThemeUpdateDelegate {
         print(selectedDriveList)
     }
 
+}
+extension ThemePostVC: NewHotFilterClickedDelegate{
+    func filterClicked(row: Int) {
+        switch row {
+        case 0:
+            getThemeData(theme: selectedTheme, filter: .like)
+            currentState = "인기순"
+            tableView.reloadData()
+        default:
+            getThemeData(theme: selectedTheme, filter: .new)
+            currentState = "최신순"
+            tableView.reloadData()
+        }
+    }
+}
+extension ThemePostVC{
+
+func dismissDropDownWhenTappedAround() {
+        let tap: UITapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissDropDown() {
+        self.filterTableView.isHidden = true
+    }
 }
