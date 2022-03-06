@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "uiViewSelectboxWarningUnselect.png",
+      "filename" : "share_apple.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "uiViewSelectboxWarningUnselect@2x.png",
+      "filename" : "share_apple@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "uiViewSelectboxWarningUnselect@3x.png",
+      "filename" : "share_apple@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

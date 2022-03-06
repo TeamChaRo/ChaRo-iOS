@@ -513,7 +513,7 @@ extension HomeVC: PostIdDelegate{
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
         nextVC.setPostId(id: data)
         nextVC.modalPresentationStyle = .currentContext
         tabBarController?.present(nextVC, animated: true, completion: nil)
@@ -522,7 +522,7 @@ extension HomeVC: PostIdDelegate{
     
     func sendPostDriveElement(data: DriveElement?) {
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
         nextVC.setAdditionalDataOfPost(data: data)
         print("sendPostDriveElement | 이거 잘 불렸나?? \(data)")
         nextVC.modalPresentationStyle = .currentContext

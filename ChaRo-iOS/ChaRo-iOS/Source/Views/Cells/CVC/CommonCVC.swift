@@ -43,7 +43,7 @@ class CommonCVC: UICollectionViewCell {
     var isFavorite: Bool? {
         didSet {
             if isFavorite! {
-                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+                heartButton.setImage(ImageLiterals.icHeartActive, for: .normal)
             } else {
                 heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
             }
