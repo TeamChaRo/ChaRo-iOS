@@ -14,7 +14,6 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     
     static let identifier : String = "HomePostDetailCVC"
-    @IBOutlet weak var postCountLabel: UILabel!
     @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
@@ -28,13 +27,6 @@ class HomePostDetailCVC: UICollectionViewCell {
         selectLabel.text = data
     }
 
-    func setLabel(){
-        var postCountText : String = "전체 \(postCount)개 게시물"
-        postCountLabel.text = postCountText
-        selectLabel.text = selectText
-        postCountLabel.textColor = UIColor.gray50
-        selectLabel.textColor = UIColor.gray50
-    }
     
     @IBAction func menuButtonClicked(_ sender: Any) {
         delegate?.menuClicked()
@@ -45,7 +37,6 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setLabel()
         setTitle(data: selectText)
     }
     
