@@ -23,7 +23,7 @@ class AddressMainVC: UIViewController {
     private let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
     
     private lazy var tableView = UITableView().then{
-        $0.registerCustomXib(xibName: AddressButtonCell.identifier)
+        $0.register(cell: AddressButtonCell.self)
         $0.delegate = self
         $0.dataSource = self
         $0.separatorStyle = .none
@@ -184,27 +184,27 @@ extension AddressMainVC{
 extension AddressMainVC {
     private func initAddressList(){
         addressList.append(contentsOf: [AddressDataModel(),AddressDataModel()])
-        addressCellList.append(contentsOf: [initAddressCell(text: "출발지"),
-                                            initAddressCell(text: "도착지")])
+        addressCellList.append(contentsOf: [initAddressCell(type: .start),
+                                            initAddressCell(type: .end)])
     }
     
     private func setRecivedAddressCell(){
         addressCellList = []
-        for item in addressList {
-            let addressCell = setRecivedAddressCellStyle(address: item)
+        addressList.forEach{
+            let addressCell = setRecivedAddressCellStyle(address: $0)
             addressCellList.append(addressCell)
         }
     }
     
-    private func initAddressCell(text: String) -> AddressButtonCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else {return AddressButtonCell()}
+    private func initAddressCell(type: AddressCellType) -> AddressButtonCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.className) as? AddressButtonCell else {return AddressButtonCell()}
         cell.delegate = self
-        cell.setInitContentText(text: text)
+        cell.setInitContent(of: type)
         return cell
     }
     
     private func setRecivedAddressCellStyle(address: AddressDataModel) -> AddressButtonCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else { return AddressButtonCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.className) as? AddressButtonCell else { return AddressButtonCell()}
         cell.delegate = self
         cell.setAddressText(address: address)
         return cell
@@ -288,7 +288,8 @@ extension AddressMainVC: AddressButtonCellDelegate{
     func addressButtonCellForAdding(cell: AddressButtonCell) {
         let index = addressList.endIndex - 1
         addressList.insert(cell.address, at: index)
-        addressCellList.insert(initAddressCell(text: "경유지"), at: index)
+        addressCellList.insert(initAddressCell(type: .mid), at: index)
+        
         tableView.reloadData()
         
         tableViewHeight = calculateTableViewHeight()
@@ -308,7 +309,7 @@ extension AddressMainVC: AddressButtonCellDelegate{
         let nextVC = SearchAddressKeywordVC()
         let index = cell.getTableCellIndexPath()
         nextVC.setAddressModel(model: addressList[index],
-                               cellType: cell.cellType,
+                               cellType: cell.cellType.rawValue,
                                index: index)
         nextVC.setSearchKeyword(list: newSearchHistory+searchHistory)
         self.navigationController?.pushViewController(nextVC, animated: true)
