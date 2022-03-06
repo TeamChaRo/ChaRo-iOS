@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Then
 import TMapSDK
 
 
@@ -20,45 +21,33 @@ class AddressConfirmVC: UIViewController {
     public var presentingCellIndex = -1
     private var isFirstLoaded = true
     
-    private var backButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)
-        button.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
-        return button
-    }()
-    
+    private var backButton = UIButton().then{
+        $0.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)
+        $0.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
+    }
     private var centerMarkerView = UIImageView()
+    private var bottomView = UIView().then{
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 20
+        $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
+    }
     
-    private var bottomView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 20
-        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
-        return view
-    }()
+    private var confirmButton = UIButton().then{
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = .mainBlue
+        $0.setTitleColor(.white, for: .normal)
+        $0.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
+    }
     
-    private var confirmButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .mainBlue
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
-        return button
-    }()
+    private var titleNameLabel = UILabel().then{
+        $0.font = .notoSansMediumFont(ofSize: 16)
+        $0.textColor = .gray50
+    }
     
-    private var titleNameLabel : UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 16)
-        label.textColor = .gray50
-        return label
-    }()
-    
-    private var addressLabel : UILabel = {
-        let label = UILabel()
-        label.font = .notoSansRegularFont(ofSize: 14)
-        label.textColor = .gray40
-        return label
-    }()
+    private var addressLabel = UILabel().then{
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.textColor = .gray40
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
