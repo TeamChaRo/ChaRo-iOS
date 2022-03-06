@@ -19,7 +19,7 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var famousButton: UIButton!
     @IBOutlet weak var newUpdateButton: UIButton!
-    @IBOutlet weak var dropDownTableview: UITableView!
+//    @IBOutlet weak var dropDownTableview: UITableView!
     @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
     
@@ -35,6 +35,9 @@ class HomePostVC: UIViewController {
     var postData: [DetailModel] = []
     var newPostData: [DetailModel] = []
     var cellLoadFirst: Bool = true
+    
+    var currentState: String = "인기순"
+    let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
     
     static let identifier : String = "HomePostVC"
     
@@ -61,26 +64,23 @@ class HomePostVC: UIViewController {
     }
     
     
-    func setDropdown(){
-        dropDownTableview.registerCustomXib(xibName: "HotDropDownTVC")
-        dropDownTableview.delegate = self
-        dropDownTableview.dataSource = self
-        dropDownTableview.separatorStyle = .none
+    func filterTableViewLayout() {
+        filterTableView.delegate = self
+        filterTableView.clickDelegate = self
+        filterTableView.isHidden = true
+        self.view.addSubview(filterTableView)
+        filterTableView.snp.makeConstraints{
+            $0.top.equalTo(homePostNavigationView.snp.bottom).offset(60)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(97)
+            $0.width.equalTo(180)
+        }
     }
-    
   
-    
-    func setRound(){
-        dropDownTableview.layer.masksToBounds = true
-        dropDownTableview.layer.cornerRadius = 20
-//        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-        setDropdown()
-        setRound()
+        filterTableViewLayout()
         setNavigationLabel()
         getData()
         setHeaderBottomView()
@@ -186,8 +186,7 @@ extension HomePostVC: UICollectionViewDelegate{
                 isFirstLoaded = false
                 topCVCCell = topCell
             }
-            topCVCCell?.postCount = postCount
-            topCVCCell?.setLabel()
+            topCVCCell?.setTitle(data: currentState)
             return topCVCCell!
         case 1:
             if postData.count == 0{
@@ -255,90 +254,89 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
     }
 }
 
-extension HomePostVC: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cellIndexpath = indexPath
-        
-        switch indexPath.row {
-        case 0:
-            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-            var bgColorView = UIView()
-            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-            cell.selectedBackgroundView = bgColorView
-            cell.setLabel()
-            cell.setCellName(name: "인기순")
-            cell.delegate = self
-            return cell
-
-        case 1:
-            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-            var bgColorView = UIView()
-            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-            cell.selectedBackgroundView = bgColorView
-            cell.setCellName(name: "최신순")
-            cell.delegate = self
-
-            return cell
-
-        default:
-            return UITableViewCell()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let HotCell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-        if indexPath.row == 0 {
-            HotCell.setSelectedCell()
-            
-        }
-
-    }
-    
-}
-
-extension HomePostVC: UITableViewDataSource{
-    
-}
+//extension HomePostVC: UITableViewDelegate{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 2
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        cellIndexpath = indexPath
+//
+//        switch indexPath.row {
+//        case 0:
+//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+//            var bgColorView = UIView()
+//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+//            cell.selectedBackgroundView = bgColorView
+//            cell.setLabel()
+//            cell.setCellName(name: "인기순")
+//            cell.delegate = self
+//            return cell
+//
+//        case 1:
+//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+//            var bgColorView = UIView()
+//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+//            cell.selectedBackgroundView = bgColorView
+//            cell.setCellName(name: "최신순")
+//            cell.delegate = self
+//
+//            return cell
+//
+//        default:
+//            return UITableViewCell()
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let HotCell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+//        if indexPath.row == 0 {
+//            HotCell.setSelectedCell()
+//
+//        }
+//
+//    }
+//
+//}
+//
+//extension HomePostVC: UITableViewDataSource{
+//
+//}
 
 extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
-        dropDownTableview.isHidden = false
-
+        filterTableView.isHidden = false
     }
     
 }
 
-extension HomePostVC: SetTitleDelegate {
-    func setTitle(cell: HotDropDownTVC) {
-        
-        if cell.name == "인기순"{
-            print("인기순 실행")
-            self.getData()
-            self.cellCount = self.postData[0].data.drive.count
-            self.dropDownTableview.isHidden = true
-            topCVCCell?.setTitle(data: "인기순")
-            topCVCCell?.setTopTitle(name: "인기순")
-            topCVCCell?.setSelectName(name: "인기순")
-        }
-        
-        else if cell.name == "최신순"{
-            print("최신순 실행")
-            self.getNewData()
-            self.cellCount = self.postData[0].data.drive.count
-            self.dropDownTableview.isHidden = true
-            topCVCCell?.setTitle(data: "최신순")
-            topCVCCell?.setTopTitle(name: "최신순")
-            topCVCCell?.setSelectName(name: "최신순")
-
-        }
-        
-    }
-    
-}
+//extension HomePostVC: SetTitleDelegate {
+//    func setTitle(cell: HotDropDownTVC) {
+//        
+//        if cell.name == "인기순"{
+//            print("인기순 실행")
+//            self.getData()
+//            self.cellCount = self.postData[0].data.drive.count
+//            self.dropDownTableview.isHidden = true
+//            topCVCCell?.setTitle(data: "인기순")
+//            topCVCCell?.setTopTitle(name: "인기순")
+//            topCVCCell?.setSelectName(name: "인기순")
+//        }
+//        
+//        else if cell.name == "최신순"{
+//            print("최신순 실행")
+//            self.getNewData()
+//            self.cellCount = self.postData[0].data.drive.count
+//            self.dropDownTableview.isHidden = true
+//            topCVCCell?.setTitle(data: "최신순")
+//            topCVCCell?.setTopTitle(name: "최신순")
+//            topCVCCell?.setSelectName(name: "최신순")
+//
+//        }
+//        
+//    }
+//    
+//}
 
 extension HomePostVC{
 
@@ -350,7 +348,7 @@ func dismissDropDownWhenTappedAround() {
     }
     
     @objc func dismissDropDown() {
-        self.dropDownTableview.isHidden = true
+        self.filterTableView.isHidden = true
     }
 }
 
@@ -375,4 +373,18 @@ extension HomePostVC: PostIdDelegate {
         tabBarController?.present(nextVC, animated: true, completion: nil)
     }
     
+}
+extension HomePostVC: NewHotFilterClickedDelegate{
+    func filterClicked(row: Int) {
+        switch row {
+        case 0:
+            getData()
+            currentState = "인기순"
+            collectionView.reloadData()
+        default:
+            getNewData()
+            currentState = "최신순"
+            collectionView.reloadData()
+        }
+    }
 }
