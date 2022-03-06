@@ -128,11 +128,11 @@ class AddressMainVC: UIViewController {
     }
     
     
-    @objc func dismissView(){
+    @objc private func dismissView(){
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func sendDecidedAddress(){
+    @objc private func sendDecidedAddress(){
         let newAddressList = changeAddressData()
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
@@ -140,7 +140,7 @@ class AddressMainVC: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    func changeAddressData() -> [Address]{
+    private func changeAddressData() -> [Address]{
         print("현재까지 주소 - \(addressList)")
         var castedToAddressDatalList : [Address] = []
         addressList.forEach{
@@ -152,7 +152,7 @@ class AddressMainVC: UIViewController {
 
 // MARK: - Guide Animation
 extension AddressMainVC{
-    func setupGuideAnimationView(){
+    private func setupGuideAnimationView(){
         if !isFirstOpen {return}
         let backgroundView = UIView()
         backgroundView.backgroundColor = .mainBlack.withAlphaComponent(0.8)
