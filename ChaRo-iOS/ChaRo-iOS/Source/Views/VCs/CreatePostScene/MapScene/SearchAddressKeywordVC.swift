@@ -43,11 +43,13 @@ class SearchAddressKeywordVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         setupConstraints()
         setActionToComponent()
         bindToViewModel()
     }
     
+    //MARK: - public func
     public func setAddressModel(model: AddressDataModel, cellType: String, index: Int){
         searchTextField.placeholder = "\(cellType)를 입력해주세요"
         addressType = cellType
@@ -56,6 +58,12 @@ class SearchAddressKeywordVC: UIViewController {
     
     public func setSearchKeyword(list: [KeywordResult]){
         print(list)
+    }
+    
+    // MARK: - private func
+    
+    private func configureUI(){
+        view.backgroundColor = .white
     }
     
     private func bindToViewModel(){
@@ -83,18 +91,10 @@ class SearchAddressKeywordVC: UIViewController {
     }
     
     private func pushNextVC(address: AddressDataModel){
-        let nextVC = self.getAddressConfirmVC()
+        let nextVC = AddressConfirmVC()
         nextVC.setPresentingAddress(address: address)
         nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
         self.navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
-    private func getAddressConfirmVC() -> AddressConfirmVC{
-        let storyboard = UIStoryboard(name: "AddressConfirm", bundle: nil)
-        guard let nextVC = storyboard.instantiateViewController(identifier: AddressConfirmVC.identifier) as? AddressConfirmVC else {
-            return AddressConfirmVC()
-        }
-        return nextVC
     }
     
     public func setActionToComponent(){

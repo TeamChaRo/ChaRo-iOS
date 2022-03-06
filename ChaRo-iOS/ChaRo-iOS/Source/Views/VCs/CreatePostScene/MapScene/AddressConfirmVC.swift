@@ -62,8 +62,13 @@ class AddressConfirmVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         setContraints()
         initTMapView()
+    }
+    
+    private func configureUI(){
+        view.backgroundColor = .white
     }
     
     @objc func popCurrentView(){
@@ -119,7 +124,6 @@ class AddressConfirmVC: UIViewController {
         tMapView.setCenter(initPosition)
         tMapView.setZoom(18)
     }
-    
     
     func setContraints(){
         view.addSubviews([tMapView,
