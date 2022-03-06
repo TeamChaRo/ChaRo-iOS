@@ -37,7 +37,7 @@ class SearchAddressKeywordVC: UIViewController {
         $0.backgroundColor = .gray20
     }
     private var tableView = UITableView().then{
-        $0.registerCustomXib(xibName: SearchKeywordCell.identifier)
+        $0.register(cell: SearchKeywordCell.self)
         $0.rowHeight = 72
     }
     
@@ -69,7 +69,7 @@ class SearchAddressKeywordVC: UIViewController {
     private func bindToViewModel(){
         viewModel
             .addressSubject
-            .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.identifier,
+            .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.className,
                                                 cellType: SearchKeywordCell.self)){ row, element, cell in
                 cell.titleLabel.text = element.title
                 cell.addressLabel.text = element.address
@@ -85,9 +85,9 @@ class SearchAddressKeywordVC: UIViewController {
         searchTextField.rx.text
             .throttle(.milliseconds(1500), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: {
+                print("검색하는 text = \($0)")
                 self.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
             }).disposed(by: disposeBag)
-        
     }
     
     private func pushNextVC(address: AddressDataModel){
