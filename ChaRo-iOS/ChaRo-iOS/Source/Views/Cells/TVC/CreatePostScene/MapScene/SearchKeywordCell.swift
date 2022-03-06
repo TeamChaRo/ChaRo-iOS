@@ -10,7 +10,6 @@ import Then
 
 class SearchKeywordCell: UITableViewCell {
 
-    static let identifier = "SearchKeywordCell"
     private var addressData : AddressDataModel?
     public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
     
@@ -30,12 +29,15 @@ class SearchKeywordCell: UITableViewCell {
         $0.text = ""
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
-        self.selectionStyle = .none
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
@@ -44,7 +46,7 @@ class SearchKeywordCell: UITableViewCell {
     }
     
     private func setupConstraints(){
-        addSubviews([titleLabel,
+        contentView.addSubviews([titleLabel,
                      addressLabel,
                      dateLabel])
         
