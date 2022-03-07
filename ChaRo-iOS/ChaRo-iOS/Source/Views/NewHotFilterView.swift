@@ -34,12 +34,15 @@ class NewHotFilterView: UIView{
     }
     private func setView(){
         backgroundView.frame = CGRect(x: 0, y: 0, width: 180, height: 97)
-        tableView.frame = CGRect(x: 0, y: 0, width: 180, height: 82)
+        tableView.frame = CGRect(x: 0, y: 0, width: 180, height: 97)
         addSubview(backgroundView)
         addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerCustomXib(xibName: "HotDropDownTVC")
+        
+        tableView.bounces = false
+        tableView.showsVerticalScrollIndicator = false
         
         backgroundView.clipsToBounds = true
         backgroundView.layer.cornerRadius = 15
@@ -49,7 +52,7 @@ class NewHotFilterView: UIView{
         tableView.snp.makeConstraints{
             $0.leading.equalTo(backgroundView).offset(0)
             $0.trailing.equalTo(backgroundView).offset(0)
-            $0.top.equalTo(backgroundView).offset(11)
+            $0.top.equalTo(backgroundView).offset(0)
             $0.bottom.equalTo(backgroundView).offset(0)
         }
     }
@@ -57,6 +60,9 @@ class NewHotFilterView: UIView{
 }
 
 extension NewHotFilterView: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 49
+    }
     
 }
 extension NewHotFilterView: UITableViewDataSource{
