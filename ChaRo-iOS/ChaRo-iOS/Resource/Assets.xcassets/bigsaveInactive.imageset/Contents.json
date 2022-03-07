@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "uiViewSelectboxWarningUnselect.png",
+      "filename" : "bigsave5_inactive.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "uiViewSelectboxWarningUnselect@2x.png",
+      "filename" : "bigsave5_inactive@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "uiViewSelectboxWarningUnselect@3x.png",
+      "filename" : "bigsave5_inactive@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

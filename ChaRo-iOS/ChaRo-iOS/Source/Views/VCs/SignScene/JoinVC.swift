@@ -28,7 +28,7 @@ class JoinVC: UIViewController {
     }
     
     var backButton = UIButton().then {
-        $0.setImage(UIImage(named: "icBackButton"), for: .normal)
+        $0.setImage(ImageLiterals.icBack, for: .normal)
         $0.addTarget(self, action: #selector(moveBack), for: .touchUpInside)
     }
     

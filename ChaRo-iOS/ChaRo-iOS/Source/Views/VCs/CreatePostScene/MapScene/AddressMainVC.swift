@@ -131,7 +131,7 @@ class AddressMainVC: UIViewController {
     @objc func sendDecidedAddress(){
         let newAddressList = changeAddressData()
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
         print("------------------------")
         print("imagelist = \(imageList) 이거 넘길 거야!!!!")
 //        print("------------------------")

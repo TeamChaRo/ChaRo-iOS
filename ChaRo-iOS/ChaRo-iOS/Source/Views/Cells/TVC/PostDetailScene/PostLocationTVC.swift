@@ -27,7 +27,7 @@ class PostLocationTVC: UITableViewCell {
 
     let copyButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "copy1LightVer"), for: .normal)
+        button.setBackgroundImage(ImageLiterals.icCopy, for: .normal)
         button.isUserInteractionEnabled = true
         button.imageView?.contentMode = .scaleToFill
         return button
