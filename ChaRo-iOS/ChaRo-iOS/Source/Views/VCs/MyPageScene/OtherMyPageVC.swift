@@ -54,7 +54,7 @@ class OtherMyPageVC: UIViewController {
     }
     
     private let isFollowButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
         $0.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
     }
     
@@ -97,7 +97,7 @@ class OtherMyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
     }
     private let backButton = UIButton().then{
-        $0.setBackgroundImage(UIImage(named: "icBack1"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icBackWhite, for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     //컬렉션 뷰
@@ -358,7 +358,7 @@ class OtherMyPageVC: UIViewController {
                        if let response = data as? DoFollowDataModel{
                            self.isFollow = response.data.isFollow
                            if self.isFollow == false{
-                               self.isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+                               self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
                            }
                            else{
                                self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
@@ -424,7 +424,7 @@ class OtherMyPageVC: UIViewController {
                 if let response = data as? DoFollowDataModel{
                     self.isFollow = response.data.isFollow
                     if self.isFollow == false{
-                        self.isFollowButton.setBackgroundImage(UIImage(named: "followButton"), for: .normal)
+                        self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
                         self.getMypageData()
                     }
                     else{
@@ -483,7 +483,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
+        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.className) as? PostDetailVC else {return}
         if indexPath.row > 0{
             detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
             detailVC.setAdditionalDataOfPost(data: DriveElement.init(

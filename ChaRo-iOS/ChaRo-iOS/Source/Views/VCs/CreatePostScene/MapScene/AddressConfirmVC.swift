@@ -22,7 +22,7 @@ class AddressConfirmVC: UIViewController {
     
     private var backButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "iconCircleBackButton"), for: .normal)
+        button.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)
         button.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
         return button
     }()

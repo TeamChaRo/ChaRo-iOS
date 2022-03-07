@@ -52,7 +52,7 @@
                                             <constraint firstAttribute="width" constant="48" id="LAu-C1-IdI"/>
                                             <constraint firstAttribute="height" constant="48" id="UT8-QG-2Gw"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="iconBack1"/>
+                                        <state key="normal" backgroundImage="backIcon"/>
                                         <connections>
                                             <action selector="backButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="c9n-W2-7qp"/>
                                         </connections>
@@ -105,7 +105,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iconBack1" width="48" height="48"/>
+        <image name="backIcon" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

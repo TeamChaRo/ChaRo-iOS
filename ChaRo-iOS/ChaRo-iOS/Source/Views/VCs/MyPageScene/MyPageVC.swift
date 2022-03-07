@@ -710,7 +710,7 @@ extension MyPageVC: UICollectionViewDelegate {
 extension MyPageVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.identifier) as? PostDetailVC else {return}
+        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.className) as? PostDetailVC else {return}
         var driveData = MyPageDrive()
         //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
         if indexPath.row > 0 {
