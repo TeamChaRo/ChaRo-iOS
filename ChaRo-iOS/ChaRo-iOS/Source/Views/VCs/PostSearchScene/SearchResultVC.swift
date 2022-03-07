@@ -17,11 +17,13 @@ class SearchResultVC: UIViewController {
     public var filterResultList: [String] = []
     var myCellIsFirstLoaded: Bool = true
     
+    var currentState: String = "인기순"
+    
     var topCVCCell: HomePostDetailCVC?
     
     //MARK: UIComponent
     private let navigationView = UIView()
-    @IBOutlet weak var dropDownTableView: UITableView!
+    private let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
     private lazy var backButton = LeftBackButton(toPop: self)
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
                                                             color: .mainBlack)
@@ -58,8 +60,6 @@ class SearchResultVC: UIViewController {
         postSearchPost(type: "like")
         setConstraint()
         configureCollectionView()
-        configureDropDown()
-        
     }
     
     public func setFilterTagList(list: [String]){
@@ -96,17 +96,18 @@ class SearchResultVC: UIViewController {
         collectionView.isPagingEnabled = false
     }
     
-    func configureDropDown(){
-        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
-        dropDownTableView.delegate = self
-        dropDownTableView.dataSource = self
-        dropDownTableView.isHidden = true
-        dropDownTableView.separatorStyle = .none
-        dropDownTableView.clipsToBounds = true
-        dropDownTableView.layer.cornerRadius = 20
-
+    func filterTableViewLayout() {
+        filterTableView.delegate = self
+        filterTableView.clickDelegate = self
+        filterTableView.isHidden = true
+        self.view.addSubview(filterTableView)
+        filterTableView.snp.makeConstraints{
+            $0.top.equalTo(navigationView.snp.bottom).offset(119)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(97)
+            $0.width.equalTo(180)
+        }
     }
-    
 }
 
 extension SearchResultVC: UICollectionViewDelegate{
@@ -135,8 +136,9 @@ extension SearchResultVC: UICollectionViewDataSource{
             if myCellIsFirstLoaded {
                 myCellIsFirstLoaded = false
                 topCVCCell = dropDownCell
-                topCVCCell?.postCount = postCount
             }
+            topCVCCell?.setTitle(data: currentState)
+
             return topCVCCell ?? UICollectionViewCell()
         }
         cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
@@ -183,7 +185,7 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if indexPath.row == 0 {
-            return CGSize(width: collectionView.frame.size.width-40, height: 30)
+            return CGSize(width: collectionView.frame.size.width-40, height: 57)
         }
         
         return CGSize(width: collectionView.frame.size.width-40, height: 260)
@@ -250,6 +252,7 @@ extension SearchResultVC {
             setEmptyViewConstraint()
         }else{
             setResultViewConstraint()
+            filterTableViewLayout()
         }
     }
     
@@ -349,67 +352,81 @@ extension SearchResultVC{
 }
 
 
-extension SearchResultVC: UITableViewDelegate{
-    
-}
-extension SearchResultVC: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-            var bgColorView = UIView()
-            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-            cell.selectedBackgroundView = bgColorView
-            cell.setLabel()
-            cell.setCellName(name: "인기순")
-            print("실행됨")
-            cell.delegate = self
-            return cell
-
-        case 1:
-            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-            var bgColorView = UIView()
-            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-            cell.selectedBackgroundView = bgColorView
-            print("실행됨")
-            cell.setLabel()
-            cell.setCellName(name: "최신순")
-            cell.delegate = self
-            return cell
-        default:
-            return UITableViewCell()
-        }
-    }
-}
-    
-extension SearchResultVC: SetTitleDelegate{
-    func setTitle(cell: HotDropDownTVC) {
-        if cell.name == "인기순"{
-            print("인기순 실행")
-            GetMyPageDataService.URL = Constants.myPageLikeURL
-            postSearchPost(type: "like")
-            postCount = postData.count
-            self.dropDownTableView.isHidden = true
-            topCVCCell?.setTitle(data: "인기순")
-        }
-        
-        else if cell.name == "최신순"{
-            print("최신순 실행")
-            GetMyPageDataService.URL = Constants.myPageNewURL
-            postSearchPost(type: "new")
-            postCount = postData.count
-            self.dropDownTableView.isHidden = true
-            topCVCCell?.setTitle(data: "최신순")
-            
-        }
-    }
-}
+//extension SearchResultVC: UITableViewDelegate{
+//
+//}
+//extension SearchResultVC: UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 2
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        switch indexPath.row {
+//        case 0:
+//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+//            var bgColorView = UIView()
+//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+//            cell.selectedBackgroundView = bgColorView
+//            cell.setLabel()
+//            cell.setCellName(name: "인기순")
+//            print("실행됨")
+//            cell.delegate = self
+//            return cell
+//
+//        case 1:
+//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
+//            var bgColorView = UIView()
+//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+//            cell.selectedBackgroundView = bgColorView
+//            print("실행됨")
+//            cell.setLabel()
+//            cell.setCellName(name: "최신순")
+//            cell.delegate = self
+//            return cell
+//        default:
+//            return UITableViewCell()
+//        }
+//    }
+//}
+//
+//extension SearchResultVC: SetTitleDelegate{
+//    func setTitle(cell: HotDropDownTVC) {
+//        if cell.name == "인기순"{
+//            print("인기순 실행")
+//            GetMyPageDataService.URL = Constants.myPageLikeURL
+//            postSearchPost(type: "like")
+//            postCount = postData.count
+//            self.dropDownTableView.isHidden = true
+//            topCVCCell?.setTitle(data: "인기순")
+//        }
+//
+//        else if cell.name == "최신순"{
+//            print("최신순 실행")
+//            GetMyPageDataService.URL = Constants.myPageNewURL
+//            postSearchPost(type: "new")
+//            postCount = postData.count
+//            self.dropDownTableView.isHidden = true
+//            topCVCCell?.setTitle(data: "최신순")
+//
+//        }
+//    }
+//}
 extension SearchResultVC: MenuClickedDelegate {
     func menuClicked(){
-        dropDownTableView.isHidden = false
+        filterTableView.isHidden = false
+    }
+}
+extension SearchResultVC: NewHotFilterClickedDelegate{
+    func filterClicked(row: Int) {
+        switch row {
+        case 0:
+            postSearchPost(type: "like")
+            currentState = "인기순"
+            collectionView.reloadData()
+        default:
+            postSearchPost(type: "new")
+            currentState = "최신순"
+            collectionView.reloadData()
+        }
     }
 }

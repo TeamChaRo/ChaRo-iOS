@@ -85,8 +85,8 @@ class HomePostVC: UIViewController {
         getData()
         setHeaderBottomView()
         self.dismissDropDownWhenTappedAround()
-
         // Do any additional setup after loading the view.
+
     }
 
     @IBAction func backButtonClicked(_ sender: Any) {
@@ -199,7 +199,6 @@ extension HomePostVC: UICollectionViewDelegate{
                              tagArr: postData[0].data.drive[indexPath.row].tags,
                              isFavorite: postData[0].data.drive[indexPath.row].isFavorite,
                              postID: postData[0].data.drive[indexPath.row].postID, height: 60)
-                topCVCCell?.postCount = postCount
                 //cell.titleHeight?.constant = 60
                 cell.setLabel()
                 return cell
