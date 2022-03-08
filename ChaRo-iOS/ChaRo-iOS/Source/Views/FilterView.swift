@@ -17,6 +17,7 @@ class FilterView: UIView {
     var touchCellCompletion: ((Int) -> Int)?
     
     private func configCell() {
+        self.backgroundColor = UIColor.white
         self.layer.cornerRadius = 12
         self.clipsToBounds = true
         addSubviews([popularOlderView, newOlderView])
