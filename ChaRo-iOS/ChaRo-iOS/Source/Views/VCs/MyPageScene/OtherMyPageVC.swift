@@ -119,7 +119,7 @@ class OtherMyPageVC: UIViewController {
         return collectionView
     }()
     //인기순 최신순 필터
-    private let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
+    private let filterView = FilterView()
 
     
     
@@ -128,7 +128,8 @@ class OtherMyPageVC: UIViewController {
         super.viewDidLoad()
         setHeaderViewLayout()
         setCollectionviewLayout()
-        filterTableViewLayout()
+        setFilterViewLayout()
+        setFilterViewCompletion()
         getMypageData()
         getFollowData()
         self.dismissDropDownWhenTappedAround()
@@ -228,19 +229,38 @@ class OtherMyPageVC: UIViewController {
         }
     
     }
-    
-    func filterTableViewLayout(){
-        filterTableView.delegate = self
-        filterTableView.clickDelegate = self
-        filterTableView.isHidden = true
-        self.view.addSubview(filterTableView)
-        filterTableView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(250)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.height.equalTo(97)
-            $0.width.equalTo(180)
+//MARK: filterTableView
+        func setFilterViewLayout() {
+            self.view.addSubview(filterView)
+            filterView.isHidden = true
+            filterView.snp.makeConstraints{
+                $0.top.equalTo(headerBackgroundView.snp.bottom).offset(49)
+                $0.trailing.equalToSuperview().offset(-10)
+                $0.height.equalTo(97)
+                $0.width.equalTo(180)
+            }
         }
-    }
+        
+        func setFilterViewCompletion(){
+            filterView.touchCellCompletion = {
+                index in
+                switch index{
+                case 0:
+                    self.currentState = "인기순"
+                    GetMyPageDataService.URL = Constants.myPageLikeURL
+                case 1:
+                    self.currentState = "최신순"
+                    GetMyPageDataService.URL = Constants.myPageNewURL
+                default:
+                    print("Error")
+                }
+                self.writenPostDriveData = []
+                self.getMypageData()
+                self.collectionview.reloadData()
+                self.filterView.isHidden = true
+                return index
+            }
+        }
     //MARK: function
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -538,35 +558,12 @@ func dismissDropDownWhenTappedAround() {
     }
     
     @objc func dismissDropDown() {
-        self.filterTableView.isHidden = true
+        self.filterView.isHidden = true
     }
-}
-
-extension OtherMyPageVC: NewHotFilterClickedDelegate{
-    func filterClicked(row: Int) {
-        switch row {
-        case 0:
-            updateFollowNum = false
-            GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
-            writenPostDriveData = []
-            getMypageData()
-            currentState = "인기순"
-            collectionview.reloadData()
-        default:
-            updateFollowNum = false
-            GetMyPageDataService.URL = Constants.otherMyPageNewURL + otherUserID
-            writenPostDriveData = []
-            getMypageData()
-            currentState = "최신순"
-            collectionview.reloadData()
-        }
-    }
-    
-
 }
 extension OtherMyPageVC: MenuClickedDelegate{
     func menuClicked(){
-        filterTableView.isHidden = false
+        filterView.isHidden = false
     }
 }
 extension OtherMyPageVC: AnimateIndicatorDelegate{
