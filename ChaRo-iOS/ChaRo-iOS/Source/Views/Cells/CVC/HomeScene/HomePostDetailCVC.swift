@@ -29,9 +29,7 @@ class HomePostDetailCVC: UICollectionViewCell {
     
     @IBAction func menuButtonClicked(_ sender: Any) {
         delegate?.menuClicked()
-//        isButtonClicked.toggle()
-        print("HomePostDetailCVC")
-        print("버튼 눌림", selectText)        
+        print("버튼 눌림", selectText)
     }
     
     override func awakeFromNib() {
