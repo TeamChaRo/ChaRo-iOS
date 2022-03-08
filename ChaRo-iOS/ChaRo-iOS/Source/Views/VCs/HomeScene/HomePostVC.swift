@@ -19,7 +19,6 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var famousButton: UIButton!
     @IBOutlet weak var newUpdateButton: UIButton!
-//    @IBOutlet weak var dropDownTableview: UITableView!
     @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
     
@@ -37,7 +36,7 @@ class HomePostVC: UIViewController {
     var cellLoadFirst: Bool = true
     
     var currentState: String = "인기순"
-    let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
+    let filterView = FilterView()
     
     static let identifier : String = "HomePostVC"
     
@@ -52,7 +51,7 @@ class HomePostVC: UIViewController {
         }
     }
     
-    func setTableView(){
+    func setCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
@@ -64,26 +63,46 @@ class HomePostVC: UIViewController {
     }
     
     
-    func filterTableViewLayout() {
-        filterTableView.delegate = self
-        filterTableView.clickDelegate = self
-        filterTableView.isHidden = true
-        self.view.addSubview(filterTableView)
-        filterTableView.snp.makeConstraints{
+    func filterViewLayout() {
+        self.view.addSubview(filterView)
+        filterView.isHidden = true
+        filterView.snp.makeConstraints{
             $0.top.equalTo(homePostNavigationView.snp.bottom).offset(60)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)
             $0.width.equalTo(180)
         }
     }
+    
+    func filterViewCompletion(){
+        filterView.touchCellCompletion = {
+            index in
+            switch index{
+            case 0:
+                self.currentState = "인기순"
+                self.getData()
+                self.collectionView.reloadData()
+                self.filterView.isHidden = true
+            case 1:
+                self.currentState = "최신순"
+                self.getNewData()
+                self.collectionView.reloadData()
+                self.filterView.isHidden = true
+            default:
+                print("Error")
+            }
+            return index
+        }
+    }
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTableView()
-        filterTableViewLayout()
+        setCollectionView()
+        filterViewLayout()
         setNavigationLabel()
         getData()
         setHeaderBottomView()
+        filterViewCompletion()
         self.dismissDropDownWhenTappedAround()
         // Do any additional setup after loading the view.
 
@@ -99,7 +118,8 @@ class HomePostVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? DetailModel{
-                    
+                    print("인기순 데이터")
+
                     DispatchQueue.global().sync {
                         self.postCount = response.data.totalCourse
                         self.postData = [response]
@@ -125,7 +145,7 @@ class HomePostVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? DetailModel{
-                    
+                    print("최신순 데이터")
                     DispatchQueue.global().sync {
                         self.postCount = response.data.drive.count
                         self.newPostCount = response.data.drive.count
@@ -255,9 +275,8 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
 
 extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
-        filterTableView.isHidden = false
+        filterView.isHidden = false
     }
-    
 }
 
 extension HomePostVC{
@@ -268,9 +287,9 @@ func dismissDropDownWhenTappedAround() {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
-    
+
     @objc func dismissDropDown() {
-        self.filterTableView.isHidden = true
+        self.filterView.isHidden = true
     }
 }
 
@@ -295,18 +314,4 @@ extension HomePostVC: PostIdDelegate {
         tabBarController?.present(nextVC, animated: true, completion: nil)
     }
     
-}
-extension HomePostVC: NewHotFilterClickedDelegate{
-    func filterClicked(row: Int) {
-        switch row {
-        case 0:
-            getData()
-            currentState = "인기순"
-            collectionView.reloadData()
-        default:
-            getNewData()
-            currentState = "최신순"
-            collectionView.reloadData()
-        }
-    }
 }
