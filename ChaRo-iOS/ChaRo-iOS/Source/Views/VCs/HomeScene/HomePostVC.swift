@@ -63,7 +63,7 @@ class HomePostVC: UIViewController {
     }
     
     
-    func filterViewLayout() {
+    func setFilterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
         filterView.snp.makeConstraints{
@@ -74,23 +74,21 @@ class HomePostVC: UIViewController {
         }
     }
     
-    func filterViewCompletion(){
+    func setFilterViewCompletion(){
         filterView.touchCellCompletion = {
             index in
             switch index{
             case 0:
                 self.currentState = "인기순"
                 self.getData()
-                self.collectionView.reloadData()
-                self.filterView.isHidden = true
             case 1:
                 self.currentState = "최신순"
                 self.getNewData()
-                self.collectionView.reloadData()
-                self.filterView.isHidden = true
             default:
                 print("Error")
             }
+            self.collectionView.reloadData()
+            self.filterView.isHidden = true
             return index
         }
     }
@@ -98,11 +96,11 @@ class HomePostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
-        filterViewLayout()
+        setFilterViewLayout()
         setNavigationLabel()
         getData()
         setHeaderBottomView()
-        filterViewCompletion()
+        setFilterViewCompletion()
         self.dismissDropDownWhenTappedAround()
         // Do any additional setup after loading the view.
 

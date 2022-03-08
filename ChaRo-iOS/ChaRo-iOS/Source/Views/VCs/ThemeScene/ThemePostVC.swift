@@ -294,15 +294,15 @@ extension ThemePostVC: PostIdDelegate {
     }
 }
 
-
-extension ThemePostVC: SetThemeUpdateDelegate {
-    
-    func updateThemeData(filter: Filter) {
-        getThemeData(theme: selectedTheme, filter: filter)
-        print(selectedDriveList)
-    }
-
-}
+//
+//extension ThemePostVC: SetThemeUpdateDelegate {
+//    
+//    func updateThemeData(filter: Filter) {
+//        getThemeData(theme: selectedTheme, filter: filter)
+//        print(selectedDriveList)
+//    }
+//
+//}
 extension ThemePostVC{
 
 func dismissDropDownWhenTappedAround() {

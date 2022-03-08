@@ -60,7 +60,7 @@ class SearchResultVC: UIViewController {
         postSearchPost(type: "like")
         setConstraint()
         SearchResultVC()
-        filterViewCompletion()
+        setFilterViewCompletion()
         configureCollectionView()
     }
     
@@ -109,7 +109,7 @@ class SearchResultVC: UIViewController {
         }
     }
     
-    func filterViewCompletion(){
+    func setFilterViewCompletion(){
         filterView.touchCellCompletion = {
             index in
             switch index{
