@@ -19,7 +19,7 @@ class MyPageVC: UIViewController {
     var tabbarBottomConstraint: Int = 0
     
 //    var isLogin: Bool = UserDefaults.standard.bool(forKey: "isLogin") ?? true
-    var isLogin: Bool = false
+    var isLogin: Bool = true
     
     private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
@@ -27,7 +27,7 @@ class MyPageVC: UIViewController {
     private var savePostDriveData: [MyPageDrive] = []
     
     
-    let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
+    let filterView = FilterView()
     var currentState: String = "인기순"
     
     //무한스크롤을 위함
@@ -123,7 +123,7 @@ class MyPageVC: UIViewController {
         $0.numberOfLines = 3
     }
     private let noSaveDataLabel = UILabel().then {
-        $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n작성해보는 것은 어떠신가요?"
+        $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n만들어보는 것은 어떠신가요?"
         $0.textColor = UIColor.gray50
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textAlignment = .center
@@ -210,7 +210,8 @@ class MyPageVC: UIViewController {
         setHeaderLayout()
         setTabbarLayout()
         setCollectionViewLayout()
-        filterTableViewLayout()
+        setFilterViewLayout()
+        setFilterViewCompletion()
         self.dismissDropDownWhenTappedAround()
     }
     
@@ -494,16 +495,35 @@ class MyPageVC: UIViewController {
         
     }
 //MARK: filterTableView
-    func filterTableViewLayout() {
-        filterTableView.delegate = self
-        filterTableView.clickDelegate = self
-        filterTableView.isHidden = true
-        self.view.addSubview(filterTableView)
-        filterTableView.snp.makeConstraints{
+        func setFilterViewLayout() {
+        self.view.addSubview(filterView)
+        filterView.isHidden = true
+        filterView.snp.makeConstraints{
             $0.top.equalToSuperview().offset(310)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)
             $0.width.equalTo(180)
+        }
+    }
+    
+    func setFilterViewCompletion(){
+        filterView.touchCellCompletion = {
+            index in
+            switch index{
+            case 0:
+                self.currentState = "인기순"
+                GetMyPageDataService.URL = Constants.myPageLikeURL
+            case 1:
+                self.currentState = "최신순"
+                GetMyPageDataService.URL = Constants.myPageNewURL
+            default:
+                print("Error")
+            }
+            self.getMypageData()
+            self.writeCollectionView.reloadData()
+            self.saveCollectioinView.reloadData()
+            self.filterView.isHidden = true
+            return index
         }
     }
 //MARK: CollectionViewLayout
@@ -702,9 +722,6 @@ extension MyPageVC: UICollectionViewDelegate {
         return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
-    
-
-    
 }
 //MARK: Extension
 extension MyPageVC: UICollectionViewDataSource {
@@ -795,7 +812,7 @@ extension MyPageVC: UICollectionViewDataSource {
                 let saveElement = savePostDriveData[indexPath.row-1]
                 var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
                 
-            cell.setData(image: savePostDriveData[indexPath.row-1].image, title: savePostDriveData[indexPath.row-1].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostDriveData[indexPath.row].favoriteNum, save: savePostDriveData[indexPath.row].saveNum, year: savePostDriveData[indexPath.row].year, month: savePostDriveData[indexPath.row].month, day: savePostDriveData[indexPath.row].day, postID: savePostDriveData[indexPath.row].postID)
+            cell.setData(image: savePostDriveData[indexPath.row-1].image, title: savePostDriveData[indexPath.row-1].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostDriveData[indexPath.row-1].favoriteNum, save: savePostDriveData[indexPath.row-1].saveNum, year: savePostDriveData[indexPath.row-1].year, month: savePostDriveData[indexPath.row-1].month, day: savePostDriveData[indexPath.row-1].day, postID: savePostDriveData[indexPath.row-1].postID)
             return cell
             }
         default:
@@ -820,13 +837,10 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
 extension MyPageVC: MenuClickedDelegate {
     func menuClicked() {
-        filterTableView.isHidden = false
+        filterView.isHidden = false
     }
-    
-    
 }
 extension MyPageVC{
 func dismissDropDownWhenTappedAround() {
@@ -837,26 +851,7 @@ func dismissDropDownWhenTappedAround() {
     }
     
     @objc func dismissDropDown() {
-        self.filterTableView.isHidden = true
-    }
-}
-
-extension MyPageVC: NewHotFilterClickedDelegate{
-    func filterClicked(row: Int) {
-        switch row {
-        case 0:
-            GetMyPageDataService.URL = Constants.myPageLikeURL
-            getMypageData()
-            currentState = "인기순"
-            writeCollectionView.reloadData()
-            saveCollectioinView.reloadData()
-        default:
-            GetMyPageDataService.URL = Constants.myPageNewURL
-            getMypageData()
-            currentState = "최신순"
-            writeCollectionView.reloadData()
-            saveCollectioinView.reloadData()
-        }
+        self.filterView.isHidden = true
     }
 }
 extension MyPageVC: AnimateIndicatorDelegate {
