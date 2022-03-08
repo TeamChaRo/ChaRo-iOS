@@ -23,7 +23,7 @@ class ThemePostVC: UIViewController {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToTitle: NSLayoutConstraint!
     
-    let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
+    let filterView = FilterView()
     
     
     //MARK:- Variable
@@ -33,7 +33,6 @@ class ThemePostVC: UIViewController {
     var ThemeDic: Dictionary = ["봄":"spring", "여름":"summer", "가을":"fall", "겨울":"winter", "산":"mountain", "바다":"sea", "호수":"lake", "강":"river", "해안도로":"oceanRoad", "벚꽃":"blossom", "단풍":"maple", "여유":"relax", "스피드":"speed", "야경":"nightView", "도심":"cityView"]
     
     var topTVCCell : ThemePostDetailTVC?
-    var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 0
     var currentState: String = "인기순"
@@ -48,7 +47,8 @@ class ThemePostVC: UIViewController {
         setTableView()
         setTitleLabelUI()
         setHeaderBottomView()
-        filterTableViewLayout()
+        filterViewCompletion()
+        filterViewLayout()
         dismissDropDownWhenTappedAround()
     }
 
@@ -84,12 +84,33 @@ class ThemePostVC: UIViewController {
         tableView.separatorStyle = .none
         
     }
-    func filterTableViewLayout() {
-        filterTableView.delegate = self
-        filterTableView.clickDelegate = self
-        filterTableView.isHidden = true
-        self.view.addSubview(filterTableView)
-        filterTableView.snp.makeConstraints{
+    
+    
+    func filterViewCompletion(){
+        filterView.touchCellCompletion = {
+            index in
+            switch index{
+            case 0:
+                self.currentState = "인기순"
+                self.getThemeData(theme: self.selectedTheme, filter: .like)
+                self.tableView.reloadData()
+                self.filterView.isHidden = true
+            case 1:
+                self.currentState = "최신순"
+                self.getThemeData(theme: self.selectedTheme, filter: .new)
+                self.tableView.reloadData()
+                self.filterView.isHidden = true
+            default:
+                print("Error")
+            }
+            return index
+        }
+    }
+    
+    func filterViewLayout() {
+        self.view.addSubview(filterView)
+        filterView.isHidden = true
+        filterView.snp.makeConstraints{
             $0.top.equalTo(navigationView.snp.bottom).offset(168)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)
@@ -244,7 +265,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
 
 extension ThemePostVC: MenuClickedDelegate{
     func menuClicked() {
-        filterTableView.isHidden = false
+        filterView.isHidden = false
     }
     
     
@@ -287,20 +308,20 @@ extension ThemePostVC: SetThemeUpdateDelegate {
     }
 
 }
-extension ThemePostVC: NewHotFilterClickedDelegate{
-    func filterClicked(row: Int) {
-        switch row {
-        case 0:
-            getThemeData(theme: selectedTheme, filter: .like)
-            currentState = "인기순"
-            tableView.reloadData()
-        default:
-            getThemeData(theme: selectedTheme, filter: .new)
-            currentState = "최신순"
-            tableView.reloadData()
-        }
-    }
-}
+//extension ThemePostVC: NewHotFilterClickedDelegate{
+//    func filterClicked(row: Int) {
+//        switch row {
+//        case 0:
+//            getThemeData(theme: selectedTheme, filter: .like)
+//            currentState = "인기순"
+//            tableView.reloadData()
+//        default:
+//            getThemeData(theme: selectedTheme, filter: .new)
+//            currentState = "최신순"
+//            tableView.reloadData()
+//        }
+//    }
+//}
 extension ThemePostVC{
 
 func dismissDropDownWhenTappedAround() {
@@ -311,6 +332,6 @@ func dismissDropDownWhenTappedAround() {
     }
     
     @objc func dismissDropDown() {
-        self.filterTableView.isHidden = true
+        self.filterView.isHidden = true
     }
 }
