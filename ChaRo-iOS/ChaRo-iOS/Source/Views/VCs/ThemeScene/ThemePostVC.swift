@@ -267,12 +267,9 @@ extension ThemePostVC: MenuClickedDelegate{
     func menuClicked() {
         filterView.isHidden = false
     }
-    
-    
 }
 
 extension ThemePostVC: ThemeNetworkDelegate {
-    
     func setClickedThemeData(themeName: String) {
         getThemeData(theme: themeName, filter: Filter.new)
     }
@@ -280,9 +277,7 @@ extension ThemePostVC: ThemeNetworkDelegate {
 }
 
 extension ThemePostVC: PostIdDelegate {
-    
     func sendPostID(data: Int) {
-    
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
         
@@ -308,20 +303,6 @@ extension ThemePostVC: SetThemeUpdateDelegate {
     }
 
 }
-//extension ThemePostVC: NewHotFilterClickedDelegate{
-//    func filterClicked(row: Int) {
-//        switch row {
-//        case 0:
-//            getThemeData(theme: selectedTheme, filter: .like)
-//            currentState = "인기순"
-//            tableView.reloadData()
-//        default:
-//            getThemeData(theme: selectedTheme, filter: .new)
-//            currentState = "최신순"
-//            tableView.reloadData()
-//        }
-//    }
-//}
 extension ThemePostVC{
 
 func dismissDropDownWhenTappedAround() {
