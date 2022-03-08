@@ -23,7 +23,7 @@ class SearchResultVC: UIViewController {
     
     //MARK: UIComponent
     private let navigationView = UIView()
-    private let filterTableView = NewHotFilterView(frame: CGRect(x: 0, y: 0, width: 180, height: 97))
+    private let filterView = FilterView()
     private lazy var backButton = LeftBackButton(toPop: self)
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
                                                             color: .mainBlack)
@@ -59,6 +59,8 @@ class SearchResultVC: UIViewController {
         super.viewDidLoad()
         postSearchPost(type: "like")
         setConstraint()
+        SearchResultVC()
+        filterViewCompletion()
         configureCollectionView()
     }
     
@@ -96,16 +98,35 @@ class SearchResultVC: UIViewController {
         collectionView.isPagingEnabled = false
     }
     
-    func filterTableViewLayout() {
-        filterTableView.delegate = self
-        filterTableView.clickDelegate = self
-        filterTableView.isHidden = true
-        self.view.addSubview(filterTableView)
-        filterTableView.snp.makeConstraints{
+    func setFilterViewLayout() {
+        self.view.addSubview(filterView)
+        filterView.isHidden = true
+        filterView.snp.makeConstraints{
             $0.top.equalTo(navigationView.snp.bottom).offset(119)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)
             $0.width.equalTo(180)
+        }
+    }
+    
+    func filterViewCompletion(){
+        filterView.touchCellCompletion = {
+            index in
+            switch index{
+            case 0:
+                self.currentState = "인기순"
+                self.postSearchPost(type: "new")
+                self.collectionView.reloadData()
+                self.filterView.isHidden = true
+            case 1:
+                self.currentState = "최신순"
+                self.postSearchPost(type: "like")
+                self.collectionView.reloadData()
+                self.filterView.isHidden = true
+            default:
+                print("Error")
+            }
+            return index
         }
     }
 }
@@ -125,6 +146,7 @@ extension SearchResultVC: UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC
         let dropDownCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePostDetailCVC.identifier, for: indexPath) as? HomePostDetailCVC
         dropDownCell?.delegate = self
+        topCVCCell?.delegate = self
         cell?.clickedPostCell = { postid in
             let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
@@ -138,7 +160,6 @@ extension SearchResultVC: UICollectionViewDataSource{
                 topCVCCell = dropDownCell
             }
             topCVCCell?.setTitle(data: currentState)
-
             return topCVCCell ?? UICollectionViewCell()
         }
         cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
@@ -252,7 +273,7 @@ extension SearchResultVC {
             setEmptyViewConstraint()
         }else{
             setResultViewConstraint()
-            filterTableViewLayout()
+            setFilterViewLayout()
         }
     }
     
@@ -351,82 +372,20 @@ extension SearchResultVC{
     }
 }
 
-
-//extension SearchResultVC: UITableViewDelegate{
-//
-//}
-//extension SearchResultVC: UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 2
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        switch indexPath.row {
-//        case 0:
-//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-//            var bgColorView = UIView()
-//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-//            cell.selectedBackgroundView = bgColorView
-//            cell.setLabel()
-//            cell.setCellName(name: "인기순")
-//            print("실행됨")
-//            cell.delegate = self
-//            return cell
-//
-//        case 1:
-//            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-//            var bgColorView = UIView()
-//            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-//            cell.selectedBackgroundView = bgColorView
-//            print("실행됨")
-//            cell.setLabel()
-//            cell.setCellName(name: "최신순")
-//            cell.delegate = self
-//            return cell
-//        default:
-//            return UITableViewCell()
-//        }
-//    }
-//}
-//
-//extension SearchResultVC: SetTitleDelegate{
-//    func setTitle(cell: HotDropDownTVC) {
-//        if cell.name == "인기순"{
-//            print("인기순 실행")
-//            GetMyPageDataService.URL = Constants.myPageLikeURL
-//            postSearchPost(type: "like")
-//            postCount = postData.count
-//            self.dropDownTableView.isHidden = true
-//            topCVCCell?.setTitle(data: "인기순")
-//        }
-//
-//        else if cell.name == "최신순"{
-//            print("최신순 실행")
-//            GetMyPageDataService.URL = Constants.myPageNewURL
-//            postSearchPost(type: "new")
-//            postCount = postData.count
-//            self.dropDownTableView.isHidden = true
-//            topCVCCell?.setTitle(data: "최신순")
-//
-//        }
-//    }
-//}
 extension SearchResultVC: MenuClickedDelegate {
     func menuClicked(){
-        filterTableView.isHidden = false
+        filterView.isHidden = false
     }
 }
-extension SearchResultVC: NewHotFilterClickedDelegate{
-    func filterClicked(row: Int) {
-        switch row {
-        case 0:
-            postSearchPost(type: "like")
-            currentState = "인기순"
-            collectionView.reloadData()
-        default:
-            postSearchPost(type: "new")
-            currentState = "최신순"
-            collectionView.reloadData()
-        }
+extension SearchResultVC{
+func dismissDropDownWhenTappedAround() {
+        let tap: UITapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissDropDown() {
+        self.filterView.isHidden = true
     }
 }
