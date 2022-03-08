@@ -17,6 +17,9 @@ class FilterCellView: UIView {
     let checkImageView = UIImageView().then{
         $0.image = ImageLiterals.icBlueCheck
     }
+    let bottomLineView = UIView().then{
+        $0.backgroundColor = UIColor.gray20
+    }
     func resetCellColor () {
         orderLabel.textColor = UIColor.gray40
         backgroundColor = UIColor.white
@@ -29,8 +32,8 @@ class FilterCellView: UIView {
         backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
     }
     
-    private func setLaout(type: FilterCellType){
-        addSubviews([orderLabel, checkImageView])
+    private func setLayout(type: FilterCellType){
+        addSubviews([orderLabel, checkImageView, bottomLineView])
         orderLabel.snp.makeConstraints{
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
@@ -41,6 +44,11 @@ class FilterCellView: UIView {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-16)
             $0.width.height.equalTo(22)
+        }
+        bottomLineView.snp.makeConstraints{
+            $0.leading.trailing.equalToSuperview().offset(0)
+            $0.height.equalTo(1)
+            $0.bottom.equalToSuperview().offset(1)
         }
         
         switch type {
@@ -64,7 +72,7 @@ class FilterCellView: UIView {
     
     init(type: FilterCellType){
         super.init(frame: .zero)
-        setLaout(type: type)
+        setLayout(type: type)
     }
 
 }

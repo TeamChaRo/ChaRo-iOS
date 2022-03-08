@@ -14,9 +14,11 @@ class FilterView: UIView {
     private let popularOlderView = FilterCellView(type: .populationOrderCell)
     private let newOlderView = FilterCellView(type: .newOrderCell)
     
-    var touchCellCompletion: (() -> Void)?
+    var touchCellCompletion: ((Int) -> Int)?
     
     private func configCell() {
+        self.layer.cornerRadius = 12
+        self.clipsToBounds = true
         addSubviews([popularOlderView, newOlderView])
         
         popularOlderView.snp.makeConstraints{
@@ -34,7 +36,9 @@ class FilterView: UIView {
         let popGesture = UITapGestureRecognizer(target: self, action: #selector(isCellClicked(sender:)))
         let newGesture = UITapGestureRecognizer(target: self, action: #selector(isCellClicked(sender:)))
         popularOlderView.addGestureRecognizer(popGesture)
+        popularOlderView.tag = 0
         newOlderView.addGestureRecognizer(newGesture)
+        newOlderView.tag = 1
         
         popularOlderView.isUserInteractionEnabled = true
         newOlderView.isUserInteractionEnabled = true
@@ -52,7 +56,7 @@ class FilterView: UIView {
             newOlderView.selectCellColor()
         }
         guard let completion = touchCellCompletion else { return }
-        completion()
+        completion(sender.view?.tag ?? 99)
         
     }
     
