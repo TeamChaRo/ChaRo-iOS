@@ -13,7 +13,7 @@ class PostLikeListVC: UIViewController{
     
     private let disposeBag = DisposeBag()
     private let viewModel = PostLikeListViewModel()
-    private let viewModelInput = PostLikeListViewModel.Input()
+    private let transionYOffsetSubject = PublishSubject<(CGFloat, Bool)>()
     
     //MARK: - Properties
     private var animator = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
@@ -98,9 +98,9 @@ class PostLikeListVC: UIViewController{
         let transionY = gesture.translation(in: self.view).y
         switch gesture.state{
         case .changed:
-            viewModelInput.transionYOffsetSubject.onNext((transionY, true))
+            transionYOffsetSubject.onNext((transionY, true))
         case .ended:
-            viewModelInput.transionYOffsetSubject.onNext((transionY, false))
+            transionYOffsetSubject.onNext((transionY, false))
         default:
             break
         }
@@ -113,7 +113,7 @@ class PostLikeListVC: UIViewController{
     }
     
     private func bindViewModel(){
-        let output = viewModel.transform(form: viewModelInput)
+        let output = viewModel.transform(form: PostLikeListViewModel.Input(transionYOffsetSubject: transionYOffsetSubject))
         output.newHeightSubject
             .bind(onNext: { [weak self] newHeight, isEnded in
                 isEnded ? self?.animateContainerView(height: newHeight)
