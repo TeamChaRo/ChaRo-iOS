@@ -16,20 +16,19 @@ class PostLikeListViewModel{
     let maximumContainerHeight: CGFloat = UIScreen.getDeviceHeight() - 64
     var currentContainerHeight: CGFloat = UIScreen.getDeviceHeight() / 2
     let maxBackgroundAlpha: CGFloat = 0.8
+    let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
     
     //MARK: - Input and Output
     struct Input{
-        let transionYOffsetSubject = PublishSubject<(CGFloat, Bool)>()
+        let transionYOffsetSubject: PublishSubject<(CGFloat, Bool)>
     }
     
     struct Output{
-        let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
-        let postLikeListSubject = PublishSubject<[Follow]>()
+        let newHeightSubject: PublishSubject<(CGFloat, Bool)>
     }
     
-    let output = Output()
-    
     func transform(form input: Input, disposeBag: DisposeBag) -> Output{
+        let output = Output(newHeightSubject: newHeightSubject)
         input.transionYOffsetSubject
             .bind(onNext: { [weak self] (yOffset, isDragging) in
                 guard let self = self else {return}
