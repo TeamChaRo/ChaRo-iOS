@@ -46,7 +46,7 @@ class PostLikeListVC: UIViewController{
         setupConstraints()
         configureUI()
         setupPanGesture()
-        bind()
+        bindViewModel()
         viewModel.getPostLikeList(postId: postId)
     }
     
@@ -115,9 +115,12 @@ class PostLikeListVC: UIViewController{
     }
     
     private func bindViewModel(){
-        let output = viewModel.transform(form: PostLikeListViewModel.Input(transionYOffsetSubject: transionYOffsetSubject))
+        let output = viewModel.transform(form: PostLikeListViewModel.Input(transionYOffsetSubject: transionYOffsetSubject), disposeBag: disposeBag)
         output.newHeightSubject
             .bind(onNext: { [weak self] newHeight, isEnded in
+                if newHeight == -1 {
+                    self?.animateDismissView()
+                }
                 isEnded ? self?.animateContainerView(height: newHeight)
                 : self?.updateContainerView(height: newHeight)
             })
