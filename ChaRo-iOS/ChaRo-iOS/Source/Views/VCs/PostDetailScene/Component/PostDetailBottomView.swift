@@ -24,10 +24,10 @@ class PostDetailBottomView: UIView{
         $0.setBackgroundImage(ImageLiterals.icShare, for: .normal)
     }
     
-    var likeLabel = UILabel().then{
-        $0.font = .notoSansRegularFont(ofSize: 12)
-        $0.textColor = .gray30
-        $0.text = "18명이 좋아합니다"
+    var likeDescriptionButton = UIButton().then{
+        $0.titleLabel?.font = .notoSansRegularFont(ofSize: 12)
+        $0.setTitleColor(.gray30, for: .normal)
+        $0.setTitle("18명이 좋아합니다.", for: .normal)
     }
     
     override init(frame: CGRect){
@@ -40,7 +40,7 @@ class PostDetailBottomView: UIView{
     }
     
     private func configUI(){
-        addSubviews([likeButton, likeLabel,
+        addSubviews([likeButton, likeDescriptionButton,
                      scrapButton, shareButton])
         
         likeButton.snp.makeConstraints{
@@ -49,7 +49,7 @@ class PostDetailBottomView: UIView{
             $0.height.equalTo(42)
         }
         
-        likeLabel.snp.makeConstraints{
+        likeDescriptionButton.snp.makeConstraints{
             $0.centerY.equalTo(likeButton.snp.centerY)
             $0.leading.equalTo(likeButton.snp.trailing).inset(2)
         }
