@@ -75,8 +75,7 @@ class HomePostVC: UIViewController {
     }
     
     func setFilterViewCompletion(){
-        filterView.touchCellCompletion = {
-            index in
+        filterView.touchCellCompletion = { index in
             switch index{
             case 0:
                 self.currentState = "인기순"

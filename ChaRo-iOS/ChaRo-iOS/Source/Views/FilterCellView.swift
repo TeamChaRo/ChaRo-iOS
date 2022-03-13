@@ -10,15 +10,27 @@ enum FilterCellType{
 
 
 class FilterCellView: UIView {
-    var orderLabel = UILabel().then{
+    private var orderLabel = UILabel().then{
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textColor = UIColor.gray40
     }
-    let checkImageView = UIImageView().then{
+    private let checkImageView = UIImageView().then{
         $0.image = ImageLiterals.icBlueCheck
     }
-    let bottomLineView = UIView().then{
+    private let bottomLineView = UIView().then{
         $0.backgroundColor = UIColor.gray20
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    init(type: FilterCellType){
+        super.init(frame: .zero)
+        setCellType(type: type)
     }
     func resetCellColor () {
         orderLabel.textColor = UIColor.gray40
@@ -32,7 +44,19 @@ class FilterCellView: UIView {
         backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
     }
     
-    private func setLayout(type: FilterCellType){
+    private func setCellType(type: FilterCellType){
+        setCellLayout()
+        switch type {
+        case .newOrderCell:
+            orderLabel.text = "최신순"
+            checkImageView.isHidden = true
+        default:
+            orderLabel.text = "인기순"
+            orderLabel.textColor = UIColor.mainBlue
+            backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+        }
+    }
+    private func setCellLayout(){
         addSubviews([orderLabel, checkImageView, bottomLineView])
         orderLabel.snp.makeConstraints{
             $0.centerY.equalToSuperview()
@@ -50,29 +74,9 @@ class FilterCellView: UIView {
             $0.height.equalTo(1)
             $0.bottom.equalToSuperview().offset(1)
         }
-        
-        switch type {
-        case .newOrderCell:
-            orderLabel.text = "최신순"
-            checkImageView.isHidden = true
-        default:
-            orderLabel.text = "인기순"
-            orderLabel.textColor = UIColor.mainBlue
-            backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-        }
     }
     
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    init(type: FilterCellType){
-        super.init(frame: .zero)
-        setLayout(type: type)
-    }
+   
 
 }

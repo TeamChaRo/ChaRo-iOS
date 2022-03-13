@@ -16,7 +16,32 @@ class FilterView: UIView {
     
     var touchCellCompletion: ((Int) -> Int)?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    init(){
+        super.init(frame: .zero)
+        configCell()
+    }
+    
     private func configCell() {
+        setFilterLayout()
+        let popGesture = UITapGestureRecognizer(target: self, action: #selector(isCellClicked(sender:)))
+        let newGesture = UITapGestureRecognizer(target: self, action: #selector(isCellClicked(sender:)))
+        popularOlderView.addGestureRecognizer(popGesture)
+        popularOlderView.tag = 0
+        newOlderView.addGestureRecognizer(newGesture)
+        newOlderView.tag = 1
+        
+        popularOlderView.isUserInteractionEnabled = true
+        newOlderView.isUserInteractionEnabled = true
+        
+    }
+    private func setFilterLayout() {
         self.backgroundColor = UIColor.white
         self.layer.cornerRadius = 12
         self.clipsToBounds = true
@@ -34,16 +59,6 @@ class FilterView: UIView {
             $0.height.equalTo(40)
         }
         
-        let popGesture = UITapGestureRecognizer(target: self, action: #selector(isCellClicked(sender:)))
-        let newGesture = UITapGestureRecognizer(target: self, action: #selector(isCellClicked(sender:)))
-        popularOlderView.addGestureRecognizer(popGesture)
-        popularOlderView.tag = 0
-        newOlderView.addGestureRecognizer(newGesture)
-        newOlderView.tag = 1
-        
-        popularOlderView.isUserInteractionEnabled = true
-        newOlderView.isUserInteractionEnabled = true
-        
     }
     
     
@@ -60,19 +75,4 @@ class FilterView: UIView {
         completion(sender.view?.tag ?? 99)
         
     }
-    
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    init(){
-        super.init(frame: .zero)
-        configCell()
-    }
-
 }
