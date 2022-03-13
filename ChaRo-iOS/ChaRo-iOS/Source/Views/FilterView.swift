@@ -18,14 +18,10 @@ class FilterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configCell()
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-    
-    init(){
-        super.init(frame: .zero)
-        configCell()
     }
     
     private func configCell() {
