@@ -54,6 +54,7 @@ struct Constants {
 
     /// 게시물 상세보기
     static let detailPostURL = baseURL + "/post/detail/" + userEmail + "/"
+    static let detailPostLikeListURL = baseURL + "/post/likes/"
     
     /// 저장하기
     static let saveURL = baseURL + "/post/save"

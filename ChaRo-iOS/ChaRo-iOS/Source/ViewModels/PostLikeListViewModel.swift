@@ -5,12 +5,11 @@
 //  Created by 장혜령 on 2022/03/02.
 //
 
-import RxSwift
 import UIKit
+import RxSwift
 
 class PostLikeListViewModel{
-    private let disposeBag = DisposeBag()
-    
+
     //MARK: - Properties
     let defaultHeight: CGFloat = UIScreen.getDeviceHeight() / 2
     let dismissibleHeight: CGFloat = 200
@@ -18,6 +17,7 @@ class PostLikeListViewModel{
     var currentContainerHeight: CGFloat = UIScreen.getDeviceHeight() / 2
     let maxBackgroundAlpha: CGFloat = 0.8
     let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
+    let postLikeListSubject = PublishSubject<[Follow]>()
     
     //MARK: - Input and Output
     struct Input{
@@ -26,18 +26,20 @@ class PostLikeListViewModel{
     
     struct Output{
         let newHeightSubject: PublishSubject<(CGFloat, Bool)>
+        let postLikeListSubject: PublishSubject<[Follow]>
     }
     
-    func transform(form input: Input) -> Output{
-        let output = Output(newHeightSubject: newHeightSubject)
+    func transform(form input: Input, disposeBag: DisposeBag) -> Output{
+        let output = Output(newHeightSubject: newHeightSubject,
+                            postLikeListSubject: postLikeListSubject)
         input.transionYOffsetSubject
             .bind(onNext: { [weak self] (yOffset, isDragging) in
                 guard let self = self else {return}
                 output.newHeightSubject
-                    .onNext((self.calculateHeight(yOffset: yOffset, isDragging: isDragging),
-                                                !isDragging))
+                    .onNext((self.calculateHeight(yOffset: yOffset,
+                                                  isDragging: isDragging),!isDragging))
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         return output
     }
     
@@ -49,7 +51,7 @@ class PostLikeListViewModel{
         }
         
         if newHeight < self.dismissibleHeight{
-            return self.defaultHeight
+            return -1
         }else if newHeight < self.defaultHeight {
             return self.defaultHeight
         }else if newHeight < self.maximumContainerHeight && isDraggingDown{
@@ -59,4 +61,26 @@ class PostLikeListViewModel{
         }
         return -1
     }
+    
+    func getPostLikeList(postId: Int){
+        PostResultService.shared.getPostLikeList(postId: postId){ [weak self] response in
+            switch response{
+            case .success(let resultData):
+                dump(resultData)
+                if let data =  resultData as? [Follow]{
+                    print("response = \(data)")
+                    self?.postLikeListSubject.onNext(data)
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
 }
+

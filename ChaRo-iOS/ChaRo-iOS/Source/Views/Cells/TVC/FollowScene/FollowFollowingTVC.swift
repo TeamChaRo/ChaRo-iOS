@@ -19,8 +19,6 @@ class FollowFollowingTVC: UITableViewCell {
     var otherUserID: String = "and@naver.com"
     var delegate: isFollowButtonClickedDelegate?
     
-    static let identifier: String = "FollowFollowingTVC"
-    
     private let profileImageView = UIImageView().then{
         $0.image = UIImage(named: "myimage")
         $0.clipsToBounds = true
@@ -40,13 +38,17 @@ class FollowFollowingTVC: UITableViewCell {
         $0.setBackgroundImage(ImageLiterals.icFollowButtonGray, for: .normal)
         $0.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
     }
-//MARK: awakeFromNib
-    override func awakeFromNib() {
-        super.awakeFromNib()
+
+    // MARK: - init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayout()
-        // Initialization code
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+ 
 //MARK: function
     func setData(image: String, userName: String, isFollow: Bool, userEmail: String){
         guard let url = URL(string: image) else { return }
@@ -112,7 +114,40 @@ class FollowFollowingTVC: UITableViewCell {
             $0.width.equalTo(60)
             $0.height.equalTo(25)
         }
-        
+    }
+    
+    func updateLayoutArPostLikeList(){
+        profileImageView.snp.remakeConstraints{
+            $0.top.bottom.equalToSuperview().inset(11)
+            $0.leading.equalToSuperview().offset(20)
+            $0.width.height.equalTo(37)
+        }
+        userNameLabel.snp.makeConstraints{
+            $0.centerY.equalTo(profileImageView)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
+        }
+        followButton.snp.makeConstraints{
+            $0.centerY.equalTo(profileImageView)
+            $0.trailing.equalToSuperview().inset(19)
+            $0.width.equalTo(56)
+            $0.height.equalTo(22)
+        }
+    }
+    
+    func changeUIStyleAtPostListList(){
+        updateLayoutArPostLikeList()
+        profileImageView.layer.borderWidth = 1
+        userNameLabel.font = .notoSansMediumFont(ofSize: 13)
+        followButton.setBackgroundImage(nil, for: .normal)
+        followButton.layer.borderColor = followButton.isSelected ? UIColor.mainBlue.cgColor : UIColor.gray30.cgColor
+        followButton.layer.borderWidth = 1
+        followButton.layer.cornerRadius = 11
+        followButton.backgroundColor = followButton.isSelected ? .mainBlue : .white
+        followButton.setTitle("팔로잉", for: .normal)
+        followButton.setTitle("팔로우", for: .selected)
+        followButton.setTitleColor(.mainBlack, for: .normal)
+        followButton.setTitleColor(.white, for: .selected)
+        followButton.titleLabel?.font = .notoSansRegularFont(ofSize: 12)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

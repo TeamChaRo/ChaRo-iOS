@@ -16,6 +16,7 @@ class PostLikeListVC: UIViewController{
     private let transionYOffsetSubject = PublishSubject<(CGFloat, Bool)>()
     
     //MARK: - Properties
+    var postId: Int = -1
     private var animator = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
     private let backgroundView = UIView().then{
         $0.backgroundColor = .mainBlack.withAlphaComponent(0.8)
@@ -28,7 +29,8 @@ class PostLikeListVC: UIViewController{
     }
     
     private lazy var tableView = UITableView().then{
-        $0.registerCustomXib(xibName: FollowFollowingTVC.className)
+        $0.register(cell: FollowFollowingTVC.self)
+        $0.separatorStyle = .none
     }
     
     private let xmarkButton = UIButton().then{
@@ -45,7 +47,7 @@ class PostLikeListVC: UIViewController{
         configureUI()
         setupPanGesture()
         bindViewModel()
-        bind()
+        viewModel.getPostLikeList(postId: postId)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,16 +115,27 @@ class PostLikeListVC: UIViewController{
     }
     
     private func bindViewModel(){
-        let output = viewModel.transform(form: PostLikeListViewModel.Input(transionYOffsetSubject: transionYOffsetSubject))
+        let output = viewModel.transform(form: PostLikeListViewModel.Input(transionYOffsetSubject: transionYOffsetSubject), disposeBag: disposeBag)
         output.newHeightSubject
             .bind(onNext: { [weak self] newHeight, isEnded in
+                if newHeight == -1 {
+                    self?.animateDismissView()
+                }
                 isEnded ? self?.animateContainerView(height: newHeight)
                 : self?.updateContainerView(height: newHeight)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func bind(){
+        
+        output.postLikeListSubject
+            .bind(to: tableView.rx.items(cellIdentifier: FollowFollowingTVC.className,
+                                         cellType: FollowFollowingTVC.self)){ row, element, cell in
+                cell.setData(image: element.image,
+                             userName: element.nickname,
+                             isFollow: element.isFollow,
+                             userEmail: element.userEmail)
+                cell.changeUIStyleAtPostListList()
+                }.disposed(by: disposeBag)
+        
         xmarkButton.rx.tap
             .asDriver()
             .drive(onNext:{[weak self] in

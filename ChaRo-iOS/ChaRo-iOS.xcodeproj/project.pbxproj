@@ -34,7 +34,6 @@
 		367B318D274A74C7007A2C18 /* MypageInfinityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B318C274A74C7007A2C18 /* MypageInfinityService.swift */; };
 		367D598F26F768EB0072C7C9 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D598E26F768EB0072C7C9 /* IndicatorView.swift */; };
 		368EC8E82779C48B0076BF5E /* FollowFollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */; };
-		368EC8E92779C48B0076BF5E /* FollowFollowingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */; };
 		368EC8EC277A15B20076BF5E /* GetFollowDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368EC8EB277A15B20076BF5E /* GetFollowDataService.swift */; };
 		368EC8EE277A16700076BF5E /* GetFollowDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368EC8ED277A16700076BF5E /* GetFollowDataModel.swift */; };
 		36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36B69F7A2772420D00FEEAAE /* OtherMyPage.storyboard */; };
@@ -287,7 +286,6 @@
 		367B318C274A74C7007A2C18 /* MypageInfinityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageInfinityService.swift; sourceTree = "<group>"; };
 		367D598E26F768EB0072C7C9 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowFollowingTVC.swift; sourceTree = "<group>"; };
-		368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowFollowingTVC.xib; sourceTree = "<group>"; };
 		368EC8EB277A15B20076BF5E /* GetFollowDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFollowDataService.swift; sourceTree = "<group>"; };
 		368EC8ED277A16700076BF5E /* GetFollowDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFollowDataModel.swift; sourceTree = "<group>"; };
 		36B69F7A2772420D00FEEAAE /* OtherMyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OtherMyPage.storyboard; sourceTree = "<group>"; };
@@ -574,14 +572,6 @@
 			path = FollowScene;
 			sourceTree = "<group>";
 		};
-		368EC8EA2779C4960076BF5E /* FollowScene */ = {
-			isa = PBXGroup;
-			children = (
-				368EC8E72779C48B0076BF5E /* FollowFollowingTVC.xib */,
-			);
-			path = FollowScene;
-			sourceTree = "<group>";
-		};
 		36A2FECE278F206800B1D87A /* New Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,7 +732,6 @@
 		3C86FA812694C7C6009370CD /* TVC */ = {
 			isa = PBXGroup;
 			children = (
-				368EC8EA2779C4960076BF5E /* FollowScene */,
 				36E445B1277CA12F008E31BE /* SettingScene */,
 				3CAE519F26C2431D00DB8A41 /* CreatePostScene */,
 				3CAE51A626C243F100DB8A41 /* HomeScene */,
@@ -1519,7 +1508,6 @@
 			files = (
 				3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */,
 				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
-				368EC8E92779C48B0076BF5E /* FollowFollowingTVC.xib in Resources */,
 				3C840BF1269589DF001CAFE5 /* SearchKeywordCell.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */,

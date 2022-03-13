@@ -341,6 +341,7 @@ extension PostDetailVC {
             .asDriver()
             .drive(onNext:{ [weak self] in
                 let nextVC = PostLikeListVC()
+                nextVC.postId = self?.postId ?? -1
                 nextVC.modalPresentationStyle = .overFullScreen
                 self?.present(nextVC, animated: false, completion: nil)
             })
