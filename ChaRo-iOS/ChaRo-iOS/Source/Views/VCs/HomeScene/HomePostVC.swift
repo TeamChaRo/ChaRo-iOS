@@ -40,12 +40,12 @@ class HomePostVC: UIViewController {
     
     static let identifier : String = "HomePostVC"
     
-    func setHeaderBottomView() {
-        let bottomView = UIView().then{
+    func setNavigationBottomLineView() {
+        let bottomLineView = UIView().then{
             $0.backgroundColor = UIColor.gray20
         }
-        homePostNavigationView.addSubview(bottomView)
-        bottomView.snp.makeConstraints{
+        homePostNavigationView.addSubview(bottomLineView)
+        bottomLineView.snp.makeConstraints{
             $0.bottom.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
@@ -98,7 +98,7 @@ class HomePostVC: UIViewController {
         setFilterViewLayout()
         setNavigationLabel()
         getData()
-        setHeaderBottomView()
+        setNavigationBottomLineView()
         setFilterViewCompletion()
         self.dismissDropDownWhenTappedAround()
         // Do any additional setup after loading the view.
