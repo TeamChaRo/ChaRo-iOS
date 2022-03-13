@@ -16,26 +16,28 @@ class PostLikeListViewModel{
     let maximumContainerHeight: CGFloat = UIScreen.getDeviceHeight() - 64
     var currentContainerHeight: CGFloat = UIScreen.getDeviceHeight() / 2
     let maxBackgroundAlpha: CGFloat = 0.8
+    let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
+    let postLikeListSubject = PublishSubject<[Follow]>()
     
     //MARK: - Input and Output
     struct Input{
-        let transionYOffsetSubject = PublishSubject<(CGFloat, Bool)>()
+        let transionYOffsetSubject: PublishSubject<(CGFloat, Bool)>
     }
     
     struct Output{
-        let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
-        let postLikeListSubject = PublishSubject<[Follow]>()
+        let newHeightSubject: PublishSubject<(CGFloat, Bool)>
+        let postLikeListSubject: PublishSubject<[Follow]>
     }
     
-    let output = Output()
-    
     func transform(form input: Input, disposeBag: DisposeBag) -> Output{
+        let output = Output(newHeightSubject: newHeightSubject,
+                            postLikeListSubject: postLikeListSubject)
         input.transionYOffsetSubject
             .bind(onNext: { [weak self] (yOffset, isDragging) in
                 guard let self = self else {return}
-                self.output.newHeightSubject
-                    .onNext((self.calculateHeight(yOffset: yOffset, isDragging: isDragging),
-                                                !isDragging))
+                output.newHeightSubject
+                    .onNext((self.calculateHeight(yOffset: yOffset,
+                                                  isDragging: isDragging),!isDragging))
             })
             .disposed(by: disposeBag)
         return output
@@ -49,7 +51,7 @@ class PostLikeListViewModel{
         }
         
         if newHeight < self.dismissibleHeight{
-            return self.defaultHeight
+            return -1
         }else if newHeight < self.defaultHeight {
             return self.defaultHeight
         }else if newHeight < self.maximumContainerHeight && isDraggingDown{
@@ -67,7 +69,7 @@ class PostLikeListViewModel{
                 dump(resultData)
                 if let data =  resultData as? [Follow]{
                     print("response = \(data)")
-                    self?.output.postLikeListSubject.onNext(data)
+                    self?.postLikeListSubject.onNext(data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
