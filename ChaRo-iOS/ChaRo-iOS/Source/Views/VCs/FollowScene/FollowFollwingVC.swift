@@ -205,8 +205,8 @@ class FollowFollwingVC: UIViewController {
         followerTableView.tag = 1
         followingTableView.tag = 2
         
-        followerTableView.registerCustomXib(xibName: "FollowFollowingTVC")
-        followingTableView.registerCustomXib(xibName: "FollowFollowingTVC")
+        followerTableView.register(cell: FollowFollowingTVC.self)
+        followingTableView.register(cell: FollowFollowingTVC.self)
         
         self.view.addSubview(tableScrollView)
         tableScrollView.addSubviews([followerView, followingView])
@@ -345,7 +345,7 @@ extension FollowFollwingVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FollowFollowingTVC.identifier) as? FollowFollowingTVC else {return UITableViewCell()}
+        let cell = tableView.dequeueReusableCell(withType: FollowFollowingTVC.self, for: indexPath)
         cell.delegate = self
         if tableView.tag == 1{
             cell.setData(image: followDataList[0].follower[indexPath.row].image,

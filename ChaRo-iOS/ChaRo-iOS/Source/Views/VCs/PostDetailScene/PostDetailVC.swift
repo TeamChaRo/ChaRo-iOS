@@ -308,27 +308,44 @@ extension PostDetailVC {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(88)
         }
-        bottomView.likeLabel.text = "\(postDetailData?.likesCount ?? 0)명이 좋아해요"
+        bottomView.likeDescriptionButton.setTitle("\(postDetailData?.likesCount ?? 0)명이 좋아해요", for: .normal)
         bindToBottomView()
     }
     
     private func bindToBottomView(){
         bottomView.likeButton.rx.tap
-            .bind{ [weak self] _ in
-                self?.bottomView.likeButton.isSelected.toggle()
-                self?.requestPostLike()
-            }.disposed(by: disposeBag)
+            .asDriver()
+            .drive(onNext:{
+                [weak self] _ in
+                    self?.bottomView.likeButton.isSelected.toggle()
+                    self?.requestPostLike()
+            })
+            .disposed(by: disposeBag)
         
         bottomView.scrapButton.rx.tap
-            .bind{ [weak self] _ in
+            .asDriver()
+            .drive(onNext:{ [weak self] _ in
                 self?.bottomView.scrapButton.isSelected.toggle()
                 self?.requestPostScrap()
-            }.disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         bottomView.shareButton.rx.tap
-            .bind{ _ in
+            .asDriver()
+            .drive(onNext:{ _ in
                 print("shareButton 눌림")
-            }.disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
+        
+        bottomView.likeDescriptionButton.rx.tap
+            .asDriver()
+            .drive(onNext:{ [weak self] in
+                let nextVC = PostLikeListVC()
+                nextVC.postId = self?.postId ?? -1
+                nextVC.modalPresentationStyle = .overFullScreen
+                self?.present(nextVC, animated: false, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
