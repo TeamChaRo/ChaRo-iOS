@@ -6,7 +6,10 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 import RxSwift
+
 
 class PostDetailBottomView: UIView{
     
@@ -33,6 +36,7 @@ class PostDetailBottomView: UIView{
     override init(frame: CGRect){
         super.init(frame: frame)
         configUI()
+        drawBackgroundShadow()
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +69,6 @@ class PostDetailBottomView: UIView{
             $0.trailing.equalTo(shareButton.snp.leading).offset(-14)
             $0.height.equalTo(42)
         }
-        drawBackgroundShadow()
     }
     
     private func drawBackgroundShadow(){

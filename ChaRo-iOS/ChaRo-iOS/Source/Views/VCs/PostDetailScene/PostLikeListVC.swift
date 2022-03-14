@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 import RxSwift
-import Alamofire
 
 class PostLikeListVC: UIViewController{
     
