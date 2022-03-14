@@ -14,17 +14,17 @@ class SearchKeywordCell: UITableViewCell {
     private var addressData : AddressDataModel?
     public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
     
-    var titleLabel = UILabel().then{
+    var titleLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 16)
         $0.textColor = .gray50
     }
     
-    var addressLabel = UILabel().then{
+    var addressLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .gray40
     }
     
-    var dateLabel = UILabel().then{
+    var dateLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 12)
         $0.textColor = .gray30
         $0.text = ""

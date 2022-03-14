@@ -21,30 +21,30 @@ class AddressConfirmVC: UIViewController {
     public var presentingCellIndex = -1
     private var isFirstLoaded = true
     
-    private var backButton = UIButton().then{
+    private var backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)
         $0.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
     }
     private var centerMarkerView = UIImageView()
-    private var bottomView = UIView().then{
+    private var bottomView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
         $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
     }
     
-    private var confirmButton = UIButton().then{
+    private var confirmButton = UIButton().then {
         $0.layer.cornerRadius = 8
         $0.backgroundColor = .mainBlue
         $0.setTitleColor(.white, for: .normal)
         $0.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
     }
     
-    private var titleNameLabel = UILabel().then{
+    private var titleNameLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 16)
         $0.textColor = .gray50
     }
     
-    private var addressLabel = UILabel().then{
+    private var addressLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .gray40
     }

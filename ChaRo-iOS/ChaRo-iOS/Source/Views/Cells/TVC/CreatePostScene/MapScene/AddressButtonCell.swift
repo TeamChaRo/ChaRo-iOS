@@ -26,7 +26,7 @@ class AddressButtonCell: UITableViewCell {
     public var delegate: AddressButtonCellDelegate?
     public var cellType: AddressCellType = .start
 
-    public var searchButton = UIButton().then{
+    public var searchButton = UIButton().then {
         $0.layer.borderWidth = 1
         $0.contentHorizontalAlignment = .left
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 47)
@@ -35,14 +35,14 @@ class AddressButtonCell: UITableViewCell {
         $0.backgroundColor = .gray10
         $0.setTitleColor(.gray30, for: .normal)
     }
-    private var plusButton = UIButton().then{
+    private var plusButton = UIButton().then {
         //$0.isUserInteractionEnabled = false
         $0.setBackgroundImage(UIImage(named: "icWayPointPlusActive"), for: .normal)
         $0.setBackgroundImage(UIImage(named: "icWayPointPlusInactive"), for: .disabled)
         $0.isEnabled = false
     }
     
-    private var minusButton = UIButton().then{
+    private var minusButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "icWaypointMinusActive"), for: .normal)
     }
     

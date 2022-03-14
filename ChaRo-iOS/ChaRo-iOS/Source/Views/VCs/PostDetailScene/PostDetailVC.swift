@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Then
 import RxSwift
 
 class PostDetailVC: UIViewController {

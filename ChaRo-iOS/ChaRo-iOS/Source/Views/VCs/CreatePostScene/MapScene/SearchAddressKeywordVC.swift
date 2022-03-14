@@ -21,11 +21,11 @@ class SearchAddressKeywordVC: UIViewController {
     private var addressType = ""
     
     //MARK: UI Component
-    private var backButton = UIButton().then{
+    private var backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
         $0.tintColor = .gray40
     }
-    private var searchTextField = UITextField().then{
+    private var searchTextField = UITextField().then {
         $0.autocorrectionType = .no
         $0.font = .notoSansRegularFont(ofSize: 17)
         $0.textColor = .gray50
@@ -33,10 +33,10 @@ class SearchAddressKeywordVC: UIViewController {
         $0.clearButtonMode = .whileEditing
         $0.returnKeyType = .done
     }
-    private let separateLine = UIView().then{
+    private let separateLine = UIView().then {
         $0.backgroundColor = .gray20
     }
-    private var tableView = UITableView().then{
+    private var tableView = UITableView().then {
         $0.register(cell: SearchKeywordCell.self)
         $0.rowHeight = 72
     }

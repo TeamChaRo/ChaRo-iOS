@@ -13,21 +13,21 @@ import RxSwift
 
 class PostDetailBottomView: UIView{
     
-    var likeButton = UIButton().then{
+    var likeButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icHeartInactive, for: .normal)
         $0.setBackgroundImage(ImageLiterals.icHeartActive, for: .selected)
     }
     
-    var scrapButton = UIButton().then{
+    var scrapButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icScrapInactive, for: .normal)
         $0.setBackgroundImage(ImageLiterals.icScrapActive, for: .selected)
     }
     
-    var shareButton = UIButton().then{
+    var shareButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icShare, for: .normal)
     }
     
-    var likeDescriptionButton = UIButton().then{
+    var likeDescriptionButton = UIButton().then {
         $0.titleLabel?.font = .notoSansRegularFont(ofSize: 12)
         $0.setTitleColor(.gray30, for: .normal)
         $0.setTitle("18명이 좋아합니다.", for: .normal)

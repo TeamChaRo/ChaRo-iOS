@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Then
 
 class SearchResultVC: UIViewController {
     static let identifier = "SearchResultVC"
@@ -53,7 +52,6 @@ class SearchResultVC: UIViewController {
     private let searchNoImageView = UIImageView()
     private let searchNoLabel = UILabel()
     private let searchButton = UIButton()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

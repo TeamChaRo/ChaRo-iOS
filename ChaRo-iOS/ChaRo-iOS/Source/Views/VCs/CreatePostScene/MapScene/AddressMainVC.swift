@@ -22,7 +22,7 @@ class AddressMainVC: UIViewController {
     private var imageList: [UIImage] = []
     private let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
     
-    private lazy var tableView = UITableView().then{
+    private lazy var tableView = UITableView().then {
         $0.register(cell: AddressButtonCell.self)
         $0.delegate = self
         $0.dataSource = self
@@ -39,12 +39,12 @@ class AddressMainVC: UIViewController {
     private var polyLineList: [TMapPolyline] = []
     
     //MARK: UI Component
-    private let backButton = UIButton().then{
+    private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "icGrayBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }
     
-    private var confirmButton = UIButton().then{
+    private var confirmButton = UIButton().then {
         $0.layer.cornerRadius = 8
         $0.backgroundColor = .mainBlue
         $0.setTitleColor(.white, for: .normal)
