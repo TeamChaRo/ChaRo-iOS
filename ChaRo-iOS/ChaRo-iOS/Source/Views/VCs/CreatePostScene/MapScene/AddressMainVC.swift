@@ -349,7 +349,7 @@ extension AddressMainVC{
             print("index = \(index)")
             pathData.findPathData(startPoint: addressList[index].getPoint(),
                                   endPoint: addressList[index+1].getPoint()) { result, error in
-                guard let polyLine = result else {return}
+                guard let polyLine = result else { return }
                 
                 print(" start = \(self.addressList[index]), \(self.addressList[index].title)")
                 print(" end = \(self.addressList[index+1]),\(self.addressList[index+1].title) ")
@@ -384,7 +384,7 @@ extension AddressMainVC{
 //            print("index = \(index)")
 //            pathData.findPathData(startPoint: addressList[index].getPoint(),
 //                                  endPoint: addressList[index+1].getPoint()) { result, error in
-//                guard let polyLine = result else {return}
+//                guard let polyLine = result else { return }
 //                self.polyLineList.append(polyLine)
 //
 //                if index == self.addressList.count-2{

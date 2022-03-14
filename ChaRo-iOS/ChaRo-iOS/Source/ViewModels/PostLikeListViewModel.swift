@@ -34,7 +34,7 @@ class PostLikeListViewModel{
                             postLikeListSubject: postLikeListSubject)
         input.transionYOffsetSubject
             .bind(onNext: { [weak self] (yOffset, isDragging) in
-                guard let self = self else {return}
+                guard let self = self else { return }
                 output.newHeightSubject
                     .onNext((self.calculateHeight(yOffset: yOffset,
                                                   isDragging: isDragging),!isDragging))

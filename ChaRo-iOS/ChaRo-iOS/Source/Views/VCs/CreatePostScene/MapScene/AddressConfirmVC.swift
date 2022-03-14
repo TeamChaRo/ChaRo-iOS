@@ -66,7 +66,7 @@ class AddressConfirmVC: UIViewController {
     
     @objc func sendDecidedAddress(){
         let endIndex = Int(navigationController?.viewControllers.endIndex ?? 0)
-        guard let addressMainVC = navigationController?.viewControllers[endIndex-3] as? AddressMainVC else {return}
+        guard let addressMainVC = navigationController?.viewControllers[endIndex-3] as? AddressMainVC else { return }
         addressMainVC.replaceAddressData(address: addressModel!, index: presentingCellIndex)
         navigationController?.popToViewController(addressMainVC, animated: true)
     }
