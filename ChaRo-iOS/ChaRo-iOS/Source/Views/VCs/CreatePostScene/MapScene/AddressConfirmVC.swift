@@ -14,12 +14,12 @@ import TMapSDK
 class AddressConfirmVC: UIViewController {
 
     static let identifier = "AddressConfirmVC"
-    private var addressModel : AddressDataModel?
+    private var addressModel: AddressDataModel?
     private var tMapView = MapService.getTmapView()
-    private var deviceHeight : CGFloat?
-    public var searchType = ""
-    public var presentingCellIndex = -1
-    private var isFirstLoaded = true
+    private var deviceHeight: CGFloat?
+    public var searchType: String = ""
+    public var presentingCellIndex: Int = -1
+    private var isFirstLoaded: Bool = true
     
     private var backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)

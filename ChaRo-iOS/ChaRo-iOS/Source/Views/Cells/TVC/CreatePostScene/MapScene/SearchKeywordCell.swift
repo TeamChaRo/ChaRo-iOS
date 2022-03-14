@@ -11,7 +11,7 @@ import Then
 
 class SearchKeywordCell: UITableViewCell {
 
-    private var addressData : AddressDataModel?
+    private var addressData: AddressDataModel?
     public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
     
     var titleLabel = UILabel().then {

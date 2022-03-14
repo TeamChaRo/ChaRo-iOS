@@ -17,8 +17,8 @@ class SearchAddressKeywordVC: UIViewController {
     private let viewModel = SearchKeywordViewModel()
     private var disposeBag = DisposeBag()
     
-    private var addressIndex = -1
-    private var addressType = ""
+    private var addressIndex: Int = -1
+    private var addressType: String = ""
     
     //MARK: UI Component
     private var backButton = UIButton().then {
@@ -85,7 +85,6 @@ class SearchAddressKeywordVC: UIViewController {
         searchTextField.rx.text
             .throttle(.milliseconds(1500), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: {
-                print("검색하는 text = \($0)")
                 self.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
             }).disposed(by: disposeBag)
     }
