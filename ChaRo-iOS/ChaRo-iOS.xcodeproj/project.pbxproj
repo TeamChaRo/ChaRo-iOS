@@ -98,7 +98,6 @@
 		3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA522694C169009370CD /* PostAttentionTVC.swift */; };
 		3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */; };
 		3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA802694C7C6009370CD /* CommonCVC.xib */; };
-		3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA822694C7C6009370CD /* PostTitleTVC.xib */; };
 		3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */; };
 		3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA852694C7C6009370CD /* PostImagesTVC.xib */; };
 		3C86FAA92694C7C6009370CD /* PostParkingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA872694C7C6009370CD /* PostParkingTVC.xib */; };
@@ -344,7 +343,6 @@
 		3C86FA522694C169009370CD /* PostAttentionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
 		3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
 		3C86FA802694C7C6009370CD /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
-		3C86FA822694C7C6009370CD /* PostTitleTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTitleTVC.xib; sourceTree = "<group>"; };
 		3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostAttentionTVC.xib; sourceTree = "<group>"; };
 		3C86FA852694C7C6009370CD /* PostImagesTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostImagesTVC.xib; sourceTree = "<group>"; };
 		3C86FA872694C7C6009370CD /* PostParkingTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostParkingTVC.xib; sourceTree = "<group>"; };
@@ -1045,7 +1043,6 @@
 				F4CC1AE82697570A009A0C01 /* PostPathMapTVC.xib */,
 				F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */,
 				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
-				3C86FA822694C7C6009370CD /* PostTitleTVC.xib */,
 			);
 			path = PostDetailScene;
 			sourceTree = "<group>";
@@ -1508,7 +1505,6 @@
 				3C86FAB82694C7C6009370CD /* README in Resources */,
 				F4CC1AEA2697570A009A0C01 /* PostPathMapTVC.xib in Resources */,
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
-				3C86FAA42694C7C6009370CD /* PostTitleTVC.xib in Resources */,
 				360937AE2699EF7B005392BB /* TabbarCVC.xib in Resources */,
 				3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */,
 				360937A42699E52F005392BB /* MyPage.storyboard in Resources */,
