@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Then
 import RxSwift
 
 class PostDetailVC: UIViewController {
@@ -14,7 +15,6 @@ class PostDetailVC: UIViewController {
     
     private var isAuthor = false
     private var isEditingMode = false
-    private var tableView = UITableView()
     private var postId: Int = -1
     private var postData : PostDetail?
     private var postDetailData : PostDetailData?
@@ -40,6 +40,12 @@ class PostDetailVC: UIViewController {
     private var writedPostData: WritePostData?
     
     //MARK: UIComponent
+    private lazy var tableView = UITableView().then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.separatorStyle = .none
+        $0.register(cell: PostTitleTVC.self)
+    }
     private let navigationView = UIView()
     private lazy var backButton = LeftBackButton(toPop: self, isModal: true)
     private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
@@ -78,7 +84,6 @@ class PostDetailVC: UIViewController {
         print("넘어온 데이터 = \(additionalDataOfPost)")
     }
     
-    
     private func checkModeForSendingServer(){
         if isEditingMode{
             print("editing 모드로 넘겨받음")
@@ -86,21 +91,13 @@ class PostDetailVC: UIViewController {
             print("addressList = \(addressList)")
             print("isAuthor = \(isAuthor)")
             setNavigaitionViewConstraints()
-            configureTableView()
         }else{
             print("그냥 구경하러 왔음")
             getPostDetailData()
         }
     }
     
-    private func configureTableView(){
-        registerXibs()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-    }
     private func registerXibs(){
-        tableView.registerCustomXib(xibName: PostTitleTVC.identifier)
         tableView.registerCustomXib(xibName: PostImagesTVC.identifier)
         tableView.registerCustomXib(xibName: PostParkingTVC.identifier)
         tableView.registerCustomXib(xibName: PostAttentionTVC.identifier)
