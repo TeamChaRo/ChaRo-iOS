@@ -13,11 +13,11 @@ import TMapSDK
 class AddressMainVC: UIViewController {
 
     public var addressList: [AddressDataModel] = []
-    public var searchHistory : [KeywordResult] = []
+    public var searchHistory: [KeywordResult] = []
     public var newSearchHistory: [KeywordResult] = []
     public var addressCellList: [AddressButtonCell] = []
     
-    private var isFirstFinded = true
+    private var isFirstFinded: Bool = true
     private var sendedPostData: WritePostData?
     private var imageList: [UIImage] = []
     private let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
@@ -31,11 +31,11 @@ class AddressMainVC: UIViewController {
     private var oneCellHeight: CGFloat = 48
     private var tableViewHeight: CGFloat  = 96
     private var tableViewBottomOffset: CGFloat  = 19
-    private var isFirstOpen = true
+    private var isFirstOpen: Bool = true
     
     //MARK: - About Map
     private let tMapView = TMapView()
-    private var markerList : [TMapMarker] = []
+    private var markerList: [TMapMarker] = []
     private var polyLineList: [TMapPolyline] = []
     
     //MARK: UI Component
@@ -63,7 +63,6 @@ class AddressMainVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("넘겨온 데이터 확인 = \(sendedPostData)")
         displayAddress()
         setMapFrame()
         inputMarkerInMapView()
@@ -153,7 +152,7 @@ class AddressMainVC: UIViewController {
 // MARK: - Guide Animation
 extension AddressMainVC{
     private func setupGuideAnimationView(){
-        if !isFirstOpen {return}
+        guard isFirstOpen else { return }
         let backgroundView = UIView()
         backgroundView.backgroundColor = .mainBlack.withAlphaComponent(0.8)
         let imageView = UIImageView(image: ImageLiterals.imgMapFirstGuide)
@@ -176,7 +175,6 @@ extension AddressMainVC{
         animator.startAnimation()
         isFirstOpen = false
     }
-    
 }
 
 
@@ -196,7 +194,7 @@ extension AddressMainVC {
         }
     }
     
-    private func initAddressCell(type: AddressCellType) -> AddressButtonCell{
+    private func initAddressCell(type: AddressButtonCell.AddressCellType) -> AddressButtonCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.className) as? AddressButtonCell else {return AddressButtonCell()}
         cell.delegate = self
         cell.setInitContent(of: type)

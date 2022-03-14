@@ -15,13 +15,16 @@ protocol AddressButtonCellDelegate {
     func addressButtonCellForAdding(cell: AddressButtonCell)
 }
 
-enum AddressCellType: String{
-    case start = "출발지"
-    case mid = "경유지"
-    case end = "도착지"
-}
+
 
 class AddressButtonCell: UITableViewCell {
+    
+    enum AddressCellType: String{
+        case start = "출발지"
+        case mid = "경유지"
+        case end = "도착지"
+    }
+    
     public var address = AddressDataModel()
     public var delegate: AddressButtonCellDelegate?
     public var cellType: AddressCellType = .start
