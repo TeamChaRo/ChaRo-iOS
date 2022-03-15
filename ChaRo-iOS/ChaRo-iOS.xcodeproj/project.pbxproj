@@ -90,6 +90,7 @@
 		3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */; };
 		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
 		3C840BF72696F08F001CAFE5 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF62696F08F001CAFE5 /* UIScreen+.swift */; };
+		3C86C1BB27DF92CE00A41FCE /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86C1BA27DF92CE00A41FCE /* PostDetailViewModel.swift */; };
 		3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F5269478F3009370CD /* AddressMainVC.swift */; };
 		3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86F9F7269484E4009370CD /* AddressDataModel.swift */; };
 		3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */; };
@@ -335,6 +336,7 @@
 		3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBackButton.swift; sourceTree = "<group>"; };
 		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
 		3C840BF62696F08F001CAFE5 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
+		3C86C1BA27DF92CE00A41FCE /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
 		3C86F9F5269478F3009370CD /* AddressMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMainVC.swift; sourceTree = "<group>"; };
 		3C86F9F7269484E4009370CD /* AddressDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDataModel.swift; sourceTree = "<group>"; };
 		3C86FA1F2694B6D2009370CD /* AddressButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressButtonCell.swift; sourceTree = "<group>"; };
@@ -1351,6 +1353,7 @@
 			children = (
 				3CCBB32626E2201800088B82 /* SearchKeywordViewModel.swift */,
 				3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */,
+				3C86C1BA27DF92CE00A41FCE /* PostDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1689,6 +1692,7 @@
 				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
 				F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */,
 				7062C836270B5A0B00C1CD2E /* PasswordView.swift in Sources */,
+				3C86C1BB27DF92CE00A41FCE /* PostDetailViewModel.swift in Sources */,
 				70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* UIView+.swift in Sources */,
 				7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */,
