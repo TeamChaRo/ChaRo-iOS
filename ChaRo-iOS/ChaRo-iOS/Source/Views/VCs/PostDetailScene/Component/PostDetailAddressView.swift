@@ -24,9 +24,11 @@ final class PostDetailAddressView: UIView {
         $0.isUserInteractionEnabled = false
     }
     
-    private let copyButton = UIButton().then {
+    private lazy var copyButton = UIButton().then {
         $0.setImage(ImageLiterals.icCopy, for: .normal)
+        $0.addTarget(self, action: #selector(touchUpCopyButton), for: .touchUpInside)
     }
+    var copyAddressClouser: ((String) -> ())?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -63,4 +65,8 @@ final class PostDetailAddressView: UIView {
         }
     }
     
+    @objc private func touchUpCopyButton(){
+        copyAddressClouser?("\(titleLabel.text ?? "")")
+        UIPasteboard.general.string = addressTextField.text
+    }
 }

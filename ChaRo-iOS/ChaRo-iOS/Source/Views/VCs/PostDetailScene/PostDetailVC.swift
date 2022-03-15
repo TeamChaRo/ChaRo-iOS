@@ -360,6 +360,11 @@ extension PostDetailVC: UITableViewDataSource {
         case 3:
             let cell = tableView.dequeueReusableCell(withType: PostLocationTVC.self, for: indexPath)
             cell.setContent(courseList: postData.course)
+            cell.copyAddressClouser = { locationTitle in
+                print("locationTitle = \(locationTitle)")
+                self.view.showToast(message: "\(locationTitle) 주소를 복사했습니다")
+            }
+            cell.setCopyClosure()
             return cell
             
         case 4:

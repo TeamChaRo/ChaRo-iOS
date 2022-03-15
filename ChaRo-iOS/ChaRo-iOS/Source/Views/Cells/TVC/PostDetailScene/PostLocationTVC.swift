@@ -22,7 +22,8 @@ class PostLocationTVC: UITableViewCell {
     private let startAddressView = PostDetailAddressView(title: "출발지")
     private let midAddressView = PostDetailAddressView(title: "경유지")
     private let endAddressView = PostDetailAddressView(title: "도착지")
-
+    var copyAddressClouser: ((String) -> ())?
+    
     private let addressStackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 3
@@ -35,14 +36,14 @@ class PostLocationTVC: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureUI()
         setupConstraints()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+  
     func setContent(courseList: [Course]) {
         self.courseList = courseList
         let lastIndex = courseList.count - 1
@@ -66,7 +67,7 @@ class PostLocationTVC: UITableViewCell {
         addressStackView.addArrangedSubviews(views: [startAddressView, midAddressView, endAddressView ])
         
         tMapView.snp.makeConstraints {
-            $0.top.equalTo(addressStackView.snp.bottom)
+            $0.top.equalTo(addressStackView.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(9)
             $0.trailing.equalToSuperview().offset(-9)
             $0.bottom.equalToSuperview().inset(15)
@@ -80,7 +81,10 @@ class PostLocationTVC: UITableViewCell {
     
     private func configureMapView(){
         tMapView.delegate = self
-        tMapView.setApiKey(MapService.mapkey)
+        DispatchQueue.main.async {
+            self.tMapView.setApiKey(MapService.mapkey)
+        }
+    }
     }
 }
 
