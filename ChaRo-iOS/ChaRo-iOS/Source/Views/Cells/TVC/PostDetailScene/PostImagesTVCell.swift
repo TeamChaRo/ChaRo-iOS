@@ -9,14 +9,20 @@ import UIKit
 import Kingfisher
 
 class PostImagesTVC: UITableViewCell {
-    
-    static let identifier: String = "PostImagesTVC"
 
-    // MARK: - Outlet Variables
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var previousButton: UIButton!
-    @IBOutlet weak var pageController: UIPageControl!
-    @IBOutlet weak var scrollView: UIScrollView!
+    // MARK: - properties
+
+    private let nextButton = UIButton().then {
+    }
+    
+    private let previousButton = UIButton().then {
+        
+    }
+    
+    private let pageController = UIPageControl()
+    
+    private let scrollView = UIScrollView()
+    
     
     // MARK: - images
     // ToDo: - 일단 지금은 더미데이터로 넣고, 추후 서버 통신으로 리스트 append 예정
@@ -25,15 +31,21 @@ class PostImagesTVC: UITableViewCell {
     let imageHeightRate: CGFloat = 222 / UIScreen.main.bounds.height
     let ImageViewWidth: CGFloat = UIScreen.main.bounds.width
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        selectionStyle = .none
-        configureScrollView()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstraints()
+        configureUI()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
+    private func setupConstraints() {
+    }
+    
+    private func configureUI() {
+        selectionStyle = .none
     }
     
     private func configureScrollView(){
