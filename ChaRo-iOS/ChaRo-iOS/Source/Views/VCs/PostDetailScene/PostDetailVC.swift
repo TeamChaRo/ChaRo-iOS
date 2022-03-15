@@ -45,7 +45,7 @@ class PostDetailVC: UIViewController {
         $0.separatorStyle = .none
         $0.register(cell: PostTitleTVC.self)
         $0.registerCustomXib(xibName: PostImagesTVC.identifier)
-        $0.registerCustomXib(xibName: PostParkingTVC.identifier)
+        $0.register(cell: PostParkingTVC.self)
         $0.registerCustomXib(xibName: PostAttentionTVC.identifier)
         $0.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
         $0.register(cell: PostCourseThemeTVC.self)
@@ -368,19 +368,38 @@ extension PostDetailVC: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            return getPostTitleCell(tableView: tableView, indexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath)
+            guard let additionalData = additionalDataOfPost,
+                  let postData = postDetailData else { return UITableViewCell() }
+            cell.setContent(title: additionalData.title,
+                                 userName: postData.author,
+                                 date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
+                                 imageName: postData.profileImage)
+            return cell
+            
         case 1:
             return getPostImagesCell(tableView: tableView)
+            
         case 2:
-            return getPostCourseThemeCell(tableView: tableView, indexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath)
+            cell.setContent(city: postDetailData?.province ?? "",
+                            region: additionalDataOfPost?.region ?? "",
+                            theme: postDetailData?.themes ?? [])
+            return cell
+            
         case 3:
             return getPostLocationCell(tableView: tableView, indexPath: indexPath) // 출발지
         case rowAdjustment:
             return getPostLocationCell(tableView: tableView, indexPath: indexPath) // 도착지
         case rowAdjustment+1:
             return getPostPathMapCell(tableView: tableView)
+            
         case rowAdjustment+2:
-            return getPostParkingCell(tableView: tableView)
+            let cell = tableView.dequeueReusableCell(withType: PostParkingTVC.self, for: indexPath)
+            cell.setContent(isParking: postDetailData?.isParking ?? false,
+                            description: postDetailData?.parkingDesc ?? "")
+            return cell
+            
         case rowAdjustment+3:
             return getPostAttensionCell(tableView: tableView)
         case rowAdjustment+4:
@@ -395,21 +414,7 @@ extension PostDetailVC: UITableViewDataSource {
 
 //MARK: - import cell funcions
 extension PostDetailVC {
-    func getPostTitleCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell{
-        let titleCell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath)
-        print("additionalData = \(additionalDataOfPost)")
-        print("postData = \(postDetailData)")
-        
-        guard let additionalData = additionalDataOfPost,
-              let postData = postDetailData else { return UITableViewCell() }
-        
-        titleCell.setContent(title: additionalData.title,
-                             userName: postData.author,
-                             date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
-                             imageName: postData.profileImage)
-        return titleCell
-    }
-    
+
     func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
         
@@ -421,14 +426,7 @@ extension PostDetailVC {
         cell.selectionStyle = .none
         return cell
     }
-    
-    func getPostCourseThemeCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath)
-        cell.setContent(city: postDetailData?.province ?? "",
-                        region: additionalDataOfPost?.region ?? "",
-                        theme: postDetailData?.themes ?? [])
-        return cell
-    }
+
     
     func getPostLocationCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostLocationTVC.identifier) as? PostLocationTVC else {return UITableViewCell()}
@@ -463,16 +461,6 @@ extension PostDetailVC {
         return cell
     }
     
-    
-    func getPostParkingCell(tableView: UITableView) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostParkingTVC.identifier) as? PostParkingTVC else {return UITableViewCell()}
-        cell.setParkingStatus(status: postDetailData?.isParking ?? false)
-        cell.setParkingExplanation(text: postDetailData?.parkingDesc ?? "")
-        cell.idEditMode(isEditing: false)
-        cell.selectionStyle = .none
-        return cell
-    }
-    
     func getPostAttensionCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostAttentionTVC.identifier) as? PostAttentionTVC else { return UITableViewCell()}
         cell.setAttentionList(list: postDetailData?.warnings ?? [])
@@ -491,7 +479,6 @@ extension PostDetailVC {
 
 //MARK: Network
 extension PostDetailVC {
-    
     func bindToViewModel(){
         viewModel = PostDetailViewModel(postId: additionalDataOfPost?.postID ?? -1)
         let output = viewModel?.transform(input: PostDetailViewModel.Input(), disposeBag: disposeBag)
