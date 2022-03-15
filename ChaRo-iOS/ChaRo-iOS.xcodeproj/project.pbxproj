@@ -203,10 +203,6 @@
 		F468C0FE269E20390019B1B3 /* CreatePostDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */; };
 		F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497D3EB26A0869A009A17AA /* UIViewController+.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
-		F4CC1AE52697464C009A0C01 /* PostLocationTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE32697464C009A0C01 /* PostLocationTVCell.swift */; };
-		F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */; };
-		F4CC1AE92697570A009A0C01 /* PostPathMapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE72697570A009A0C01 /* PostPathMapTVC.swift */; };
-		F4CC1AEA2697570A009A0C01 /* PostPathMapTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE82697570A009A0C01 /* PostPathMapTVC.xib */; };
 		F4CC1B5C269A2085009A0C01 /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */; };
 		F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */; };
 		F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */; };
@@ -454,10 +450,6 @@
 		F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDataModel.swift; sourceTree = "<group>"; };
 		F497D3EB26A0869A009A17AA /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
-		F4CC1AE32697464C009A0C01 /* PostLocationTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVCell.swift; sourceTree = "<group>"; };
-		F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostLocationTVC.xib; sourceTree = "<group>"; };
-		F4CC1AE72697570A009A0C01 /* PostPathMapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPathMapTVC.swift; sourceTree = "<group>"; };
-		F4CC1AE82697570A009A0C01 /* PostPathMapTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPathMapTVC.xib; sourceTree = "<group>"; };
 		F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePost.storyboard; sourceTree = "<group>"; };
 		F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostVC.swift; sourceTree = "<group>"; };
 		F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostTitleTVC.swift; sourceTree = "<group>"; };
@@ -892,9 +884,7 @@
 				F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */,
 				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
-				F4CC1AE72697570A009A0C01 /* PostPathMapTVC.swift */,
 				3C2B3FCF27E0A7F8005D2DC5 /* PostLocationTVC.swift */,
-				F4CC1AE32697464C009A0C01 /* PostLocationTVCell.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
 			);
@@ -1038,8 +1028,6 @@
 			isa = PBXGroup;
 			children = (
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
-				F4CC1AE82697570A009A0C01 /* PostPathMapTVC.xib */,
-				F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */,
 			);
 			path = PostDetailScene;
 			sourceTree = "<group>";
@@ -1477,7 +1465,6 @@
 				36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */,
 				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
-				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
 				36D1E602269739FD0079BD94 /* HotDropDownTVC.xib in Resources */,
 				36F3302926A2A97D009C0173 /* loading.json in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
@@ -1493,7 +1480,6 @@
 				F451640C2778D92A00AE84B4 /* CreatePostDriveCourseTVC.xib in Resources */,
 				3C86FABB2694C7C6009370CD /* NotoSansCJKkr-Regular.otf in Resources */,
 				3C86FAB82694C7C6009370CD /* README in Resources */,
-				F4CC1AEA2697570A009A0C01 /* PostPathMapTVC.xib in Resources */,
 				3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */,
 				360937AE2699EF7B005392BB /* TabbarCVC.xib in Resources */,
 				3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */,
@@ -1675,7 +1661,6 @@
 				339DEED6277A44C3002749B2 /* PresentationController.swift in Sources */,
 				7062C843270C5A4200C1CD2E /* IsDuplicatedEmailService.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
-				F4CC1AE52697464C009A0C01 /* PostLocationTVCell.swift in Sources */,
 				F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */,
 				7062C836270B5A0B00C1CD2E /* PasswordView.swift in Sources */,
 				3C86C1BB27DF92CE00A41FCE /* PostDetailViewModel.swift in Sources */,
@@ -1753,7 +1738,6 @@
 				36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */,
 				36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */,
 				362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */,
-				F4CC1AE92697570A009A0C01 /* PostPathMapTVC.swift in Sources */,
 				703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */,
 				3CB532D127C510A3005AAB1D /* NSObject+.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,
