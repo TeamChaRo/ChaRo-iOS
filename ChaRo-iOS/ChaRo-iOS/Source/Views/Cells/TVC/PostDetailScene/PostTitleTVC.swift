@@ -43,11 +43,7 @@ class PostTitleTVC: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    func setupConstraints() {
+    private func setupConstraints() {
         contentView.addSubviews([postTitleLabel, profileImageView,
                      userNameLabel, postDateLabel])
         
@@ -74,7 +70,7 @@ class PostTitleTVC: UITableViewCell {
         }
     }
     
-    func configureUI() {
+    private func configureUI() {
         selectionStyle = .none
     }
     
