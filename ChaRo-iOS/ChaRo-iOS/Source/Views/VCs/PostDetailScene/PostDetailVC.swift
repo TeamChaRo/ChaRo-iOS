@@ -47,7 +47,7 @@ class PostDetailVC: UIViewController {
         $0.registerCustomXib(xibName: PostImagesTVC.identifier)
         $0.register(cell: PostParkingTVC.self)
         $0.register(cell: PostAttentionTVC.self)
-        $0.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
+        $0.register(cell: PostDriveCourseTVC.self)
         $0.register(cell: PostCourseThemeTVC.self)
         $0.registerCustomXib(xibName: PostLocationTVC.identifier)
         $0.registerCustomXib(xibName: PostPathMapTVC.identifier)
@@ -363,14 +363,12 @@ extension PostDetailVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let rowAdjustment: Int = cellFixedCount + addressList.count - 1
-        
+        guard let additionalData = additionalDataOfPost,
+              let postData = postDetailData else { return UITableViewCell() }
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath)
-            guard let additionalData = additionalDataOfPost,
-                  let postData = postDetailData else { return UITableViewCell() }
             cell.setContent(title: additionalData.title,
                                  userName: postData.author,
                                  date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
@@ -382,9 +380,9 @@ extension PostDetailVC: UITableViewDataSource {
             
         case 2:
             let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath)
-            cell.setContent(city: postDetailData?.province ?? "",
-                            region: additionalDataOfPost?.region ?? "",
-                            theme: postDetailData?.themes ?? [])
+            cell.setContent(city: postData.province,
+                            region: additionalData.region,
+                            theme: postData.themes)
             return cell
             
         case 3:
@@ -396,19 +394,20 @@ extension PostDetailVC: UITableViewDataSource {
             
         case rowAdjustment+2:
             let cell = tableView.dequeueReusableCell(withType: PostParkingTVC.self, for: indexPath)
-            cell.setContent(isParking: postDetailData?.isParking ?? false,
-                            description: postDetailData?.parkingDesc ?? "")
+            cell.setContent(isParking: postData.isParking,
+                            description: postData.parkingDesc)
             return cell
             
         case rowAdjustment+3:
             let cell = tableView.dequeueReusableCell(withType: PostAttentionTVC.self, for: indexPath)
-            cell.setAttentionList(list: postDetailData?.warnings ?? [])
+            cell.setAttentionList(list: postData.warnings)
             return cell
             
         case rowAdjustment+4:
-            driveCell = getPostDriveCourceCell(tableView: tableView) as? PostDriveCourseTVC
-            //return getPostDriveCourceCell(tableView: tableView)
-            return driveCell!
+            let cell = tableView.dequeueReusableCell(withType: PostDriveCourseTVC.self, for: indexPath)
+            cell.setContent(text: postData.courseDesc)
+            return cell
+            
         default: // 경유지 일로 들어왕
             return getPostLocationCell(tableView: tableView, indexPath: indexPath)
         }
@@ -460,13 +459,6 @@ extension PostDetailVC {
     func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathMapTVC.identifier) as? PostPathMapTVC else {return UITableViewCell()}
         cell.setcourseList(list: addressList, height: 451)
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    func getPostDriveCourceCell(tableView: UITableView) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else {return UITableViewCell()}
-        cell.setContentText(text: postDetailData?.courseDesc ?? "")
         cell.selectionStyle = .none
         return cell
     }
