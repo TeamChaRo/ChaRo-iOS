@@ -105,7 +105,6 @@
 		3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA522694C169009370CD /* PostAttentionTVC.swift */; };
 		3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */; };
 		3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA802694C7C6009370CD /* CommonCVC.xib */; };
-		3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA852694C7C6009370CD /* PostImagesTVC.xib */; };
 		3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */; };
 		3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */; };
 		3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */; };
@@ -196,7 +195,6 @@
 		8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */; };
 		DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
-		F42DA8042694AF82003DA0DC /* PostImagesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA8032694AF82003DA0DC /* PostImagesTVCell.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */; };
 		F451640C2778D92A00AE84B4 /* CreatePostDriveCourseTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F451640A2778D92A00AE84B4 /* CreatePostDriveCourseTVC.xib */; };
@@ -348,7 +346,6 @@
 		3C86FA522694C169009370CD /* PostAttentionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
 		3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
 		3C86FA802694C7C6009370CD /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
-		3C86FA852694C7C6009370CD /* PostImagesTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostImagesTVC.xib; sourceTree = "<group>"; };
 		3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTodayDriveTVC.xib; sourceTree = "<group>"; };
 		3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSquareTVC.xib; sourceTree = "<group>"; };
 		3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeTVC.xib; sourceTree = "<group>"; };
@@ -445,7 +442,6 @@
 		A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
-		F42DA8032694AF82003DA0DC /* PostImagesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImagesTVCell.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDriveCourseTVC.swift; sourceTree = "<group>"; };
 		F451640A2778D92A00AE84B4 /* CreatePostDriveCourseTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostDriveCourseTVC.xib; sourceTree = "<group>"; };
@@ -717,7 +713,6 @@
 				36E445B1277CA12F008E31BE /* SettingScene */,
 				3CAE519F26C2431D00DB8A41 /* CreatePostScene */,
 				3CAE51A626C243F100DB8A41 /* HomeScene */,
-				3CAE51A526C243BD00DB8A41 /* PostDetailScene */,
 				3CAE51A726C2440600DB8A41 /* ThemeScene */,
 				36D1E600269739FD0079BD94 /* HotDropDownTVC.xib */,
 			);
@@ -887,7 +882,6 @@
 				3C86FA522694C169009370CD /* PostAttentionTVC.swift */,
 				F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */,
 				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
-				F42DA8032694AF82003DA0DC /* PostImagesTVCell.swift */,
 				3C2B3FCF27E0A7F8005D2DC5 /* PostLocationTVC.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
@@ -1028,14 +1022,6 @@
 				F4CC1B60269B92F0009A0C01 /* CreatePostTitleTVC.xib */,
 			);
 			path = WrittingScene;
-			sourceTree = "<group>";
-		};
-		3CAE51A526C243BD00DB8A41 /* PostDetailScene */ = {
-			isa = PBXGroup;
-			children = (
-				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
-			);
-			path = PostDetailScene;
 			sourceTree = "<group>";
 		};
 		3CAE51A626C243F100DB8A41 /* HomeScene */ = {
@@ -1456,7 +1442,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */,
-				3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */,
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
@@ -1683,7 +1668,6 @@
 				3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
 				3C2B3FCE27E08381005D2DC5 /* PostDetailAddressView.swift in Sources */,
-				F42DA8042694AF82003DA0DC /* PostImagesTVCell.swift in Sources */,
 				70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */,
 				3CB532CF27C50950005AAB1D /* ImageLiterals.swift in Sources */,
 				7062C84B270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift in Sources */,
