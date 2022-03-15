@@ -46,7 +46,7 @@ extension UIView {
     }
     
     func showToast(message : String) {
-        let toastLabel = UILabel(frame: CGRect(x: UIScreen.getDeviceWidth() - 100,
+        let toastLabel = UILabel(frame: CGRect(x: UIScreen.getDeviceWidth() / 2 - 100,
                                                y: UIScreen.getDeviceHeight() - 150,
                                                width: 200, height: 35))
         toastLabel.backgroundColor = .gray40
