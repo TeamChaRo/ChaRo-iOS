@@ -46,7 +46,7 @@ class PostDetailVC: UIViewController {
         $0.register(cell: PostTitleTVC.self)
         $0.registerCustomXib(xibName: PostImagesTVC.identifier)
         $0.register(cell: PostParkingTVC.self)
-        $0.registerCustomXib(xibName: PostAttentionTVC.identifier)
+        $0.register(cell: PostAttentionTVC.self)
         $0.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
         $0.register(cell: PostCourseThemeTVC.self)
         $0.registerCustomXib(xibName: PostLocationTVC.identifier)
@@ -401,7 +401,10 @@ extension PostDetailVC: UITableViewDataSource {
             return cell
             
         case rowAdjustment+3:
-            return getPostAttensionCell(tableView: tableView)
+            let cell = tableView.dequeueReusableCell(withType: PostAttentionTVC.self, for: indexPath)
+            cell.setAttentionList(list: postDetailData?.warnings ?? [])
+            return cell
+            
         case rowAdjustment+4:
             driveCell = getPostDriveCourceCell(tableView: tableView) as? PostDriveCourseTVC
             //return getPostDriveCourceCell(tableView: tableView)
@@ -460,14 +463,7 @@ extension PostDetailVC {
         cell.selectionStyle = .none
         return cell
     }
-    
-    func getPostAttensionCell(tableView: UITableView) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostAttentionTVC.identifier) as? PostAttentionTVC else { return UITableViewCell()}
-        cell.setAttentionList(list: postDetailData?.warnings ?? [])
-        cell.selectionStyle = .none
-        return cell
-    }
-    
+
     func getPostDriveCourceCell(tableView: UITableView) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostDriveCourseTVC.identifier) as? PostDriveCourseTVC else {return UITableViewCell()}
         cell.setContentText(text: postDetailData?.courseDesc ?? "")
