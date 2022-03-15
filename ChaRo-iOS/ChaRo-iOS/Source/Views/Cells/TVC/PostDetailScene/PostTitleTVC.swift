@@ -16,6 +16,9 @@ class PostTitleTVC: UITableViewCell {
     private let postTitleLabel = UILabel().then {
         $0.font = .notoSansBoldFont(ofSize: 19)
         $0.textColor = .mainBlack
+        $0.numberOfLines = 0
+        $0.autoresizesSubviews = true
+        $0.adjustsFontSizeToFitWidth = true
     }
     
     private let userNameLabel = UILabel().then {
@@ -45,24 +48,24 @@ class PostTitleTVC: UITableViewCell {
     }
     
     func setupConstraints() {
-        addSubviews([postTitleLabel, profileImageView,
+        contentView.addSubviews([postTitleLabel, profileImageView,
                      userNameLabel, postDateLabel])
         
         postTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(21)
+            $0.top.equalToSuperview().offset(21)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
         
         profileImageView.snp.makeConstraints {
-            $0.top.equalTo(postTitleLabel.snp.bottom).inset(15)
+            $0.top.equalTo(postTitleLabel.snp.bottom).offset(15)
             $0.leading.equalTo(postTitleLabel.snp.leading)
             $0.width.height.equalTo(29)
-            $0.bottom.equalToSuperview().inset(17)
+            //$0.bottom.equalToSuperview().offset(-17)
         }
         
         userNameLabel.snp.makeConstraints {
-            $0.top.equalTo(postTitleLabel.snp.bottom).inset(10)
-            $0.leading.equalTo(profileImageView.snp.trailing).inset(14)
+            $0.top.equalTo(postTitleLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().inset(63)
         }
         
         postDateLabel.snp.makeConstraints{
