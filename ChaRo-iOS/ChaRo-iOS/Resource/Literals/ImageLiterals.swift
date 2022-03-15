@@ -46,6 +46,7 @@ enum ImageLiterals {
     static var icMapEnd: UIImage{ .load(name: "icMapEnd") }
     static var icMapStart: UIImage{ .load(name: "icMapStart") }
     static var icMapWaypoint: UIImage{ .load(name: "icMapWaypoint") }
+    static var icMypageMore: UIImage{ .load(name: "icMypageMore") }
     static var icProfile: UIImage{ .load(name: "icProfile") }
     static var icRouteEnd: UIImage{ .load(name: "icRouteEnd") }
     static var icRouteStart: UIImage{ .load(name: "icRouteStart") }
@@ -90,7 +91,6 @@ enum ImageLiterals {
     static var icWayPointPlusInactive: UIImage{ .load(name: "icWayPointPlusInactive") }
     static var icWriteActive: UIImage{ .load(name: "write_active") }
     static var icWriteInactive: UIImage{ .load(name: "write_inactive") }
-    
     
     //MARK: - image
     static var imgBlueCar: UIImage{ .load(name: "blueCar") }
