@@ -133,8 +133,7 @@ class AddressMainVC: UIViewController {
     
     @objc private func sendDecidedAddress(){
         let newAddressList = changeAddressData()
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = PostDetailVC()
         postSearchKeywords()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }

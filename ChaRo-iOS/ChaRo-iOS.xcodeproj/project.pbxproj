@@ -107,7 +107,6 @@
 		3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */; };
 		3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */; };
 		3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */; };
-		3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */; };
 		3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8E2694C7C6009370CD /* Home.storyboard */; };
 		3C86FAB02694C7C6009370CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8F2694C7C6009370CD /* LaunchScreen.storyboard */; };
 		3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA942694C7C6009370CD /* Tabbar.storyboard */; };
@@ -353,7 +352,6 @@
 		3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSquareTVC.xib; sourceTree = "<group>"; };
 		3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeTVC.xib; sourceTree = "<group>"; };
 		3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostDriveCourseTVC.xib; sourceTree = "<group>"; };
-		3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostDetail.storyboard; sourceTree = "<group>"; };
 		3C86FA8E2694C7C6009370CD /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3C86FA902694C7C6009370CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C86FA942694C7C6009370CD /* Tabbar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
@@ -739,7 +737,6 @@
 				3CAE51BD26C2478300DB8A41 /* HomeScene */,
 				3CAE51BE26C249FE00DB8A41 /* MyPageScene */,
 				3CAE51C426C24A6E00DB8A41 /* OnBoardScene */,
-				3CAE51C326C24A5F00DB8A41 /* PostDetailScene */,
 				3CAE51C226C24A5100DB8A41 /* PostSearchScene */,
 				3CAE51C526C24A7B00DB8A41 /* SignScene */,
 				3CAE51C126C24A3F00DB8A41 /* SplachScene */,
@@ -1298,14 +1295,6 @@
 			path = PostSearchScene;
 			sourceTree = "<group>";
 		};
-		3CAE51C326C24A5F00DB8A41 /* PostDetailScene */ = {
-			isa = PBXGroup;
-			children = (
-				3C86FA8D2694C7C6009370CD /* PostDetail.storyboard */,
-			);
-			path = PostDetailScene;
-			sourceTree = "<group>";
-		};
 		3CAE51C426C24A6E00DB8A41 /* OnBoardScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1479,7 +1468,6 @@
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
 				3C45B5F526A1C0110061D64B /* lottie_test.json in Resources */,
 				70D63E272694E2AA0036484B /* ThemePost.storyboard in Resources */,
-				3C86FAAE2694C7C6009370CD /* PostDetail.storyboard in Resources */,
 				3C86FABA2694C7C6009370CD /* NotoSansCJKkr-Thin.otf in Resources */,
 				70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */,
 				F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */,

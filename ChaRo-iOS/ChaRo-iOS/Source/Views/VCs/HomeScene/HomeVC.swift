@@ -500,8 +500,7 @@ extension HomeVC: PostIdDelegate{
 
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = PostDetailVC()
         nextVC.setPostId(id: data)
         nextVC.modalPresentationStyle = .currentContext
         tabBarController?.present(nextVC, animated: true, completion: nil)
