@@ -75,7 +75,7 @@ class PostDriveCourseTVC: UITableViewCell {
         
         titleView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(34)
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(22)
         }
         

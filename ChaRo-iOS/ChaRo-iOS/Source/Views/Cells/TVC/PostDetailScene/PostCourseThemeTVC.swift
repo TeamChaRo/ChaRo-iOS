@@ -71,7 +71,7 @@ class PostCourseThemeTVC: UITableViewCell {
     
         themeTitleView.snp.makeConstraints {
             $0.top.equalTo(locationImageView).inset(36)
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(22)
         }
         themeStackView.snp.makeConstraints {
