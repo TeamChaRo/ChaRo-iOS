@@ -70,7 +70,8 @@ class PostLocationTVC: UITableViewCell {
             $0.top.equalTo(addressStackView.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(9)
             $0.trailing.equalToSuperview().offset(-9)
-            $0.bottom.equalToSuperview().inset(15)
+            $0.bottom.equalToSuperview().offset(-15)
+            $0.height.equalTo(351)
         }
     }
     
