@@ -63,8 +63,7 @@ class PostParkingTVC: UITableViewCell {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(42)
         }
-        parkingStackView.insertArrangedSubview(yesButton, at: 0)
-        parkingStackView.insertArrangedSubview(noButton, at: 1)
+        parkingStackView.addArrangedSubviews(views: [yesButton, noButton])
         
         descriptionTextFeild.snp.makeConstraints{
             $0.top.equalTo(parkingStackView.snp.bottom).offset(8)

@@ -56,16 +56,16 @@ class PostAttentionTVC: UITableViewCell {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(92)
         }
-        attentionStackView.addArrangedSubview(getHorizentalStackView(subViews: [highwayButton, mountainButton]))
-        attentionStackView.addArrangedSubview(getHorizentalStackView(subViews: [beginnerButton, peopleButton]))
+        attentionStackView.addArrangedSubviews(views: [getHorizentalStackView(views: [highwayButton, mountainButton]),
+                                                       getHorizentalStackView(views: [beginnerButton, peopleButton])])
     }
 
     private func configureUI() {
         selectionStyle = .none
     }
     
-    private func getHorizentalStackView(subViews: [UIView]) -> UIStackView{
-        let stackView = UIStackView(arrangedSubviews: subViews)
+    private func getHorizentalStackView(views: [UIView]) -> UIStackView{
+        let stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .horizontal
         stackView.spacing = 6
         stackView.distribution = .fillEqually
