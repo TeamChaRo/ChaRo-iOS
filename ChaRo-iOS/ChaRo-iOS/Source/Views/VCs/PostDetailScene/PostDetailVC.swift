@@ -44,7 +44,7 @@ class PostDetailVC: UIViewController {
     private lazy var tableView = UITableView().then {
         $0.separatorStyle = .none
         $0.register(cell: PostTitleTVC.self)
-        $0.registerCustomXib(xibName: PostImagesTVC.identifier)
+        $0.register(cell: PostPhotoTVC.self)
         $0.register(cell: PostParkingTVC.self)
         $0.register(cell: PostAttentionTVC.self)
         $0.register(cell: PostDriveCourseTVC.self)
@@ -308,25 +308,6 @@ extension PostDetailVC {
 
 //MARK: TableView Delegate
 extension PostDetailVC: UITableViewDelegate{
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0:
-            return 132
-        case 1:
-            return 222
-        case 2:
-            return 179
-        case 3:
-            return 538
-        case 4, 5:
-            return 159
-        case 6:
-            return 418
-        default:
-            return 50
-        }
-    }
 }
 
 //MARK: - UITableView extension
@@ -337,7 +318,9 @@ extension PostDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let additionalData = additionalDataOfPost,
-              let postData = postDetailData else { return UITableViewCell() }
+              let postData = postDetailData else {
+                  return UITableViewCell()
+              }
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath)
@@ -348,7 +331,9 @@ extension PostDetailVC: UITableViewDataSource {
             return cell
             
         case 1:
-            return getPostImagesCell(tableView: tableView)
+            let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath)
+            cell.setContent(imageList: [additionalData.image] + postData.images)
+            return cell
             
         case 2:
             let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath)
@@ -361,7 +346,6 @@ extension PostDetailVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withType: PostLocationTVC.self, for: indexPath)
             cell.setContent(courseList: postData.course)
             cell.copyAddressClouser = { locationTitle in
-                print("locationTitle = \(locationTitle)")
                 self.view.showToast(message: "\(locationTitle) 주소를 복사했습니다")
             }
             cell.setCopyClosure()
@@ -385,22 +369,6 @@ extension PostDetailVC: UITableViewDataSource {
         default:
             return UITableViewCell()
         }
-    }
-}
-
-//MARK: - import cell funcions
-extension PostDetailVC {
-
-    func getPostImagesCell(tableView: UITableView) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostImagesTVC.identifier) as? PostImagesTVC else { return UITableViewCell() }
-        
-        if imageList.isEmpty {
-            cell.setImage(postDetailData?.images ?? [])
-        }else{
-            cell.setImageAtConfirmView(imageList: [])
-        }
-        cell.selectionStyle = .none
-        return cell
     }
 }
 
