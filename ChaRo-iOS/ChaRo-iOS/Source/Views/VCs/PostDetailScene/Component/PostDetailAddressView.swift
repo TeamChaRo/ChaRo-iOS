@@ -14,13 +14,14 @@ final class PostDetailAddressView: UIView {
         $0.textColor = .mainBlack
     }
     
-    private let addressTextField = UITextField().then {
+    let addressTextField = UITextField().then {
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .gray50
         $0.addLeftPadding(9)
         $0.addRightPadding(9)
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 8
+        $0.isUserInteractionEnabled = false
     }
     
     private let copyButton = UIButton().then {
@@ -29,6 +30,11 @@ final class PostDetailAddressView: UIView {
     
     override init(frame: CGRect){
         super.init(frame: frame)
+    }
+    
+    init(title: String){
+        super.init(frame: .zero)
+        titleLabel.text = title
         setupConstraints()
     }
 
@@ -37,7 +43,7 @@ final class PostDetailAddressView: UIView {
     }
     
     private func setupConstraints(){
-        addSubviews([titleLabel, addressTextField, copyButton])
+        self.addSubviews([copyButton, titleLabel, addressTextField ])
         
         copyButton.snp.makeConstraints {
             $0.top.trailing.bottom.equalToSuperview()
@@ -46,14 +52,14 @@ final class PostDetailAddressView: UIView {
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalTo(copyButton.snp.centerY)
-            $0.leading.equalToSuperview().inset(10)
+            $0.leading.equalToSuperview().offset(10)
+            $0.width.equalTo(43)
         }
         
         addressTextField.snp.makeConstraints {
-            //$0.centerY.equalTo(copyButton.snp.centerY)
             $0.top.bottom.equalToSuperview().inset(3)
-            $0.leading.equalTo(titleLabel.snp.trailing).inset(3)
-            $0.trailing.equalTo(copyButton.snp.leading).inset(3)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(3)
+            $0.trailing.equalTo(copyButton.snp.leading).offset(-3)
         }
     }
     
