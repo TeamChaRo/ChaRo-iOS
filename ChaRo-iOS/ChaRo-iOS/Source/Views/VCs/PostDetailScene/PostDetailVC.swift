@@ -49,8 +49,9 @@ class PostDetailVC: UIViewController {
         $0.register(cell: PostAttentionTVC.self)
         $0.register(cell: PostDriveCourseTVC.self)
         $0.register(cell: PostCourseThemeTVC.self)
-        $0.registerCustomXib(xibName: PostLocationTVC.identifier)
-        $0.registerCustomXib(xibName: PostPathMapTVC.identifier)
+        $0.register(cell: PostLocationTVC.self)
+        //$0.registerCustomXib(xibName: PostLocationTVC.identifier)
+        //$0.registerCustomXib(xibName: PostPathMapTVC.identifier)
     }
     private let navigationView = UIView()
     private lazy var backButton = LeftBackButton(toPop: self, isModal: true)
@@ -327,8 +328,7 @@ extension PostDetailVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let rowAdjustment: Int = cellFixedCount + addressList.count - 1
-        
+        //let rowAdjustment: Int = cellFixedCount + addressList.count - 1
         switch indexPath.row {
         case 0:
             return 132
@@ -337,16 +337,10 @@ extension PostDetailVC: UITableViewDelegate{
         case 2:
             return 179
         case 3:
-            return 50
-        case rowAdjustment:
-            return 50
-        case rowAdjustment+1:
-            return 451
-        case rowAdjustment+2:
+            return 538
+        case 4, 5:
             return 159
-        case rowAdjustment+3:
-            return 159
-        case rowAdjustment+4:
+        case 6:
             return 418
         default:
             return 50
@@ -359,11 +353,11 @@ extension PostDetailVC: UITableViewDelegate{
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("address count = \(addressList.count)")
-        return 7 + addressList.count
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let rowAdjustment: Int = cellFixedCount + addressList.count - 1
+        //let rowAdjustment: Int = cellFixedCount + addressList.count - 1
         guard let additionalData = additionalDataOfPost,
               let postData = postDetailData else { return UITableViewCell() }
         switch indexPath.row {
@@ -386,30 +380,27 @@ extension PostDetailVC: UITableViewDataSource {
             return cell
             
         case 3:
-            return getPostLocationCell(tableView: tableView, indexPath: indexPath) // 출발지
-        case rowAdjustment:
-            return getPostLocationCell(tableView: tableView, indexPath: indexPath) // 도착지
-        case rowAdjustment+1:
-            return getPostPathMapCell(tableView: tableView)
+            let cell = tableView.dequeueReusableCell(withType: PostLocationTVC.self, for: indexPath)
+            cell.setContent(courseList: postData.course)
+            return cell
             
-        case rowAdjustment+2:
+        case 4:
             let cell = tableView.dequeueReusableCell(withType: PostParkingTVC.self, for: indexPath)
             cell.setContent(isParking: postData.isParking,
                             description: postData.parkingDesc)
             return cell
             
-        case rowAdjustment+3:
+        case 5:
             let cell = tableView.dequeueReusableCell(withType: PostAttentionTVC.self, for: indexPath)
             cell.setAttentionList(list: postData.warnings)
             return cell
             
-        case rowAdjustment+4:
+        case 6:
             let cell = tableView.dequeueReusableCell(withType: PostDriveCourseTVC.self, for: indexPath)
             cell.setContent(text: postData.courseDesc)
             return cell
-            
-        default: // 경유지 일로 들어왕
-            return getPostLocationCell(tableView: tableView, indexPath: indexPath)
+        default:
+            return UITableViewCell()
         }
     }
 }
@@ -425,40 +416,6 @@ extension PostDetailVC {
         }else{
             cell.setImageAtConfirmView(imageList: [])
         }
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    
-    func getPostLocationCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostLocationTVC.identifier) as? PostLocationTVC else {return UITableViewCell()}
-        
-        switch indexPath.row {
-        case 3:
-            cell.titleView.titleLabel.text = "출발지"
-            cell.setLocationText(address: addressList[0].address)
-        case 3 + addressList.count-1:
-            cell.titleView.titleLabel.text = "도착지"
-            cell.setLocationText(address: addressList[addressList.count-1].address)
-        default:
-            cell.titleView.titleLabel.text = "경유지"
-            if indexPath.row == 4 {
-                cell.setLocationText(address: addressList[1].address)
-            }
-            if indexPath.row == 5 {
-                cell.setLocationText(address: addressList[2].address)
-            }
-        }
-        cell.clickCopyButton = {
-            self.showToast(message: "클립보드에 복사되었습니다.")
-        }
-        cell.selectionStyle = .none
-        return cell
-    }
-    
-    func getPostPathMapCell(tableView: UITableView) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPathMapTVC.identifier) as? PostPathMapTVC else {return UITableViewCell()}
-        cell.setcourseList(list: addressList, height: 451)
         cell.selectionStyle = .none
         return cell
     }
