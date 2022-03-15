@@ -370,19 +370,17 @@ extension HomeVC : UITableViewDelegate {
         return sectionNum
     }
     
-//MARK: 내용 구현 부
+    //MARK: 내용 구현 부
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //tableview indexPath
         tableIndex = indexPath
-//MARK: 배너부분 구현
+        
+        //MARK: 배너부분 구현
         switch indexPath.row {
-//MARK: 오늘의 드라이브
+        //MARK: 오늘의 드라이브
         case 0:
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
             print(todayData)
-
-            //image
             if todayData.count == 0 {
                 return cell
             }
@@ -394,32 +392,22 @@ extension HomeVC : UITableViewDelegate {
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
-            
-            
-//MARK: 트렌드
+        //MARK: 트렌드
         case 2:
-
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
             cell.postDelegate = self
-            
-
             if trendyData.count == 0 {
                 return cell
             }
             else {
                 cell.trendyDriveList = trendyData
-
-                
-            return cell
-                
+                return cell
             }
 
-            
-//MARK: 커스텀 테마
+        //MARK: 커스텀 테마
         case 3:
-
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
@@ -521,8 +509,7 @@ extension HomeVC: PostIdDelegate{
     }
     
     func sendPostDriveElement(data: DriveElement?) {
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
         print("sendPostDriveElement | 이거 잘 불렸나?? \(data)")
         nextVC.modalPresentationStyle = .currentContext

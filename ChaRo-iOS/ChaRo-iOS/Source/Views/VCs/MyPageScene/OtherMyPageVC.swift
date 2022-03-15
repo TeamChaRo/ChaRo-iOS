@@ -486,7 +486,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.className) as? PostDetailVC else {return}
         if indexPath.row > 0{
-            detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
+            //detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
             detailVC.setAdditionalDataOfPost(data: DriveElement.init(
                 postID: writenPostDriveData[indexPath.row-1].postID,
                 title: writenPostDriveData[indexPath.row-1].title,

@@ -18,7 +18,6 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     var postDelegate: PostIdDelegate?
     let cellTag : Int = 4
     
-    
     var customList: [DriveElement] = []
     var headerText: String = ""
     

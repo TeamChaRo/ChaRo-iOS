@@ -17,32 +17,28 @@ class HomeAreaRecommandTVC: UITableViewCell {
     var buttonDelegate: SeeMorePushDelegate?
     var postDelegate: PostIdDelegate?
     let cellTag : Int = 5
-    //MARK:- Variable
+    
+    //MARK: - Variable
     static let identifier = "HomeAreaRecommandTVC"
 
     var headerText: String = ""
     var localList: [DriveElement] = []
     
-    //MARK:- Life Cycle
+    //MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setCollctionView()
         setLabelUI()
-        //cellInit()
     }
 
-    
-    //MARK:- default Setting Function Part
+    //MARK: - default Setting Function Part
     func setCollctionView() {
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
-        
     }
     
     func setLabelUI() {
-        
         titleLabel.text = headerText
         moreLabel.text = "더보기"
         
@@ -51,7 +47,6 @@ class HomeAreaRecommandTVC: UITableViewCell {
         
         titleLabel.textColor = UIColor.mainBlack
         moreLabel.textColor = UIColor.gray40
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -62,7 +57,6 @@ class HomeAreaRecommandTVC: UITableViewCell {
     }
     @IBAction func seeMoreButtonClicked(_ sender: Any) {
         buttonDelegate?.seeMorePushDelegate(data: cellTag)
-
     }
     
     //MARK:- Function
@@ -70,7 +64,6 @@ class HomeAreaRecommandTVC: UITableViewCell {
 }
 
 //MARK:- extension
-
 extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -79,10 +72,7 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
-        
-        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
-        let postid = cell!.postID
-        postDelegate?.sendPostID(data: postid)
+        postDelegate?.sendPostDriveElement(data: localList[indexPath.row])
     }
     
     

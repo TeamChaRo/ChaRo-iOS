@@ -10,8 +10,6 @@ import UIKit
 
 
 class HomeTodayDriveTVC: UITableViewCell {
-    
-    
     //MARK:- IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var charoPickLabel: UILabel!
@@ -21,7 +19,6 @@ class HomeTodayDriveTVC: UITableViewCell {
     static let identifier = "HomeTodayDriveTVC"
     
     var todayDriveList: [DriveElement] = []
-    
     var postDelegate: PostIdDelegate?
     
     //MARK:- Life Cycle
@@ -41,31 +38,23 @@ class HomeTodayDriveTVC: UITableViewCell {
     
     //MARK:- default Setting Function Part
     func setCollctionView() {
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
-        
         collectionView.showsHorizontalScrollIndicator = false
-        
     }
     
     func setLabelUI() {
-        
         charoPickLabel.text = "이번주 차로'S PICK"
         todayDriveLabel.text = "차로의 '오늘 드라이브'"
         
         charoPickLabel.textColor = UIColor.mainBlue
         todayDriveLabel.textColor = UIColor.mainBlack
         
-        
         charoPickLabel.font = UIFont.notoSansRegularFont(ofSize: 13)
         todayDriveLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
-        
     }
-    
     //MARK:- Function
-    
 }
 
 
@@ -78,11 +67,8 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
-        let postid = cell!.postID
-        postDelegate?.sendPostID(data: postid)
-
+        postDelegate?.sendPostDriveElement(data: todayDriveList[indexPath.row])
+        //postDelegate?.sendPostID(data: postid)
     }
     
     
