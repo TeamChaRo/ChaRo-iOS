@@ -66,6 +66,8 @@
 		3C117E1F269F45D5005F4646 /* PostResultHeaderCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */; };
 		3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */; };
 		3C2B3FCC27E04E6B005D2DC5 /* PostDetailContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B3FCB27E04E6B005D2DC5 /* PostDetailContentButton.swift */; };
+		3C2B3FCE27E08381005D2DC5 /* PostDetailAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B3FCD27E08381005D2DC5 /* PostDetailAddressView.swift */; };
+		3C2B3FD027E0A7F8005D2DC5 /* PostLocationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B3FCF27E0A7F8005D2DC5 /* PostLocationTVC.swift */; };
 		3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EC2690244D0099B684 /* MapService.swift */; };
 		3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */; };
 		3C45B5F126A1B5F30061D64B /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5F026A1B5F30061D64B /* Splash.storyboard */; };
@@ -200,7 +202,7 @@
 		F468C0FE269E20390019B1B3 /* CreatePostDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */; };
 		F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497D3EB26A0869A009A17AA /* UIViewController+.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
-		F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */; };
+		F4CC1AE52697464C009A0C01 /* PostLocationTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE32697464C009A0C01 /* PostLocationTVCell.swift */; };
 		F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */; };
 		F4CC1AE92697570A009A0C01 /* PostPathMapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1AE72697570A009A0C01 /* PostPathMapTVC.swift */; };
 		F4CC1AEA2697570A009A0C01 /* PostPathMapTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1AE82697570A009A0C01 /* PostPathMapTVC.xib */; };
@@ -308,6 +310,8 @@
 		3C117E1D269F45D5005F4646 /* PostResultHeaderCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostResultHeaderCVC.xib; sourceTree = "<group>"; };
 		3C117E20269F6FCB005F4646 /* PostDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailDataModel.swift; sourceTree = "<group>"; };
 		3C2B3FCB27E04E6B005D2DC5 /* PostDetailContentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailContentButton.swift; sourceTree = "<group>"; };
+		3C2B3FCD27E08381005D2DC5 /* PostDetailAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailAddressView.swift; sourceTree = "<group>"; };
+		3C2B3FCF27E0A7F8005D2DC5 /* PostLocationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVC.swift; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellTitleView.swift; sourceTree = "<group>"; };
 		3C45B5F026A1B5F30061D64B /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
@@ -448,7 +452,7 @@
 		F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDataModel.swift; sourceTree = "<group>"; };
 		F497D3EB26A0869A009A17AA /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
-		F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVC.swift; sourceTree = "<group>"; };
+		F4CC1AE32697464C009A0C01 /* PostLocationTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationTVCell.swift; sourceTree = "<group>"; };
 		F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostLocationTVC.xib; sourceTree = "<group>"; };
 		F4CC1AE72697570A009A0C01 /* PostPathMapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPathMapTVC.swift; sourceTree = "<group>"; };
 		F4CC1AE82697570A009A0C01 /* PostPathMapTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostPathMapTVC.xib; sourceTree = "<group>"; };
@@ -886,7 +890,8 @@
 				3C86FA212694B713009370CD /* PostDriveCourseTVC.swift */,
 				F42DA8032694AF82003DA0DC /* PostImagesTVC.swift */,
 				F4CC1AE72697570A009A0C01 /* PostPathMapTVC.swift */,
-				F4CC1AE32697464C009A0C01 /* PostLocationTVC.swift */,
+				3C2B3FCF27E0A7F8005D2DC5 /* PostLocationTVC.swift */,
+				F4CC1AE32697464C009A0C01 /* PostLocationTVCell.swift */,
 				3610A89B2693730700EFC794 /* PostParkingTVC.swift */,
 				3C86FA252694B738009370CD /* PostTitleTVC.swift */,
 			);
@@ -1316,6 +1321,7 @@
 			children = (
 				3CB532CB27C507DA005AAB1D /* PostDetailBottomView.swift */,
 				3C2B3FCB27E04E6B005D2DC5 /* PostDetailContentButton.swift */,
+				3C2B3FCD27E08381005D2DC5 /* PostDetailAddressView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1649,6 +1655,7 @@
 				F4CC1B68269B9850009A0C01 /* UITextView+.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
 				F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */,
+				3C2B3FD027E0A7F8005D2DC5 /* PostLocationTVC.swift in Sources */,
 				3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */,
 				36D1E601269739FD0079BD94 /* HotDropDownTVC.swift in Sources */,
 				F4CC1B9D269D3E7B009A0C01 /* CreatePostThemeTVC.swift in Sources */,
@@ -1665,7 +1672,7 @@
 				339DEED6277A44C3002749B2 /* PresentationController.swift in Sources */,
 				7062C843270C5A4200C1CD2E /* IsDuplicatedEmailService.swift in Sources */,
 				3C86F9F6269478F3009370CD /* AddressMainVC.swift in Sources */,
-				F4CC1AE52697464C009A0C01 /* PostLocationTVC.swift in Sources */,
+				F4CC1AE52697464C009A0C01 /* PostLocationTVCell.swift in Sources */,
 				F4CC1B94269C95DB009A0C01 /* AddressConfirmVC.swift in Sources */,
 				7062C836270B5A0B00C1CD2E /* PasswordView.swift in Sources */,
 				3C86C1BB27DF92CE00A41FCE /* PostDetailViewModel.swift in Sources */,
@@ -1680,6 +1687,7 @@
 				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,
+				3C2B3FCE27E08381005D2DC5 /* PostDetailAddressView.swift in Sources */,
 				F42DA8042694AF82003DA0DC /* PostImagesTVC.swift in Sources */,
 				70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */,
 				3CB532CF27C50950005AAB1D /* ImageLiterals.swift in Sources */,
