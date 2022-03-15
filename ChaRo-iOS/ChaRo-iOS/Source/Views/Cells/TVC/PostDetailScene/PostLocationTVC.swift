@@ -28,22 +28,27 @@ class PostLocationTVC: UITableViewCell {
         $0.spacing = 3
         $0.distribution = .fillEqually
     }
-    private lazy var tMapView = TMapView().then {
-        $0.delegate = self
-        $0.setApiKey(MapService.mapkey)
-    }
+    private lazy var tMapView = TMapView()
     private var courseList: [Course] = []
     private var polyLineSubjuect = PublishSubject<TMapPolyline>()
     private var polyLineList: [TMapPolyline] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupConstraints()
         configureUI()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setContent(courseList: [Course]) {
+        self.courseList = courseList
+        let lastIndex = courseList.count - 1
+        startAddressView.addressTextField.text = courseList[0].address
+        endAddressView.addressTextField.text = courseList[lastIndex].address
+        courseList.count == 3 ? (midAddressView.addressTextField.text = courseList[1].address) : (midAddressView.isHidden = true)
     }
     
     private func setupConstraints() {
@@ -59,18 +64,23 @@ class PostLocationTVC: UITableViewCell {
             $0.leading.trailing.equalToSuperview()
         }
         addressStackView.addArrangedSubviews(views: [startAddressView, midAddressView, endAddressView ])
+        
+        tMapView.snp.makeConstraints {
+            $0.top.equalTo(addressStackView.snp.bottom)
+            $0.leading.equalToSuperview().offset(9)
+            $0.trailing.equalToSuperview().offset(-9)
+            $0.bottom.equalToSuperview().inset(15)
+        }
     }
     
     private func configureUI() {
         selectionStyle = .none
+        configureMapView()
     }
     
-    func setContent(courseList: [Course]) {
-        self.courseList = courseList
-        let lastIndex = courseList.count - 1
-        startAddressView.addressTextField.text = courseList[0].address
-        endAddressView.addressTextField.text = courseList[lastIndex].address
-        courseList.count == 3 ? (midAddressView.addressTextField.text = courseList[1].address) : (midAddressView.isHidden = true)
+    private func configureMapView(){
+        tMapView.delegate = self
+        tMapView.setApiKey(MapService.mapkey)
     }
 }
 
@@ -85,7 +95,6 @@ extension PostLocationTVC {
         }).disposed(by: disposeBag)
     }
 
-    
     private func checkDrawingPolyLine() {
         if polyLineList.count == courseList.count - 1 {
             DispatchQueue.main.async {
@@ -127,12 +136,7 @@ extension PostLocationTVC: TMapViewDelegate {
         bindToMapView()
         addPathInMapView()
         addMarkerInMapView()
-        tMapView.snp.makeConstraints {
-            $0.top.equalTo(addressStackView.snp.bottom)
-            $0.leading.equalToSuperview().offset(9)
-            $0.trailing.equalToSuperview().offset(-9)
-            $0.bottom.equalToSuperview().inset(15)
-        }
+        tMapView.sizeToFit()
     }
 }
 
