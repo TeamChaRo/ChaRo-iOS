@@ -7,13 +7,12 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class PostDriveCourseTVC: UITableViewCell {
 
-    static let identifier = "PostDriveCourseTVC"
-    
     public var isEditingMode = false
-    private let titleView = PostCellTitleView(title: "그래서 제 드라이브 코스는요!")
+    private let titleView = PostCellTitleView(title: "코스 소개")
     
     public var setCourseDesc: ((String) -> Void)?
     public var contentText = "" {
@@ -22,7 +21,7 @@ class PostDriveCourseTVC: UITableViewCell {
         }
     }
     private let limitTextCount = 280
-    private var isWarnning : Bool = false {
+    private var isWarnning: Bool = false {
         didSet{
             if isWarnning{
                 warnningLabel.isHidden = false
@@ -37,93 +36,82 @@ class PostDriveCourseTVC: UITableViewCell {
         }
     }
     
-    public var textCountLabel : UILabel = {
-        let label = UILabel()
-        label.font = .notoSansRegularFont(ofSize: 11)
-        label.textColor = .gray30
-        label.text = "0/280자"
-        return label
-    }()
+    public let textCountLabel = UILabel().then {
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .gray30
+        $0.text = "0/280자"
+    }
     
-    private var textView : UITextView = {
-        let textView = UITextView()
-        textView.font = .notoSansRegularFont(ofSize: 14)
-        textView.textColor = .gray30
-        textView.backgroundColor = .clear
-        textView.isEditable = true
-        return textView
-    }()
+    private let textView = UITextView().then {
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.textColor = .gray50
+        $0.backgroundColor = .gray10
+        $0.layer.cornerRadius = 12
+        $0.contentInset = UIEdgeInsets(top: 21, left: 16, bottom: 16, right: 16)
+        $0.isEditable = false
+    }
     
     private let writeFormView: UIView = UIView()
     
-    private let warnningLabel: UILabel = {
-        let label = UILabel()
-        label.text = "280자 이내로 작성해주세요."
-        label.font = .notoSansRegularFont(ofSize: 11)
-        label.textColor = .mainOrange
-        label.isHidden = true
-        return label
-    }()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    private let warnningLabel = UILabel().then {
+        $0.text = "280자 이내로 작성해주세요."
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .mainOrange
+        $0.isHidden = true
     }
     
-    public func setContentText(text: String){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstraints()
+        configureUI()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupConstraints() {
+        contentView.addSubviews([titleView, textView, textCountLabel, warnningLabel])
+        
+        titleView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(20)
+            $0.height.equalTo(22)
+        }
+        
+        textView.snp.makeConstraints {
+            $0.top.equalTo(titleView.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(356)
+        }
+        
+        textCountLabel.snp.makeConstraints {
+            $0.trailing.equalTo(textView.snp.trailing).offset(-8)
+            $0.bottom.equalTo(textView.snp.bottom).offset(-8)
+        }
+        
+        warnningLabel.snp.makeConstraints {
+            $0.top.equalTo(textView.snp.bottom).inset(8)
+            $0.leading.equalTo(textView.snp.leading)
+        }
+    }
+    
+    private func configureUI() {
+        selectionStyle = .none
+    }
+    
+    public func setContent(text: String){
         textView.text = text
         textCountLabel.text = "\(text.count)/280자"
-        self.setNonEditingModeConstraint()
-        setTextViewStyle()
-            setNonEditingModeConstraint()
-            textView.isEditable = false
-
+        //setTextViewStyle()
     }
     
     private func setTextViewStyle(){
         textView.textColor = .gray50
         textView.layer.cornerRadius = 12
         textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.gray20.cgColor
+        textView.layer.borderColor = UIColor.gray50.cgColor
         textView.contentInset = UIEdgeInsets(top: 21, left: 16, bottom: 16, right: 16)
-    }
-    
-    private func setNonEditingModeConstraint(){
-        addSubviews([
-            self.titleView,
-            self.textView,
-            self.textCountLabel,
-            self.warnningLabel
-        ])
-        
-        self.titleView.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top)
-            $0.leading.equalTo(self.snp.leading).offset(20)
-            $0.trailing.equalTo(self.snp.trailing).inset(20)
-            $0.height.equalTo(22)
-        }
-        
-        self.textView.snp.makeConstraints {
-            $0.top.equalTo(self.titleView.snp.bottom).offset(12)
-            $0.leading.equalTo(self.snp.leading).offset(20)
-            $0.trailing.equalTo(self.snp.trailing).inset(20)
-            $0.height.equalTo(356)
-            $0.bottom.equalTo(self.snp.bottom).inset(16)
-        }
-        
-        self.textCountLabel.snp.makeConstraints {
-            $0.trailing.equalTo(self.textView.snp.trailing).inset(8)
-            $0.bottom.equalTo(self.textView.snp.bottom).inset(12)
-        }
-
-        self.warnningLabel.snp.makeConstraints {
-            $0.top.equalTo(textView.snp.bottom).offset(4)
-            $0.leading.equalTo(self.snp.leading).offset(20)
-        }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        selectionStyle = .none
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
