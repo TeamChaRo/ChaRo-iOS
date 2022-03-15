@@ -11,7 +11,7 @@ import Then
 
 final class PostPhotoCVC: UICollectionViewCell{
 
-    let imageView = UIImageView().then{
+    private let imageView = UIImageView().then{
         $0.contentMode = .scaleAspectFill
     }
     
@@ -30,4 +30,9 @@ final class PostPhotoCVC: UICollectionViewCell{
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    func setImage(to imgString: String){
+        imageView.kf.setImage(with: URL(string: imgString))
+    }
+    
 }
