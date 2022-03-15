@@ -18,7 +18,7 @@ class PostCourseThemeTVC: UITableViewCell {
         $0.font = .notoSansMediumFont(ofSize: 14)
         $0.textColor = .gray50
     }
-    private lazy var themeStackView = UIStackView().then {
+    private let themeStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 6
         $0.distribution = .fillEqually
@@ -45,15 +45,9 @@ class PostCourseThemeTVC: UITableViewCell {
         if themeStackView.arrangedSubviews.count == 3 { return }
         locationLabel.text = "\(city) \(region)"
         for index in 0..<3 {
-            if index < theme.count{
-                let button = PostDetailContentButton(title: theme[index],
-                                                     isSelected: true)
-                themeStackView.insertArrangedSubview(button, at: index)
-            }else{
-                let button = PostDetailContentButton()
-                button.clearUI()
-                themeStackView.insertArrangedSubview(button, at: index)
-            }
+            let button = PostDetailContentButton()
+            index < theme.count ? button.setContent(title: theme[index], isSelected: true) : button.clearUI()
+            themeStackView.insertArrangedSubview(button, at: index)
         }
     }
     

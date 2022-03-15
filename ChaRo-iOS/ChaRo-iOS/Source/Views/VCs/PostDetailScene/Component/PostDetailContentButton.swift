@@ -12,14 +12,7 @@ final class PostDetailContentButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
-    init(title: String, isSelected: Bool){
-        super.init(frame: .zero)
-        self.setTitle(title, for: .normal)
-        self.isSelected = isSelected
-        self.configureUI()
-    }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,6 +25,12 @@ final class PostDetailContentButton: UIButton {
         self.layer.borderColor = isSelected ? UIColor.mainSkyBlue.cgColor : UIColor.gray30.cgColor
         self.setTitleColor(.gray50, for: .selected)
         self.setTitleColor(.gray30, for: .normal)
+    }
+    
+    public func setContent(title: String, isSelected: Bool){
+        self.setTitle(title, for: .normal)
+        self.isSelected = isSelected
+        self.configureUI()
     }
     
     public func clearUI(){
