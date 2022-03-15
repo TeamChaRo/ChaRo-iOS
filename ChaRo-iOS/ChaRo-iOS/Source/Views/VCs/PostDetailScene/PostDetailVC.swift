@@ -48,7 +48,7 @@ class PostDetailVC: UIViewController {
         $0.registerCustomXib(xibName: PostParkingTVC.identifier)
         $0.registerCustomXib(xibName: PostAttentionTVC.identifier)
         $0.registerCustomXib(xibName: PostDriveCourseTVC.identifier)
-        $0.registerCustomXib(xibName: PostCourseThemeTVC.identifier)
+        $0.register(cell: PostCourseThemeTVC.self)
         $0.registerCustomXib(xibName: PostLocationTVC.identifier)
         $0.registerCustomXib(xibName: PostPathMapTVC.identifier)
     }
@@ -335,7 +335,7 @@ extension PostDetailVC: UITableViewDelegate{
         case 1:
             return 222
         case 2:
-            return 259
+            return 179
         case 3:
             return 50
         case rowAdjustment:
@@ -372,7 +372,7 @@ extension PostDetailVC: UITableViewDataSource {
         case 1:
             return getPostImagesCell(tableView: tableView)
         case 2:
-            return getPostCourseThemeCell(tableView: tableView)
+            return getPostCourseThemeCell(tableView: tableView, indexPath: indexPath)
         case 3:
             return getPostLocationCell(tableView: tableView, indexPath: indexPath) // 출발지
         case rowAdjustment:
@@ -422,14 +422,11 @@ extension PostDetailVC {
         return cell
     }
     
-    func getPostCourseThemeCell(tableView: UITableView) -> UITableViewCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCourseThemeTVC.identifier) as? PostCourseThemeTVC else {return UITableViewCell()}
-        cell.setCourse(city: postDetailData?.province ?? "" ,
-                       region: additionalDataOfPost?.region ?? "" )
-        cell.setTheme(theme: postDetailData?.themes ?? [])
-        cell.configureLayout()
-        cell.themeButtonConfigureLayer()
-        cell.selectionStyle = .none
+    func getPostCourseThemeCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath)
+        cell.setContent(city: postDetailData?.province ?? "",
+                        region: additionalDataOfPost?.region ?? "",
+                        theme: postDetailData?.themes ?? [])
         return cell
     }
     
