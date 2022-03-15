@@ -100,13 +100,10 @@
 		3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86FA522694C169009370CD /* PostAttentionTVC.swift */; };
 		3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */; };
 		3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA802694C7C6009370CD /* CommonCVC.xib */; };
-		3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */; };
 		3C86FAA72694C7C6009370CD /* PostImagesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA852694C7C6009370CD /* PostImagesTVC.xib */; };
-		3C86FAA92694C7C6009370CD /* PostParkingTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA872694C7C6009370CD /* PostParkingTVC.xib */; };
 		3C86FAAA2694C7C6009370CD /* HomeTodayDriveTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */; };
 		3C86FAAB2694C7C6009370CD /* HomeSquareTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */; };
 		3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */; };
-		3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */; };
 		3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8E2694C7C6009370CD /* Home.storyboard */; };
 		3C86FAB02694C7C6009370CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA8F2694C7C6009370CD /* LaunchScreen.storyboard */; };
 		3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C86FA942694C7C6009370CD /* Tabbar.storyboard */; };
@@ -345,13 +342,10 @@
 		3C86FA522694C169009370CD /* PostAttentionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttentionTVC.swift; sourceTree = "<group>"; };
 		3C86FA7E2694C7C6009370CD /* HomeThemeCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeCVC.xib; sourceTree = "<group>"; };
 		3C86FA802694C7C6009370CD /* CommonCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCVC.xib; sourceTree = "<group>"; };
-		3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostAttentionTVC.xib; sourceTree = "<group>"; };
 		3C86FA852694C7C6009370CD /* PostImagesTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostImagesTVC.xib; sourceTree = "<group>"; };
-		3C86FA872694C7C6009370CD /* PostParkingTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostParkingTVC.xib; sourceTree = "<group>"; };
 		3C86FA882694C7C6009370CD /* HomeTodayDriveTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTodayDriveTVC.xib; sourceTree = "<group>"; };
 		3C86FA892694C7C6009370CD /* HomeSquareTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSquareTVC.xib; sourceTree = "<group>"; };
 		3C86FA8A2694C7C6009370CD /* HomeThemeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeThemeTVC.xib; sourceTree = "<group>"; };
-		3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostDriveCourseTVC.xib; sourceTree = "<group>"; };
 		3C86FA8E2694C7C6009370CD /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3C86FA902694C7C6009370CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C86FA942694C7C6009370CD /* Tabbar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
@@ -1035,12 +1029,9 @@
 		3CAE51A526C243BD00DB8A41 /* PostDetailScene */ = {
 			isa = PBXGroup;
 			children = (
-				3C86FA842694C7C6009370CD /* PostAttentionTVC.xib */,
-				3C86FA8B2694C7C6009370CD /* PostDriveCourseTVC.xib */,
 				3C86FA852694C7C6009370CD /* PostImagesTVC.xib */,
 				F4CC1AE82697570A009A0C01 /* PostPathMapTVC.xib */,
 				F4CC1AE42697464C009A0C01 /* PostLocationTVC.xib */,
-				3C86FA872694C7C6009370CD /* PostParkingTVC.xib */,
 			);
 			path = PostDetailScene;
 			sourceTree = "<group>";
@@ -1472,7 +1463,6 @@
 				70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */,
 				F4CC1B66269B943B009A0C01 /* CreatePostPhotoTVC.xib in Resources */,
 				70D63E39269646D30036484B /* ThemePostAllTVC.xib in Resources */,
-				3C86FAA62694C7C6009370CD /* PostAttentionTVC.xib in Resources */,
 				703DD830269F3A7E004416A9 /* Login.storyboard in Resources */,
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
 				36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */,
@@ -1511,13 +1501,11 @@
 				3C86FAB42694C7C6009370CD /* Assets.xcassets in Resources */,
 				36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */,
 				3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */,
-				3C86FAA92694C7C6009370CD /* PostParkingTVC.xib in Resources */,
 				36B69F832775DC6500FEEAAE /* FollowFollowing.storyboard in Resources */,
 				3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */,
 				3C7DF0F9269AEE910021939C /* SearchResult.storyboard in Resources */,
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
 				F4CC1B9A269D3E67009A0C01 /* CreatePostCourseTVC.xib in Resources */,
-				3C86FAAD2694C7C6009370CD /* PostDriveCourseTVC.xib in Resources */,
 				36E445B9277CA1F3008E31BE /* SettingTVC.xib in Resources */,
 				F4CC1B91269C5EFA009A0C01 /* CreatePostPhotosCVC.xib in Resources */,
 				360937B22699F15A005392BB /* MyPagePostCVC.xib in Resources */,
