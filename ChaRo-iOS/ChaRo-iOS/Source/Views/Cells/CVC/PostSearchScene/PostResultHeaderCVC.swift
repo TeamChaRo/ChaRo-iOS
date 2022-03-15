@@ -56,7 +56,7 @@ class PostResultHeaderCVC: UICollectionViewCell {
             }else{
                 button.setTitle(" #\(filterResultList[index]) ", for: .normal)
                 button.setTitleColor(.mainBlue, for: .normal)
-                button.layer.borderColor = UIColor.mainlightBlue.cgColor
+                button.layer.borderColor = UIColor.mainLightBlue.cgColor
             }
             
             list.append(button)

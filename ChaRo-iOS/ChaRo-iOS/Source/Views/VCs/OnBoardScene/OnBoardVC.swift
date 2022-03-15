@@ -46,8 +46,8 @@ class OnBoardVC: UIViewController {
     
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.tintColor = .mainlightBlue
-        pageControl.pageIndicatorTintColor = .mainlightBlue
+        pageControl.tintColor = .mainLightBlue
+        pageControl.pageIndicatorTintColor = .mainLightBlue
         pageControl.currentPageIndicatorTintColor = .mainBlue
         pageControl.numberOfPages = 3
         pageControl.isUserInteractionEnabled = false
