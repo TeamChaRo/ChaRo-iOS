@@ -85,6 +85,11 @@ class PostLocationTVC: UITableViewCell {
             self.tMapView.setApiKey(MapService.mapkey)
         }
     }
+    
+    func setCopyClosure(){
+        startAddressView.copyAddressClouser = copyAddressClouser
+        midAddressView.copyAddressClouser = copyAddressClouser
+        endAddressView.copyAddressClouser = copyAddressClouser
     }
 }
 
@@ -136,11 +141,16 @@ extension PostLocationTVC {
 }
 
 extension PostLocationTVC: TMapViewDelegate {
+    func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D, to newPosition: CLLocationCoordinate2D) -> Bool {
+        return false
+    }
+    
     func mapViewDidFinishLoadingMap() {
         bindToMapView()
         addPathInMapView()
         addMarkerInMapView()
         tMapView.sizeToFit()
+        tMapView.layoutIfNeeded()
     }
 }
 
