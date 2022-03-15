@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class SearchResultVC: UIViewController {
     static let identifier = "SearchResultVC"
@@ -26,7 +27,9 @@ class SearchResultVC: UIViewController {
     private lazy var backButton = LeftBackButton(toPop: self)
     private let navigationTitleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색 결과",
                                                             color: .mainBlack)
-    private let separateLineView = UIView()
+    private let separateLineView = UIView().then {
+        $0.backgroundColor = .gray20
+    }
     private var collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: UICollectionViewFlowLayout())
@@ -48,24 +51,44 @@ class SearchResultVC: UIViewController {
         return collectionView
     }()
     
-    private let closeButton = UIButton()
-    private let searchNoImageView = UIImageView()
-    private let searchNoLabel = UILabel()
-    private let searchButton = UIButton()
+    private let closeButton = UIButton().then {
+        $0.setTitle("닫기", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
+        $0.setTitleColor(.mainBlue, for: .normal)
+        $0.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+    }
+    private let searchNoImageView = UIImageView().then {
+        $0.image = ImageLiterals.imgSearchNoImage
+        $0.contentMode = .scaleAspectFit
+    }
+    private let searchNoLabel = UILabel().then {
+        $0.text = "검색하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?"
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.textColor = .gray50
+    }
+    
+    private let searchButton = UIButton().then {
+        $0.setTitle("드라이브 코스 작성하기", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = .mainBlue
+        $0.addTarget(self, action: #selector(presentToCreatePostVC), for: .touchUpInside)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         postSearchPost(type: "like")
-        setConstraint()
+        setupConstraint()
         configureCollectionView()
         configureDropDown()
-        
     }
     
     public func setFilterTagList(list: [String]){
         filterResultList = list
     }
-
     
     @objc func dismissAction(){
         self.dismiss(animated: true, completion: nil)
@@ -81,7 +104,6 @@ class SearchResultVC: UIViewController {
             tabbar.present(createTab, animated: true, completion: nil)
         }
     }
-    
     
     func configureCollectionView(){
         collectionView.register(UINib(nibName: PostResultHeaderCVC.identifier, bundle: nil),
@@ -104,9 +126,7 @@ class SearchResultVC: UIViewController {
         dropDownTableView.separatorStyle = .none
         dropDownTableView.clipsToBounds = true
         dropDownTableView.layer.cornerRadius = 20
-
     }
-    
 }
 
 extension SearchResultVC: UICollectionViewDelegate{
@@ -116,7 +136,6 @@ extension SearchResultVC: UICollectionViewDelegate{
 extension SearchResultVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return postData.count + 1
-
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,16 +180,13 @@ extension SearchResultVC: UICollectionViewDataSource{
             return UICollectionReusableView()
         }
         header.setStackViewData(list: filterResultList)
-        header.add(separateLineView) {
-            $0.backgroundColor = .gray20
-            $0.snp.makeConstraints{
-                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
-                $0.bottom.equalToSuperview()
-                $0.height.equalTo(1)
-            }
+        header.addSubview(separateLineView)
+        separateLineView.snp.makeConstraints{
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(1)
         }
         return header
-        
     }
 
 }
@@ -201,48 +217,34 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .zero
     }
-    
 }
 
 
 extension SearchResultVC {
     
-    private func setConstraint(){
-        view.add(navigationView){
-            $0.snp.makeConstraints{
-                $0.top.leading.trailing.equalTo(self.view)
-                $0.height.equalTo(UIScreen.getNotchHeight() + 58)
-            }
-        }
-        setConstraintsInNavigaitionView()
-    }
-    
-    private func setConstraintsInNavigaitionView(){
-        navigationView.add(backButton){
-            $0.snp.makeConstraints{
-                $0.centerY.equalToSuperview()
-                $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
-                $0.leading.equalToSuperview()
-                $0.bottom.equalToSuperview().offset(-9)
-            }
+    private func setupConstraint(){
+        view.addSubview(navigationView)
+        navigationView.snp.makeConstraints{
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
         }
         
-        navigationView.add(navigationTitleLabel){
-            $0.snp.makeConstraints{
-                $0.centerX.equalToSuperview()
-                $0.centerY.equalTo(self.backButton.snp.centerY)
-            }
+        navigationView.addSubviews([backButton,navigationTitleLabel,closeButton])
+        backButton.snp.makeConstraints{
+            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
+            $0.leading.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-9)
         }
         
-        navigationView.add(closeButton){
-            $0.setTitle("닫기", for: .normal)
-            $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
-            $0.setTitleColor(.mainBlue, for: .normal)
-            $0.addTarget(self, action: #selector(self.dismissAction), for: .touchUpInside)
-            $0.snp.makeConstraints{
-                $0.trailing.equalToSuperview().offset(-20)
-                $0.centerY.equalTo(self.backButton.snp.centerY)
-            }
+        navigationTitleLabel.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(backButton.snp.centerY)
+        }
+        
+        closeButton.snp.makeConstraints{
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.centerY.equalTo(backButton.snp.centerY)
         }
     }
     
@@ -255,59 +257,33 @@ extension SearchResultVC {
     }
     
     private func setEmptyViewConstraint(){
-        view.add(separateLineView){
-            $0.backgroundColor = .gray20
-            $0.snp.makeConstraints{
-                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
-                $0.top.equalTo(self.navigationView.snp.bottom)
-                $0.height.equalTo(1)
-            }
+        separateLineView.snp.makeConstraints{
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(navigationView.snp.bottom)
+            $0.height.equalTo(1)
         }
         
-        view.add(searchNoImageView) {
-            $0.image =  UIImage(named: "searchNoImage")
-            $0.contentMode = .scaleAspectFit
-            $0.snp.makeConstraints{
-                $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
-                $0.top.equalTo(self.navigationView.snp.bottom).offset(28)
-            }
+        searchNoImageView.snp.makeConstraints{
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(navigationView.snp.bottom).offset(28)
         }
         
-        view.add(searchNoLabel) {
-            $0.text = "검색하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?"
-            $0.numberOfLines = 0
-            $0.textAlignment = .center
-            $0.font = .notoSansRegularFont(ofSize: 14)
-            $0.textColor = .gray50
-            $0.snp.makeConstraints{
-                $0.top.equalTo(self.searchNoImageView.snp.bottom).offset(19)
-                $0.centerX.equalTo(self.view.snp.centerX)
-            }
+        searchNoLabel.snp.makeConstraints{
+            $0.top.equalTo(searchNoImageView.snp.bottom).offset(19)
+            $0.centerX.equalTo(view.snp.centerX)
         }
         
-        view.add(searchButton){
-            $0.setTitle("드라이브 코스 작성하기", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
-            $0.layer.cornerRadius = 8
-            $0.backgroundColor = .mainBlue
-            $0.addTarget(self, action: #selector(self.presentToCreatePostVC), for: .touchUpInside)
-            $0.snp.makeConstraints{
-                $0.leading.equalTo(self.view.safeAreaLayoutGuide).offset(20)
-                $0.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
-                $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
-                $0.height.equalTo(48)
-            }
+        searchButton.snp.makeConstraints{
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.height.equalTo(48)
         }
+        
     }
     
     private func setResultViewConstraint(){
-        view.add(collectionView){
-            $0.snp.makeConstraints{
-                $0.top.equalTo(self.navigationView.snp.bottom).offset(15)
-                print("navigationView.frame.height\(self.navigationView.frame.height)")
-                $0.leading.trailing.bottom.equalToSuperview()
-            }
+        collectionView.snp.makeConstraints{
+            $0.top.equalTo(self.navigationView.snp.bottom).offset(15)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
