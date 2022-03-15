@@ -74,7 +74,7 @@ class PostDriveCourseTVC: UITableViewCell {
         contentView.addSubviews([titleView, textView, textCountLabel, warnningLabel])
         
         titleView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().offset(34)
             $0.leading.equalToSuperview().inset(20)
             $0.height.equalTo(22)
         }
@@ -92,7 +92,9 @@ class PostDriveCourseTVC: UITableViewCell {
         
         warnningLabel.snp.makeConstraints {
             $0.top.equalTo(textView.snp.bottom).inset(8)
+            $0.bottom.equalToSuperview()
             $0.leading.equalTo(textView.snp.leading)
+            $0.height.equalTo(14)
         }
     }
     

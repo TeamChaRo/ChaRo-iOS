@@ -50,8 +50,6 @@ class PostDetailVC: UIViewController {
         $0.register(cell: PostDriveCourseTVC.self)
         $0.register(cell: PostCourseThemeTVC.self)
         $0.register(cell: PostLocationTVC.self)
-        //$0.registerCustomXib(xibName: PostLocationTVC.identifier)
-        //$0.registerCustomXib(xibName: PostPathMapTVC.identifier)
     }
     private let navigationView = UIView()
     private lazy var backButton = LeftBackButton(toPop: self, isModal: true)
@@ -62,7 +60,7 @@ class PostDetailVC: UIViewController {
         $0.backgroundColor = .gray20
     }
     private var modifyButton = UIButton().then {
-        $0.setBackgroundImage(UIImage(named: "icMypageMore"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icMypageMore, for: .normal)
         $0.addTarget(self, action: #selector(registActionSheet), for: .touchUpInside)
     }
     private let saveButton = UIButton().then {
@@ -142,21 +140,6 @@ extension PostDetailVC{
         optionMenu.addAction(cancleAction)
         
         self.present(optionMenu, animated: true, completion: nil)
-    }
-    
-    func showToast(message : String) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100,
-                                               y: self.view.frame.size.height-100, width: 200, height: 35))
-        toastLabel.backgroundColor = .gray40
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = .notoSansRegularFont(ofSize: 14)
-        toastLabel.textAlignment = .center
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 17;
-        toastLabel.clipsToBounds = true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 2.0, delay: 0.5, options: .curveEaseOut, animations: { toastLabel.alpha = 0.0 }, completion: {(isCompleted) in toastLabel.removeFromSuperview() })
     }
 }
 
@@ -327,8 +310,6 @@ extension PostDetailVC {
 extension PostDetailVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        //let rowAdjustment: Int = cellFixedCount + addressList.count - 1
         switch indexPath.row {
         case 0:
             return 132
@@ -348,16 +329,13 @@ extension PostDetailVC: UITableViewDelegate{
     }
 }
 
-
 //MARK: - UITableView extension
 extension PostDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("address count = \(addressList.count)")
         return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let rowAdjustment: Int = cellFixedCount + addressList.count - 1
         guard let additionalData = additionalDataOfPost,
               let postData = postDetailData else { return UITableViewCell() }
         switch indexPath.row {

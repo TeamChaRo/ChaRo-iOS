@@ -53,7 +53,7 @@ class PostParkingTVC: UITableViewCell {
         contentView.addSubviews([titleView, parkingStackView, descriptionTextFeild])
 
         titleView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().offset(38)
             $0.leading.equalToSuperview().inset(20)
             $0.height.equalTo(22)
         }
@@ -67,6 +67,7 @@ class PostParkingTVC: UITableViewCell {
         
         descriptionTextFeild.snp.makeConstraints{
             $0.top.equalTo(parkingStackView.snp.bottom).offset(8)
+            $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(42)
         }

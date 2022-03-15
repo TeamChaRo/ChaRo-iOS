@@ -56,7 +56,7 @@ class PostTitleTVC: UITableViewCell {
             $0.top.equalTo(postTitleLabel.snp.bottom).offset(15)
             $0.leading.equalTo(postTitleLabel.snp.leading)
             $0.width.height.equalTo(29)
-            //$0.bottom.equalToSuperview().offset(-17)
+            $0.bottom.equalToSuperview().offset(-17)
         }
         
         userNameLabel.snp.makeConstraints {
@@ -76,6 +76,8 @@ class PostTitleTVC: UITableViewCell {
     
     func setContent(title: String, userName: String, date: String, imageName: String) {
         postTitleLabel.text = title
+        postTitleLabel.sizeToFit()
+        postTitleLabel.layoutIfNeeded()
         userNameLabel.text = userName
         postDateLabel.text = date
         profileImageView.layer.masksToBounds = true

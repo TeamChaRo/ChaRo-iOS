@@ -46,13 +46,14 @@ class PostAttentionTVC: UITableViewCell {
         contentView.addSubviews([titleView, attentionStackView])
         
         titleView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().offset(34)
             $0.leading.equalToSuperview().inset(20)
             $0.height.equalTo(22)
         }
         
         attentionStackView.snp.makeConstraints {
             $0.top.equalTo(titleView.snp.bottom).offset(12)
+            $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(92)
         }

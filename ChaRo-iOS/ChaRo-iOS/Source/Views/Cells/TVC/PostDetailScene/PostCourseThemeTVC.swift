@@ -76,6 +76,7 @@ class PostCourseThemeTVC: UITableViewCell {
         }
         themeStackView.snp.makeConstraints {
             $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
+            //$0.bottom.equalToSuperview().offset(-34)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(42)
         }
