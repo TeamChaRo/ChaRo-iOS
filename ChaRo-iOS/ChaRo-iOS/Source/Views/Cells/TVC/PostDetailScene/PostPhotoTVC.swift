@@ -18,7 +18,7 @@ final class PostPhotoTVC: UITableViewCell{
     private let photoSubject = PublishSubject<[String]>()
     private var imageList: [String] = []
     
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let screenWidth = UIScreen.main.bounds.width
         layout.itemSize = CGSize(width: screenWidth, height: screenWidth * (222.0 / 375.0))
@@ -37,7 +37,7 @@ final class PostPhotoTVC: UITableViewCell{
         $0.titleLabel?.font = .notoSansRegularFont(ofSize: 11)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = .gray30
+        $0.backgroundColor = .gray30.withAlphaComponent(0.8)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
