@@ -12,28 +12,24 @@ import RxSwift
 
 class PostLikeListVC: UIViewController{
     
+    // MARK: - Properties
     private let disposeBag = DisposeBag()
-    private let viewModel = PostLikeListViewModel()
+    private var viewModel: PostLikeListViewModel
     private let transionYOffsetSubject = PublishSubject<(CGFloat, Bool)>()
     
-    //MARK: - Properties
-    var postId: Int = -1
     private var animator = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
     private let backgroundView = UIView().then {
         $0.backgroundColor = .mainBlack.withAlphaComponent(0.8)
     }
-    
     private let containerView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 15
         $0.clipsToBounds = true
     }
-    
     private lazy var tableView = UITableView().then {
         $0.register(cell: FollowFollowingTVC.self)
         $0.separatorStyle = .none
     }
-    
     private let xmarkButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icClose, for: .normal)
     }
@@ -42,13 +38,21 @@ class PostLikeListVC: UIViewController{
         $0.font = .notoSansMediumFont(ofSize: 17)
     }
     
+    init(postId: Int){
+        self.viewModel = PostLikeListViewModel(postId: postId)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConstraints()
         configureUI()
         setupPanGesture()
         bindViewModel()
-        viewModel.getPostLikeList(postId: postId)
     }
     
     override func viewDidAppear(_ animated: Bool) {

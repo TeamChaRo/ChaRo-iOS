@@ -296,8 +296,7 @@ extension PostDetailVC {
         bottomView.likeDescriptionButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] in
-                let nextVC = PostLikeListVC()
-                nextVC.postId = self?.additionalDataOfPost?.postID ?? -1
+                let nextVC = PostLikeListVC(postId: self?.additionalDataOfPost?.postID ?? -1)
                 nextVC.modalPresentationStyle = .overFullScreen
                 self?.present(nextVC, animated: false, completion: nil)
             })
