@@ -31,7 +31,10 @@ class PostTitleTVC: UITableViewCell {
         $0.textColor = .gray30
     }
     
-    private let profileImageView = UIImageView()
+    private let profileImageView = UIImageView().then {
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 29.0 / 2.0
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -82,9 +85,7 @@ class PostTitleTVC: UITableViewCell {
         postTitleLabel.layoutIfNeeded()
         userNameLabel.text = userName
         postDateLabel.text = date
-        profileImageView.layer.masksToBounds = true
         profileImageView.kf.setImage(with: URL(string: imageName))
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2.0
     }
     
 }
