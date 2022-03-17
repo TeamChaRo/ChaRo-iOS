@@ -6,36 +6,39 @@
 //
 
 import UIKit
+import SnapKit
 import Then
 
 class SearchKeywordCell: UITableViewCell {
 
-    static let identifier = "SearchKeywordCell"
-    private var addressData : AddressDataModel?
+    private var addressData: AddressDataModel?
     public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
     
-    var titleLabel = UILabel().then{
+    var titleLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 16)
         $0.textColor = .gray50
     }
     
-    var addressLabel = UILabel().then{
+    var addressLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .gray40
     }
     
-    var dateLabel = UILabel().then{
+    var dateLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 12)
         $0.textColor = .gray30
         $0.text = ""
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
-        self.selectionStyle = .none
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
@@ -44,7 +47,7 @@ class SearchKeywordCell: UITableViewCell {
     }
     
     private func setupConstraints(){
-        addSubviews([titleLabel,
+        contentView.addSubviews([titleLabel,
                      addressLabel,
                      dateLabel])
         

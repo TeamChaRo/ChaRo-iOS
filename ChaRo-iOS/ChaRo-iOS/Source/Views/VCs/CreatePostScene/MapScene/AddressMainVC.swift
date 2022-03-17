@@ -7,89 +7,84 @@
 
 import UIKit
 import SnapKit
+import Then
 import TMapSDK
 
 class AddressMainVC: UIViewController {
 
-    static let identifier = "AddressMainVC"
     public var addressList: [AddressDataModel] = []
-    public var searchHistory : [KeywordResult] = []
+    public var searchHistory: [KeywordResult] = []
     public var newSearchHistory: [KeywordResult] = []
     public var addressCellList: [AddressButtonCell] = []
     
-    private var isFirstFinded = true
+    private var isFirstFinded: Bool = true
     private var sendedPostData: WritePostData?
     private var imageList: [UIImage] = []
+    private let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
     
-    private var tableView = UITableView()
-    private var oneCellHeight = 48
-    private var tableViewHeight = 96
-    private var tableViewBottomOffset = 19
+    private lazy var tableView = UITableView().then {
+        $0.register(cell: AddressButtonCell.self)
+        $0.delegate = self
+        $0.dataSource = self
+        $0.separatorStyle = .none
+    }
+    private var oneCellHeight: CGFloat = 48
+    private var tableViewHeight: CGFloat  = 96
+    private var tableViewBottomOffset: CGFloat  = 19
+    private var isFirstOpen: Bool = true
     
-    //MARK:- About Map
-    //private let tMapView = MapService.getTmapView()
+    //MARK: - About Map
     private let tMapView = TMapView()
-    private var markerList : [TMapMarker] = []
+    private var markerList: [TMapMarker] = []
     private var polyLineList: [TMapPolyline] = []
     
-    private let backButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icGrayBackButton"), for: .normal)
-        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
-        return button
-    }()
+    //MARK: UI Component
+    private let backButton = UIButton().then {
+        $0.setBackgroundImage(UIImage(named: "icGrayBackButton"), for: .normal)
+        $0.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+    }
     
-    private var confirmButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .mainBlue
-        button.setTitleColor(.white, for: .normal)
-        button.isHidden = true
-        button.setTitle("작성완료", for: .normal)
-        button.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
-        return button
-    }()
-    
+    private var confirmButton = UIButton().then {
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = .mainBlue
+        $0.setTitleColor(.white, for: .normal)
+        $0.isHidden = true
+        $0.setTitle("작성완료", for: .normal)
+        $0.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeAlert(title: "",
-                  message: "출발지와 목적지를 입력해 다녀온 드라이브 \n코스를 표현해주세요.\n\n 완성된 경로를 확인 후, 경유지를 추가해\n 원하는 경로로 수정이 가능합니다.")
+        configureUI()
         getSearchKeywords()
-        configureTableView()
         setConstraints()
         configureCells()
         initMapView()
-        navigationController?.isNavigationBarHidden = true
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
-        print("넘겨온 데이터 확인 = \(sendedPostData)")
         displayAddress()
         setMapFrame()
         inputMarkerInMapView()
         isThereStartAddress()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupGuideAnimationView()
+    }
+    
     private func configureCells(){
-        if isFirstFinded{
-            initAddressList()
-        }else{
-            setRecivedAddressCell()
-        }
+        isFirstFinded ? initAddressList() : setRecivedAddressCell()
     }
 
-    
     private func isThereStartAddress(){
         if addressList[0].title != ""{
             print("isThereStartAddress")
             addressCellList[1].searchButton.isEnabled = true
         }
     }
-
-
+    
     private func setConstraints(){
         view.addSubviews([backButton,
                           tableView,
@@ -123,36 +118,56 @@ class AddressMainVC: UIViewController {
         }
     }
     
+    private func configureUI(){
+        view.backgroundColor = .white
+        navigationController?.isNavigationBarHidden = true
+        oneCellHeight = 48.0
+        tableViewBottomOffset = 19
+        tableViewHeight = (oneCellHeight * 2) + tableViewBottomOffset
+    }
     
-    @objc func dismissView(){
+    
+    @objc private func dismissView(){
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func sendDecidedAddress(){
+    @objc private func sendDecidedAddress(){
         let newAddressList = changeAddressData()
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
-        print("------------------------")
-        print("imagelist = \(imageList) 이거 넘길 거야!!!!")
-//        print("------------------------")
-//        nextVC.setDataWhenConfirmPost(data: sendedPostData!,
-//                                      imageList: imageList,
-//                                      addressList: addressList)
         postSearchKeywords()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    func changeAddressData() -> [Address]{
+    private func changeAddressData() -> [Address]{
         print("현재까지 주소 - \(addressList)")
         var castedToAddressDatalList : [Address] = []
-        
-        for item in addressList {
-            castedToAddressDatalList.append(item.getAddressDataModel())
+        addressList.forEach{
+            castedToAddressDatalList.append($0.getAddressDataModel())
         }
-        
         return castedToAddressDatalList
     }
-    
+}
+
+// MARK: - Guide Animation
+extension AddressMainVC{
+    private func setupGuideAnimationView(){
+        guard isFirstOpen else { return }
+        let guideView = MapGuideView()
+        self.view.addSubview(guideView)
+        guideView.snp.makeConstraints{
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        animator.addAnimations {
+            guideView.alpha = 0
+        }
+        animator.addCompletion { _ in
+            guideView.removeFromSuperview()
+        }
+        animator.startAnimation()
+        isFirstOpen = false
+    }
 }
 
 
@@ -160,27 +175,27 @@ class AddressMainVC: UIViewController {
 extension AddressMainVC {
     private func initAddressList(){
         addressList.append(contentsOf: [AddressDataModel(),AddressDataModel()])
-        addressCellList.append(contentsOf: [initAddressCell(text: "출발지"),
-                                            initAddressCell(text: "도착지")])
+        addressCellList.append(contentsOf: [initAddressCell(type: .start),
+                                            initAddressCell(type: .end)])
     }
     
     private func setRecivedAddressCell(){
         addressCellList = []
-        for item in addressList {
-            let addressCell = setRecivedAddressCellStyle(address: item)
+        addressList.forEach{
+            let addressCell = setRecivedAddressCellStyle(address: $0)
             addressCellList.append(addressCell)
         }
     }
     
-    private func initAddressCell(text: String) -> AddressButtonCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else {return AddressButtonCell()}
+    private func initAddressCell(type: AddressButtonCell.AddressCellType) -> AddressButtonCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.className) as? AddressButtonCell else {return AddressButtonCell()}
         cell.delegate = self
-        cell.setInitContentText(text: text)
+        cell.setInitContent(of: type)
         return cell
     }
     
     private func setRecivedAddressCellStyle(address: AddressDataModel) -> AddressButtonCell{
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.identifier) as? AddressButtonCell else { return AddressButtonCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressButtonCell.className) as? AddressButtonCell else { return AddressButtonCell()}
         cell.delegate = self
         cell.setAddressText(address: address)
         return cell
@@ -190,7 +205,6 @@ extension AddressMainVC {
         sendedPostData = data
         self.imageList = imageList
         dump(imageList)
-        print("-----------받아온 데이터들----------------")
     }
     
     public func setAddressListData(list: [AddressDataModel]){
@@ -221,28 +235,15 @@ extension AddressMainVC {
 }
 
 
-//MARK:- TableView Delegate
+// MARK: - TableView Delegate
 extension AddressMainVC : UITableViewDelegate{
-    
-    private func configureTableView(){
-        tableView.registerCustomXib(xibName: AddressButtonCell.identifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        oneCellHeight = 48
-        tableViewBottomOffset = 19
-        tableViewHeight = (oneCellHeight * 2) + tableViewBottomOffset
-        print("tableViewHeight = \(tableViewHeight)")
-    }
-    
-    private func calculateTableViewHeight() -> Int{
-        return addressList.count * oneCellHeight + tableViewBottomOffset
+    private func calculateTableViewHeight() -> CGFloat{
+        return CGFloat(addressList.count) * oneCellHeight + tableViewBottomOffset
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(oneCellHeight)
+        return oneCellHeight
     }
-    
 }
 
 extension AddressMainVC: UITableViewDataSource{
@@ -278,7 +279,8 @@ extension AddressMainVC: AddressButtonCellDelegate{
     func addressButtonCellForAdding(cell: AddressButtonCell) {
         let index = addressList.endIndex - 1
         addressList.insert(cell.address, at: index)
-        addressCellList.insert(initAddressCell(text: "경유지"), at: index)
+        addressCellList.insert(initAddressCell(type: .mid), at: index)
+        
         tableView.reloadData()
         
         tableViewHeight = calculateTableViewHeight()
@@ -295,28 +297,17 @@ extension AddressMainVC: AddressButtonCellDelegate{
     }
     
     func addressButtonCellForPreseting(cell: AddressButtonCell) {
-        
-        let storyboard = UIStoryboard(name: "SearchKeyword", bundle: nil)
-//        guard let nextVC =  storyboard.instantiateViewController(identifier: SearchKeywordVC.identifier) as? SearchKeywordVC else {
-//            return
-//        }
-        
-        guard let nextVC =  storyboard.instantiateViewController(identifier: SearchAddressKeywordVC.identifier) as? SearchAddressKeywordVC else {
-            return
-        }
+        let nextVC = SearchAddressKeywordVC()
         let index = cell.getTableCellIndexPath()
         nextVC.setAddressModel(model: addressList[index],
-                               cellType: cell.cellType,
+                               cellType: cell.cellType.rawValue,
                                index: index)
         nextVC.setSearchKeyword(list: newSearchHistory+searchHistory)
-        
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
 }
 
-
-//MARK:- TMap
+//MARK: - TMap
 extension AddressMainVC{
     private func initMapView(){
         tMapView.setApiKey(MapService.mapkey)
@@ -351,7 +342,7 @@ extension AddressMainVC{
             print("index = \(index)")
             pathData.findPathData(startPoint: addressList[index].getPoint(),
                                   endPoint: addressList[index+1].getPoint()) { result, error in
-                guard let polyLine = result else {return}
+                guard let polyLine = result else { return }
                 
                 print(" start = \(self.addressList[index]), \(self.addressList[index].title)")
                 print(" end = \(self.addressList[index+1]),\(self.addressList[index+1].title) ")
@@ -386,7 +377,7 @@ extension AddressMainVC{
 //            print("index = \(index)")
 //            pathData.findPathData(startPoint: addressList[index].getPoint(),
 //                                  endPoint: addressList[index+1].getPoint()) { result, error in
-//                guard let polyLine = result else {return}
+//                guard let polyLine = result else { return }
 //                self.polyLineList.append(polyLine)
 //
 //                if index == self.addressList.count-2{
@@ -475,11 +466,8 @@ extension AddressMainVC{
                 maxY = point.longitude
             }
         }
-        
         return CLLocationCoordinate2D(latitude: (minX+maxX)/2, longitude: (minY+maxY)/2)
-        
     }
-
 }
 
 //MARK: Network
@@ -550,9 +538,9 @@ extension AddressMainVC : TMapViewDelegate{
         tMapView.setZoom(12)
         print("tMapView.getZoom() = \(tMapView.getZoom())")
     }
-
     
-    func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D, to newPosition: CLLocationCoordinate2D) -> Bool {
+    func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D,
+                 to newPosition: CLLocationCoordinate2D) -> Bool {
         return true
     }
     

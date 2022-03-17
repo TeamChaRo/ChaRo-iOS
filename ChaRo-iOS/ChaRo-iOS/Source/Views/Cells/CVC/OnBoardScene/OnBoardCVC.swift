@@ -29,8 +29,6 @@ class OnBoardCVC: UICollectionViewCell {
         return label
     }()
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setContraints()
