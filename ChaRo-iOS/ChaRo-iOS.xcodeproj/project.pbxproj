@@ -134,6 +134,7 @@
 		3CB532CF27C50950005AAB1D /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB532CE27C50950005AAB1D /* ImageLiterals.swift */; };
 		3CB532D127C510A3005AAB1D /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB532D027C510A3005AAB1D /* NSObject+.swift */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
+		3CC6787927E3318200F8F9EE /* MapGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6787827E3318200F8F9EE /* MapGuideView.swift */; };
 		3CCBB32726E2201800088B82 /* SearchKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBB32626E2201800088B82 /* SearchKeywordViewModel.swift */; };
 		3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */; };
 		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
@@ -382,6 +383,7 @@
 		3CB532CE27C50950005AAB1D /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		3CB532D027C510A3005AAB1D /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
+		3CC6787827E3318200F8F9EE /* MapGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGuideView.swift; sourceTree = "<group>"; };
 		3CCBB32626E2201800088B82 /* SearchKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordViewModel.swift; sourceTree = "<group>"; };
 		3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordDataMadel.swift; sourceTree = "<group>"; };
 		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
@@ -1075,6 +1077,7 @@
 		3CAE51A826C2442E00DB8A41 /* CreatePostScene */ = {
 			isa = PBXGroup;
 			children = (
+				3CC6787727E3316700F8F9EE /* Component */,
 				3CAE51AA26C2445200DB8A41 /* WrittingScene */,
 				3CAE51A926C2444200DB8A41 /* MapScene */,
 			);
@@ -1347,6 +1350,14 @@
 				3CB532CE27C50950005AAB1D /* ImageLiterals.swift */,
 			);
 			path = Literals;
+			sourceTree = "<group>";
+		};
+		3CC6787727E3316700F8F9EE /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				3CC6787827E3318200F8F9EE /* MapGuideView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		3CCBB32526E21FDD00088B82 /* ViewModels */ = {
@@ -1683,6 +1694,7 @@
 				70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */,
 				3C7DF0F5269ACE8F0021939C /* FilterDatas.swift in Sources */,
 				367D598F26F768EB0072C7C9 /* IndicatorView.swift in Sources */,
+				3CC6787927E3318200F8F9EE /* MapGuideView.swift in Sources */,
 				3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */,
 				3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */,
 				3CEC010C269DF4E400E9332C /* Date+.swift in Sources */,
