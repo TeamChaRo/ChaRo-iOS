@@ -152,24 +152,17 @@ class AddressMainVC: UIViewController {
 extension AddressMainVC{
     private func setupGuideAnimationView(){
         guard isFirstOpen else { return }
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .mainBlack.withAlphaComponent(0.8)
-        let imageView = UIImageView(image: ImageLiterals.imgMapFirstGuide)
-        view.addSubview(backgroundView)
-        backgroundView.snp.makeConstraints{
+        let guideView = MapGuideView()
+        self.view.addSubview(guideView)
+        guideView.snp.makeConstraints{
             $0.top.equalTo(tableView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-            
-        }
-        backgroundView.addSubview(imageView)
-        imageView.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(225)
-            $0.leading.equalToSuperview().inset(18)
-            $0.trailing.equalToSuperview().inset(22)
         }
         animator.addAnimations {
-            backgroundView.alpha = 0
-            imageView.alpha = 0
+            guideView.alpha = 0
+        }
+        animator.addCompletion { _ in
+            guideView.removeFromSuperview()
         }
         animator.startAnimation()
         isFirstOpen = false
