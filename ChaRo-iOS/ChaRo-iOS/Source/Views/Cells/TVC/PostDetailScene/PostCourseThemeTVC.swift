@@ -43,7 +43,7 @@ class PostCourseThemeTVC: UITableViewCell {
     
     func setContent(city: String, region: String, theme: [String]){
         if themeStackView.arrangedSubviews.count == 3 { return }
-        locationLabel.text = "\(city) \(region)"
+        locationLabel.text = getLocationText(city: city, region: region)
         for index in 0..<3 {
             let button = PostDetailContentButton()
             index < theme.count ? button.setContent(title: theme[index], isSelected: true) : button.clearUI()
@@ -80,6 +80,13 @@ class PostCourseThemeTVC: UITableViewCell {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(42)
         }
+    }
+    
+    private func getLocationText(city: String, region: String) -> String{
+        if city == "광역시" || city == "특별시" {
+            return "\(region)\(city)"
+        }
+        return "\(city) \(region)"
     }
 }
 
