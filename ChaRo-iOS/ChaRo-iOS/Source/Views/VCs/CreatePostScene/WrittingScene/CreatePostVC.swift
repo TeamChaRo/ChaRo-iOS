@@ -262,18 +262,12 @@ extension CreatePostVC {
     
     @objc
     func nextButtonDidTap(sender: UIButton){
-        let storyboard = UIStoryboard(name: "AddressMain", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(identifier: AddressMainVC.identifier) as? AddressMainVC else {
-            return
-        }
-        
+        let nextVC = AddressMainVC()
         let images: [UIImage] = selectImages
-        
         let model: WritePostData = getPostWriteData()
-        
-        vc.setAddressListData(list: [])
-        vc.setWritePostDataForServer(data: model, imageList: images)
-        self.navigationController?.pushViewController(vc, animated: false)
+        nextVC.setAddressListData(list: [])
+        nextVC.setWritePostDataForServer(data: model, imageList: images)
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
     @objc

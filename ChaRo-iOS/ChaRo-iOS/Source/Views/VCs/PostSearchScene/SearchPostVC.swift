@@ -39,41 +39,41 @@ class SearchPostVC: UIViewController {
     lazy private var backButton = XmarkDismissButton(toDismiss: self)
     private let titleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색", color: .white)
     
-    private let backgroundImageView = UIImageView().then{
+    private let backgroundImageView = UIImageView().then {
         $0.image = UIImage(named: "searchBackground")
         $0.contentMode = .scaleToFill
     }
     
-    private let userNameLabel = UILabel().then{
+    private let userNameLabel = UILabel().then {
         $0.font = .notoSansBoldFont(ofSize: 22)
         $0.textColor = .white
     }
     
-    private let userSubLabel = UILabel().then{
+    private let userSubLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 17)
         $0.textColor = .white
         $0.text = "원하는 코스를 검색해보세요"
     }
     
-    private let fileterView = UIImageView().then{
+    private let fileterView = UIImageView().then {
         $0.image = UIImage(named: "searchBackgroundWhite")
         $0.contentMode = .scaleToFill
     }
     
-    private let filterTitleLabel = UILabel().then{
+    private let filterTitleLabel = UILabel().then {
         $0.text = "오늘 드라이브는"
         $0.font = .notoSansBoldFont(ofSize: 19)
         $0.textColor = .gray50
     }
     
-    private let filterSubtitleLabel = UILabel().then{
+    private let filterSubtitleLabel = UILabel().then {
         $0.text = "3가지 요소 중 하나 이상만 입력해도 검색할 수 있어요!"
         $0.font = .notoSansMediumFont(ofSize: 13)
         $0.textColor = .gray30
     }
     
     private let stateImageView = UIImageView()
-    private let stateTextField = UITextField().then{
+    private let stateTextField = UITextField().then {
         $0.tag = 0
         $0.text = "지역"
     }
@@ -104,18 +104,18 @@ class SearchPostVC: UIViewController {
     }
     
     private let cautionImageView = UIImageView()
-    private let cautionTextField = UITextField().then{
+    private let cautionTextField = UITextField().then {
         $0.tag = 3
         $0.text = "주의사항"
     }
     
-    private let cautionLabel = UILabel().then{
+    private let cautionLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 17)
         $0.textColor = .gray50
         $0.text = "은 피하고 싶어요"
     }
     
-    private let findButton = UIButton().then{
+    private let findButton = UIButton().then {
         $0.isUserInteractionEnabled = false
         $0.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
         $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)

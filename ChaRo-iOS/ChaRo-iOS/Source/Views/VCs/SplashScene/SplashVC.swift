@@ -15,7 +15,6 @@ class SplashVC: UIViewController {
     let button = UIButton()
     private var animationView = AnimationView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAnimation()
@@ -23,8 +22,6 @@ class SplashVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5, execute: { [self] in
             self.presentNextOnBoaring()
         })

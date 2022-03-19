@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 import RxSwift
-import Alamofire
 
 class PostLikeListVC: UIViewController{
     
@@ -18,25 +19,25 @@ class PostLikeListVC: UIViewController{
     //MARK: - Properties
     var postId: Int = -1
     private var animator = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
-    private let backgroundView = UIView().then{
+    private let backgroundView = UIView().then {
         $0.backgroundColor = .mainBlack.withAlphaComponent(0.8)
     }
     
-    private let containerView = UIView().then{
+    private let containerView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 15
         $0.clipsToBounds = true
     }
     
-    private lazy var tableView = UITableView().then{
+    private lazy var tableView = UITableView().then {
         $0.register(cell: FollowFollowingTVC.self)
         $0.separatorStyle = .none
     }
     
-    private let xmarkButton = UIButton().then{
+    private let xmarkButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icClose, for: .normal)
     }
-    private let titleLabel = UILabel().then{
+    private let titleLabel = UILabel().then {
         $0.text = "좋아요"
         $0.font = .notoSansMediumFont(ofSize: 17)
     }

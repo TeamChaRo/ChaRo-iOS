@@ -97,6 +97,7 @@ enum ImageLiterals {
     static var imgBlueCar: UIImage{ .load(name: "blueCar") }
     static var imgBlueCarLine: UIImage{ .load(name: "blueCarLine") }
     static var imgCharoCar: UIImage{ .load(name: "charoCar") }
+    static var imgMapFirstGuide: UIImage { .load(name: "mapFirstGuide")}
     static var imgMyImage: UIImage{ .load(name: "myimage") }
     static var imgOnBoarding1: UIImage{ .load(name: "onboardingBackground1") }
     static var imgOnBoarding2: UIImage{ .load(name: "onboardingBackground2") }
