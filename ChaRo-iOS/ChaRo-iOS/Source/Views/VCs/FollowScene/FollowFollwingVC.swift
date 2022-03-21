@@ -383,7 +383,6 @@ extension FollowFollwingVC: UITableViewDataSource{
 extension FollowFollwingVC: isFollowButtonClickedDelegate{
     func isFollowButtonClicked(){
         getFollowData()
-        print("딜리게이트 실행")
     }
     
 

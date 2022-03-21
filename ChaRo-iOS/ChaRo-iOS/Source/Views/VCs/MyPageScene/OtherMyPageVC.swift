@@ -40,7 +40,7 @@ class OtherMyPageVC: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = 3
-        $0.image = UIImage(named: "myimage")
+        $0.image = ImageLiterals.imgMypageDefaultProfile
         $0.layer.cornerRadius = 32
     }
     private let headerBackgroundView = UIView().then{
@@ -53,10 +53,7 @@ class OtherMyPageVC: UIViewController {
         $0.text = "MY PAGE"
     }
     
-    private let isFollowButton = UIButton().then{
-        $0.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
-        $0.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
-    }
+    private var isFollowButton = UIButton()
     
     private let userNameLabel = UILabel().then{
         $0.textColor = UIColor.white
@@ -105,7 +102,7 @@ class OtherMyPageVC: UIViewController {
         $0.backgroundColor = UIColor.white
     }
     private let noDataImageView = UIImageView().then{
-        $0.image = UIImage(named: "no_img")
+        $0.image = ImageLiterals.imgMypageEmpty
     }
     private var collectionview: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -132,9 +129,14 @@ class OtherMyPageVC: UIViewController {
         setFilterViewCompletion()
         getMypageData()
         getFollowData()
+        isFollowButtonAddTarget()
+        setFollowButtonUI()
         self.dismissDropDownWhenTappedAround()
     }
     
+    func isFollowButtonAddTarget() {
+        isFollowButton.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
+    }
     
     //MARK: setUI
     
@@ -301,8 +303,15 @@ class OtherMyPageVC: UIViewController {
     func setOtherUserID(userID: String){
         otherUserID = userID
     }
-    
-    
+    func setFollowButtonUI() {
+        isFollowButton.backgroundColor = isFollowButton.isSelected ? UIColor.white : .clear
+        isFollowButton.layer.cornerRadius = 13
+        isFollowButton.layer.borderColor = UIColor.white.cgColor
+        isFollowButton.layer.borderWidth = 1
+        isFollowButton.setTitleColor(isFollowButton.isSelected ? UIColor.mainBlue : UIColor.white, for: .normal)
+        isFollowButton.setTitle(isFollowButton.isSelected ? "팔로잉" : "팔로우", for: .normal)
+        isFollowButton.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 13)
+    }
     func setHeaderData(){
         followerNum = userProfileData[0].follower
         followingNum = userProfileData[0].following
@@ -376,11 +385,13 @@ class OtherMyPageVC: UIViewController {
                    case .success(let data):
                        if let response = data as? DoFollowDataModel{
                            self.isFollow = response.data.isFollow
-                           if self.isFollow == false{
-                               self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
+                           if self.isFollow == true{
+                               self.isFollowButton.isSelected = true
+                               self.setFollowButtonUI()
                            }
-                           else{
-                               self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
+                           else {
+                               self.isFollowButton.isSelected = false
+                               self.setFollowButtonUI()
                            }
                        }
                    case .requestErr(let message) :
@@ -443,11 +454,13 @@ class OtherMyPageVC: UIViewController {
                 if let response = data as? DoFollowDataModel{
                     self.isFollow = response.data.isFollow
                     if self.isFollow == false{
-                        self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
+                        self.isFollowButton.isSelected = false
+                        self.setFollowButtonUI()
                         self.getMypageData()
                     }
                     else{
-                        self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
+                        self.isFollowButton.isSelected = true
+                        self.setFollowButtonUI()
                         self.getMypageData()
                     }
                     
@@ -494,7 +507,15 @@ extension OtherMyPageVC: UICollectionViewDataSource{
             let writenElement = writenPostDriveData[indexPath.row-1]
             var writenTags = [writenElement.region, writenElement.theme,
                         writenElement.warning ?? ""] as [String]
-        cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
+        cell.setData(image: writenPostDriveData[indexPath.row-1].image,
+                     title: writenPostDriveData[indexPath.row-1].title,
+                     tagCount:writenTags.count, tagArr: writenTags,
+                     heart:writenPostDriveData[indexPath.row-1].favoriteNum,
+                     save: writenPostDriveData[indexPath.row-1].saveNum,
+                     year: writenPostDriveData[indexPath.row-1].year,
+                     month: writenPostDriveData[indexPath.row-1].month,
+                     day: writenPostDriveData[indexPath.row-1].day,
+                     postID: writenPostDriveData[indexPath.row-1].postID)
         return cell
         
         }
