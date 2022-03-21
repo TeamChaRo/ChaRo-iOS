@@ -31,10 +31,6 @@ enum ImageLiterals {
     static var icDown: UIImage{ .load(name: "icDown") }
     static var icEyeOff: UIImage{ .load(name: "icEyeOff") }
     static var icEyeOn: UIImage{ .load(name: "icEyeOn") }
-    static var icFollowButtonWhite: UIImage{ .load(name: "followButtonWhite") }
-    static var icFollowButtonGray: UIImage{ .load(name: "FollowButtonGray") }
-    static var icFollowingButton: UIImage{ .load(name: "followingButton") }
-    static var icFollowingButtonImage: UIImage{ .load(name: "followingButtonImage") }
     static var icGoogleLogo: UIImage{ .load(name: "googleLogo") }
     
     static var icHeartActive: UIImage{ .load(name: "icHeartActive")}
