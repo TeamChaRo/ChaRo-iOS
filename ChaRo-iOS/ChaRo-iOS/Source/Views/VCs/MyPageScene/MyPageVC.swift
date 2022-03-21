@@ -46,7 +46,7 @@ class MyPageVC: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = 3
-        $0.image = UIImage(named: "defaultImage")
+        $0.image = ImageLiterals.imgMypageDefaultProfile
         $0.layer.cornerRadius = 32
     }
     private let headerBackgroundView = UIView().then {
@@ -62,7 +62,7 @@ class MyPageVC: UIViewController {
     }
     
     private let settingButton = UIButton().then {
-        $0.setBackgroundImage(UIImage(named: "setting2_white"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icSettingWhite , for: .normal)
         $0.addTarget(self, action: #selector(settingButtonClicked(_:)), for: .touchUpInside)
 
     }
@@ -110,10 +110,10 @@ class MyPageVC: UIViewController {
         $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
     private let noWritenDataImageView = UIImageView().then {
-        $0.image = UIImage(named: "no_img")
+        $0.image = ImageLiterals.imgMypageEmpty
     }
     private let noSaveDataImageView = UIImageView().then {
-        $0.image = UIImage(named: "no_img")
+        $0.image = ImageLiterals.imgMypageEmpty
     }
     private let noWritenDataLabel = UILabel().then {
         $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n작성해보는 것은 어떠신가요?"
@@ -136,13 +136,13 @@ class MyPageVC: UIViewController {
         $0.backgroundColor = UIColor.white
     }
     private let tabbarWriteButton = UIButton().then {
-        $0.setImage(UIImage(named: "write_active"), for: .normal)
+        $0.setImage(ImageLiterals.icWriteActive, for: .normal)
         $0.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         $0.addTarget(self, action: #selector(saveButtonClicked(_:)), for: .touchUpInside)
     }
     private let tabbarSaveButton = UIButton().then {
-        $0.setImage(UIImage(named: "save_inactive"), for: .normal)
+        $0.setImage(ImageLiterals.icSaveInactive, for: .normal)
         $0.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         $0.addTarget(self, action: #selector(writeButtonClicked(_:)), for: .touchUpInside)
@@ -237,12 +237,12 @@ class MyPageVC: UIViewController {
             $0.height.equalTo(2)
         }
         if contentOffsetX > userWidth/3{
-            tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
-            tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
+            tabbarWriteButton.setImage(ImageLiterals.icWriteInactive, for: .normal)
+            tabbarSaveButton.setImage(ImageLiterals.icSaveActive, for: .normal)
         }
         else{
-            tabbarWriteButton.setImage(UIImage(named: "write_active"), for: .normal)
-            tabbarSaveButton.setImage(UIImage(named: "save_inactive"), for: .normal)
+            tabbarWriteButton.setImage(ImageLiterals.icWriteActive, for: .normal)
+            tabbarSaveButton.setImage(ImageLiterals.icSaveInactive, for: .normal)
         }
     }
     
@@ -367,13 +367,13 @@ class MyPageVC: UIViewController {
 //MARK: buttonClicked
    @objc private func saveButtonClicked(_ sender: UIButton) {
        collectionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-       tabbarWriteButton.setImage(UIImage(named: "write_active"), for: .normal)
-       tabbarSaveButton.setImage(UIImage(named: "save_inactive"), for: .normal)
+       tabbarWriteButton.setImage(ImageLiterals.icWriteActive, for: .normal)
+       tabbarSaveButton.setImage(ImageLiterals.icSaveInactive, for: .normal)
     }
     @objc private func writeButtonClicked(_ sender: UIButton) {
         collectionScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
-        tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
-        tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
+        tabbarWriteButton.setImage(ImageLiterals.icWriteInactive, for: .normal)
+        tabbarSaveButton.setImage(ImageLiterals.icSaveActive, for: .normal)
      }
     @objc private func settingButtonClicked(_ sender: UIButton) {
         guard let setVC = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "SettingVC") as? SettingVC else {return}
@@ -799,7 +799,15 @@ extension MyPageVC: UICollectionViewDataSource {
                 var writenTags = [writenElement.region, writenElement.theme,
                             writenElement.warning ?? ""] as [String]
                 print(writenPostDriveData, "왜 안뜨냐?")
-            cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
+            cell.setData(image: writenPostDriveData[indexPath.row-1].image,
+                         title: writenPostDriveData[indexPath.row-1].title,
+                         tagCount:writenTags.count, tagArr: writenTags,
+                         heart:writenPostDriveData[indexPath.row-1].favoriteNum,
+                         save: writenPostDriveData[indexPath.row-1].saveNum,
+                         year: writenPostDriveData[indexPath.row-1].year,
+                         month: writenPostDriveData[indexPath.row-1].month,
+                         day: writenPostDriveData[indexPath.row-1].day,
+                         postID: writenPostDriveData[indexPath.row-1].postID)
             return cell
             }
         case 2:
@@ -811,7 +819,15 @@ extension MyPageVC: UICollectionViewDataSource {
                 let saveElement = savePostDriveData[indexPath.row-1]
                 var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
                 
-            cell.setData(image: savePostDriveData[indexPath.row-1].image, title: savePostDriveData[indexPath.row-1].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostDriveData[indexPath.row-1].favoriteNum, save: savePostDriveData[indexPath.row-1].saveNum, year: savePostDriveData[indexPath.row-1].year, month: savePostDriveData[indexPath.row-1].month, day: savePostDriveData[indexPath.row-1].day, postID: savePostDriveData[indexPath.row-1].postID)
+            cell.setData(image: savePostDriveData[indexPath.row-1].image,
+                         title: savePostDriveData[indexPath.row-1].title,
+                         tagCount:saveTags.count, tagArr: saveTags,
+                         heart:savePostDriveData[indexPath.row-1].favoriteNum,
+                         save: savePostDriveData[indexPath.row-1].saveNum,
+                         year: savePostDriveData[indexPath.row-1].year,
+                         month: savePostDriveData[indexPath.row-1].month,
+                         day: savePostDriveData[indexPath.row-1].day,
+                         postID: savePostDriveData[indexPath.row-1].postID)
             return cell
             }
         default:
