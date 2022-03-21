@@ -51,6 +51,7 @@ enum ImageLiterals {
     static var icRouteEnd: UIImage{ .load(name: "icRouteEnd") }
     static var icRouteStart: UIImage{ .load(name: "icRouteStart") }
     static var icRouteWaypoint: UIImage{ .load(name: "icRouteWaypoint") }
+    static var icSettingWhite: UIImage{ .load(name: "setting2_white") }
     
     //TODO: 위에 두개 중 안쓰는 거 한쪽은 삭제하기
     static var icSaveActive: UIImage{ .load(name: "icSaveActive") }
@@ -67,7 +68,6 @@ enum ImageLiterals {
     static var icSearchBtnWhite: UIImage{ .load(name: "searchBtnWhite") }
     static var icSearchWhite: UIImage{ .load(name: "icSearchWhite") }
     static var icSelectBoxShow: UIImage{ .load(name: "selectbox_show") }
-    static var icSettingWhite: UIImage{ .load(name: "setting_white") }
     static var icShare: UIImage{ .load(name: "icShare") }
     static var icSignupAgreeBig: UIImage{ .load(name: "icSignupAgreeBig") }
     static var icSignupAgreeSmall: UIImage{ .load(name: "icSignupAgreeSmall") }
@@ -107,6 +107,9 @@ enum ImageLiterals {
     static var imgSearchNoImage: UIImage{ .load(name: "searchNoImage") }
     static var imgPlaceholder: UIImage{ .load(name: "imagePlaceholder") }
     static var imgPostTextfieldLocationShow: UIImage{ .load(name: "postTextfieldLocationShow") }
+    static var imgMypageEmpty: UIImage{ .load(name: "no_img")}
+    static var imgMypageDefaultProfile: UIImage{ .load(name: "defaultImage")}
+    
 }
 
 extension UIImage {
