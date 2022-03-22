@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		330B8A70274C7B89007FB132 /* ThemePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */; };
 		3348E18D27E9F2C600D0E93D /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */; };
+		3348E18F27E9FF7B00D0E93D /* NotificationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */; };
+		3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E19027EA00F700D0E93D /* NotificationService.swift */; };
 		339DEED4277A3E8B002749B2 /* TransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED3277A3E8B002749B2 /* TransitionVC.swift */; };
 		339DEED6277A44C3002749B2 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED5277A44C3002749B2 /* PresentationController.swift */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
@@ -255,6 +257,8 @@
 /* Begin PBXFileReference section */
 		330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopupVC.swift; sourceTree = "<group>"; };
 		3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTVC.swift; sourceTree = "<group>"; };
+		3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListModel.swift; sourceTree = "<group>"; };
+		3348E19027EA00F700D0E93D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		336D2CFC26E72F0900E64042 /* ChaRo-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChaRo-iOS.entitlements"; sourceTree = "<group>"; };
 		339DEED3277A3E8B002749B2 /* TransitionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionVC.swift; sourceTree = "<group>"; };
 		339DEED5277A44C3002749B2 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
@@ -645,6 +649,7 @@
 				36FB8BA627777E3100C2E642 /* DoFollowService.swift */,
 				361986BE27778C2700B031F8 /* FollowCheckService.swift */,
 				368EC8EB277A15B20076BF5E /* GetFollowDataService.swift */,
+				3348E19027EA00F700D0E93D /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -849,6 +854,7 @@
 				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
 				368EC8ED277A16700076BF5E /* GetFollowDataModel.swift */,
 				36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */,
+				3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1710,6 +1716,7 @@
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */,
 				361986BF27778C2700B031F8 /* FollowCheckService.swift in Sources */,
+				3348E18F27E9FF7B00D0E93D /* NotificationListModel.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* UICollectionView+.swift in Sources */,
 				368EC8EE277A16700076BF5E /* GetFollowDataModel.swift in Sources */,
 				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
@@ -1745,6 +1752,7 @@
 				7062C845270C63F500C1CD2E /* NextButton.swift in Sources */,
 				7084948226A23AB7001B3C2B /* CollectionViewFooter.swift in Sources */,
 				360937B12699F15A005392BB /* MyPagePostCVC.swift in Sources */,
+				3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */,
 				7062C83F270C465300C1CD2E /* JoinContractView.swift in Sources */,
 				3C7A0C4F27CE838100B78854 /* PostLikeListVC.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
