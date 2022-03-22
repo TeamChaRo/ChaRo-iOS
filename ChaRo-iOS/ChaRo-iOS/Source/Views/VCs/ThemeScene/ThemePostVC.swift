@@ -37,7 +37,7 @@ class ThemePostVC: UIViewController {
     var cellCount = 0
     var currentState: String = "인기순"
     private var selectedTheme = ""
-    private var selectedDriveList: [Drive] = []
+    private var selectedDriveList: [DriveElement] = []
     
     //MARK:- Constraint
     
@@ -158,13 +158,11 @@ class ThemePostVC: UIViewController {
                     switch(response)
                     {
                     case .success(let driveData):
-                        
-                        if let object = driveData as? TotalDrive {
-                            self.cellCount = object.totalCourse
-                                                    
-                            if let drive = object.drive as? [Drive] {
-                                self.selectedDriveList = drive
-                            }
+                        print(driveData)
+                        if let object = driveData as? Drive {
+                            print("여기까지 왓음")
+                            self.cellCount = object.drive.count
+                            self.selectedDriveList = object.drive
                             
                             self.tableView.reloadData()
                         }

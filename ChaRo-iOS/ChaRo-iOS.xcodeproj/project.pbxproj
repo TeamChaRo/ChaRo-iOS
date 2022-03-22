@@ -173,6 +173,8 @@
 		7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084948326A2441C001B3C2B /* EmptyCVC.swift */; };
 		7084948626A2441C001B3C2B /* EmptyCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7084948426A2441C001B3C2B /* EmptyCVC.xib */; };
 		70876CD0275E08EB00096C51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70876CCF275E08EB00096C51 /* GoogleService-Info.plist */; };
+		709104A627CE576000284B62 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709104A527CE576000284B62 /* ChangePasswordVC.swift */; };
+		709104A827CE577700284B62 /* ChangeImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709104A727CE577700284B62 /* ChangeImageVC.swift */; };
 		70A18FA92778E4370069B1E5 /* FindPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */; };
 		70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */; };
 		70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */; };
@@ -426,6 +428,8 @@
 		7084948326A2441C001B3C2B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		7084948426A2441C001B3C2B /* EmptyCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCVC.xib; sourceTree = "<group>"; };
 		70876CCF275E08EB00096C51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		709104A527CE576000284B62 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		709104A727CE577700284B62 /* ChangeImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageVC.swift; sourceTree = "<group>"; };
 		70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordVC.swift; sourceTree = "<group>"; };
 		70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginVC.swift; sourceTree = "<group>"; };
@@ -588,6 +592,8 @@
 			isa = PBXGroup;
 			children = (
 				36E445B2277CA160008E31BE /* SettingVC.swift */,
+				709104A527CE576000284B62 /* ChangePasswordVC.swift */,
+				709104A727CE577700284B62 /* ChangeImageVC.swift */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -1707,6 +1713,8 @@
 				70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */,
 				3C879BED268B146300C41BB8 /* UIView+.swift in Sources */,
 				7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */,
+				709104A827CE577700284B62 /* ChangeImageVC.swift in Sources */,
+				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */,
 				361986BF27778C2700B031F8 /* FollowCheckService.swift in Sources */,
@@ -1720,6 +1728,7 @@
 				3CB532CF27C50950005AAB1D /* ImageLiterals.swift in Sources */,
 				7062C84B270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift in Sources */,
 				365FEF4927D66C9C0036E182 /* FilterCellView.swift in Sources */,
+				709104A627CE576000284B62 /* ChangePasswordVC.swift in Sources */,
 				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
 				3C5B15B82749802600F178A8 /* GenericResponse.swift in Sources */,
 				F4FB2ECB269FD7AE000C339B /* UIButton+.swift in Sources */,

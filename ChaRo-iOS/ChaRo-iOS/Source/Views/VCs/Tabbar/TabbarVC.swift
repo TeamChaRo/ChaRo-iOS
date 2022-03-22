@@ -19,6 +19,8 @@ class TabbarVC: UITabBarController {
         super.viewDidLoad()
         configTabbar()
         setTabbarCustomFrame()
+        
+        print("이거임 : \(UserDefaults.standard.string(forKey: "isLogin"))")
     }
 
 
