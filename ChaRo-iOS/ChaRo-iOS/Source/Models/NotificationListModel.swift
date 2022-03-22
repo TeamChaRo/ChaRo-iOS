@@ -24,5 +24,5 @@ struct NotificationListModel: Codable {
 
 /// 알림 날짜 표시 형식에 맞춰 convert하는 함수
 func convertNotiDateString(month: String, day: String) -> String {
-    return month + "/" + day
+    return month + "월 " + day + "일"
 }
