@@ -74,6 +74,7 @@
                     </view>
                     <connections>
                         <outlet property="headerView" destination="4VV-8K-pFu" id="X7p-ri-OSg"/>
+                        <outlet property="notificationListTV" destination="RvA-N1-LNg" id="xDR-q9-xJg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
