@@ -8,14 +8,15 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 class NotificationTVC: UITableViewCell {
     
     // MARK: UI Components
     private let profileImageView = UIImageView().then {
-        $0.layer.borderWidth = 4
+        $0.layer.borderWidth = 3
         $0.layer.borderColor = UIColor.mainBlue.cgColor
-        $0.layer.cornerRadius = $0.frame.height / 2
+        $0.layer.masksToBounds = true
     }
     
     private let notiStateLabel = UILabel().then {
@@ -41,12 +42,24 @@ class NotificationTVC: UITableViewCell {
     // MARK: Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        configureUI()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    
+    override func layoutSubviews() {
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.gray20.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+    }
+    
+    // MARK: init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
         selectionStyle = .none
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError()
     }
 }
 
@@ -66,7 +79,7 @@ extension NotificationTVC {
             $0.top.equalTo(profileImageView.snp.top)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
             $0.height.equalTo(profileImageView.snp.height).multipliedBy(heightRatio)
-            $0.width.equalTo(notiStateLabel.snp.height).multipliedBy(43/17)
+            $0.width.equalTo(43)
         }
         
         notiTitleLabel.snp.makeConstraints {
@@ -84,7 +97,13 @@ extension NotificationTVC {
 
 // MARK: - Custom Method
 extension NotificationTVC {
-    func bindData() {
+    func bindData(model: NotificationListModel) {
+        guard let url = URL(string: model.image) else { return }
+        profileImageView.kf.setImage(with: url)
+        notiStateLabel.text = model.title
+        notiTitleLabel.text = model.body
+        notiDateLabel.text = convertNotiDateString(month: model.month, day: model.day)
+        self.backgroundColor = model.isRead == 0 ? .blueSelect : .white
     }
 }
 
