@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChangeImageVC: UIViewController {
+class ChangeImageVC: UIViewController, UITextFieldDelegate {
 
     static let identifier = "ChangeImageVC"
     
@@ -68,21 +68,20 @@ class ChangeImageVC: UIViewController {
     
     @objc private func profileChangeButtonClicked() {
         
-        let actionsheetController = UIAlertController(title: "타이틀이담마", message: "메세지담마", preferredStyle: .actionSheet)
+        let actionsheetController = UIAlertController(title: "프로필 사진 바꾸기", message: nil, preferredStyle: .actionSheet)
         
-        
-        let actionDefault = UIAlertAction(title: "액션 디폴트", style: .default, handler: { action in
+        let actionDefaultImage = UIAlertAction(title: "기본 이미지 설정", style: .default, handler: { action in
             print("디폴트 action called")
         })
-        let actionDestructive = UIAlertAction(title: "액션 디스트뤕티브", style: .destructive, handler: { action in
-            print("destructive action called")
+        let actionLibraryImage = UIAlertAction(title: "라이브러리에서 선택", style: .default, handler: { action in
+            print("디폴트 action called")
         })
-        let actionCancel = UIAlertAction(title: "액션 캔슬", style: .cancel, handler: { action in
+        let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: { action in
             print("캔슬 action called")
         })
         
-        actionsheetController.addAction(actionDefault)
-        actionsheetController.addAction(actionDestructive)
+        actionsheetController.addAction(actionDefaultImage)
+        actionsheetController.addAction(actionLibraryImage)
         actionsheetController.addAction(actionCancel)
         
         self.present(actionsheetController, animated: true)
@@ -95,32 +94,40 @@ class ChangeImageVC: UIViewController {
     func setHeaderLayout() {
         let headerHeigth = userheight * 0.15
         self.view.addSubview(settingBackgroundView)
+        
         settingBackgroundView.addSubviews([headerTitleLabel,
                                            backButton,
                                            doneButton,
-                                           bottomView,
-                                           profileView,
-                                           profileChangeButton,
-                                           nicknameInputView])
+                                           bottomView])
+        
+        self.view.addSubviews([
+            profileView,
+            profileChangeButton,
+            nicknameInputView
+        ])
         
         settingBackgroundView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(headerHeigth)
         }
+        
         headerTitleLabel.snp.makeConstraints {
             $0.centerX.equalTo(settingBackgroundView.snp.centerX)
             $0.bottom.equalToSuperview().offset(-25)
             $0.width.equalTo(170)
         }
+        
         backButton.snp.makeConstraints {
             $0.width.height.equalTo(48)
             $0.leading.equalToSuperview().offset(0)
             $0.centerY.equalTo(headerTitleLabel)
         }
+        
         bottomView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
+        
         doneButton.snp.makeConstraints {
             $0.width.height.equalTo(48)
             $0.trailing.equalToSuperview().offset(-20)
