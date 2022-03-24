@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -190,6 +190,7 @@
 		70D63E3526963C810036484B /* ThemePostThemeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E3326963C810036484B /* ThemePostThemeTVC.xib */; };
 		70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D63E36269646D30036484B /* ThemePostAllTVC.swift */; };
 		70D63E39269646D30036484B /* ThemePostAllTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E37269646D30036484B /* ThemePostAllTVC.xib */; };
+		70DE0CA827ECF8FB00BBC9E9 /* UpdatePasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE0CA727ECF8FB00BBC9E9 /* UpdatePasswordService.swift */; };
 		70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */; };
 		70F5D7BB271D9DBC00FF9229 /* SocialJoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */; };
 		70F5D7BF271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */; };
@@ -307,8 +308,6 @@
 		36E445B7277CA1F3008E31BE /* SettingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTVC.xib; sourceTree = "<group>"; };
 		36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewDataModel.swift; sourceTree = "<group>"; };
 		36F3302826A2A97D009C0173 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		36F8F6C027134D4800092338 /* NewHotFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHotFilterView.swift; sourceTree = "<group>"; };
-		36F8F6AE27133F8800092338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoFollowDataModel.swift; sourceTree = "<group>"; };
 		36FB8BA627777E3100C2E642 /* DoFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoFollowService.swift; sourceTree = "<group>"; };
 		3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultHeaderCVC.swift; sourceTree = "<group>"; };
@@ -445,6 +444,7 @@
 		70D63E3326963C810036484B /* ThemePostThemeTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostThemeTVC.xib; sourceTree = "<group>"; };
 		70D63E36269646D30036484B /* ThemePostAllTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePostAllTVC.swift; sourceTree = "<group>"; };
 		70D63E37269646D30036484B /* ThemePostAllTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostAllTVC.xib; sourceTree = "<group>"; };
+		70DE0CA727ECF8FB00BBC9E9 /* UpdatePasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordService.swift; sourceTree = "<group>"; };
 		70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSJoinVC.swift; sourceTree = "<group>"; };
 		70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialJoinService.swift; sourceTree = "<group>"; };
 		70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginJoinResponseDataModel.swift; sourceTree = "<group>"; };
@@ -650,6 +650,7 @@
 				36FB8BA627777E3100C2E642 /* DoFollowService.swift */,
 				361986BE27778C2700B031F8 /* FollowCheckService.swift */,
 				368EC8EB277A15B20076BF5E /* GetFollowDataService.swift */,
+				70DE0CA727ECF8FB00BBC9E9 /* UpdatePasswordService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -662,7 +663,6 @@
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
 				5871AE65ECA530CBED32CC7F /* Frameworks */,
-				36A0DC3C27D66E97004BFBC8 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1714,7 +1714,6 @@
 				3C879BED268B146300C41BB8 /* UIView+.swift in Sources */,
 				7062C8222702F93000C1CD2E /* JoinInputView.swift in Sources */,
 				709104A827CE577700284B62 /* ChangeImageVC.swift in Sources */,
-				3C86FAC52694D767009370CD /* SearchKeywordVC.swift in Sources */,
 				3C86F9F8269484E4009370CD /* AddressDataModel.swift in Sources */,
 				3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */,
 				361986BF27778C2700B031F8 /* FollowCheckService.swift in Sources */,
@@ -1730,6 +1729,7 @@
 				365FEF4927D66C9C0036E182 /* FilterCellView.swift in Sources */,
 				709104A627CE576000284B62 /* ChangePasswordVC.swift in Sources */,
 				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
+				70DE0CA827ECF8FB00BBC9E9 /* UpdatePasswordService.swift in Sources */,
 				3C5B15B82749802600F178A8 /* GenericResponse.swift in Sources */,
 				F4FB2ECB269FD7AE000C339B /* UIButton+.swift in Sources */,
 				F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */,
