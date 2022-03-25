@@ -6,6 +6,8 @@
 //
 import Foundation
 import UIKit
+import SnapKit
+import Then
 
 protocol SetTopTitleDelegate {
     func setTopTitle(name: String)
@@ -17,7 +19,6 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var famousButton: UIButton!
     @IBOutlet weak var newUpdateButton: UIButton!
-    @IBOutlet weak var dropDownTableview: UITableView!
     @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
     
@@ -34,9 +35,23 @@ class HomePostVC: UIViewController {
     var newPostData: [DetailModel] = []
     var cellLoadFirst: Bool = true
     
+    var currentState: String = "인기순"
+    let filterView = FilterView()
+    
     static let identifier: String = "HomePostVC"
     
-    func setTableView() {
+    func setNavigationBottomLineView() {
+        let bottomLineView = UIView().then{
+            $0.backgroundColor = UIColor.gray20
+        }
+        homePostNavigationView.addSubview(bottomLineView)
+        bottomLineView.snp.makeConstraints{
+            $0.bottom.leading.trailing.equalToSuperview().offset(0)
+            $0.height.equalTo(1)
+        }
+    }
+    
+    func setCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
@@ -48,6 +63,7 @@ class HomePostVC: UIViewController {
     }
     
     
+<<<<<<< HEAD
     func setDropdown() {
         dropDownTableview.registerCustomXib(xibName: "HotDropDownTVC")
         dropDownTableview.delegate = self
@@ -64,19 +80,48 @@ class HomePostVC: UIViewController {
         dropDownTableview.layer.cornerRadius = 20
 //        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
+=======
+    func setFilterViewLayout() {
+        self.view.addSubview(filterView)
+        filterView.isHidden = true
+        filterView.snp.makeConstraints{
+            $0.top.equalTo(homePostNavigationView.snp.bottom).offset(60)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(97)
+            $0.width.equalTo(180)
+        }
     }
-
+    
+    func setFilterViewCompletion(){
+        filterView.touchCellCompletion = { index in
+            switch index{
+            case 0:
+                self.currentState = "인기순"
+                self.getData()
+            case 1:
+                self.currentState = "최신순"
+                self.getNewData()
+            default:
+                print("Error")
+            }
+            self.collectionView.reloadData()
+            self.filterView.isHidden = true
+            return index
+        }
+>>>>>>> develop
+    }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTableView()
-        setShaow()
-        setDropdown()
-        setRound()
+        setCollectionView()
+        setFilterViewLayout()
         setNavigationLabel()
         getData()
+        setNavigationBottomLineView()
+        setFilterViewCompletion()
         self.dismissDropDownWhenTappedAround()
-
         // Do any additional setup after loading the view.
+
     }
 
     @IBAction func backButtonClicked(_ sender: Any) {
@@ -88,13 +133,18 @@ class HomePostVC: UIViewController {
             switch response
             {
             case .success(let data) :
+<<<<<<< HEAD
                 if let response = data as? DetailModel {
                     
+=======
+                if let response = data as? DetailModel{
+                    print("인기순 데이터")
+
+>>>>>>> develop
                     DispatchQueue.global().sync {
                         self.postCount = response.data.totalCourse
                         self.postData = [response]
                     }
-                    print("ddd", self.postCount)
                     self.postCount = response.data.totalCourse
                     self.collectionView.reloadData()
                 }
@@ -115,8 +165,13 @@ class HomePostVC: UIViewController {
             switch response
             {
             case .success(let data) :
+<<<<<<< HEAD
                 if let response = data as? DetailModel {
                     
+=======
+                if let response = data as? DetailModel{
+                    print("최신순 데이터")
+>>>>>>> develop
                     DispatchQueue.global().sync {
                         self.postCount = response.data.drive.count
                         self.newPostCount = response.data.drive.count
@@ -175,8 +230,7 @@ extension HomePostVC: UICollectionViewDelegate {
                 isFirstLoaded = false
                 topCVCCell = topCell
             }
-            topCVCCell?.postCount = postCount
-            topCVCCell?.setLabel()
+            topCVCCell?.setTitle(data: currentState)
             return topCVCCell!
         case 1:
             if postData.count == 0{
@@ -189,7 +243,6 @@ extension HomePostVC: UICollectionViewDelegate {
                              tagArr: postData[0].data.drive[indexPath.row].tags,
                              isFavorite: postData[0].data.drive[indexPath.row].isFavorite,
                              postID: postData[0].data.drive[indexPath.row].postID, height: 60)
-                topCVCCell?.postCount = postCount
                 //cell.titleHeight?.constant = 60
                 cell.setLabel()
                 return cell
@@ -244,6 +297,7 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
+<<<<<<< HEAD
 extension HomePostVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -297,36 +351,12 @@ extension HomePostVC: MenuClickedDelegate {
     func menuClicked() {
         dropDownTableview.isHidden = false
 
+=======
+extension HomePostVC: MenuClickedDelegate {
+    func menuClicked(){
+        filterView.isHidden = false
+>>>>>>> develop
     }
-    
-}
-
-extension HomePostVC: SetTitleDelegate {
-    func setTitle(cell: HotDropDownTVC) {
-        
-        if cell.name == "인기순"{
-            print("인기순 실행")
-            self.getData()
-            self.cellCount = self.postData[0].data.drive.count
-            self.dropDownTableview.isHidden = true
-            topCVCCell?.setTitle(data: "인기순")
-            topCVCCell?.setTopTitle(name: "인기순")
-            topCVCCell?.setSelectName(name: "인기순")
-        }
-        
-        else if cell.name == "최신순"{
-            print("최신순 실행")
-            self.getNewData()
-            self.cellCount = self.postData[0].data.drive.count
-            self.dropDownTableview.isHidden = true
-            topCVCCell?.setTitle(data: "최신순")
-            topCVCCell?.setTopTitle(name: "최신순")
-            topCVCCell?.setSelectName(name: "최신순")
-
-        }
-        
-    }
-    
 }
 
 extension HomePostVC{
@@ -337,9 +367,9 @@ func dismissDropDownWhenTappedAround() {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
-    
+
     @objc func dismissDropDown() {
-        self.dropDownTableview.isHidden = true
+        self.filterView.isHidden = true
     }
 }
 
