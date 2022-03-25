@@ -74,10 +74,12 @@ class LoginVC: UIViewController {
                     UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
                     UserDefaults.standard.set(user.isSocial, forKey: "isSocial")
                 }
+                self.showHomeVC()
 
             case .requestErr(let message):
                 if let message = message as? String {
-                    print(message)
+                    self.makeAlert(title: "로그인 실패",
+                              message: message)
                 }
             default :
                 print("ERROR")
@@ -104,11 +106,13 @@ class LoginVC: UIViewController {
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
+    }
+    
+    private func showHomeVC() {
         let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
         let nextVC = storyboard.instantiateViewController(withIdentifier: TabbarVC.identifier)
         nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)
-        
     }
     
     
