@@ -36,7 +36,7 @@ class CreatePostThemeTVC: UITableViewCell {
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
     private var currentList: [String] = [] //pickerview에 표시 될 List
     private var filterList: [String] = ["","",""]{
-        didSet{
+        didSet {
             _ = setThemeInfo?(self.filterList)
         }
     }
@@ -103,7 +103,7 @@ class CreatePostThemeTVC: UITableViewCell {
                                           themeSecondField,
                                           themeThirdField])
         
-        for textField in textFieldList{
+        for textField in textFieldList {
             textField.textAlignment = .center
             textField.borderStyle = .none
             textField.tintColor = .clear
@@ -186,10 +186,10 @@ extension CreatePostThemeTVC {
     
     func didNotSelect() {
         switch currentIndex {
-        case 0 : filterList[currentIndex] = ""
-        case 1 : filterList[currentIndex] = ""
-        case 2 : filterList[currentIndex] = ""
-        default : print("text set error")
+        case 0: filterList[currentIndex] = ""
+        case 1: filterList[currentIndex] = ""
+        case 2: filterList[currentIndex] = ""
+        default: print("text set error")
         }
     }
     
@@ -235,7 +235,7 @@ extension CreatePostThemeTVC {
         
     }
     
-    func changeCurrentPickerData(index : Int) {
+    func changeCurrentPickerData(index: Int) {
         
         if index == 0 {
             currentList = filterData.thema
@@ -268,7 +268,7 @@ extension CreatePostThemeTVC {
     
 }
 
-extension CreatePostThemeTVC: UIPickerViewDelegate{
+extension CreatePostThemeTVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return currentList[row]
     }
@@ -280,16 +280,16 @@ extension CreatePostThemeTVC: UIPickerViewDelegate{
             filterList[currentIndex] = currentList[row]
         } else {
             switch currentIndex {
-            case 0 : filterList[currentIndex] = "테마 1"
-            case 1 : filterList[currentIndex] = "테마 2"
-            case 2 : filterList[currentIndex] = "테마 3"
-            default : print("text set error")
+            case 0: filterList[currentIndex] = "테마 1"
+            case 1: filterList[currentIndex] = "테마 2"
+            case 2: filterList[currentIndex] = "테마 3"
+            default: print("text set error")
             }
         }
     }
 }
 
-extension CreatePostThemeTVC: UIPickerViewDataSource{
+extension CreatePostThemeTVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

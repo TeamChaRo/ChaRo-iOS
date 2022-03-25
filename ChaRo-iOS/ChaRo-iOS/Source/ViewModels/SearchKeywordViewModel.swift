@@ -25,7 +25,7 @@ class SearchKeywordViewModel {
     
     private func searchKeywordList(keywordList: [String]) {
         var poiItemList: [TMapPoiItem] = []
-        for index in 0..<keywordList.count{
+        for index in 0..<keywordList.count {
             searchKeywordPoi(keyword: keywordList[index]) { poiItems in
                 poiItemList.append(contentsOf: poiItems)
                 if index == keywordList.count - 1 {

@@ -10,11 +10,11 @@ import UIKit
 class OnBoardVC: UIViewController {
 
     static let identifier = "OnBoardVC"
-    private var imageList : [UIImage] = []
-    private var titleList : [String] = []
+    private var imageList: [UIImage] = []
+    private var titleList: [String] = []
     private var subTitleList: [String] = []
     
-    private let skipButton : UIButton = {
+    private let skipButton: UIButton = {
         let button = UIButton()
         button.setTitle("SKIP", for: .normal)
         button.setTitleColor(.mainBlue, for: .normal)
@@ -24,7 +24,7 @@ class OnBoardVC: UIViewController {
         return button
     }()
     
-    private var collectionView : UICollectionView = {
+    private var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                                collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -34,7 +34,7 @@ class OnBoardVC: UIViewController {
         
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
-        let rate : CGFloat = UIScreen.getDeviceHeight() / 812
+        let rate: CGFloat = UIScreen.getDeviceHeight() / 812
     
         layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: rate * 624)
         layout.minimumLineSpacing = 0
@@ -150,7 +150,7 @@ extension OnBoardVC{
         if(currentPage == 2) {
             skipButton.isHidden = true
             startButton.isHidden = false
-        }else{
+        } else {
             skipButton.isHidden = false
             startButton.isHidden = true
         }
@@ -177,7 +177,7 @@ extension OnBoardVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension OnBoardVC: UICollectionViewDataSource{
+extension OnBoardVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titleList.count
     }

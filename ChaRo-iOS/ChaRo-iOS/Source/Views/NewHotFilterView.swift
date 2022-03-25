@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-protocol NewHotFilterClickedDelegate{
+protocol NewHotFilterClickedDelegate {
     func filterClicked(row: Int)
 }
 
@@ -19,7 +19,7 @@ class NewHotFilterView: UIView{
     var delegate: MenuClickedDelegate?
     var clickDelegate: NewHotFilterClickedDelegate?
     private let tableView = UITableView()
-    private let backgroundView = UIView().then{
+    private let backgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
     
@@ -56,10 +56,10 @@ class NewHotFilterView: UIView{
 
 }
 
-extension NewHotFilterView: UITableViewDelegate{
+extension NewHotFilterView: UITableViewDelegate {
     
 }
-extension NewHotFilterView: UITableViewDataSource{
+extension NewHotFilterView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2;
     }

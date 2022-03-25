@@ -22,9 +22,9 @@ class SearchPostVC: UIViewController {
     private var imageViewList: [UIImageView] = []
     private var filterData = FilterDatas()
     private var currentList: [String] = []
-    private var filterList : [String] = ["","","",""]
+    private var filterList: [String] = ["","","",""]
     private var canActiveButton = false {
-        didSet{
+        didSet {
             if canActiveButton {
                 changeFindButtonToActive()
             }
@@ -201,7 +201,7 @@ extension SearchPostVC {
     }
     
   
-    @objc func clickedTextField(_ sender : UITextField) {
+    @objc func clickedTextField(_ sender: UITextField) {
         currentIndex = sender.tag
         pickerView.selectRow(0, inComponent: 0, animated: true)
         changeCurrentPickerData(index: currentIndex)
@@ -287,14 +287,14 @@ extension SearchPostVC {
             changeCurrentPickerData(index: currentIndex)
             changeToolbarText(index: currentIndex)
             pickerView.reloadComponent(0)
-        }else{
+        } else {
             changeFilterActive(index: currentIndex)
             observeFilterData()
             self.view.endEditing(true)
         }
     }
     
-    private func changeCurrentPickerData(index : Int) {
+    private func changeCurrentPickerData(index: Int) {
         switch index {
         case 0:
             currentList = filterData.state
@@ -325,7 +325,7 @@ extension SearchPostVC {
 
 }
 
-extension SearchPostVC: UIPickerViewDelegate{
+extension SearchPostVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return currentList[row]
     }
@@ -333,14 +333,14 @@ extension SearchPostVC: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row == 0 {
             filterList[currentIndex] = currentList[0]
-        }else{
+        } else {
             filterList[currentIndex] = currentList[row-1]
             filterList[currentIndex] = currentList[row]
         }
     }
 }
 
-extension SearchPostVC: UIPickerViewDataSource{
+extension SearchPostVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-struct settingDataModel{
+struct settingDataModel {
     var isToggle: Bool = false
     var toggleData: Bool = false
     var isSubLabel: Bool = false

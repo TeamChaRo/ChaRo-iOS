@@ -131,9 +131,9 @@ extension PostLocationTVC {
             let marker = TMapMarker(position: courseList[index].getPoint())
             if index == 0 {
                 marker.icon = ImageLiterals.icRouteStart
-            }else if index == courseList.count - 1{
+            } else if index == courseList.count - 1 {
                 marker.icon = ImageLiterals.icRouteEnd
-            }else{
+            } else {
                 marker.icon = ImageLiterals.icRouteWaypoint
             }
             marker.map = self.tMapView

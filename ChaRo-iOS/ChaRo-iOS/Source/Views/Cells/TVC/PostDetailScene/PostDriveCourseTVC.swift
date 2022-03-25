@@ -16,19 +16,19 @@ class PostDriveCourseTVC: UITableViewCell {
     
     public var setCourseDesc: ((String) -> Void)?
     public var contentText = "" {
-        didSet{
+        didSet {
             _ = setCourseDesc?(self.contentText)
         }
     }
     private let limitTextCount = 280
     private var isWarnning: Bool = false {
-        didSet{
+        didSet {
             if isWarnning{
                 warnningLabel.isHidden = false
                 textView.layer.borderColor = UIColor.mainOrange.cgColor
                 textCountLabel.textColor = .mainOrange
                 
-            }else{
+            } else {
                 warnningLabel.isHidden = true
                 textView.layer.borderColor = UIColor.gray30.cgColor
                 textCountLabel.textColor = .gray30

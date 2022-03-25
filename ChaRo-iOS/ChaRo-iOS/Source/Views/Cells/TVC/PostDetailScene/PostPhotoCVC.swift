@@ -11,7 +11,7 @@ import Then
 
 final class PostPhotoCVC: UICollectionViewCell{
 
-    private let imageView = UIImageView().then{
+    private let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
     

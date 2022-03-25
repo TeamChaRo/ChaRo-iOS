@@ -36,7 +36,7 @@ class PostCourseThemeTVC: UITableViewCell {
     }
   
     func setEditingMode() {
-        for item in themeButtonList{
+        for item in themeButtonList {
             item.isUserInteractionEnabled = false
         }
     }

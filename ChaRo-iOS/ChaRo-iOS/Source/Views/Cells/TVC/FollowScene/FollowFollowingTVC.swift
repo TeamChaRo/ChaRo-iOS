@@ -19,7 +19,7 @@ class FollowFollowingTVC: UITableViewCell {
     var otherUserID: String = "and@naver.com"
     var delegate: isFollowButtonClickedDelegate?
     
-    private let profileImageView = UIImageView().then{
+    private let profileImageView = UIImageView().then {
         $0.image = UIImage(named: "myimage")
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
@@ -29,12 +29,12 @@ class FollowFollowingTVC: UITableViewCell {
         $0.layer.cornerRadius = 21
     }
     
-    private let userNameLabel = UILabel().then{
+    private let userNameLabel = UILabel().then {
         $0.text = "name"
         $0.font = UIFont.notoSansMediumFont(ofSize: 14)
         $0.textColor = UIColor.black
     }
-    private let followButton = UIButton().then{
+    private let followButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icFollowButtonGray, for: .normal)
         $0.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
     }
@@ -55,10 +55,10 @@ class FollowFollowingTVC: UITableViewCell {
         userNameLabel.text = userName
         otherUserID = userEmail
         profileImageView.kf.setImage(with: url)
-        if isFollow == true{
+        if isFollow == true {
             followButton.setBackgroundImage(UIImage(named: "followingButtonImage"), for: .normal)
         }
-        else{
+        else {
             followButton.setBackgroundImage(ImageLiterals.icFollowButtonGray, for: .normal)
         }
     }
@@ -67,12 +67,12 @@ class FollowFollowingTVC: UITableViewCell {
         DoFollowService.shared.followService(follower: myId, followed: otherUserID) { result in
             switch result {
             case .success(let data):
-                if let response = data as? DoFollowDataModel{
+                if let response = data as? DoFollowDataModel {
                     print(response.data.isFollow)
-//                    if response.data.isFollow == true{
+//                    if response.data.isFollow == true {
 //                        self.followButton.setBackgroundImage(UIImage(named: "followingButtonImage"), for: .normal)
 //                    }
-//                    else{
+//                    else {
 //                        self.followButton.setBackgroundImage(UIImage(named: "FollowButtonImage"), for: .normal)
 //                    }
                     self.delegate?.isFollowButtonClicked()

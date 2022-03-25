@@ -174,10 +174,10 @@ class MyPageVC: UIViewController {
         $0.showsHorizontalScrollIndicator = false
         $0.showsVerticalScrollIndicator = false
     }
-    private let writeView = UIView().then{
+    private let writeView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
-    private let saveView = UIView().then{
+    private let saveView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
 
@@ -215,11 +215,11 @@ class MyPageVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if isLogin == true{
+        if isLogin == true {
             getMypageData()
             setEmptyDataLayout()
         }
-        else{
+        else {
             setEmptyDataLayout()
             isEmptyData()
         }
@@ -239,7 +239,7 @@ class MyPageVC: UIViewController {
             tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
             tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
         }
-        else{
+        else {
             tabbarWriteButton.setImage(UIImage(named: "write_active"), for: .normal)
             tabbarSaveButton.setImage(UIImage(named: "save_inactive"), for: .normal)
         }
@@ -338,7 +338,7 @@ class MyPageVC: UIViewController {
                                self.isLast = true
                                self.delegate?.endIndicator()
                            }
-                           else{
+                           else {
                                self.isLast = false
                            }
                            if self.isLast == false {
@@ -398,7 +398,7 @@ class MyPageVC: UIViewController {
                 as? SNSLoginVC else {return}
         let navController = UINavigationController(rootViewController: LoginVC)
         
-        if isLogin == false{
+        if isLogin == false {
 //요 녀석은 일단 이 뷰에 들어가면 빠져나올수가 없어서 잠시 빼놓겠습니다!
 //            LoginVC.modalPresentationStyle = .overFullScreen
             self.present(navController, animated: true, completion: nil)
@@ -436,7 +436,7 @@ class MyPageVC: UIViewController {
             var addURL = ""
             if lastcount > 0 && scrollTriger == false {
             scrollTriger = true
-            lastId =  writenPostDriveData[lastcount-1].postID
+            lastId = writenPostDriveData[lastcount-1].postID
             lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
             
             if currentState == "인기순" {
@@ -466,7 +466,7 @@ class MyPageVC: UIViewController {
             
             if lastcount > 0 && scrollTriger == false {
                 scrollTriger = true
-            lastId =  savePostDriveData[lastcount-1].postID
+            lastId = savePostDriveData[lastcount-1].postID
             lastFavorite = savePostDriveData[lastcount-1].favoriteNum
             
             if currentState == "인기순" {
@@ -698,7 +698,7 @@ extension MyPageVC: UICollectionViewDelegate {
         if indexPath.row == 0 {
             return CGSize(width: userWidth-35, height: 42)
         }
-        else{
+        else {
         return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
@@ -746,14 +746,14 @@ extension MyPageVC: UICollectionViewDataSource {
         if(writenPostDriveData.count == 0) {
             writeCellCount = 0
         }
-        else{
-            writeCellCount =  writenPostDriveData.count + 1
+        else {
+            writeCellCount = writenPostDriveData.count + 1
         }
         
         if(savePostDriveData.count == 0) {
             saveCellCount = 0
         }
-        else{
+        else {
             saveCellCount = savePostDriveData.count + 1
         }
         
@@ -768,7 +768,7 @@ extension MyPageVC: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
         let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
         detailCell.delegate = self
         detailCell.setSelectName(name: currentState)
@@ -843,7 +843,7 @@ func dismissDropDownWhenTappedAround() {
     }
 }
 
-extension MyPageVC: NewHotFilterClickedDelegate{
+extension MyPageVC: NewHotFilterClickedDelegate {
     func filterClicked(row: Int) {
         switch row {
         case 0:

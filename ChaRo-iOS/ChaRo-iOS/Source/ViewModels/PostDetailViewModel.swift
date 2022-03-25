@@ -18,10 +18,10 @@ class PostDetailViewModel {
         getPostDetailData(postId: postId)
     }
     
-    struct Input{
+    struct Input {
     }
     
-    struct Output{
+    struct Output {
         let postDetailSubject: ReplaySubject<PostDetailData>
     }
     
@@ -33,7 +33,7 @@ class PostDetailViewModel {
         PostResultService.shared.getPostDetail(postId: postId) { response in
             switch(response) {
             case .success(let resultData):
-                if let data =  resultData as? PostDetailData{
+                if let data = resultData as? PostDetailData{
                     self.postDetailSubject.onNext(data)
                 }
             case .requestErr(let message):

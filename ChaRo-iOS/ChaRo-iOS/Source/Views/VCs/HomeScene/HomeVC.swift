@@ -12,7 +12,7 @@ import Kingfisher
 import Lottie
 import SwiftUI
 
-class HomeVC: UIViewController{
+class HomeVC: UIViewController {
 
 //MARK: Var
     @IBOutlet weak var HomeTableView: UITableView!
@@ -90,14 +90,14 @@ class HomeVC: UIViewController{
         }
         
             for index in 0..<titleList.count {
-                let titleLabel = UILabel().then{
+                let titleLabel = UILabel().then {
                     $0.font = .notoSansBoldFont(ofSize: 28)
                     $0.textColor = .white
                     $0.text = titleList[index]
                     $0.numberOfLines = 3
                 }
                 
-                let subTitleLabel = UILabel().then{
+                let subTitleLabel = UILabel().then {
                     $0.font = .notoSansRegularFont(ofSize: 13)
                     $0.textColor = .white
                     $0.text = subTitleList[index]
@@ -234,9 +234,9 @@ class HomeVC: UIViewController{
 
 }
 
-extension HomeVC : UITableViewDelegate {
+extension HomeVC: UITableViewDelegate {
     
-    func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat {
         
         let factor = UIScreen.main.bounds.width / 375
         switch indextPath.row {
@@ -272,7 +272,7 @@ extension HomeVC : UITableViewDelegate {
             bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
 
         }
-        else{
+        else {
             if bannerData.count != 0{
                 for i in 1..<images.count + 1 {
                     let xPos = self.view.frame.width * CGFloat(i-1)
@@ -300,7 +300,7 @@ extension HomeVC : UITableViewDelegate {
         let currentHeight = HomeTableView.contentOffset.y
         print(HomeTableView.contentOffset.y,-homeTableViewHeaderHeight, currentHeight)
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
-               if currentHeight > -homeTableViewHeaderHeight{
+               if currentHeight > -homeTableViewHeaderHeight {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
                 if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3) {
                     if currentWidth == 0 && currentHeight == 0{
@@ -315,7 +315,7 @@ extension HomeVC : UITableViewDelegate {
                             homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                             homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
                         }
-                        else{
+                        else {
                             homeNavigationLogo.image = UIImage(named: "logo.png")
                             homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
                             homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
@@ -333,13 +333,13 @@ extension HomeVC : UITableViewDelegate {
                 if currentHeight > 0{
                     HomeNavigationView.backgroundColor = UIColor.white
                 }
-                else if currentHeight < -homeTableViewHeaderHeight{
+                else if currentHeight < -homeTableViewHeaderHeight {
                     HomeNavigationView.backgroundColor = .none
                 }
                 
                }
         }
-        else{
+        else {
             updateHeaderView()
             addContentScrollView()
             HomeNavigationView.backgroundColor = .none
@@ -348,8 +348,8 @@ extension HomeVC : UITableViewDelegate {
     }
     func setMoveCar() {
         let originalCarConstant = carMoveConstraint.constant
-        let sideMargin : CGFloat = 24
-        let pageCount : Int = 4
+        let sideMargin: CGFloat = 24
+        let pageCount: Int = 4
         let currentWidth = bannerScrollView.contentOffset.x
         if bannerScrollView.contentOffset.x > 0{
                if currentWidth < 10000 {
@@ -358,7 +358,7 @@ extension HomeVC : UITableViewDelegate {
                 carMoveConstraint.constant = originalCarConstant
                }
            }
-        else{
+        else {
             carMoveConstraint.constant = originalCarConstant
            }
     }
@@ -450,16 +450,16 @@ extension HomeVC : UITableViewDelegate {
     
 
 }
-extension HomeVC: UITableViewDataSource{
+extension HomeVC: UITableViewDataSource {
 }
-extension HomeVC: IsSelectedCVCDelegate{
+extension HomeVC: IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
         print(tableIndex.row)
     }
 }
 
-extension HomeVC: SeeMorePushDelegate{
+extension HomeVC: SeeMorePushDelegate {
     func seeMorePushDelegate(data: Int) {
         guard let smVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
         
@@ -485,7 +485,7 @@ extension HomeVC: SeeMorePushDelegate{
 
 }
 
-extension HomeVC: CollectionViewCellDelegate{
+extension HomeVC: CollectionViewCellDelegate {
     func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
         let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
@@ -496,7 +496,7 @@ extension HomeVC: CollectionViewCellDelegate{
 
 
 //postID 넘기기 위한 Delegate 구현
-extension HomeVC: PostIdDelegate{
+extension HomeVC: PostIdDelegate {
 
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
@@ -516,7 +516,7 @@ extension HomeVC: PostIdDelegate{
     }
 }
 
-extension HomeVC: AnimateIndicatorDelegate{
+extension HomeVC: AnimateIndicatorDelegate {
     func startIndicator() {
         view.addSubview(lottieView)
         lottieView.isHidden = false

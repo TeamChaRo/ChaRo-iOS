@@ -21,10 +21,10 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
     
-    var delegate : SetTopTitleDelegate?
+    var delegate: SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 0
-    var topCVCCell : HomePostDetailCVC?
+    var topCVCCell: HomePostDetailCVC?
     var postCell: CommonCVC?
     var topText: String = "요즘 뜨는 드라이브"
     var cellIndexpath: IndexPath = [0,0]
@@ -34,7 +34,7 @@ class HomePostVC: UIViewController {
     var newPostData: [DetailModel] = []
     var cellLoadFirst: Bool = true
     
-    static let identifier : String = "HomePostVC"
+    static let identifier: String = "HomePostVC"
     
     func setTableView() {
         collectionView.delegate = self
@@ -88,7 +88,7 @@ class HomePostVC: UIViewController {
             switch response
             {
             case .success(let data) :
-                if let response = data as? DetailModel{
+                if let response = data as? DetailModel {
                     
                     DispatchQueue.global().sync {
                         self.postCount = response.data.totalCourse
@@ -115,7 +115,7 @@ class HomePostVC: UIViewController {
             switch response
             {
             case .success(let data) :
-                if let response = data as? DetailModel{
+                if let response = data as? DetailModel {
                     
                     DispatchQueue.global().sync {
                         self.postCount = response.data.drive.count
@@ -139,7 +139,7 @@ class HomePostVC: UIViewController {
 
     
 }
-extension HomePostVC: UICollectionViewDelegate{
+extension HomePostVC: UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -149,7 +149,7 @@ extension HomePostVC: UICollectionViewDelegate{
         if section == 0{
             return 1
         }
-        else{
+        else {
             return postCount
         }
     }
@@ -169,7 +169,7 @@ extension HomePostVC: UICollectionViewDelegate{
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         topCell.delegate = self
         
-        switch indexPath.section{
+        switch indexPath.section {
         case 0:
             if isFirstLoaded {
                 isFirstLoaded = false
@@ -182,7 +182,7 @@ extension HomePostVC: UICollectionViewDelegate{
             if postData.count == 0{
                 return cell
             }
-            else{
+            else {
                 cell.setData(image: postData[0].data.drive[indexPath.row].image,
                              title: postData[0].data.drive[indexPath.row].title,
                              tagCount: postData[0].data.drive[indexPath.row].tags.count,
@@ -204,10 +204,10 @@ extension HomePostVC: UICollectionViewDelegate{
 }
 
 
-extension HomePostVC: UICollectionViewDataSource{
+extension HomePostVC: UICollectionViewDataSource {
     
 }
-extension HomePostVC: UICollectionViewDelegateFlowLayout{
+extension HomePostVC: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -216,7 +216,7 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
         if indexPath.section == 0{
             return CGSize(width: Cellwidth, height: 50)
         }
-        else{
+        else {
             return CGSize(width: Cellwidth, height: 260)
 
         }
@@ -234,7 +234,7 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
         if section == 0{
             return 0
         }
-        else{
+        else {
         return 35
         }
     }
@@ -244,7 +244,7 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
     }
 }
 
-extension HomePostVC: UITableViewDelegate{
+extension HomePostVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -289,7 +289,7 @@ extension HomePostVC: UITableViewDelegate{
     
 }
 
-extension HomePostVC: UITableViewDataSource{
+extension HomePostVC: UITableViewDataSource {
     
 }
 

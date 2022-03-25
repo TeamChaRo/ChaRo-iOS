@@ -227,7 +227,7 @@ extension AddressMainVC {
     }
     private func displayAddress() {
         print("addressList 개수 = \(addressList.count)")
-        for item in addressList{
+        for item in addressList {
             item.displayContent()
         }
     }
@@ -235,8 +235,8 @@ extension AddressMainVC {
 
 
 // MARK: - TableView Delegate
-extension AddressMainVC : UITableViewDelegate{
-    private func calculateTableViewHeight() -> CGFloat{
+extension AddressMainVC : UITableViewDelegate {
+    private func calculateTableViewHeight() -> CGFloat {
         return CGFloat(addressList.count) * oneCellHeight + tableViewBottomOffset
     }
     
@@ -245,7 +245,7 @@ extension AddressMainVC : UITableViewDelegate{
     }
 }
 
-extension AddressMainVC: UITableViewDataSource{
+extension AddressMainVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addressCellList.count
     }
@@ -255,7 +255,7 @@ extension AddressMainVC: UITableViewDataSource{
     }
 }
 
-extension AddressMainVC: AddressButtonCellDelegate{
+extension AddressMainVC: AddressButtonCellDelegate {
     func addressButtonCellForRemoving(cell: AddressButtonCell) {
         let index = cell.getTableCellIndexPath()
         addressList.remove(at: index)
@@ -323,7 +323,7 @@ extension AddressMainVC{
     }
     
     private func removeAllPolyLines() {
-        for line in polyLineList{
+        for line in polyLineList {
             line.map = nil
         }
         polyLineList.removeAll()
@@ -401,7 +401,7 @@ extension AddressMainVC{
     private func inputMarkerInMapView() {
         print("inputMarkerInMapView")
         print("addressList = \(addressList.count)")
-        for index in 0..<addressList.count{
+        for index in 0..<addressList.count {
             
             if addressList[index].title != ""{
                 let point = addressList[index].getPoint()
@@ -414,7 +414,7 @@ extension AddressMainVC{
         }
     }
     
-    private func setMarkerImage(index: Int) -> UIImage{
+    private func setMarkerImage(index: Int) -> UIImage {
         var image = UIImage()
         switch index {
         case 0:
@@ -437,31 +437,31 @@ extension AddressMainVC{
         if point1.latitude < point2.latitude {
             minX = point1.latitude
             maxX = point2.latitude
-        }else{
+        } else {
             maxX = point1.latitude
             minX = point2.latitude
         }
         
-        if point1.longitude < point2.longitude{
+        if point1.longitude < point2.longitude {
             minY = point1.longitude
             maxY = point2.longitude
-        }else{
+        } else {
             maxY = point1.longitude
             minY = point2.longitude
         }
         
         
-        for i in 1..<addressList.count{
+        for i in 1..<addressList.count {
             let point = addressList[i].getPoint()
             if point.latitude < minX{
                 minX = point.latitude
-            }else if point.latitude > maxX{
+            } else if point.latitude > maxX{
                 maxX = point.latitude
             }
             
             if point.longitude < minY{
                 minY = point.longitude
-            }else if point.longitude > maxY{
+            } else if point.longitude > maxY{
                 maxY = point.longitude
             }
         }
@@ -477,7 +477,7 @@ extension AddressMainVC{
             
             switch(response) {
             case .success(let resultData):
-                if let data =  resultData as? SearchResultDataModel{
+                if let data = resultData as? SearchResultDataModel {
                     print("내가 검색한 결과 조회~~~!!")
                     self.searchHistory = data.data!
                     dump(self.searchHistory)
@@ -516,7 +516,7 @@ extension AddressMainVC{
                 print("--------------------------")
                 print("\(resultData)")
                 print("--------------------------")
-                if let data =  resultData as? SearchResultDataModel{
+                if let data = resultData as? SearchResultDataModel {
                     print("성공했더~!!!!")
                     dump(data)
                     print("성공했더~!!!!")
@@ -534,7 +534,7 @@ extension AddressMainVC{
     }
 }
 
-extension AddressMainVC : TMapViewDelegate{
+extension AddressMainVC : TMapViewDelegate {
     func mapViewDidFinishLoadingMap() {
         print("mapViewDidFinishLoadingMap")
         tMapView.setZoom(12)

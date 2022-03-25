@@ -18,12 +18,12 @@ class CreatePostCourseTVC: UITableViewCell {
     public var setCityInfo: ((String) -> Void)?
     public var setRegionInfo: ((String) -> Void)?
     private var city: String = ""{
-        didSet{
+        didSet {
             _ = setCityInfo?(self.city)
         }
     }
     private var region: String = "" {
-        didSet{
+        didSet {
             _ = setRegionInfo?(self.region)
         }
     }
@@ -47,7 +47,7 @@ class CreatePostCourseTVC: UITableViewCell {
     private var currentList: [String] = [] //pickerview에 표시 될 List
     private var currentIndex = 0 // 현재 선택된 component (0 == city, 1 == region)
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
-    private var filterList : [String] = ["",""] // pickerview 선택 완료 후에 담길 결과 배열
+    private var filterList: [String] = ["",""] // pickerview 선택 완료 후에 담길 결과 배열
     
     // MARK: UI Components
     private let themeTitleView = PostCellTitleView(title: "어느 지역으로 다녀오셨나요?", subTitle: "도/광역시, 시 단위로 선택해주세요.")
@@ -99,7 +99,7 @@ class CreatePostCourseTVC: UITableViewCell {
         textFieldList.append(contentsOf: [cityField,
                                           regionField])
         
-        for textField in textFieldList{
+        for textField in textFieldList {
             
             textField.textAlignment = .center
             textField.borderStyle = .none
@@ -191,7 +191,7 @@ extension CreatePostCourseTVC {
         
     }
     
-    func changeCurrentPickerData(index : Int) {
+    func changeCurrentPickerData(index: Int) {
         
         if index == 0 {
             currentList = filterData.state
@@ -218,7 +218,7 @@ extension CreatePostCourseTVC {
     
 }
 
-extension CreatePostCourseTVC: UIPickerViewDelegate{
+extension CreatePostCourseTVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return currentList[row]
     }
@@ -231,7 +231,7 @@ extension CreatePostCourseTVC: UIPickerViewDelegate{
     }
 }
 
-extension CreatePostCourseTVC: UIPickerViewDataSource{
+extension CreatePostCourseTVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

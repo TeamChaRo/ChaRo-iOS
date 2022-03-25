@@ -16,10 +16,10 @@ extension UIView {
         self.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func getDeviceHeight() -> Int{
+    func getDeviceHeight() -> Int {
         return Int(UIScreen.main.bounds.height)
         }
-    func getDeviceWidth() -> Int{
+    func getDeviceWidth() -> Int {
         return Int(UIScreen.main.bounds.width)
     }
     

@@ -171,11 +171,11 @@ extension CreatePostPhotoTVC {
    
 }
 
-extension CreatePostPhotoTVC : UICollectionViewDelegate {
+extension CreatePostPhotoTVC: UICollectionViewDelegate {
     
 }
 
-extension CreatePostPhotoTVC : UICollectionViewDataSource {
+extension CreatePostPhotoTVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if receiveImageList.count >= maxPhotoCount {
             return maxPhotoCount
@@ -207,7 +207,7 @@ extension CreatePostPhotoTVC : UICollectionViewDataSource {
     
 }
 
-extension CreatePostPhotoTVC : UICollectionViewDelegateFlowLayout {
+extension CreatePostPhotoTVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellsize: CGFloat = (UIScreen.getDeviceWidth() - 54.0) / 3
         return CGSize(width: cellsize, height: cellsize)

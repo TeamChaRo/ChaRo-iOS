@@ -34,7 +34,7 @@ struct PostResultService {
                                      headers: header)
         
         dataRequest.responseData{ dataResponse in
-            switch dataResponse.result{
+            switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}
@@ -53,7 +53,7 @@ struct PostResultService {
                                       headers: header)
         
         dataRequeat.responseData{ dataResponse in
-            switch dataResponse.result{
+            switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}
@@ -71,7 +71,7 @@ struct PostResultService {
                                      parameters: ["userEmail" : Constants.userEmail],
                                      encoding: URLEncoding.queryString)
         dateRequest.responseData{ dataResponse in
-            switch dataResponse.result{
+            switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}

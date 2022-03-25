@@ -223,7 +223,7 @@ class AddressConfirmVC: UIViewController {
     
 }
 
-extension AddressConfirmVC: TMapViewDelegate{
+extension AddressConfirmVC: TMapViewDelegate {
     func initTMapView() {
         tMapView.setApiKey(MapService.mapkey)
         tMapView.delegate = self

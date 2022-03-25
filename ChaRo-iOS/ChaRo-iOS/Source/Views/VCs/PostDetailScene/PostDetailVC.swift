@@ -17,8 +17,8 @@ class PostDetailVC: UIViewController {
     private var isAuthor = false
     private var isEditingMode = false
     private var postId: Int = -1
-    private var postData : PostDetail?
-    private var postDetailData : PostDetailData?
+    private var postData: PostDetail?
+    private var postDetailData: PostDetailData?
     private var additionalDataOfPost: DriveElement?
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [Course] = []
@@ -27,13 +27,13 @@ class PostDetailVC: UIViewController {
     
     private var isFavorite: Bool? {
         didSet {
-            bottomView.likeButton.isSelected = isFavorite! ? true : false
+            bottomView.likeButton.isSelected = isFavorite! ? true: false
         }
     }
     
     private var isStored: Bool? {
         didSet {
-            bottomView.likeButton.isSelected = isStored! ? true : false
+            bottomView.likeButton.isSelected = isStored! ? true: false
         }
     }
     
@@ -94,12 +94,12 @@ class PostDetailVC: UIViewController {
     }
     
     private func checkModeForSendingServer() {
-        if isEditingMode{
+        if isEditingMode {
             print("editing 모드로 넘겨받음")
             print("postData = \(postData)")
             print("addressList = \(addressList)")
             print("isAuthor = \(isAuthor)")
-        }else{
+        } else {
             print("그냥 구경하러 왔음")
         }
     }
@@ -150,7 +150,7 @@ extension PostDetailVC{
         view.addSubviews([navigationView, separateLineView])
         navigationView.snp.makeConstraints{
             $0.top.leading.trailing.equalTo(self.view)
-            $0.height.equalTo(UIScreen.hasNotch ? UIScreen.getNotchHeight() + 58 : 93)
+            $0.height.equalTo(UIScreen.hasNotch ? UIScreen.getNotchHeight() + 58: 93)
         }
         separateLineView.snp.makeConstraints{
             $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
@@ -183,7 +183,7 @@ extension PostDetailVC{
     private func configureNavigaitionView() {
         if isAuthor {
             navigationTitleLabel.text = "내가 작성한 글"
-            isEditingMode ? setNavigationViewInSaveMode() : setNavigationViewInConfirmMode()
+            isEditingMode ? setNavigationViewInSaveMode(): setNavigationViewInConfirmMode()
         } else {
             navigationTitleLabel.text = "구경하기"
         }
@@ -247,7 +247,7 @@ extension PostDetailVC{
     //        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     //
     //        var newAddressList :[Address] = []
-    //        for address in addressList{
+    //        for address in addressList {
     //            newAddressList.append(address.getAddressDataModel())
     //        }
     //
@@ -306,7 +306,7 @@ extension PostDetailVC {
 
 
 //MARK: TableView Delegate
-extension PostDetailVC: UITableViewDelegate{
+extension PostDetailVC: UITableViewDelegate {
 }
 
 //MARK: - UITableView extension
@@ -386,8 +386,8 @@ extension PostDetailVC {
         print("additionalDataOfPost = \(additionalDataOfPost)")
         postDetailData = postData
         isAuthor = postDetailData?.isAuthor ?? false
-        isFavorite = postDetailData?.isFavorite == 0 ? false : true
-        isStored = postDetailData?.isStored == 0 ? false : true
+        isFavorite = postDetailData?.isFavorite == 0 ? false: true
+        isStored = postDetailData?.isStored == 0 ? false: true
         addressList = postDetailData?.course ?? []
         tableView.delegate = self
         tableView.dataSource = self
@@ -417,7 +417,7 @@ extension PostDetailVC {
     func requestPostLike() {
         LikeService.shared.Like(userId: Constants.userId,
                                 postId: postId) { [self] result in
-            switch result{
+            switch result {
             case .success(let success):
                 if let success = success as? Bool {
                     self.isFavorite!.toggle()
@@ -436,7 +436,7 @@ extension PostDetailVC {
         SaveService.shared.requestScrapPost(userId: Constants.userId,
                                             postId: postId) { [self] result in
             
-            switch result{
+            switch result {
             case .success(let success):
                 if let success = success as? Bool {
                     print("스크랩 성공해서 바뀝니다")

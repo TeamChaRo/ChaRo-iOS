@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol IsSelectedCVCDelegate{
-    func isSelectedCVC(indexPath : IndexPath)
+protocol IsSelectedCVCDelegate {
+    func isSelectedCVC(indexPath: IndexPath)
 }
 
-protocol SeeMorePushDelegate{
-    func seeMorePushDelegate(data : Int)
+protocol SeeMorePushDelegate {
+    func seeMorePushDelegate(data: Int)
 }
 
 class HomeSquareTVC: UITableViewCell {
@@ -24,7 +24,7 @@ class HomeSquareTVC: UITableViewCell {
     var delegate: IsSelectedCVCDelegate?
     var ButtonDelegate: SeeMorePushDelegate?
     var postDelegate: PostIdDelegate?
-    let cellTag : Int = 3
+    let cellTag: Int = 3
 //
 //    var imageNameText: [String] = []
 //    var titleText: [String] = []

@@ -33,7 +33,7 @@ final class PostPhotoTVC: UITableViewCell{
         $0.isPagingEnabled = true
     }
     
-    private let photoNumberButton = UIButton().then{
+    private let photoNumberButton = UIButton().then {
         $0.titleLabel?.font = .notoSansRegularFont(ofSize: 11)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 10
@@ -86,7 +86,7 @@ final class PostPhotoTVC: UITableViewCell{
 }
 
 // MARK: - UICollectionViewDelegate
-extension PostPhotoTVC: UICollectionViewDelegate{
+extension PostPhotoTVC: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
         photoNumberButton.setTitle("\(currentPage + 1) / \(imageList.count)", for: .normal)

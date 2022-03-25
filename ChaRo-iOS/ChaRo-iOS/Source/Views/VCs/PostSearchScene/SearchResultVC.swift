@@ -13,9 +13,9 @@ class SearchResultVC: UIViewController {
     static let identifier = "SearchResultVC"
     
     //MARK: Result Data
-    public var lastPostId : Int = 0
+    public var lastPostId: Int = 0
     public var postCount: Int = 0
-    public var postData : [DriveElement] = []
+    public var postData: [DriveElement] = []
     public var filterResultList: [String] = []
     var myCellIsFirstLoaded: Bool = true
     
@@ -30,7 +30,7 @@ class SearchResultVC: UIViewController {
     private let separateLineView = UIView().then {
         $0.backgroundColor = .gray20
     }
-    private var collectionView : UICollectionView = {
+    private var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -129,11 +129,11 @@ class SearchResultVC: UIViewController {
     }
 }
 
-extension SearchResultVC: UICollectionViewDelegate{
+extension SearchResultVC: UICollectionViewDelegate {
     
 }
 
-extension SearchResultVC: UICollectionViewDataSource{
+extension SearchResultVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return postData.count + 1
     }
@@ -189,7 +189,7 @@ extension SearchResultVC: UICollectionViewDataSource{
 
 }
 
-extension SearchResultVC: UICollectionViewDelegateFlowLayout{
+extension SearchResultVC: UICollectionViewDelegateFlowLayout { 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: UIScreen.getDeviceWidth(), height: 40)
@@ -249,7 +249,7 @@ extension SearchResultVC {
     private func setContentViewConstraint() {
         if postData.isEmpty{
             setEmptyViewConstraint()
-        }else{
+        } else {
             setResultViewConstraint()
         }
     }
@@ -307,7 +307,7 @@ extension SearchResultVC{
             
             switch(response) {
             case .success(let resultData):
-                if let data =  resultData as? Drive{
+                if let data = resultData as? Drive {
                     self.refinePostResultData(data: data)
                 }
             case .requestErr(let message):
@@ -324,10 +324,10 @@ extension SearchResultVC{
 }
 
 
-extension SearchResultVC: UITableViewDelegate{
+extension SearchResultVC: UITableViewDelegate {
     
 }
-extension SearchResultVC: UITableViewDataSource{
+extension SearchResultVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -361,7 +361,7 @@ extension SearchResultVC: UITableViewDataSource{
     }
 }
     
-extension SearchResultVC: SetTitleDelegate{
+extension SearchResultVC: SetTitleDelegate {
     func setTitle(cell: HotDropDownTVC) {
         if cell.name == "인기순"{
             print("인기순 실행")

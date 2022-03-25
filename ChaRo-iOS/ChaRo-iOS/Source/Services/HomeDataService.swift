@@ -6,12 +6,12 @@ import Foundation
 struct GetHomeDataService
 {
     static let HomeData = GetHomeDataService()
-    func getRecommendInfo(completion : @escaping (NetworkResult<Any>) -> Void)
+    func getRecommendInfo(completion: @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
 
         let URL = Constants.HomeURL
-        let header : HTTPHeaders = ["Content-Type": "application/json"]
+        let header: HTTPHeaders = ["Content-Type": "application/json"]
 
         let dataRequest = AF.request(URL,
                                      method: .get,
@@ -46,7 +46,7 @@ struct GetHomeDataService
         }
     }
     
-    private func isValidData(data : Data) -> NetworkResult<Any> {
+    private func isValidData(data: Data) -> NetworkResult<Any> {
         
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(HomeDataModel.self, from: data)

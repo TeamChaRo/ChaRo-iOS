@@ -103,7 +103,7 @@ class PostLikeListVC: UIViewController {
     @objc
     private func handlePanGesture(gesture: UIPanGestureRecognizer) {
         let transionY = gesture.translation(in: self.view).y
-        switch gesture.state{
+        switch gesture.state {
         case .changed:
             transionYOffsetSubject.onNext((transionY, true))
         case .ended:

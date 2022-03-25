@@ -59,9 +59,9 @@ class TabbarVC: UITabBarController {
 
             createTab.modalPresentationStyle = .fullScreen
             self.present(createTab, animated: false, completion: nil)
-        }else if item.title == "나의 차로" {
+        } else if item.title == "나의 차로" {
             comeBackIndex = 2
-        }else {
+        } else {
             comeBackIndex = 0
         }
         

@@ -21,7 +21,7 @@ class CreatePostTitleTVC: UITableViewCell {
     // MARK: 데이터 전달 closeur
     public var setTitleInfo: ((String) -> Void)?
     private var titleContent: String = "" {
-        didSet{
+        didSet {
             _ = setTitleInfo?(self.titleContent)
         }
     }
@@ -31,7 +31,7 @@ class CreatePostTitleTVC: UITableViewCell {
     private let limitTextCount: Int = 38
     private let limitLineTextCount: Int = 23
     private var isWarning: Bool = false {
-        didSet{
+        didSet {
             if isWarning {
                 warningLabel.isHidden = false
                 titleTextView.layer.borderColor = UIColor.mainOrange.cgColor

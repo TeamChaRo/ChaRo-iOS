@@ -11,7 +11,7 @@ import SnapKit
 class PostCellTitleView: UIView {
 
     //title만 있으면 높이 22
-    public var titleLabel : UILabel = {
+    public var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSansBoldFont(ofSize: 16)
         label.textColor = .mainBlack
@@ -40,7 +40,7 @@ class PostCellTitleView: UIView {
         
         if subTitle == ""{
             setTitleContraints()
-        }else{
+        } else {
             subTitleLabel.text = subTitle
             setSubTitleContraints()
         }

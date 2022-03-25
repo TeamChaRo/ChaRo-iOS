@@ -77,7 +77,7 @@ class AddressButtonCell: UITableViewCell {
         searchButton.setTitleColor(.mainBlack, for: .normal)
         if cellType == .end{
             plusButton.isEnabled = true
-        }else if cellType == .mid{
+        } else if cellType == .mid{
             plusButton.isEnabled = false
         }
     }

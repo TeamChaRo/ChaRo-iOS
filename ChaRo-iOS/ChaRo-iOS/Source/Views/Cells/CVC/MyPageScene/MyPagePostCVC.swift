@@ -32,9 +32,9 @@ class MyPagePostCVC: UICollectionViewCell {
     
     var heartText: String = "99"
     var saveText: String = "99"
-    var clickedPostCell : ((Int) -> ())?
+    var clickedPostCell: ((Int) -> ())?
     
-    var image : UIImage?
+    var image: UIImage?
 
     
     func setRound() {
@@ -126,8 +126,7 @@ class MyPagePostCVC: UICollectionViewCell {
                 tagButtonList[index].layer.borderWidth = 1
                 tagButtonList[index].layer.borderColor = UIColor.mainBlue.cgColor
                 tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            }
-            else{
+            } else {
                 tagButtonList[index].setTitle("", for: .normal)
                 tagButtonList[index].layer.borderColor = UIColor.clear.cgColor
             }

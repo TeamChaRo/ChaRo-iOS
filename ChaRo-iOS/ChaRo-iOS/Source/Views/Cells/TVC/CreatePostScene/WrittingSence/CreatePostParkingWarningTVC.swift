@@ -13,7 +13,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     static let identifier: String = "CreatePostParkingWarningTVC"
     private let limitTextCount: Int = 23
     private var isWarning: Bool = false {
-        didSet{
+        didSet {
             if isWarning {
                 warningLabel.isHidden = false
                 parkingDescTextField.setMainOrangeBorder(8)
@@ -24,17 +24,17 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         }
     }
     private var parkingContent: String = ""  {
-        didSet{
+        didSet {
             _ = setParkingDesc?(self.parkingContent)
         }
     }
     private var warningValue: [Bool] = [false, false, false, false] {
-        didSet{
+        didSet {
             _ = setWraningData?(self.warningValue)
         }
     }
     public var availableParking: Bool = false {
-        didSet{
+        didSet {
             _ = setParkingInfo?(self.availableParking)
         }
     }

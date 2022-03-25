@@ -16,7 +16,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
     var delegate: IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
     var postDelegate: PostIdDelegate?
-    let cellTag : Int = 5
+    let cellTag: Int = 5
     
     //MARK: - Variable
     static let identifier = "HomeAreaRecommandTVC"

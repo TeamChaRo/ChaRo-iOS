@@ -59,11 +59,11 @@ class PostLikeListViewModel {
         
         if newHeight < self.dismissibleHeight {
             return -1
-        }else if newHeight < self.defaultHeight {
+        } else if newHeight < self.defaultHeight {
             return self.defaultHeight
-        }else if newHeight < self.maximumContainerHeight && isDraggingDown{
+        } else if newHeight < self.maximumContainerHeight && isDraggingDown {
             return self.defaultHeight
-        }else if newHeight > self.defaultHeight && !isDraggingDown{
+        } else if newHeight > self.defaultHeight && !isDraggingDown {
             return self.maximumContainerHeight
         }
         return -1
@@ -71,9 +71,9 @@ class PostLikeListViewModel {
     
     private func getPostLikeList() {
         PostResultService.shared.getPostLikeList(postId: postId) { [weak self] response in
-            switch response{
+            switch response {
             case .success(let resultData):
-                if let data =  resultData as? [Follow] {
+                if let data = resultData as? [Follow] {
                     self?.postLikeListSubject.onNext(data)
                 }
             case .requestErr(let message):
