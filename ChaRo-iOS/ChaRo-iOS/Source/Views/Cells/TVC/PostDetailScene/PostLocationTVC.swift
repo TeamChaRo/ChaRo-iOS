@@ -80,14 +80,14 @@ class PostLocationTVC: UITableViewCell {
         configureMapView()
     }
     
-    private func configureMapView(){
+    private func configureMapView() {
         tMapView.delegate = self
         DispatchQueue.main.async {
             self.tMapView.setApiKey(MapService.mapkey)
         }
     }
     
-    func setCopyClosure(){
+    func setCopyClosure() {
         startAddressView.copyAddressClouser = copyAddressClouser
         midAddressView.copyAddressClouser = copyAddressClouser
         endAddressView.copyAddressClouser = copyAddressClouser
@@ -96,7 +96,7 @@ class PostLocationTVC: UITableViewCell {
 
 extension PostLocationTVC {
     
-    private func bindToMapView(){
+    private func bindToMapView() {
         polyLineSubjuect.bind(onNext: { polyLine in
             polyLine.strokeColor = .mainBlue
             self.polyLineList.append(polyLine)
@@ -113,7 +113,7 @@ extension PostLocationTVC {
         }
     }
     
-    private func addPathInMapView(){
+    private func addPathInMapView() {
         let pathData = TMapPathData()
         polyLineList = []
         print("count = \(courseList.count)")
@@ -126,7 +126,7 @@ extension PostLocationTVC {
         }
     }
     
-    private func addMarkerInMapView(){
+    private func addMarkerInMapView() {
         for index in 0..<courseList.count {
             let marker = TMapMarker(position: courseList[index].getPoint())
             if index == 0 {

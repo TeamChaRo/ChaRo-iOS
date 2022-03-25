@@ -71,7 +71,7 @@ class ThemePostVC: UIViewController {
 
     
     //MARK:- default Setting Function Part
-    func setTableViewTag(){
+    func setTableViewTag() {
         tableView.tag = 1
         dropDownTableView.tag = 2
     }
@@ -91,7 +91,7 @@ class ThemePostVC: UIViewController {
         
     }
     
-    func setShaow(){
+    func setShaow() {
         
         //SE일 때 설정
         self.setDetailNavigationViewUI(height: heightConstraint,

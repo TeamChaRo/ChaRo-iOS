@@ -70,7 +70,7 @@ final class PostPhotoTVC: UITableViewCell{
         selectionStyle = .none
     }
     
-    private func bind(){
+    private func bind() {
         photoSubject
             .bind(to: collectionView.rx.items(cellIdentifier: PostPhotoCVC.className,
                                                      cellType: PostPhotoCVC.self)) { row, element, cell in
@@ -78,7 +78,7 @@ final class PostPhotoTVC: UITableViewCell{
         }.disposed(by: disposeBag)
     }
     
-    func setContent(imageList: [String]){
+    func setContent(imageList: [String]) {
         self.imageList = imageList
         photoNumberButton.setTitle("1 / \(imageList.count)", for: .normal)
         photoSubject.onNext(imageList)

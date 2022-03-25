@@ -98,7 +98,7 @@ class CreatePostThemeTVC: UITableViewCell {
         selectionStyle = .none
     }
     
-    private func initTextField(){
+    private func initTextField() {
         textFieldList.append(contentsOf: [themeFirstField,
                                           themeSecondField,
                                           themeThirdField])
@@ -115,7 +115,7 @@ class CreatePostThemeTVC: UITableViewCell {
         }
     }
     
-    private func setTextFieldAction(){
+    private func setTextFieldAction() {
         themeFirstField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         themeSecondField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         themeThirdField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
@@ -129,17 +129,17 @@ class CreatePostThemeTVC: UITableViewCell {
 
 // MARK: - PickerView
 extension CreatePostThemeTVC {
-    private func initPickerView(){
+    private func initPickerView() {
         setPickerViewDelegate()
         createPickerViewToolbar()
     }
     
-    private func setPickerViewDelegate(){
+    private func setPickerViewDelegate() {
         pickerView.dataSource = self
         pickerView.delegate = self
     }
     
-    private func createPickerViewToolbar(){
+    private func createPickerViewToolbar() {
         // ToolBar
         toolbar.sizeToFit()
         
@@ -152,7 +152,7 @@ extension CreatePostThemeTVC {
     }
     
     @objc
-    func donePresseed(){
+    func donePresseed() {
         
         if !pickerSelectFlag { didNotSelect() }
         var setText: String = filterList[currentIndex]
@@ -184,7 +184,7 @@ extension CreatePostThemeTVC {
         self.endEditing(true)
     }
     
-    func didNotSelect(){
+    func didNotSelect() {
         switch currentIndex {
         case 0 : filterList[currentIndex] = ""
         case 1 : filterList[currentIndex] = ""
@@ -193,7 +193,7 @@ extension CreatePostThemeTVC {
         }
     }
     
-    func wasSelected(){
+    func wasSelected() {
         
         switch currentIndex {
         case 0: // 테마 1 재선택 필터링
@@ -224,7 +224,7 @@ extension CreatePostThemeTVC {
     }
 
     @objc
-    func clikedTextField(_ sender: UITextField){
+    func clikedTextField(_ sender: UITextField) {
         
         currentIndex = sender.tag
         pickerSelectFlag = false
@@ -235,7 +235,7 @@ extension CreatePostThemeTVC {
         
     }
     
-    func changeCurrentPickerData(index : Int){
+    func changeCurrentPickerData(index : Int) {
         
         if index == 0 {
             currentList = filterData.thema
@@ -254,7 +254,7 @@ extension CreatePostThemeTVC {
         }
     }
     
-    func changeToolbarText(index: Int){
+    func changeToolbarText(index: Int) {
         var newTitle = ""
         
         switch index {
@@ -301,7 +301,7 @@ extension CreatePostThemeTVC: UIPickerViewDataSource{
 
 // MARK:- Layout (셀높이 125)
 extension CreatePostThemeTVC{
-    private func configureLayout(){
+    private func configureLayout() {
         addSubviews([courseTitleView, themeFirstField, themeSecondField, themeThirdField, themeFirstButton, themeSecondButton, themeThirdButton])
         
         let textWidth: CGFloat = 65

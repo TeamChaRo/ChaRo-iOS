@@ -22,17 +22,17 @@ class TabbarCVC: UICollectionViewCell {
     }
 
     
-    func setSelectedView(){
+    func setSelectedView() {
         selectedView.backgroundColor = UIColor.mainBlue
     }
-    func setDeselectedView(){
+    func setDeselectedView() {
         selectedView.backgroundColor = .none
     }
     
-    func setIcon(data: String){
+    func setIcon(data: String) {
         tabbarIcon.image = UIImage(named: data)
     }
-    func setBottomView(){
+    func setBottomView() {
         selectedView.backgroundColor = .mainBlue
     }
 

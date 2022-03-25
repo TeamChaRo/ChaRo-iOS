@@ -134,7 +134,7 @@ class SearchPostVC: UIViewController {
         initTextFieldList()
     }
     
-    @objc func pushNextVC(){
+    @objc func pushNextVC() {
         let storyboard = UIStoryboard(name: "SearchResult", bundle: nil)
         guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.identifier)as? SearchResultVC else {
             return
@@ -145,7 +145,7 @@ class SearchPostVC: UIViewController {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    func refineFilterList(){
+    func refineFilterList() {
         for index in 0..<4{
             if filterList[index] == "선택안함"{
                 filterList[index] = ""
@@ -157,7 +157,7 @@ class SearchPostVC: UIViewController {
 
 //MARK: TextField
 extension SearchPostVC {
-    private func initTextFieldList(){
+    private func initTextFieldList() {
         textFieldList.append(contentsOf: [stateTextField,
                                           cityTextField,
                                           themaTextField,
@@ -175,7 +175,7 @@ extension SearchPostVC {
         }
     }
     
-    private func initImageViewList(){
+    private func initImageViewList() {
         imageViewList.append(contentsOf: [stateImageView,
                                           cityImageView,
                                           themaImageView,
@@ -188,20 +188,20 @@ extension SearchPostVC {
         
     }
     
-    func changeFindButtonToActive(){
+    func changeFindButtonToActive() {
         findButton.isUserInteractionEnabled = true
         findButton.setBackgroundImage(UIImage(named: "searchBtnBlue"), for: .normal)
         findButton.setTitleColor(.white, for: .normal)
     }
     
-    func changeFindButtonToUnactive(){
+    func changeFindButtonToUnactive() {
         findButton.isUserInteractionEnabled = false
         findButton.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
         findButton.setTitleColor(.mainBlue, for: .normal)
     }
     
   
-    @objc func clickedTextField(_ sender : UITextField){
+    @objc func clickedTextField(_ sender : UITextField) {
         currentIndex = sender.tag
         pickerView.selectRow(0, inComponent: 0, animated: true)
         changeCurrentPickerData(index: currentIndex)
@@ -209,14 +209,14 @@ extension SearchPostVC {
         pickerView.reloadComponent(0)
     }
 
-    func changeFilterActive(index: Int){
+    func changeFilterActive(index: Int) {
         imageViewList[index].image = UIImage(named: "searchBtnSelect")
         textFieldList[index].text = filterList[index]
         textFieldList[index].textColor = .mainBlue
     }
    
     
-    func observeFilterData(){
+    func observeFilterData() {
         for index in 1..<4{
             if filterList[index] != "" && filterList[index] != "선택안함"{
                 print("여기서 찍힘 == \(filterList[index])")
@@ -241,7 +241,7 @@ extension SearchPostVC {
     }
     
     
-    func changeCityFilterUnactive(){
+    func changeCityFilterUnactive() {
         textFieldList[1].isUserInteractionEnabled = false
         imageViewList[1].image = UIImage(named: "searchBtnUnselect")
         textFieldList[1].text = "지역"
@@ -255,17 +255,17 @@ extension SearchPostVC {
 
 //MARK: PickerView
 extension SearchPostVC {
-    private func initPickerView(){
+    private func initPickerView() {
         setPickerViewDelegate()
         createPickerViewToolbar()
     }
     
-    private func setPickerViewDelegate(){
+    private func setPickerViewDelegate() {
         pickerView.dataSource = self
         pickerView.delegate = self
     }
     
-    private func createPickerViewToolbar(){
+    private func createPickerViewToolbar() {
         toolbar.sizeToFit()
         let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: nil, action: #selector(donePresseed))
@@ -274,9 +274,9 @@ extension SearchPostVC {
         toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
     }
     
-    @objc func donePresseed(){
+    @objc func donePresseed() {
         if currentIndex == 0{
-            if isCheckWhenStateNonValue(){
+            if isCheckWhenStateNonValue() {
                 observeFilterData()
                 self.view.endEditing(true)
                 return
@@ -294,7 +294,7 @@ extension SearchPostVC {
         }
     }
     
-    private func changeCurrentPickerData(index : Int){
+    private func changeCurrentPickerData(index : Int) {
         switch index {
         case 0:
             currentList = filterData.state
@@ -310,7 +310,7 @@ extension SearchPostVC {
     }
     
     
-    private func changeToolbarText(index: Int){
+    private func changeToolbarText(index: Int) {
        var newTitle = ""
         switch index {
         case 2:
@@ -353,7 +353,7 @@ extension SearchPostVC: UIPickerViewDataSource{
 
 //MARK: UI
 extension SearchPostVC {
-    func setConstraints(){
+    func setConstraints() {
         view.addSubview(backgroundImageView)
         view.addSubviews([backButton,
                           titleLabel,
@@ -402,7 +402,7 @@ extension SearchPostVC {
         setConstraintsInFileterView()
     }
     
-    func setConstraintsInFileterView(){
+    func setConstraintsInFileterView() {
         fileterView.addSubviews([filterTitleLabel
                                  ,filterSubtitleLabel])
         
@@ -422,7 +422,7 @@ extension SearchPostVC {
         setCautionConstraints()
     }
     
-    func setStateConstraints(){
+    func setStateConstraints() {
         fileterView.addSubviews([stateImageView,
                                  stateTextField,
                                  cityImageView,
@@ -462,7 +462,7 @@ extension SearchPostVC {
         
     }
     
-    func setThemaConstraints(){
+    func setThemaConstraints() {
         fileterView.addSubviews([themaImageView,
                                  themaTextField,
                                  themaLabel])
@@ -487,7 +487,7 @@ extension SearchPostVC {
        
     }
     
-    func setCautionConstraints(){
+    func setCautionConstraints() {
         fileterView.addSubviews([cautionImageView,
                                  cautionTextField,
                                  cautionLabel])

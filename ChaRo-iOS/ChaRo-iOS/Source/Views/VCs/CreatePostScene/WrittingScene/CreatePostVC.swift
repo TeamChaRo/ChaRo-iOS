@@ -93,7 +93,7 @@ class CreatePostVC: UIViewController {
 extension CreatePostVC {
     
     // MARK: function
-    func configureTableView(){
+    func configureTableView() {
         registerXibs()
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -101,7 +101,7 @@ extension CreatePostVC {
         tableView.dismissKeyboardWhenTappedAround()
     }
     
-    func registerXibs(){
+    func registerXibs() {
         tableView.registerCustomXib(xibName: CreatePostTitleTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostPhotoTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostCourseTVC.identifier)
@@ -110,22 +110,22 @@ extension CreatePostVC {
         tableView.registerCustomXib(xibName: CreatePostDriveCourseTVC.identifier)
     }
     
-    func setNavigationBar(){
+    func setNavigationBar() {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    func initCellHeight(){
+    func initCellHeight() {
         cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408])
     }
     
-    func setNotificationCenter(){
+    func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(touchTitleView), name: .touchTitleTextView, object: nil)
     }
     
-    func removeObservers(){
+    func removeObservers() {
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -144,7 +144,7 @@ extension CreatePostVC {
     }
     
     @objc
-    func textFieldMoveUp(_ notification: NSNotification){
+    func textFieldMoveUp(_ notification: NSNotification) {
         
 //        let currentScrollY = tableView.contentOffset.y
 //        -keyboardSize.height
@@ -162,17 +162,17 @@ extension CreatePostVC {
     }
     
     @objc
-    func textFieldMoveDown(_ notification: NSNotification){
+    func textFieldMoveDown(_ notification: NSNotification) {
         self.tableView.transform = .identity
     }
     
     // MARK: 서버통신 .post /writePost
-    func postCreatePost(){
+    func postCreatePost() {
         // test dummy data
         let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
         
         
-        CreatePostService.shared.createPost(model: model, image: selectImages){ result in
+        CreatePostService.shared.createPost(model: model, image: selectImages) { result in
             switch result {
             case .success(let message):
                 print(message)
@@ -190,7 +190,7 @@ extension CreatePostVC {
     
     
     // MARK: Layout
-    func setMainViewLayout(){
+    func setMainViewLayout() {
         self.view.addSubviews([self.titleView, self.tableView, self.separatorView])
         
         let titleRatio: CGFloat = 102/375
@@ -216,7 +216,7 @@ extension CreatePostVC {
         }
     }
     
-    func configureConponentLayout(){
+    func configureConponentLayout() {
         titleView.addSubviews([self.titleLabel, self.xButton, self.nextButton])
         
         titleLabel.snp.makeConstraints{
@@ -242,13 +242,13 @@ extension CreatePostVC {
     
     //MARK: - Button Actions
     @objc
-    func xButtonDidTap(sender: UIButton){
+    func xButtonDidTap(sender: UIButton) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         
         let alertViewController = UIAlertController(title: "", message: "게시물 작성을 중단하시겠습니까?", preferredStyle: .alert)
         
-        let dismissAction = UIAlertAction(title: "작성 중단", style: .default){ _ in
+        let dismissAction = UIAlertAction(title: "작성 중단", style: .default) { _ in
             self.dismiss(animated: true, completion: nil)
 
         }
@@ -261,7 +261,7 @@ extension CreatePostVC {
     }
     
     @objc
-    func nextButtonDidTap(sender: UIButton){
+    func nextButtonDidTap(sender: UIButton) {
         let nextVC = AddressMainVC()
         let images: [UIImage] = selectImages
         let model: WritePostData = getPostWriteData()
@@ -271,7 +271,7 @@ extension CreatePostVC {
     }
     
     @objc
-    func addPhotoButtonDidTap(){
+    func addPhotoButtonDidTap() {
         if #available(iOS 14, *) { // 14이상 부터 쓸 수 있음
             var configuration = PHPickerConfiguration()
             configuration.selectionLimit = 6 - selectImages.count // 최대 6개 선택

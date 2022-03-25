@@ -34,7 +34,7 @@ class PostAttentionTVC: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setAttentionList(list: [Bool]){
+    public func setAttentionList(list: [Bool]) {
         if list.count != 4 { return }
         highwayButton.setContent(title: "고속도로", isSelected: list[0])
         mountainButton.setContent(title: "산길포함", isSelected: list[1])

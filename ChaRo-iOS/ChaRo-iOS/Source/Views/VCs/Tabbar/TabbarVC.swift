@@ -70,7 +70,7 @@ class TabbarVC: UITabBarController {
     }
     
     
-    private func configTabbar(){
+    private func configTabbar() {
         
         let customTabbar = tabBar
         customTabbar.tintColor = .blue

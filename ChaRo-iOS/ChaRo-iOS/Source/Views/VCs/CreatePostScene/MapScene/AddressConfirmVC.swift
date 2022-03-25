@@ -56,39 +56,39 @@ class AddressConfirmVC: UIViewController {
         initTMapView()
     }
     
-    private func configureUI(){
+    private func configureUI() {
         view.backgroundColor = .white
     }
     
-    @objc func popCurrentView(){
+    @objc func popCurrentView() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func sendDecidedAddress(){
+    @objc func sendDecidedAddress() {
         let endIndex = Int(navigationController?.viewControllers.endIndex ?? 0)
         guard let addressMainVC = navigationController?.viewControllers[endIndex-3] as? AddressMainVC else { return }
         addressMainVC.replaceAddressData(address: addressModel!, index: presentingCellIndex)
         navigationController?.popToViewController(addressMainVC, animated: true)
     }
     
-    func setPresentingAddress(address: AddressDataModel){
+    func setPresentingAddress(address: AddressDataModel) {
         setTMapInitAddressView(address: address)
         setAddressLabels(address: address)
     }
     
-    func setSearchType(type: String, index: Int){
+    func setSearchType(type: String, index: Int) {
         confirmButton.setTitle("\(type)로 설정", for: .normal)
         presentingCellIndex = index
         setImageInCenterMarkerView(type: type)
     }
     
-    func setAddressLabels(address: AddressDataModel){
+    func setAddressLabels(address: AddressDataModel) {
         addressModel = address
         changeAddressText()
         print("first = \(address.title), \(address.address)")
     }
     
-    func setImageInCenterMarkerView(type: String){
+    func setImageInCenterMarkerView(type: String) {
         var image = UIImage()
         switch type {
         case "출발지":
@@ -102,19 +102,19 @@ class AddressConfirmVC: UIViewController {
     }
     
     
-    func changeAddressText(){
+    func changeAddressText() {
         titleNameLabel.text = addressModel!.title
         addressLabel.text = addressModel!.address
     }
     
-    func setTMapInitAddressView(address: AddressDataModel){
+    func setTMapInitAddressView(address: AddressDataModel) {
         let initPosition: CLLocationCoordinate2D = address.getPoint()
         print("setTMapInitAddressView - tMapView.getZoom() = \(tMapView.getZoom())")
         tMapView.setCenter(initPosition)
         tMapView.setZoom(18)
     }
     
-    func setContraints(){
+    func setContraints() {
         view.addSubviews([tMapView,
                           backButton,
                           centerMarkerView,
@@ -175,10 +175,10 @@ class AddressConfirmVC: UIViewController {
 
     }
     
-    private func changeCoodinateToAddress(point : CLLocationCoordinate2D){
+    private func changeCoodinateToAddress(point : CLLocationCoordinate2D) {
         let pathData = TMapPathData()
         
-        pathData.reverseGeocoding(point, addressType: "A04"){ result , error in
+        pathData.reverseGeocoding(point, addressType: "A04") { result , error in
             let addressDict = result ?? [:]
             print(addressDict)
             print(addressDict["newRoadName"])
@@ -205,7 +205,7 @@ class AddressConfirmVC: UIViewController {
         
     }
 
-    private func getCenterCoordinateInCurrentMap(){
+    private func getCenterCoordinateInCurrentMap() {
         let lat: Double = (tMapView.getCenter()?.latitude)!
         let lon: Double = (tMapView.getCenter()?.longitude)!
         
@@ -214,7 +214,7 @@ class AddressConfirmVC: UIViewController {
         print("----------------------------")
     }
     
-    private func clickedToAddMarker(){
+    private func clickedToAddMarker() {
         let position = tMapView.getCenter()
         let marker = TMapMarker(position: position!)
         marker.map = tMapView
@@ -224,11 +224,11 @@ class AddressConfirmVC: UIViewController {
 }
 
 extension AddressConfirmVC: TMapViewDelegate{
-    func initTMapView(){
+    func initTMapView() {
         tMapView.setApiKey(MapService.mapkey)
         tMapView.delegate = self
     }
-    func mapViewDidChangeBounds(){
+    func mapViewDidChangeBounds() {
         if !isFirstLoaded {
             changeCoodinateToAddress(point: tMapView.getCenter()!)
         }

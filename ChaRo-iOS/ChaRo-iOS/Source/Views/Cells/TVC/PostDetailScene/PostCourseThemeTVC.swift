@@ -35,13 +35,13 @@ class PostCourseThemeTVC: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
   
-    func setEditingMode(){
+    func setEditingMode() {
         for item in themeButtonList{
             item.isUserInteractionEnabled = false
         }
     }
     
-    func setContent(city: String, region: String, theme: [String]){
+    func setContent(city: String, region: String, theme: [String]) {
         if themeStackView.arrangedSubviews.count == 3 { return }
         locationLabel.text = getLocationText(city: city, region: region)
         for index in 0..<3 {
@@ -55,7 +55,7 @@ class PostCourseThemeTVC: UITableViewCell {
         selectionStyle = .none
     }
     
-    private func setupConstraints(){
+    private func setupConstraints() {
         addSubviews([locationImageView, locationLabel, themeTitleView, themeStackView])
      
         locationImageView.snp.makeConstraints {

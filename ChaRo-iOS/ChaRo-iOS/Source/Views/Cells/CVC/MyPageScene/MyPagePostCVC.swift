@@ -37,24 +37,24 @@ class MyPagePostCVC: UICollectionViewCell {
     var image : UIImage?
 
     
-    func setRound(){
+    func setRound() {
         postImage.clipsToBounds = true
         postImage.layer.cornerRadius = 10
     }
    
     
-    func setLikeUI(){
+    func setLikeUI() {
         heartImage.image = UIImage(named: "icHeartActive")
         saveImage.image = UIImage(named: "icSaveActive")
         heartLabel.text = heartText
         saveLabel.text = saveText
     }
     
-    func setHeartSave(heart: String, save: String){
+    func setHeartSave(heart: String, save: String) {
         heartLabel.text = heart
         saveLabel.text = save
     }
-    func setLikeLabel(){
+    func setLikeLabel() {
         saveLabel.textColor = .gray40
         heartLabel.textColor = .gray40
         saveLabel.font = UIFont.notoSansRegularFont(ofSize: 11)
@@ -63,7 +63,7 @@ class MyPagePostCVC: UICollectionViewCell {
     
    
     
-    func setTitleLabel(text: String){
+    func setTitleLabel(text: String) {
         postTitle.text = text
     }
     func setImageUrl(_ url: String) {

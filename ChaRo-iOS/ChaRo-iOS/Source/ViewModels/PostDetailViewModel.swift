@@ -13,7 +13,7 @@ class PostDetailViewModel {
     let postId: Int
     let postDetailSubject = ReplaySubject<PostDetailData>.create(bufferSize: 1)
     
-    init(postId: Int){
+    init(postId: Int) {
         self.postId = postId
         getPostDetailData(postId: postId)
     }
@@ -29,9 +29,9 @@ class PostDetailViewModel {
         return Output(postDetailSubject: postDetailSubject)
     }
     
-    func getPostDetailData(postId: Int){
-        PostResultService.shared.getPostDetail(postId: postId){ response in
-            switch(response){
+    func getPostDetailData(postId: Int) {
+        PostResultService.shared.getPostDetail(postId: postId) { response in
+            switch(response) {
             case .success(let resultData):
                 if let data =  resultData as? PostDetailData{
                     self.postDetailSubject.onNext(data)

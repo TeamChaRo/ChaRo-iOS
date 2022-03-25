@@ -41,7 +41,7 @@ class HomeSquareTVC: UITableViewCell {
     static let identifier = "HomeSquareTVC"
     
    
-//    func cellInit(){
+//    func cellInit() {
 //            guard let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,0]) as? CommonCVC else {return}
 //            guard let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,1]) as? CommonCVC else {return}
 //            guard let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: [0,2]) as? CommonCVC else {return}

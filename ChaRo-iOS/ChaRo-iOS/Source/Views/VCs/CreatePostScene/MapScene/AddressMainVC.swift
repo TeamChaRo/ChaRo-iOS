@@ -74,18 +74,18 @@ class AddressMainVC: UIViewController {
         setupGuideAnimationView()
     }
     
-    private func configureCells(){
+    private func configureCells() {
         isFirstFinded ? initAddressList() : setRecivedAddressCell()
     }
 
-    private func isThereStartAddress(){
+    private func isThereStartAddress() {
         if addressList[0].title != ""{
             print("isThereStartAddress")
             addressCellList[1].searchButton.isEnabled = true
         }
     }
     
-    private func setConstraints(){
+    private func setConstraints() {
         view.addSubviews([backButton,
                           tableView,
                           tMapView,
@@ -118,7 +118,7 @@ class AddressMainVC: UIViewController {
         }
     }
     
-    private func configureUI(){
+    private func configureUI() {
         view.backgroundColor = .white
         navigationController?.isNavigationBarHidden = true
         oneCellHeight = 48.0
@@ -127,11 +127,11 @@ class AddressMainVC: UIViewController {
     }
     
     
-    @objc private func dismissView(){
+    @objc private func dismissView() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc private func sendDecidedAddress(){
+    @objc private func sendDecidedAddress() {
         let newAddressList = changeAddressData()
         let nextVC = PostDetailVC()
         postSearchKeywords()
@@ -150,7 +150,7 @@ class AddressMainVC: UIViewController {
 
 // MARK: - Guide Animation
 extension AddressMainVC{
-    private func setupGuideAnimationView(){
+    private func setupGuideAnimationView() {
         guard isFirstOpen else { return }
         let guideView = MapGuideView()
         self.view.addSubview(guideView)
@@ -172,13 +172,13 @@ extension AddressMainVC{
 
 //MARK: - Address 관련
 extension AddressMainVC {
-    private func initAddressList(){
+    private func initAddressList() {
         addressList.append(contentsOf: [AddressDataModel(),AddressDataModel()])
         addressCellList.append(contentsOf: [initAddressCell(type: .start),
                                             initAddressCell(type: .end)])
     }
     
-    private func setRecivedAddressCell(){
+    private func setRecivedAddressCell() {
         addressCellList = []
         addressList.forEach{
             let addressCell = setRecivedAddressCellStyle(address: $0)
@@ -200,18 +200,18 @@ extension AddressMainVC {
         return cell
     }
     
-    public func setWritePostDataForServer(data: WritePostData, imageList: [UIImage]){
+    public func setWritePostDataForServer(data: WritePostData, imageList: [UIImage]) {
         sendedPostData = data
         self.imageList = imageList
         dump(imageList)
     }
     
-    public func setAddressListData(list: [AddressDataModel]){
+    public func setAddressListData(list: [AddressDataModel]) {
         isFirstFinded = list.count == 0 ? true : false
         addressList = list
     }
     
-    public func replaceAddressData(address: AddressDataModel, index: Int){
+    public func replaceAddressData(address: AddressDataModel, index: Int) {
         addressList[index] = address
         addressCellList[index].setAddressText(address: address)
         
@@ -225,7 +225,7 @@ extension AddressMainVC {
             addPathInMapView()
         }
     }
-    private func displayAddress(){
+    private func displayAddress() {
         print("addressList 개수 = \(addressList.count)")
         for item in addressList{
             item.displayContent()
@@ -308,28 +308,28 @@ extension AddressMainVC: AddressButtonCellDelegate{
 
 //MARK: - TMap
 extension AddressMainVC{
-    private func initMapView(){
+    private func initMapView() {
         tMapView.setApiKey(MapService.mapkey)
         tMapView.delegate = self
         tMapView.setZoom(10)
         initMapViewStyle()
     }
     
-    private func setMapFrame(){
+    private func setMapFrame() {
         tMapView.frame = CGRect(x: 0, y: tableViewHeight,
                                 width: UIScreen.getDeviceWidth(),
                                 height: UIScreen.getDeviceHeight() - tableViewHeight)
         
     }
     
-    private func removeAllPolyLines(){
+    private func removeAllPolyLines() {
         for line in polyLineList{
             line.map = nil
         }
         polyLineList.removeAll()
     }
     
-    private func addPathInMapView(){
+    private func addPathInMapView() {
         removeAllPolyLines()
         let pathData = TMapPathData()
         print("count = \(addressList.count)")
@@ -368,7 +368,7 @@ extension AddressMainVC{
     }
     
     
-//    private func addPathInMapView(){
+//    private func addPathInMapView() {
 //        polyLineList.removeAll()
 //        let pathData = TMapPathData()
 //        print("count = \(addressList.count)")
@@ -393,12 +393,12 @@ extension AddressMainVC{
 //        }
 //    }
     
-    private func initMapViewStyle(){
+    private func initMapViewStyle() {
         print("initMapViewStyle")
         print("tMapView.getZoom() = \(tMapView.getZoom())")
     }
     
-    private func inputMarkerInMapView(){
+    private func inputMarkerInMapView() {
         print("inputMarkerInMapView")
         print("addressList = \(addressList.count)")
         for index in 0..<addressList.count{
@@ -471,11 +471,11 @@ extension AddressMainVC{
 
 //MARK: Network
 extension AddressMainVC{
-    private func getSearchKeywords(){
+    private func getSearchKeywords() {
         print("getSearchKeywords")
-        SearchKeywordService.shared.getSearchKeywords(userId: Constants.userId){response in
+        SearchKeywordService.shared.getSearchKeywords(userId: Constants.userId) {response in
             
-            switch(response){
+            switch(response) {
             case .success(let resultData):
                 if let data =  resultData as? SearchResultDataModel{
                     print("내가 검색한 결과 조회~~~!!")
@@ -495,7 +495,7 @@ extension AddressMainVC{
     }
     
     
-    private func postSearchKeywords(){
+    private func postSearchKeywords() {
         print("postSearchKeywords-----------------")
         var searchKeywordList: [SearchHistory] = []
         
@@ -508,11 +508,14 @@ extension AddressMainVC{
         }
         
         SearchKeywordService.shared.postSearchKeywords(userId: Constants.userId,
-                                                       keywords: searchKeywordList){ [self] response in
+                                                       keywords: searchKeywordList) {  response in
             print("결과받음")
             
-            switch(response){
+            switch(response) {
             case .success(let resultData):
+                print("--------------------------")
+                print("\(resultData)")
+                print("--------------------------")
                 if let data =  resultData as? SearchResultDataModel{
                     print("성공했더~!!!!")
                     dump(data)
@@ -532,7 +535,7 @@ extension AddressMainVC{
 }
 
 extension AddressMainVC : TMapViewDelegate{
-    func mapViewDidFinishLoadingMap(){
+    func mapViewDidFinishLoadingMap() {
         print("mapViewDidFinishLoadingMap")
         tMapView.setZoom(12)
         print("tMapView.getZoom() = \(tMapView.getZoom())")

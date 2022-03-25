@@ -36,7 +36,7 @@ class HomePostVC: UIViewController {
     
     static let identifier : String = "HomePostVC"
     
-    func setTableView(){
+    func setTableView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCustomXib(xibName: "CommonCVC")
@@ -48,18 +48,18 @@ class HomePostVC: UIViewController {
     }
     
     
-    func setDropdown(){
+    func setDropdown() {
         dropDownTableview.registerCustomXib(xibName: "HotDropDownTVC")
         dropDownTableview.delegate = self
         dropDownTableview.dataSource = self
         dropDownTableview.separatorStyle = .none
     }
     
-    func setShaow(){
+    func setShaow() {
         homePostNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
     
-    func setRound(){
+    func setRound() {
         dropDownTableview.layer.masksToBounds = true
         dropDownTableview.layer.cornerRadius = 20
 //        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -83,7 +83,7 @@ class HomePostVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func getData(){
+    func getData() {
         GetDetailDataService.detailData.getRecommendInfo{ (response) in
             switch response
             {
@@ -110,7 +110,7 @@ class HomePostVC: UIViewController {
         }
     }
     
-    func getNewData(){
+    func getNewData() {
         GetNewDetailDataService.detailData.getRecommendInfo{ (response) in
             switch response
             {
@@ -294,7 +294,7 @@ extension HomePostVC: UITableViewDataSource{
 }
 
 extension HomePostVC: MenuClickedDelegate {
-    func menuClicked(){
+    func menuClicked() {
         dropDownTableview.isHidden = false
 
     }

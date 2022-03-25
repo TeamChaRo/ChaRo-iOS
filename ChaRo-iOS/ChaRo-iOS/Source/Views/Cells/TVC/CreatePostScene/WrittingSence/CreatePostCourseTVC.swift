@@ -95,7 +95,7 @@ class CreatePostCourseTVC: UITableViewCell {
         selectionStyle = .none
     }
     
-    private func initTextField(){
+    private func initTextField() {
         textFieldList.append(contentsOf: [cityField,
                                           regionField])
         
@@ -112,7 +112,7 @@ class CreatePostCourseTVC: UITableViewCell {
         }
     }
     
-    private func setTextFieldAction(){
+    private func setTextFieldAction() {
         cityField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         regionField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         self.bringSubviewToFront(cityField)
@@ -123,17 +123,17 @@ class CreatePostCourseTVC: UITableViewCell {
 
 // MARK: - PickerView
 extension CreatePostCourseTVC {
-    private func initPickerView(){
+    private func initPickerView() {
         setPickerViewDelegate()
         createPickerViewToolbar()
     }
     
-    private func setPickerViewDelegate(){
+    private func setPickerViewDelegate() {
         pickerView.dataSource = self
         pickerView.delegate = self
     }
     
-    private func createPickerViewToolbar(){
+    private func createPickerViewToolbar() {
         // ToolBar
         toolbar.sizeToFit()
         
@@ -146,7 +146,7 @@ extension CreatePostCourseTVC {
     }
     
     @objc
-    func donePresseed(){
+    func donePresseed() {
 
         switch currentIndex {
         case 0:
@@ -169,7 +169,7 @@ extension CreatePostCourseTVC {
         self.endEditing(true)
     }
     
-    func wasSelected(){
+    func wasSelected() {
         // 기존에 선택되어있으면 2번째 애 초기화해주기
         if filterList[0] != "" && filterList[0] != "선택안함" {
             filterList[1] = "" // 뒤에 애 초기화
@@ -181,7 +181,7 @@ extension CreatePostCourseTVC {
     
 
     @objc
-    func clikedTextField(_ sender: UITextField){
+    func clikedTextField(_ sender: UITextField) {
         
         currentIndex = sender.tag
         pickerView.selectRow(0, inComponent: 0, animated: true)
@@ -191,7 +191,7 @@ extension CreatePostCourseTVC {
         
     }
     
-    func changeCurrentPickerData(index : Int){
+    func changeCurrentPickerData(index : Int) {
         
         if index == 0 {
             currentList = filterData.state
@@ -203,7 +203,7 @@ extension CreatePostCourseTVC {
         
     }
     
-    func changeToolbarText(index: Int){
+    func changeToolbarText(index: Int) {
         var newTitle = ""
         
         switch index {
@@ -244,7 +244,7 @@ extension CreatePostCourseTVC: UIPickerViewDataSource{
 // MARK:- Layout (셀높이 125)
 extension CreatePostCourseTVC {
     
-    private func configureLayout(){
+    private func configureLayout() {
         addSubviews([themeTitleView, cityField, regionField, regionButton, cityButton])
         
         let textWidth: CGFloat = 65

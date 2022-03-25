@@ -30,11 +30,11 @@ final class PostDetailAddressView: UIView {
     }
     var copyAddressClouser: ((String) -> ())?
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    init(title: String){
+    init(title: String) {
         super.init(frame: .zero)
         titleLabel.text = title
         setupConstraints()
@@ -44,7 +44,7 @@ final class PostDetailAddressView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupConstraints(){
+    private func setupConstraints() {
         self.addSubviews([copyButton, titleLabel, addressTextField ])
         
         copyButton.snp.makeConstraints {
@@ -65,7 +65,7 @@ final class PostDetailAddressView: UIView {
         }
     }
     
-    @objc private func touchUpCopyButton(){
+    @objc private func touchUpCopyButton() {
         copyAddressClouser?("\(titleLabel.text ?? "")")
         UIPasteboard.general.string = addressTextField.text
     }

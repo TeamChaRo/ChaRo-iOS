@@ -28,7 +28,7 @@ class HomePostDetailCVC: UICollectionViewCell {
         selectLabel.text = data
     }
 
-    func setLabel(){
+    func setLabel() {
         var postCountText : String = "전체 \(postCount)개 게시물"
         postCountLabel.text = postCountText
         selectLabel.text = selectText
@@ -49,7 +49,7 @@ class HomePostDetailCVC: UICollectionViewCell {
         setTitle(data: selectText)
     }
     
-    func setSelectName(name: String){
+    func setSelectName(name: String) {
         selectLabel.text = name
         selectText = name
         print(selectText , "이거됨?")

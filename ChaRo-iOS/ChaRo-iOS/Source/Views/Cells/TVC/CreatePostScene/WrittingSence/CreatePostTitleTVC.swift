@@ -134,7 +134,7 @@ extension CreatePostTitleTVC: UITextViewDelegate {
 extension CreatePostTitleTVC {
  
     // MARK: - Layout
-    func configureLayout(){
+    func configureLayout() {
         addSubviews([titleTextView, warningLabel])
         
         titleTextView.snp.makeConstraints{
@@ -151,13 +151,13 @@ extension CreatePostTitleTVC {
         }
     }
     
-    func increaseTitleHight(){
+    func increaseTitleHight() {
         titleTextView.snp.makeConstraints{
             $0.height.equalTo(64)
         }
     }
     
-    func decreaseTitleHight(){
+    func decreaseTitleHight() {
         titleTextView.snp.makeConstraints{
             $0.height.equalTo(42)
         }

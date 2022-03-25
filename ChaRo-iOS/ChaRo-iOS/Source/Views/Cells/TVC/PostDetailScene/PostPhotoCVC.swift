@@ -15,7 +15,7 @@ final class PostPhotoCVC: UICollectionViewCell{
         $0.contentMode = .scaleAspectFill
     }
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setupContraints()
     }
@@ -31,7 +31,7 @@ final class PostPhotoCVC: UICollectionViewCell{
         }
     }
     
-    func setImage(to imgString: String){
+    func setImage(to imgString: String) {
         imageView.kf.setImage(with: URL(string: imgString))
     }
     

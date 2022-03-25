@@ -137,7 +137,7 @@ class OtherMyPageVC: UIViewController {
     
     //MARK: setUI
     
-    func setCollectionviewLayout(){
+    func setCollectionviewLayout() {
         self.view.addSubview(collectionBackgroundView)
         collectionBackgroundView.addSubview(collectionview)
         collectionview.delegate = self
@@ -157,7 +157,7 @@ class OtherMyPageVC: UIViewController {
         }
     }
     
-    func setHeaderViewLayout(){
+    func setHeaderViewLayout() {
         self.view.addSubview(headerBackgroundView)
         headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton, backButton])
         
@@ -229,7 +229,7 @@ class OtherMyPageVC: UIViewController {
     
     }
     
-    func filterTableViewLayout(){
+    func filterTableViewLayout() {
         filterTableView.delegate = self
         filterTableView.clickDelegate = self
         filterTableView.isHidden = true
@@ -246,7 +246,7 @@ class OtherMyPageVC: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let writeContentHeight = collectionview.contentSize.height
         
-        if(collectionview.contentOffset.y > writeContentHeight - collectionview.frame.height){
+        if(collectionview.contentOffset.y > writeContentHeight - collectionview.frame.height) {
             let lastcount = writenPostDriveData.count
             var likeOrNew = ""
             var addURL = ""
@@ -275,16 +275,16 @@ class OtherMyPageVC: UIViewController {
             }
         }
         
-        if(collectionview.contentOffset.y < writeContentHeight - collectionview.frame.height){scrollTriger = false
+        if(collectionview.contentOffset.y < writeContentHeight - collectionview.frame.height) {scrollTriger = false
         }
     }
     
-    func setOtherUserID(userID: String){
+    func setOtherUserID(userID: String) {
         otherUserID = userID
     }
     
     
-    func setHeaderData(){
+    func setHeaderData() {
         followerNum = userProfileData[0].follower
         followingNum = userProfileData[0].following
         guard let url = URL(string: userProfileData[0].profileImage) else { return }
@@ -293,7 +293,7 @@ class OtherMyPageVC: UIViewController {
         followerNumButton.setTitle(String(followerNum), for: .normal)
         followNumButton.setTitle(String(followingNum), for: .normal)
     }
-    func isNoData(){
+    func isNoData() {
         collectionBackgroundView.addSubview(noDataImageView)
         
         noDataImageView.isHidden = true
@@ -310,16 +310,16 @@ class OtherMyPageVC: UIViewController {
       
     }
     
-    @objc private func doFollowButtonClicked(_ sender: UIButton){
+    @objc private func doFollowButtonClicked(_ sender: UIButton) {
         postFollowUser()
    }
-    @objc private func backButtonClicked(_ sender: UIButton){
+    @objc private func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
    }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
-        func getMypageData(){
+        func getMypageData() {
             GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
             GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                        switch response
@@ -350,8 +350,8 @@ class OtherMyPageVC: UIViewController {
                        }
                    }
         }
-    func getFollowData(){
-        FollowCheckService.followData.getRecommendInfo(userId: myId, otherId: otherUserID){ (response) in
+    func getFollowData() {
+        FollowCheckService.followData.getRecommendInfo(userId: myId, otherId: otherUserID) { (response) in
                    switch response
                    {
                    case .success(let data):
@@ -378,11 +378,11 @@ class OtherMyPageVC: UIViewController {
     }
     
     
-    func getInfinityData(addUrl: String, LikeOrNew: String){
+    func getInfinityData(addUrl: String, LikeOrNew: String) {
         updateFollowNum = false
         delegate = self
         self.delegate?.startIndicator()
-        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: otherUserID, addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: otherUserID, addURL: addUrl,likeOrNew: LikeOrNew) { (response) in
                    switch response
                    {
                    case .success(let data) :
@@ -414,11 +414,11 @@ class OtherMyPageVC: UIViewController {
                }
         self.delegate?.endIndicator()
     }
-    func postFollowUser(){
+    func postFollowUser() {
         self.updateFollowNum = true
         delegate = self
         self.delegate?.startIndicator()
-        DoFollowService.shared.followService(follower: myId, followed: otherUserID){ result in
+        DoFollowService.shared.followService(follower: myId, followed: otherUserID) { result in
             switch result {
             case .success(let data):
                 if let response = data as? DoFollowDataModel{
@@ -453,7 +453,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var cellCount = 0
         
-        if(writenPostDriveData.count == 0){
+        if(writenPostDriveData.count == 0) {
             cellCount = 0
         }
         else{
@@ -468,7 +468,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
         detailCell.delegate = self
         detailCell.setSelectName(name: currentState)
     
-        if(indexPath.row == 0){
+        if(indexPath.row == 0) {
             detailCell.postCountLabel.text = ""
             return detailCell
         }
@@ -566,7 +566,7 @@ extension OtherMyPageVC: NewHotFilterClickedDelegate{
 
 }
 extension OtherMyPageVC: MenuClickedDelegate{
-    func menuClicked(){
+    func menuClicked() {
         filterTableView.isHidden = false
     }
 }

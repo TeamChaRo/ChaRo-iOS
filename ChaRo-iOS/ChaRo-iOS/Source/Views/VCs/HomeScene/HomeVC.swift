@@ -49,7 +49,7 @@ class HomeVC: UIViewController{
     
     var tableIndex: IndexPath = [0,0]
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         getServerData()
         setTableView()
@@ -58,7 +58,7 @@ class HomeVC: UIViewController{
         HomeTableView.separatorStyle = .none
     }
     //헤더뷰
-    func setHeader(){
+    func setHeader() {
         HomeTableView.rowHeight = UITableView.automaticDimension
         headerView = HomeTableView.tableHeaderView
         HomeTableView.tableHeaderView = nil
@@ -77,7 +77,7 @@ class HomeVC: UIViewController{
         headerView.frame = headerRect
     }
     
-    func setupHeaderViewUI(){
+    func setupHeaderViewUI() {
         var titleList: [String] = []
         var subTitleList: [String] = []
             
@@ -114,7 +114,7 @@ class HomeVC: UIViewController{
             
         }
         
-        func setupHeaderViewLayout(){
+        func setupHeaderViewLayout() {
             for index in 0..<bannerTitleLableList.count {
                 bannerTitleLableList[index].snp.makeConstraints{
                     $0.leading.equalTo(bannerScrollView.viewWithTag(index+1)!).offset(24)
@@ -130,7 +130,7 @@ class HomeVC: UIViewController{
         }
    
     //서버 데이터 받아오는 부분
-    func getServerData(){
+    func getServerData() {
         //lottieview
         delegate = self
         delegate?.startIndicator()
@@ -199,7 +199,7 @@ class HomeVC: UIViewController{
             
         }
     }
-    func setTableView(){
+    func setTableView() {
         
         HomeTableView.delegate = self
         HomeTableView.dataSource = self
@@ -212,11 +212,11 @@ class HomeVC: UIViewController{
         HomeTableView.registerCustomXib(xibName: "HomeAreaRecommandTVC")
     }
     
-    func setActionToSearchButton(){
+    func setActionToSearchButton() {
         homeNavigationSearchButton.addTarget(self, action: #selector(presentSearchPost), for: .touchUpInside)
     }
     
-    @objc func presentSearchPost(){
+    @objc func presentSearchPost() {
         let storyboard = UIStoryboard(name: "SearchPost", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: SearchPostVC.identifier) as! SearchPostVC
         let navigation = UINavigationController(rootViewController: nextVC)
@@ -257,7 +257,7 @@ extension HomeVC : UITableViewDelegate {
         
     }
     
-    func setNavigationViewShadow(){
+    func setNavigationViewShadow() {
         //shadowExtension 예제
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
@@ -291,18 +291,18 @@ extension HomeVC : UITableViewDelegate {
         }
         }
 //MARK: ScrollViewDidScroll
-    func scrollViewDidScroll(_ scrollView: UIScrollView){
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNavigationAlpah()
         setMoveCar()
        }
-    func setNavigationAlpah(){
+    func setNavigationAlpah() {
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
         print(HomeTableView.contentOffset.y,-homeTableViewHeaderHeight, currentHeight)
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
                if currentHeight > -homeTableViewHeaderHeight{
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
-                if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3){
+                if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3) {
                     if currentWidth == 0 && currentHeight == 0{
                         homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                         homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
@@ -323,7 +323,7 @@ extension HomeVC : UITableViewDelegate {
                         }
                     }
                 }
-                else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3){
+                else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3) {
                     homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
@@ -346,7 +346,7 @@ extension HomeVC : UITableViewDelegate {
            }
 
     }
-    func setMoveCar(){
+    func setMoveCar() {
         let originalCarConstant = carMoveConstraint.constant
         let sideMargin : CGFloat = 24
         let pageCount : Int = 4

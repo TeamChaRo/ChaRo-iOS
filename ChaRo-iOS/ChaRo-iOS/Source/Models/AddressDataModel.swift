@@ -16,7 +16,7 @@ struct AddressDataModel: Codable {
     var longitude: String = ""
     
     
-    func displayContent(){
+    func displayContent() {
         print("title = \(title)")
         print("address = \(address)")
         print("latitude = \(latitude)")

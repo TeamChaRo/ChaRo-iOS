@@ -50,27 +50,27 @@ class SearchAddressKeywordVC: UIViewController {
     }
     
     //MARK: - public func
-    public func setAddressModel(model: AddressDataModel, cellType: String, index: Int){
+    public func setAddressModel(model: AddressDataModel, cellType: String, index: Int) {
         searchTextField.placeholder = "\(cellType)를 입력해주세요"
         addressType = cellType
         addressIndex = index
     }
     
-    public func setSearchKeyword(list: [KeywordResult]){
+    public func setSearchKeyword(list: [KeywordResult]) {
         print(list)
     }
     
     // MARK: - private func
     
-    private func configureUI(){
+    private func configureUI() {
         view.backgroundColor = .white
     }
     
-    private func bindToViewModel(){
+    private func bindToViewModel() {
         viewModel
             .addressSubject
             .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.className,
-                                                cellType: SearchKeywordCell.self)){ row, element, cell in
+                                                cellType: SearchKeywordCell.self)) { row, element, cell in
                 cell.titleLabel.text = element.title
                 cell.addressLabel.text = element.address
                 cell.dateLabel.text = self.viewModel.getCurrentDate()
@@ -89,25 +89,25 @@ class SearchAddressKeywordVC: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    private func pushNextVC(address: AddressDataModel){
+    private func pushNextVC(address: AddressDataModel) {
         let nextVC = AddressConfirmVC()
         nextVC.setPresentingAddress(address: address)
         nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    public func setActionToComponent(){
+    public func setActionToComponent() {
         backButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
     }
     
-    @objc func dismissAction(){
+    @objc func dismissAction() {
         self.navigationController?.popViewController(animated: true)
     }
 }
 
 //MARK: Layout
 extension SearchAddressKeywordVC {
-    private func setupConstraints(){
+    private func setupConstraints() {
         view.addSubviews([backButton,
                           searchTextField,
                           separateLine,

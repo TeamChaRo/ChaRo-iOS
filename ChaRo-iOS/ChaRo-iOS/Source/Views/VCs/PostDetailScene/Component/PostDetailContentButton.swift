@@ -17,7 +17,7 @@ final class PostDetailContentButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
             
-    private func configureUI(){
+    private func configureUI() {
         self.isUserInteractionEnabled = false
         self.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         self.layer.cornerRadius = 21
@@ -27,13 +27,13 @@ final class PostDetailContentButton: UIButton {
         self.setTitleColor(.gray30, for: .normal)
     }
     
-    public func setContent(title: String, isSelected: Bool){
+    public func setContent(title: String, isSelected: Bool) {
         self.setTitle(title, for: .normal)
         self.isSelected = isSelected
         self.configureUI()
     }
     
-    public func clearUI(){
+    public func clearUI() {
         self.setTitleColor(.clear, for: .normal)
         self.layer.borderWidth = 0
     }

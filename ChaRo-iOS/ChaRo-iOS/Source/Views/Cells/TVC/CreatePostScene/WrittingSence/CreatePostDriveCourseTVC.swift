@@ -71,14 +71,14 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         textView.delegate = self
     }
 
-    public func setContentText(text: String){
+    public func setContentText(text: String) {
         textView.text = text
         textCountLabel.text = "\(text.count)/280자"
         self.setEditingModeConstraint()
         setTextViewStyle()
     }
 
-    private func setTextViewStyle(){
+    private func setTextViewStyle() {
         textView.isEditable = true
         textView.textColor = .gray30
         textView.text = placeHolderText
@@ -88,7 +88,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         textView.contentInset = UIEdgeInsets(top: 21, left: 16, bottom: 16, right: 16)
     }
 
-    private func setEditingModeConstraint(){
+    private func setEditingModeConstraint() {
         addSubviews([
             self.titleView,
             self.textView,
@@ -127,7 +127,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         selectionStyle = .none
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.endEditing(true)
     }
 

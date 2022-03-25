@@ -73,7 +73,7 @@ class OnBoardVC: UIViewController {
         configureCollectionView()
     }
     
-    private func initContentList(){
+    private func initContentList() {
         imageList.append(contentsOf: [UIImage(named: "onboardingBackground1")!,
                                       UIImage(named: "onboardingBackground2")!,
                                       UIImage(named: "onboardingBackground3")!])
@@ -88,7 +88,7 @@ class OnBoardVC: UIViewController {
     }
     
     
-    @objc func dismissAction(){
+    @objc func dismissAction() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: SNSLoginVC.identifier)
         nextVC.modalPresentationStyle = .fullScreen
@@ -96,7 +96,7 @@ class OnBoardVC: UIViewController {
        //self.dismiss(animated: false)
     }
 
-    private func setConstraints(){
+    private func setConstraints() {
         view.addSubviews([skipButton,
                           collectionView,
                           pageControl,
@@ -135,7 +135,7 @@ class OnBoardVC: UIViewController {
 
 extension OnBoardVC{
     
-    func configureCollectionView(){
+    func configureCollectionView() {
         collectionView.registerCustomXib(xibName: OnBoardCVC.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -147,7 +147,7 @@ extension OnBoardVC{
         print("currentPage = \(currentPage)")
         pageControl.currentPage = currentPage
 
-        if(currentPage == 2){
+        if(currentPage == 2) {
             skipButton.isHidden = true
             startButton.isHidden = false
         }else{

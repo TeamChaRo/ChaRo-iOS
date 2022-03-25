@@ -329,7 +329,7 @@ class MyPageVC: UIViewController {
     func getInfinityData(addUrl: String, LikeOrNew: String) {
         delegate = self
         self.delegate?.startIndicator()
-        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: myId, addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: myId, addURL: addUrl,likeOrNew: LikeOrNew) { (response) in
                    switch response
                    {
                    case .success(let data) :

@@ -21,7 +21,7 @@ struct SearchKeywordService {
     
     func postSearchKeywords(userId: String,
                             keywords: [SearchHistory],
-                            completion: @escaping (NetworkResult<Any>) -> Void){
+                            completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let dataRequest = AF.request(Constants.searchKeywordURL,
                                      method: .post,
@@ -43,7 +43,7 @@ struct SearchKeywordService {
     }
     
     func getSearchKeywords(userId : String,
-                           completion: @escaping (NetworkResult<Any>) -> Void){
+                           completion: @escaping (NetworkResult<Any>) -> Void) {
        
         let dataRequeat = AF.download(Constants.searchKeywordURL+"/\(userId)",
                                       method: .get,

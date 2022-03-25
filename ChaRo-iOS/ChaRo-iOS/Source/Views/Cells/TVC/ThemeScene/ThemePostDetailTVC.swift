@@ -25,7 +25,7 @@ class ThemePostDetailTVC: UITableViewCell {
         setLabel()
     }
 
-    func setLabel(){
+    func setLabel() {
         var countText : String = "전체 \(postCount)개 게시물"
         countLabel.text = countText
         selectLabel.text = selectText

@@ -40,7 +40,7 @@ class FollowFollowingTVC: UITableViewCell {
     }
 
     // MARK: - init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayout()
     }
@@ -50,7 +50,7 @@ class FollowFollowingTVC: UITableViewCell {
     }
  
 //MARK: function
-    func setData(image: String, userName: String, isFollow: Bool, userEmail: String){
+    func setData(image: String, userName: String, isFollow: Bool, userEmail: String) {
         guard let url = URL(string: image) else { return }
         userNameLabel.text = userName
         otherUserID = userEmail
@@ -63,8 +63,8 @@ class FollowFollowingTVC: UITableViewCell {
         }
     }
     
-    func postFollowData(){
-        DoFollowService.shared.followService(follower: myId, followed: otherUserID){ result in
+    func postFollowData() {
+        DoFollowService.shared.followService(follower: myId, followed: otherUserID) { result in
             switch result {
             case .success(let data):
                 if let response = data as? DoFollowDataModel{
@@ -91,11 +91,11 @@ class FollowFollowingTVC: UITableViewCell {
     
     
     
-    @objc private func followButtonClicked(_ sender: UIButton){
+    @objc private func followButtonClicked(_ sender: UIButton) {
         postFollowData()
     }
 //MARK: layoutFunction
-    func setLayout(){
+    func setLayout() {
         addSubviews([profileImageView, userNameLabel, followButton])
         profileImageView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
@@ -116,7 +116,7 @@ class FollowFollowingTVC: UITableViewCell {
         }
     }
     
-    func updateLayoutArPostLikeList(){
+    func updateLayoutArPostLikeList() {
         profileImageView.snp.remakeConstraints{
             $0.top.bottom.equalToSuperview().inset(11)
             $0.leading.equalToSuperview().offset(20)
@@ -134,7 +134,7 @@ class FollowFollowingTVC: UITableViewCell {
         }
     }
     
-    func changeUIStyleAtPostListList(){
+    func changeUIStyleAtPostListList() {
         updateLayoutArPostLikeList()
         profileImageView.layer.borderWidth = 1
         userNameLabel.font = .notoSansMediumFont(ofSize: 13)

@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 
-class PostLikeListVC: UIViewController{
+class PostLikeListVC: UIViewController {
     
     // MARK: - Properties
     private let disposeBag = DisposeBag()
@@ -38,7 +38,7 @@ class PostLikeListVC: UIViewController{
         $0.font = .notoSansMediumFont(ofSize: 17)
     }
     
-    init(postId: Int){
+    init(postId: Int) {
         self.viewModel = PostLikeListViewModel(postId: postId)
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,7 +61,7 @@ class PostLikeListVC: UIViewController{
         animatePresentContainer()
     }
     
-    private func setupConstraints(){
+    private func setupConstraints() {
         view.addSubviews([backgroundView, containerView])
         backgroundView.snp.makeConstraints{
             $0.top.leading.trailing.bottom.equalToSuperview()
@@ -89,11 +89,11 @@ class PostLikeListVC: UIViewController{
         }
     }
     
-    private func configureUI(){
+    private func configureUI() {
         view.backgroundColor = .clear
     }
     
-    private func setupPanGesture(){
+    private func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
         panGesture.delaysTouchesBegan = false
         panGesture.delaysTouchesEnded = false
@@ -101,7 +101,7 @@ class PostLikeListVC: UIViewController{
     }
     
     @objc
-    func handlePanGesture(gesture: UIPanGestureRecognizer){
+    private func handlePanGesture(gesture: UIPanGestureRecognizer) {
         let transionY = gesture.translation(in: self.view).y
         switch gesture.state{
         case .changed:
@@ -113,13 +113,13 @@ class PostLikeListVC: UIViewController{
         }
     }
     
-    private func updateContainerView(height: CGFloat){
+    private func updateContainerView(height: CGFloat) {
         containerView.snp.updateConstraints{
             $0.height.equalTo(height)
         }
     }
     
-    private func bindViewModel(){
+    private func bindViewModel() {
         let output = viewModel.transform(form: PostLikeListViewModel.Input(transionYOffsetSubject: transionYOffsetSubject), disposeBag: disposeBag)
         output.newHeightSubject
             .bind(onNext: { [weak self] newHeight, isEnded in
@@ -130,10 +130,10 @@ class PostLikeListVC: UIViewController{
                 : self?.updateContainerView(height: newHeight)
             })
             .disposed(by: disposeBag)
-        
+
         output.postLikeListSubject
             .bind(to: tableView.rx.items(cellIdentifier: FollowFollowingTVC.className,
-                                         cellType: FollowFollowingTVC.self)){ row, element, cell in
+                                         cellType: FollowFollowingTVC.self)) { row, element, cell in
                 cell.setData(image: element.image,
                              userName: element.nickname,
                              isFollow: element.isFollow,
@@ -151,7 +151,7 @@ class PostLikeListVC: UIViewController{
 
 //MARK: - Animation
 extension PostLikeListVC{
-    func animatePresentContainer() {
+    private func animatePresentContainer() {
         animator.addAnimations {
             self.updateContainerView(height: self.viewModel.defaultHeight)
             self.view.layoutIfNeeded()
@@ -159,7 +159,7 @@ extension PostLikeListVC{
         animator.startAnimation()
     }
     
-    func animatebackgroundView() {
+    private func animatebackgroundView() {
         backgroundView.alpha = 0
         animator.addAnimations {
             self.backgroundView.alpha = self.viewModel.maxBackgroundAlpha
@@ -167,7 +167,7 @@ extension PostLikeListVC{
         animator.startAnimation()
     }
     
-    func animateContainerView(height: CGFloat) {
+    private func animateContainerView(height: CGFloat) {
         animator.addAnimations {
             self.updateContainerView(height: height)
             self.view.layoutIfNeeded()
@@ -176,7 +176,7 @@ extension PostLikeListVC{
         animator.startAnimation()
     }
     
-    func animateDismissView() {
+    private func animateDismissView() {
         backgroundView.alpha = viewModel.maxBackgroundAlpha
         animator.addAnimations {
             self.backgroundView.alpha = 0

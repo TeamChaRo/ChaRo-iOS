@@ -23,7 +23,7 @@ class LeftBackButton: UIButton {
         initAction(vc: vc, isModal: isModal)
     }
     
-   private func setBackgroundImage(){
+   private func setBackgroundImage() {
         setBackgroundImage(ImageLiterals.icBack, for: .normal)
     }
     

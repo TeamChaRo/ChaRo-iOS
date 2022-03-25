@@ -34,7 +34,7 @@ class PostCellTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, subTitle:String = ""){
+    init(title: String, subTitle:String = "") {
         super.init(frame: .zero)
         titleLabel.text = title
         
@@ -46,7 +46,7 @@ class PostCellTitleView: UIView {
         }
     }
     
-    private func setTitleContraints(){
+    private func setTitleContraints() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
@@ -54,7 +54,7 @@ class PostCellTitleView: UIView {
         }
     }
     
-    private func setSubTitleContraints(){
+    private func setSubTitleContraints() {
         addSubviews([titleLabel,
                      subTitleLabel])
         

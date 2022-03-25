@@ -14,7 +14,7 @@ extension UIViewController {
                           message : String,
                           okAction : ((UIAlertAction) -> Void)?,
                           cancelAction : ((UIAlertAction) -> Void)? = nil,
-                          completion : (() -> Void)? = nil){
+                          completion : (() -> Void)? = nil) {
         
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
@@ -37,7 +37,7 @@ extension UIViewController {
     func makeAlert(title : String,
                    message : String,
                    okAction : ((UIAlertAction) -> Void)? = nil,
-                   completion : (() -> Void)? = nil){
+                   completion : (() -> Void)? = nil) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         
@@ -54,7 +54,7 @@ extension UIViewController {
     func makeAlert(title : String?,
                    message : String?,
                    okAction : ((UIAlertAction) -> Void)? = nil,
-                   completion : (() -> Void)? = nil){
+                   completion : (() -> Void)? = nil) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         

@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class PostLikeListViewModel{
+class PostLikeListViewModel {
 
     //MARK: - Properties
     private var postId: Int

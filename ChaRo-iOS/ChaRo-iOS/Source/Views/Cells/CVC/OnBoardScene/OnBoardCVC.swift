@@ -34,13 +34,13 @@ class OnBoardCVC: UICollectionViewCell {
         setContraints()
     }
 
-    public func setContent(image: UIImage, title: String, subTitle: String){
+    public func setContent(image: UIImage, title: String, subTitle: String) {
         imageView.image = image
         titleLabel.text = title
         subTitleLabel.text = subTitle
     }
     
-    private func setContraints(){
+    private func setContraints() {
         addSubviews([imageView,
                      titleLabel,
                      subTitleLabel])

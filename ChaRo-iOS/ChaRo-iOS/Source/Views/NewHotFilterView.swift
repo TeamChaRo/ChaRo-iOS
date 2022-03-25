@@ -24,15 +24,15 @@ class NewHotFilterView: UIView{
     }
     
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setView()
     }
     
-    required init?(coder: NSCoder){
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    private func setView(){
+    private func setView() {
         backgroundView.frame = CGRect(x: 0, y: 0, width: 180, height: 97)
         tableView.frame = CGRect(x: 0, y: 0, width: 180, height: 82)
         addSubview(backgroundView)

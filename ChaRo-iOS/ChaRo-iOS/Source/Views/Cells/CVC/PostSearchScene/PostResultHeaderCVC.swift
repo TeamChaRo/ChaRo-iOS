@@ -20,13 +20,13 @@ class PostResultHeaderCVC: UICollectionViewCell {
         print("PostResultHeaderCVC = \(filterResultList)")
     }
     
-    public func setStackViewData(list: [String]){
+    public func setStackViewData(list: [String]) {
         filterResultList = list
         setConstraint()
     }
     
     
-    func setConstraint(){
+    func setConstraint() {
         let header = setHearderView()
         addSubview(header)
         

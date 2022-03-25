@@ -86,26 +86,26 @@ class SearchResultVC: UIViewController {
         configureDropDown()
     }
     
-    public func setFilterTagList(list: [String]){
+    public func setFilterTagList(list: [String]) {
         filterResultList = list
     }
     
-    @objc func dismissAction(){
+    @objc func dismissAction() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func presentToCreatePostVC(){
+    @objc func presentToCreatePostVC() {
         let tabbar = presentingViewController as! TabbarVC
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
         let createTab = UINavigationController(rootViewController: createVC)
         createTab.modalPresentationStyle = .fullScreen
-        dismiss(animated: false){
+        dismiss(animated: false) {
             tabbar.present(createTab, animated: true, completion: nil)
         }
     }
     
-    func configureCollectionView(){
+    func configureCollectionView() {
         collectionView.register(UINib(nibName: PostResultHeaderCVC.identifier, bundle: nil),
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: PostResultHeaderCVC.identifier)
@@ -118,7 +118,7 @@ class SearchResultVC: UIViewController {
         collectionView.isPagingEnabled = false
     }
     
-    func configureDropDown(){
+    func configureDropDown() {
         dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
         dropDownTableView.delegate = self
         dropDownTableView.dataSource = self
@@ -220,7 +220,7 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout{
 
 extension SearchResultVC {
     
-    private func setupConstraint(){
+    private func setupConstraint() {
         view.addSubview(navigationView)
         navigationView.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview()
@@ -246,7 +246,7 @@ extension SearchResultVC {
         }
     }
     
-    private func setContentViewConstraint(){
+    private func setContentViewConstraint() {
         if postData.isEmpty{
             setEmptyViewConstraint()
         }else{
@@ -254,7 +254,7 @@ extension SearchResultVC {
         }
     }
     
-    private func setEmptyViewConstraint(){
+    private func setEmptyViewConstraint() {
         separateLineView.snp.makeConstraints{
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(navigationView.snp.bottom)
@@ -278,7 +278,7 @@ extension SearchResultVC {
         
     }
     
-    private func setResultViewConstraint(){
+    private func setResultViewConstraint() {
         collectionView.snp.makeConstraints{
             $0.top.equalTo(self.navigationView.snp.bottom).offset(15)
             $0.leading.trailing.bottom.equalToSuperview()
@@ -289,23 +289,23 @@ extension SearchResultVC {
 
 //MARK: Network
 extension SearchResultVC{
-    func refinePostResultData(data: Drive?){
+    func refinePostResultData(data: Drive?) {
         postData = data?.drive ?? []
         print("post data = \(postData)")
         setContentViewConstraint()
         self.collectionView.reloadData()
     }
     
-    func postSearchPost(type: String){
+    func postSearchPost(type: String) {
         let themeEng = CommonData.themeDict[filterResultList[2]] ?? ""
         let warningEng = CommonData.warningDataDict[filterResultList[3]] ?? ""
         print("themeEng =\(themeEng), warningEng = \(warningEng)")
         PostResultService.shared.postSearchKeywords(region: filterResultList[1],
                                                     theme: themeEng,
                                                     warning: warningEng,
-                                                    type: type){ response in
+                                                    type: type) { response in
             
-            switch(response){
+            switch(response) {
             case .success(let resultData):
                 if let data =  resultData as? Drive{
                     self.refinePostResultData(data: data)
@@ -384,7 +384,7 @@ extension SearchResultVC: SetTitleDelegate{
     }
 }
 extension SearchResultVC: MenuClickedDelegate {
-    func menuClicked(){
+    func menuClicked() {
         dropDownTableView.isHidden = false
     }
 }

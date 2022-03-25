@@ -102,13 +102,13 @@ class PostDriveCourseTVC: UITableViewCell {
         selectionStyle = .none
     }
     
-    public func setContent(text: String){
+    public func setContent(text: String) {
         textView.text = text
         textCountLabel.text = "\(text.count)/280자"
         //setTextViewStyle()
     }
     
-    private func setTextViewStyle(){
+    private func setTextViewStyle() {
         textView.textColor = .gray50
         textView.layer.cornerRadius = 12
         textView.layer.borderWidth = 1
@@ -116,7 +116,7 @@ class PostDriveCourseTVC: UITableViewCell {
         textView.contentInset = UIEdgeInsets(top: 21, left: 16, bottom: 16, right: 16)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.endEditing(true)
     }
 }

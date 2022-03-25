@@ -78,22 +78,22 @@ class PostDetailVC: UIViewController {
         configureUI()
     }
     
-    public func setPostMode(isAuthor: Bool, isEditing: Bool){
+    public func setPostMode(isAuthor: Bool, isEditing: Bool) {
         self.isAuthor = isAuthor
         self.isEditingMode = isEditing
     }
     
-    public func setPostId(id: Int){
+    public func setPostId(id: Int) {
         print("setPost PostDetailVC - \(id)")
         postId = id
     }
     
-    public func setAdditionalDataOfPost(data: DriveElement?){
+    public func setAdditionalDataOfPost(data: DriveElement?) {
         additionalDataOfPost = data
         print("넘어온 데이터 = \(additionalDataOfPost)")
     }
     
-    private func checkModeForSendingServer(){
+    private func checkModeForSendingServer() {
         if isEditingMode{
             print("editing 모드로 넘겨받음")
             print("postData = \(postData)")
@@ -113,15 +113,15 @@ class PostDetailVC: UIViewController {
 extension PostDetailVC{
     
     //등록 버튼 눌렀을 때 post 서버 통신
-    @objc func clickedToSaveButton(){
+    @objc func clickedToSaveButton() {
         print("등록 버튼")
-        makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?"){ _ in
+        makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?") { _ in
             self.postCreatePost()
             self.dismiss(animated: true, completion: nil)
         }
     }
     
-    @objc func registActionSheet(){
+    @objc func registActionSheet() {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
@@ -180,16 +180,16 @@ extension PostDetailVC{
         }
     }
     
-    private func configureNavigaitionView(){
-        if isAuthor{
+    private func configureNavigaitionView() {
+        if isAuthor {
             navigationTitleLabel.text = "내가 작성한 글"
             isEditingMode ? setNavigationViewInSaveMode() : setNavigationViewInConfirmMode()
-        }else{
+        } else {
             navigationTitleLabel.text = "구경하기"
         }
     }
     
-    func setNavigationViewInSaveMode(){
+    func setNavigationViewInSaveMode() {
         navigationView.addSubview(saveButton)
         saveButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-20)
@@ -197,7 +197,7 @@ extension PostDetailVC{
         }
     }
     
-    func setNavigationViewInConfirmMode(){
+    func setNavigationViewInConfirmMode() {
         navigationView.addSubview(modifyButton)
         modifyButton.snp.makeConstraints{
             $0.trailing.equalToSuperview().offset(-11)
@@ -207,7 +207,7 @@ extension PostDetailVC{
     
     //    public func setDataWhenConfirmPost(data: WritePostData,
     //                                       imageList: [UIImage],
-    //                                       addressList: [AddressDataModel]){
+    //                                       addressList: [AddressDataModel]) {
     //        isEditingMode = true
     //        isAuthor = true
     //        self.addressList = addressList
@@ -258,7 +258,7 @@ extension PostDetailVC{
 
 //MARK: - Bottom View
 extension PostDetailVC {
-    private func configureBottomView(){
+    private func configureBottomView() {
         view.addSubview(bottomView)
         bottomView.snp.makeConstraints{
             $0.leading.trailing.bottom.equalToSuperview()
@@ -268,7 +268,7 @@ extension PostDetailVC {
         bindToBottomView()
     }
     
-    private func bindToBottomView(){
+    private func bindToBottomView() {
         bottomView.likeButton.rx.tap
             .asDriver()
             .drive(onNext:{
@@ -374,7 +374,7 @@ extension PostDetailVC: UITableViewDataSource {
 
 //MARK: Network
 extension PostDetailVC {
-    func bindToViewModel(){
+    func bindToViewModel() {
         viewModel = PostDetailViewModel(postId: additionalDataOfPost?.postID ?? -1)
         let output = viewModel?.transform(input: PostDetailViewModel.Input(), disposeBag: disposeBag)
         output?.postDetailSubject.bind(onNext: { [weak self] postDetailData in
@@ -382,7 +382,7 @@ extension PostDetailVC {
         }).disposed(by: disposeBag)
     }
     
-    func setPostContentView(postData: PostDetailData?){
+    func setPostContentView(postData: PostDetailData?) {
         print("additionalDataOfPost = \(additionalDataOfPost)")
         postDetailData = postData
         isAuthor = postDetailData?.isAuthor ?? false
@@ -395,10 +395,10 @@ extension PostDetailVC {
         configureBottomView()
     }
   
-    func postCreatePost(){
+    func postCreatePost() {
         dump(writedPostData!)
         print("===서버통신 시작=====")
-        CreatePostService.shared.createPost(model: writedPostData!, image: imageList){ result in
+        CreatePostService.shared.createPost(model: writedPostData!, image: imageList) { result in
             switch result {
             case .success(let message):
                 print(message)
@@ -414,7 +414,7 @@ extension PostDetailVC {
         }
     }
     
-    func requestPostLike(){
+    func requestPostLike() {
         LikeService.shared.Like(userId: Constants.userId,
                                 postId: postId) { [self] result in
             switch result{
@@ -432,7 +432,7 @@ extension PostDetailVC {
         }
     }
     
-    func requestPostScrap(){
+    func requestPostScrap() {
         SaveService.shared.requestScrapPost(userId: Constants.userId,
                                             postId: postId) { [self] result in
             

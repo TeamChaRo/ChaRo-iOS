@@ -139,11 +139,11 @@ class CommonCVC: UICollectionViewCell {
   
     }
     
-    func setLabel(){
+    func setLabel() {
         titleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
     }
     
-    func likeAction(){
+    func likeAction() {
         LikeService.shared.Like(userId: "jieun1211", postId: self.postID) { [self] result in
             
             switch result{

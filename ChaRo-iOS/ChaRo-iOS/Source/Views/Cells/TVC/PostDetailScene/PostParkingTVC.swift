@@ -39,17 +39,17 @@ class PostParkingTVC: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setContent(isParking: Bool, description: String){
+    public func setContent(isParking: Bool, description: String) {
         descriptionTextFeild.text = description
         yesButton.setContent(title: "있음", isSelected: isParking)
         noButton.setContent(title: "없음", isSelected: !isParking)
     }
     
-    public func idEditMode(isEditing: Bool){
+    public func idEditMode(isEditing: Bool) {
         descriptionTextFeild.isUserInteractionEnabled = isEditing
     }
 
-    private func setupConstraints(){
+    private func setupConstraints() {
         contentView.addSubviews([titleView, parkingStackView, descriptionTextFeild])
 
         titleView.snp.makeConstraints {

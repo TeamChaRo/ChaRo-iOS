@@ -13,7 +13,7 @@ struct DoFollowService {
     
     func followService(follower: String,
                             followed: String,
-                            completion: @escaping (NetworkResult<Any>) -> Void){
+                            completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let dataRequest = AF.request(Constants.followURL,
                                      method: .post,
