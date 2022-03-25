@@ -37,7 +37,6 @@ struct IsDuplicatedEmailService {
             
             switch dataResponse.result {
             case .success:
-                
                 print("중복 이메일 ----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
