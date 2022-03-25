@@ -48,15 +48,17 @@ extension UIView {
     func showToast(message : String) {
         let toastLabel = UILabel(frame: CGRect(x: UIScreen.getDeviceWidth() / 2 - 100,
                                                y: UIScreen.getDeviceHeight() - 150,
-                                               width: 200, height: 35))
-        toastLabel.backgroundColor = .gray40
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = .notoSansRegularFont(ofSize: 14)
-        toastLabel.textAlignment = .center
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 17;
-        toastLabel.clipsToBounds = true
+                                               width: 200, height: 35)).then {
+            $0.backgroundColor = .gray40
+            $0.textColor = UIColor.white
+            $0.font = .notoSansRegularFont(ofSize: 14)
+            $0.textAlignment = .center
+            $0.text = message
+            $0.alpha = 1.0
+            $0.layer.cornerRadius = 17;
+            $0.clipsToBounds = true
+        }
+        
         self.addSubview(toastLabel)
         UIView.animate(withDuration: 2.0,
                        delay: 0.5, options: .curveEaseOut,

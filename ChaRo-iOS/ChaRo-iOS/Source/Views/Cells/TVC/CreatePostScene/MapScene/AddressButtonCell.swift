@@ -102,7 +102,6 @@ class AddressButtonCell: UITableViewCell {
     }
     
     @objc public func goToKeywordSearch(sender: UIButton) {
-        print("여기 잘 눌림?")
         delegate?.addressButtonCellForPreseting(cell: self)
     }
     
