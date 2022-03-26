@@ -43,7 +43,6 @@ class LoginVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    
     func setLoginButtonUI() {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
         
@@ -54,9 +53,7 @@ class LoginVC: UIViewController {
         
     }
     
-    
     func loginAction(){
-        
         LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) {
             result in
 
@@ -94,15 +91,12 @@ class LoginVC: UIViewController {
     
     
     @IBAction func findPwdButtonClicked(_ sender: UIButton) {
-        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: FindPasswordVC.identifier) as? FindPasswordVC else {
             return
         }
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
@@ -131,8 +125,6 @@ class LoginVC: UIViewController {
     
     @objc
     func textFieldMoveUp(_ notification: NSNotification){
-        
-        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
@@ -145,9 +137,6 @@ class LoginVC: UIViewController {
     func textFieldMoveDown(_ notification: NSNotification){
         view.transform = .identity
     }
-    
-    
-    
 }
 
 extension LoginVC {
@@ -162,10 +151,5 @@ extension LoginVC {
             imageView.image = UIImage(named: "maskGroupSE")
             
         }
-        
-        
-        
-        
-        
     }
 }

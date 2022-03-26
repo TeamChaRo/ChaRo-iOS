@@ -76,4 +76,5 @@ struct Constants {
     
     //비밀번호, 프로필 수정
     static let updatePassword = baseURL + "/user/password?"
+    static let updateProfile = baseURL + "/user"
 }

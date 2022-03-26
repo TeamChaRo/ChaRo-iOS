@@ -19,11 +19,9 @@ class TabbarVC: UITabBarController {
         super.viewDidLoad()
         configTabbar()
         setTabbarCustomFrame()
-        
-        print("이거임 : \(UserDefaults.standard.string(forKey: "isLogin"))")
+    
     }
-
-
+    
     private func setTabbarCustomFrame() {
 
         let customTabbar = tabBar
@@ -47,6 +45,9 @@ class TabbarVC: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         selectedViewController = tabs[comeBackIndex]
+        
+        print("이거임 : \(Constants.UserDefaultsKey.userEmail)")
+        print("이거임2: \(Constants.UserDefaultsKey.userImage)")
     }
     
     
