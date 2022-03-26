@@ -38,8 +38,9 @@ class ChangeImageVC: UIViewController, UITextFieldDelegate {
         $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 17)
         $0.setTitleColor(.gray40, for: .normal)
+        $0.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
     }
-    
+        
     private let bottomView = UIView().then {
         $0.backgroundColor = UIColor.gray20
     }
@@ -138,6 +139,30 @@ class ChangeImageVC: UIViewController, UITextFieldDelegate {
             case .networkFail:
                 print("networkFail")
             }
+        }
+    }
+    
+    @objc private func doneButtonClicked() {
+        let newNickname = nicknameView.inputTextField?.text
+        UpdateProfileService.shared.putNewProfile(nickname: newNickname!,
+                                                  newImage: nil) { result in
+            
+            switch result {
+            case .success(let msg):
+                print("success", msg)
+                self.makeAlert(title: "", message: "프로필이 변경되었습니다.", okAction: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                })
+            case .requestErr(let msg):
+                print("requestERR", msg)
+            case .pathErr:
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+            
         }
     }
     

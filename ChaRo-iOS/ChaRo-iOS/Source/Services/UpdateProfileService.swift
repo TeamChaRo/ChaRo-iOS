@@ -12,20 +12,32 @@ import Alamofire
 struct UpdateProfileService {
     static let shared = UpdateProfileService()
     
-    func putNewProfile(nickname: String, newImage: UIImage, completion : @escaping (NetworkResult<Any>) -> Void)
+    func putNewProfile(nickname: String, newImage: UIImage?, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         
+        let original = Constants.updateProfile + "you@gmail.com"
+        
+        guard let target = original.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return
+        }
+        
+        guard let url = URL(string: target) else {
+            return
+        }
+        
+        print(url)
+        
         //TODO: - UserDefault 에 저장된 유저의 email로 변경예정
-        let userEmail = "you@gmail.com"
-        let originImageURL = ""
-        var newImageURL = ""
+//        let userEmail = "you@gmail.com"
+//        let originImageURL = ""
+//        var newImageURL = ""
+        
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         
         let parameters: [String: Any] = [
-            "userEmail": userEmail,
             "image": newImage,
-            "originImage": nickname,
+            "originImage": "",
             "newNickname": nickname,
         ]
         
@@ -38,12 +50,14 @@ struct UpdateProfileService {
                 dicParameters.updateValue(value, forKey: "\(key)")
             }
             
-            if let imageData = newImage.jpegData(compressionQuality: 1) {
+            if let imageData = newImage?.jpegData(compressionQuality: 1) {
                 multipartFormData.append(imageData, withName: "image", fileName: "gg.jpeg", mimeType: "image/jpeg")
                 dicParameters.updateValue(imageData, forKey: "image")
             }
             
-        }, to: Constants.updateProfile
+            print(dicParameters)
+            
+        }, to: url
                   , usingThreshold: UInt64.init()
                   , method: .put
                   , headers: header).response { dataResponse in
@@ -68,15 +82,13 @@ struct UpdateProfileService {
         
         let decoder = JSONDecoder()
         
-        
-        print(data)
+        print("프로필 수정 ----- 데이터 응답 코드 \(statusCode)")
         
         guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
         else {
             return .pathErr
         }
         
-        print(statusCode)
         
         switch statusCode {
         case 200...299:
