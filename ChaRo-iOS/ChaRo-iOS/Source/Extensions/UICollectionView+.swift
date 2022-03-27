@@ -13,35 +13,28 @@ extension UICollectionView {
         self.register(xib, forCellWithReuseIdentifier: xibName)
     }
     
-    // TODO: - 에러 처리 필수
-    func dequeueReusableCell<T: UICollectionViewCell>(forIndexPath indexPath: IndexPath) -> T {
-        guard let cell = self.dequeueReusableCell(withReuseIdentifier: T.className,
-                                                  for: indexPath) as? T else {
-            fatalError("Could not find cell with reuseID \(T.className)")
+    func dequeueReusableCell<T: UICollectionViewCell>(forIndexPath indexPath: IndexPath) -> T? {
+        guard let cell = self.dequeueReusableCell(withReuseIdentifier: T.className, for: indexPath) as? T else {
+            assertionFailure("Could not find cell with reuseID \(T.className)")
+            return nil
         }
         return cell
     }
 
-    // TODO: - 에러 처리 필수
-    func dequeueHeaderView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T {
-        guard let view = dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: T.className,
-            for: indexPath
-        ) as? T else {
-            fatalError("Could not dequeue cell with identifier: \(T.className)")
+    func dequeueHeaderView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T? {
+        guard let view = dequeueReusableSupplementaryView( ofKind: UICollectionView.elementKindSectionHeader,
+                                                           withReuseIdentifier: T.className, for: indexPath) as? T else {
+            assertionFailure("Could not find cell with reuseID \(T.className)")
+            return nil
         }
         return view
     }
 
-    // TODO: - 에러 처리 필수 
-    func dequeueFooterView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T {
-        guard let view = dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: T.className,
-            for: indexPath
-        ) as? T else {
-            fatalError("Could not dequeue cell with identifier: \(T.className)")
+    func dequeueFooterView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T? {
+        guard let view = dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
+                                                          withReuseIdentifier: T.className, for: indexPath) as? T else {
+            assertionFailure("Could not find cell with reuseID \(T.className)")
+            return nil
         }
         return view
     }

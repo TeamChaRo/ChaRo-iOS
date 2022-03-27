@@ -344,7 +344,7 @@ extension FollowFollwingVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withType: FollowFollowingTVC.self, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withType: FollowFollowingTVC.self, for: indexPath) else { return UITableViewCell() }
         cell.delegate = self
         if tableView.tag == 1{
             cell.setData(image: followDataList[0].follower[indexPath.row].image,
@@ -352,16 +352,14 @@ extension FollowFollwingVC: UITableViewDataSource {
                          isFollow: followDataList[0].follower[indexPath.row].isFollow,
                          userEmail: followDataList[0].follower[indexPath.row].userEmail
             )
-            return cell
-        }
-        else {
+        } else {
             cell.setData(image: followDataList[0].following[indexPath.row].image,
                          userName: followDataList[0].following[indexPath.row].nickname,
                          isFollow: followDataList[0].following[indexPath.row].isFollow,
                          userEmail: followDataList[0].following[indexPath.row].userEmail
             )
-            return cell
         }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

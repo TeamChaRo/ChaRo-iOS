@@ -322,7 +322,7 @@ extension PostDetailVC: UITableViewDataSource {
               }
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(title: additionalData.title,
                                  userName: postData.author,
                                  date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
@@ -330,19 +330,19 @@ extension PostDetailVC: UITableViewDataSource {
             return cell
             
         case 1:
-            let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(imageList: [additionalData.image] + postData.images)
             return cell
             
         case 2:
-            let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(city: postData.province,
                             region: additionalData.region,
                             theme: postData.themes)
             return cell
             
         case 3:
-            let cell = tableView.dequeueReusableCell(withType: PostLocationTVC.self, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withType: PostLocationTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(courseList: postData.course)
             cell.copyAddressClouser = { locationTitle in
                 self.view.showToast(message: "\(locationTitle) 주소를 복사했습니다")
@@ -351,18 +351,18 @@ extension PostDetailVC: UITableViewDataSource {
             return cell
             
         case 4:
-            let cell = tableView.dequeueReusableCell(withType: PostParkingTVC.self, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withType: PostParkingTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(isParking: postData.isParking,
                             description: postData.parkingDesc)
             return cell
             
         case 5:
-            let cell = tableView.dequeueReusableCell(withType: PostAttentionTVC.self, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withType: PostAttentionTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setAttentionList(list: postData.warnings)
             return cell
             
         case 6:
-            let cell = tableView.dequeueReusableCell(withType: PostDriveCourseTVC.self, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withType: PostDriveCourseTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(text: postData.courseDesc)
             return cell
         default:

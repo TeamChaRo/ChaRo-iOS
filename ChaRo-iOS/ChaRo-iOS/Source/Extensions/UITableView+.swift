@@ -22,10 +22,10 @@ extension UITableView {
         return cell
     }
     
-    // TODO: - 에러 처리 필수
-    func dequeueReusableCell<T: UITableViewCell>(withType cellType: T.Type, for indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(withType cellType: T.Type, for indexPath: IndexPath) -> T? {
         guard let cell = self.dequeueReusableCell(withIdentifier: T.className, for: indexPath) as? T else {
-            fatalError("Could not find cell with reuseID \(T.className)")
+            assertionFailure("Could not find cell with reuseID \(T.className)")
+            return nil
         }
         return cell
     }
