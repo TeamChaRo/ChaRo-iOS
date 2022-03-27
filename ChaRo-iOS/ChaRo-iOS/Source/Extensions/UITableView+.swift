@@ -14,6 +14,7 @@ extension UITableView {
         self.register(xib, forCellReuseIdentifier: xibName)
     }
     
+    // TODO: - 에러 처리 필수
     func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Unable Dequeue Reusable")
@@ -21,6 +22,7 @@ extension UITableView {
         return cell
     }
     
+    // TODO: - 에러 처리 필수
     func dequeueReusableCell<T: UITableViewCell>(withType cellType: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = self.dequeueReusableCell(withIdentifier: T.className, for: indexPath) as? T else {
             fatalError("Could not find cell with reuseID \(T.className)")

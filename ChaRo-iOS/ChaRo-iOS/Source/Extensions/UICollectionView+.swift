@@ -13,6 +13,7 @@ extension UICollectionView {
         self.register(xib, forCellWithReuseIdentifier: xibName)
     }
     
+    // TODO: - 에러 처리 필수
     func dequeueReusableCell<T: UICollectionViewCell>(forIndexPath indexPath: IndexPath) -> T {
         guard let cell = self.dequeueReusableCell(withReuseIdentifier: T.className,
                                                   for: indexPath) as? T else {
@@ -21,6 +22,7 @@ extension UICollectionView {
         return cell
     }
 
+    // TODO: - 에러 처리 필수
     func dequeueHeaderView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T {
         guard let view = dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionHeader,
@@ -32,6 +34,7 @@ extension UICollectionView {
         return view
     }
 
+    // TODO: - 에러 처리 필수 
     func dequeueFooterView<T: UICollectionReusableView>(forIndexPath indexPath: IndexPath) -> T {
         guard let view = dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionFooter,
