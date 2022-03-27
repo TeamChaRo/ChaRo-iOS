@@ -63,24 +63,6 @@ class HomePostVC: UIViewController {
     }
     
     
-<<<<<<< HEAD
-    func setDropdown() {
-        dropDownTableview.registerCustomXib(xibName: "HotDropDownTVC")
-        dropDownTableview.delegate = self
-        dropDownTableview.dataSource = self
-        dropDownTableview.separatorStyle = .none
-    }
-    
-    func setShaow() {
-        homePostNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
-    }
-    
-    func setRound() {
-        dropDownTableview.layer.masksToBounds = true
-        dropDownTableview.layer.cornerRadius = 20
-//        dropDownTableview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        
-=======
     func setFilterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
@@ -92,7 +74,7 @@ class HomePostVC: UIViewController {
         }
     }
     
-    func setFilterViewCompletion(){
+    func setFilterViewCompletion() {
         filterView.touchCellCompletion = { index in
             switch index{
             case 0:
@@ -108,7 +90,6 @@ class HomePostVC: UIViewController {
             self.filterView.isHidden = true
             return index
         }
->>>>>>> develop
     }
   
     override func viewDidLoad() {
@@ -133,14 +114,9 @@ class HomePostVC: UIViewController {
             switch response
             {
             case .success(let data) :
-<<<<<<< HEAD
                 if let response = data as? DetailModel {
-                    
-=======
-                if let response = data as? DetailModel{
                     print("인기순 데이터")
 
->>>>>>> develop
                     DispatchQueue.global().sync {
                         self.postCount = response.data.totalCourse
                         self.postData = [response]
@@ -165,13 +141,8 @@ class HomePostVC: UIViewController {
             switch response
             {
             case .success(let data) :
-<<<<<<< HEAD
                 if let response = data as? DetailModel {
-                    
-=======
-                if let response = data as? DetailModel{
                     print("최신순 데이터")
->>>>>>> develop
                     DispatchQueue.global().sync {
                         self.postCount = response.data.drive.count
                         self.newPostCount = response.data.drive.count
@@ -297,65 +268,9 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-<<<<<<< HEAD
-extension HomePostVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cellIndexpath = indexPath
-        
-        switch indexPath.row {
-        case 0:
-            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-            var bgColorView = UIView()
-            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-            cell.selectedBackgroundView = bgColorView
-            cell.setLabel()
-            cell.setCellName(name: "인기순")
-            cell.delegate = self
-            return cell
-
-        case 1:
-            let cell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-            var bgColorView = UIView()
-            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-            cell.selectedBackgroundView = bgColorView
-            cell.setCellName(name: "최신순")
-            cell.delegate = self
-
-            return cell
-
-        default:
-            return UITableViewCell()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let HotCell: HotDropDownTVC = tableView.dequeueReusableCell(for: indexPath)
-        if indexPath.row == 0 {
-            HotCell.setSelectedCell()
-            
-        }
-
-    }
-    
-}
-
-extension HomePostVC: UITableViewDataSource {
-    
-}
-
-extension HomePostVC: MenuClickedDelegate {
-    func menuClicked() {
-        dropDownTableview.isHidden = false
-
-=======
 extension HomePostVC: MenuClickedDelegate {
     func menuClicked(){
         filterView.isHidden = false
->>>>>>> develop
     }
 }
 
