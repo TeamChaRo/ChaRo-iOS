@@ -83,8 +83,7 @@ class SearchResultVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         postSearchPost(type: "like")
-        setConstraint()
-        SearchResultVC()
+        setupConstraint()
         setFilterViewCompletion()
         configureCollectionView()
     }
@@ -189,9 +188,6 @@ extension SearchResultVC: UICollectionViewDataSource {
                       tagCount: 3, tagArr: ["배열이","있는데","개수를왜"],
                       isFavorite: post.isFavorite,
                       postID: post.postID)
-//        cell?.setData(image: postData[indexPath.row-1].image, title: postData[indexPath.row-1].title, tagCount: postData[indexPath.row-1].tags.count, tagArr: postData[indexPath.row-1].tags, isFavorite: postData[indexPath.row-1].isFavorite, postID: postData[indexPath.row-1].postID)
-//
-        
         return cell!
     }
     
@@ -241,20 +237,18 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
 extension SearchResultVC {
     
     private func setupConstraint() {
         view.addSubview(navigationView)
         navigationView.snp.makeConstraints{
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(UIScreen.getNotchHeight() + 58)
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(58)
         }
         
         navigationView.addSubviews([backButton,navigationTitleLabel,closeButton])
         backButton.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.top.equalToSuperview().offset(UIScreen.getNotchHeight() + 1)
+            $0.top.equalToSuperview().offset(1)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-9)
         }
@@ -280,6 +274,7 @@ extension SearchResultVC {
     }
     
     private func setEmptyViewConstraint() {
+        view.addSubviews([separateLineView, searchNoImageView, searchNoLabel, searchButton])
         separateLineView.snp.makeConstraints{
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(navigationView.snp.bottom)
@@ -304,6 +299,7 @@ extension SearchResultVC {
     }
     
     private func setResultViewConstraint() {
+        view.addSubview(collectionView)
         collectionView.snp.makeConstraints{
             $0.top.equalTo(self.navigationView.snp.bottom).offset(15)
             $0.leading.trailing.bottom.equalToSuperview()
