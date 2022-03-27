@@ -27,7 +27,7 @@ struct CreatePostService {
         ]
     }
     
-    func createPost(model: WritePostData, image: [UIImage], completion: @escaping (NetworkResult<Any>) -> Void){
+    func createPost(model: WritePostData, image: [UIImage], completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         
@@ -50,7 +50,7 @@ struct CreatePostService {
                 multipartFormData.append(Data($0.longtitude.utf8), withName: "course[longtitude]")
             }
             image.map{
-                if let imageData = $0.jpegData(compressionQuality: 1){
+                if let imageData = $0.jpegData(compressionQuality: 1) {
                     multipartFormData.append(imageData, withName: "image", fileName: ".jpeg", mimeType: "image/jpeg")
                 }
             }

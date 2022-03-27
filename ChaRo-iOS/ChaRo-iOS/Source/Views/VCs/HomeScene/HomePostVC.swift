@@ -22,10 +22,10 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
     
-    var delegate : SetTopTitleDelegate?
+    var delegate: SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 0
-    var topCVCCell : HomePostDetailCVC?
+    var topCVCCell: HomePostDetailCVC?
     var postCell: CommonCVC?
     var topText: String = "요즘 뜨는 드라이브"
     var cellIndexpath: IndexPath = [0,0]
@@ -38,7 +38,7 @@ class HomePostVC: UIViewController {
     var currentState: String = "인기순"
     let filterView = FilterView()
     
-    static let identifier : String = "HomePostVC"
+    static let identifier: String = "HomePostVC"
     
     func setNavigationBottomLineView() {
         let bottomLineView = UIView().then{
@@ -74,7 +74,7 @@ class HomePostVC: UIViewController {
         }
     }
     
-    func setFilterViewCompletion(){
+    func setFilterViewCompletion() {
         filterView.touchCellCompletion = { index in
             switch index{
             case 0:
@@ -109,12 +109,12 @@ class HomePostVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func getData(){
+    func getData() {
         GetDetailDataService.detailData.getRecommendInfo{ (response) in
             switch response
             {
             case .success(let data) :
-                if let response = data as? DetailModel{
+                if let response = data as? DetailModel {
                     print("인기순 데이터")
 
                     DispatchQueue.global().sync {
@@ -136,12 +136,12 @@ class HomePostVC: UIViewController {
         }
     }
     
-    func getNewData(){
+    func getNewData() {
         GetNewDetailDataService.detailData.getRecommendInfo{ (response) in
             switch response
             {
             case .success(let data) :
-                if let response = data as? DetailModel{
+                if let response = data as? DetailModel {
                     print("최신순 데이터")
                     DispatchQueue.global().sync {
                         self.postCount = response.data.drive.count
@@ -165,7 +165,7 @@ class HomePostVC: UIViewController {
 
     
 }
-extension HomePostVC: UICollectionViewDelegate{
+extension HomePostVC: UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -175,7 +175,7 @@ extension HomePostVC: UICollectionViewDelegate{
         if section == 0{
             return 1
         }
-        else{
+        else {
             return postCount
         }
     }
@@ -184,9 +184,7 @@ extension HomePostVC: UICollectionViewDelegate{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
         cell.clickedPostCell = { postid in
-            let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-            let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
-            
+            let nextVC = PostDetailVC()
             nextVC.setPostId(id: postid)
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
@@ -197,7 +195,7 @@ extension HomePostVC: UICollectionViewDelegate{
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
         topCell.delegate = self
         
-        switch indexPath.section{
+        switch indexPath.section {
         case 0:
             if isFirstLoaded {
                 isFirstLoaded = false
@@ -209,7 +207,7 @@ extension HomePostVC: UICollectionViewDelegate{
             if postData.count == 0{
                 return cell
             }
-            else{
+            else {
                 cell.setData(image: postData[0].data.drive[indexPath.row].image,
                              title: postData[0].data.drive[indexPath.row].title,
                              tagCount: postData[0].data.drive[indexPath.row].tags.count,
@@ -230,10 +228,10 @@ extension HomePostVC: UICollectionViewDelegate{
 }
 
 
-extension HomePostVC: UICollectionViewDataSource{
+extension HomePostVC: UICollectionViewDataSource {
     
 }
-extension HomePostVC: UICollectionViewDelegateFlowLayout{
+extension HomePostVC: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -242,7 +240,7 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
         if indexPath.section == 0{
             return CGSize(width: Cellwidth, height: 50)
         }
-        else{
+        else {
             return CGSize(width: Cellwidth, height: 260)
 
         }
@@ -260,7 +258,7 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout{
         if section == 0{
             return 0
         }
-        else{
+        else {
         return 35
         }
     }
@@ -295,17 +293,13 @@ extension HomePostVC: PostIdDelegate {
     
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
-        
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
-        
+        let nextVC = PostDetailVC()
         nextVC.setPostId(id: data)
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func sendPostDriveElement(data: DriveElement?) {
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
         nextVC.modalPresentationStyle = .currentContext
         tabBarController?.present(nextVC, animated: true, completion: nil)

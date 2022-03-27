@@ -8,67 +8,72 @@
 import UIKit
 import RxSwift
 
-class PostLikeListViewModel{
+class PostLikeListViewModel {
 
     //MARK: - Properties
-    let defaultHeight: CGFloat = UIScreen.getDeviceHeight() / 2
-    let dismissibleHeight: CGFloat = 200
-    let maximumContainerHeight: CGFloat = UIScreen.getDeviceHeight() - 64
-    var currentContainerHeight: CGFloat = UIScreen.getDeviceHeight() / 2
+    private var postId: Int
+    
     let maxBackgroundAlpha: CGFloat = 0.8
-    let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
-    let postLikeListSubject = PublishSubject<[Follow]>()
+    let defaultHeight: CGFloat = UIScreen.getDeviceHeight() / 2
+    var currentContainerHeight: CGFloat = UIScreen.getDeviceHeight() / 2
+    private let dismissibleHeight: CGFloat = 200
+    private let maximumContainerHeight: CGFloat = UIScreen.getDeviceHeight() - 64
+    
+    private let newHeightSubject = PublishSubject<(CGFloat, Bool)>()
+    private let postLikeListSubject = ReplaySubject<[Follow]>.create(bufferSize: 1)
+    
+    init(postId: Int) {
+        self.postId = postId
+        self.getPostLikeList()
+    }
     
     //MARK: - Input and Output
-    struct Input{
+    struct Input {
         let transionYOffsetSubject: PublishSubject<(CGFloat, Bool)>
     }
     
-    struct Output{
+    struct Output {
         let newHeightSubject: PublishSubject<(CGFloat, Bool)>
-        let postLikeListSubject: PublishSubject<[Follow]>
+        let postLikeListSubject: ReplaySubject<[Follow]>
     }
     
-    func transform(form input: Input, disposeBag: DisposeBag) -> Output{
+    func transform(form input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output(newHeightSubject: newHeightSubject,
                             postLikeListSubject: postLikeListSubject)
         input.transionYOffsetSubject
             .bind(onNext: { [weak self] (yOffset, isDragging) in
                 guard let self = self else { return }
-                output.newHeightSubject
-                    .onNext((self.calculateHeight(yOffset: yOffset,
-                                                  isDragging: isDragging),!isDragging))
+                let newHeight = self.calculateHeight(yOffset: yOffset, isDragging: isDragging)
+                output.newHeightSubject.onNext((newHeight,!isDragging))
             })
             .disposed(by: disposeBag)
         return output
     }
     
-    private func calculateHeight(yOffset: CGFloat, isDragging: Bool) -> CGFloat{
+    private func calculateHeight(yOffset: CGFloat, isDragging: Bool) -> CGFloat {
         let isDraggingDown = yOffset > 0
         let newHeight = self.currentContainerHeight - yOffset
         if isDragging {
             return newHeight
         }
         
-        if newHeight < self.dismissibleHeight{
+        if newHeight < self.dismissibleHeight {
             return -1
-        }else if newHeight < self.defaultHeight {
+        } else if newHeight < self.defaultHeight {
             return self.defaultHeight
-        }else if newHeight < self.maximumContainerHeight && isDraggingDown{
+        } else if newHeight < self.maximumContainerHeight && isDraggingDown {
             return self.defaultHeight
-        }else if newHeight > self.defaultHeight && !isDraggingDown{
+        } else if newHeight > self.defaultHeight && !isDraggingDown {
             return self.maximumContainerHeight
         }
         return -1
     }
     
-    func getPostLikeList(postId: Int){
-        PostResultService.shared.getPostLikeList(postId: postId){ [weak self] response in
-            switch response{
+    private func getPostLikeList() {
+        PostResultService.shared.getPostLikeList(postId: postId) { [weak self] response in
+            switch response {
             case .success(let resultData):
-                dump(resultData)
-                if let data =  resultData as? [Follow]{
-                    print("response = \(data)")
+                if let data = resultData as? [Follow] {
                     self?.postLikeListSubject.onNext(data)
                 }
             case .requestErr(let message):

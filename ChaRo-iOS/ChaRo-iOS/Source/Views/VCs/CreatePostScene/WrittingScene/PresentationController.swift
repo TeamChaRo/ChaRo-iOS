@@ -55,7 +55,7 @@ class PresentationController: UIPresentationController {
         blurEffectView.frame = containerView!.bounds
     }
 
-    @objc func dismissController(){
+    @objc func dismissController() {
         self.presentedViewController.dismiss(animated: true, completion: nil)
     }
   }

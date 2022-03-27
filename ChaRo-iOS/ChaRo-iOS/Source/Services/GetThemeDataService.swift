@@ -17,7 +17,7 @@ struct GetThemeDataService {
     
     static let shared = GetThemeDataService()
     
-    func getThemeInfo(theme: String, filter: Filter, completion : @escaping (NetworkResult<Any>) -> Void)
+    func getThemeInfo(theme: String, filter: Filter, completion: @escaping (NetworkResult<Any>) -> Void)
         {
         
         var URL = ""
@@ -33,7 +33,7 @@ struct GetThemeDataService {
             break
         }
         
-            let header : HTTPHeaders = ["Content-Type": "application/json"]
+            let header: HTTPHeaders = ["Content-Type": "application/json"]
             
             let dataRequest = AF.request(URL,
                                          method: .get,

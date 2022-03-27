@@ -49,7 +49,7 @@ class AddressButtonCell: UITableViewCell {
         $0.setBackgroundImage(UIImage(named: "icWaypointMinusActive"), for: .normal)
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addActionIntoButtons()
         selectionStyle = .none
@@ -63,26 +63,26 @@ class AddressButtonCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    public func setInitContent(of type: AddressCellType){
+    public func setInitContent(of type: AddressCellType) {
         let title = "\(type.rawValue)를 입력해주세요"
         setCellStyleForType(type: type)
         searchButton.setTitle(title, for: .normal)
         searchButton.setTitleColor(.gray30, for: .normal)
     }
     
-    public func setAddressText(address: AddressDataModel){
+    public func setAddressText(address: AddressDataModel) {
         print("setAddressText = \(address), cellType = \(cellType)")
         self.address = address
         searchButton.setTitle(address.title, for: .normal)
         searchButton.setTitleColor(.mainBlack, for: .normal)
         if cellType == .end{
             plusButton.isEnabled = true
-        }else if cellType == .mid{
+        } else if cellType == .mid{
             plusButton.isEnabled = false
         }
     }
 
-    private func setCellStyleForType(type: AddressCellType){
+    private func setCellStyleForType(type: AddressCellType) {
         cellType = type
         print("현재 cell type = \(cellType)")
         switch type {
@@ -95,22 +95,21 @@ class AddressButtonCell: UITableViewCell {
         }
     }
     
-    private func addActionIntoButtons(){
+    private func addActionIntoButtons() {
         searchButton.addTarget(self, action: #selector(goToKeywordSearch), for: .touchUpInside)
         plusButton.addTarget(self, action: #selector(addCellAction), for: .touchUpInside)
         minusButton.addTarget(self, action: #selector(removeCellAction), for: .touchUpInside)
     }
     
-    @objc public func goToKeywordSearch(sender: UIButton){
-        print("여기 잘 눌림?")
+    @objc public func goToKeywordSearch(sender: UIButton) {
         delegate?.addressButtonCellForPreseting(cell: self)
     }
     
-    @objc private func addCellAction(){
+    @objc private func addCellAction() {
         delegate?.addressButtonCellForAdding(cell: self)
     }
     
-    @objc private func removeCellAction(){
+    @objc private func removeCellAction() {
         delegate?.addressButtonCellForRemoving(cell: self)
     }
     
@@ -118,7 +117,7 @@ class AddressButtonCell: UITableViewCell {
 
 //MARK: UI Constraints
 extension AddressButtonCell{
-    private func setSearchButtonContraints(){
+    private func setSearchButtonContraints() {
         contentView.addSubview(searchButton)
         searchButton.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top).offset(3)
@@ -128,7 +127,7 @@ extension AddressButtonCell{
         }
     }
 
-    private func setMiddleTypeConstraints(){
+    private func setMiddleTypeConstraints() {
         setSearchButtonContraints()
         contentView.addSubview(minusButton)
         minusButton.snp.makeConstraints{make in
@@ -137,7 +136,7 @@ extension AddressButtonCell{
         }
     }
     
-    private func setEndTypeConstraints(){
+    private func setEndTypeConstraints() {
         setSearchButtonContraints()
         searchButton.isEnabled = false
         contentView.addSubview(plusButton)

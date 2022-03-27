@@ -126,7 +126,7 @@ extension SettingVC: UITableViewDelegate {
             $0.textColor = UIColor.gray50
             $0.textAlignment = .left
         }
-        let view = UIView().then{
+        let view = UIView().then {
             $0.backgroundColor = UIColor.white
         }
         view.addSubview(titleLabel)
@@ -175,7 +175,7 @@ extension SettingVC: UITableViewDelegate {
     
 extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section{
+        switch section {
         case 0:
             return 2
         case 1:
@@ -193,7 +193,7 @@ extension SettingVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTVC.identifier) as? SettingTVC else {return UITableViewCell()}
         var settingData = settingDataModel()
         //각섹션 별 파트입니다.
-        switch indexPath.section{
+        switch indexPath.section {
             //0 접근허용
         case 0:
             settingData = permissionModel[indexPath.row]

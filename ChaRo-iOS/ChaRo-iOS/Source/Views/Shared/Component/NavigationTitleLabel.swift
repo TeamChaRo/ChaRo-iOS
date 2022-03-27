@@ -17,7 +17,7 @@ class NavigationTitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, color: UIColor){
+    init(title: String, color: UIColor) {
         super.init(frame: .zero)
         text = title
         textColor = color

@@ -12,8 +12,7 @@ import UIKit
 
 class HomePostDetailCVC: UICollectionViewCell {
     
-    
-    static let identifier : String = "HomePostDetailCVC"
+    static let identifier: String = "HomePostDetailCVC"
     @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
@@ -22,7 +21,7 @@ class HomePostDetailCVC: UICollectionViewCell {
     var isButtonClicked: Bool = false
     
     
-    func setTitle(data : String) {
+    func setTitle(data: String) {
         selectLabel.text = data
     }
 
@@ -36,7 +35,7 @@ class HomePostDetailCVC: UICollectionViewCell {
         setTitle(data: selectText)
     }
     
-    func setSelectName(name: String){
+    func setSelectName(name: String) {
         selectLabel.text = name
         selectText = name
         print(selectText , "이거됨?")
