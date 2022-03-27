@@ -35,7 +35,7 @@ class PostAttentionTVC: UITableViewCell {
     }
     
     public func setAttentionList(list: [Bool]) {
-        if list.count != 4 { return }
+        guard list.count >= 4 else { return }
         highwayButton.setContent(title: "고속도로", isSelected: list[0])
         mountainButton.setContent(title: "산길포함", isSelected: list[1])
         beginnerButton.setContent(title: "초보힘듦", isSelected: list[2])

@@ -42,7 +42,7 @@ class PostCourseThemeTVC: UITableViewCell {
     }
     
     func setContent(city: String, region: String, theme: [String]) {
-        if themeStackView.arrangedSubviews.count == 3 { return }
+        guard themeStackView.arrangedSubviews.count == 3 else { return }
         locationLabel.text = getLocationText(city: city, region: region)
         for index in 0..<3 {
             let button = PostDetailContentButton()

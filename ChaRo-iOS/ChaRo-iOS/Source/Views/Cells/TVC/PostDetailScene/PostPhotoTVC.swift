@@ -19,12 +19,13 @@ final class PostPhotoTVC: UITableViewCell{
     private var imageList: [String] = []
     
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        let screenWidth = UIScreen.main.bounds.width
-        layout.itemSize = CGSize(width: screenWidth, height: screenWidth * (222.0 / 375.0))
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.scrollDirection = .horizontal
+        let layout = UICollectionViewFlowLayout().then {
+            $0.itemSize = CGSize(width: UIScreen.getDeviceWidth(),
+                                 height: UIScreen.getDeviceWidth() * (222.0 / 375.0))
+            $0.minimumLineSpacing = 0
+            $0.minimumInteritemSpacing = 0
+            $0.scrollDirection = .horizontal
+        }
         $0.setCollectionViewLayout(layout, animated: true)
         $0.tintColor = .clear
         $0.register(cell: PostPhotoCVC.self)
