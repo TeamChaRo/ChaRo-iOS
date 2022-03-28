@@ -36,12 +36,6 @@ enum ImageLiterals {
     static var icFollowingButton: UIImage { .load(name: "followingButton") }
     static var icFollowingButtonImage: UIImage { .load(name: "followingButtonImage") }
     static var icGoogleLogo: UIImage { .load(name: "googleLogo") }
-    
-    static var icDelete: UIImage{ .load(name: "imgDelete36px") }
-    static var icDown: UIImage{ .load(name: "icDown") }
-    static var icEyeOff: UIImage{ .load(name: "icEyeOff") }
-    static var icEyeOn: UIImage{ .load(name: "icEyeOn") }
-    static var icGoogleLogo: UIImage{ .load(name: "googleLogo") }
     static var icHeartActive: UIImage { .load(name: "icHeartActive")}
     static var icHeartCountNoText: UIImage { .load(name: "heart_count_no text") }
     static var icHeartInactive: UIImage { .load(name: "bigheartInactive")}
@@ -59,14 +53,6 @@ enum ImageLiterals {
     static var icRouteEnd: UIImage { .load(name: "icRouteEnd") }
     static var icRouteStart: UIImage { .load(name: "icRouteStart") }
     static var icRouteWaypoint: UIImage { .load(name: "icRouteWaypoint") }
-    
-    static var icMapEnd: UIImage{ .load(name: "icMapEnd") }
-    static var icMapStart: UIImage{ .load(name: "icMapStart") }
-    static var icMapWaypoint: UIImage{ .load(name: "icMapWaypoint") }
-    static var icProfile: UIImage{ .load(name: "icProfile") }
-    static var icRouteEnd: UIImage{ .load(name: "icRouteEnd") }
-    static var icRouteStart: UIImage{ .load(name: "icRouteStart") }
-    static var icRouteWaypoint: UIImage{ .load(name: "icRouteWaypoint") }
     static var icSettingWhite: UIImage{ .load(name: "setting2_white") }
     
     //TODO: 위에 두개 중 안쓰는 거 한쪽은 삭제하기
@@ -84,7 +70,6 @@ enum ImageLiterals {
     static var icSearchBtnWhite: UIImage { .load(name: "searchBtnWhite") }
     static var icSearchWhite: UIImage { .load(name: "icSearchWhite") }
     static var icSelectBoxShow: UIImage { .load(name: "selectbox_show") }
-    static var icSettingWhite: UIImage { .load(name: "setting_white") }
     static var icShare: UIImage { .load(name: "icShare") }
     static var icSignupAgreeBig: UIImage { .load(name: "icSignupAgreeBig") }
     static var icSignupAgreeSmall: UIImage { .load(name: "icSignupAgreeSmall") }
