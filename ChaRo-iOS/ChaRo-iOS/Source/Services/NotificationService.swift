@@ -16,7 +16,7 @@ struct NotificationService {
     // MARK: Service
     /// [GET] 전체 알림 리스트 조회
     func getNotificationList(completion: @escaping (NetworkResult<Any>) -> Void) {
-        let dataRequest = AF.request(Constants.getNotificationListURL + Constants.userEmail,
+        let dataRequest = AF.request(Constants.notificationListURL + Constants.userEmail,
                                      method: .get,
                                      encoding: JSONEncoding.default,
                                      headers: header)
