@@ -19,7 +19,7 @@ class FollowFollowingTVC: UITableViewCell {
     var otherUserID: String = "and@naver.com"
     var delegate: isFollowButtonClickedDelegate?
     
-    private let profileImageView = UIImageView().then{
+    private let profileImageView = UIImageView().then {
         $0.image = ImageLiterals.imgMypageDefaultProfile
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
@@ -29,15 +29,21 @@ class FollowFollowingTVC: UITableViewCell {
         $0.layer.cornerRadius = 21
     }
     
-    private let userNameLabel = UILabel().then{
+    private let userNameLabel = UILabel().then {
         $0.text = ""
         $0.font = UIFont.notoSansMediumFont(ofSize: 14)
         $0.textColor = UIColor.black
     }
-    private var followButton = UIButton()
+    private var followButton = UIButton().then{
+        $0.setTitleColor( .mainBlue, for: .selected)
+        $0.setTitleColor( .gray30, for: .normal)
+        $0.setTitle( "팔로잉" , for: .selected)
+        $0.setTitle( "팔로워", for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 13)
+    }
 
     // MARK: - init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayout()
         setFollowButtonAddTarget()
@@ -48,7 +54,7 @@ class FollowFollowingTVC: UITableViewCell {
     }
  
 //MARK: function
-    func setData(image: String, userName: String, isFollow: Bool, userEmail: String){
+    func setData(image: String, userName: String, isFollow: Bool, userEmail: String) {
         guard let url = URL(string: image) else { return }
         userNameLabel.text = userName
         otherUserID = userEmail
@@ -66,9 +72,6 @@ class FollowFollowingTVC: UITableViewCell {
         followButton.layer.cornerRadius = 13
         followButton.layer.borderColor = followButton.isSelected ? UIColor.mainBlue.cgColor : UIColor.gray30.cgColor
         followButton.layer.borderWidth = 1
-        followButton.setTitleColor(followButton.isSelected ? UIColor.mainBlue : UIColor.gray30, for: .normal)
-        followButton.setTitle(followButton.isSelected ? "팔로잉" : "팔로우", for: .normal)
-        followButton.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 13)
     }
     func setFollowButtonAddTarget() {
         followButton.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
@@ -80,14 +83,8 @@ class FollowFollowingTVC: UITableViewCell {
             case .success(let data):
                 if let response = data as? DoFollowDataModel{
                     print(response.data.isFollow)
-                    if response.data.isFollow == true{
-                        self.followButton.isSelected = true
-                        self.setFollowButtonUI()
-                    }
-                    else{
-                        self.followButton.isSelected = false
-                        self.setFollowButtonUI()
-                    }
+                    self.followButton.isSelected = response.data.isFollow
+                    self.setFollowButtonUI()
                     self.delegate?.isFollowButtonClicked()
                 }
             case .requestErr(let message):
@@ -104,11 +101,11 @@ class FollowFollowingTVC: UITableViewCell {
     
     
     
-    @objc private func followButtonClicked(_ sender: UIButton){
+    @objc private func followButtonClicked(_ sender: UIButton) {
         postFollowData()
     }
 //MARK: layoutFunction
-    func setLayout(){
+    func setLayout() {
         self.contentView.addSubviews([profileImageView, userNameLabel, followButton])
         profileImageView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
@@ -129,7 +126,7 @@ class FollowFollowingTVC: UITableViewCell {
         }
     }
     
-    func updateLayoutArPostLikeList(){
+    func updateLayoutArPostLikeList() {
         profileImageView.snp.remakeConstraints{
             $0.top.bottom.equalToSuperview().inset(11)
             $0.leading.equalToSuperview().offset(20)
@@ -147,7 +144,7 @@ class FollowFollowingTVC: UITableViewCell {
         }
     }
     
-    func changeUIStyleAtPostListList(){
+    func changeUIStyleAtPostListList() {
         updateLayoutArPostLikeList()
         profileImageView.layer.borderWidth = 1
         userNameLabel.font = .notoSansMediumFont(ofSize: 13)
