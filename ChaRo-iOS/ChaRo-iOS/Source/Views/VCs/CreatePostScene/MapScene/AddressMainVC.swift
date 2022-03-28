@@ -17,10 +17,8 @@ class AddressMainVC: UIViewController {
     private let viewModel = AddressMainViewModel()
     private let updateAddressSubject = PublishSubject<(AddressDataModel, Int)>()
     
-    public var addressList: [AddressDataModel] = []
     public var searchHistory: [KeywordResult] = []
     public var newSearchHistory: [KeywordResult] = []
-    public var addressCellList: [AddressButtonCell] = []
     
     private var isFirstFinded: Bool = true
     private var sendedPostData: WritePostData?
@@ -29,8 +27,6 @@ class AddressMainVC: UIViewController {
     
     private lazy var tableView = UITableView().then {
         $0.register(cell: AddressButtonCell.self)
-        //$0.delegate = self
-        //$0.dataSource = self
         $0.separatorStyle = .none
     }
     
@@ -73,6 +69,15 @@ class AddressMainVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupGuideAnimationView()
+    }
+    
+    public func setAddressListData(list: [AddressDataModel]) {
+        if list.isEmpty {
+            isFirstOpen = true
+        } else {
+            isFirstOpen = false
+            viewModel.addressList = list
+        }
     }
     
     private func setConstraints() {
@@ -126,6 +131,20 @@ class AddressMainVC: UIViewController {
                 }
                 cell.delegate = self
             }.disposed(by: disposeBag)
+        
+        output.polylineSubject.bind(onNext: { [weak self] polyLineList in
+            polyLineList.forEach {
+                $0.strokeColor = .mainBlue
+                $0.map = self?.tMapView
+            }
+            DispatchQueue.main.async {
+                self?.tMapView.fitMapBoundsWithPolylines(polyLineList)
+            }
+        }).disposed(by: disposeBag)
+        
+        output.isConfirmCheckSubject.bind(onNext: { [weak self]isConfirm in
+            self?.confirmButton.isHidden = !isConfirm
+        }).disposed(by: disposeBag)
     }
     
     private func bind() {
@@ -146,8 +165,8 @@ class AddressMainVC: UIViewController {
     }
     
     
-    private func changeAddressData() -> [Address]{
-        print("현재까지 주소 - \(addressList)")
+    private func changeAddressData() -> [Address] {
+        print("현재까지 주소 - \(viewModel.addressList)")
         var castedToAddressDatalList : [Address] = []
         viewModel.addressList.forEach{
             castedToAddressDatalList.append($0.getAddressDataModel())
@@ -186,14 +205,12 @@ extension AddressMainVC{
 
 //MARK: - Address 관련
 extension AddressMainVC {
-    
     public func setWritePostDataForServer(data: WritePostData, imageList: [UIImage]) {
         sendedPostData = data
         self.imageList = imageList
         dump(imageList)
     }
 }
-
 
 extension AddressMainVC: AddressButtonCellDelegate {
     func addressButtonCellForRemoving(cell: AddressButtonCell) {
@@ -219,64 +236,18 @@ extension AddressMainVC: AddressButtonCellDelegate {
 }
 
 //MARK: - TMap
-extension AddressMainVC{
-    private func initMapView() {
-        tMapView.setApiKey(MapService.mapkey)
-        tMapView.delegate = self
-    }
-    
-    private func removeAllPolyLines() {
-        polyLineList.forEach { $0.map = nil }
-        polyLineList.removeAll()
-    }
-    
-    private func addPathInMapView() {
-        removeAllPolyLines()
-        let pathData = TMapPathData()
-        
-        for index in 0..<addressList.count-1 {
-            if addressList[index+1].title == "" {
-                return
-            }
-            print("index = \(index)")
-            pathData.findPathData(startPoint: addressList[index].getPoint(),
-                                  endPoint: addressList[index+1].getPoint()) { result, error in
-                guard let polyLine = result else { return }
-                
-                print(" start = \(self.addressList[index]), \(self.addressList[index].title)")
-                print(" end = \(self.addressList[index+1]),\(self.addressList[index+1].title) ")
-                
-                print("경로 들어감")
-                self.polyLineList.append(polyLine)
-                polyLine.strokeColor = .mainBlue
-                DispatchQueue.main.async {
-                    polyLine.map = self.tMapView
-                }
-                
-                if index == self.addressList.count-2{
-                    
-                    print("경로 그려져야함!!!!! = \(index)")
-                    DispatchQueue.main.async {
-                        self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
-                    }
-                }
-            }
-        }
-    }
+extension AddressMainVC {
     
     private func inputMarkerInMapView() {
-        print("inputMarkerInMapView")
-        print("addressList = \(addressList.count)")
-        for index in 0..<addressList.count {
-            
-            if addressList[index].title != "" {
-                let point = addressList[index].getPoint()
-                let marker = TMapMarker(position: point)
-                marker.icon = setMarkerImage(index: index)
-                marker.map = tMapView
-                markerList.append(marker)
-                tMapView.setCenter(point)
-            }
+        tMapView.setZoom(15)
+        for index in 0..<viewModel.addressList.count {
+            if viewModel.addressList[index].title == "" { continue }
+            let point = viewModel.addressList[index].getPoint()
+            let marker = TMapMarker(position: point)
+            marker.icon = setMarkerImage(index: index)
+            marker.map = tMapView
+            markerList.append(marker)
+            tMapView.setCenter(point)
         }
     }
     
@@ -284,7 +255,7 @@ extension AddressMainVC{
         switch index {
         case 0:
             return ImageLiterals.icRouteStart
-        case addressList.count - 1:
+        case viewModel.addressList.count - 1:
             return ImageLiterals.icRouteEnd
         default:
             return ImageLiterals.icRouteWaypoint
@@ -292,11 +263,16 @@ extension AddressMainVC{
     }
 }
 
-extension AddressMainVC : TMapViewDelegate {
+extension AddressMainVC: TMapViewDelegate {
+    
+    private func initMapView() {
+        tMapView.setApiKey(MapService.mapkey)
+        tMapView.delegate = self
+    }
+ 
     func mapViewDidFinishLoadingMap() {
-        print("mapViewDidFinishLoadingMap")
-        tMapView.setZoom(12)
-        print("tMapView.getZoom() = \(tMapView.getZoom())")
+        tMapView.setCenter(CLLocationCoordinate2D(latitude: 34.89910928257491, longitude: 127.8400762160781))
+        tMapView.setZoom(6)
     }
     
     func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D,
