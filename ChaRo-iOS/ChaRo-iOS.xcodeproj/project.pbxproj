@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -300,8 +300,6 @@
 		36E445B7277CA1F3008E31BE /* SettingTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTVC.xib; sourceTree = "<group>"; };
 		36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewDataModel.swift; sourceTree = "<group>"; };
 		36F3302826A2A97D009C0173 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		36F8F6C027134D4800092338 /* NewHotFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHotFilterView.swift; sourceTree = "<group>"; };
-		36F8F6AE27133F8800092338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoFollowDataModel.swift; sourceTree = "<group>"; };
 		36FB8BA627777E3100C2E642 /* DoFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoFollowService.swift; sourceTree = "<group>"; };
 		3C117E1C269F45D5005F4646 /* PostResultHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultHeaderCVC.swift; sourceTree = "<group>"; };
@@ -646,7 +644,6 @@
 				3C71FEA426881DAA007E8EAD /* Products */,
 				0CA8D00E5168EC02612F0BAB /* Pods */,
 				5871AE65ECA530CBED32CC7F /* Frameworks */,
-				36A0DC3C27D66E97004BFBC8 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1467,7 +1464,6 @@
 				36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */,
 				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
-				F4CC1AE62697464C009A0C01 /* PostLocationTVC.xib in Resources */,
 				36F3302926A2A97D009C0173 /* loading.json in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
@@ -1522,7 +1518,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		12E7D82FFD8128D59F9B41C7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -1532,7 +1528,7 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
@@ -1953,7 +1949,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2ZS26WP93H;
+				DEVELOPMENT_TEAM = J8A843466G;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
