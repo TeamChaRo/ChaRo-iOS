@@ -2,93 +2,157 @@
 //  PostLocationTVC.swift
 //  ChaRo-iOS
 //
-//  Created by 최인정 on 2021/07/08.
+//  Created by 장혜령 on 2022/03/15.
 //
 
 import UIKit
+import SnapKit
+import Then
+import RxSwift
+import TMapSDK
 
 class PostLocationTVC: UITableViewCell {
-
-    static let identifier: String = "PostLocationTVC"
     
-    let titleView = PostCellTitleView(title: "출발지")
-    let buttonMultiplier: CGFloat = 248/42
-    public var clickCopyButton: (() -> ())?
+    private let disposeBag = DisposeBag()
     
-    let locationTextField: UITextField = {
-        let textField = UITextField()
-        textField.background = UIImage(named: "postTextfieldLocationShow")
-        textField.addLeftPadding(17)
-        textField.font = .notoSansRegularFont(ofSize: 14)
-        textField.isEnabled = false
-        return textField
-    }()
+    private let backgourndView = UIView().then {
+        $0.backgroundColor = .gray10
+        $0.layer.cornerRadius = 8
+    }
+    private let startAddressView = PostDetailAddressView(title: "출발지")
+    private let midAddressView = PostDetailAddressView(title: "경유지")
+    private let endAddressView = PostDetailAddressView(title: "도착지")
+    var copyAddressClouser: ((String) -> ())?
     
-
-    let copyButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(ImageLiterals.icCopy, for: .normal)
-        button.isUserInteractionEnabled = true
-        button.imageView?.contentMode = .scaleToFill
-        return button
-    }()
+    private let addressStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 3
+        $0.distribution = .fillEqually
+    }
+    private lazy var tMapView = TMapView()
+    private var courseList: [Course] = []
+    private var polyLineSubjuect = PublishSubject<TMapPolyline>()
+    private var polyLineList: [TMapPolyline] = []
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstraints()
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+  
+    func setContent(courseList: [Course]) {
+        self.courseList = courseList
+        let lastIndex = courseList.count - 1
+        startAddressView.addressTextField.text = courseList[0].address
+        endAddressView.addressTextField.text = courseList[lastIndex].address
+        courseList.count == 3 ? (midAddressView.addressTextField.text = courseList[1].address) : (midAddressView.isHidden = true)
+    }
+    
+    private func setupConstraints() {
+        contentView.addSubview(backgourndView)
+        backgourndView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
+        }
+        
+        backgourndView.addSubviews([addressStackView, tMapView])
+        addressStackView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(12)
+            $0.leading.trailing.equalToSuperview()
+        }
+        addressStackView.addArrangedSubviews(views: [startAddressView, midAddressView, endAddressView ])
+        
+        tMapView.snp.makeConstraints {
+            $0.top.equalTo(addressStackView.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(9)
+            $0.trailing.equalToSuperview().offset(-9)
+            $0.bottom.equalToSuperview().offset(-15)
+            $0.height.equalTo(351)
+        }
+    }
+    
+    private func configureUI() {
         selectionStyle = .none
-        configureLayout()
-        copyButton.addTarget(self, action: #selector(copyTextInClibBoard), for: .touchUpInside)
+        configureMapView()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    private func configureMapView() {
+        tMapView.delegate = self
+        DispatchQueue.main.async {
+            self.tMapView.setApiKey(MapService.mapkey)
+        }
     }
     
-    @objc
-    func copyTextInClibBoard(){
-        print("복사버튼 눌림")
-        UIPasteboard.general.string = locationTextField.text
-        clickCopyButton?()
+    func setCopyClosure() {
+        startAddressView.copyAddressClouser = copyAddressClouser
+        midAddressView.copyAddressClouser = copyAddressClouser
+        endAddressView.copyAddressClouser = copyAddressClouser
     }
-    
 }
 
 extension PostLocationTVC {
     
-    func setTitleText(title: String){
-        titleView.titleLabel.text = title
+    private func bindToMapView() {
+        polyLineSubjuect.bind(onNext: { polyLine in
+            polyLine.strokeColor = .mainBlue
+            self.polyLineList.append(polyLine)
+            polyLine.map = self.tMapView
+            self.checkDrawingPolyLine()
+        }).disposed(by: disposeBag)
+    }
+
+    private func checkDrawingPolyLine() {
+        if polyLineList.count == courseList.count - 1 {
+            DispatchQueue.main.async {
+                self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
+            }
+        }
     }
     
-    func setLocationText(address: String){
-        locationTextField.text = address
+    private func addPathInMapView() {
+        let pathData = TMapPathData()
+        polyLineList = []
+        print("count = \(courseList.count)")
+        for index in 0..<courseList.count-1 {
+            pathData.findPathData(startPoint: courseList[index].getPoint(),
+                                  endPoint: courseList[index+1].getPoint()) { result, error in
+                guard let polyLine = result else {return}
+                self.polyLineSubjuect.onNext(polyLine)
+            }
+        }
     }
     
-    func configureLayout(){
-        addSubview(copyButton)
-        addSubviews([titleView])
-        addSubview(locationTextField)
-        
-        titleView.snp.makeConstraints{
-            $0.top.equalTo(self.snp.top).offset(10)
-            $0.leading.equalTo(self.snp.leading).offset(20)
-            $0.centerY.equalTo(copyButton.snp.centerY)
-            $0.width.equalTo(50)
-        }
-        
-        locationTextField.snp.makeConstraints{
-            $0.top.equalTo(self.snp.top)
-            $0.leading.equalTo(self.titleView.snp.trailing).offset(3)
-            $0.trailing.equalTo(copyButton.snp.leading).offset(-1)
-            $0.bottom.equalTo(self.snp.bottom).offset(-8)
-        }
-        
-        copyButton.bringSubviewToFront(self)
-        copyButton.snp.makeConstraints{
-            $0.top.equalTo(self.snp.top)
-            $0.bottom.equalTo(self.snp.bottom).offset(-6)
-            $0.trailing.equalTo(self.snp.trailing).offset(-6)
-            $0.width.height.equalTo(48)
+    private func addMarkerInMapView() {
+        for index in 0..<courseList.count {
+            let marker = TMapMarker(position: courseList[index].getPoint())
+            if index == 0 {
+                marker.icon = ImageLiterals.icRouteStart
+            } else if index == courseList.count - 1 {
+                marker.icon = ImageLiterals.icRouteEnd
+            } else {
+                marker.icon = ImageLiterals.icRouteWaypoint
+            }
+            marker.map = self.tMapView
         }
     }
 }
+
+extension PostLocationTVC: TMapViewDelegate {
+    func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D, to newPosition: CLLocationCoordinate2D) -> Bool {
+        return false
+    }
+    
+    func mapViewDidFinishLoadingMap() {
+        bindToMapView()
+        addPathInMapView()
+        addMarkerInMapView()
+        tMapView.sizeToFit()
+        tMapView.layoutIfNeeded()
+    }
+}
+
 

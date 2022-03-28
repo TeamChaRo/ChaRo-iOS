@@ -24,7 +24,7 @@ class XmarkDismissButton : UIButton {
         initAction(vc: vc)
     }
     
-   private func setBackgroundImage(){
+   private func setBackgroundImage() {
        setBackgroundImage(ImageLiterals.icCloseWhite, for: .normal)
     }
     

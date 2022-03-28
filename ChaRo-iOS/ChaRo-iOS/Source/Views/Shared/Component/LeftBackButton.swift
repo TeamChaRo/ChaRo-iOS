@@ -23,7 +23,7 @@ class LeftBackButton: UIButton {
         initAction(vc: vc, isModal: isModal)
     }
     
-   private func setBackgroundImage(){
+   private func setBackgroundImage() {
         setBackgroundImage(ImageLiterals.icBack, for: .normal)
     }
     
@@ -32,7 +32,7 @@ class LeftBackButton: UIButton {
         let popAction = UIAction { _ in
             if isModal {
                 vc.dismiss(animated: true)
-            }else{
+            } else {
                 vc.navigationController?.popViewController(animated: true)
             }
         }

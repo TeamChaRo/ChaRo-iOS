@@ -93,36 +93,36 @@ extension CreatePostPhotoTVC {
     }
     
 
-    func receiveImageListfromVC(image: [UIImage]){
+    func receiveImageListfromVC(image: [UIImage]) {
         self.receiveImageList.removeAll()
         self.receiveImageList.append(contentsOf: image)
     }
     
     @objc
-    func imageViewDidTap(){
+    func imageViewDidTap() {
         NotificationCenter.default.post(name: .callPhotoPicker, object: nil)
     }
 
-    func setNotificationCenter(){
+    func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(imageViewDidTap), name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePhoto), name: .createPostDeletePhotoClicked, object: nil)
     
     }
     
-    func removeObservers(){ // TODO: 얘를 어디서 호출할지..?
+    func removeObservers() { // TODO: 얘를 어디서 호출할지..?
         NotificationCenter.default.removeObserver(self, name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.removeObserver(self, name: .createPostDeletePhotoClicked, object: nil)
     }
 
     @objc
-    func deletePhoto(_ notification: Notification){
+    func deletePhoto(_ notification: Notification) {
         print("====delete====")
         self.receiveImageList.remove(at: notification.object as! Int) //선택한 이미지 삭제
         collectionView.reloadData()
     }
     
     // MARK:- Layout
-    func emptyConfigureLayout(){
+    func emptyConfigureLayout() {
 
         addSubviews([
             self.photoBackgroundView,
@@ -157,7 +157,7 @@ extension CreatePostPhotoTVC {
         }
     }
     
-    func photoConfigureLayout(){
+    func photoConfigureLayout() {
         addSubview(collectionView)
         
         collectionView.snp.makeConstraints{
@@ -171,11 +171,11 @@ extension CreatePostPhotoTVC {
    
 }
 
-extension CreatePostPhotoTVC : UICollectionViewDelegate {
+extension CreatePostPhotoTVC: UICollectionViewDelegate {
     
 }
 
-extension CreatePostPhotoTVC : UICollectionViewDataSource {
+extension CreatePostPhotoTVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if receiveImageList.count >= maxPhotoCount {
             return maxPhotoCount
@@ -207,7 +207,7 @@ extension CreatePostPhotoTVC : UICollectionViewDataSource {
     
 }
 
-extension CreatePostPhotoTVC : UICollectionViewDelegateFlowLayout {
+extension CreatePostPhotoTVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellsize: CGFloat = (UIScreen.getDeviceWidth() - 54.0) / 3
         return CGSize(width: cellsize, height: cellsize)

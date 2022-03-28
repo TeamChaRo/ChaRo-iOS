@@ -20,13 +20,13 @@ class PostResultHeaderCVC: UICollectionViewCell {
         print("PostResultHeaderCVC = \(filterResultList)")
     }
     
-    public func setStackViewData(list: [String]){
+    public func setStackViewData(list: [String]) {
         filterResultList = list
         setConstraint()
     }
     
     
-    func setConstraint(){
+    func setConstraint() {
         let header = setHearderView()
         addSubview(header)
         
@@ -53,10 +53,10 @@ class PostResultHeaderCVC: UICollectionViewCell {
                 button.setTitle(" #\(filterResultList[index])X ", for: .normal)
                 button.setTitleColor(.gray30, for: .normal)
                 button.layer.borderColor = UIColor.gray30.cgColor
-            }else{
+            } else {
                 button.setTitle(" #\(filterResultList[index]) ", for: .normal)
                 button.setTitleColor(.mainBlue, for: .normal)
-                button.layer.borderColor = UIColor.mainlightBlue.cgColor
+                button.layer.borderColor = UIColor.mainLightBlue.cgColor
             }
             
             list.append(button)
