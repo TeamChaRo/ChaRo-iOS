@@ -95,6 +95,8 @@ enum ImageLiterals {
     static var imgCharoCar: UIImage{ .load(name: "charoCar") }
     static var imgMapFirstGuide: UIImage { .load(name: "mapFirstGuide")}
     static var imgMyImage: UIImage{ .load(name: "myimage") }
+    static var imgMypageDefaultProfile: UIImage{ .load(name: "defaultImage")}
+    static var imgMypageEmpty: UIImage{ .load(name: "no_img")}
     static var imgOnBoarding1: UIImage{ .load(name: "onboardingBackground1") }
     static var imgOnBoarding2: UIImage{ .load(name: "onboardingBackground2") }
     static var imgOnBoarding3: UIImage{ .load(name: "onboardingBackground3") }
@@ -103,8 +105,7 @@ enum ImageLiterals {
     static var imgSearchNoImage: UIImage{ .load(name: "searchNoImage") }
     static var imgPlaceholder: UIImage{ .load(name: "imagePlaceholder") }
     static var imgPostTextfieldLocationShow: UIImage{ .load(name: "postTextfieldLocationShow") }
-    static var imgMypageEmpty: UIImage{ .load(name: "no_img")}
-    static var imgMypageDefaultProfile: UIImage{ .load(name: "defaultImage")}
+    
     
 }
 
