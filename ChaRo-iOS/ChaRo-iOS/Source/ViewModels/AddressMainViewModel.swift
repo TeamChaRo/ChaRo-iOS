@@ -118,3 +118,47 @@ extension AddressMainViewModel {
         }
     }
 }
+
+// MARK: - Map Logic
+extension AddressMainViewModel {
+    private func getOptimizationCenter() ->  CLLocationCoordinate2D {
+        var minX, minY, maxX, maxY : Double
+        
+        print("addressList.endIndex = \(addressList.endIndex)")
+        let point1 = addressList[0].getPoint()
+        let point2 = addressList[addressList.endIndex-1].getPoint()
+        
+        if point1.latitude < point2.latitude {
+            minX = point1.latitude
+            maxX = point2.latitude
+        } else {
+            maxX = point1.latitude
+            minX = point2.latitude
+        }
+        
+        if point1.longitude < point2.longitude {
+            minY = point1.longitude
+            maxY = point2.longitude
+        } else {
+            maxY = point1.longitude
+            minY = point2.longitude
+        }
+        
+        
+        for i in 1..<addressList.count {
+            let point = addressList[i].getPoint()
+            if point.latitude < minX {
+                minX = point.latitude
+            } else if point.latitude > maxX {
+                maxX = point.latitude
+            }
+            
+            if point.longitude < minY{
+                minY = point.longitude
+            } else if point.longitude > maxY {
+                maxY = point.longitude
+            }
+        }
+        return CLLocationCoordinate2D(latitude: (minX+maxX)/2, longitude: (minY+maxY)/2)
+    }
+}
