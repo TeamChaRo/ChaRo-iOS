@@ -109,12 +109,8 @@ class MyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
         $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
-    private let noWritenDataImageView = UIImageView().then {
-        $0.image = ImageLiterals.imgMypageEmpty
-    }
-    private let noSaveDataImageView = UIImageView().then {
-        $0.image = ImageLiterals.imgMypageEmpty
-    }
+    private let noWritenDataImageView = UIImageView(image: ImageLiterals.imgMypageEmpty)
+    private let noSaveDataImageView = UIImageView(image: ImageLiterals.imgMypageEmpty)
     private let noWritenDataLabel = UILabel().then {
         $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n작성해보는 것은 어떠신가요?"
         $0.textColor = UIColor.gray50
@@ -236,7 +232,7 @@ class MyPageVC: UIViewController {
             $0.width.equalTo(userWidth/2)
             $0.height.equalTo(2)
         }
-        if contentOffsetX > userWidth/3{
+        if contentOffsetX > userWidth/3 {
             tabbarWriteButton.setImage(ImageLiterals.icWriteInactive, for: .normal)
             tabbarSaveButton.setImage(ImageLiterals.icSaveActive, for: .normal)
         }
@@ -799,15 +795,15 @@ extension MyPageVC: UICollectionViewDataSource {
                 var writenTags = [writenElement.region, writenElement.theme,
                             writenElement.warning ?? ""] as [String]
                 print(writenPostDriveData, "왜 안뜨냐?")
-            cell.setData(image: writenPostDriveData[indexPath.row-1].image,
-                         title: writenPostDriveData[indexPath.row-1].title,
-                         tagCount:writenTags.count, tagArr: writenTags,
-                         heart:writenPostDriveData[indexPath.row-1].favoriteNum,
-                         save: writenPostDriveData[indexPath.row-1].saveNum,
-                         year: writenPostDriveData[indexPath.row-1].year,
-                         month: writenPostDriveData[indexPath.row-1].month,
-                         day: writenPostDriveData[indexPath.row-1].day,
-                         postID: writenPostDriveData[indexPath.row-1].postID)
+                cell.setData(image: writenElement.image,
+                         title: writenElement.title,
+                         tagCount: writenTags.count, tagArr: writenTags,
+                         heart: writenElement.favoriteNum,
+                         save: writenElement.saveNum,
+                         year: writenElement.year,
+                         month: writenElement.month,
+                         day: writenElement.day,
+                         postID: writenElement.postID)
             return cell
             }
         case 2:
