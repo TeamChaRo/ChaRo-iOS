@@ -17,6 +17,8 @@ class AddressMainViewModel {
     
     let addressSubject = ReplaySubject<[(AddressDataModel, Int)]>.create(bufferSize: 1)
     let searchHistorySubject = PublishSubject<[KeywordResult]>()
+    let polylineSubject = PublishSubject<[TMapPolyline]>()
+    let isConfirmCheckSubject = PublishSubject<Bool>()
     
     init() {
         addressList = [AddressDataModel(), AddressDataModel()]
@@ -29,6 +31,8 @@ class AddressMainViewModel {
     
     struct Output {
         let addressSubject: ReplaySubject<[(AddressDataModel, Int)]>
+        let polylineSubject: PublishSubject<[TMapPolyline]>
+        let isConfirmCheckSubject: PublishSubject<Bool>
     }
     
     func transform(of input: Input, disposeBag: DisposeBag) -> Output {
@@ -36,7 +40,9 @@ class AddressMainViewModel {
             .bind(onNext: { address, index in
             self.updateAddress(of: address, at: index)
             }).disposed(by: disposeBag)
-        let output = Output(addressSubject: addressSubject)
+        let output = Output(addressSubject: addressSubject,
+                            polylineSubject: polylineSubject,
+                            isConfirmCheckSubject: isConfirmCheckSubject)
         return output
     }
     
@@ -47,12 +53,25 @@ class AddressMainViewModel {
             addressList[index] = address
         }
         addressSubject.onNext(refineAddressData())
+        addPathInMapView()
+        checkRouting()
     }
     
     private func refineAddressData() -> [(AddressDataModel, Int)] {
         var list: [(AddressDataModel, Int)] = []
         addressList.forEach { list.append(($0, addressList.count)) }
         return list
+    }
+    private func checkRouting() {
+        var isConfirm = true
+        for address in addressList {
+            if address.title == "" {
+                isConfirm = false
+                print("isConfirm = \(isConfirm)")
+                break
+            }
+        }
+        isConfirmCheckSubject.onNext(isConfirm)
     }
 }
 
@@ -121,6 +140,23 @@ extension AddressMainViewModel {
 
 // MARK: - Map Logic
 extension AddressMainViewModel {
+    
+    private func addPathInMapView() {
+        var polylineList: [TMapPolyline] = []
+        let pathData = TMapPathData()
+        for index in 0..<addressList.count-1 {
+            if addressList[index+1].title == "" { return }
+            pathData.findPathData(startPoint: addressList[index].getPoint(),
+                                  endPoint: addressList[index+1].getPoint()) { [weak self] result, error in
+                guard let polyLine = result else { return }
+                polylineList.append(polyLine)
+                if index == (self?.addressList.count ?? -1) - 2 {
+                    self?.polylineSubject.onNext(polylineList)
+                }
+            }
+        }
+    }
+    
     private func getOptimizationCenter() ->  CLLocationCoordinate2D {
         var minX, minY, maxX, maxY : Double
         
