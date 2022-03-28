@@ -53,7 +53,7 @@ extension NotificationVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationTVC.className, for: indexPath) as? NotificationTVC else { return UITableViewCell() }
-        cell.bindData(model: notificationList[indexPath.row])
+        cell.setContent(model: notificationList[indexPath.row])
         return cell
     }
 }

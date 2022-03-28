@@ -19,7 +19,7 @@ class NotificationTVC: UITableViewCell {
         $0.layer.masksToBounds = true
     }
     
-    private let notiStateLabel = UILabel().then {
+    private let stateLabel = UILabel().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.mainBlue.cgColor
         $0.layer.cornerRadius = 8.5
@@ -28,22 +28,18 @@ class NotificationTVC: UITableViewCell {
         $0.textAlignment = .center
     }
     
-    private let notiTitleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.font = UIFont.notoSansMediumFont(ofSize: 12)
         $0.textColor = .subBlack
     }
     
-    private let notiDateLabel = UILabel().then {
+    private let dateLabel = UILabel().then {
         $0.font = UIFont.notoSansRegularFont(ofSize: 11)
         $0.textColor = .gray40
         $0.textAlignment = .right
     }
 
     // MARK: Life Cycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override func layoutSubviews() {
         layer.borderWidth = 1
         layer.borderColor = UIColor.gray20.cgColor
@@ -66,7 +62,7 @@ class NotificationTVC: UITableViewCell {
 // MARK: - UI
 extension NotificationTVC {
     private func configureUI() {
-        self.addSubviews([profileImageView, notiStateLabel, notiTitleLabel, notiDateLabel])
+        self.addSubviews([profileImageView, stateLabel, titleLabel, dateLabel])
         
         profileImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
@@ -74,7 +70,7 @@ extension NotificationTVC {
             $0.centerY.equalToSuperview()
         }
         
-        notiStateLabel.snp.makeConstraints {
+        stateLabel.snp.makeConstraints {
             let heightRatio: CGFloat = 17/45
             $0.top.equalTo(profileImageView.snp.top)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
@@ -82,28 +78,28 @@ extension NotificationTVC {
             $0.width.equalTo(43)
         }
         
-        notiTitleLabel.snp.makeConstraints {
-            $0.leading.equalTo(notiStateLabel.snp.leading)
+        titleLabel.snp.makeConstraints {
+            $0.leading.equalTo(stateLabel.snp.leading)
             $0.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(profileImageView.snp.bottom)
         }
         
-        notiDateLabel.snp.makeConstraints {
-            $0.trailing.equalTo(notiTitleLabel.snp.trailing)
-            $0.centerY.equalTo(notiStateLabel)
+        dateLabel.snp.makeConstraints {
+            $0.trailing.equalTo(titleLabel.snp.trailing)
+            $0.centerY.equalTo(stateLabel)
         }
     }
 }
 
 // MARK: - Custom Method
 extension NotificationTVC {
-    func bindData(model: NotificationListModel) {
+    func setContent(model: NotificationListModel) {
         guard let url = URL(string: model.image) else { return }
         profileImageView.kf.setImage(with: url)
-        notiStateLabel.text = model.title
-        notiTitleLabel.text = model.body
-        notiDateLabel.text = convertNotiDateString(month: model.month, day: model.day)
-        self.backgroundColor = model.isRead == 0 ? .blueSelect : .white
+        stateLabel.text = model.title
+        titleLabel.text = model.body
+        dateLabel.text = model.convertNotiDateString(month: model.month, day: model.day)
+        self.backgroundColor = model.isRead == 0 ? .blueSelect : .blueSelect
     }
 }
 

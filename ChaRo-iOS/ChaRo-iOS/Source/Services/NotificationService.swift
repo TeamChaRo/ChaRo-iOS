@@ -15,17 +15,17 @@ struct NotificationService {
     
     // MARK: Service
     /// [GET] 전체 알림 리스트 조회
-    func getNotificationList(completion: @escaping (NetworkResult<Any>) -> Void){
+    func getNotificationList(completion: @escaping (NetworkResult<Any>) -> Void) {
         let dataRequest = AF.request(Constants.getNotificationListURL + Constants.userEmail,
                                      method: .get,
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
         dataRequest.responseData{ dataResponse in
-            switch dataResponse.result{
+            switch dataResponse.result {
             case .success:
-                guard let statusCode = dataResponse.response?.statusCode else { return}
-                guard let value = dataResponse.value  else {return}
+                guard let statusCode = dataResponse.response?.statusCode else { return }
+                guard let value = dataResponse.value else { return }
                 let networkResult = self.judgeStatus(type: [NotificationListModel].self, by: statusCode, value)
                 completion(networkResult)
             case .failure(_): completion(.pathErr)

@@ -20,9 +20,9 @@ struct NotificationListModel: Codable {
         case isRead = "is_read"
         case token, image, title, body, month, day
     }
-}
-
-/// 알림 날짜 표시 형식에 맞춰 convert하는 함수
-func convertNotiDateString(month: String, day: String) -> String {
-    return month + "월 " + day + "일"
+    
+    /// 알림 날짜 표시 형식에 맞춰 convert하는 함수
+    func convertNotiDateString(month: String, day: String) -> String {
+        return month + "월 " + day + "일"
+    }
 }
