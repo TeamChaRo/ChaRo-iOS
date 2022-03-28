@@ -21,7 +21,7 @@ struct NotificationService {
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
-        dataRequest.responseData{ dataResponse in
+        dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return }
