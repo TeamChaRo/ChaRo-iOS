@@ -382,7 +382,7 @@ extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelega
         
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         //이미지 Choose
         picker.dismiss(animated: false) { () in

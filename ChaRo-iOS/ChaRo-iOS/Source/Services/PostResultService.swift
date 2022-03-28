@@ -21,7 +21,7 @@ struct PostResultService {
                             theme: String,
                             warning: String,
                             type: String,
-                            completion: @escaping (NetworkResult<Any>) -> Void){
+                            completion: @escaping (NetworkResult<Any>) -> Void) {
         let parameter = makeParameter(region: region,
                                       theme: theme,
                                       warning: warning)
@@ -34,7 +34,7 @@ struct PostResultService {
                                      headers: header)
         
         dataRequest.responseData{ dataResponse in
-            switch dataResponse.result{
+            switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}
@@ -46,14 +46,14 @@ struct PostResultService {
     }
     
     func getPostDetail(postId : Int,
-                        completion: @escaping (NetworkResult<Any>) -> Void){
+                        completion: @escaping (NetworkResult<Any>) -> Void) {
         let dataRequeat = AF.download(Constants.detailPostURL+"\(postId)",
                                       method: .get,
                                       encoding: JSONEncoding.default,
                                       headers: header)
         
         dataRequeat.responseData{ dataResponse in
-            switch dataResponse.result{
+            switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}
@@ -65,13 +65,13 @@ struct PostResultService {
         }
     }
     
-    func getPostLikeList(postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+    func getPostLikeList(postId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
         let dateRequest = AF.request(Constants.detailPostLikeListURL + "\(postId)",
                                      method: .get,
                                      parameters: ["userEmail" : Constants.userEmail],
                                      encoding: URLEncoding.queryString)
         dateRequest.responseData{ dataResponse in
-            switch dataResponse.result{
+            switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}

@@ -34,7 +34,7 @@ class OtherMyPageVC: UIViewController {
     var delegate: AnimateIndicatorDelegate?
 
     //헤더뷰 유아이
-    private let profileImageView = UIImageView().then{
+    private let profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.layer.masksToBounds = true
@@ -43,11 +43,11 @@ class OtherMyPageVC: UIViewController {
         $0.image = ImageLiterals.imgMypageDefaultProfile
         $0.layer.cornerRadius = 32
     }
-    private let headerBackgroundView = UIView().then{
+    private let headerBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.mainBlue
     }
 
-    private let headerTitleLabel = UILabel().then{
+    private let headerTitleLabel = UILabel().then {
         $0.textColor = UIColor.white
         $0.font = UIFont.notoSansMediumFont(ofSize: 17)
         $0.text = "MY PAGE"
@@ -55,14 +55,14 @@ class OtherMyPageVC: UIViewController {
     
     private var isFollowButton = UIButton()
     
-    private let userNameLabel = UILabel().then{
+    private let userNameLabel = UILabel().then {
         $0.textColor = UIColor.white
         $0.font = UIFont.notoSansBoldFont(ofSize: 18)
         $0.textAlignment = .left
         $0.text = "none 드라이버님"
     }
     
-    private let followerButton = UIButton().then{
+    private let followerButton = UIButton().then {
         $0.backgroundColor = .none
         $0.setTitle("팔로워", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
@@ -70,7 +70,7 @@ class OtherMyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
     }
     
-    private let followerNumButton = UIButton().then{
+    private let followerNumButton = UIButton().then {
         $0.backgroundColor = .none
         $0.setTitle("0", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
@@ -78,7 +78,7 @@ class OtherMyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
     }
     
-    private let followButton = UIButton().then{
+    private let followButton = UIButton().then {
         $0.backgroundColor = .none
         $0.setTitle("팔로잉", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
@@ -86,19 +86,19 @@ class OtherMyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
     }
     
-    private let followNumButton = UIButton().then{
+    private let followNumButton = UIButton().then {
         $0.backgroundColor = .none
         $0.setTitle("0", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 13)
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
     }
-    private let backButton = UIButton().then{
+    private let backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icBackWhite, for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     //컬렉션 뷰
-    private let collectionBackgroundView = UIView().then{
+    private let collectionBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
     private let noDataImageView = UIImageView().then{
@@ -140,7 +140,7 @@ class OtherMyPageVC: UIViewController {
     
     //MARK: setUI
     
-    func setCollectionviewLayout(){
+    func setCollectionviewLayout() {
         self.view.addSubview(collectionBackgroundView)
         collectionBackgroundView.addSubview(collectionview)
         collectionview.delegate = self
@@ -160,7 +160,7 @@ class OtherMyPageVC: UIViewController {
         }
     }
     
-    func setHeaderViewLayout(){
+    func setHeaderViewLayout() {
         self.view.addSubview(headerBackgroundView)
         headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton, backButton])
         
@@ -267,13 +267,13 @@ class OtherMyPageVC: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let writeContentHeight = collectionview.contentSize.height
         
-        if(collectionview.contentOffset.y > writeContentHeight - collectionview.frame.height){
+        if(collectionview.contentOffset.y > writeContentHeight - collectionview.frame.height) {
             let lastcount = writenPostDriveData.count
             var likeOrNew = ""
             var addURL = ""
-            if lastcount > 0 && scrollTriger == false{
+            if lastcount > 0 && scrollTriger == false {
             scrollTriger = true
-            lastId =  writenPostDriveData[lastcount-1].postID
+            lastId = writenPostDriveData[lastcount-1].postID
             lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
             
             if currentState == "인기순"{
@@ -296,11 +296,11 @@ class OtherMyPageVC: UIViewController {
             }
         }
         
-        if(collectionview.contentOffset.y < writeContentHeight - collectionview.frame.height){scrollTriger = false
+        if(collectionview.contentOffset.y < writeContentHeight - collectionview.frame.height) {scrollTriger = false
         }
     }
     
-    func setOtherUserID(userID: String){
+    func setOtherUserID(userID: String) {
         otherUserID = userID
     }
     func setFollowButtonUI() {
@@ -321,7 +321,7 @@ class OtherMyPageVC: UIViewController {
         followerNumButton.setTitle(String(followerNum), for: .normal)
         followNumButton.setTitle(String(followingNum), for: .normal)
     }
-    func isNoData(){
+    func isNoData() {
         collectionBackgroundView.addSubview(noDataImageView)
         
         noDataImageView.isHidden = true
@@ -332,37 +332,37 @@ class OtherMyPageVC: UIViewController {
             $0.height.equalTo(259)
         }
       
-        if writenPostDriveData.isEmpty == true{
+        if writenPostDriveData.isEmpty == true {
             noDataImageView.isHidden = false
         }
       
     }
     
-    @objc private func doFollowButtonClicked(_ sender: UIButton){
+    @objc private func doFollowButtonClicked(_ sender: UIButton) {
         postFollowUser()
    }
-    @objc private func backButtonClicked(_ sender: UIButton){
+    @objc private func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
    }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
-        func getMypageData(){
+        func getMypageData() {
             GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
             GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                        switch response
                        {
                        case .success(let data) :
-                           if let response = data as? MyPageDataModel{
+                           if let response = data as? MyPageDataModel {
                                self.userProfileData = []
                                //팔로우 수만 업데이트 할때
-                               if self.updateFollowNum == false{self.writenPostDriveData = []}
+                               if self.updateFollowNum == false {self.writenPostDriveData = []}
                                self.userProfileData.append(response.data.userInformation)
                                self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
-                               if self.updateFollowNum == false{self.collectionview.reloadData()}
+                               if self.updateFollowNum == false {self.collectionview.reloadData()}
                                self.setHeaderData()
                                
-                               if self.writenPostDriveData.isEmpty == true{
+                               if self.writenPostDriveData.isEmpty == true {
                                    self.isNoData()
                                    
                                }
@@ -378,12 +378,12 @@ class OtherMyPageVC: UIViewController {
                        }
                    }
         }
-    func getFollowData(){
-        FollowCheckService.followData.getRecommendInfo(userId: myId, otherId: otherUserID){ (response) in
+    func getFollowData() {
+        FollowCheckService.followData.getRecommendInfo(userId: myId, otherId: otherUserID) { (response) in
                    switch response
                    {
                    case .success(let data):
-                       if let response = data as? DoFollowDataModel{
+                       if let response = data as? DoFollowDataModel {
                            self.isFollow = response.data.isFollow
                            if self.isFollow == true{
                                self.isFollowButton.isSelected = true
@@ -408,23 +408,23 @@ class OtherMyPageVC: UIViewController {
     }
     
     
-    func getInfinityData(addUrl: String, LikeOrNew: String){
+    func getInfinityData(addUrl: String, LikeOrNew: String) {
         updateFollowNum = false
         delegate = self
         self.delegate?.startIndicator()
-        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: otherUserID, addURL: addUrl,likeOrNew: LikeOrNew){ (response) in
+        MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: otherUserID, addURL: addUrl,likeOrNew: LikeOrNew) { (response) in
                    switch response
                    {
                    case .success(let data) :
-                       if let response = data as? MypageInfinityModel{
+                       if let response = data as? MypageInfinityModel {
                            if response.data.lastID == 0{
                                self.isLast = true
                                self.delegate?.endIndicator()
                            }
-                           else{
+                           else {
                                self.isLast = false
                            }
-                           if self.isLast == false{
+                           if self.isLast == false {
                                self.writenPostDriveData.append(contentsOf: response.data.drive)
                                self.collectionview.reloadData()
                                self.delegate?.endIndicator()
@@ -444,14 +444,14 @@ class OtherMyPageVC: UIViewController {
                }
         self.delegate?.endIndicator()
     }
-    func postFollowUser(){
+    func postFollowUser() {
         self.updateFollowNum = true
         delegate = self
         self.delegate?.startIndicator()
-        DoFollowService.shared.followService(follower: myId, followed: otherUserID){ result in
+        DoFollowService.shared.followService(follower: myId, followed: otherUserID) { result in
             switch result {
             case .success(let data):
-                if let response = data as? DoFollowDataModel{
+                if let response = data as? DoFollowDataModel {
                     self.isFollow = response.data.isFollow
                     if self.isFollow == false{
                         self.isFollowButton.isSelected = false
@@ -481,21 +481,21 @@ class OtherMyPageVC: UIViewController {
 
 
 //MARK: Extension
-extension OtherMyPageVC: UICollectionViewDataSource{
+extension OtherMyPageVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var cellCount = 0
         
-        if(writenPostDriveData.count == 0){
+        if(writenPostDriveData.count == 0) {
             cellCount = 0
         }
-        else{
+        else {
             cellCount = writenPostDriveData.count + 1
         }
         return cellCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPagePostCVC.identifier, for: indexPath) as! MyPagePostCVC
         let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
         detailCell.delegate = self
         detailCell.setSelectName(name: currentState)
@@ -503,7 +503,7 @@ extension OtherMyPageVC: UICollectionViewDataSource{
         if(indexPath.row == 0){
             return detailCell
         }
-        else{
+        else {
             let writenElement = writenPostDriveData[indexPath.row-1]
             var writenTags = [writenElement.region, writenElement.theme,
                         writenElement.warning ?? ""] as [String]
@@ -523,9 +523,9 @@ extension OtherMyPageVC: UICollectionViewDataSource{
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = UIStoryboard(name: "PostDetail", bundle: nil).instantiateViewController(withIdentifier: PostDetailVC.className) as? PostDetailVC else {return}
+        let detailVC = PostDetailVC()
         if indexPath.row > 0{
-            detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
+            //detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
             detailVC.setAdditionalDataOfPost(data: DriveElement.init(
                 postID: writenPostDriveData[indexPath.row-1].postID,
                 title: writenPostDriveData[indexPath.row-1].title,
@@ -544,19 +544,19 @@ extension OtherMyPageVC: UICollectionViewDataSource{
     
     
 }
-extension OtherMyPageVC: UICollectionViewDelegate{
+extension OtherMyPageVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
                             UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0{
             return CGSize(width: userWidth-35, height: 42)
         }
-        else{
+        else {
         return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
     
 }
-extension OtherMyPageVC: UICollectionViewDelegateFlowLayout{
+extension OtherMyPageVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
@@ -586,7 +586,7 @@ extension OtherMyPageVC: MenuClickedDelegate{
         filterView.isHidden = false
     }
 }
-extension OtherMyPageVC: AnimateIndicatorDelegate{
+extension OtherMyPageVC: AnimateIndicatorDelegate {
     func startIndicator() {
         view.addSubview(lottieView)
         lottieView.isHidden = false

@@ -77,11 +77,11 @@ class FollowFollowingTVC: UITableViewCell {
         followButton.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
     }
     
-    func postFollowData(){
-        DoFollowService.shared.followService(follower: myId, followed: otherUserID){ result in
+    func postFollowData() {
+        DoFollowService.shared.followService(follower: myId, followed: otherUserID) { result in
             switch result {
             case .success(let data):
-                if let response = data as? DoFollowDataModel{
+                if let response = data as? DoFollowDataModel {
                     print(response.data.isFollow)
                     self.followButton.isSelected = response.data.isFollow
                     self.setFollowButtonUI()

@@ -449,7 +449,7 @@ class SNSLoginVC: UIViewController {
     
 }
 
-extension SNSLoginVC : ASAuthorizationControllerDelegate {
+extension SNSLoginVC: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             print(credential.user)

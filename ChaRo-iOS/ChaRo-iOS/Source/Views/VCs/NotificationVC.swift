@@ -17,7 +17,7 @@ class NotificationVC: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    func setShadow(){
+    func setShadow() {
         headerView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
     

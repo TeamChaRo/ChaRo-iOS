@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-struct settingDataModel{
+struct settingDataModel {
     var isToggle: Bool = false
     var toggleData: Bool = false
     var isSubLabel: Bool = false
@@ -10,7 +10,7 @@ struct settingDataModel{
     var titleLabelColor: UIColor = UIColor.black
     var subLabelColor: UIColor = UIColor.white
     
-    init(){
+    init() {
         
     }
     
@@ -27,12 +27,12 @@ struct settingDataModel{
         self.subLabelColor = subLabelColor
     }
     //기본 글씨 색상 변경 부분 init
-    init(titleString: String, titleLabelColor: UIColor){
+    init(titleString: String, titleLabelColor: UIColor) {
         self.titleString = titleString
         self.titleLabelColor = titleLabelColor
     }
     //기본글씨 + 좌측 글씨 + 색상
-    init(titleString: String, titleLabelColor: UIColor, isSubLabel: Bool, subLabelString: String, subLabelColor: UIColor){
+    init(titleString: String, titleLabelColor: UIColor, isSubLabel: Bool, subLabelString: String, subLabelColor: UIColor) {
         self.titleString = titleString
         self.titleLabelColor = titleLabelColor
         self.isSubLabel = isSubLabel

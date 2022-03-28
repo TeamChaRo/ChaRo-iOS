@@ -16,7 +16,7 @@ struct AppFontName {
     static let black = "NotoSansCJKkr-Black"
 }
 
-extension UIFont{
+extension UIFont {
     
     @objc class func notoSansThinFont(ofSize size: CGFloat) -> UIFont {
         return UIFont(name: AppFontName.thin, size: size)!

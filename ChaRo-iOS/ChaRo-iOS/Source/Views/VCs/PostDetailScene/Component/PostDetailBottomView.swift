@@ -33,7 +33,7 @@ class PostDetailBottomView: UIView{
         $0.setTitle("18명이 좋아합니다.", for: .normal)
     }
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         configUI()
         drawBackgroundShadow()
@@ -43,7 +43,7 @@ class PostDetailBottomView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configUI(){
+    private func configUI() {
         addSubviews([likeButton, likeDescriptionButton,
                      scrapButton, shareButton])
         
@@ -71,7 +71,7 @@ class PostDetailBottomView: UIView{
         }
     }
     
-    private func drawBackgroundShadow(){
+    private func drawBackgroundShadow() {
         self.backgroundColor = .white
         self.layer.shadowOffset = CGSize(width: -1, height: -1)
         self.layer.shadowOpacity = 0.1
