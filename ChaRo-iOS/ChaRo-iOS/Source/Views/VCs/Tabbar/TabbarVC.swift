@@ -46,8 +46,9 @@ class TabbarVC: UITabBarController {
         super.viewWillAppear(animated)
         selectedViewController = tabs[comeBackIndex]
         
-        print("이거임 : \(Constants.UserDefaultsKey.userEmail)")
-        print("이거임2: \(Constants.UserDefaultsKey.userImage)")
+        print("유저디폴트 유저이메일 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail))")
+        print("유저디폴트 유저이미지 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userImage))")
+        print("유저디폴트 유저닉네임 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname))")
     }
     
     
