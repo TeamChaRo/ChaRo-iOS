@@ -75,5 +75,5 @@ struct Constants {
     static let appleLoginURL = baseURL + "/user/register/apple"
     
     /// 알림
-    static let getNotificationListURL = baseURL + "/push/"
+    static let notificationListURL = baseURL + "/push/"
 }
