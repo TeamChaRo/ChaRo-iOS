@@ -58,7 +58,7 @@ class ThemePopupVC: UIViewController {
             if themeList.count == 3 || themeList.contains("선택안함") {
                 // 테마 최대 선택 개수에 도달하거나, "선택안함"이 이미 선택되어 있는 경우
                 themeBtnItems[sender.tag].isSelected = false
-                // TODO: Alert 띄우기
+                makeAlert(title: "", message: themeList.count == 3 ? "테마는 3개까지만 선택할 수 있습니다." : "테마를 추가로 선택하려면 \n‘선택안함’을 취소 후 다시 선택해 주세요.")
             } else {
                 configureThemeBtnsBySelect(selectedBtn: sender, isSelected: true, senderTag: sender.tag)
                 themeList.append(themeBtnItems[sender.tag].titleLabel?.text ?? "")
