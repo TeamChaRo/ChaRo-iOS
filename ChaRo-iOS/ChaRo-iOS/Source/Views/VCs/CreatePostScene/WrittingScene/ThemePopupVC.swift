@@ -48,7 +48,7 @@ class ThemePopupVC: UIViewController {
             removeCase = senderIndexList.count == removeIndex + 1 ? .removeLast : .removeFront
             
             configureThemeBtnsBySelect(selectedBtn: sender, isSelected: false, senderTag: sender.tag)
-            removeSelectedIndexImageView(senderTag: sender.tag, removeCase: removeCase ?? .removeFront)
+            removeIndexImageViewByCase(senderTag: sender.tag, removeCase: removeCase ?? .removeFront)
             themeList.remove(at: removeIndex)
             senderIndexList.remove(at: removeIndex)
             
@@ -75,10 +75,9 @@ class ThemePopupVC: UIViewController {
     @IBAction func confirmThemeBtn(_ sender: UIButton) {
         var passList: [String] = themeList
         
-        if passList.count == 1 {
-            passList.append(contentsOf: ["선택안함", "선택안함"])
-        } else if passList.count == 2 {
-            passList.append("선택안함")
+        for index in 0..<3 {
+          if index < passList.count { continue }
+          passList.append("선택안함")
         }
         
         if let pvc = self.presentingViewController as? UINavigationController {
@@ -103,7 +102,7 @@ extension ThemePopupVC {
     
     /// 테마 아이템 버튼들의 첫 UI를 구성하는 함수
     private func configureThemeBtns() {
-        themeBtnItems.forEach({
+        themeBtnItems.forEach {
             $0.layer.cornerRadius = $0.frame.height / 2
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray20.cgColor
@@ -111,7 +110,7 @@ extension ThemePopupVC {
             $0.setTitleColor(UIColor.gray40, for: .normal)
             $0.setTitleColor(UIColor.mainBlue, for: .selected)
             $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        })
+        }
         
         let entireFilterList: [String] = filterData.thema.reversed()
         
@@ -137,22 +136,20 @@ extension ThemePopupVC {
     }
     
     /// Theme 선택시 선택 순서 나타내는 ImageView를 removeFromSuperView하는 함수
-    private func removeSelectedIndexImageView(senderTag: Int, removeCase: ThemeRemoveCase) {
+    private func removeIndexImageViewByCase(senderTag: Int, removeCase: ThemeRemoveCase) {
         
         switch removeCase {
         case .removeLast:
-            for subview in themeBtnItems[senderTag].subviews {
-                if subview.tag == senderTag + 1 {
-                    subview.removeFromSuperview()
-                }
-            }
+            removeIndexImageView(of: senderTag)
         case .removeFront:
-            for i in senderIndexList {
-                for subview in themeBtnItems[i].subviews {
-                    if subview.tag == i + 1 {
-                        subview.removeFromSuperview()
-                    }
-                }
+            senderIndexList.forEach { removeIndexImageView(of: $0) }
+        }
+    }
+    
+    private func removeIndexImageView(of index : Int) {
+        for subview in themeBtnItems[index].subviews {
+            if subview.tag == index + 1 {
+                subview.removeFromSuperview()
             }
         }
     }
