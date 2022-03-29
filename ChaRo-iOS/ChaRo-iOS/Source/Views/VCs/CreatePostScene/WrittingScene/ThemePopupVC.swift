@@ -102,7 +102,7 @@ extension ThemePopupVC {
     /// 테마 아이템 버튼들의 첫 UI를 구성하는 함수
     private func configureThemeBtns() {
         themeBtnItems.forEach({
-            $0.layer.cornerRadius = 21
+            $0.layer.cornerRadius = $0.frame.height / 2
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray20.cgColor
             $0.tintColor = .clear
@@ -127,7 +127,7 @@ extension ThemePopupVC {
     
     /// Theme 선택시 선택 순서 나타내는 ImageView를 addSubView하는 함수
     private func addSelectedIndexImageView(senderTag: Int, selectedIndex: Int) {
-        let selectIndexImageView = UIImageView(frame: CGRect(x: 9, y: 13, width: 14, height:15))
+        let selectIndexImageView = UIImageView(frame: CGRect(x: 10, y: 13.5, width: 14, height:15))
         selectIndexImageView.tag = senderTag + 1
         selectIndexImageView.image = UIImage(named: "themeNumber\(selectedIndex + 1)")
         selectIndexImageView.clipsToBounds = true
