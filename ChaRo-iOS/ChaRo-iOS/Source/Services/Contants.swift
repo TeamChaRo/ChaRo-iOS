@@ -73,4 +73,7 @@ struct Constants {
     static let kakaoLoginURL = baseURL + "/user/register/kakao"
     static let googleLoginURL = baseURL + "/user/register/google"
     static let appleLoginURL = baseURL + "/user/register/apple"
+    
+    /// 알림
+    static let notificationListURL = baseURL + "/push/"
 }
