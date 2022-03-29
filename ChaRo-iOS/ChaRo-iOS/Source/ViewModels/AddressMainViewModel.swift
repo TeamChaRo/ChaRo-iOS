@@ -18,6 +18,7 @@ class AddressMainViewModel {
     let addressSubject = ReplaySubject<[(AddressDataModel, Int)]>.create(bufferSize: 1)
     let searchHistorySubject = PublishSubject<[KeywordResult]>()
     let polylineSubject = PublishSubject<[TMapPolyline]>()
+    let markerSubject = PublishSubject<[TMapMarker]>()
     let isConfirmCheckSubject = PublishSubject<Bool>()
     
     init() {
@@ -32,6 +33,7 @@ class AddressMainViewModel {
     struct Output {
         let addressSubject: ReplaySubject<[(AddressDataModel, Int)]>
         let polylineSubject: PublishSubject<[TMapPolyline]>
+        let markerSubject: PublishSubject<[TMapMarker]>
         let isConfirmCheckSubject: PublishSubject<Bool>
     }
     
@@ -42,15 +44,20 @@ class AddressMainViewModel {
             }).disposed(by: disposeBag)
         let output = Output(addressSubject: addressSubject,
                             polylineSubject: polylineSubject,
+                            markerSubject: markerSubject,
                             isConfirmCheckSubject: isConfirmCheckSubject)
         return output
     }
     
     private func updateAddress(of address: AddressDataModel, at index: Int) {
-        if address.title == "" {
-            index == 1 ? addressList.insert(address, at: 1) : addressList.remove(atOffsets: IndexSet(1...1))
+        if index == -1 {
+            addressList.insert(address, at: 1)
+        } else if index == -2 {
+            addressList.remove(atOffsets: IndexSet(1...1))
+            inputMarkerInMapView()
         } else {
             addressList[index] = address
+            inputMarkerInMapView()
         }
         addressSubject.onNext(refineAddressData())
         addPathInMapView()
@@ -72,6 +79,17 @@ class AddressMainViewModel {
             }
         }
         isConfirmCheckSubject.onNext(isConfirm)
+    }
+    
+    private func inputMarkerInMapView() {
+        var markerList: [TMapMarker] = []
+        for index in 0..<addressList.count {
+            if addressList[index].title == "" { continue }
+            let point = addressList[index].getPoint()
+            let marker = TMapMarker(position: point)
+            markerList.append(marker)
+        }
+        markerSubject.onNext(markerList)
     }
 }
 
