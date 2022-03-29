@@ -18,10 +18,8 @@ class CreatePostVC: UIViewController {
     public var postTitle: String = ""
     public var province: String = ""
     public var region: String = ""
-    public var lastTheme: [String] = []
     public var theme: [String] = [] {
         didSet {
-            lastTheme = oldValue
             tableView.reloadRows(at: [[0, 3]], with: .automatic)
         }
     }
@@ -29,6 +27,9 @@ class CreatePostVC: UIViewController {
     public var isParking: Bool = false
     public var parkingDesc: String = ""
     public var courseDesc: String = ""
+    
+    public var lastThemeList: [String] = []
+    public var lastSenderList: [Int] = []
     
     var selectImages: [UIImage] = []
     var itemProviders: [NSItemProvider] = []
@@ -415,13 +416,15 @@ extension CreatePostVC {
         guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
         
         cellHeights[3] = themeCell.setDynamicHeight()
-        themeCell.setThemeData(themeList: theme.isEmpty ? lastTheme : theme)
+        themeCell.setThemeData(themeList: theme.isEmpty ? lastThemeList : theme)
         
         themeCell.tapSetThemeBtnAction = {
-            guard let slideVC = self.storyboard?.instantiateViewController(withIdentifier: ThemePopupVC.className) else { return }
-            slideVC.modalPresentationStyle = .custom
-            slideVC.transitioningDelegate = self
-            self.present(slideVC, animated: true, completion: nil)
+            guard let themeVC = self.storyboard?.instantiateViewController(withIdentifier: ThemePopupVC.className) as? ThemePopupVC else { return }
+            themeVC.modalPresentationStyle = .custom
+            themeVC.transitioningDelegate = self
+            themeVC.lastThemeList = self.lastThemeList
+            themeVC.lastSenderList = self.lastSenderList
+            self.present(themeVC, animated: true, completion: nil)
         }
         
         return themeCell
