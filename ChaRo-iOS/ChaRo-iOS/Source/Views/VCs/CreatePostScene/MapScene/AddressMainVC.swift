@@ -56,28 +56,15 @@ class AddressMainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        bindToViewModel()
         setConstraints()
+        bindToViewModel()
         bind()
         initMapView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        inputMarkerInMapView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupGuideAnimationView()
-    }
-    
-    public func setAddressListData(list: [AddressDataModel]) {
-        if list.isEmpty {
-            isFirstOpen = true
-        } else {
-            isFirstOpen = false
-            viewModel.addressList = list
-        }
     }
     
     private func setConstraints() {
@@ -97,7 +84,8 @@ class AddressMainVC: UIViewController {
         
         tMapView.snp.makeConstraints {
             $0.top.equalTo(tableView.snp.bottom)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
         }
         
         confirmButton.snp.makeConstraints {
@@ -133,13 +121,11 @@ class AddressMainVC: UIViewController {
             }.disposed(by: disposeBag)
         
         output.polylineSubject.bind(onNext: { [weak self] polyLineList in
-            polyLineList.forEach {
-                $0.strokeColor = .mainBlue
-                $0.map = self?.tMapView
-            }
-            DispatchQueue.main.async {
-                self?.tMapView.fitMapBoundsWithPolylines(polyLineList)
-            }
+            self?.updatePolyline(list: polyLineList)
+        }).disposed(by: disposeBag)
+        
+        output.markerSubject.bind(onNext: { [weak self] markerList in
+            self?.updateMarkers(list: markerList)
         }).disposed(by: disposeBag)
         
         output.isConfirmCheckSubject.bind(onNext: { [weak self]isConfirm in
@@ -164,6 +150,9 @@ class AddressMainVC: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    func replaceAddressData(address: AddressDataModel, index: Int) {
+        updateAddressSubject.onNext((address, index))
+    }
     
     private func changeAddressData() -> [Address] {
         print("현재까지 주소 - \(viewModel.addressList)")
@@ -181,8 +170,19 @@ class AddressMainVC: UIViewController {
         }
     }
     
-    func replaceAddressData(address: AddressDataModel, index: Int) {
-        updateAddressSubject.onNext((address, index))
+    func setWritePostDataForServer(data: WritePostData, imageList: [UIImage]) {
+        sendedPostData = data
+        self.imageList = imageList
+        dump(imageList)
+    }
+    
+    func setAddressListData(list: [AddressDataModel]) {
+        if list.isEmpty {
+            isFirstOpen = true
+        } else {
+            isFirstOpen = false
+            viewModel.addressList = list
+        }
     }
 }
 
@@ -203,23 +203,15 @@ extension AddressMainVC{
     }
 }
 
-//MARK: - Address 관련
-extension AddressMainVC {
-    public func setWritePostDataForServer(data: WritePostData, imageList: [UIImage]) {
-        sendedPostData = data
-        self.imageList = imageList
-        dump(imageList)
-    }
-}
 
 extension AddressMainVC: AddressButtonCellDelegate {
     func addressButtonCellForRemoving(cell: AddressButtonCell) {
-        updateAddressSubject.onNext((AddressDataModel(), -1))
+        updateAddressSubject.onNext((AddressDataModel(), -2))
         updateTableViewHeight()
     }
     
     func addressButtonCellForAdding(cell: AddressButtonCell) {
-        updateAddressSubject.onNext((AddressDataModel(), 1))
+        updateAddressSubject.onNext((AddressDataModel(), -1))
         updateTableViewHeight()
     }
     
@@ -238,16 +230,30 @@ extension AddressMainVC: AddressButtonCellDelegate {
 //MARK: - TMap
 extension AddressMainVC {
     
-    private func inputMarkerInMapView() {
-        tMapView.setZoom(15)
-        for index in 0..<viewModel.addressList.count {
-            if viewModel.addressList[index].title == "" { continue }
-            let point = viewModel.addressList[index].getPoint()
-            let marker = TMapMarker(position: point)
-            marker.icon = setMarkerImage(index: index)
-            marker.map = tMapView
-            markerList.append(marker)
-            tMapView.setCenter(point)
+    private func updatePolyline(list: [TMapPolyline]) {
+        polyLineList.forEach { $0.map = nil }
+        polyLineList = list
+        polyLineList.forEach {
+            $0.strokeColor = .mainBlue
+            $0.map = tMapView
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.tMapView.fitMapBoundsWithPolylines(self?.polyLineList ?? [])
+        }
+    }
+    
+    private func updateMarkers(list: [TMapMarker]) {
+        markerList.forEach { $0.map = nil }
+        markerList = list
+        for index in 0..<markerList.count {
+            markerList[index].icon = setMarkerImage(index: index)
+            markerList[index].map = tMapView
+        }
+        
+        if markerList.count == 1 {
+            DispatchQueue.main.async { [weak self] in
+                self?.tMapView.fitMapBoundsWithMarkers(self?.markerList ?? [])
+            }
         }
     }
     
@@ -255,7 +261,7 @@ extension AddressMainVC {
         switch index {
         case 0:
             return ImageLiterals.icRouteStart
-        case viewModel.addressList.count - 1:
+        case markerList.count - 1:
             return ImageLiterals.icRouteEnd
         default:
             return ImageLiterals.icRouteWaypoint
@@ -271,15 +277,16 @@ extension AddressMainVC: TMapViewDelegate {
     }
  
     func mapViewDidFinishLoadingMap() {
-        tMapView.setCenter(CLLocationCoordinate2D(latitude: 34.89910928257491, longitude: 127.8400762160781))
+        tMapView.setCenter(CLLocationCoordinate2D(latitude: 35.83808343685922, longitude: 127.84007638374868))
         tMapView.setZoom(6)
+        tMapView.sizeToFit()
+        tMapView.layoutIfNeeded()
     }
     
     func mapView(_ mapView: TMapView, shouldChangeFrom oldPosition: CLLocationCoordinate2D,
                  to newPosition: CLLocationCoordinate2D) -> Bool {
         return true
     }
-    
 }
 
 
