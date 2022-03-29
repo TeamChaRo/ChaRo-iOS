@@ -249,7 +249,6 @@
 /* Begin PBXFileReference section */
 		330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopupVC.swift; sourceTree = "<group>"; };
 		336D2CFC26E72F0900E64042 /* ChaRo-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChaRo-iOS.entitlements"; sourceTree = "<group>"; };
-		339DEED3277A3E8B002749B2 /* TransitionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionVC.swift; sourceTree = "<group>"; };
 		339DEED5277A44C3002749B2 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
@@ -1073,7 +1072,6 @@
 			children = (
 				F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */,
 				330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */,
-				339DEED3277A3E8B002749B2 /* TransitionVC.swift */,
 				339DEED5277A44C3002749B2 /* PresentationController.swift */,
 			);
 			path = WrittingScene;
@@ -1747,7 +1745,6 @@
 				3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */,
 				3C2B3FD427E0E76B005D2DC5 /* PostPhotoTVC.swift in Sources */,
 				70D63E042694BD290036484B /* HomeSeasonRecommandTVC.swift in Sources */,
-				339DEED4277A3E8B002749B2 /* TransitionVC.swift in Sources */,
 				F468C0FE269E20390019B1B3 /* CreatePostDataModel.swift in Sources */,
 				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
