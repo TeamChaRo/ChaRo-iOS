@@ -23,15 +23,18 @@ class ThemePopupVC: UIViewController {
     
     // MARK: Variables
     private var filterData = FilterDatas()
-    private var themeList: [String] = []
-    private var senderIndexList: [Int] = []
     private var removeCase: ThemeRemoveCase?
+    var lastThemeList: [String]?
+    var lastSenderList: [Int]?
+    var themeList: [String] = []
+    var senderIndexList: [Int] = []
     
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTopView()
         configureThemeBtns()
+        setLastDataList()
     }
     
     // MARK: IBAction
@@ -80,6 +83,8 @@ class ThemePopupVC: UIViewController {
         
         if let presentingVC = presentingViewController as? CreatePostVC {
             presentingVC.theme = passList
+            presentingVC.lastThemeList = themeList
+            presentingVC.lastSenderList = senderIndexList
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -146,6 +151,26 @@ extension ThemePopupVC {
                         subview.removeFromSuperview()
                     }
                 }
+            }
+        }
+    }
+}
+
+// MARK: - Custom Methods
+extension ThemePopupVC {
+    
+    /// 지난 선택 데이터 리스트를 받아와 set하는 함수
+    func setLastDataList() {
+        if let theme = lastThemeList,
+           let sender = lastSenderList {
+            themeList = theme
+            senderIndexList = sender
+        }
+        
+        if !themeList.isEmpty {
+            for i in 0...senderIndexList.count - 1 {
+                configureThemeBtnsBySelect(selectedBtn: themeBtnItems[senderIndexList[i]], isSelected: true, senderTag: senderIndexList[i])
+                addSelectedIndexImageView(senderTag: senderIndexList[i], selectedIndex: i)
             }
         }
     }
