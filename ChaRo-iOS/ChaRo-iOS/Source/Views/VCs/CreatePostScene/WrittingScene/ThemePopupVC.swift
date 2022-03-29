@@ -42,8 +42,9 @@ class ThemePopupVC: UIViewController {
     @IBAction func themeBtnDidTap(_ sender: UIButton) {
         if sender.isSelected {
             let removeIndex = senderIndexList.firstIndex(where: {$0 == sender.tag}) ?? 0
-            configureThemeBtnsBySelect(selectedBtn: sender, isSelected: false, senderTag: sender.tag)
             removeCase = senderIndexList.count == removeIndex + 1 ? .removeLast : .removeFront
+            
+            configureThemeBtnsBySelect(selectedBtn: sender, isSelected: false, senderTag: sender.tag)
             removeSelectedIndexImageView(senderTag: sender.tag, removeCase: removeCase ?? .removeFront)
             themeList.remove(at: removeIndex)
             senderIndexList.remove(at: removeIndex)
@@ -71,16 +72,10 @@ class ThemePopupVC: UIViewController {
     @IBAction func confirmThemeBtn(_ sender: UIButton) {
         var passList: [String] = themeList
         
-        if passList.isEmpty {
-            // TODO: Alert 띄우기
-            print("Alert")
-        } else {
-            if passList.count == 1 {
-                passList.append(contentsOf: ["선택안함", "선택안함"])
-            } else if passList.count == 2 {
-                passList.append("선택안함")
-            }
-            print(passList)
+        if passList.count == 1 {
+            passList.append(contentsOf: ["선택안함", "선택안함"])
+        } else if passList.count == 2 {
+            passList.append("선택안함")
         }
     }
 }
