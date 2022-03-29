@@ -74,7 +74,6 @@ class AddressMainViewModel {
         for address in addressList {
             if address.title == "" {
                 isConfirm = false
-                print("isConfirm = \(isConfirm)")
                 break
             }
         }

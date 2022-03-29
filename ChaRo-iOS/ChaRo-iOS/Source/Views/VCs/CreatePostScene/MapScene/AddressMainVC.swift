@@ -154,7 +154,6 @@ class AddressMainVC: UIViewController {
     }
     
     private func changeAddressData() -> [Address] {
-        print("현재까지 주소 - \(viewModel.addressList)")
         var castedToAddressDatalList : [Address] = []
         viewModel.addressList.forEach{
             castedToAddressDatalList.append($0.getAddressDataModel())
