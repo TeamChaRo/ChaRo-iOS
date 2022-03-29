@@ -23,7 +23,6 @@ class AddressMainVC: UIViewController {
     private var isFirstFinded: Bool = true
     private var sendedPostData: WritePostData?
     private var imageList: [UIImage] = []
-    private let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
     
     private lazy var tableView = UITableView().then {
         $0.register(cell: AddressButtonCell.self)
@@ -190,6 +189,7 @@ class AddressMainVC: UIViewController {
 extension AddressMainVC{
     private func setupGuideAnimationView() {
         guard isFirstOpen else { return }
+        let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
         let guideView = MapGuideView()
         self.view.addSubview(guideView)
         guideView.snp.makeConstraints {
