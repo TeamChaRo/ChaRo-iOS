@@ -408,7 +408,7 @@ class MyPageVC: UIViewController {
         let writeContentHeigth = writeCollectionView.contentSize.height
         let saveContentHeigth = saveCollectioinView.contentSize.height
         
-        if(collectionScrollView.contentOffset.x > 0 && collectionScrollView.contentOffset.y < 0) {
+        if (collectionScrollView.contentOffset.x > 0 && collectionScrollView.contentOffset.y < 0) {
             collectionScrollView.contentOffset.y = 0
         }
         //바텀뷰 이동
@@ -444,8 +444,7 @@ class MyPageVC: UIViewController {
                 //MypageInfinityService.addURL = "/write/11/0"
                 getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
-            }
-            else if currentState == "최신순" {
+            } else if currentState == "최신순" {
                 //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
                 likeOrNew = "new/"
                 addURL = "/write/\(lastId)"
@@ -454,9 +453,8 @@ class MyPageVC: UIViewController {
             }
                 
             }
-        }
-        //저장글 무한스크롤
-        else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) {
+            //저장글 무한 스크롤
+        } else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) {
             let lastcount = savePostDriveData.count
             var likeOrNew = ""
             var addURL = ""
@@ -473,8 +471,7 @@ class MyPageVC: UIViewController {
                 //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
                 //MypageInfinityService.addURL = "/write/5/0"
                 getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
-            }
-            else if currentState == "최신순" {
+            } else if currentState == "최신순" {
                 //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
                 likeOrNew = "new/"
                 addURL = "/write/\(lastId)"
@@ -712,8 +709,7 @@ extension MyPageVC: UICollectionViewDelegate {
                             UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
             return CGSize(width: userWidth-35, height: 42)
-        }
-        else {
+        } else {
         return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
@@ -729,8 +725,7 @@ extension MyPageVC: UICollectionViewDataSource {
         if collectionView.tag == 1 {
             detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
             driveData = writenPostDriveData[indexPath.row-1]
-        }
-        else {
+        } else {
             detailVC.setPostId(id: savePostDriveData[indexPath.row-1].postID)
                 driveData = savePostDriveData[indexPath.row-1]
         }
@@ -757,15 +752,12 @@ extension MyPageVC: UICollectionViewDataSource {
         
         if(writenPostDriveData.count == 0) {
             writeCellCount = 0
-        }
-        else {
+        } else {
             writeCellCount = writenPostDriveData.count + 1
         }
-        
         if(savePostDriveData.count == 0) {
             saveCellCount = 0
-        }
-        else {
+        } else {
             saveCellCount = savePostDriveData.count + 1
         }
         
@@ -789,8 +781,7 @@ extension MyPageVC: UICollectionViewDataSource {
         case 1:
             if(indexPath.row == 0) {
                 return detailCell
-            }
-            else {
+            } else {
                 let writenElement = writenPostDriveData[indexPath.row-1]
                 var writenTags = [writenElement.region, writenElement.theme,
                             writenElement.warning ?? ""] as [String]
@@ -809,9 +800,7 @@ extension MyPageVC: UICollectionViewDataSource {
         case 2:
             if(indexPath.row == 0) {
                 return detailCell
-            }
-            
-            else {
+            } else {
                 let saveElement = savePostDriveData[indexPath.row-1]
                 var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
                 

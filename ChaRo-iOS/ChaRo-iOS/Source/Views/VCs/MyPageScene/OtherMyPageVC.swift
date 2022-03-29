@@ -284,8 +284,7 @@ class OtherMyPageVC: UIViewController {
                 //MypageInfinityService.addURL = "/write/11/0"
                 getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
-            }
-            else if currentState == "최신순"{
+            } else if currentState == "최신순"{
                 //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
                 likeOrNew = "new/"
                 addURL = "/write/\(lastId)"
@@ -388,8 +387,7 @@ class OtherMyPageVC: UIViewController {
                            if self.isFollow == true{
                                self.isFollowButton.isSelected = true
                                self.setFollowButtonUI()
-                           }
-                           else {
+                           } else {
                                self.isFollowButton.isSelected = false
                                self.setFollowButtonUI()
                            }
@@ -420,8 +418,7 @@ class OtherMyPageVC: UIViewController {
                            if response.data.lastID == 0{
                                self.isLast = true
                                self.delegate?.endIndicator()
-                           }
-                           else {
+                           } else {
                                self.isLast = false
                            }
                            if self.isLast == false {
@@ -457,8 +454,7 @@ class OtherMyPageVC: UIViewController {
                         self.isFollowButton.isSelected = false
                         self.setFollowButtonUI()
                         self.getMypageData()
-                    }
-                    else{
+                    } else{
                         self.isFollowButton.isSelected = true
                         self.setFollowButtonUI()
                         self.getMypageData()
@@ -502,8 +498,7 @@ extension OtherMyPageVC: UICollectionViewDataSource {
     
         if(indexPath.row == 0){
             return detailCell
-        }
-        else {
+        } else {
             let writenElement = writenPostDriveData[indexPath.row-1]
             var writenTags = [writenElement.region, writenElement.theme,
                         writenElement.warning ?? ""] as [String]
@@ -549,8 +544,7 @@ extension OtherMyPageVC: UICollectionViewDelegate {
                             UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0{
             return CGSize(width: userWidth-35, height: 42)
-        }
-        else {
+        } else {
         return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
