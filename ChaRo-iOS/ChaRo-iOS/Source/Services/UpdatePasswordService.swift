@@ -15,8 +15,7 @@ struct UpdatePasswordService {
     func putNewPassword(password: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         
-        //TODO: - UserDefault 에 저장된 유저의 email로 변경예정
-        let userEmail = "you@gmail.com"
+        let userEmail = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail)
         let original = Constants.updatePassword + "userEmail=\(userEmail)&newPassword=\(password)"
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         

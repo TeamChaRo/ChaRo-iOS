@@ -98,7 +98,8 @@ class SNSLoginVC: UIViewController {
     
     @objc func testLogin() {
         snsType = "G"
-        snsJoin(email: "ghjf3322233@naver.com", profileImage: nil, nickname: nil)
+        socialLogin(email: "ghjf39853@naver.com", profileImage: nil, nickname: nil)
+        //snsJoin(email: "ghjf3322233@naver.com", profileImage: nil, nickname: nil)
     }
     
     @objc func appleLogin() {
@@ -137,7 +138,7 @@ class SNSLoginVC: UIViewController {
         snsType = "K"
         
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk {(_, error) in
+            UserApi.shared.loginWithKakaoTalk { (_, error) in
                 if let error = error {
                     print(error)
                 }
@@ -262,11 +263,10 @@ class SNSLoginVC: UIViewController {
                     switch result {
                     
                     case .success(let data):
-//                        print(data)
-//                        UserDefaults.standard.set(data.email, forKey: Constants.UserDefaultsKey.userEmail)
-//                        UserDefaults.standard.set(profileImage, forKey: Constants.UserDefaultsKey.userImage)
+                        print("data : \(data)")
                         if let personData = data as? UserInitialInfo {
 
+                            print("personData : \(personData)")
                             UserDefaults.standard.set(personData.email, forKey: Constants.UserDefaultsKey.userEmail)
                             UserDefaults.standard.set(personData.profileImage, forKey: Constants.UserDefaultsKey.userImage)
                             UserDefaults.standard.set(personData.nickname, forKey: Constants.UserDefaultsKey.userNickname)

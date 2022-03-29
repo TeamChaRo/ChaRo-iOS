@@ -92,9 +92,9 @@ class ChangePasswordVC: UIViewController {
             
             switch result {
             case .success(let msg):
-                print("success", msg)
                 self.makeAlert(title: "", message: "비밀번호가 변경되었습니다.", okAction: { _ in 
                     self.navigationController?.popViewController(animated: true)
+                    UserDefaults.standard.set(newPassword, forKey: Constants.UserDefaultsKey.userPassword)
                 })
             case .requestErr(let msg):
                 print("requestERR", msg)
@@ -178,12 +178,11 @@ extension ChangePasswordVC: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
         let text = textField.text
+        let oldPassword = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userPassword) as? String
         
         switch textField {
         case oldPasswordInputView.inputTextField :
-        
-            //TODO: - UserDefault 에 저장된 유저의 비밀번호로 변경예정
-            if text == "12345" {
+            if text == oldPassword {
                 oldPasswordInputView.setBlueTFLabelColorWithText(text: "확인되었습니다.")
                 newPasswordInputView.isHidden = false
             } else {

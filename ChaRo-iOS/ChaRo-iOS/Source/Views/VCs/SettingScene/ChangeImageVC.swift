@@ -60,7 +60,9 @@ class ChangeImageVC: UIViewController, UITextFieldDelegate {
     
     private let nicknameView = JoinInputView(title: "",
                                              subTitle: "닉네임",
-                                             placeholder: "기존 닉네임")
+                                             placeholder: "기존 닉네임").then {
+        $0.inputTextField?.text = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname) as? String
+    }
     
     
     
@@ -152,6 +154,7 @@ class ChangeImageVC: UIViewController, UITextFieldDelegate {
                 print("success", msg)
                 self.makeAlert(title: "", message: "프로필이 변경되었습니다.", okAction: { _ in
                     self.navigationController?.popViewController(animated: true)
+                    UserDefaults.standard.set(newNickname, forKey: Constants.UserDefaultsKey.userNickname)
                 })
             case .requestErr(let msg):
                 print("requestERR", msg)
