@@ -41,7 +41,7 @@ class ThemePopupVC: UIViewController {
     
     @IBAction func themeBtnDidTap(_ sender: UIButton) {
         if sender.isSelected {
-            let removeIndex = senderIndexList.firstIndex(where: {$0 == sender.tag}) ?? 0
+            let removeIndex = senderIndexList.firstIndex(where: { $0 == sender.tag }) ?? 0
             removeCase = senderIndexList.count == removeIndex + 1 ? .removeLast : .removeFront
             
             configureThemeBtnsBySelect(selectedBtn: sender, isSelected: false, senderTag: sender.tag)
@@ -64,7 +64,7 @@ class ThemePopupVC: UIViewController {
                 configureThemeBtnsBySelect(selectedBtn: sender, isSelected: true, senderTag: sender.tag)
                 themeList.append(themeBtnItems[sender.tag].titleLabel?.text ?? "")
                 senderIndexList.append(sender.tag)
-                addSelectedIndexImageView(senderTag: sender.tag, selectedIndex: senderIndexList.firstIndex(where: {$0 == sender.tag}) ?? 0)
+                addSelectedIndexImageView(senderTag: sender.tag, selectedIndex: senderIndexList.firstIndex(where: { $0 == sender.tag }) ?? 0)
             }
         }
     }
