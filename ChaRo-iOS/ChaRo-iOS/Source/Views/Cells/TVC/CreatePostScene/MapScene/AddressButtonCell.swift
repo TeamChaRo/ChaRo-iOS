@@ -59,24 +59,6 @@ class AddressButtonCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setInitContent(of type: AddressCellType) {
-        let title = "\(type.rawValue)를 입력해주세요"
-        setCellStyleForType(type: type)
-        searchButton.setTitle(title, for: .normal)
-        searchButton.setTitleColor(.gray30, for: .normal)
-    }
-    
-    public func setAddressText(address: AddressDataModel) {
-        print("setAddressText = \(address), cellType = \(cellType)")
-        self.address = address
-        searchButton.setTitle(address.title, for: .normal)
-        if cellType == .end{
-            plusButton.isEnabled = true
-        } else if cellType == .mid{
-            plusButton.isEnabled = false
-        }
-    }
-    
     func setContent(of address: AddressDataModel, for type: AddressCellType, at totalCount: Int) {
         setCellStyleForType(type: type)
         if address.title == "" {
@@ -113,7 +95,6 @@ class AddressButtonCell: UITableViewCell {
             .asDriver()
             .drive(onNext: { [weak self] in
                 guard let self = self else { return }
-                print("search Button click")
                 self.delegate?.addressButtonCellForPreseting(cell: self)
             }).disposed(by: disposeBag)
 
