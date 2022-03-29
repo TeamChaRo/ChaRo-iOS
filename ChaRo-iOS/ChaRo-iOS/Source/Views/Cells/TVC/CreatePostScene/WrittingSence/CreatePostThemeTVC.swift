@@ -25,26 +25,17 @@ class CreatePostThemeTVC: UITableViewCell {
     }
     
     // MARK: 데이터 전달 closeur
-    public var setThemeInfo: (([String]) -> Void)?
+    public var tapSetThemeBtnAction : (() -> ())?
 
-    
-    // about pickerview
-    private var pickerView = UIPickerView()
-    private let toolbar = UIToolbar()
     private var textFieldList: [UITextField] = []
     private var currentIndex = 0 // 현재 선택된 component
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
     private var currentList: [String] = [] //pickerview에 표시 될 List
-    private var filterList: [String] = ["","",""]{
-        didSet {
-            _ = setThemeInfo?(self.filterList)
-        }
-    }
+    private var filterList: [String] = ["","",""]
     private var pickerSelectFlag: Bool = false
    
     // MARK: UI Components
     private let courseTitleView = PostCellTitleView(title: "어느 테마의 드라이브였나요?", subTitle: "드라이브 테마를 한 개 이상 선택해주세요.")
-
 
     private let themeFirstButton: UIButton = {
         let button = UIButton()
@@ -90,7 +81,6 @@ class CreatePostThemeTVC: UITableViewCell {
         configureLayout()
         initTextField()
         setTextFieldAction()
-        initPickerView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -109,9 +99,6 @@ class CreatePostThemeTVC: UITableViewCell {
             textField.tintColor = .clear
             textField.font = .notoSansMediumFont(ofSize: 14)
             textField.textColor = .gray40
-            
-            textField.inputAccessoryView = toolbar
-            textField.inputView = pickerView
         }
     }
     
@@ -124,178 +111,21 @@ class CreatePostThemeTVC: UITableViewCell {
         self.bringSubviewToFront(themeSecondField)
         self.bringSubviewToFront(themeThirdField)
     }
-    
 }
 
-// MARK: - PickerView
+// MARK: - Custom Methods
 extension CreatePostThemeTVC {
-    private func initPickerView() {
-        setPickerViewDelegate()
-        createPickerViewToolbar()
-    }
-    
-    private func setPickerViewDelegate() {
-        pickerView.dataSource = self
-        pickerView.delegate = self
-    }
-    
-    private func createPickerViewToolbar() {
-        // ToolBar
-        toolbar.sizeToFit()
-        
-        // bar button item
-        let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(self.donePresseed))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
-
-    }
-    
-    @objc
-    func donePresseed() {
-        
-        if !pickerSelectFlag { didNotSelect() }
-        var setText: String = filterList[currentIndex]
-        
-        switch currentIndex {
-        case 0:
-            if setText != "" {
-                themeFirstField.textColor = .mainBlue
-                themeFirstButton.setImage(UIImage(named: "select"), for: .normal)
-            } else { setText = "테마 1" }
-            themeFirstField.text = setText
-        case 1:
-            if setText != "" {
-                themeSecondField.textColor = .mainBlue
-                themeSecondButton.setImage(UIImage(named: "select"), for: .normal)
-            } else { setText = "테마 2" }
-            themeSecondField.text = setText
-        case 2:
-            if setText != "" {
-                themeThirdField.textColor = .mainBlue
-                themeThirdButton.setImage(UIImage(named: "select"), for: .normal)
-            } else { setText = "테마 3" }
-            themeThirdField.text = setText
-        default:
-            print("done error")
-        }
-        wasSelected()
-
-        self.endEditing(true)
-    }
-    
-    func didNotSelect() {
-        switch currentIndex {
-        case 0: filterList[currentIndex] = ""
-        case 1: filterList[currentIndex] = ""
-        case 2: filterList[currentIndex] = ""
-        default: print("text set error")
-        }
-    }
-    
-    func wasSelected() {
-        
-        switch currentIndex {
-        case 0: // 테마 1 재선택 필터링
-            if filterList[currentIndex+1] != "" { // 테마2가 이미 있다는 것
-                filterList[currentIndex+1] = "테마 2"
-                themeSecondField.text = filterList[currentIndex+1]
-                themeSecondField.textColor = .gray40
-                themeSecondButton.setImage(UIImage(named: "unselect"), for: .normal)
-            }
-            if filterList[currentIndex+2] != "" { // 테마3이 이미 있다는 것
-                filterList[currentIndex+2] = "테마 3"
-                themeThirdField.text = filterList[currentIndex+2]
-                themeThirdField.textColor = .gray40
-                themeThirdButton.setImage(UIImage(named: "unselect"), for: .normal)
-            }
-        case 1: // 테마 2 재선택 필터링
-            if filterList[currentIndex+1] != "" { // 테마3이 이미 있다는 것
-                filterList[currentIndex+1] = "테마 3"
-                themeThirdField.text = filterList[currentIndex+1]
-                themeThirdField.textColor = .gray40
-                themeThirdButton.setImage(UIImage(named: "unselect"), for: .normal)
-            }
-        default:
-            print("wasSelected() error")
-        }
-        
-        
-    }
-
     @objc
     func clikedTextField(_ sender: UITextField) {
-        
-        currentIndex = sender.tag
-        pickerSelectFlag = false
-        pickerView.selectRow(0, inComponent: 0, animated: true)
-        changeCurrentPickerData(index: currentIndex) // data 지정
-        changeToolbarText(index: currentIndex) // title 지정
-        pickerView.reloadComponent(0)
-        
+        tapSetThemeBtnAction?()
     }
     
-    func changeCurrentPickerData(index: Int) {
-        
-        if index == 0 {
-            currentList = filterData.thema
-        } else if  index == 1 && filterList[0] != "" {
-            currentList = filterData.thema
-            let removeIdx = currentList.firstIndex(of: filterList[0])!
-            currentList.remove(at: removeIdx)
-        } else if index == 2 && filterList[0] != "" && filterList[1] != "" {
-            currentList = filterData.thema
-            let removeIdx1 = currentList.firstIndex(of: filterList[0])!
-            currentList.remove(at: removeIdx1)
-            let removeIdx2 = currentList.firstIndex(of: filterList[1])!
-            currentList.remove(at: removeIdx2)
-        } else {
-            self.endEditing(true)
+    func setThemeData(themeList: [String]) {
+        if !themeList.isEmpty {
+            themeFirstField.text = themeList[0]
+            themeSecondField.text = themeList[1]
+            themeThirdField.text = themeList[2]
         }
-    }
-    
-    func changeToolbarText(index: Int) {
-        var newTitle = ""
-        
-        switch index {
-        case 0:
-            newTitle = "테마"
-        default:
-            newTitle = "테마"
-        }
-        toolbar.items![0].title = newTitle
-    }
-    
-}
-
-extension CreatePostThemeTVC: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currentList[row]
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerSelectFlag = true
-        if currentList[row] != "선택안함" && currentList[row] != "" {
-            filterList[currentIndex] = currentList[row]
-        } else {
-            switch currentIndex {
-            case 0: filterList[currentIndex] = "테마 1"
-            case 1: filterList[currentIndex] = "테마 2"
-            case 2: filterList[currentIndex] = "테마 3"
-            default: print("text set error")
-            }
-        }
-    }
-}
-
-extension CreatePostThemeTVC: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currentList.count
     }
 }
 
