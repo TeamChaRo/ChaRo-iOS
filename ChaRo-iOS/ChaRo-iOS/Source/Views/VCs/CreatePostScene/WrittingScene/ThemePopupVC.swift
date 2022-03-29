@@ -77,6 +77,11 @@ class ThemePopupVC: UIViewController {
         } else if passList.count == 2 {
             passList.append("선택안함")
         }
+        
+        if let presentingVC = presentingViewController as? CreatePostVC {
+            presentingVC.theme = passList
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
