@@ -25,7 +25,7 @@ class CreatePostThemeTVC: UITableViewCell {
     }
     
     // MARK: 데이터 전달 closeur
-    public var tapSetThemeBtnAction : (() -> ())?
+    public var tapSetThemeButtonAction : (() -> ())?
 
     private var textFieldList: [UITextField] = []
     private var currentIndex = 0 // 현재 선택된 component
@@ -117,7 +117,7 @@ class CreatePostThemeTVC: UITableViewCell {
 extension CreatePostThemeTVC {
     @objc
     func clikedTextField(_ sender: UITextField) {
-        tapSetThemeBtnAction?()
+        tapSetThemeButtonAction?()
     }
     
     func setThemeData(themeList: [String]) {

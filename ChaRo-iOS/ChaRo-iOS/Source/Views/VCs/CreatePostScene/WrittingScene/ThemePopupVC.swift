@@ -159,7 +159,7 @@ extension ThemePopupVC {
 extension ThemePopupVC {
     
     /// 지난 선택 데이터 리스트를 받아와 set하는 함수
-    func setLastDataList() {
+    private func setLastDataList() {
         if let theme = lastThemeList,
            let sender = lastSenderList {
             themeList = theme

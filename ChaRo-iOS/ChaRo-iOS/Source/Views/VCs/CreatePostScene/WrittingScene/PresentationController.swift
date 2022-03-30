@@ -9,7 +9,7 @@ import UIKit
 import Then
 
 class PresentationController: UIPresentationController {
-    let backdropView = UIView().then {
+    let dimView = UIView().then {
         $0.backgroundColor = .black
     }
     
@@ -24,10 +24,10 @@ class PresentationController: UIPresentationController {
     }
 
     override func presentationTransitionWillBegin() {
-        backdropView.alpha = 0
-        containerView?.addSubview(backdropView)
+        dimView.alpha = 0
+        containerView?.addSubview(dimView)
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [self] (UIViewControllerTransitionCoordinatorContext) in
-            backdropView.alpha = 0.5
+            dimView.alpha = 0.5
         }, completion: {
             (UIViewControllerTransitionCoordinatorContext) in
             
@@ -36,10 +36,10 @@ class PresentationController: UIPresentationController {
     
     override func dismissalTransitionWillBegin() {
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [self] (UIViewControllerTransitionCoordinatorContext) in
-            backdropView.alpha = 0
+            dimView.alpha = 0
         }, completion: {
             (UIViewControllerTransitionCoordinatorContext) in
-            self.backdropView.removeFromSuperview()
+            self.dimView.removeFromSuperview()
         })
     }
     
@@ -51,7 +51,7 @@ class PresentationController: UIPresentationController {
         super.containerViewDidLayoutSubviews()
         
         presentedView?.frame = frameOfPresentedViewInContainerView
-        backdropView.frame = containerView!.bounds
+        dimView.frame = containerView!.bounds
     }
 
     @objc func dismissController() {

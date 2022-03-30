@@ -418,7 +418,7 @@ extension CreatePostVC {
         cellHeights[3] = themeCell.setDynamicHeight()
         themeCell.setThemeData(themeList: theme.isEmpty ? lastThemeList : theme)
         
-        themeCell.tapSetThemeBtnAction = {
+        themeCell.tapSetThemeButtonAction = {
             guard let themeVC = self.storyboard?.instantiateViewController(withIdentifier: ThemePopupVC.className) as? ThemePopupVC else { return }
             themeVC.modalPresentationStyle = .custom
             themeVC.transitioningDelegate = self
