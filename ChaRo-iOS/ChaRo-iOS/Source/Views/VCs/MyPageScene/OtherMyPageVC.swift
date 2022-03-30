@@ -384,7 +384,7 @@ class OtherMyPageVC: UIViewController {
                    case .success(let data):
                        if let response = data as? DoFollowDataModel {
                            self.isFollow = response.data.isFollow
-                           if self.isFollow == true{
+                           if self.isFollow == true {
                                self.isFollowButton.isSelected = true
                                self.setFollowButtonUI()
                            } else {
@@ -454,7 +454,7 @@ class OtherMyPageVC: UIViewController {
                         self.isFollowButton.isSelected = false
                         self.setFollowButtonUI()
                         self.getMypageData()
-                    } else{
+                    } else {
                         self.isFollowButton.isSelected = true
                         self.setFollowButtonUI()
                         self.getMypageData()

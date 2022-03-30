@@ -35,10 +35,10 @@ class FollowFollowingTVC: UITableViewCell {
         $0.textColor = UIColor.black
     }
     private var followButton = UIButton().then{
-        $0.setTitleColor( .mainBlue, for: .selected)
-        $0.setTitleColor( .gray30, for: .normal)
-        $0.setTitle( "팔로잉" , for: .selected)
-        $0.setTitle( "팔로워", for: .normal)
+        $0.setTitleColor(.mainBlue, for: .selected)
+        $0.setTitleColor(.gray30, for: .normal)
+        $0.setTitle("팔로잉" , for: .selected)
+        $0.setTitle("팔로워", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 13)
     }
 
@@ -59,20 +59,19 @@ class FollowFollowingTVC: UITableViewCell {
         userNameLabel.text = userName
         otherUserID = userEmail
         profileImageView.kf.setImage(with: url)
-        if isFollow == true{
+        if isFollow == true {
             followButton.isSelected = true
-            setFollowButtonUI()
         }
-        else{
             setFollowButtonUI()
-        }
     }
+    
     func setFollowButtonUI() {
         followButton.backgroundColor = .none
         followButton.layer.cornerRadius = 13
         followButton.layer.borderColor = followButton.isSelected ? UIColor.mainBlue.cgColor : UIColor.gray30.cgColor
         followButton.layer.borderWidth = 1
     }
+    
     func setFollowButtonAddTarget() {
         followButton.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
     }
