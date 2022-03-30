@@ -36,7 +36,6 @@ class AddressButtonCell: UITableViewCell {
         $0.layer.borderColor = UIColor.gray20.cgColor
         $0.layer.cornerRadius = 12
         $0.backgroundColor = .gray10
-        $0.isEnabled = true
     }
     private var plusButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "icWayPointPlusActive"), for: .normal)
