@@ -190,7 +190,6 @@ class FollowFollwingVC: UIViewController {
 
 //MARK: layoutFunction
     func setTableViewLayout() {
-        
         let tableViewHeight  = userheight - (userheight * 0.15 + 130)
         
         tableScrollView.delegate = self
@@ -331,12 +330,10 @@ extension FollowFollwingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(followDataList.count == 0) {
             return 0
-        }
-        else {
+        } else {
             if tableView.tag == 1{
                 return followDataList[0].follower.count
-            }
-            else {
+            } else {
                 return followDataList[0].following.count
             }
         }
@@ -367,8 +364,7 @@ extension FollowFollwingVC: UITableViewDataSource {
         
         if tableView.tag == 1 {
             otherVC.setOtherUserID(userID: followDataList[0].follower[indexPath.row].userEmail)
-        }
-        else {
+        } else {
             otherVC.setOtherUserID(userID: followDataList[0].following[indexPath.row].userEmail)
         }
         self.navigationController?.pushViewController(otherVC, animated: true)
@@ -380,7 +376,6 @@ extension FollowFollwingVC: UITableViewDataSource {
 extension FollowFollwingVC: isFollowButtonClickedDelegate {
     func isFollowButtonClicked() {
         getFollowData()
-        print("딜리게이트 실행")
     }
     
 

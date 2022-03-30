@@ -20,7 +20,7 @@ class FollowFollowingTVC: UITableViewCell {
     var delegate: isFollowButtonClickedDelegate?
     
     private let profileImageView = UIImageView().then {
-        $0.image = UIImage(named: "myimage")
+        $0.image = ImageLiterals.imgMypageDefaultProfile
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
@@ -30,19 +30,23 @@ class FollowFollowingTVC: UITableViewCell {
     }
     
     private let userNameLabel = UILabel().then {
-        $0.text = "name"
+        $0.text = ""
         $0.font = UIFont.notoSansMediumFont(ofSize: 14)
         $0.textColor = UIColor.black
     }
-    private let followButton = UIButton().then {
-        $0.setBackgroundImage(ImageLiterals.icFollowButtonGray, for: .normal)
-        $0.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
+    private var followButton = UIButton().then{
+        $0.setTitleColor(.mainBlue, for: .selected)
+        $0.setTitleColor(.gray30, for: .normal)
+        $0.setTitle("팔로잉" , for: .selected)
+        $0.setTitle("팔로워", for: .normal)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 13)
     }
 
     // MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayout()
+        setFollowButtonAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -56,11 +60,20 @@ class FollowFollowingTVC: UITableViewCell {
         otherUserID = userEmail
         profileImageView.kf.setImage(with: url)
         if isFollow == true {
-            followButton.setBackgroundImage(UIImage(named: "followingButtonImage"), for: .normal)
+            followButton.isSelected = true
         }
-        else {
-            followButton.setBackgroundImage(ImageLiterals.icFollowButtonGray, for: .normal)
-        }
+            setFollowButtonUI()
+    }
+    
+    func setFollowButtonUI() {
+        followButton.backgroundColor = .none
+        followButton.layer.cornerRadius = 13
+        followButton.layer.borderColor = followButton.isSelected ? UIColor.mainBlue.cgColor : UIColor.gray30.cgColor
+        followButton.layer.borderWidth = 1
+    }
+    
+    func setFollowButtonAddTarget() {
+        followButton.addTarget(self, action: #selector(followButtonClicked(_:)), for: .touchUpInside)
     }
     
     func postFollowData() {
@@ -69,12 +82,8 @@ class FollowFollowingTVC: UITableViewCell {
             case .success(let data):
                 if let response = data as? DoFollowDataModel {
                     print(response.data.isFollow)
-//                    if response.data.isFollow == true {
-//                        self.followButton.setBackgroundImage(UIImage(named: "followingButtonImage"), for: .normal)
-//                    }
-//                    else {
-//                        self.followButton.setBackgroundImage(UIImage(named: "FollowButtonImage"), for: .normal)
-//                    }
+                    self.followButton.isSelected = response.data.isFollow
+                    self.setFollowButtonUI()
                     self.delegate?.isFollowButtonClicked()
                 }
             case .requestErr(let message):
@@ -96,7 +105,7 @@ class FollowFollowingTVC: UITableViewCell {
     }
 //MARK: layoutFunction
     func setLayout() {
-        addSubviews([profileImageView, userNameLabel, followButton])
+        self.contentView.addSubviews([profileImageView, userNameLabel, followButton])
         profileImageView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(24)

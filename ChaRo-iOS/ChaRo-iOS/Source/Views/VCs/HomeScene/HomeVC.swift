@@ -270,9 +270,7 @@ extension HomeVC: UITableViewDelegate {
             bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
-
-        }
-        else {
+        }  else {
             if bannerData.count != 0{
                 for i in 1..<images.count + 1 {
                     let xPos = self.view.frame.width * CGFloat(i-1)
@@ -308,22 +306,19 @@ extension HomeVC: UITableViewDelegate {
                         homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                         homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
                         HomeNavigationView.removeShadowView()
-                    }
-                    else {
+                    }  else {
                         if HomeTableView.contentOffset.y <= -47 && currentHeight == -47{
                             homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                             homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                             homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
-                        }
-                        else {
+                        } else {
                             homeNavigationLogo.image = UIImage(named: "logo.png")
                             homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
                             homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
                             setNavigationViewShadow()
                         }
                     }
-                }
-                else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3) {
+                } else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3) {
                     homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
@@ -332,14 +327,12 @@ extension HomeVC: UITableViewDelegate {
                 }
                 if currentHeight > 0{
                     HomeNavigationView.backgroundColor = UIColor.white
-                }
-                else if currentHeight < -homeTableViewHeaderHeight {
+                } else if currentHeight < -homeTableViewHeaderHeight {
                     HomeNavigationView.backgroundColor = .none
                 }
                 
                }
-        }
-        else {
+        } else {
             updateHeaderView()
             addContentScrollView()
             HomeNavigationView.backgroundColor = .none
@@ -357,8 +350,7 @@ extension HomeVC: UITableViewDelegate {
                } else {
                 carMoveConstraint.constant = originalCarConstant
                }
-           }
-        else {
+           } else {
             carMoveConstraint.constant = originalCarConstant
            }
     }
@@ -383,8 +375,7 @@ extension HomeVC: UITableViewDelegate {
             print(todayData)
             if todayData.count == 0 {
                 return cell
-            }
-            else {
+            } else {
                 cell.todayDriveList = todayData
             return cell
         }
@@ -400,8 +391,7 @@ extension HomeVC: UITableViewDelegate {
             cell.postDelegate = self
             if trendyData.count == 0 {
                 return cell
-            }
-            else {
+            } else {
                 cell.trendyDriveList = trendyData
                 return cell
             }
@@ -417,11 +407,8 @@ extension HomeVC: UITableViewDelegate {
             
             if customData.count == 0 {
                 return cell
-            }
-            
-            else {
+            } else {
                 cell.customList = customData
-                
             return cell
                 
             }
