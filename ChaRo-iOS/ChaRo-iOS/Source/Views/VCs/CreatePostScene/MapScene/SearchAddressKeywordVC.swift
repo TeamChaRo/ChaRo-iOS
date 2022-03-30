@@ -13,7 +13,6 @@ import RxSwift
 
 class SearchAddressKeywordVC: UIViewController {
 
-    static let identifier = "SearchAddressKeywordVC"
     private let viewModel = SearchKeywordViewModel()
     private var disposeBag = DisposeBag()
     

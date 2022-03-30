@@ -74,9 +74,9 @@ class ThemePostVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
-        tableView.registerCustomXib(xibName: "ThemePostAllTVC")
-        tableView.registerCustomXib(xibName: "ThemePostDetailTVC")
+        tableView.registerCustomXib(xibName: ThemePostThemeTVC.className)
+        tableView.registerCustomXib(xibName: ThemePostAllTVC.className)
+        tableView.registerCustomXib(xibName: ThemePostDetailTVC.className)
         
         
         tableView.showsHorizontalScrollIndicator = false
