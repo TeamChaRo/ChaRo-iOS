@@ -11,7 +11,7 @@ import TMapSDK
 
 class AddressMainViewModel {
     
-    var addressList: [AddressDataModel] = []
+    var addressList: [AddressDataModel]
     var searchHistory: [KeywordResult] = []
     var newSearchHistory: [KeywordResult] = []
     
@@ -21,8 +21,8 @@ class AddressMainViewModel {
     let markerSubject = PublishSubject<[TMapMarker]>()
     let isConfirmCheckSubject = PublishSubject<Bool>()
     
-    init() {
-        addressList = [AddressDataModel(), AddressDataModel()]
+    init(start: AddressDataModel, end: AddressDataModel) {
+        addressList = [start, end]
         addressSubject.onNext(refineAddressData())
     }
     
@@ -61,7 +61,7 @@ class AddressMainViewModel {
         }
         addressSubject.onNext(refineAddressData())
         addPathInMapView()
-        checkRouting()
+        checkAddressCompleted()
     }
     
     private func refineAddressData() -> [(AddressDataModel, Int)] {
@@ -69,7 +69,8 @@ class AddressMainViewModel {
         addressList.forEach { list.append(($0, addressList.count)) }
         return list
     }
-    private func checkRouting() {
+    
+    private func checkAddressCompleted() {
         var isConfirm = true
         for address in addressList {
             if address.title == "" {
@@ -84,11 +85,32 @@ class AddressMainViewModel {
         var markerList: [TMapMarker] = []
         for index in 0..<addressList.count {
             if addressList[index].title == "" { continue }
-            let point = addressList[index].getPoint()
-            let marker = TMapMarker(position: point)
+            let marker = TMapMarker(position: addressList[index].getPoint())
             markerList.append(marker)
         }
         markerSubject.onNext(markerList)
+    }
+    
+  
+    private func addPathInMapView() {
+        var polylineList: [TMapPolyline] = []
+        let pathData = TMapPathData()
+        for index in 0..<addressList.count-1 {
+            if !hasAddress(of: index+1) || addressList[index+1].title == "" { return }
+            pathData.findPathData(startPoint: addressList[index].getPoint(),
+                                  endPoint: addressList[index+1].getPoint()) { [weak self] result, error in
+                guard let polyLine = result, let self = self else { return }
+                polylineList.append(polyLine)
+                if polylineList.count == self.addressList.count - 1 {
+                    self.polylineSubject.onNext(polylineList)
+                }
+            }
+        }
+    }
+    
+    private func hasAddress(of index: Int) -> Bool {
+        guard index < addressList.count else { return false }
+        return true
     }
 }
 
@@ -158,26 +180,10 @@ extension AddressMainViewModel {
 // MARK: - Map Logic
 extension AddressMainViewModel {
     
-    private func addPathInMapView() {
-        var polylineList: [TMapPolyline] = []
-        let pathData = TMapPathData()
-        for index in 0..<addressList.count-1 {
-            if addressList[index+1].title == "" { return }
-            pathData.findPathData(startPoint: addressList[index].getPoint(),
-                                  endPoint: addressList[index+1].getPoint()) { [weak self] result, error in
-                guard let polyLine = result else { return }
-                polylineList.append(polyLine)
-                if index == (self?.addressList.count ?? -1) - 2 {
-                    self?.polylineSubject.onNext(polylineList)
-                }
-            }
-        }
-    }
-    
     private func getOptimizationCenter() ->  CLLocationCoordinate2D {
-        var minX, minY, maxX, maxY : Double
+        var minX, maxX: Double
+        var minY, maxY: Double
         
-        print("addressList.endIndex = \(addressList.endIndex)")
         let point1 = addressList[0].getPoint()
         let point2 = addressList[addressList.endIndex-1].getPoint()
         

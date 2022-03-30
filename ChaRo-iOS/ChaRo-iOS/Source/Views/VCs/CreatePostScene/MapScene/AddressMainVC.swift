@@ -14,34 +14,35 @@ import TMapSDK
 class AddressMainVC: UIViewController {
 
     private let disposeBag = DisposeBag()
-    private let viewModel = AddressMainViewModel()
+    private let viewModel: AddressMainViewModel
     private let updateAddressSubject = PublishSubject<(AddressDataModel, Int)>()
     
     public var searchHistory: [KeywordResult] = []
     public var newSearchHistory: [KeywordResult] = []
     
-    private var isFirstFinded: Bool = true
     private var sendedPostData: WritePostData?
     private var imageList: [UIImage] = []
     
-    private lazy var tableView = UITableView().then {
-        $0.register(cell: AddressButtonCell.self)
-        $0.separatorStyle = .none
-    }
-    
-    private var oneCellHeight: CGFloat = 48
-    private var tableViewHeight: CGFloat  = 96
-    private var tableViewBottomOffset: CGFloat  = 19
+    private var oneCellHeight: CGFloat = 0.0
+    private var tableViewHeight: CGFloat = 0.0
+    private var tableViewBottomOffset: CGFloat = 0.0
     private var isFirstOpen: Bool = true
     
     //MARK: - About Map
+    
     private let tMapView = TMapView()
     private var markerList: [TMapMarker] = []
     private var polyLineList: [TMapPolyline] = []
     
     //MARK: UI Component
+    
     private let backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icBackGray, for: .normal)
+    }
+    
+    private lazy var tableView = UITableView().then {
+        $0.register(cell: AddressButtonCell.self)
+        $0.separatorStyle = .none
     }
     
     private var confirmButton = UIButton().then {
@@ -50,6 +51,15 @@ class AddressMainVC: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.isHidden = true
         $0.setTitle("작성완료", for: .normal)
+    }
+    
+    init() {
+        viewModel = AddressMainViewModel(start: AddressDataModel(), end: AddressDataModel())
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
