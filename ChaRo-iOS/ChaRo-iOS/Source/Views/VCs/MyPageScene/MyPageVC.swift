@@ -46,7 +46,7 @@ class MyPageVC: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = 3
-        $0.image = UIImage(named: "defaultImage")
+        $0.image = ImageLiterals.imgMypageDefaultProfile
         $0.layer.cornerRadius = 32
     }
     private let headerBackgroundView = UIView().then {
@@ -62,7 +62,7 @@ class MyPageVC: UIViewController {
     }
     
     private let settingButton = UIButton().then {
-        $0.setBackgroundImage(UIImage(named: "setting2_white"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icSettingWhite , for: .normal)
         $0.addTarget(self, action: #selector(settingButtonClicked(_:)), for: .touchUpInside)
 
     }
@@ -109,12 +109,8 @@ class MyPageVC: UIViewController {
         $0.contentHorizontalAlignment = .left
         $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
-    private let noWritenDataImageView = UIImageView().then {
-        $0.image = UIImage(named: "no_img")
-    }
-    private let noSaveDataImageView = UIImageView().then {
-        $0.image = UIImage(named: "no_img")
-    }
+    private let noWritenDataImageView = UIImageView(image: ImageLiterals.imgMypageEmpty)
+    private let noSaveDataImageView = UIImageView(image: ImageLiterals.imgMypageEmpty)
     private let noWritenDataLabel = UILabel().then {
         $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n작성해보는 것은 어떠신가요?"
         $0.textColor = UIColor.gray50
@@ -136,13 +132,13 @@ class MyPageVC: UIViewController {
         $0.backgroundColor = UIColor.white
     }
     private let tabbarWriteButton = UIButton().then {
-        $0.setImage(UIImage(named: "write_active"), for: .normal)
+        $0.setImage(ImageLiterals.icWriteActive, for: .normal)
         $0.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         $0.addTarget(self, action: #selector(saveButtonClicked(_:)), for: .touchUpInside)
     }
     private let tabbarSaveButton = UIButton().then {
-        $0.setImage(UIImage(named: "save_inactive"), for: .normal)
+        $0.setImage(ImageLiterals.icSaveInactive, for: .normal)
         $0.contentMode = .scaleAspectFit
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         $0.addTarget(self, action: #selector(writeButtonClicked(_:)), for: .touchUpInside)
@@ -236,13 +232,13 @@ class MyPageVC: UIViewController {
             $0.width.equalTo(userWidth/2)
             $0.height.equalTo(2)
         }
-        if contentOffsetX > userWidth/3{
-            tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
-            tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
+        if contentOffsetX > userWidth/3 {
+            tabbarWriteButton.setImage(ImageLiterals.icWriteInactive, for: .normal)
+            tabbarSaveButton.setImage(ImageLiterals.icSaveActive, for: .normal)
         }
-        else {
-            tabbarWriteButton.setImage(UIImage(named: "write_active"), for: .normal)
-            tabbarSaveButton.setImage(UIImage(named: "save_inactive"), for: .normal)
+        else{
+            tabbarWriteButton.setImage(ImageLiterals.icWriteActive, for: .normal)
+            tabbarSaveButton.setImage(ImageLiterals.icSaveInactive, for: .normal)
         }
     }
     
@@ -367,13 +363,13 @@ class MyPageVC: UIViewController {
 //MARK: buttonClicked
    @objc private func saveButtonClicked(_ sender: UIButton) {
        collectionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-       tabbarWriteButton.setImage(UIImage(named: "write_active"), for: .normal)
-       tabbarSaveButton.setImage(UIImage(named: "save_inactive"), for: .normal)
+       tabbarWriteButton.setImage(ImageLiterals.icWriteActive, for: .normal)
+       tabbarSaveButton.setImage(ImageLiterals.icSaveInactive, for: .normal)
     }
     @objc private func writeButtonClicked(_ sender: UIButton) {
         collectionScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
-        tabbarWriteButton.setImage(UIImage(named: "write_inactive"), for: .normal)
-        tabbarSaveButton.setImage(UIImage(named: "save_active"), for: .normal)
+        tabbarWriteButton.setImage(ImageLiterals.icWriteInactive, for: .normal)
+        tabbarSaveButton.setImage(ImageLiterals.icSaveActive, for: .normal)
      }
     @objc private func settingButtonClicked(_ sender: UIButton) {
         guard let setVC = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "SettingVC") as? SettingVC else {return}
@@ -412,7 +408,7 @@ class MyPageVC: UIViewController {
         let writeContentHeigth = writeCollectionView.contentSize.height
         let saveContentHeigth = saveCollectioinView.contentSize.height
         
-        if(collectionScrollView.contentOffset.x > 0 && collectionScrollView.contentOffset.y < 0) {
+        if (collectionScrollView.contentOffset.x > 0 && collectionScrollView.contentOffset.y < 0) {
             collectionScrollView.contentOffset.y = 0
         }
         //바텀뷰 이동
@@ -448,8 +444,7 @@ class MyPageVC: UIViewController {
                 //MypageInfinityService.addURL = "/write/11/0"
                 getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
-            }
-            else if currentState == "최신순" {
+            } else if currentState == "최신순" {
                 //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
                 likeOrNew = "new/"
                 addURL = "/write/\(lastId)"
@@ -458,9 +453,8 @@ class MyPageVC: UIViewController {
             }
                 
             }
-        }
-        //저장글 무한스크롤
-        else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) {
+            //저장글 무한 스크롤
+        } else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) {
             let lastcount = savePostDriveData.count
             var likeOrNew = ""
             var addURL = ""
@@ -477,8 +471,7 @@ class MyPageVC: UIViewController {
                 //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
                 //MypageInfinityService.addURL = "/write/5/0"
                 getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
-            }
-            else if currentState == "최신순" {
+            } else if currentState == "최신순" {
                 //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
                 likeOrNew = "new/"
                 addURL = "/write/\(lastId)"
@@ -716,8 +709,7 @@ extension MyPageVC: UICollectionViewDelegate {
                             UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
             return CGSize(width: userWidth-35, height: 42)
-        }
-        else {
+        } else {
         return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
@@ -733,8 +725,7 @@ extension MyPageVC: UICollectionViewDataSource {
         if collectionView.tag == 1 {
             detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
             driveData = writenPostDriveData[indexPath.row-1]
-        }
-        else {
+        } else {
             detailVC.setPostId(id: savePostDriveData[indexPath.row-1].postID)
                 driveData = savePostDriveData[indexPath.row-1]
         }
@@ -761,15 +752,12 @@ extension MyPageVC: UICollectionViewDataSource {
         
         if(writenPostDriveData.count == 0) {
             writeCellCount = 0
-        }
-        else {
+        } else {
             writeCellCount = writenPostDriveData.count + 1
         }
-        
         if(savePostDriveData.count == 0) {
             saveCellCount = 0
-        }
-        else {
+        } else {
             saveCellCount = savePostDriveData.count + 1
         }
         
@@ -793,25 +781,38 @@ extension MyPageVC: UICollectionViewDataSource {
         case 1:
             if(indexPath.row == 0) {
                 return detailCell
-            }
-            else {
+            } else {
                 let writenElement = writenPostDriveData[indexPath.row-1]
                 var writenTags = [writenElement.region, writenElement.theme,
                             writenElement.warning ?? ""] as [String]
                 print(writenPostDriveData, "왜 안뜨냐?")
-            cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
+                cell.setData(image: writenElement.image,
+                         title: writenElement.title,
+                         tagCount: writenTags.count, tagArr: writenTags,
+                         heart: writenElement.favoriteNum,
+                         save: writenElement.saveNum,
+                         year: writenElement.year,
+                         month: writenElement.month,
+                         day: writenElement.day,
+                         postID: writenElement.postID)
             return cell
             }
         case 2:
             if(indexPath.row == 0) {
                 return detailCell
-            }
-            
-            else {
+            } else {
                 let saveElement = savePostDriveData[indexPath.row-1]
                 var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
                 
-            cell.setData(image: savePostDriveData[indexPath.row-1].image, title: savePostDriveData[indexPath.row-1].title, tagCount:saveTags.count, tagArr: saveTags, heart:savePostDriveData[indexPath.row-1].favoriteNum, save: savePostDriveData[indexPath.row-1].saveNum, year: savePostDriveData[indexPath.row-1].year, month: savePostDriveData[indexPath.row-1].month, day: savePostDriveData[indexPath.row-1].day, postID: savePostDriveData[indexPath.row-1].postID)
+            cell.setData(image: savePostDriveData[indexPath.row-1].image,
+                         title: savePostDriveData[indexPath.row-1].title,
+                         tagCount:saveTags.count, tagArr: saveTags,
+                         heart:savePostDriveData[indexPath.row-1].favoriteNum,
+                         save: savePostDriveData[indexPath.row-1].saveNum,
+                         year: savePostDriveData[indexPath.row-1].year,
+                         month: savePostDriveData[indexPath.row-1].month,
+                         day: savePostDriveData[indexPath.row-1].day,
+                         postID: savePostDriveData[indexPath.row-1].postID)
             return cell
             }
         default:

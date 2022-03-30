@@ -36,7 +36,6 @@ enum ImageLiterals {
     static var icFollowingButton: UIImage { .load(name: "followingButton") }
     static var icFollowingButtonImage: UIImage { .load(name: "followingButtonImage") }
     static var icGoogleLogo: UIImage { .load(name: "googleLogo") }
-    
     static var icHeartActive: UIImage { .load(name: "icHeartActive")}
     static var icHeartCountNoText: UIImage { .load(name: "heart_count_no text") }
     static var icHeartInactive: UIImage { .load(name: "bigheartInactive")}
@@ -54,6 +53,7 @@ enum ImageLiterals {
     static var icRouteEnd: UIImage { .load(name: "icRouteEnd") }
     static var icRouteStart: UIImage { .load(name: "icRouteStart") }
     static var icRouteWaypoint: UIImage { .load(name: "icRouteWaypoint") }
+    static var icSettingWhite: UIImage{ .load(name: "setting2_white") }
     
     //TODO: 위에 두개 중 안쓰는 거 한쪽은 삭제하기
     static var icSaveActive: UIImage { .load(name: "icSaveActive") }
@@ -70,7 +70,6 @@ enum ImageLiterals {
     static var icSearchBtnWhite: UIImage { .load(name: "searchBtnWhite") }
     static var icSearchWhite: UIImage { .load(name: "icSearchWhite") }
     static var icSelectBoxShow: UIImage { .load(name: "selectbox_show") }
-    static var icSettingWhite: UIImage { .load(name: "setting_white") }
     static var icShare: UIImage { .load(name: "icShare") }
     static var icSignupAgreeBig: UIImage { .load(name: "icSignupAgreeBig") }
     static var icSignupAgreeSmall: UIImage { .load(name: "icSignupAgreeSmall") }
@@ -100,15 +99,19 @@ enum ImageLiterals {
     static var imgBlueCarLine: UIImage { .load(name: "blueCarLine") }
     static var imgCharoCar: UIImage { .load(name: "charoCar") }
     static var imgMapFirstGuide: UIImage { .load(name: "mapFirstGuide")}
-    static var imgMyImage: UIImage { .load(name: "myimage") }
-    static var imgOnBoarding1: UIImage { .load(name: "onboardingBackground1") }
-    static var imgOnBoarding2: UIImage { .load(name: "onboardingBackground2") }
-    static var imgOnBoarding3: UIImage { .load(name: "onboardingBackground3") }
-    static var imgSearchBackground: UIImage { .load(name: "searchBackground") }
-    static var imgSearchBackgroundWhite: UIImage { .load(name: "searchBackgroundWhite") }
-    static var imgSearchNoImage: UIImage { .load(name: "searchNoImage") }
-    static var imgPlaceholder: UIImage { .load(name: "imagePlaceholder") }
-    static var imgPostTextfieldLocationShow: UIImage { .load(name: "postTextfieldLocationShow") }
+    static var imgMyImage: UIImage{ .load(name: "myimage") }
+    static var imgMypageDefaultProfile: UIImage{ .load(name: "defaultImage")}
+    static var imgMypageEmpty: UIImage{ .load(name: "no_img")}
+    static var imgOnBoarding1: UIImage{ .load(name: "onboardingBackground1") }
+    static var imgOnBoarding2: UIImage{ .load(name: "onboardingBackground2") }
+    static var imgOnBoarding3: UIImage{ .load(name: "onboardingBackground3") }
+    static var imgSearchBackground: UIImage{ .load(name: "searchBackground") }
+    static var imgSearchBackgroundWhite: UIImage{ .load(name: "searchBackgroundWhite") }
+    static var imgSearchNoImage: UIImage{ .load(name: "searchNoImage") }
+    static var imgPlaceholder: UIImage{ .load(name: "imagePlaceholder") }
+    static var imgPostTextfieldLocationShow: UIImage{ .load(name: "postTextfieldLocationShow") }
+    
+    
 }
 
 extension UIImage {
