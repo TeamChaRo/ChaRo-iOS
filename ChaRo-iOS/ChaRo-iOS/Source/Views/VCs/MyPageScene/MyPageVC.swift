@@ -427,7 +427,7 @@ class MyPageVC: UIViewController {
             collectionScrollView.contentOffset.x = 0;
         }
         //작성글 무한스크롤
-        if(writeCollectionView.contentOffset.y > writeContentHeigth - writeCollectionView.frame.height) {
+        if(writeCollectionView.contentOffset.y > writeContentHeigth - writeCollectionView.frame.height) && writeCollectionView.contentOffset.x == 0 {
             let lastcount = writenPostDriveData.count
             var likeOrNew = ""
             var addURL = ""
@@ -454,7 +454,7 @@ class MyPageVC: UIViewController {
                 
             }
             //저장글 무한 스크롤
-        } else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) {
+        } else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) && saveCollectioinView.contentOffset.x == userWidth{
             let lastcount = savePostDriveData.count
             var likeOrNew = ""
             var addURL = ""
