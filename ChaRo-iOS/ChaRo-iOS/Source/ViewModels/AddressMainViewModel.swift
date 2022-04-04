@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import TMapSDK
+import CoreMedia
 
 class AddressMainViewModel {
     
@@ -15,15 +16,16 @@ class AddressMainViewModel {
     var searchHistory: [KeywordResult] = []
     var newSearchHistory: [KeywordResult] = []
     
-    let addressSubject = ReplaySubject<[(AddressDataModel, Int)]>.create(bufferSize: 1)
-    let searchHistorySubject = PublishSubject<[KeywordResult]>()
-    let polylineSubject = PublishSubject<[TMapPolyline]>()
-    let markerSubject = PublishSubject<[TMapMarker]>()
-    let isConfirmCheckSubject = PublishSubject<Bool>()
+    private let addressSubject = ReplaySubject<[(AddressDataModel, Int)]>.create(bufferSize: 1)
+    private let searchHistorySubject = ReplaySubject<[KeywordResult]>.create(bufferSize: 1)
+    private let polylineSubject = PublishSubject<[TMapPolyline]>()
+    private let markerSubject = PublishSubject<[TMapMarker]>()
+    private let isConfirmCheckSubject = PublishSubject<Bool>()
     
     init(start: AddressDataModel, end: AddressDataModel) {
         addressList = [start, end]
         addressSubject.onNext(refineAddressData())
+        getSearchKeywords()
     }
     
     struct Input {
@@ -112,18 +114,23 @@ class AddressMainViewModel {
         guard index < addressList.count else { return false }
         return true
     }
+    
+    func getSearchHistory() -> [KeywordResult]{
+        return searchHistory + newSearchHistory
+    }
+    
 }
 
 // MARK: - Network
 extension AddressMainViewModel {
+    
     private func getSearchKeywords() {
         SearchKeywordService.shared.getSearchKeywords(userId: Constants.userId) { response in
             switch(response) {
             case .success(let resultData):
-                if let data = resultData as? SearchResultDataModel {
-                    print("내가 검색한 결과 조회~~~!!")
-                    //self.searchHistory = data.data!
-                    //dump(self.searchHistory)
+                if let data = resultData as? [KeywordResult] {
+                    //self.searchHistorySubject.onNext(data)
+                    self.searchHistory = data
                 }
             case .requestErr(let message):
                 print("requestErr", message)
