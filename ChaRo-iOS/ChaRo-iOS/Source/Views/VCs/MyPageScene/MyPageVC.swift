@@ -201,6 +201,10 @@ class MyPageVC: UIViewController {
     }()
     
 //MARK: ViewdidLoad
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderLayout()
@@ -380,6 +384,7 @@ class MyPageVC: UIViewController {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
         if isLogin == true {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: myId)
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(followVC, animated: true)
         }
      }
@@ -387,6 +392,7 @@ class MyPageVC: UIViewController {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
         if isLogin == true {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: myId)
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(followVC, animated: true)
         }
      }
