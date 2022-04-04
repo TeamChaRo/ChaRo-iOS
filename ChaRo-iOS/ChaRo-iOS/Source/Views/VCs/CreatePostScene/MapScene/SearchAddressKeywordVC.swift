@@ -13,8 +13,9 @@ import RxSwift
 
 class SearchAddressKeywordVC: UIViewController {
 
-    private let viewModel = SearchKeywordViewModel()
+    private let viewModel: SearchKeywordViewModel
     private var disposeBag = DisposeBag()
+    private var searchKeywordSubject = PublishSubject<AddressDataModel>()
     
     private var addressIndex: Int = -1
     private var addressType: String = ""
@@ -40,12 +41,20 @@ class SearchAddressKeywordVC: UIViewController {
         $0.rowHeight = 72
     }
     
+    init(searchHistory: [KeywordResult]) {
+        self.viewModel = SearchKeywordViewModel(searchHistory: searchHistory)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         setupConstraints()
-        setActionToComponent()
-        bindToViewModel()
+        bind()
     }
     
     //MARK: - public func
@@ -54,37 +63,39 @@ class SearchAddressKeywordVC: UIViewController {
         addressType = cellType
         addressIndex = index
     }
-    
-    public func setSearchKeyword(list: [KeywordResult]) {
-        print(list)
-    }
-    
+   
     // MARK: - private func
     
     private func configureUI() {
         view.backgroundColor = .white
     }
     
-    private func bindToViewModel() {
-        viewModel
-            .addressSubject
+    private func bind() {
+        let output = viewModel.transform(input: SearchKeywordViewModel.Input(), disposeBag: disposeBag)
+        output.addressSubject
             .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.className,
-                                                cellType: SearchKeywordCell.self)) { row, element, cell in
+                                         cellType: SearchKeywordCell.self)) { row, element, cell in
                 cell.titleLabel.text = element.title
                 cell.addressLabel.text = element.address
                 cell.dateLabel.text = self.viewModel.getCurrentDate()
             }.disposed(by: disposeBag)
         
         tableView.rx.modelSelected(AddressDataModel.self)
-            .subscribe(onNext: {
-                self.pushNextVC(address: $0)
+            .subscribe(onNext: { [weak self] in
+                self?.pushNextVC(address: $0)
             })
             .disposed(by: disposeBag)
         
         searchTextField.rx.text
-            .throttle(.milliseconds(1500), scheduler: MainScheduler.asyncInstance)
-            .subscribe(onNext: {
-                self.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
+            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
+            }).disposed(by: disposeBag)
+        
+        backButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }).disposed(by: disposeBag)
     }
     
@@ -93,14 +104,6 @@ class SearchAddressKeywordVC: UIViewController {
         nextVC.setPresentingAddress(address: address)
         nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
         self.navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
-    public func setActionToComponent() {
-        backButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
-    }
-    
-    @objc func dismissAction() {
-        self.navigationController?.popViewController(animated: true)
     }
 }
 

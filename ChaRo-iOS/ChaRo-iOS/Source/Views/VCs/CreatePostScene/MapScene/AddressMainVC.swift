@@ -152,7 +152,7 @@ class AddressMainVC: UIViewController {
         confirmButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let newAddressList = self?.changeAddressData()
+                //let newAddressList = self?.changeAddressData()
                 let nextVC = PostDetailVC()
                 // postSearchKeywords()
                 self?.navigationController?.pushViewController(nextVC, animated: true)
@@ -225,13 +225,12 @@ extension AddressMainVC: AddressButtonCellDelegate {
     }
     
     func addressButtonCellForPreseting(cell: AddressButtonCell) {
-        let nextVC = SearchAddressKeywordVC()
+        let nextVC = SearchAddressKeywordVC(searchHistory: viewModel.getSearchHistory())
         let index = cell.getTableCellIndexPath()
         nextVC.setAddressModel(model: viewModel.addressList[index],
                                cellType: cell.cellType.rawValue,
                                index: index)
         //nextVC.setSearchKeyword(list: newSearchHistory+searchHistory)
-        nextVC.setSearchKeyword(list: [])
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
