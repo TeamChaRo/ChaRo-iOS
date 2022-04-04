@@ -18,11 +18,18 @@ class CreatePostVC: UIViewController {
     public var postTitle: String = ""
     public var province: String = ""
     public var region: String = ""
-    public var theme: [String] = ["","",""]
+    public var theme: [String] = [] {
+        didSet {
+            tableView.reloadRows(at: [[0, 3]], with: .automatic)
+        }
+    }
     public var warning: [Bool] = [false, false, false, false]
     public var isParking: Bool = false
     public var parkingDesc: String = ""
     public var courseDesc: String = ""
+    
+    public var lastThemeList: [String] = []
+    public var lastSenderList: [Int] = []
     
     var selectImages: [UIImage] = []
     var itemProviders: [NSItemProvider] = []
@@ -86,7 +93,6 @@ class CreatePostVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         removeObservers() // 옵저버 해제
     }
-    
 }
 
 // MARK: - functions
@@ -296,11 +302,8 @@ extension CreatePostVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       
         return cellHeights[indexPath.row]
     }
-    
-    
 }
 
 extension CreatePostVC: UITableViewDataSource {
@@ -327,9 +330,7 @@ extension CreatePostVC: UITableViewDataSource {
         default:
             return getCreatePostTitleCell(tableView: tableView)
         }
-        
     }
-
 }
 
 // MARK: - PHPicker Extension
@@ -357,20 +358,17 @@ extension CreatePostVC: PHPickerViewControllerDelegate {
                                     self.tableView.reloadData()
                                 }
                             }
-                            
                         }
                     }
                 }
             }
         }
-        
-        
     }
 }
 
 //MARK: - import cell function
 extension CreatePostVC {
-    func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell {
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostTitleTVC.identifier) as? CreatePostTitleTVC else { return UITableViewCell() }
         
         titleCell.delegateCell = self
@@ -381,7 +379,7 @@ extension CreatePostVC {
         return titleCell
     }
     
-    func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell {
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
         
         // 여기서 VC 이미지를 Cell에 전달
@@ -399,7 +397,7 @@ extension CreatePostVC {
         return photoCell
     }
     
-    func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell {
         guard let courseCell = tableView.dequeueReusableCell(withIdentifier: CreatePostCourseTVC.identifier) as? CreatePostCourseTVC else { return UITableViewCell() }
 
         cellHeights[2] = courseCell.setDynamicHeight()
@@ -414,19 +412,25 @@ extension CreatePostVC {
         return courseCell
     }
     
-    func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell {
         guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
         
         cellHeights[3] = themeCell.setDynamicHeight()
+        themeCell.setThemeData(themeList: theme.isEmpty ? lastThemeList : theme)
         
-        themeCell.setThemeInfo = { value in
-            self.theme = value
+        themeCell.tapSetThemeButtonAction = {
+            guard let themeVC = self.storyboard?.instantiateViewController(withIdentifier: ThemePopupVC.className) as? ThemePopupVC else { return }
+            themeVC.modalPresentationStyle = .custom
+            themeVC.transitioningDelegate = self
+            themeVC.lastThemeList = self.lastThemeList
+            themeVC.lastSenderList = self.lastSenderList
+            self.present(themeVC, animated: true, completion: nil)
         }
         
         return themeCell
     }
     
-    func getCreatePostParkingWarningCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostParkingWarningCell(tableView: UITableView) -> UITableViewCell {
         guard let parkingWarningCell = tableView.dequeueReusableCell(withIdentifier: CreatePostParkingWarningTVC.identifier) as? CreatePostParkingWarningTVC else { return UITableViewCell() }
         
         // 데이터 전달 closure
@@ -445,7 +449,7 @@ extension CreatePostVC {
         return parkingWarningCell
     }
     
-    func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell {
         guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: CreatePostDriveCourseTVC.identifier) as? CreatePostDriveCourseTVC else { return UITableViewCell() }
         
         if courseDesc == "" {
@@ -492,3 +496,9 @@ extension CreatePostVC: PostTitlecTVCDelegate {
     }
 }
 
+// MARK: - UIViewControllerTransitioningDelegate
+extension CreatePostVC: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
