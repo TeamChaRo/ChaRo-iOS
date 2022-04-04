@@ -748,7 +748,8 @@ extension MyPageVC: UICollectionViewDataSource {
                                     isFavorite: driveData.isFavorite))
         }
         if indexPath.row > 0 {
-        self.navigationController?.pushViewController(detailVC, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
     
