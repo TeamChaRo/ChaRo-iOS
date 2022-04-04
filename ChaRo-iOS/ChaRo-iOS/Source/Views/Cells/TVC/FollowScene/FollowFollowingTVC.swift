@@ -56,11 +56,14 @@ class FollowFollowingTVC: UITableViewCell {
 //MARK: function
     func setData(image: String, userName: String, isFollow: Bool, userEmail: String) {
         guard let url = URL(string: image) else { return }
+        print(userEmail,userName, "TVC")
         userNameLabel.text = userName
         otherUserID = userEmail
         profileImageView.kf.setImage(with: url)
-        if isFollow == true {
+        if isFollow {
             followButton.isSelected = true
+        } else {
+            followButton.isSelected = false
         }
             setFollowButtonUI()
     }
@@ -81,7 +84,7 @@ class FollowFollowingTVC: UITableViewCell {
             switch result {
             case .success(let data):
                 if let response = data as? DoFollowDataModel {
-                    print(response.data.isFollow)
+                    print(response.data.isFollow, "isFollow")
                     self.followButton.isSelected = response.data.isFollow
                     self.setFollowButtonUI()
                     self.delegate?.isFollowButtonClicked()
