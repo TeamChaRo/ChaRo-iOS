@@ -13,7 +13,29 @@ class SearchKeywordViewModel {
     
     let tmapView = MapService.getTmapView()
     let pathData = TMapPathData()
-    var addressSubject = PublishSubject<[AddressDataModel]>()
+    var addressSubject = ReplaySubject<[AddressDataModel]>.create(bufferSize: 1)
+    
+    init(searchHistory: [KeywordResult]) {
+        addressSubject.onNext(refineSearchHistory(of: searchHistory))
+    }
+    
+    struct Input {
+        
+    }
+    
+    struct Output {
+        let addressSubject: ReplaySubject<[AddressDataModel]>
+    }
+    
+    func transform(input: Input, disposeBag: DisposeBag) -> Output{
+        return Output(addressSubject: addressSubject)
+    }
+    
+    private func refineSearchHistory(of list: [KeywordResult]) -> [AddressDataModel] {
+        var addressModelList: [AddressDataModel] = []
+        list.forEach { addressModelList.append($0.getAddressModel()) }
+        return addressModelList
+    }
     
     public func findAutoCompleteAddressList(keyword: String) {
         pathData.autoComplete(keyword) { autoAddressList, error in
