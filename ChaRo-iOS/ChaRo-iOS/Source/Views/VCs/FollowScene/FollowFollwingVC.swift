@@ -161,11 +161,12 @@ class FollowFollwingVC: UIViewController {
      }
 //MARK: ServerFunction
     func getFollowData() {
-        GetFollowDataService.followData.getRecommendInfo(userId: myId, otherId: otherUserID) { (response) in
+        GetFollowDataService.followData.getRecommendInfo(otherId: otherUserID, userId: myId) { (response) in
                    switch response
                    {
                    case .success(let data):
-                       if let response = data as? GetFollowDataModel { 
+                       if let response = data as? GetFollowDataModel {
+                           print(response.data.follower[0].isFollow, response.data.follower[0].nickname, self.myId, self.otherUserID)
                            self.followDataList = []
                            self.followDataList.append(response.data)
                            self.followerButton.setTitle(String(response.data.follower.count) + " 팔로워", for: .normal)
@@ -344,16 +345,18 @@ extension FollowFollwingVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withType: FollowFollowingTVC.self, for: indexPath) else { return UITableViewCell() }
         cell.delegate = self
         if tableView.tag == 1{
-            cell.setData(image: followDataList[0].follower[indexPath.row].image,
-                         userName: followDataList[0].follower[indexPath.row].nickname,
-                         isFollow: followDataList[0].follower[indexPath.row].isFollow,
-                         userEmail: followDataList[0].follower[indexPath.row].userEmail
+            let followerData = followDataList[0].follower[indexPath.row]
+            cell.setData(image: followerData.image,
+                         userName: followerData.nickname,
+                         isFollow: followerData.isFollow,
+                         userEmail: followerData.userEmail
             )
         } else {
-            cell.setData(image: followDataList[0].following[indexPath.row].image,
-                         userName: followDataList[0].following[indexPath.row].nickname,
-                         isFollow: followDataList[0].following[indexPath.row].isFollow,
-                         userEmail: followDataList[0].following[indexPath.row].userEmail
+            let followingData = followDataList[0].following[indexPath.row]
+            cell.setData(image: followingData.image,
+                         userName: followingData.nickname,
+                         isFollow: followingData.isFollow,
+                         userEmail: followingData.userEmail
             )
         }
         return cell
