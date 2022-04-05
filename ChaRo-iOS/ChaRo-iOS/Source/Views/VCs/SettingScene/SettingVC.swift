@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import CoreMIDI
+import SafariServices
 
 class SettingVC: UIViewController {
     
@@ -42,11 +43,11 @@ class SettingVC: UIViewController {
         $0.text = "설정"
         $0.font = UIFont.notoSansRegularFont(ofSize: 17)
         $0.textColor = UIColor.black
-        
     }
     
     private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
+        $0.addTarget(SettingVC.self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let bottomView = UIView().then {
@@ -106,6 +107,22 @@ class SettingVC: UIViewController {
             $0.top.equalTo(settingBackgroundView.snp.bottom).offset(0)
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
         }
+    }
+}
+
+// MARK: - Custom Methods
+extension SettingVC {
+    
+    /// SafariViewController를 불러와 화면전환을 하는 메서드 (인앱)
+    private func presentToSafariVC(urlString: String) {
+        let url = NSURL(string: urlString)! as URL
+        let safariView: SFSafariViewController = SFSafariViewController(url: url)
+        self.present(safariView, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func backButtonClicked(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -243,7 +260,20 @@ extension SettingVC: UITableViewDataSource {
         case 4:
             print("문의")
         case 5:
-            print("약관")
+            switch indexPath.row {
+            case 0:
+                presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/257d36140ab74dcab89c447171f85c76")
+            case 1:
+                presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/c930b0349abf41e08061d669863bde95")
+            case 2:
+                presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/f9a49abdcf91479987faaa83a35eb7a8")
+            case 4:
+                print("로그아웃")
+            case 5:
+                print("탈퇴")
+            default:
+                print("default")
+            }
         default:
             print(indexPath.section)
         }
