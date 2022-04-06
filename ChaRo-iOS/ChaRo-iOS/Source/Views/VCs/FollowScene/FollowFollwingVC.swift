@@ -162,8 +162,7 @@ class FollowFollwingVC: UIViewController {
 //MARK: ServerFunction
     func getFollowData() {
         GetFollowDataService.followData.getRecommendInfo(otherId: otherUserID, userId: myId) { (response) in
-                   switch response
-                   {
+                   switch response {
                    case .success(let data):
                        if let response = data as? GetFollowDataModel {
                            print(response.data.follower[0].isFollow, response.data.follower[0].nickname, self.myId, self.otherUserID)
