@@ -260,10 +260,9 @@ extension HomeVC: UITableViewDelegate {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
         if bannerScrollView.subviews.count > 3{
-            bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
+            for index in 1..<5 {
+                bannerScrollView.viewWithTag(index)?.frame.size.height = -HomeTableView.contentOffset.y
+            }
         }  else {
             if bannerData.count != 0{
                 for i in 1..<images.count + 1 {
