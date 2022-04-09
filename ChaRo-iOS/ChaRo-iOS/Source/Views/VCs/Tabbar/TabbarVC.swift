@@ -31,10 +31,12 @@ class TabbarVC: UITabBarController {
         tabBar.shadowImage = UIImage()
     }
     func setShadow() {
-        tabBar.layer.shadowOpacity = 0.5
-        tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
-        tabBar.layer.shadowRadius = 10
-        tabBar.layer.masksToBounds = false
+        tabBar.getShadowView(color: UIColor.black.cgColor,
+                             masksToBounds: false,
+                             shadowOffset: CGSize(width: 0, height: 0),
+                             shadowRadius: 10,
+                             shadowOpacity: 0.5
+        )
     }
     func setRadius() {
         tabBar.backgroundColor = .white
