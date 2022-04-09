@@ -166,7 +166,6 @@ class FollowFollwingVC: UIViewController {
                    switch response {
                    case .success(let data):
                        if let response = data as? GetFollowDataModel {
-                           print(self.otherUserID, "")
                            self.followDataList = nil
                            self.followDataList = response.data
                            self.followerButton.setTitle(String(response.data.follower.count) + " 팔로워", for: .normal)
