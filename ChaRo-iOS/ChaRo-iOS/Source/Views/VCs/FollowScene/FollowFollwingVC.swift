@@ -24,7 +24,8 @@ class FollowFollwingVC: UIViewController {
     
     var checkIsFollow: Bool = false
     var titleName: String = "none"
-    var followDataList: [followData] = []
+    var followDataList: followData?
+    var isOtherMypage: Bool = false
         
     //무한스크롤을 위함
     var lastId: Int = 0
@@ -165,9 +166,9 @@ class FollowFollwingVC: UIViewController {
                    switch response {
                    case .success(let data):
                        if let response = data as? GetFollowDataModel {
-                           print(response.data.follower[0].isFollow, response.data.follower[0].nickname, self.myId, self.otherUserID)
-                           self.followDataList = []
-                           self.followDataList.append(response.data)
+                           print(self.otherUserID, "")
+                           self.followDataList = nil
+                           self.followDataList = response.data
                            self.followerButton.setTitle(String(response.data.follower.count) + " 팔로워", for: .normal)
                            self.followingButton.setTitle(String(response.data.following.count) + " 팔로잉", for: .normal)
                            self.followerTableView.reloadData()
@@ -328,13 +329,13 @@ extension FollowFollwingVC: UITableViewDelegate {
 }
 extension FollowFollwingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(followDataList.count == 0) {
+        if(followDataList == nil) {
             return 0
         } else {
             if tableView.tag == 1{
-                return followDataList[0].follower.count
+                return followDataList?.follower.count ?? 0
             } else {
-                return followDataList[0].following.count
+                return followDataList?.following.count ?? 0
             }
         }
         
@@ -344,19 +345,9 @@ extension FollowFollwingVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withType: FollowFollowingTVC.self, for: indexPath) else { return UITableViewCell() }
         cell.delegate = self
         if tableView.tag == 1{
-            let followerData = followDataList[0].follower[indexPath.row]
-            cell.setData(image: followerData.image,
-                         userName: followerData.nickname,
-                         isFollow: followerData.isFollow,
-                         userEmail: followerData.userEmail
-            )
+            cell.setData(data: followDataList?.follower[indexPath.row] ?? Follow.init(nickname: "", userEmail: "", image: "", isFollow: false))
         } else {
-            let followingData = followDataList[0].following[indexPath.row]
-            cell.setData(image: followingData.image,
-                         userName: followingData.nickname,
-                         isFollow: followingData.isFollow,
-                         userEmail: followingData.userEmail
-            )
+            cell.setData(data: followDataList?.following[indexPath.row] ?? Follow.init(nickname: "", userEmail: "", image: "", isFollow: false))
         }
         return cell
     }
@@ -365,9 +356,9 @@ extension FollowFollwingVC: UITableViewDataSource {
         guard let otherVC = UIStoryboard(name: "OtherMyPage", bundle: nil).instantiateViewController(withIdentifier: "OtherMyPageVC") as? OtherMyPageVC else {return}
         
         if tableView.tag == 1 {
-            otherVC.setOtherUserID(userID: followDataList[0].follower[indexPath.row].userEmail)
+            otherVC.setOtherUserID(userID: followDataList?.follower[indexPath.row].userEmail ?? "")
         } else {
-            otherVC.setOtherUserID(userID: followDataList[0].following[indexPath.row].userEmail)
+            otherVC.setOtherUserID(userID: followDataList?.following[indexPath.row].userEmail ?? "")
         }
         self.navigationController?.pushViewController(otherVC, animated: true)
     }
