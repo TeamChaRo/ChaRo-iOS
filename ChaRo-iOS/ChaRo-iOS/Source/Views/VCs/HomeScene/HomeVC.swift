@@ -139,7 +139,6 @@ class HomeVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? HomeDataModel {
-                    print("겟 데이터 실행")
                     DispatchQueue.global().sync {
                         let data = response.data
                     //배너 타이틀
@@ -152,7 +151,6 @@ class HomeVC: UIViewController {
                     //today 차로
                         if let today = data.todayCharoDrive.drive as? [DriveElement] {
                         self.todayData = today
-                        print(self.todayData)
                     }
                     
                     //trendy 차로
@@ -171,8 +169,6 @@ class HomeVC: UIViewController {
                         if let local = data.localDrive.drive as? [DriveElement] {
                         self.localData = local
                         self.localText = data.localTitle
-                        print(data.localTitle)
-
                     }
                         self.delegate?.endIndicator()
                     }
@@ -183,7 +179,6 @@ class HomeVC: UIViewController {
                 print("requestERR")
             case .pathErr:
                 print("pathERR")
-                print("한번 더 실행ㅋ")
             case .serverErr:
                 print("serverERR")
             case .networkFail:
@@ -265,18 +260,15 @@ extension HomeVC: UITableViewDelegate {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
         if bannerScrollView.subviews.count > 3{
-            print(bannerScrollView.subviews)
-            bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
+            for index in 1..<5 {
+                bannerScrollView.viewWithTag(index)?.frame.size.height = -HomeTableView.contentOffset.y
+            }
         }  else {
             if bannerData.count != 0{
                 for i in 1..<images.count + 1 {
                     let xPos = self.view.frame.width * CGFloat(i-1)
                     let imageView = UIImageView()
                     imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
-                    print(bannerData.count)
                         guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
                         imageView.kf.setImage(with: url)
                     imageView.tag = i
@@ -296,7 +288,6 @@ extension HomeVC: UITableViewDelegate {
     func setNavigationAlpah() {
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
-        print(HomeTableView.contentOffset.y,-homeTableViewHeaderHeight, currentHeight)
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
                if currentHeight > -homeTableViewHeaderHeight {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
@@ -372,7 +363,6 @@ extension HomeVC: UITableViewDelegate {
         case 0:
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
-            print(todayData)
             if todayData.count == 0 {
                 return cell
             } else {
@@ -420,8 +410,6 @@ extension HomeVC: UITableViewDelegate {
             cell.delegate = self
             cell.buttonDelegate = self
             cell.postDelegate = self
-            
-            print("fsdgsfdg", localText)
             cell.headerText = localText
             cell.localList = localData
          
@@ -442,7 +430,6 @@ extension HomeVC: UITableViewDataSource {
 extension HomeVC: IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
-        print(tableIndex.row)
     }
 }
 
