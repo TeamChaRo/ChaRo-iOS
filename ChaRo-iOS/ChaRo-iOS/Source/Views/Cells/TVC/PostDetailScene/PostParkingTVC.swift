@@ -7,117 +7,73 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class PostParkingTVC: UITableViewCell {
-
-    static let identifier = "PostParkingTVC"
-    private let deviceWidthRate: CGFloat = UIScreen.getDeviceWidth() / 375
-    private let deviceHeightRate = UIScreen.getDeviceWidth() / 896
-    public var hasParking : Bool?
     
     private let titleView = PostCellTitleView(title: "주차공간")
+    private let descriptionTextFeild = UITextField().then {
+        $0.backgroundColor = .gray10
+        $0.tintColor = .gray50
+        $0.addLeftPadding(16)
+        $0.layer.cornerRadius = 12
+        $0.font = .notoSansRegularFont(ofSize: 14)
+    }
+    
+    private let parkingStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 6
+        $0.distribution = .fillEqually
+    }
+    
+    private let yesButton = PostDetailContentButton()
+    private let noButton = PostDetailContentButton()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstraints()
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func setContent(isParking: Bool, description: String) {
+        descriptionTextFeild.text = description
+        yesButton.setContent(title: "있음", isSelected: isParking)
+        noButton.setContent(title: "없음", isSelected: !isParking)
+    }
+    
+    public func idEditMode(isEditing: Bool) {
+        descriptionTextFeild.isUserInteractionEnabled = isEditing
+    }
 
-    private let parkingExplanationTextFeild: UITextField = {
-        let textFeild = UITextField()
-        textFeild.background = UIImage(named: "uiViewTextfieldParkingShow")
-        textFeild.tintColor = .gray
-        textFeild.addLeftPadding(36)
-        return textFeild
-    }()
-    
-    private let yesButton : UIButton = {
-            let button = UIButton()
-            button.setTitle("있음", for: .normal)
-            button.setBackgroundImage(UIImage(named: "uiViewSelectboxParkingNo"), for: .normal)
-            button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-            button.setTitleColor(.gray40, for: .normal)
-            button.imageView?.contentMode = .scaleAspectFill
-            return button
-        }()
-        
-        private let noButton : UIButton = {
-            let button = UIButton()
-            button.setTitle("없음", for: .normal)
-            button.setBackgroundImage(UIImage(named: "uiViewSelectboxParkingNo"), for: .normal)
-            button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-            button.setTitleColor(.gray40, for: .normal)
-            button.imageView?.contentMode = .scaleAspectFill
-            return button
-        }()
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        configureLayout()
-        yesButton.isUserInteractionEnabled = false
-        noButton.isUserInteractionEnabled = false
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    public func setParkingStatus(status: Bool){
-        changeToActiveButton(hasParking: status)
-    }
-    
-    
-    public func setParkingExplanation(text: String){
-        parkingExplanationTextFeild.text = text
-    }
-    
-   
-    public func idEditMode(isEditing: Bool){
-        parkingExplanationTextFeild.isUserInteractionEnabled = isEditing
-    }
-    
-    private func setSelectedButtonStyle(button: UIButton){
-       button.setBackgroundImage(UIImage(named: "uiViewSelectboxParkingYes"), for: .normal)
-       button.setTitleColor(.mainBlue, for: .normal)
-    }
-       
-   private func changeToActiveButton(hasParking: Bool){
-       if hasParking{
-           setSelectedButtonStyle(button: yesButton)
-       }else{
-           setSelectedButtonStyle(button: noButton)
-       }
-   }
-    
-    private func configureLayout(){
-        addSubviews([titleView,
-                     yesButton,
-                     noButton,
-                     parkingExplanationTextFeild])
-        
-        let customGap = 171 * deviceWidthRate
-        
-        titleView.snp.makeConstraints{make in
-            make.top.equalTo(self.snp.top)
-            make.leading.equalTo(self.snp.leading).offset(20)
-            make.trailing.equalTo(self.snp.trailing).offset(-20)
-            make.height.equalTo(22)
-        }
-                                               
-        yesButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(0)
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing).offset(-customGap)
-            make.height.equalTo(70)
+    private func setupConstraints() {
+        contentView.addSubviews([titleView, parkingStackView, descriptionTextFeild])
+
+        titleView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(38)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(22)
         }
         
-        noButton.snp.makeConstraints{make in
-            make.top.equalTo(titleView.snp.bottom).offset(0)
-            make.leading.equalTo(self.snp.leading).offset(customGap)
-            make.trailing.equalTo(self.snp.trailing)
-            make.height.equalTo(70)
+        parkingStackView.snp.makeConstraints{
+            $0.top.equalTo(titleView.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(42)
         }
+        parkingStackView.addArrangedSubviews(views: [yesButton, noButton])
+        
+        descriptionTextFeild.snp.makeConstraints{
+            $0.top.equalTo(parkingStackView.snp.bottom).offset(8)
+            $0.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(42)
+        }
+    }
     
-        parkingExplanationTextFeild.snp.makeConstraints{make in
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.bottom.equalTo(self.snp.bottom).offset(-19)
-            make.height.equalTo(70)
-        }
+    private func configureUI() {
+        selectionStyle = .none
     }
 }

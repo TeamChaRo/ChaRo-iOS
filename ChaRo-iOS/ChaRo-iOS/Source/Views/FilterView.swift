@@ -62,8 +62,7 @@ class FilterView: UIView {
         if sender.view == popularOlderView {
             popularOlderView.selectCellColor()
             newOlderView.resetCellColor()
-        }
-        else {
+        } else {
             popularOlderView.resetCellColor()
             newOlderView.selectCellColor()
         }

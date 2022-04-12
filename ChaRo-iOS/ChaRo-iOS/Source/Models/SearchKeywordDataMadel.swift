@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: - SearchKeywordDataModel
-struct SearchResultDataModel: Codable{
+struct SearchResultDataModel: Codable {
     let success: Bool
     let msg: String
     let data: [KeywordResult]?

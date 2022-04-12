@@ -27,7 +27,7 @@ class ThemePostVC: UIViewController {
     
     
     //MARK:- Variable
-    static let identifier : String = "HomePostVC"
+    static let identifier: String = "HomePostVC"
     var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
     
     var ThemeDic: Dictionary = ["봄":"spring", "여름":"summer", "가을":"fall", "겨울":"winter", "산":"mountain", "바다":"sea", "호수":"lake", "강":"river", "해안도로":"oceanRoad", "벚꽃":"blossom", "단풍":"maple", "여유":"relax", "스피드":"speed", "야경":"nightView", "도심":"cityView"]
@@ -69,15 +69,14 @@ class ThemePostVC: UIViewController {
 
     
     //MARK:- default Setting Function Part
-
     func setTableView() {
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
-        tableView.registerCustomXib(xibName: "ThemePostAllTVC")
-        tableView.registerCustomXib(xibName: "ThemePostDetailTVC")
+        tableView.registerCustomXib(xibName: ThemePostThemeTVC.className)
+        tableView.registerCustomXib(xibName: ThemePostAllTVC.className)
+        tableView.registerCustomXib(xibName: ThemePostDetailTVC.className)
         
         
         tableView.showsHorizontalScrollIndicator = false
@@ -85,8 +84,7 @@ class ThemePostVC: UIViewController {
         
     }
     
-    
-    func filterViewCompletion(){
+    func filterViewCompletion() {
         filterView.touchCellCompletion = { index in
             switch index{
             case 0:
@@ -260,7 +258,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
 }
 
 
-extension ThemePostVC: MenuClickedDelegate{
+extension ThemePostVC: MenuClickedDelegate {
     func menuClicked() {
         filterView.isHidden = false
     }
@@ -283,8 +281,7 @@ extension ThemePostVC: PostIdDelegate {
     }
     
     func sendPostDriveElement(data: DriveElement?) {
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
         nextVC.modalPresentationStyle = .currentContext
         tabBarController?.present(nextVC, animated: true, completion: nil)

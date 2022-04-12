@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CommonData{
+class CommonData {
     static let warningDataDict = [ "고속도로": "highway",
                                   "산길포함": "mountaionRoad",
                                   "초보힘듦": "diffRoad",

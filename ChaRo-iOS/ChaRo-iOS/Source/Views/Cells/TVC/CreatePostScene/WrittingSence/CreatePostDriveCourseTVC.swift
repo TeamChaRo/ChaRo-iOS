@@ -18,19 +18,19 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
 
     public var setCourseDesc: ((String) -> Void)?
     public var contentText = "" {
-        didSet{
+        didSet {
             _ = setCourseDesc?(self.contentText)
         }
     }
     private let limitTextCount = 280
-    private var isWarnning : Bool = false {
-        didSet{
+    private var isWarnning: Bool = false {
+        didSet {
             if isWarnning{
                 warnningLabel.isHidden = false
                 textView.layer.borderColor = UIColor.mainOrange.cgColor
                 textCountLabel.textColor = .mainOrange
 
-            }else{
+            } else {
                 warnningLabel.isHidden = true
                 textView.layer.borderColor = UIColor.gray30.cgColor
                 textCountLabel.textColor = .gray30
@@ -38,7 +38,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         }
     }
 
-    public var textCountLabel : UILabel = {
+    public var textCountLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSansRegularFont(ofSize: 11)
         label.textColor = .gray30
@@ -46,7 +46,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         return label
     }()
 
-    private var textView : UITextView = {
+    private var textView: UITextView = {
         let textView = UITextView()
         textView.font = .notoSansRegularFont(ofSize: 14)
         textView.textColor = .gray30
@@ -71,14 +71,14 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         textView.delegate = self
     }
 
-    public func setContentText(text: String){
+    public func setContentText(text: String) {
         textView.text = text
         textCountLabel.text = "\(text.count)/280자"
         self.setEditingModeConstraint()
         setTextViewStyle()
     }
 
-    private func setTextViewStyle(){
+    private func setTextViewStyle() {
         textView.isEditable = true
         textView.textColor = .gray30
         textView.text = placeHolderText
@@ -88,7 +88,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         textView.contentInset = UIEdgeInsets(top: 21, left: 16, bottom: 16, right: 16)
     }
 
-    private func setEditingModeConstraint(){
+    private func setEditingModeConstraint() {
         addSubviews([
             self.titleView,
             self.textView,
@@ -127,7 +127,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         selectionStyle = .none
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.endEditing(true)
     }
 
@@ -135,7 +135,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
 
 //MARK: TextViewDelegate
 
-extension CreatePostDriveCourseTVC: UITextViewDelegate{
+extension CreatePostDriveCourseTVC: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
         let textCount = textView.text.count
@@ -143,7 +143,7 @@ extension CreatePostDriveCourseTVC: UITextViewDelegate{
             textCountLabel.text = "\(textCount)/280자"
             isWarnning = isWarnning ? false : isWarnning
             contentText = textView.text
-        }else{
+        } else {
             textView.text = contentText
             isWarnning = !isWarnning ? true : isWarnning
         }
@@ -163,7 +163,7 @@ extension CreatePostDriveCourseTVC: UITextViewDelegate{
         }
     }
 
-    func removeSpaceInText(text: String) -> Int{
+    func removeSpaceInText(text: String) -> Int {
         let stringCount = String(text.filter{ !" \n\t\r".contains($0)})
         return stringCount.count
     }

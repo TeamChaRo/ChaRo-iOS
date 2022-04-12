@@ -27,7 +27,7 @@ class SplashVC: UIViewController {
         })
     }
     
-    private func setUpAnimation(){
+    private func setUpAnimation() {
        
         animationView.frame = view.bounds
         animationView.animation = Animation.named("lottie_test")
@@ -44,7 +44,7 @@ class SplashVC: UIViewController {
      
     }
    
-    private func presentNextOnBoaring(){
+    private func presentNextOnBoaring() {
         print("보내기")
         let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)

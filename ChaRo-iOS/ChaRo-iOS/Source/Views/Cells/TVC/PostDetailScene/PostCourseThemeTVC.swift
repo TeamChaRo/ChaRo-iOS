@@ -9,145 +9,85 @@ import UIKit
 import SnapKit
 
 class PostCourseThemeTVC: UITableViewCell {
-
-    static let identifier = "PostCourseThemeTVC"
     
     // MARK: - Title View
-    let courseTitleView = PostCellTitleView(title: "드라이브 코스 지역")
-    let themeTitleView = PostCellTitleView(title: "테마")
-    
-    // MARK: - Buttons
-    var themeButtonList: [UIButton] = []
-    let buttonMultiplier: CGFloat = 148/70
-    
-    let cityButton: UIButton = {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-        button.setTitleColor(UIColor.mainBlue, for: .normal)
-        button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        return button
-    }()
-    let regionButton: UIButton = {
-        let button = UIButton()
-        button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-        button.setTitleColor(UIColor.mainBlue, for: .normal)
-        button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        return button
-    }()
-    
-    // MARK: - AwakeFromNib and setSelected
-    override func awakeFromNib(){
-        selectionStyle = .none
-        super.awakeFromNib()
-        
-        
+    private let themeTitleView = PostCellTitleView(title: "테마")
+    private var themeButtonList: [PostDetailContentButton] = []
+    private let locationImageView = UIImageView(image: ImageLiterals.icMapStart)
+    private let locationLabel = UILabel().then {
+        $0.font = .notoSansMediumFont(ofSize: 14)
+        $0.textColor = .gray50
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool){
-        super.setSelected(selected, animated: animated)
+    private let themeStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 6
+        $0.distribution = .fillEqually
     }
     
-    func setEditingMode(){
-        for item in themeButtonList{
+    // MARK: - init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstraints()
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+  
+    func setEditingMode() {
+        for item in themeButtonList {
             item.isUserInteractionEnabled = false
         }
-        
-        cityButton.isUserInteractionEnabled = false
-        regionButton.isUserInteractionEnabled = false
     }
     
-}
-
-extension PostCourseThemeTVC {
-    
-    func setCourse(city: String, region: String){
-        cityButton.setTitle(city, for: .normal)
-        regionButton.setTitle(region, for: .normal)
-    }
-    
-    func setTheme(theme: [String]){
-        themeButtonList = [] // 빈배열로 초기화
-        for i in 0..<theme.count {
-            let themeButton: UIButton = {
-                let button = UIButton()
-                button.setTitle(theme[i], for: .normal)
-                button.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
-                button.setTitleColor(UIColor.mainBlue, for: .normal)
-                button.setBackgroundImage(UIImage(named: "selectbox_show"), for: .normal)
-                button.imageView?.contentMode = .scaleAspectFill
-                return button
-            }()
-            setThemeButtonList(themeButton: themeButton)
+    func setContent(city: String, region: String, theme: [String]) {
+        locationLabel.text = getLocationText(city: city, region: region)
+        for index in 0..<3 {
+            let button = themeStackView.arrangedSubviews[index] as? PostDetailContentButton
+            index < theme.count ? button?.setContent(title: theme[index], isSelected: true) : button?.clearUI()
         }
     }
     
-    func setThemeButtonList(themeButton: UIButton){
-        themeButtonList.append(themeButton)
+    private func configureUI() {
+        selectionStyle = .none
     }
-
-    func configureLayout(){
-        addSubviews([courseTitleView, cityButton, regionButton, themeTitleView])
-        
-        courseTitleView.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(37)
-            $0.leading.equalTo(self.snp.leading).offset(20)
-            $0.trailing.equalTo(self.snp.trailing).offset(-20)
-            $0.height.equalTo(22)
+    
+    private func setupConstraints() {
+        addSubviews([locationImageView, locationLabel, themeTitleView, themeStackView])
+     
+        locationImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(15)
+            $0.leading.equalToSuperview().offset(18)
+            $0.width.height.equalTo(18)
         }
         
-        cityButton.snp.makeConstraints {
-            $0.top.equalTo(courseTitleView.snp.bottom).inset(2)
-            $0.height.equalTo(70)
-            $0.leading.equalTo(self.snp.leading)
-            $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
+        locationLabel.snp.makeConstraints {
+            $0.centerY.equalTo(locationImageView.snp.centerY)
+            $0.leading.equalTo(locationImageView.snp.trailing).offset(6)
         }
-        
-        regionButton.snp.makeConstraints {
-            $0.leading.equalTo(cityButton.snp.trailing).inset(34)
-            $0.height.equalTo(70)
-            $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
-            $0.centerY.equalTo(cityButton.snp.centerY)
-        }
-        
+    
         themeTitleView.snp.makeConstraints {
-            $0.top.equalTo(cityButton.snp.bottom).offset(19)
-            $0.leading.equalTo(self.snp.leading).offset(20)
-            $0.trailing.equalTo(self.snp.trailing).offset(-2)
+            $0.top.equalTo(locationImageView.snp.bottom).offset(36)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(22)
         }
+        themeStackView.snp.makeConstraints {
+            $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
+            $0.bottom.equalToSuperview().offset(-34)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(42)
+        }
+        themeStackView.addArrangedSubviews(views: [PostDetailContentButton(),
+                                                   PostDetailContentButton(),
+                                                   PostDetailContentButton()])
     }
     
-    func themeButtonConfigureLayer(){
-        
-        addSubviews(themeButtonList)
-        
-        themeButtonList[0].snp.makeConstraints {
-            $0.top.equalTo(themeTitleView.snp.bottom).inset(2)
-            $0.leading.equalTo(self.snp.leading)
-            $0.height.equalTo(70)
-            $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
+    private func getLocationText(city: String, region: String) -> String{
+        if city == "광역시" || city == "특별시" {
+            return "\(region)\(city)"
         }
-        
-        if themeButtonList.count > 1 {
-            for i in 1..<themeButtonList.count {
-                themeButtonList[i].snp.makeConstraints{
-                    $0.leading.equalTo(themeButtonList[i-1].snp.trailing).inset(34)
-                    $0.height.equalTo(70)
-                    $0.width.equalTo(self.cityButton.snp.height).multipliedBy(buttonMultiplier)
-                    $0.centerY.equalTo(themeButtonList[i-1].snp.centerY)
-                }
-            }
-        }
-    }
-    
-    func bringButtonToFront(){
-        self.bringSubviewToFront(cityButton)
-        if themeButtonList.count > 1 {
-            for i in 1..<themeButtonList.count {
-                self.bringSubviewToFront(themeButtonList[themeButtonList.count-i-1])
-            }
-        }
+        return "\(city) \(region)"
     }
 }
+
