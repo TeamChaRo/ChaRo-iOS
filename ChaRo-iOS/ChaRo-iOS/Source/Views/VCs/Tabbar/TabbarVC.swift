@@ -24,6 +24,10 @@ class TabbarVC: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         selectedViewController = tabs[comeBackIndex]
+        
+        print("유저디폴트 유저이메일 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail))")
+        print("유저디폴트 유저이미지 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userImage))")
+        print("유저디폴트 유저닉네임 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname))")
     }
     func setBackgroundClear() {
         tabBar.isTranslucent = true

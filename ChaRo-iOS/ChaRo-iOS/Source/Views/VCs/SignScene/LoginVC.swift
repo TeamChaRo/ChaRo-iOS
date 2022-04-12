@@ -43,7 +43,6 @@ class LoginVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    
     func setLoginButtonUI() {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
         
@@ -54,10 +53,20 @@ class LoginVC: UIViewController {
         
     }
     
-    
     func loginAction() {
         
-        LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) {
+        guard let userEmail = self.idTextField.text, !userEmail.isEmpty else {
+            self.makeAlert(title: "로그인 실패", message: "아이디를 입력해주세요.")
+            return
+        }
+        
+        guard let userPassword = self.pwdTextField.text, !userPassword.isEmpty else {
+            self.makeAlert(title: "로그인 실패", message: "비밀번호를 입력해주세요.")
+            return
+        }
+        
+        
+        LoginService.shared.login(id: userEmail, password: userPassword) {
             result in
 
             switch result
@@ -67,17 +76,19 @@ class LoginVC: UIViewController {
                 let loginData = data as? LoginDataModel
                 let userData = loginData?.data
 
-                //UserDefaults에 이메일, 닉네임, 프로필 사진, 소셜 로그인 여부 저장
+                //UserDefaults에 이메일, 닉네임, 프로필 사진 저장
                 if let user = userData {
-                    UserDefaults.standard.set(user.email, forKey: "userId")
-                    UserDefaults.standard.set(user.nickname, forKey: "nickname")
-                    UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
-                    UserDefaults.standard.set(user.isSocial, forKey: "isSocial")
+                    UserDefaults.standard.set(user.email, forKey: Constants.UserDefaultsKey.userEmail)
+                    UserDefaults.standard.set(userPassword, forKey: Constants.UserDefaultsKey.userPassword)
+                    UserDefaults.standard.set(user.nickname, forKey: Constants.UserDefaultsKey.userNickname)
+                    UserDefaults.standard.set(user.profileImage, forKey: Constants.UserDefaultsKey.userImage)
                 }
+                self.showHomeVC()
 
             case .requestErr(let message):
                 if let message = message as? String {
-                    print(message)
+                    self.makeAlert(title: "로그인 실패",
+                              message: message)
                 }
             default :
                 print("ERROR")
@@ -92,23 +103,22 @@ class LoginVC: UIViewController {
     
     
     @IBAction func findPwdButtonClicked(_ sender: UIButton) {
-        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: FindPasswordVC.identifier) as? FindPasswordVC else {
             return
         }
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
+    }
+    
+    private func showHomeVC() {
         let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
         let nextVC = storyboard.instantiateViewController(withIdentifier: TabbarVC.identifier)
         nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)
-        
     }
     
     
@@ -126,9 +136,7 @@ class LoginVC: UIViewController {
     }
     
     @objc
-    func textFieldMoveUp(_ notification: NSNotification) {
-        
-        
+    func textFieldMoveUp(_ notification: NSNotification){
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
@@ -141,9 +149,6 @@ class LoginVC: UIViewController {
     func textFieldMoveDown(_ notification: NSNotification) {
         view.transform = .identity
     }
-    
-    
-    
 }
 
 extension LoginVC {
@@ -158,10 +163,5 @@ extension LoginVC {
             imageView.image = UIImage(named: "maskGroupSE")
             
         }
-        
-        
-        
-        
-        
     }
 }

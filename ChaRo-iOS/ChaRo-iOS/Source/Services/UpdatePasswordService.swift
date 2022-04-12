@@ -1,21 +1,22 @@
 //
-//  IsDuplicatedEmailService.swift
+//  UpdatePasswordService.swift
 //  ChaRo-iOS
 //
-//  Created by JEN Lee on 2021/10/05.
+//  Created by JEN Lee on 2022/03/25.
 //
 
 import Foundation
 import Alamofire
 
 
-struct IsDuplicatedEmailService {
-    static let shared = IsDuplicatedEmailService()
+struct UpdatePasswordService {
+    static let shared = UpdatePasswordService()
     
-    func getEmailInfo(email: String, completion : @escaping (NetworkResult<Any>) -> Void)
+    func putNewPassword(password: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         
-        let original = Constants.duplicateEmailURL + email
+        let userEmail = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail)
+        let original = Constants.updatePassword + "userEmail=\(userEmail)&newPassword=\(password)"
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         
         guard let target = original.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
@@ -27,27 +28,23 @@ struct IsDuplicatedEmailService {
         }
                 
         let dataRequest = AF.request(url,
-                                     method: .get,
+                                     method: .put,
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
         
         dataRequest.responseData { dataResponse in
             
-            
             switch dataResponse.result {
             case .success:
-                print("중복 이메일 ----- 데이터 요청 성공")
-                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let statusCode = dataResponse.response?.statusCode else { return }
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value)
                 completion(networkResult)
                 
             case .failure: completion(.pathErr)
-                
             }
         }
-        
     }
     
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
@@ -66,7 +63,6 @@ struct IsDuplicatedEmailService {
 
         switch statusCode {
         case 200...299:
-            print("중복 이메일 --- 데이터 받기 성공")
             return .success(decodedData.success)
         case 400: return .requestErr(decodedData.msg)
         case 409: return .success(decodedData.success)

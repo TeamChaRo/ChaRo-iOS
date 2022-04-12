@@ -74,6 +74,10 @@ struct Constants {
     static let googleLoginURL = baseURL + "/user/register/google"
     static let appleLoginURL = baseURL + "/user/register/apple"
     
+    //비밀번호, 프로필 수정
+    static let updatePassword = baseURL + "/user/password?"
+    static let updateProfile = baseURL + "/user/"
+    
     /// 알림
     static let notificationListURL = baseURL + "/push/"
 }

@@ -27,7 +27,7 @@ struct EmailJoinService {
             "pushAgree": marketingPush,
         ]
         
-        var test: [String: Any] = [:]
+        var dicParameters: [String: Any] = [:]
         
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         
@@ -35,16 +35,13 @@ struct EmailJoinService {
             
             for (key, value) in parameters {
                 multipartFormData.append("\(value)".data(using: .utf8, allowLossyConversion: false)!, withName: "\(key)")
-                test.updateValue(value, forKey: "\(key)")
+                dicParameters.updateValue(value, forKey: "\(key)")
             }
            
             if let imageData = image.jpegData(compressionQuality: 1) {
                 multipartFormData.append(imageData, withName: "image", fileName: "gg.jpeg", mimeType: "image/jpeg")
-                test.updateValue(imageData, forKey: "profileImage")
+                dicParameters.updateValue(imageData, forKey: "profileImage")
             }
-            
-            print(test)
-        
             
         }, to: Constants.JoinURL
         , usingThreshold: UInt64.init()

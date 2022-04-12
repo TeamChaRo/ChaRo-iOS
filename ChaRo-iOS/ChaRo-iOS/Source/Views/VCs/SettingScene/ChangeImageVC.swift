@@ -4,12 +4,16 @@
 //
 //  Created by JEN Lee on 2022/03/01.
 //
+// 일단 그거 .. 빨간거 파란거 부터 프로파일 참고해서 기능구현하고
+// 서버연결
 
 import UIKit
 
-class ChangeImageVC: UIViewController {
-
+class ChangeImageVC: UIViewController, UITextFieldDelegate {
+    
+    //MARK: - Properties
     static let identifier = "ChangeImageVC"
+    var isNicknamePassed = false
     
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
@@ -24,15 +28,19 @@ class ChangeImageVC: UIViewController {
         $0.textColor = UIColor.black
         $0.textAlignment = .center
     }
+    
     private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked), for: .touchUpInside)
     }
+    
     private let doneButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 17)
         $0.setTitleColor(.gray40, for: .normal)
+        $0.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
     }
+        
     private let bottomView = UIView().then {
         $0.backgroundColor = UIColor.gray20
     }
@@ -50,16 +58,25 @@ class ChangeImageVC: UIViewController {
         $0.addTarget(self, action: #selector(profileChangeButtonClicked), for: .touchUpInside)
     }
     
-    private let nicknameInputView = JoinInputView(title: "",
-                                                  subTitle: "닉네임",
-                                                  placeholder: "기존 닉네임")
+    private let nicknameView = JoinInputView(title: "",
+                                             subTitle: "닉네임",
+                                             placeholder: "기존 닉네임").then {
+        $0.inputTextField?.text = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname) as? String
+    }
     
     
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setHeaderLayout()
+        configureHeaderLayout()
+        configureUI()
+        configureDelegate()
+    }
+    
+    //MARK: - Custom Function
+    private func configureDelegate() {
+        nicknameView.inputTextField?.delegate = self
     }
     
     @objc private func backButtonClicked() {
@@ -68,64 +85,164 @@ class ChangeImageVC: UIViewController {
     
     @objc private func profileChangeButtonClicked() {
         
-        let actionsheetController = UIAlertController(title: "타이틀이담마", message: "메세지담마", preferredStyle: .actionSheet)
+        let actionsheetController = UIAlertController(title: "프로필 사진 바꾸기", message: nil, preferredStyle: .actionSheet)
         
-        
-        let actionDefault = UIAlertAction(title: "액션 디폴트", style: .default, handler: { action in
+        let actionDefaultImage = UIAlertAction(title: "기본 이미지 설정", style: .default, handler: { action in
             print("디폴트 action called")
         })
-        let actionDestructive = UIAlertAction(title: "액션 디스트뤕티브", style: .destructive, handler: { action in
-            print("destructive action called")
+        let actionLibraryImage = UIAlertAction(title: "라이브러리에서 선택", style: .default, handler: { action in
+            print("디폴트 action called")
         })
-        let actionCancel = UIAlertAction(title: "액션 캔슬", style: .cancel, handler: { action in
+        let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: { action in
             print("캔슬 action called")
         })
         
-        actionsheetController.addAction(actionDefault)
-        actionsheetController.addAction(actionDestructive)
+        actionsheetController.addAction(actionDefaultImage)
+        actionsheetController.addAction(actionLibraryImage)
         actionsheetController.addAction(actionCancel)
         
         self.present(actionsheetController, animated: true)
-        
-        print("왈왈")
     }
     
+    private func makeNicknameViewRed(text: String) {
+        self.isNicknamePassed = false
+        nicknameView.setOrangeTFLabelColorWithText(text: text)
+        self.doneButton.isEnabled = false
+        self.doneButton.setTitleColor(.gray40, for: .normal)
+    }
+    
+    private func makeNicknameViewBlue(text: String) {
+        self.isNicknamePassed = true
+        nicknameView.setBlueTFLabelColorWithText(text: text)
+        self.doneButton.isEnabled = true
+        self.doneButton.setTitleColor(.mainBlue, for: .normal)
+    }
+    
+    //MARK: - Service Function
+    private func IsDuplicatedNickname(nickname: String) {
+        IsDuplicatedNicknameService.shared.getNicknameInfo(nickname: nickname) { (response) in
+            
+            switch(response)
+            {
+            case .success(let success):
+                if let success = success as? Bool {
+                    if success {
+                        self.makeNicknameViewBlue(text: "사용 가능한 닉네임입니다. ")
+                    } else {
+                        self.makeNicknameViewRed(text: "중복되는 닉네임이 존재합니다.")
+                    }
+                }
+            case .requestErr(let message) :
+                print("requestERR", message)
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    @objc private func doneButtonClicked() {
+        let newNickname = nicknameView.inputTextField?.text
+        UpdateProfileService.shared.putNewProfile(nickname: newNickname!,
+                                                  newImage: nil) { result in
+            
+            switch result {
+            case .success(let msg):
+                print("success", msg)
+                self.makeAlert(title: "", message: "프로필이 변경되었습니다.", okAction: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                    UserDefaults.standard.set(newNickname, forKey: Constants.UserDefaultsKey.userNickname)
+                })
+            case .requestErr(let msg):
+                print("requestERR", msg)
+            case .pathErr:
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+            
+        }
+    }
+    
+    //MARK: - TextField Delegate 함수
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let nickname: String = textField.text ?? ""
+        if nickname == "" {
+            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
+        } else if nickname.count > 5 {
+            makeNicknameViewRed(text: "5자 이내로 작성해주세요.")
+        } else if !nickname.isOnlyHanguel() {
+            makeNicknameViewRed(text: "한글만 사용해주세요.")
+        } else {
+            self.IsDuplicatedNickname(nickname: nickname)
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let nickname = textField.text ?? ""
+        if nickname == "" {
+            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let nickname = textField.text ?? ""
+        if nickname == "" {
+            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
+        }
+    }
     
     //MARK: - Configure UI
-    func setHeaderLayout() {
+    private func configureHeaderLayout() {
         let headerHeigth = userheight * 0.15
         self.view.addSubview(settingBackgroundView)
+        
         settingBackgroundView.addSubviews([headerTitleLabel,
                                            backButton,
                                            doneButton,
-                                           bottomView,
-                                           profileView,
-                                           profileChangeButton,
-                                           nicknameInputView])
+                                           bottomView])
         
         settingBackgroundView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(headerHeigth)
         }
+        
         headerTitleLabel.snp.makeConstraints {
             $0.centerX.equalTo(settingBackgroundView.snp.centerX)
             $0.bottom.equalToSuperview().offset(-25)
             $0.width.equalTo(170)
         }
+        
         backButton.snp.makeConstraints {
             $0.width.height.equalTo(48)
             $0.leading.equalToSuperview().offset(0)
             $0.centerY.equalTo(headerTitleLabel)
         }
+        
         bottomView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
+        
         doneButton.snp.makeConstraints {
             $0.width.height.equalTo(48)
             $0.trailing.equalToSuperview().offset(-20)
             $0.centerY.equalTo(headerTitleLabel)
         }
+        
+    }
+    
+    private func configureUI() {
+        self.view.addSubviews([
+            profileView,
+            profileChangeButton,
+            nicknameView
+        ])
         
         profileView.snp.makeConstraints {
             $0.top.equalTo(settingBackgroundView.snp.bottom).offset(25)
@@ -140,15 +257,13 @@ class ChangeImageVC: UIViewController {
             $0.width.equalTo(200)
         }
         
-        nicknameInputView.snp.makeConstraints {
+        nicknameView.snp.makeConstraints {
             $0.top.equalTo(profileChangeButton.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(100)
         }
-
     }
-
-
+    
+    
 }
-

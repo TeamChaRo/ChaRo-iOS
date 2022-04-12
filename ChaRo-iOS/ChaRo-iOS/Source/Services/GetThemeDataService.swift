@@ -47,16 +47,14 @@ struct GetThemeDataService {
                 
                 
                 switch dataResponse.result {
-                
                 case .success:
                     print("테마 데이터 ----- 데이터 요청 성공")
                     guard let statusCode = dataResponse.response?.statusCode else {return}
-                    guard let value = dataResponse.value else {return}
+                    guard let value = dataResponse.value else { return }
                     let networkResult = self.judgeStatus(by: statusCode, value)
                     completion(networkResult)
                 
-                case .failure: completion(.pathErr)
-                    
+                case .failure: completion(.pathErr) 
                 }
             }
                                                 
