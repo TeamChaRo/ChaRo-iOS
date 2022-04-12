@@ -123,14 +123,14 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     }
     
     private func makeNicknameViewRed(text: String) {
-        self.isNicknamePassed = true
-        self.makeButtonsBlue()
-        self.nicknameView.setBlueTFLabelColorWithText(text: text)
+        self.isNicknamePassed = false
+        self.makeButtonsGray()
+        self.nicknameView.setOrangeTFLabelColorWithText(text: text)
     }
     
     private func makeNicknameViewBlue(text: String) {
-        self.isNicknamePassed = false
-        self.makeButtonsGray()
+        self.isNicknamePassed = true
+        self.makeButtonsBlue()
         self.nicknameView.setBlueTFLabelColorWithText(text: text)
     }
     
@@ -154,10 +154,6 @@ class JoinProfileView: UIView, UITextFieldDelegate {
             self.IsDuplicatedNickname(nickname: (self.nicknameView.inputTextField?.text!)!)
         }
     }
-    
-//    func textFieldDidChangeSelection(_ textField: UITextField) {
-//        isNicknamePassed = false
-//    }
     
     
     //MARK: - 서버 연결 함수

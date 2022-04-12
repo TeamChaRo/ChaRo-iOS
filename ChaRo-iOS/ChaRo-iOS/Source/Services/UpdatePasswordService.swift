@@ -35,7 +35,6 @@ struct UpdatePasswordService {
         
         dataRequest.responseData { dataResponse in
             
-            
             switch dataResponse.result {
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return }
@@ -44,10 +43,8 @@ struct UpdatePasswordService {
                 completion(networkResult)
                 
             case .failure: completion(.pathErr)
-                
             }
         }
-        
     }
     
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {

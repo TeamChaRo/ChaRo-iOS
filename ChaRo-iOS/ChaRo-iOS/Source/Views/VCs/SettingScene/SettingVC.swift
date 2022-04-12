@@ -229,12 +229,6 @@ extension SettingVC: UITableViewDataSource {
         print(indexPath)
         
         switch indexPath.section {
-        case 0:
-            break
-            
-        case 1:
-            break
-            
         case 2:
             if indexPath.row == 0 {
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangeImageVC.identifier) else { return }
