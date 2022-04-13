@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import Then
-import SnapKit
+
+
 
 class ThemePostVC: UIViewController {
     
@@ -16,6 +16,7 @@ class ThemePostVC: UIViewController {
     @IBOutlet weak var navigationView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dropDownTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
     
@@ -23,21 +24,21 @@ class ThemePostVC: UIViewController {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToTitle: NSLayoutConstraint!
     
-    let filterView = FilterView()
+    
     
     
     //MARK:- Variable
-    static let identifier: String = "HomePostVC"
+    static let identifier : String = "HomePostVC"
     var themeList: [String] = ["산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"]
     
     var ThemeDic: Dictionary = ["봄":"spring", "여름":"summer", "가을":"fall", "겨울":"winter", "산":"mountain", "바다":"sea", "호수":"lake", "강":"river", "해안도로":"oceanRoad", "벚꽃":"blossom", "단풍":"maple", "여유":"relax", "스피드":"speed", "야경":"nightView", "도심":"cityView"]
     
     var topTVCCell : ThemePostDetailTVC?
+    var delegate : SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 0
-    var currentState: String = "인기순"
     private var selectedTheme = ""
-    private var selectedDriveList: [DriveElement] = []
+    private var selectedDriveList: [Drive] = []
     
     //MARK:- Constraint
     
@@ -45,11 +46,12 @@ class ThemePostVC: UIViewController {
     //MARK:- Life Cycle
     override func viewDidLoad() {
         setTableView()
+        setdropDownTableView()
+        setdropDownTableViewUI()
         setTitleLabelUI()
-        setHeaderBottomView()
-        filterViewCompletion()
-        filterViewLayout()
-        dismissDropDownWhenTappedAround()
+        setShaow()
+        setTableViewTag()
+        setdropDownTableViewUI()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -69,14 +71,19 @@ class ThemePostVC: UIViewController {
 
     
     //MARK:- default Setting Function Part
+    func setTableViewTag(){
+        tableView.tag = 1
+        dropDownTableView.tag = 2
+    }
+    
     func setTableView() {
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.registerCustomXib(xibName: ThemePostThemeTVC.className)
-        tableView.registerCustomXib(xibName: ThemePostAllTVC.className)
-        tableView.registerCustomXib(xibName: ThemePostDetailTVC.className)
+        tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
+        tableView.registerCustomXib(xibName: "ThemePostAllTVC")
+        tableView.registerCustomXib(xibName: "ThemePostDetailTVC")
         
         
         tableView.showsHorizontalScrollIndicator = false
@@ -84,47 +91,29 @@ class ThemePostVC: UIViewController {
         
     }
     
-    func filterViewCompletion() {
-        filterView.touchCellCompletion = { index in
-            switch index{
-            case 0:
-                self.currentState = "인기순"
-                self.getThemeData(theme: self.selectedTheme, filter: .like)
-                self.tableView.reloadData()
-                self.filterView.isHidden = true
-            case 1:
-                self.currentState = "최신순"
-                self.getThemeData(theme: self.selectedTheme, filter: .new)
-                self.tableView.reloadData()
-                self.filterView.isHidden = true
-            default:
-                print("Error")
-            }
-            return index
-        }
+    func setShaow(){
+        
+        //SE일 때 설정
+        self.setDetailNavigationViewUI(height: heightConstraint,
+                                       fromBottomToTitle: fromBottomToTitle)
+        
+        navigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
     
-    func filterViewLayout() {
-        self.view.addSubview(filterView)
-        filterView.isHidden = true
-        filterView.snp.makeConstraints{
-            $0.top.equalTo(navigationView.snp.bottom).offset(168)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.height.equalTo(97)
-            $0.width.equalTo(180)
-        }
+    func setdropDownTableView() {
+        dropDownTableView.delegate = self
+        dropDownTableView.dataSource = self
+        dropDownTableView.isHidden = true
+        dropDownTableView.registerCustomXib(xibName: HotDropDownTVC.identifier)
     }
     
-    func setHeaderBottomView() {
-        let bottomView = UIView().then{
-            $0.backgroundColor = UIColor.gray20
-        }
-        navigationView.addSubview(bottomView)
-        bottomView.snp.makeConstraints{
-            $0.bottom.leading.trailing.equalToSuperview().offset(0)
-            $0.height.equalTo(1)
-        }
+    
+    func setdropDownTableViewUI() {
+        dropDownTableView.clipsToBounds = true
+        dropDownTableView.layer.cornerRadius = 20
+        dropDownTableView.separatorStyle = .none
     }
+    
     
     func setTitleLabel(name: String) {
         titleLabel.text = name
@@ -156,11 +145,13 @@ class ThemePostVC: UIViewController {
                     switch(response)
                     {
                     case .success(let driveData):
-                        print(driveData)
-                        if let object = driveData as? Drive {
-                            print("여기까지 왓음")
-                            self.cellCount = object.drive.count
-                            self.selectedDriveList = object.drive
+                        
+                        if let object = driveData as? TotalDrive {
+                            self.cellCount = object.totalCourse
+                                                    
+                            if let drive = object.drive as? [Drive] {
+                                self.selectedDriveList = drive
+                            }
                             
                             self.tableView.reloadData()
                         }
@@ -185,13 +176,49 @@ class ThemePostVC: UIViewController {
 //MARK:- extension
 
 extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return 3
+        
+        if tableView.tag == 2 {
+            return 2
+        } else {
+            return 3
         }
         
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
     UITableViewCell {
+                
+        if tableView.tag == 2 {
+            
+            let cell: HotDropDownTVC = dropDownTableView.dequeueReusableCell(for: indexPath)
+            
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
+            cell.selectedBackgroundView = bgColorView
+            cell.setLabel()
+            
             switch indexPath.row {
+            case 0:
+                cell.setCellName(name: "인기순")
+            case 1:
+                cell.setCellName(name: "최신순")
+            default:
+                break
+            }
+            
+            cell.delegate = self
+            cell.themeDelegate = self
+            
+            return cell
+            
+        }
+        
+        if tableView.tag == 1 {
+            
+            switch indexPath.row {
+            
             case 0:
                 let cell: ThemePostThemeTVC = tableView.dequeueReusableCell(for: indexPath)
                 
@@ -213,7 +240,7 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
                 }
 
                 cell.selectionStyle = .none
-                cell.setTitle(data: currentState)
+                cell.setPostCount(data: cellCount)
                 cell.setLabel()
 
                 return cell
@@ -229,13 +256,32 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
             default:
                 return UITableViewCell()
             }
+        }
         return UITableViewCell()
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView.tag == 2 {
+            
+            let HotCell: HotDropDownTVC = (tableView.dequeueReusableCell(withIdentifier: HotDropDownTVC.identifier) as? HotDropDownTVC)!
+            
+            if indexPath.row == 0 {
+                HotCell.setSelectedCell()
+                
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if tableView.tag == 2 {
+            return 44
+        }
+        
+        
         var topBarHeight = 100
         let factor = UIScreen.main.bounds.width / 375
         
@@ -258,13 +304,27 @@ extension ThemePostVC: UITableViewDelegate, UITableViewDataSource  {
 }
 
 
-extension ThemePostVC: MenuClickedDelegate {
+extension ThemePostVC: MenuClickedDelegate{
     func menuClicked() {
-        filterView.isHidden = false
+        dropDownTableView.isHidden = false
     }
+    
+    
 }
 
+extension ThemePostVC: SetTitleDelegate {
+    func setTitle(cell: HotDropDownTVC) {
+        delegate?.setTopTitle(name: cell.name)
+        dropDownTableView.isHidden = true
+        topTVCCell?.setTitle(data: cell.name)
+        
+    }
+    
+}
+
+
 extension ThemePostVC: ThemeNetworkDelegate {
+    
     func setClickedThemeData(themeName: String) {
         getThemeData(theme: themeName, filter: Filter.new)
     }
@@ -272,41 +332,31 @@ extension ThemePostVC: ThemeNetworkDelegate {
 }
 
 extension ThemePostVC: PostIdDelegate {
+    
     func sendPostID(data: Int) {
+    
         let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
         
         nextVC.setPostId(id: data)
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func sendPostDriveElement(data: DriveElement?) {
-        let nextVC = PostDetailVC()
+        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.identifier) as! PostDetailVC
         nextVC.setAdditionalDataOfPost(data: data)
         nextVC.modalPresentationStyle = .currentContext
         tabBarController?.present(nextVC, animated: true, completion: nil)
     }
 }
 
-//
-//extension ThemePostVC: SetThemeUpdateDelegate {
-//    
-//    func updateThemeData(filter: Filter) {
-//        getThemeData(theme: selectedTheme, filter: filter)
-//        print(selectedDriveList)
-//    }
-//
-//}
-extension ThemePostVC{
 
-func dismissDropDownWhenTappedAround() {
-        let tap: UITapGestureRecognizer =
-            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
-        tap.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tap)
-    }
+extension ThemePostVC: SetThemeUpdateDelegate {
     
-    @objc func dismissDropDown() {
-        self.filterView.isHidden = true
+    func updateThemeData(filter: Filter) {
+        getThemeData(theme: selectedTheme, filter: filter)
+        print(selectedDriveList)
     }
+
 }

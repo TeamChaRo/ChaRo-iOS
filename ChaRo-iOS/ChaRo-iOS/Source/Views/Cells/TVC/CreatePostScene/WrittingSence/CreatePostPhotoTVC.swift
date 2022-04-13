@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Then
 
 class CreatePostPhotoTVC: UITableViewCell {
     
@@ -18,29 +17,16 @@ class CreatePostPhotoTVC: UITableViewCell {
         }
     }
     
-    private let maxPhotoCount: Int = 6
+    let maxPhotoCount: Int = 6
     
     // MARK: UI Components
-
-    private let photoBackgroundView: UIView = UIView().then {
-        $0.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
-    }
-
-    private let photoSubBackgroundView: UIView = UIView().then {
-        $0.backgroundColor = UIColor.white
-    }
-
-    private let emptyImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(named: "photo1")
-    }
-
-    private let discriptionText: UILabel = UILabel().then {
-        $0.text = "이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요  (0/6)"
-        $0.font = .notoSansRegularFont(ofSize: 14)
-        $0.numberOfLines = 2
-        $0.textAlignment = .center
-        $0.textColor = UIColor.gray40
-    }
+    let emptyImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "writeEmptyImage")
+        imageView.layer.cornerRadius = 8
+        
+        return imageView
+    }()
     
     let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -52,11 +38,12 @@ class CreatePostPhotoTVC: UITableViewCell {
         return collectionView
     }()
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setNotificationCenter()
-        self.setImageGesture()
-        self.setLayout()
+        setNotificationCenter()
+        setImageGesture()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -69,95 +56,64 @@ class CreatePostPhotoTVC: UITableViewCell {
 extension CreatePostPhotoTVC {
     
     // MARK:- Functions
-
-    func setCollcetionView() {
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.registerCustomXib(xibName: CreatePostPhotosCVC.identifier)
-        self.collectionView.showsHorizontalScrollIndicator = false
+    func setCollcetionView(){
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.registerCustomXib(xibName: CreatePostPhotosCVC.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
         
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
     
-    private func setImageGesture() {
+    func setImageGesture(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewDidTap))
-        self.emptyImageView.addGestureRecognizer(tapGesture)
-        self.emptyImageView.isUserInteractionEnabled = true
-    }
-
-    private func setLayout() {
-        self.photoBackgroundView.layer.cornerRadius = 12.0
-        self.photoSubBackgroundView.layer.borderWidth = 1.0
-        self.photoSubBackgroundView.layer.borderColor = UIColor.gray20.cgColor
-        self.photoSubBackgroundView.layer.cornerRadius = 10.0
+                                                
+        emptyImageView.addGestureRecognizer(tapGesture)
+        emptyImageView.isUserInteractionEnabled = true
     }
     
 
-    func receiveImageListfromVC(image: [UIImage]) {
+    func receiveImageListfromVC(image: [UIImage]){
         self.receiveImageList.removeAll()
         self.receiveImageList.append(contentsOf: image)
     }
     
     @objc
-    func imageViewDidTap() {
+    func imageViewDidTap(){
         NotificationCenter.default.post(name: .callPhotoPicker, object: nil)
     }
 
-    func setNotificationCenter() {
+    func setNotificationCenter(){
         NotificationCenter.default.addObserver(self, selector: #selector(imageViewDidTap), name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePhoto), name: .createPostDeletePhotoClicked, object: nil)
     
     }
     
-    func removeObservers() { // TODO: 얘를 어디서 호출할지..?
+    func removeObservers(){ // TODO: 얘를 어디서 호출할지..?
         NotificationCenter.default.removeObserver(self, name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.removeObserver(self, name: .createPostDeletePhotoClicked, object: nil)
     }
 
     @objc
-    func deletePhoto(_ notification: Notification) {
+    func deletePhoto(_ notification: Notification){
         print("====delete====")
         self.receiveImageList.remove(at: notification.object as! Int) //선택한 이미지 삭제
         collectionView.reloadData()
     }
     
     // MARK:- Layout
-    func emptyConfigureLayout() {
-
-        addSubviews([
-            self.photoBackgroundView,
-            self.photoSubBackgroundView,
-            self.discriptionText,
-            self.emptyImageView
-        ])
-
-        self.photoBackgroundView.snp.makeConstraints {
+    func emptyConfigureLayout(){
+        addSubview(emptyImageView)
+        
+        emptyImageView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.bottom.equalTo(self.snp.bottom).inset(33)
         }
-        self.photoSubBackgroundView.snp.makeConstraints {
-            $0.top.equalTo(self.photoBackgroundView.snp.top).inset(33)
-            $0.width.equalTo(110)
-            $0.height.equalTo(self.photoSubBackgroundView.snp.width).multipliedBy(1.0)
-            $0.centerX.equalTo(self.photoBackgroundView.snp.centerX)
-        }
-        self.discriptionText.snp.makeConstraints {
-            $0.top.equalTo(self.photoSubBackgroundView.snp.bottom).offset(8)
-            $0.height.equalTo(44)
-            $0.width.equalTo(240)
-            $0.centerX.equalTo(self.photoBackgroundView.snp.centerX)
-        }
-        self.emptyImageView.snp.makeConstraints {
-            $0.top.equalTo(self.photoSubBackgroundView.snp.top).inset(31)
-            $0.height.equalTo(48)
-            $0.width.equalTo(self.emptyImageView.snp.height).multipliedBy(1)
-            $0.centerX.equalTo(self.photoSubBackgroundView.snp.centerX)
-        }
     }
     
-    func photoConfigureLayout() {
+    func photoConfigureLayout(){
         addSubview(collectionView)
         
         collectionView.snp.makeConstraints{
@@ -171,11 +127,11 @@ extension CreatePostPhotoTVC {
    
 }
 
-extension CreatePostPhotoTVC: UICollectionViewDelegate {
+extension CreatePostPhotoTVC : UICollectionViewDelegate {
     
 }
 
-extension CreatePostPhotoTVC: UICollectionViewDataSource {
+extension CreatePostPhotoTVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if receiveImageList.count >= maxPhotoCount {
             return maxPhotoCount
@@ -207,7 +163,7 @@ extension CreatePostPhotoTVC: UICollectionViewDataSource {
     
 }
 
-extension CreatePostPhotoTVC: UICollectionViewDelegateFlowLayout {
+extension CreatePostPhotoTVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellsize: CGFloat = (UIScreen.getDeviceWidth() - 54.0) / 3
         return CGSize(width: cellsize, height: cellsize)

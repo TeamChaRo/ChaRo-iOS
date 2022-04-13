@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct PostTitleDataModel {
+struct PostTitleDataModel{
     var title: String
     var userName: String
     var date: String

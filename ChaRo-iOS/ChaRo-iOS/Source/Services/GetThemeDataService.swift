@@ -17,7 +17,7 @@ struct GetThemeDataService {
     
     static let shared = GetThemeDataService()
     
-    func getThemeInfo(theme: String, filter: Filter, completion: @escaping (NetworkResult<Any>) -> Void)
+    func getThemeInfo(theme: String, filter: Filter, completion : @escaping (NetworkResult<Any>) -> Void)
         {
         
         var URL = ""
@@ -26,16 +26,14 @@ struct GetThemeDataService {
         
         case Filter.like:
             URL = Constants.ThemeLikeURL + "\(theme)"
-            print("응답 코드 \(URL)")
-            break
             
+            break
         case Filter.new:
             URL = Constants.ThemeNewURL + "\(theme)"
-            print("응답 코드 \(URL)")
             break
         }
         
-            let header: HTTPHeaders = ["Content-Type": "application/json"]
+            let header : HTTPHeaders = ["Content-Type": "application/json"]
             
             let dataRequest = AF.request(URL,
                                          method: .get,
@@ -47,25 +45,26 @@ struct GetThemeDataService {
                 
                 
                 switch dataResponse.result {
+                
                 case .success:
-                    print("테마 데이터 ----- 데이터 요청 성공")
+                    
                     guard let statusCode = dataResponse.response?.statusCode else {return}
-                    guard let value = dataResponse.value else { return }
+                    guard let value = dataResponse.value else {return}
                     let networkResult = self.judgeStatus(by: statusCode, value)
                     completion(networkResult)
                 
-                case .failure: completion(.pathErr) 
+                case .failure: completion(.pathErr)
+                    
                 }
             }
                                                 
         }
     
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-        print("테마 데이터 ----- 데이터 응답코드 \(statusCode)")
+              
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(ThemeDataModel.self, from: data)
         else { return .pathErr}
-        
             switch statusCode {
             
             case 200:

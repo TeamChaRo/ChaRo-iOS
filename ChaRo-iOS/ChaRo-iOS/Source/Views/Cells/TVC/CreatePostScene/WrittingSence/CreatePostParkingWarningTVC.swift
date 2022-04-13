@@ -13,7 +13,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     static let identifier: String = "CreatePostParkingWarningTVC"
     private let limitTextCount: Int = 23
     private var isWarning: Bool = false {
-        didSet {
+        didSet{
             if isWarning {
                 warningLabel.isHidden = false
                 parkingDescTextField.setMainOrangeBorder(8)
@@ -24,17 +24,17 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         }
     }
     private var parkingContent: String = ""  {
-        didSet {
+        didSet{
             _ = setParkingDesc?(self.parkingContent)
         }
     }
     private var warningValue: [Bool] = [false, false, false, false] {
-        didSet {
+        didSet{
             _ = setWraningData?(self.warningValue)
         }
     }
     public var availableParking: Bool = false {
-        didSet {
+        didSet{
             _ = setParkingInfo?(self.availableParking)
         }
     }
@@ -73,7 +73,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.titleLabel?.textAlignment = .center
         button.setEmptyTitleColor()
-        button.setGray20Border(21)
+        button.setGray20Border(8)
         return button
     }()
     
@@ -84,7 +84,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         button.titleLabel?.textAlignment = .center
         button.setEmptyTitleColor()
-        button.setGray20Border(21)
+        button.setGray20Border(8)
         return button
     }()
     
@@ -94,7 +94,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         textField.addLeftPadding(16)
         textField.textColor = .gray50
         textField.font = .notoSansRegularFont(ofSize: 14)
-        textField.setGray20Border(12)
+        textField.setGray20Border(8)
         textField.clearButtonMode = .whileEditing
         return textField
     }()
@@ -148,7 +148,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         return button
     }()
     
-    func setTextFieldDelegate() {
+    func setTextFieldDelegate(){
         parkingDescTextField.delegate = self
     }
     
@@ -183,7 +183,7 @@ extension CreatePostParkingWarningTVC: UITextFieldDelegate {
 extension CreatePostParkingWarningTVC {
     
     //MARK: - Button Actions
-    func setButtonActions() {
+    func setButtonActions(){
         parkingExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
         parkingNonExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
         highwayButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
@@ -193,11 +193,11 @@ extension CreatePostParkingWarningTVC {
     }
     
     @objc
-    func ButtonDidTap(_ sender: UIButton) {
+    func ButtonDidTap(_ sender: UIButton){
         changeButtonStatus(tag: sender.tag)
     }
     
-    func changeButtonStatus(tag: Int) {
+    func changeButtonStatus(tag: Int){
         switch tag {
         case 0:
             setWarningList(highwayButton, index: 0)
@@ -235,7 +235,7 @@ extension CreatePostParkingWarningTVC {
         }
     }
     
-    func setTapParkingButton() {
+    func setTapParkingButton(){
         if availableParking {
             parkingExistButton.setMainBlueBorder(8)
             parkingExistButton.setBenefitTitleColor()
@@ -255,7 +255,7 @@ extension CreatePostParkingWarningTVC {
         }
     }
     
-    func initParkingButton() {
+    func initParkingButton(){
         parkingExistButton.setGray20Border(8)
         parkingExistButton.setEmptyTitleColor(colorNum: 40)
         parkingExistButton.backgroundColor = .clear
@@ -264,7 +264,7 @@ extension CreatePostParkingWarningTVC {
         parkingNonExistButton.backgroundColor = .clear
     }
     
-    func setWarningList(_ button: UIButton, index: Int) {
+    func setWarningList(_ button: UIButton, index: Int){
         if warningValue[index] { // true 일 때
             warningValue[index] = false
         } else {
@@ -274,7 +274,7 @@ extension CreatePostParkingWarningTVC {
         setWarningButtonUI(button, warningValue[index])
     }
     
-    func setWarningButtonUI(_ button: UIButton,_ value: Bool) {
+    func setWarningButtonUI(_ button: UIButton,_ value: Bool){
         // warning value에 맞춰서 색상 업데이트
         if value {
             button.setMainBlueBorder(21)
@@ -289,7 +289,7 @@ extension CreatePostParkingWarningTVC {
     
     
     //MARK: - UI Layout
-    func configureLayout() {
+    func configureLayout(){
         addSubviews([parkingTitleView, parkingExistButton, parkingNonExistButton, parkingDescTextField, warningLabel])
         
         parkingTitleView.snp.makeConstraints{
@@ -367,4 +367,5 @@ extension CreatePostParkingWarningTVC {
             $0.bottom.equalTo(self.snp.bottom).inset(33)
         }
     }
+    
 }

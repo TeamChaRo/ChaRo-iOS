@@ -28,7 +28,7 @@ class JoinVC: UIViewController {
     }
     
     var backButton = UIButton().then {
-        $0.setImage(ImageLiterals.icBack, for: .normal)
+        $0.setImage(UIImage(named: "icBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(moveBack), for: .touchUpInside)
     }
     
@@ -382,7 +382,7 @@ extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelega
         
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         //이미지 Choose
         picker.dismiss(animated: false) { () in

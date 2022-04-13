@@ -14,16 +14,15 @@ class CreatePostCourseTVC: UITableViewCell {
     static let identifier: String = "CreatePostCourseTVC"
     
     // MARK: 데이터 전달 closeur
-
     public var setCityInfo: ((String) -> Void)?
     public var setRegionInfo: ((String) -> Void)?
     private var city: String = ""{
-        didSet {
+        didSet{
             _ = setCityInfo?(self.city)
         }
     }
     private var region: String = "" {
-        didSet {
+        didSet{
             _ = setRegionInfo?(self.region)
         }
     }
@@ -47,7 +46,7 @@ class CreatePostCourseTVC: UITableViewCell {
     private var currentList: [String] = [] //pickerview에 표시 될 List
     private var currentIndex = 0 // 현재 선택된 component (0 == city, 1 == region)
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
-    private var filterList: [String] = ["",""] // pickerview 선택 완료 후에 담길 결과 배열
+    private var filterList : [String] = ["",""] // pickerview 선택 완료 후에 담길 결과 배열
     
     // MARK: UI Components
     private let themeTitleView = PostCellTitleView(title: "어느 지역으로 다녀오셨나요?", subTitle: "도/광역시, 시 단위로 선택해주세요.")
@@ -95,11 +94,11 @@ class CreatePostCourseTVC: UITableViewCell {
         selectionStyle = .none
     }
     
-    private func initTextField() {
+    private func initTextField(){
         textFieldList.append(contentsOf: [cityField,
                                           regionField])
         
-        for textField in textFieldList {
+        for textField in textFieldList{
             
             textField.textAlignment = .center
             textField.borderStyle = .none
@@ -112,7 +111,7 @@ class CreatePostCourseTVC: UITableViewCell {
         }
     }
     
-    private func setTextFieldAction() {
+    private func setTextFieldAction(){
         cityField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         regionField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         self.bringSubviewToFront(cityField)
@@ -123,17 +122,17 @@ class CreatePostCourseTVC: UITableViewCell {
 
 // MARK: - PickerView
 extension CreatePostCourseTVC {
-    private func initPickerView() {
+    private func initPickerView(){
         setPickerViewDelegate()
         createPickerViewToolbar()
     }
     
-    private func setPickerViewDelegate() {
+    private func setPickerViewDelegate(){
         pickerView.dataSource = self
         pickerView.delegate = self
     }
     
-    private func createPickerViewToolbar() {
+    private func createPickerViewToolbar(){
         // ToolBar
         toolbar.sizeToFit()
         
@@ -146,7 +145,7 @@ extension CreatePostCourseTVC {
     }
     
     @objc
-    func donePresseed() {
+    func donePresseed(){
 
         switch currentIndex {
         case 0:
@@ -169,7 +168,7 @@ extension CreatePostCourseTVC {
         self.endEditing(true)
     }
     
-    func wasSelected() {
+    func wasSelected(){
         // 기존에 선택되어있으면 2번째 애 초기화해주기
         if filterList[0] != "" && filterList[0] != "선택안함" {
             filterList[1] = "" // 뒤에 애 초기화
@@ -181,7 +180,7 @@ extension CreatePostCourseTVC {
     
 
     @objc
-    func clikedTextField(_ sender: UITextField) {
+    func clikedTextField(_ sender: UITextField){
         
         currentIndex = sender.tag
         pickerView.selectRow(0, inComponent: 0, animated: true)
@@ -191,7 +190,7 @@ extension CreatePostCourseTVC {
         
     }
     
-    func changeCurrentPickerData(index: Int) {
+    func changeCurrentPickerData(index : Int){
         
         if index == 0 {
             currentList = filterData.state
@@ -203,7 +202,7 @@ extension CreatePostCourseTVC {
         
     }
     
-    func changeToolbarText(index: Int) {
+    func changeToolbarText(index: Int){
         var newTitle = ""
         
         switch index {
@@ -218,7 +217,7 @@ extension CreatePostCourseTVC {
     
 }
 
-extension CreatePostCourseTVC: UIPickerViewDelegate {
+extension CreatePostCourseTVC: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return currentList[row]
     }
@@ -231,7 +230,7 @@ extension CreatePostCourseTVC: UIPickerViewDelegate {
     }
 }
 
-extension CreatePostCourseTVC: UIPickerViewDataSource {
+extension CreatePostCourseTVC: UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -244,7 +243,7 @@ extension CreatePostCourseTVC: UIPickerViewDataSource {
 // MARK:- Layout (셀높이 125)
 extension CreatePostCourseTVC {
     
-    private func configureLayout() {
+    private func configureLayout(){
         addSubviews([themeTitleView, cityField, regionField, regionButton, cityButton])
         
         let textWidth: CGFloat = 65

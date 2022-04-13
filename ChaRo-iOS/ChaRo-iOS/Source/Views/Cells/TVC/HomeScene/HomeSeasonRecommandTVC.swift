@@ -13,10 +13,11 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var moreLabel: UILabel!
-    var delegate: IsSelectedCVCDelegate?
+    var delegate : IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
     var postDelegate: PostIdDelegate?
-    let cellTag: Int = 4
+    let cellTag : Int = 4
+    
     
     var customList: [DriveElement] = []
     var headerText: String = ""

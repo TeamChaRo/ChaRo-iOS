@@ -111,19 +111,14 @@ class PasswordView: UIView, UITextFieldDelegate {
         
         
         else {
-            if validpassword(password: textField.text!) {
-                if textField.text == firstTextField.text {
-                    isSecondPassed = true
-                    textField.setBlueBorderWithText()
-                    setLabelBlueWithText(text: "비밀번호가 일치합니다.")
-                } else {
-                    isSecondPassed = false
-                    textField.setOrangeBorderWithText()
-                    setLabelOrangeWithText(text: "비밀번호가 일치하지 않습니다.")
-                }
+            if textField.text == firstTextField.text {
+                isSecondPassed = true
+                textField.setBlueBorderWithText()
+                setLabelBlueWithText(text: "비밀번호가 일치합니다.")
             } else {
                 isSecondPassed = false
-                setLabelOrangeWithText(text: "비밀번호를 입력해주세요.")
+                textField.setOrangeBorderWithText()
+                setLabelOrangeWithText(text: "비밀번호가 일치하지 않습니다.")
             }
         }
         

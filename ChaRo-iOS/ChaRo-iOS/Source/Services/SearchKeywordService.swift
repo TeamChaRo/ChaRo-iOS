@@ -12,7 +12,7 @@ import Alamofire
 struct SearchKeywordService {
     
     static let shared = SearchKeywordService()
-    let header: HTTPHeaders = ["Content-Type": "application/json"]
+    let header : HTTPHeaders = ["Content-Type" : "application/json"]
     
     private func makeParameter(userId: String, keywords: [SearchHistory]) -> Parameters {
         let post = SearchKeywordDataModel(userId: userId, searchHistory: keywords)
@@ -21,7 +21,7 @@ struct SearchKeywordService {
     
     func postSearchKeywords(userId: String,
                             keywords: [SearchHistory],
-                            completion: @escaping (NetworkResult<Any>) -> Void) {
+                            completion: @escaping (NetworkResult<Any>) -> Void){
         
         let dataRequest = AF.request(Constants.searchKeywordURL,
                                      method: .post,
@@ -30,7 +30,7 @@ struct SearchKeywordService {
                                      headers: header)
         print("검색어 post!!!!!!!")
         dataRequest.responseData{ dataResponse in
-            switch dataResponse.result {
+            switch dataResponse.result{
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}
@@ -42,8 +42,8 @@ struct SearchKeywordService {
         }
     }
     
-    func getSearchKeywords(userId: String,
-                           completion: @escaping (NetworkResult<Any>) -> Void) {
+    func getSearchKeywords(userId : String,
+                           completion: @escaping (NetworkResult<Any>) -> Void){
        
         let dataRequeat = AF.download(Constants.searchKeywordURL+"/\(userId)",
                                       method: .get,
@@ -51,7 +51,7 @@ struct SearchKeywordService {
                                       headers: header)
         
         dataRequeat.responseData{ dataResponse in
-            switch dataResponse.result {
+            switch dataResponse.result{
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return}
                 guard let value = dataResponse.value  else {return}

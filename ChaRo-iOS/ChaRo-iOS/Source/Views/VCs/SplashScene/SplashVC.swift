@@ -15,6 +15,7 @@ class SplashVC: UIViewController {
     let button = UIButton()
     private var animationView = AnimationView()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAnimation()
@@ -22,12 +23,14 @@ class SplashVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5, execute: { [self] in
             self.presentNextOnBoaring()
         })
     }
     
-    private func setUpAnimation() {
+    private func setUpAnimation(){
        
         animationView.frame = view.bounds
         animationView.animation = Animation.named("lottie_test")
@@ -44,7 +47,7 @@ class SplashVC: UIViewController {
      
     }
    
-    private func presentNextOnBoaring() {
+    private func presentNextOnBoaring(){
         print("보내기")
         let storyboard = UIStoryboard(name: "OnBoard", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: OnBoardVC.identifier)
