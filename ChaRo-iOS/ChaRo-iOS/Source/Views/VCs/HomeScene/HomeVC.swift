@@ -298,17 +298,18 @@ extension HomeVC: UITableViewDelegate {
         }
         }
 //MARK: ScrollViewDidScroll
-    func setImageWhite() {
-        homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
-        homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
-        homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmWhite, for: .normal)
-        navigationBottomView.isHidden = true
-    }
-    func setImageBlack() {
-        homeNavigationLogo.image = ImageLiterals.icCharoLogo
-        homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
-        homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmBlack, for: .normal)
-        navigationBottomView.isHidden = false
+    private func configureLogoImage(isWhite: Bool) {
+        if isWhite {
+            homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
+            homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
+            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmWhite, for: .normal)
+            navigationBottomView.isHidden = true
+        } else {
+            homeNavigationLogo.image = ImageLiterals.icCharoLogo
+            homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
+            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmBlack, for: .normal)
+            navigationBottomView.isHidden = false
+        }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNavigationAlpah()
@@ -323,16 +324,16 @@ extension HomeVC: UITableViewDelegate {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
                 if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3) {
                     if currentWidth == 0 && currentHeight == 0{
-                       setImageWhite()
+                        configureLogoImage(isWhite: true)
                     }  else {
                         if HomeTableView.contentOffset.y <= -47 && currentHeight == -47{
-                           setImageWhite()
+                            configureLogoImage(isWhite: true)
                         } else {
-                           setImageBlack()
+                            configureLogoImage(isWhite: false)
                         }
                     }
                 } else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3) {
-                   setImageWhite()
+                    configureLogoImage(isWhite: true)
                 }
                 if currentHeight > 0{
                     HomeNavigationView.backgroundColor = UIColor.white
