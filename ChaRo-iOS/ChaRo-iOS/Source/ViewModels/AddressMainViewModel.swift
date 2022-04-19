@@ -13,11 +13,11 @@ import CoreMedia
 class AddressMainViewModel {
     
     var addressList: [AddressDataModel]
-    var searchHistory: [KeywordResult] = []
+    var searchedHistory: [KeywordResult] = []
     var newSearchHistory: [KeywordResult] = []
     
     private let addressSubject = ReplaySubject<[(AddressDataModel, Int)]>.create(bufferSize: 1)
-    private let searchHistorySubject = ReplaySubject<[KeywordResult]>.create(bufferSize: 1)
+    private let searchedHistorySubject = ReplaySubject<[KeywordResult]>.create(bufferSize: 1)
     private let polylineSubject = PublishSubject<[TMapPolyline]>()
     private let markerSubject = PublishSubject<[TMapMarker]>()
     private let isConfirmCheckSubject = PublishSubject<Bool>()
@@ -93,7 +93,6 @@ class AddressMainViewModel {
         markerSubject.onNext(markerList)
     }
     
-  
     private func addPathInMapView() {
         var polylineList: [TMapPolyline] = []
         let pathData = TMapPathData()
@@ -116,9 +115,8 @@ class AddressMainViewModel {
     }
     
     func getSearchHistory() -> [KeywordResult]{
-        return searchHistory + newSearchHistory
+        return searchedHistory + newSearchHistory
     }
-    
 }
 
 // MARK: - Network
@@ -129,8 +127,7 @@ extension AddressMainViewModel {
             switch(response) {
             case .success(let resultData):
                 if let data = resultData as? [KeywordResult] {
-                    //self.searchHistorySubject.onNext(data)
-                    self.searchHistory = data
+                    self.searchedHistory = data
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -144,32 +141,15 @@ extension AddressMainViewModel {
         }
     }
     
-    
-    private func postSearchKeywords() {
-        print("postSearchKeywords-----------------")
+    func postSearchKeywords() {
         var searchKeywordList: [SearchHistory] = []
+        newSearchHistory.forEach { searchKeywordList.append($0.getSearchHistory()) }
         
-        for item in newSearchHistory {
-            let address = SearchHistory(title: item.title,
-                                        address: item.address,
-                                        latitude: item.latitude,
-                                        longitude: item.longitude)
-            searchKeywordList.append(address)
-        }
-        
-        SearchKeywordService.shared.postSearchKeywords(userId: Constants.userId,
-                                                       keywords: searchKeywordList) {  response in
-            print("결과받음")
-            
+        SearchKeywordService.shared.postSearchKeywords(keywords: searchKeywordList) { response in
             switch(response) {
             case .success(let resultData):
-                print("--------------------------")
-                print("\(resultData)")
-                print("--------------------------")
                 if let data = resultData as? SearchResultDataModel {
-                    print("성공했더~!!!!")
                     dump(data)
-                    print("성공했더~!!!!")
                 }
             case .requestErr(let message):
                 print("requestErr", message)
