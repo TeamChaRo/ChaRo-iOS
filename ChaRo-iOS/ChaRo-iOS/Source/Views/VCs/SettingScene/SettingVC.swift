@@ -10,6 +10,8 @@ import SnapKit
 import Then
 import CoreMIDI
 import SafariServices
+import MessageUI
+import KakaoSDKCommon
 
 class SettingVC: UIViewController {
     
@@ -18,21 +20,21 @@ class SettingVC: UIViewController {
     private let userheight = UIScreen.main.bounds.height
     
     private var permissionModel = [settingDataModel(titleString: "알림", isToggle: true, toggleData: true),
-                           settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
-                           settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
+                                   settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
+                                   settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
     
     private var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
-                        settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
-                        settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: UserDefaults.standard.string(forKey: "userId") ?? "ios@gamil.com", subLabelColor: UIColor.black)]
+                                settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
+                                settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: Constants.userEmail, subLabelColor: UIColor.black)]
     
     private var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
-                            settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
+                                    settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
     private var termsModel = [settingDataModel(titleString: "개인정보 처리방침", titleLabelColor: UIColor.black),
-                      settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
-                      settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
-                      settingDataModel(titleString: "버전 정보", titleLabelColor: UIColor.gray30, isSubLabel: true, subLabelString: "1.0", subLabelColor: UIColor.gray30),
-                      settingDataModel(titleString: "로그아웃", titleLabelColor: UIColor.mainBlue),
-                      settingDataModel(titleString: "회원탈퇴", titleLabelColor: UIColor.mainOrange)]
+                              settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
+                              settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
+                              settingDataModel(titleString: "버전 정보", titleLabelColor: UIColor.gray30, isSubLabel: true, subLabelString: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "", subLabelColor: UIColor.gray30),
+                              settingDataModel(titleString: "로그아웃", titleLabelColor: UIColor.mainBlue),
+                              settingDataModel(titleString: "회원탈퇴", titleLabelColor: UIColor.mainOrange)]
     
     // headerView
     private let settingBackgroundView = UIView().then {
@@ -123,6 +125,22 @@ extension SettingVC {
     @objc
     private func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    /// 1:1 문의 메일을 보내는 메서드
+    private func sendInquiryMail() {
+        if MFMailComposeViewController.canSendMail() {
+            let compseVC = MFMailComposeViewController().then {
+                $0.mailComposeDelegate = self
+                $0.setToRecipients(["charo.drive13@gmail.com"])
+                $0.setSubject("차로 1:1 문의")
+                $0.setMessageBody("1. 문의 유형(문의, 버그 제보, 기타) : \n 2. 회원 닉네임(필요시 기입) : \n 3. 문의 내용 : \n \n \n 문의하신 사항은 차로팀이 신속하게 처리하겠습니다. 감사합니다 :)", isHTML: false)
+            }
+            self.present(compseVC, animated: true, completion: nil)
+        }
+        else {
+            self.makeAlert(title: "메일 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.")
+        }
     }
 }
 
@@ -258,14 +276,18 @@ extension SettingVC: UITableViewDataSource {
         case 3:
             print("정보")
         case 4:
-            print("문의")
+            /// 1:1 문의
+            sendInquiryMail()
         case 5:
             switch indexPath.row {
             case 0:
+                /// 개인정보 처리방침
                 presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/257d36140ab74dcab89c447171f85c76")
             case 1:
+                /// 서비스 이용약관
                 presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/c930b0349abf41e08061d669863bde95")
             case 2:
+                /// 오픈소스 라이선스
                 presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/f9a49abdcf91479987faaa83a35eb7a8")
             case 4:
                 print("로그아웃")
@@ -284,3 +306,9 @@ extension SettingVC: UITableViewDataSource {
     }
 }
 
+// MARK: - MFMailComposeViewControllerDelegate
+extension SettingVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
