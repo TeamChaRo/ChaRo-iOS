@@ -11,7 +11,7 @@ import Then
 import RxCocoa
 import RxSwift
 
-class SearchAddressKeywordVC: UIViewController {
+final class SearchAddressKeywordVC: UIViewController {
 
     private let viewModel: SearchKeywordViewModel
     private var disposeBag = DisposeBag()
@@ -33,9 +33,20 @@ class SearchAddressKeywordVC: UIViewController {
         $0.clearButtonMode = .whileEditing
         $0.returnKeyType = .done
     }
-    private let separateLine = UIView().then {
+    
+    private let textFieldSeparateLine = UIView().then {
         $0.backgroundColor = .gray20
     }
+    
+    private let contentTitleLabel = UILabel().then {
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.textColor = .gray40
+    }
+    
+    private let contentSeparateLine = UIView().then {
+        $0.backgroundColor = .gray20
+    }
+    
     private var tableView = UITableView().then {
         $0.register(cell: SearchKeywordCell.self)
         $0.rowHeight = 72
@@ -58,6 +69,7 @@ class SearchAddressKeywordVC: UIViewController {
     }
     
     //MARK: - public func
+    
     public func setAddressModel(model: AddressDataModel, cellType: String, index: Int) {
         searchTextField.placeholder = "\(cellType)를 입력해주세요"
         addressType = cellType
@@ -65,7 +77,6 @@ class SearchAddressKeywordVC: UIViewController {
     }
    
     // MARK: - private func
-    
     private func configureUI() {
         view.backgroundColor = .white
     }
@@ -74,10 +85,12 @@ class SearchAddressKeywordVC: UIViewController {
         let output = viewModel.transform(input: SearchKeywordViewModel.Input(), disposeBag: disposeBag)
         output.addressSubject
             .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.className,
-                                         cellType: SearchKeywordCell.self)) { row, element, cell in
+                                         cellType: SearchKeywordCell.self)) { [weak self] row, element, cell in
+                guard let self = self else { return }
                 cell.titleLabel.text = element.title
                 cell.addressLabel.text = element.address
                 cell.dateLabel.text = self.viewModel.getCurrentDate()
+                self.contentTitleLabel.text = self.viewModel.isSearchedHistoryList ? "최근 검색어" : "검색 결과"
             }.disposed(by: disposeBag)
         
         tableView.rx.modelSelected(AddressDataModel.self)
@@ -100,10 +113,16 @@ class SearchAddressKeywordVC: UIViewController {
     }
     
     private func pushNextVC(address: AddressDataModel) {
+        self.addSearchedKeyword(address: address)
         let nextVC = AddressConfirmVC()
         nextVC.setPresentingAddress(address: address)
         nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
         self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    private func addSearchedKeyword(address: AddressDataModel) {
+        guard let addressMainVC = self.navigationController?.previousViewController as? AddressMainVC else { return }
+        addressMainVC.addSearchedKeyword(address: address)
     }
 }
 
@@ -112,7 +131,9 @@ extension SearchAddressKeywordVC {
     private func setupConstraints() {
         view.addSubviews([backButton,
                           searchTextField,
-                          separateLine,
+                          textFieldSeparateLine,
+                          contentTitleLabel,
+                          contentSeparateLine,
                           tableView])
         
         backButton.snp.makeConstraints{
@@ -128,14 +149,25 @@ extension SearchAddressKeywordVC {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(26)
         }
         
-        separateLine.snp.makeConstraints{
+        textFieldSeparateLine.snp.makeConstraints{
             $0.top.equalTo(backButton.snp.bottom).offset(11)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(2)
+        }
+        
+        contentTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(textFieldSeparateLine.snp.bottom).offset(13)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
+        contentSeparateLine.snp.makeConstraints {
+            $0.top.equalTo(contentTitleLabel.snp.bottom).offset(13)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(1)
         }
         
         tableView.snp.makeConstraints{
-            $0.top.equalTo(separateLine.snp.bottom)
+            $0.top.equalTo(contentSeparateLine.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
