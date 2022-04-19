@@ -10,8 +10,7 @@ import SnapKit
 import Then
 import TMapSDK
 
-
-class AddressConfirmVC: UIViewController {
+final class AddressConfirmVC: UIViewController {
 
     private var addressModel: AddressDataModel?
     private var tMapView = MapService.getTmapView()
