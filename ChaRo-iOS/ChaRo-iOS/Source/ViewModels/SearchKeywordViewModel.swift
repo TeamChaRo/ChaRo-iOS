@@ -11,9 +11,10 @@ import RxSwift
 
 class SearchKeywordViewModel {
     
-    let tmapView = MapService.getTmapView()
-    let pathData = TMapPathData()
-    var addressSubject = ReplaySubject<[AddressDataModel]>.create(bufferSize: 1)
+    private let tmapView = MapService.getTmapView()
+    private let pathData = TMapPathData()
+    private let addressSubject = ReplaySubject<[AddressDataModel]>.create(bufferSize: 1)
+    var isSearchedHistoryList: Bool = true
     
     init(searchHistory: [KeywordResult]) {
         addressSubject.onNext(refineSearchHistory(of: searchHistory))
@@ -74,6 +75,7 @@ class SearchKeywordViewModel {
                                       longitude: $0.coordinate?.longitude.description ?? "0.0")
             addressList.append(address)
         }
+        isSearchedHistoryList = false
         addressSubject.onNext(addressList)
     }
     
