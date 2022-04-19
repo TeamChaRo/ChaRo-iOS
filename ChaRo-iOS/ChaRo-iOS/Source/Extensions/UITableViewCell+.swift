@@ -31,5 +31,16 @@ extension UITableViewCell{
         return indexPath
     }
     
+    func getTableSectionIndexPath() -> Int {
+        var indexPath = 0
+        
+        guard let superView = self.superview as? UITableView else {
+            return -1
+        }
+        indexPath = superView.indexPath(for: self)!.section
+
+        return indexPath
+    }
+    
 }
 
