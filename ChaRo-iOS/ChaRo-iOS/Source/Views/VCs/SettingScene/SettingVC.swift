@@ -280,15 +280,13 @@ extension SettingVC: UITableViewDataSource {
             sendInquiryMail()
         case 5:
             switch indexPath.row {
-            case 0:
-                /// 개인정보 처리방침
-                presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/257d36140ab74dcab89c447171f85c76")
-            case 1:
-                /// 서비스 이용약관
-                presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/c930b0349abf41e08061d669863bde95")
-            case 2:
-                /// 오픈소스 라이선스
-                presentToSafariVC(urlString: "https://nosy-catmint-6ad.notion.site/f9a49abdcf91479987faaa83a35eb7a8")
+            case 0, 1, 2:
+                /// 개인정보 처리방침, 서비스 이용약관, 오픈소스 라이선스
+                let urlData = [
+                    "https://nosy-catmint-6ad.notion.site/257d36140ab74dcab89c447171f85c76",
+                    "https://nosy-catmint-6ad.notion.site/c930b0349abf41e08061d669863bde95",
+                    "https://nosy-catmint-6ad.notion.site/f9a49abdcf91479987faaa83a35eb7a8"]
+                presentToSafariVC(urlString: urlData[indexPath.row])
             case 4:
                 print("로그아웃")
             case 5:
