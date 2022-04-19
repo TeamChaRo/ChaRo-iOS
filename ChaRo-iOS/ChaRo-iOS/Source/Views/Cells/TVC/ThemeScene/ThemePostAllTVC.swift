@@ -115,6 +115,7 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
         let postId = cell!.postID
         postDelegate?.sendPostID(data: postId)

@@ -15,7 +15,7 @@ class SearchKeywordViewModel {
     let pathData = TMapPathData()
     var addressSubject = PublishSubject<[AddressDataModel]>()
     
-    public func findAutoCompleteAddressList(keyword: String) {
+    public func findAutoCompleteAddressList(keyword: String){
         pathData.autoComplete(keyword) { autoAddressList, error in
             let newIndex = autoAddressList.count < 7 ? autoAddressList.count : 7
             self.searchKeywordList(keywordList: Array(autoAddressList[0..<newIndex]))
@@ -23,10 +23,10 @@ class SearchKeywordViewModel {
         }
     }
     
-    private func searchKeywordList(keywordList: [String]) {
+    private func searchKeywordList(keywordList: [String]){
         var poiItemList: [TMapPoiItem] = []
-        for index in 0..<keywordList.count {
-            searchKeywordPoi(keyword: keywordList[index]) { poiItems in
+        for index in 0..<keywordList.count{
+            searchKeywordPoi(keyword: keywordList[index]){ poiItems in
                 poiItemList.append(contentsOf: poiItems)
                 if index == keywordList.count - 1 {
                     self.refinePoiItemsToAddressData(poiList: poiItemList)
@@ -36,14 +36,14 @@ class SearchKeywordViewModel {
         }
     }
     
-    private func searchKeywordPoi(keyword: String, completion: @escaping (([TMapPoiItem]) -> ())) {
-        pathData.requestFindAllPOI(keyword, count: 2) { poiItems, error in
+    private func searchKeywordPoi(keyword: String, completion: @escaping (([TMapPoiItem]) -> ())){
+        pathData.requestFindAllPOI(keyword, count: 2){ poiItems, error in
             if let poiList = poiItems { completion(poiList) }
             if let error = error { print("searchKeywordPoi \(error)") }
         }
     }
     
-    private func refinePoiItemsToAddressData(poiList: [TMapPoiItem]) {
+    private func refinePoiItemsToAddressData(poiList: [TMapPoiItem]){
         var addressList: [AddressDataModel] = []
         poiList.forEach{
             let address = AddressDataModel(title: $0.name ?? "명칭이 없습니다.",

@@ -30,17 +30,17 @@ class HotDropDownTVC: UITableViewCell {
         // Initialization code
     }
     
-    func setLabel() {
+    func setLabel(){
         hotLabel.textColor = UIColor.gray50
         checkImage.isHidden = true
     }
     
-    func setCellName(name: String) {
+    func setCellName(name: String){
         hotLabel.text = name
         self.name = name
     }
     
-    func setSelectedCell() {
+    func setSelectedCell(){
         hotLabel.textColor = UIColor.mainBlue
         checkImage.isHidden = false
     }

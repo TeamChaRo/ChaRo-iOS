@@ -32,29 +32,29 @@ class MyPagePostCVC: UICollectionViewCell {
     
     var heartText: String = "99"
     var saveText: String = "99"
-    var clickedPostCell: ((Int) -> ())?
+    var clickedPostCell : ((Int) -> ())?
     
-    var image: UIImage?
+    var image : UIImage?
 
     
-    func setRound() {
+    func setRound(){
         postImage.clipsToBounds = true
         postImage.layer.cornerRadius = 10
     }
    
     
-    func setLikeUI() {
+    func setLikeUI(){
         heartImage.image = UIImage(named: "icHeartActive")
         saveImage.image = UIImage(named: "icSaveActive")
         heartLabel.text = heartText
         saveLabel.text = saveText
     }
     
-    func setHeartSave(heart: String, save: String) {
+    func setHeartSave(heart: String, save: String){
         heartLabel.text = heart
         saveLabel.text = save
     }
-    func setLikeLabel() {
+    func setLikeLabel(){
         saveLabel.textColor = .gray40
         heartLabel.textColor = .gray40
         saveLabel.font = UIFont.notoSansRegularFont(ofSize: 11)
@@ -63,7 +63,7 @@ class MyPagePostCVC: UICollectionViewCell {
     
    
     
-    func setTitleLabel(text: String) {
+    func setTitleLabel(text: String){
         postTitle.text = text
     }
     func setImageUrl(_ url: String) {
@@ -126,7 +126,8 @@ class MyPagePostCVC: UICollectionViewCell {
                 tagButtonList[index].layer.borderWidth = 1
                 tagButtonList[index].layer.borderColor = UIColor.mainBlue.cgColor
                 tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            } else {
+            }
+            else{
                 tagButtonList[index].setTitle("", for: .normal)
                 tagButtonList[index].layer.borderColor = UIColor.clear.cgColor
             }

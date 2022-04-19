@@ -6,39 +6,36 @@
 //
 
 import UIKit
-import SnapKit
 import Then
 
 class SearchKeywordCell: UITableViewCell {
 
-    private var addressData: AddressDataModel?
+    static let identifier = "SearchKeywordCell"
+    private var addressData : AddressDataModel?
     public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
     
-    var titleLabel = UILabel().then {
+    var titleLabel = UILabel().then{
         $0.font = .notoSansMediumFont(ofSize: 16)
         $0.textColor = .gray50
     }
     
-    var addressLabel = UILabel().then {
+    var addressLabel = UILabel().then{
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .gray40
     }
     
-    var dateLabel = UILabel().then {
+    var dateLabel = UILabel().then{
         $0.font = .notoSansRegularFont(ofSize: 12)
         $0.textColor = .gray30
         $0.text = ""
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         setupConstraints()
+        self.selectionStyle = .none
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
@@ -46,8 +43,8 @@ class SearchKeywordCell: UITableViewCell {
         }
     }
     
-    private func setupConstraints() {
-        contentView.addSubviews([titleLabel,
+    private func setupConstraints(){
+        addSubviews([titleLabel,
                      addressLabel,
                      dateLabel])
         
@@ -68,14 +65,14 @@ class SearchKeywordCell: UITableViewCell {
         }
     }
     
-    public func setContents(addressMadel: AddressDataModel) {
+    public func setContents(addressMadel: AddressDataModel){
         addressData = addressMadel
         titleLabel.text = addressData!.title
         addressLabel.text = addressData!.address
         dateLabel.text = ""
     }
     
-    public func setContents(addressMadel: KeywordResult) {
+    public func setContents(addressMadel: KeywordResult){
         addressData = AddressDataModel(title: addressMadel.latitude,
                                        address: addressMadel.longitude,
                                        latitude: addressMadel.address,

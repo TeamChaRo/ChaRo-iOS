@@ -10,11 +10,11 @@ import UIKit
 class OnBoardVC: UIViewController {
 
     static let identifier = "OnBoardVC"
-    private var imageList: [UIImage] = []
-    private var titleList: [String] = []
+    private var imageList : [UIImage] = []
+    private var titleList : [String] = []
     private var subTitleList: [String] = []
     
-    private let skipButton: UIButton = {
+    private let skipButton : UIButton = {
         let button = UIButton()
         button.setTitle("SKIP", for: .normal)
         button.setTitleColor(.mainBlue, for: .normal)
@@ -24,7 +24,7 @@ class OnBoardVC: UIViewController {
         return button
     }()
     
-    private var collectionView: UICollectionView = {
+    private var collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero,
                                                collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -34,7 +34,7 @@ class OnBoardVC: UIViewController {
         
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
-        let rate: CGFloat = UIScreen.getDeviceHeight() / 812
+        let rate : CGFloat = UIScreen.getDeviceHeight() / 812
     
         layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: rate * 624)
         layout.minimumLineSpacing = 0
@@ -46,8 +46,8 @@ class OnBoardVC: UIViewController {
     
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.tintColor = .mainLightBlue
-        pageControl.pageIndicatorTintColor = .mainLightBlue
+        pageControl.tintColor = .mainlightBlue
+        pageControl.pageIndicatorTintColor = .mainlightBlue
         pageControl.currentPageIndicatorTintColor = .mainBlue
         pageControl.numberOfPages = 3
         pageControl.isUserInteractionEnabled = false
@@ -73,7 +73,7 @@ class OnBoardVC: UIViewController {
         configureCollectionView()
     }
     
-    private func initContentList() {
+    private func initContentList(){
         imageList.append(contentsOf: [UIImage(named: "onboardingBackground1")!,
                                       UIImage(named: "onboardingBackground2")!,
                                       UIImage(named: "onboardingBackground3")!])
@@ -88,7 +88,7 @@ class OnBoardVC: UIViewController {
     }
     
     
-    @objc func dismissAction() {
+    @objc func dismissAction(){
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: SNSLoginVC.identifier)
         nextVC.modalPresentationStyle = .fullScreen
@@ -96,7 +96,7 @@ class OnBoardVC: UIViewController {
        //self.dismiss(animated: false)
     }
 
-    private func setConstraints() {
+    private func setConstraints(){
         view.addSubviews([skipButton,
                           collectionView,
                           pageControl,
@@ -135,7 +135,7 @@ class OnBoardVC: UIViewController {
 
 extension OnBoardVC{
     
-    func configureCollectionView() {
+    func configureCollectionView(){
         collectionView.registerCustomXib(xibName: OnBoardCVC.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -147,10 +147,10 @@ extension OnBoardVC{
         print("currentPage = \(currentPage)")
         pageControl.currentPage = currentPage
 
-        if(currentPage == 2) {
+        if(currentPage == 2){
             skipButton.isHidden = true
             startButton.isHidden = false
-        } else {
+        }else{
             skipButton.isHidden = false
             startButton.isHidden = true
         }
@@ -177,7 +177,7 @@ extension OnBoardVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension OnBoardVC: UICollectionViewDataSource {
+extension OnBoardVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titleList.count
     }

@@ -21,11 +21,11 @@ extension UIButton {
         self.layer.cornerRadius = radius
     }
 
-    func setEmptyTitleColor() {
+    func setEmptyTitleColor(){
         self.setTitleColor(.gray40, for: .normal)
     }
     
-    func setEmptyTitleColor(colorNum: Int) {
+    func setEmptyTitleColor(colorNum: Int){
         switch colorNum{
         case 10:
             self.setTitleColor(.gray10, for: .normal)
@@ -42,7 +42,7 @@ extension UIButton {
         }
     }
     
-    func setBenefitTitleColor() {
+    func setBenefitTitleColor(){
         self.setTitleColor(.mainBlue, for: .normal)
     }
     

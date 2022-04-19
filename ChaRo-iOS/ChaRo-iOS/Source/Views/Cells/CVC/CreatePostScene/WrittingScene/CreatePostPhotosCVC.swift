@@ -55,7 +55,7 @@ class CreatePostPhotosCVC: UICollectionViewCell {
 extension CreatePostPhotosCVC {
     
     // MARK: Layout
-    func plusViewConfigureLayout() {
+    func plusViewConfigureLayout(){
         addSubviews([plusView, plusButton])
         plusView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
@@ -73,7 +73,7 @@ extension CreatePostPhotosCVC {
         }
     }
     
-    func configureLayout() {
+    func configureLayout(){
         addSubviews([imageView, deleteButton])
         imageView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
@@ -91,17 +91,17 @@ extension CreatePostPhotosCVC {
         }
     }
     
-    func setImageView(image: UIImage = UIImage(named: "imagePlaceholder")!) {
+    func setImageView(image: UIImage = UIImage(named: "imagePlaceholder")!){
         self.imageView.image = image
     }
     
     @objc
-    func deleteButtonDidTap(_ sender: UIButton) {
+    func deleteButtonDidTap(_ sender: UIButton){
         NotificationCenter.default.post(name: .createPostDeletePhotoClicked, object: sender.tag)
     }
     
     @objc
-    func addButtonDidTap(_ sender: UIButton) {
+    func addButtonDidTap(_ sender: UIButton){
         NotificationCenter.default.post(name: .createPostAddPhotoClicked, object: sender.tag)
     }
     

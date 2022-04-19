@@ -67,25 +67,19 @@ struct MyPagePost: Codable {
 
 // MARK: - Drive
 struct MyPageDrive: Codable {
-    var postID: Int = 0
-    var title: String = ""
-    var image: String = ""
-    var region: String = ""
-    var theme: String = ""
-    var warning: String? = ""
-    var year: String = ""
-    var month: String = ""
-    var day: String = ""
-    var isFavorite: Bool = false
-    var favoriteNum: Int = 0
-    var saveNum: Int = 0
+    let postID: Int
+    let title: String
+    let image: String
+    let region, theme: String
+    let warning: String?
+    let year, month, day: String
+    let isFavorite: Bool
+    let favoriteNum, saveNum: Int
 
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
         case title, image, region, theme, warning, year, month, day, isFavorite, favoriteNum, saveNum
     }
-
-    
 }
 
 // MARK: - UserInformation

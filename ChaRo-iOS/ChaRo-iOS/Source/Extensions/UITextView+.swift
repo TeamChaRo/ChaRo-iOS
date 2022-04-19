@@ -13,11 +13,11 @@ extension UITextView {
         self.textContainerInset = UIEdgeInsets(top: 10, left: left, bottom: 10, right: right)
     }
     
-    func placeholder() {
+    func placeholder(){
         self.textColor = UIColor.gray30
     }
     
-    func removePlaceholder() {
+    func removePlaceholder(){
         self.textColor = .black
     }
     

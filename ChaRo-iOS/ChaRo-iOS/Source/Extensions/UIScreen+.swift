@@ -14,7 +14,8 @@ extension UIScreen {
             = UIScreen.main.bounds.width / UIScreen.main.bounds.height
         if deviceRatio > 0.5 {
             return false
-        } else {
+        }
+        else{
             return true
         }
     }
@@ -49,20 +50,20 @@ extension UIScreen {
     }
     
     
-    class public func getDeviceHeight() -> Int {
+    class public func getDeviceHeight() -> Int{
         return Int(UIScreen.main.bounds.height)
     }
     
-    class public func getDeviceHeight() -> CGFloat {
+    class public func getDeviceHeight() -> CGFloat{
         return UIScreen.main.bounds.height
     }
     
     
-    class func getDeviceWidth() -> Int {
+    class func getDeviceWidth() -> Int{
         return Int(UIScreen.main.bounds.width)
     }
     
-    class func getDeviceWidth() -> CGFloat {
+    class func getDeviceWidth() -> CGFloat{
         return UIScreen.main.bounds.width
     }
 }
