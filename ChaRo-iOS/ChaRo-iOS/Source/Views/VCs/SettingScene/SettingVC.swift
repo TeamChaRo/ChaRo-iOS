@@ -28,7 +28,8 @@ class SettingVC: UIViewController {
                                 settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: Constants.userEmail, subLabelColor: UIColor.black)]
     
     private var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
-                                    settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
+                                    settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black),
+                                    settingDataModel(titleString: "신고하기", titleLabelColor: UIColor.black)]
     private var termsModel = [settingDataModel(titleString: "개인정보 처리방침", titleLabelColor: UIColor.black),
                               settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
                               settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
@@ -214,7 +215,7 @@ extension SettingVC: UITableViewDelegate {
 extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
+        case 0, 4:
             return 2
         case 1:
             return 1
@@ -246,7 +247,7 @@ extension SettingVC: UITableViewDataSource {
             settingData = infoInquiryModel[0]
             //4 고객센터
         case 4:
-            settingData = infoInquiryModel[1]
+            settingData = infoInquiryModel[indexPath.row + 1]
             //5 약관
         case 5:
             settingData = termsModel[indexPath.row]
@@ -276,8 +277,14 @@ extension SettingVC: UITableViewDataSource {
         case 3:
             print("정보")
         case 4:
-            /// 1:1 문의
-            sendInquiryMail()
+            switch indexPath.row {
+            case 0:
+                /// 1:1 문의
+                sendInquiryMail()
+            default:
+                /// 신고하기
+                presentToSafariVC(urlString: "https://docs.google.com/forms/d/1A1I8b2xQLgKVGsx112udNrHRp51n1p0m2ymot-kofy4/viewform?edit_requested=true")
+            }
         case 5:
             switch indexPath.row {
             case 0, 1, 2:
