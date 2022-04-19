@@ -38,17 +38,7 @@ struct AddressDataModel: Codable {
     }
     
     func getAddressDataModel() -> Address{
-        return Address(address: address,
-                       latitude: latitude,
-                       longtitude: longitude)
-        
+        return Address(address: address, latitude: latitude, longtitude: longitude)
     }
     
-}
-
-struct AddressData {
-    var title: String
-    var address: String
-    var latitude: String
-    var longitude: String
 }
