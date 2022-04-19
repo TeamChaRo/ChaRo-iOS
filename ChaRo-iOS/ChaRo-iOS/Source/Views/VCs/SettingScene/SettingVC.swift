@@ -11,7 +11,7 @@ import Then
 import CoreMIDI
 import SafariServices
 import MessageUI
-import KakaoSDKCommon
+import PhotosUI
 
 class SettingVC: UIViewController {
     
@@ -69,7 +69,7 @@ class SettingVC: UIViewController {
         super.viewDidLoad()
         setHeaderLayout()
         setTableViewLayout()
-        
+        addNotificationObserver()
     }
     
     // MARK: Function, ServerFunction, LayoutFunction
@@ -141,6 +141,41 @@ extension SettingVC {
         }
         else {
             self.makeAlert(title: "메일 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.")
+        }
+    }
+    
+    /// Notification Observer를 추가하는 메서드
+    private func addNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    /// 앱 foreground로 진입했을 때 tableView의 section을 reload하는 메서드(토글 관련)
+    @objc func willEnterForeground() {
+        settingTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
+    
+    /// 알림 설정 상태를 토글에 반영하는 메서드
+    private func setNotificationSwitchStatus(_ toggle: UISwitch) {
+        let current = UNUserNotificationCenter.current()
+    
+        current.getNotificationSettings(completionHandler: { (settings) in
+            DispatchQueue.main.async {
+                toggle.isOn = settings.authorizationStatus == .notDetermined || settings.authorizationStatus == .denied ? false : true
+            }
+        })
+    }
+    
+    /// 사진 접근 설정 상태를 토글에 반영하는 메서드
+    private func setPhotoSwitchStatus(_ toggle: UISwitch) {
+        DispatchQueue.main.async {
+            switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+            case .authorized:
+                toggle.isOn = true
+            case .limited, .restricted, .denied, .notDetermined:
+                toggle.isOn = false
+            default:
+                break
+            }
         }
     }
 }
@@ -235,6 +270,7 @@ extension SettingVC: UITableViewDataSource {
         switch indexPath.section {
             //0 접근허용
         case 0:
+            indexPath.row == 0 ? setNotificationSwitchStatus(cell.toggle) : setPhotoSwitchStatus(cell.toggle)
             settingData = permissionModel[indexPath.row]
             //1 마케팅 활용 및 광고 수신 동의
         case 1:
@@ -256,6 +292,7 @@ extension SettingVC: UITableViewDataSource {
             
         }
         
+        cell.settingDelegate = self
         cell.setData(isToggle: settingData.isToggle,
                      toggleData: settingData.toggleData,
                      isSubLabel: settingData.isSubLabel,
@@ -268,10 +305,6 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            print("접근허용")
-        case 1:
-            print("마케팅동의")
         case 2:
             print("계정")
         case 3:
@@ -281,9 +314,11 @@ extension SettingVC: UITableViewDataSource {
             case 0:
                 /// 1:1 문의
                 sendInquiryMail()
-            default:
+            case 1:
                 /// 신고하기
                 presentToSafariVC(urlString: "https://docs.google.com/forms/d/1A1I8b2xQLgKVGsx112udNrHRp51n1p0m2ymot-kofy4/viewform?edit_requested=true")
+            default:
+                break
             }
         case 5:
             switch indexPath.row {
@@ -299,7 +334,7 @@ extension SettingVC: UITableViewDataSource {
             case 5:
                 print("탈퇴")
             default:
-                print("default")
+                break
             }
         default:
             print(indexPath.section)
@@ -315,5 +350,19 @@ extension SettingVC: UITableViewDataSource {
 extension SettingVC: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - SettingSwitchDelegate
+extension SettingVC: SettingSwitchDelegate {
+    func switchAction(sender: UISwitch, section: Int) {
+        switch section {
+        case 0:
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+        case 1:
+            print("이메일 수신동의 체크")
+        default:
+            break
+        }
     }
 }

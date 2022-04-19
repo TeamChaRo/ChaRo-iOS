@@ -10,8 +10,8 @@ import SnapKit
 import Then
 
 class SettingTVC: UITableViewCell {
-    //MARK: Var
-    
+   
+    // MARK: Variables
     static let identifier: String = "SettingTVC"
     
     private let backGroundView = UIView().then {
@@ -24,18 +24,43 @@ class SettingTVC: UITableViewCell {
         $0.textColor = UIColor.black
         
     }
-    private let toggle = UISwitch().then {
+    
+    let toggle = UISwitch().then {
         $0.tintColor = UIColor.mainBlue
         $0.onTintColor = UIColor.mainBlue
     }
+    
     private let subLabel = UILabel().then {
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textAlignment = .right
         $0.textColor = UIColor.black
     }
-
-    //MARK: setData
     
+    var settingDelegate: SettingSwitchDelegate?
+    
+    // MARK: Life Cycles
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        removeAllSubViews()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        toggle.addTarget(self, action: #selector(toggleSwitched(_:)), for: UIControl.Event.valueChanged)
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        self.selectionStyle = .none
+
+        // Configure the view for the selected state
+    }
+}
+
+// MARK: - Custom Methods
+extension SettingTVC {
+    
+    /// setData
     func setData(isToggle: Bool, toggleData: Bool, isSubLabel: Bool, subLabelString: String, titleString: String, titleLabelColor: UIColor, subLabelColor: UIColor) {
         addSubview(backGroundView)
         backGroundView.addSubview(titleLabel)
@@ -44,7 +69,6 @@ class SettingTVC: UITableViewCell {
         backGroundView.snp.makeConstraints {
             $0.leading.trailing.bottom.top.equalToSuperview().offset(0)
         }
-        
         
         //기본 라벨
         titleLabel.text = titleString
@@ -76,25 +100,17 @@ class SettingTVC: UITableViewCell {
                 $0.trailing.equalToSuperview().offset(-20)
                 $0.width.equalTo(150)
             }
-            
         }
     }
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @objc
+    private func toggleSwitched(_ sender: UISwitch) {
+        settingDelegate?.switchAction(sender: self.toggle, section: self.getTableSectionIndexPath())
     }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        removeAllSubViews()
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        self.selectionStyle = .none
-
-        // Configure the view for the selected state
-    }
-    
 }
+
+// MARK: - Protocol
+protocol SettingSwitchDelegate {
+    func switchAction(sender: UISwitch, section: Int)
+}
+
