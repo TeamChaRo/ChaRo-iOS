@@ -25,6 +25,7 @@ class HomeVC: UIViewController{
     @IBOutlet weak var bannerScrollView: UIScrollView!
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     
+    
     //배너 관련 변수
     var homeTableViewHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
@@ -35,27 +36,39 @@ class HomeVC: UIViewController{
     
     
     //데이타
-    var bannerData: [Banner] = []
-    var todayData: [DriveElement] = []
-    var trendyData: [DriveElement] = []
-    var customData: [DriveElement] = []
-    var localData: [DriveElement] = []
-    var customText: String = ""
-    var localText: String = ""
+    private var bannerData: [Banner] = []
+    private var todayData: [DriveElement] = []
+    private var trendyData: [DriveElement] = []
+    private var customData: [DriveElement] = []
+    private var localData: [DriveElement] = []
+    private var customText: String = ""
+    private var localText: String = ""
 
-    let lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-    var delegate: AnimateIndicatorDelegate?
-
+    private let lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    private var delegate: AnimateIndicatorDelegate?
+    private var tableIndex: IndexPath = [0,0]
     
-    var tableIndex: IndexPath = [0,0]
+    private let navigationBottomView = UIView().then {
+        $0.backgroundColor = UIColor.gray20
+    }
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        setNavigationViewBottomLayout()
         getServerData()
         setTableView()
         setActionToSearchButton()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
+    }
+    //navigationView
+    func setNavigationViewBottomLayout() {
+        HomeNavigationView.addSubview(navigationBottomView)
+        navigationBottomView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview().offset(0)
+            $0.height.equalTo(1)
+        }
+        navigationBottomView.isHidden = true
     }
     //헤더뷰
     func setHeader(){
@@ -256,11 +269,7 @@ extension HomeVC : UITableViewDelegate {
         }
         
     }
-    
-    func setNavigationViewShadow(){
-        //shadowExtension 예제
-        HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
-    }
+
     func addContentScrollView() {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
@@ -291,44 +300,42 @@ extension HomeVC : UITableViewDelegate {
         }
         }
 //MARK: ScrollViewDidScroll
-    func scrollViewDidScroll(_ scrollView: UIScrollView){
+    private func configureLogoImage(isWhite: Bool) {
+        if isWhite {
+            homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
+            homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
+            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmWhite, for: .normal)
+            navigationBottomView.isHidden = true
+        } else {
+            homeNavigationLogo.image = ImageLiterals.icCharoLogo
+            homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
+            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmBlack, for: .normal)
+            navigationBottomView.isHidden = false
+        }
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNavigationAlpah()
         setMoveCar()
        }
     func setNavigationAlpah(){
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
-        print(HomeTableView.contentOffset.y,-homeTableViewHeaderHeight, currentHeight)
+
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
                if currentHeight > -homeTableViewHeaderHeight{
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
                 if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3){
                     if currentWidth == 0 && currentHeight == 0{
-                        homeNavigationLogo.image = UIImage(named: "logoWhite.png")
-                        homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
-                        homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
-                        HomeNavigationView.removeShadowView()
-                    }
-                    else {
+                        configureLogoImage(isWhite: true)
+                    }  else {
                         if HomeTableView.contentOffset.y <= -47 && currentHeight == -47{
-                            homeNavigationLogo.image = UIImage(named: "logoWhite.png")
-                            homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
-                            homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
-                        }
-                        else{
-                            homeNavigationLogo.image = UIImage(named: "logo.png")
-                            homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
-                            homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
-                            setNavigationViewShadow()
+                            configureLogoImage(isWhite: true)
+                        } else {
+                            configureLogoImage(isWhite: false)
                         }
                     }
-                }
-                else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3){
-                    homeNavigationLogo.image = UIImage(named: "logoWhite.png")
-                    homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
-                    homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
-                    HomeNavigationView.removeShadowView()
- 
+                } else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3) {
+                    configureLogoImage(isWhite: true)
                 }
                 if currentHeight > 0{
                     HomeNavigationView.backgroundColor = UIColor.white
