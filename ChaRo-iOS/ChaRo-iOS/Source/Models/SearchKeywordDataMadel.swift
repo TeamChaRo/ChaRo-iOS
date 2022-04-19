@@ -23,26 +23,16 @@ struct SearchResultDataModel: Codable {
 }
 
 struct SearchKeywordDataModel: Codable {
-    let userId: String
+    let userEmail: String
     let searchHistory: [SearchHistory]
 
-    enum CodingKeys: String, CodingKey {
-        case userId
-        case searchHistory
-    }
-    
     func toJSON() -> [String: Any] {
         var history:[[String: Any]] = []
+        searchHistory.forEach { history.append($0.toJSON()) }
         
-        for item in searchHistory {
-            history.append(item.toJSON())
-        }
-        
-        return ["userId" : userId,
+        return ["userEmail" : userEmail,
                 "searchHistory" : history]
     }
-    
-    
 }
 
 // MARK: - SearchHistory
@@ -62,11 +52,17 @@ struct KeywordResult: Codable {
     let year, month, day: String
 
     func getAddressModel() -> AddressDataModel {
-        return AddressDataModel(title: latitude,
-                                address: longitude,
-                                latitude: address,
-                                longitude: title)
+        return AddressDataModel(title: title,
+                                address: address,
+                                latitude: latitude,
+                                longitude: longitude)
     }
     
+    func getSearchHistory() -> SearchHistory {
+        return SearchHistory(title: title,
+                             address: address,
+                             latitude: latitude,
+                             longitude: longitude)
+    }
     
 }
