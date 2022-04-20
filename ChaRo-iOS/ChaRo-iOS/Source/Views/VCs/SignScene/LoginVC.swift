@@ -96,11 +96,9 @@ class LoginVC: UIViewController {
         }
     }
     
-    
     @IBAction func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
     
     @IBAction func findPwdButtonClicked(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -126,12 +124,12 @@ class LoginVC: UIViewController {
         self.view.endEditing(true)
     }
     
-    func setNotificationCenter(){
+    func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func removeObservers(){
+    func removeObservers() {
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -142,18 +140,16 @@ class LoginVC: UIViewController {
                 self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
             })
         }
-        
     }
     
     @objc
-    func textFieldMoveDown(_ notification: NSNotification){
+    func textFieldMoveDown(_ notification: NSNotification) {
         view.transform = .identity
     }
 }
 
 extension LoginVC {
     func setConstraints() {
-        
         if UIScreen.hasNotch {
             let factor = UIScreen.main.bounds.width / 375
             
@@ -161,7 +157,6 @@ extension LoginVC {
         } else {
             heightConstraint.constant = 356
             imageView.image = UIImage(named: "maskGroupSE")
-            
         }
     }
 }

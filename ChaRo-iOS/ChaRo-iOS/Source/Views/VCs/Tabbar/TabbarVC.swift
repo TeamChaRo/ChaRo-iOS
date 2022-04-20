@@ -14,34 +14,13 @@ class TabbarVC: UITabBarController {
     public var addressMainVC: AddressMainVC?
     public var tabs: [UIViewController] = []
     private var comeBackIndex = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configTabbar()
-        setTabbarCustomFrame()
-    
+        setBackgroundClear()
     }
-    
-    private func setTabbarCustomFrame() {
-
-        let customTabbar = tabBar
-        var newFrame = CGRect(x: 0,
-                              y: self.view.frame.size.height - 250,
-                              width:  self.view.frame.size.width,
-                              height: 250)
-        
-        
-        print(newFrame)
-        
-        // 이 로그는 나중에 지울게요!
-       //customTabbar.backgroundImage = UIImage(named: "tabbarBackground")
-//        newFrame.size.height = 150
-//        newFrame.origin.y = self.view.frame.size.height - newFrame.size.height
-        customTabbar.frame = newFrame
-    }
-    
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         selectedViewController = tabs[comeBackIndex]
@@ -50,11 +29,40 @@ class TabbarVC: UITabBarController {
         print("유저디폴트 유저이미지 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userImage))")
         print("유저디폴트 유저닉네임 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname))")
     }
+    func setBackgroundClear() {
+        tabBar.isTranslucent = true
+        tabBar.backgroundImage = UIImage()
+        tabBar.shadowImage = UIImage()
+    }
+    func setShadow() {
+        tabBar.getShadowView(color: UIColor.black.cgColor,
+                             masksToBounds: false,
+                             shadowOffset: CGSize(width: 0, height: 0),
+                             shadowRadius: 10,
+                             shadowOpacity: 0.5
+        )
+    }
+    func setRadius() {
+        tabBar.backgroundColor = .white
+        tabBar.layer.cornerRadius = 15
+        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        tabBar.clipsToBounds = false
+    }
     
+    override func viewDidLayoutSubviews() {
+        let tabbarY = view.getDeviceHeight()
+        let tabbarX = view.getDeviceWidth()
+        var tabbarHeight = 100
+        setRadius()
+        setShadow()
+        let frame = CGRect(x: 0,
+                                  y: tabbarY - tabbarHeight,
+                                  width: tabbarX,
+                                  height: tabbarHeight)
+        self.tabBar.frame = frame
+    }
     
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-        
         if item.title == "작성하기" {
             let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
@@ -63,22 +71,19 @@ class TabbarVC: UITabBarController {
 
             createTab.modalPresentationStyle = .fullScreen
             self.present(createTab, animated: false, completion: nil)
-        }else if item.title == "나의 차로" {
+        } else if item.title == "나의차로" {
             comeBackIndex = 2
-        }else {
+        } else {
             comeBackIndex = 0
         }
-        
         print("comeBackIndex = \(comeBackIndex)")
         
     }
     
     
-    private func configTabbar(){
-        
-        let customTabbar = tabBar
-        customTabbar.tintColor = .blue
-        customTabbar.backgroundColor = UIColor.white
+    private func configTabbar() {
+        self.view.tintColor = .blue
+        self.view.backgroundColor = UIColor.white
 
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeVC = homeStoryboard.instantiateViewController(identifier: "HomeVC")
@@ -103,10 +108,8 @@ class TabbarVC: UITabBarController {
         
 
         tabs = [homeTab,createTab, myPageTab]
-        
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
     }
     
 }
-

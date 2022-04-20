@@ -30,7 +30,7 @@ class SearchKeywordCell: UITableViewCell {
         $0.text = ""
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
     }
@@ -46,7 +46,7 @@ class SearchKeywordCell: UITableViewCell {
         }
     }
     
-    private func setupConstraints(){
+    private func setupConstraints() {
         contentView.addSubviews([titleLabel,
                      addressLabel,
                      dateLabel])
@@ -68,14 +68,14 @@ class SearchKeywordCell: UITableViewCell {
         }
     }
     
-    public func setContents(addressMadel: AddressDataModel){
+    public func setContents(addressMadel: AddressDataModel) {
         addressData = addressMadel
         titleLabel.text = addressData!.title
         addressLabel.text = addressData!.address
         dateLabel.text = ""
     }
     
-    public func setContents(addressMadel: KeywordResult){
+    public func setContents(addressMadel: KeywordResult) {
         addressData = AddressDataModel(title: addressMadel.latitude,
                                        address: addressMadel.longitude,
                                        latitude: addressMadel.address,

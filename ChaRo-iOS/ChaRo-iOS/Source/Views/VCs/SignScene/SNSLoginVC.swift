@@ -14,7 +14,6 @@ import KakaoSDKUser
 
 class SNSLoginVC: UIViewController {
     
-    
     let userInfo = UserInfo.shared
     let signInConfig = GIDConfiguration.init(clientID: "316255098127-usdg37h4sgpondqjh818cl3n002vaach.apps.googleusercontent.com")
     
@@ -438,12 +437,8 @@ class SNSLoginVC: UIViewController {
             $0.height.equalTo(21)
             $0.leading.equalTo(view.snp.centerX).offset(12.5)
         }
-        
     }
-    
-    
 }
-
 
 //MARK: - Apple Login
 extension SNSLoginVC : ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {

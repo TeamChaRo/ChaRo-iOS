@@ -18,11 +18,18 @@ class CreatePostVC: UIViewController {
     public var postTitle: String = ""
     public var province: String = ""
     public var region: String = ""
-    public var theme: [String] = ["","",""]
+    public var theme: [String] = [] {
+        didSet {
+            tableView.reloadRows(at: [[0, 3]], with: .automatic)
+        }
+    }
     public var warning: [Bool] = [false, false, false, false]
     public var isParking: Bool = false
     public var parkingDesc: String = ""
     public var courseDesc: String = ""
+    
+    public var lastThemeList: [String] = []
+    public var lastSenderList: [Int] = []
     
     var selectImages: [UIImage] = []
     var itemProviders: [NSItemProvider] = []
@@ -86,14 +93,13 @@ class CreatePostVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         removeObservers() // 옵저버 해제
     }
-    
 }
 
 // MARK: - functions
 extension CreatePostVC {
     
     // MARK: function
-    func configureTableView(){
+    func configureTableView() {
         registerXibs()
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -101,7 +107,7 @@ extension CreatePostVC {
         tableView.dismissKeyboardWhenTappedAround()
     }
     
-    func registerXibs(){
+    func registerXibs() {
         tableView.registerCustomXib(xibName: CreatePostTitleTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostPhotoTVC.identifier)
         tableView.registerCustomXib(xibName: CreatePostCourseTVC.identifier)
@@ -110,22 +116,22 @@ extension CreatePostVC {
         tableView.registerCustomXib(xibName: CreatePostDriveCourseTVC.identifier)
     }
     
-    func setNavigationBar(){
+    func setNavigationBar() {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    func initCellHeight(){
+    func initCellHeight() {
         cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408])
     }
     
-    func setNotificationCenter(){
+    func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPhotoButtonDidTap), name: .callPhotoPicker, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(touchTitleView), name: .touchTitleTextView, object: nil)
     }
     
-    func removeObservers(){
+    func removeObservers() {
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -144,7 +150,7 @@ extension CreatePostVC {
     }
     
     @objc
-    func textFieldMoveUp(_ notification: NSNotification){
+    func textFieldMoveUp(_ notification: NSNotification) {
         
 //        let currentScrollY = tableView.contentOffset.y
 //        -keyboardSize.height
@@ -162,17 +168,17 @@ extension CreatePostVC {
     }
     
     @objc
-    func textFieldMoveDown(_ notification: NSNotification){
+    func textFieldMoveDown(_ notification: NSNotification) {
         self.tableView.transform = .identity
     }
     
     // MARK: 서버통신 .post /writePost
-    func postCreatePost(){
+    func postCreatePost() {
         // test dummy data
         let model: WritePostData = WritePostData(title: "하이", userId: "injeong0418", province: "특별시", region: "서울", theme: ["여름","산"], warning: [true,true,false,false], isParking: false, parkingDesc: "예원아 새벽까지 고생이 많아", courseDesc: "코스 드립크", course: [Address(address: "123", latitude: "123", longtitude: "123"), Address(address: "123", latitude: "123", longtitude: "123")])
         
         
-        CreatePostService.shared.createPost(model: model, image: selectImages){ result in
+        CreatePostService.shared.createPost(model: model, image: selectImages) { result in
             switch result {
             case .success(let message):
                 print(message)
@@ -190,7 +196,7 @@ extension CreatePostVC {
     
     
     // MARK: Layout
-    func setMainViewLayout(){
+    func setMainViewLayout() {
         self.view.addSubviews([self.titleView, self.tableView, self.separatorView])
         
         let titleRatio: CGFloat = 102/375
@@ -216,7 +222,7 @@ extension CreatePostVC {
         }
     }
     
-    func configureConponentLayout(){
+    func configureConponentLayout() {
         titleView.addSubviews([self.titleLabel, self.xButton, self.nextButton])
         
         titleLabel.snp.makeConstraints{
@@ -242,13 +248,13 @@ extension CreatePostVC {
     
     //MARK: - Button Actions
     @objc
-    func xButtonDidTap(sender: UIButton){
+    func xButtonDidTap(sender: UIButton) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         
         let alertViewController = UIAlertController(title: "", message: "게시물 작성을 중단하시겠습니까?", preferredStyle: .alert)
         
-        let dismissAction = UIAlertAction(title: "작성 중단", style: .default){ _ in
+        let dismissAction = UIAlertAction(title: "작성 중단", style: .default) { _ in
             self.dismiss(animated: true, completion: nil)
 
         }
@@ -261,7 +267,7 @@ extension CreatePostVC {
     }
     
     @objc
-    func nextButtonDidTap(sender: UIButton){
+    func nextButtonDidTap(sender: UIButton) {
         let nextVC = AddressMainVC()
         let images: [UIImage] = selectImages
         let model: WritePostData = getPostWriteData()
@@ -271,7 +277,7 @@ extension CreatePostVC {
     }
     
     @objc
-    func addPhotoButtonDidTap(){
+    func addPhotoButtonDidTap() {
         if #available(iOS 14, *) { // 14이상 부터 쓸 수 있음
             var configuration = PHPickerConfiguration()
             configuration.selectionLimit = 6 - selectImages.count // 최대 6개 선택
@@ -296,11 +302,8 @@ extension CreatePostVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       
         return cellHeights[indexPath.row]
     }
-    
-    
 }
 
 extension CreatePostVC: UITableViewDataSource {
@@ -327,9 +330,7 @@ extension CreatePostVC: UITableViewDataSource {
         default:
             return getCreatePostTitleCell(tableView: tableView)
         }
-        
     }
-
 }
 
 // MARK: - PHPicker Extension
@@ -357,20 +358,17 @@ extension CreatePostVC: PHPickerViewControllerDelegate {
                                     self.tableView.reloadData()
                                 }
                             }
-                            
                         }
                     }
                 }
             }
         }
-        
-        
     }
 }
 
 //MARK: - import cell function
 extension CreatePostVC {
-    func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostTitleCell(tableView: UITableView) -> UITableViewCell {
         guard let titleCell = tableView.dequeueReusableCell(withIdentifier: CreatePostTitleTVC.identifier) as? CreatePostTitleTVC else { return UITableViewCell() }
         
         titleCell.delegateCell = self
@@ -381,7 +379,7 @@ extension CreatePostVC {
         return titleCell
     }
     
-    func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostPhotoCell(tableView: UITableView) -> UITableViewCell {
         guard let photoCell = tableView.dequeueReusableCell(withIdentifier: CreatePostPhotoTVC.identifier) as? CreatePostPhotoTVC else { return UITableViewCell() }
         
         // 여기서 VC 이미지를 Cell에 전달
@@ -399,7 +397,7 @@ extension CreatePostVC {
         return photoCell
     }
     
-    func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostCourseCell(tableView: UITableView) -> UITableViewCell {
         guard let courseCell = tableView.dequeueReusableCell(withIdentifier: CreatePostCourseTVC.identifier) as? CreatePostCourseTVC else { return UITableViewCell() }
 
         cellHeights[2] = courseCell.setDynamicHeight()
@@ -414,19 +412,25 @@ extension CreatePostVC {
         return courseCell
     }
     
-    func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostThemeCell(tableView: UITableView) -> UITableViewCell {
         guard let themeCell = tableView.dequeueReusableCell(withIdentifier: CreatePostThemeTVC.identifier) as? CreatePostThemeTVC else { return UITableViewCell() }
         
         cellHeights[3] = themeCell.setDynamicHeight()
+        themeCell.setThemeData(themeList: theme.isEmpty ? lastThemeList : theme)
         
-        themeCell.setThemeInfo = { value in
-            self.theme = value
+        themeCell.tapSetThemeButtonAction = {
+            guard let themeVC = self.storyboard?.instantiateViewController(withIdentifier: ThemePopupVC.className) as? ThemePopupVC else { return }
+            themeVC.modalPresentationStyle = .custom
+            themeVC.transitioningDelegate = self
+            themeVC.lastThemeList = self.lastThemeList
+            themeVC.lastSenderList = self.lastSenderList
+            self.present(themeVC, animated: true, completion: nil)
         }
         
         return themeCell
     }
     
-    func getCreatePostParkingWarningCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostParkingWarningCell(tableView: UITableView) -> UITableViewCell {
         guard let parkingWarningCell = tableView.dequeueReusableCell(withIdentifier: CreatePostParkingWarningTVC.identifier) as? CreatePostParkingWarningTVC else { return UITableViewCell() }
         
         // 데이터 전달 closure
@@ -445,7 +449,7 @@ extension CreatePostVC {
         return parkingWarningCell
     }
     
-    func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell{
+    func getCreatePostCourseDescCell(tableView: UITableView) -> UITableViewCell {
         guard let courseDescCell = tableView.dequeueReusableCell(withIdentifier: CreatePostDriveCourseTVC.identifier) as? CreatePostDriveCourseTVC else { return UITableViewCell() }
         
         if courseDesc == "" {
@@ -492,3 +496,9 @@ extension CreatePostVC: PostTitlecTVCDelegate {
     }
 }
 
+// MARK: - UIViewControllerTransitioningDelegate
+extension CreatePostVC: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}

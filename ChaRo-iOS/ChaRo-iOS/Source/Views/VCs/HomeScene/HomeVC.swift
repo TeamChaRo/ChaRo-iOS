@@ -12,7 +12,7 @@ import Kingfisher
 import Lottie
 import SwiftUI
 
-class HomeVC: UIViewController{
+class HomeVC: UIViewController {
 
 //MARK: Var
     @IBOutlet weak var HomeTableView: UITableView!
@@ -49,7 +49,7 @@ class HomeVC: UIViewController{
     
     var tableIndex: IndexPath = [0,0]
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         getServerData()
         setTableView()
@@ -58,7 +58,7 @@ class HomeVC: UIViewController{
         HomeTableView.separatorStyle = .none
     }
     //헤더뷰
-    func setHeader(){
+    func setHeader() {
         HomeTableView.rowHeight = UITableView.automaticDimension
         headerView = HomeTableView.tableHeaderView
         HomeTableView.tableHeaderView = nil
@@ -77,7 +77,7 @@ class HomeVC: UIViewController{
         headerView.frame = headerRect
     }
     
-    func setupHeaderViewUI(){
+    func setupHeaderViewUI() {
         var titleList: [String] = []
         var subTitleList: [String] = []
             
@@ -90,14 +90,14 @@ class HomeVC: UIViewController{
         }
         
             for index in 0..<titleList.count {
-                let titleLabel = UILabel().then{
+                let titleLabel = UILabel().then {
                     $0.font = .notoSansBoldFont(ofSize: 28)
                     $0.textColor = .white
                     $0.text = titleList[index]
                     $0.numberOfLines = 3
                 }
                 
-                let subTitleLabel = UILabel().then{
+                let subTitleLabel = UILabel().then {
                     $0.font = .notoSansRegularFont(ofSize: 13)
                     $0.textColor = .white
                     $0.text = subTitleList[index]
@@ -114,7 +114,7 @@ class HomeVC: UIViewController{
             
         }
         
-        func setupHeaderViewLayout(){
+        func setupHeaderViewLayout() {
             for index in 0..<bannerTitleLableList.count {
                 bannerTitleLableList[index].snp.makeConstraints{
                     $0.leading.equalTo(bannerScrollView.viewWithTag(index+1)!).offset(24)
@@ -130,7 +130,7 @@ class HomeVC: UIViewController{
         }
    
     //서버 데이터 받아오는 부분
-    func getServerData(){
+    func getServerData() {
         //lottieview
         delegate = self
         delegate?.startIndicator()
@@ -139,7 +139,6 @@ class HomeVC: UIViewController{
             {
             case .success(let data) :
                 if let response = data as? HomeDataModel {
-                    print("겟 데이터 실행")
                     DispatchQueue.global().sync {
                         let data = response.data
                     //배너 타이틀
@@ -152,7 +151,6 @@ class HomeVC: UIViewController{
                     //today 차로
                         if let today = data.todayCharoDrive.drive as? [DriveElement] {
                         self.todayData = today
-                        print(self.todayData)
                     }
                     
                     //trendy 차로
@@ -171,8 +169,6 @@ class HomeVC: UIViewController{
                         if let local = data.localDrive.drive as? [DriveElement] {
                         self.localData = local
                         self.localText = data.localTitle
-                        print(data.localTitle)
-
                     }
                         self.delegate?.endIndicator()
                     }
@@ -183,7 +179,6 @@ class HomeVC: UIViewController{
                 print("requestERR")
             case .pathErr:
                 print("pathERR")
-                print("한번 더 실행ㅋ")
             case .serverErr:
                 print("serverERR")
             case .networkFail:
@@ -199,7 +194,7 @@ class HomeVC: UIViewController{
             
         }
     }
-    func setTableView(){
+    func setTableView() {
         
         HomeTableView.delegate = self
         HomeTableView.dataSource = self
@@ -212,11 +207,11 @@ class HomeVC: UIViewController{
         HomeTableView.registerCustomXib(xibName: "HomeAreaRecommandTVC")
     }
     
-    func setActionToSearchButton(){
+    func setActionToSearchButton() {
         homeNavigationSearchButton.addTarget(self, action: #selector(presentSearchPost), for: .touchUpInside)
     }
     
-    @objc func presentSearchPost(){
+    @objc func presentSearchPost() {
         let storyboard = UIStoryboard(name: "SearchPost", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: SearchPostVC.identifier) as! SearchPostVC
         let navigation = UINavigationController(rootViewController: nextVC)
@@ -234,9 +229,9 @@ class HomeVC: UIViewController{
 
 }
 
-extension HomeVC : UITableViewDelegate {
+extension HomeVC: UITableViewDelegate {
     
-    func tableView(_ tableView : UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForRowAt indextPath: IndexPath) -> CGFloat {
         
         let factor = UIScreen.main.bounds.width / 375
         switch indextPath.row {
@@ -257,7 +252,7 @@ extension HomeVC : UITableViewDelegate {
         
     }
     
-    func setNavigationViewShadow(){
+    func setNavigationViewShadow() {
         //shadowExtension 예제
         HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
     }
@@ -265,20 +260,15 @@ extension HomeVC : UITableViewDelegate {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
         if bannerScrollView.subviews.count > 3{
-            print(bannerScrollView.subviews)
-            bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
-
-        }
-        else{
+            for index in 1..<5 {
+                bannerScrollView.viewWithTag(index)?.frame.size.height = -HomeTableView.contentOffset.y
+            }
+        }  else {
             if bannerData.count != 0{
                 for i in 1..<images.count + 1 {
                     let xPos = self.view.frame.width * CGFloat(i-1)
                     let imageView = UIImageView()
                     imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
-                    print(bannerData.count)
                         guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
                         imageView.kf.setImage(with: url)
                     imageView.tag = i
@@ -291,39 +281,35 @@ extension HomeVC : UITableViewDelegate {
         }
         }
 //MARK: ScrollViewDidScroll
-    func scrollViewDidScroll(_ scrollView: UIScrollView){
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNavigationAlpah()
         setMoveCar()
        }
-    func setNavigationAlpah(){
+    func setNavigationAlpah() {
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
-        print(HomeTableView.contentOffset.y,-homeTableViewHeaderHeight, currentHeight)
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
-               if currentHeight > -homeTableViewHeaderHeight{
+               if currentHeight > -homeTableViewHeaderHeight {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
-                if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3){
+                if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3) {
                     if currentWidth == 0 && currentHeight == 0{
                         homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                         homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                         homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
                         HomeNavigationView.removeShadowView()
-                    }
-                    else {
+                    }  else {
                         if HomeTableView.contentOffset.y <= -47 && currentHeight == -47{
                             homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                             homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                             homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
-                        }
-                        else{
+                        } else {
                             homeNavigationLogo.image = UIImage(named: "logo.png")
                             homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
                             homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
                             setNavigationViewShadow()
                         }
                     }
-                }
-                else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3){
+                } else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3) {
                     homeNavigationLogo.image = UIImage(named: "logoWhite.png")
                     homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
                     homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
@@ -332,24 +318,22 @@ extension HomeVC : UITableViewDelegate {
                 }
                 if currentHeight > 0{
                     HomeNavigationView.backgroundColor = UIColor.white
-                }
-                else if currentHeight < -homeTableViewHeaderHeight{
+                } else if currentHeight < -homeTableViewHeaderHeight {
                     HomeNavigationView.backgroundColor = .none
                 }
                 
                }
-        }
-        else{
+        } else {
             updateHeaderView()
             addContentScrollView()
             HomeNavigationView.backgroundColor = .none
            }
 
     }
-    func setMoveCar(){
+    func setMoveCar() {
         let originalCarConstant = carMoveConstraint.constant
-        let sideMargin : CGFloat = 24
-        let pageCount : Int = 4
+        let sideMargin: CGFloat = 24
+        let pageCount: Int = 4
         let currentWidth = bannerScrollView.contentOffset.x
         if bannerScrollView.contentOffset.x > 0{
                if currentWidth < 10000 {
@@ -357,8 +341,7 @@ extension HomeVC : UITableViewDelegate {
                } else {
                 carMoveConstraint.constant = originalCarConstant
                }
-           }
-        else{
+           } else {
             carMoveConstraint.constant = originalCarConstant
            }
     }
@@ -370,23 +353,19 @@ extension HomeVC : UITableViewDelegate {
         return sectionNum
     }
     
-//MARK: 내용 구현 부
+    //MARK: 내용 구현 부
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //tableview indexPath
         tableIndex = indexPath
-//MARK: 배너부분 구현
+        
+        //MARK: 배너부분 구현
         switch indexPath.row {
-//MARK: 오늘의 드라이브
+        //MARK: 오늘의 드라이브
         case 0:
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
-            print(todayData)
-
-            //image
             if todayData.count == 0 {
                 return cell
-            }
-            else {
+            } else {
                 cell.todayDriveList = todayData
             return cell
         }
@@ -394,32 +373,21 @@ extension HomeVC : UITableViewDelegate {
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
-            
-            
-//MARK: 트렌드
+        //MARK: 트렌드
         case 2:
-
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.ButtonDelegate = self
             cell.postDelegate = self
-            
-
             if trendyData.count == 0 {
                 return cell
-            }
-            else {
+            } else {
                 cell.trendyDriveList = trendyData
-
-                
-            return cell
-                
+                return cell
             }
 
-            
-//MARK: 커스텀 테마
+        //MARK: 커스텀 테마
         case 3:
-
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
@@ -429,11 +397,8 @@ extension HomeVC : UITableViewDelegate {
             
             if customData.count == 0 {
                 return cell
-            }
-            
-            else {
+            } else {
                 cell.customList = customData
-                
             return cell
                 
             }
@@ -445,8 +410,6 @@ extension HomeVC : UITableViewDelegate {
             cell.delegate = self
             cell.buttonDelegate = self
             cell.postDelegate = self
-            
-            print("fsdgsfdg", localText)
             cell.headerText = localText
             cell.localList = localData
          
@@ -462,16 +425,15 @@ extension HomeVC : UITableViewDelegate {
     
 
 }
-extension HomeVC: UITableViewDataSource{
+extension HomeVC: UITableViewDataSource {
 }
-extension HomeVC: IsSelectedCVCDelegate{
+extension HomeVC: IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
-        print(tableIndex.row)
     }
 }
 
-extension HomeVC: SeeMorePushDelegate{
+extension HomeVC: SeeMorePushDelegate {
     func seeMorePushDelegate(data: Int) {
         guard let smVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
         
@@ -497,7 +459,7 @@ extension HomeVC: SeeMorePushDelegate{
 
 }
 
-extension HomeVC: CollectionViewCellDelegate{
+extension HomeVC: CollectionViewCellDelegate {
     func collectionView(collectionviewcell: HomeThemeCVC?, index: Int, didTappedInTableViewCell: HomeThemeTVC) {
         let storyboard = UIStoryboard(name: "ThemePost", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: "ThemePostVC") as? ThemePostVC else { return }
@@ -508,12 +470,11 @@ extension HomeVC: CollectionViewCellDelegate{
 
 
 //postID 넘기기 위한 Delegate 구현
-extension HomeVC: PostIdDelegate{
+extension HomeVC: PostIdDelegate {
 
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = PostDetailVC()
         nextVC.setPostId(id: data)
         nextVC.modalPresentationStyle = .currentContext
         tabBarController?.present(nextVC, animated: true, completion: nil)
@@ -521,8 +482,7 @@ extension HomeVC: PostIdDelegate{
     }
     
     func sendPostDriveElement(data: DriveElement?) {
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
+        let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
         print("sendPostDriveElement | 이거 잘 불렸나?? \(data)")
         nextVC.modalPresentationStyle = .currentContext
@@ -530,7 +490,7 @@ extension HomeVC: PostIdDelegate{
     }
 }
 
-extension HomeVC: AnimateIndicatorDelegate{
+extension HomeVC: AnimateIndicatorDelegate {
     func startIndicator() {
         view.addSubview(lottieView)
         lottieView.isHidden = false

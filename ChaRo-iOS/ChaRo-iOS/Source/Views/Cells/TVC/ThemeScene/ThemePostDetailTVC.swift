@@ -13,7 +13,7 @@ class ThemePostDetailTVC: UITableViewCell {
     @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
-    var selectText : String = "인기순"
+    var selectText: String = "인기순"
     var postCount: Int = 0
     var delegate: MenuClickedDelegate?
     var isButtonClicked: Bool = false
@@ -30,7 +30,7 @@ class ThemePostDetailTVC: UITableViewCell {
         selectLabel.font = .notoSansRegularFont(ofSize: 13)
     }
     
-    func setTitle(data : String) {
+    func setTitle(data: String) {
         selectText = data
         selectLabel.text = selectText
     }

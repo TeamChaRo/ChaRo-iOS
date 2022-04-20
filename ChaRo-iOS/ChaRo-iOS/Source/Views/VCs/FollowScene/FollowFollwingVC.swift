@@ -24,7 +24,8 @@ class FollowFollwingVC: UIViewController {
     
     var checkIsFollow: Bool = false
     var titleName: String = "none"
-    var followDataList: [followData] = []
+    var followDataList: followData?
+    var isOtherMypage: Bool = false
         
     //무한스크롤을 위함
     var lastId: Int = 0
@@ -35,49 +36,49 @@ class FollowFollwingVC: UIViewController {
     var delegate: AnimateIndicatorDelegate?
     
     //headerView
-    private let headerBackgroundView = UIView().then{
+    private let headerBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
 
-    private let headerTitleLabel = UILabel().then{
+    private let headerTitleLabel = UILabel().then {
         $0.textColor = UIColor.black
         $0.font = UIFont.notoSansMediumFont(ofSize: 17)
         $0.text = "none"
     }
     
-    private let backButton = UIButton().then{
+    private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
 
     //tabbarUI
-    private let tabbarBackgroundView = UIView().then{
+    private let tabbarBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
-    private let followerButton = UIButton().then{
+    private let followerButton = UIButton().then {
         $0.setTitle("팔로워", for: .normal)
         $0.setTitleColor(UIColor.mainBlue, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
         $0.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
     }
-    private let followingButton = UIButton().then{
+    private let followingButton = UIButton().then {
         $0.setTitle("팔로잉", for: .normal)
         $0.setTitleColor(UIColor.gray40, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
         $0.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
-    private let tabbarBottomView = UIView().then{
+    private let tabbarBottomView = UIView().then {
         $0.backgroundColor = UIColor.gray20
     }
-    private let tabbarWriteBottomView = UIView().then{
+    private let tabbarWriteBottomView = UIView().then {
         $0.backgroundColor = UIColor.mainBlue
     }
-    private let tabbarSaveBottomView = UIView().then{
+    private let tabbarSaveBottomView = UIView().then {
         $0.backgroundColor = .none
     }
 
     //TableView
-    private let tableScrollView = UIScrollView().then{
+    private let tableScrollView = UIScrollView().then {
         let userHeigth = UIScreen.main.bounds.height
         $0.tag = 1
         $0.isPagingEnabled = true
@@ -93,15 +94,15 @@ class FollowFollwingVC: UIViewController {
     private let followerTableView = UITableView()
     private let followingTableView = UITableView()
 
-    private let followerView = UIView().then{
+    private let followerView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
-    private let followingView = UIView().then{
+    private let followingView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
     
 //MARK: viewDidLoad
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         setHeaderLayout()
         setTabbarLayout()
         setTableViewLayout()
@@ -112,7 +113,7 @@ class FollowFollwingVC: UIViewController {
     }
 //MARK: Func
     //데이터 삽입과, 팔로우 팔로잉 뷰 어떤거 띄워줄지 결정
-    func setData(userName: String, isFollower: Bool, userID: String){
+    func setData(userName: String, isFollower: Bool, userID: String) {
         otherUserID = userID
         headerTitleLabel.text = userName
         checkIsFollow = isFollower
@@ -127,7 +128,7 @@ class FollowFollwingVC: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setTabbarBottomViewMove()
     }
-    func setTabbarBottomViewMove(){
+    func setTabbarBottomViewMove() {
         var contentOffsetX = tableScrollView.contentOffset.x
         tabbarWriteBottomView.snp.remakeConstraints{
             tabbarSaveBottomView.backgroundColor = .none
@@ -139,36 +140,34 @@ class FollowFollwingVC: UIViewController {
         if contentOffsetX > userWidth/3{
             followerButton.setTitleColor(UIColor.gray40, for: .normal)
             followingButton.setTitleColor(UIColor.mainBlue, for: .normal)
-        }
-        else{
+        } else {
             followerButton.setTitleColor(UIColor.mainBlue, for: .normal)
             followingButton.setTitleColor(UIColor.gray40, for: .normal)
         }
         
     }
  
-   @objc private func followerButtonClicked(_ sender: UIButton){
+   @objc private func followerButtonClicked(_ sender: UIButton) {
        tableScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
        followerButton.setTitleColor(UIColor.mainBlue, for: .normal)
        followingButton.setTitleColor(UIColor.gray40, for: .normal)
     }
-    @objc private func followingButtonClicked(_ sender: UIButton){
+    @objc private func followingButtonClicked(_ sender: UIButton) {
         tableScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
         followerButton.setTitleColor(UIColor.gray40, for: .normal)
         followingButton.setTitleColor(UIColor.mainBlue, for: .normal)
      }
-    @objc private func backButtonClicked(_ sender: UIButton){
+    @objc private func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
      }
 //MARK: ServerFunction
-    func getFollowData(){
-        GetFollowDataService.followData.getRecommendInfo(userId: myId, otherId: otherUserID){ (response) in
-                   switch response
-                   {
+    func getFollowData() {
+        GetFollowDataService.followData.getRecommendInfo(otherId: otherUserID, userId: myId) { (response) in
+                   switch response {
                    case .success(let data):
-                       if let response = data as? GetFollowDataModel{
-                           self.followDataList = []
-                           self.followDataList.append(response.data)
+                       if let response = data as? GetFollowDataModel {
+                           self.followDataList = nil
+                           self.followDataList = response.data
                            self.followerButton.setTitle(String(response.data.follower.count) + " 팔로워", for: .normal)
                            self.followingButton.setTitle(String(response.data.following.count) + " 팔로잉", for: .normal)
                            self.followerTableView.reloadData()
@@ -190,8 +189,7 @@ class FollowFollwingVC: UIViewController {
    
 
 //MARK: layoutFunction
-    func setTableViewLayout(){
-        
+    func setTableViewLayout() {
         let tableViewHeight  = userheight - (userheight * 0.15 + 130)
         
         tableScrollView.delegate = self
@@ -245,7 +243,7 @@ class FollowFollwingVC: UIViewController {
         }
     }
     
-    func setHeaderLayout(){
+    func setHeaderLayout() {
         self.view.addSubview(headerBackgroundView)
         headerBackgroundView.addSubview(headerTitleLabel)
         headerBackgroundView.addSubview(backButton)
@@ -274,7 +272,7 @@ class FollowFollwingVC: UIViewController {
         }
 
     }
-    func setTabbarLayout(){
+    func setTabbarLayout() {
         self.view.addSubview(tabbarBackgroundView)
         tabbarBackgroundView.addSubview(followingButton)
         tabbarBackgroundView.addSubview(followerButton)
@@ -322,57 +320,44 @@ class FollowFollwingVC: UIViewController {
     }
 }
 
-extension FollowFollwingVC: UITableViewDelegate{
+extension FollowFollwingVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 61
     }
     
 }
-extension FollowFollwingVC: UITableViewDataSource{
+extension FollowFollwingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(followDataList.count == 0){
+        if(followDataList == nil) {
             return 0
-        }
-        else{
+        } else {
             if tableView.tag == 1{
-                return followDataList[0].follower.count
-            }
-            else{
-                return followDataList[0].following.count
+                return followDataList?.follower.count ?? 0
+            } else {
+                return followDataList?.following.count ?? 0
             }
         }
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withType: FollowFollowingTVC.self, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withType: FollowFollowingTVC.self, for: indexPath) else { return UITableViewCell() }
         cell.delegate = self
         if tableView.tag == 1{
-            cell.setData(image: followDataList[0].follower[indexPath.row].image,
-                         userName: followDataList[0].follower[indexPath.row].nickname,
-                         isFollow: followDataList[0].follower[indexPath.row].isFollow,
-                         userEmail: followDataList[0].follower[indexPath.row].userEmail
-            )
-            return cell
+            cell.setData(data: followDataList?.follower[indexPath.row] ?? Follow.init(nickname: "", userEmail: "", image: "", isFollow: false))
+        } else {
+            cell.setData(data: followDataList?.following[indexPath.row] ?? Follow.init(nickname: "", userEmail: "", image: "", isFollow: false))
         }
-        else{
-            cell.setData(image: followDataList[0].following[indexPath.row].image,
-                         userName: followDataList[0].following[indexPath.row].nickname,
-                         isFollow: followDataList[0].following[indexPath.row].isFollow,
-                         userEmail: followDataList[0].following[indexPath.row].userEmail
-            )
-            return cell
-        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let otherVC = UIStoryboard(name: "OtherMyPage", bundle: nil).instantiateViewController(withIdentifier: "OtherMyPageVC") as? OtherMyPageVC else {return}
         
         if tableView.tag == 1 {
-            otherVC.setOtherUserID(userID: followDataList[0].follower[indexPath.row].userEmail)
-        }
-        else{
-            otherVC.setOtherUserID(userID: followDataList[0].following[indexPath.row].userEmail)
+            otherVC.setOtherUserID(userID: followDataList?.follower[indexPath.row].userEmail ?? "")
+        } else {
+            otherVC.setOtherUserID(userID: followDataList?.following[indexPath.row].userEmail ?? "")
         }
         self.navigationController?.pushViewController(otherVC, animated: true)
     }
@@ -380,10 +365,9 @@ extension FollowFollwingVC: UITableViewDataSource{
     
 }
 
-extension FollowFollwingVC: isFollowButtonClickedDelegate{
-    func isFollowButtonClicked(){
+extension FollowFollwingVC: isFollowButtonClickedDelegate {
+    func isFollowButtonClicked() {
         getFollowData()
-        print("딜리게이트 실행")
     }
     
 
