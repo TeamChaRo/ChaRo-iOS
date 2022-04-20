@@ -102,8 +102,8 @@ final class SearchAddressKeywordVC: UIViewController {
         searchTextField.rx.text
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self]  in
-                if $0 == "" { //to
-                    print("clear 버튼 클릭")
+                if $0 == "" { 
+                    self?.viewModel.refreshSearchHistory()
                 } else {
                     self?.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
                 }
@@ -125,9 +125,11 @@ final class SearchAddressKeywordVC: UIViewController {
     }
     
     private func addSearchedKeyword(address: AddressDataModel) {
+        viewModel.searchedHistory.append(address.getKeywordResult())
         guard let addressMainVC = self.navigationController?.previousViewController as? AddressMainVC else { return }
         addressMainVC.addSearchedKeyword(address: address)
     }
+    
 }
 
 //MARK: Layout
