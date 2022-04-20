@@ -11,14 +11,13 @@ import Foundation
 struct ThemeDataModel: Codable {
     let success: Bool
     let msg: String
-    let data: Drive
+    let data: TotalDrive
 }
 
 // MARK: - TotalDrive
 struct TotalDrive: Codable {
-    let lastID: Int
-    let lastCount: Int
-    let drive: [DriveElement]
+    let totalCourse: Int
+    let drive: [Drive]
 }
 
 

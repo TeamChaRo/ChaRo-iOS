@@ -129,16 +129,15 @@ class OtherMyPageVC: UIViewController {
         setFilterViewCompletion()
         getMypageData()
         getFollowData()
+        isFollowButtonAddTarget()
         setFollowButtonUI()
         self.dismissDropDownWhenTappedAround()
-        setButtonTarget()
     }
-
-    func setButtonTarget() {
+    
+    func isFollowButtonAddTarget() {
         isFollowButton.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
-        followerButton.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
-        followButton.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
     }
+    
     //MARK: setUI
     
     func setCollectionviewLayout() {
@@ -340,27 +339,10 @@ class OtherMyPageVC: UIViewController {
     
     @objc private func doFollowButtonClicked(_ sender: UIButton) {
         postFollowUser()
-    }
-    
+   }
     @objc private func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc private func followerButtonClicked(_ sender: UIButton) {
-        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
-            followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: otherUserID)
-            followVC.isOtherMypage = true
-            self.tabBarController?.tabBar.isHidden = true
-            self.navigationController?.pushViewController(followVC, animated: true)
-     }
-    
-    @objc private func followingButtonClicked(_ sender: UIButton) {
-        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
-            followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: otherUserID)
-            followVC.isOtherMypage = true
-            self.tabBarController?.tabBar.isHidden = true
-            self.navigationController?.pushViewController(followVC, animated: true)
-     }
+   }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수

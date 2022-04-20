@@ -56,8 +56,9 @@ enum ImageLiterals {
     static var icSettingWhite: UIImage{ .load(name: "setting2_white") }
     
     //TODO: 위에 두개 중 안쓰는 거 한쪽은 삭제하기
-    static var icSaveActive: UIImage { .load(name: "save_active") }
+    static var icSaveActive: UIImage { .load(name: "icSaveActive") }
     static var icSaveInactive: UIImage { .load(name: "icSaveInactive") }
+    static var icSave_Active: UIImage { .load(name: "save_active") }
     static var icSave_Inactive: UIImage { .load(name: "save_inactive") }
     
     static var icScrapActive: UIImage { .load(name: "icSaveActive")}

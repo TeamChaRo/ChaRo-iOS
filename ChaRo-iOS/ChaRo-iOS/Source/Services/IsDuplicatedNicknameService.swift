@@ -34,6 +34,8 @@ struct IsDuplicatedNicknameService {
     
             switch dataResponse.result {
             case .success:
+                
+                print("----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value)

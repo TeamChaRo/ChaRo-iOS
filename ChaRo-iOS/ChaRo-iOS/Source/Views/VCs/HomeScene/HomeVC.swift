@@ -25,6 +25,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var bannerScrollView: UIScrollView!
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     
+    
     //배너 관련 변수
     var homeTableViewHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
@@ -35,27 +36,39 @@ class HomeVC: UIViewController {
     
     
     //데이타
-    var bannerData: [Banner] = []
-    var todayData: [DriveElement] = []
-    var trendyData: [DriveElement] = []
-    var customData: [DriveElement] = []
-    var localData: [DriveElement] = []
-    var customText: String = ""
-    var localText: String = ""
+    private var bannerData: [Banner] = []
+    private var todayData: [DriveElement] = []
+    private var trendyData: [DriveElement] = []
+    private var customData: [DriveElement] = []
+    private var localData: [DriveElement] = []
+    private var customText: String = ""
+    private var localText: String = ""
 
-    let lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-    var delegate: AnimateIndicatorDelegate?
-
+    private let lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    private var delegate: AnimateIndicatorDelegate?
+    private var tableIndex: IndexPath = [0,0]
     
-    var tableIndex: IndexPath = [0,0]
+    private let navigationBottomView = UIView().then {
+        $0.backgroundColor = UIColor.gray20
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationViewBottomLayout()
         getServerData()
         setTableView()
         setActionToSearchButton()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
+    }
+    //navigationView
+    func setNavigationViewBottomLayout() {
+        HomeNavigationView.addSubview(navigationBottomView)
+        navigationBottomView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview().offset(0)
+            $0.height.equalTo(1)
+        }
+        navigationBottomView.isHidden = true
     }
     //헤더뷰
     func setHeader() {
@@ -139,6 +152,7 @@ class HomeVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? HomeDataModel {
+                    print("겟 데이터 실행")
                     DispatchQueue.global().sync {
                         let data = response.data
                     //배너 타이틀
@@ -151,6 +165,7 @@ class HomeVC: UIViewController {
                     //today 차로
                         if let today = data.todayCharoDrive.drive as? [DriveElement] {
                         self.todayData = today
+                        print(self.todayData)
                     }
                     
                     //trendy 차로
@@ -169,6 +184,8 @@ class HomeVC: UIViewController {
                         if let local = data.localDrive.drive as? [DriveElement] {
                         self.localData = local
                         self.localText = data.localTitle
+                        print(data.localTitle)
+
                     }
                         self.delegate?.endIndicator()
                     }
@@ -179,6 +196,7 @@ class HomeVC: UIViewController {
                 print("requestERR")
             case .pathErr:
                 print("pathERR")
+                print("한번 더 실행ㅋ")
             case .serverErr:
                 print("serverERR")
             case .networkFail:
@@ -251,24 +269,23 @@ extension HomeVC: UITableViewDelegate {
         }
         
     }
-    
-    func setNavigationViewShadow() {
-        //shadowExtension 예제
-        HomeNavigationView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
-    }
+
     func addContentScrollView() {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
         if bannerScrollView.subviews.count > 3{
-            for index in 1..<5 {
-                bannerScrollView.viewWithTag(index)?.frame.size.height = -HomeTableView.contentOffset.y
-            }
+            print(bannerScrollView.subviews)
+            bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
+            bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
+            bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
+            bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
         }  else {
             if bannerData.count != 0{
                 for i in 1..<images.count + 1 {
                     let xPos = self.view.frame.width * CGFloat(i-1)
                     let imageView = UIImageView()
                     imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
+                    print(bannerData.count)
                         guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
                         imageView.kf.setImage(with: url)
                     imageView.tag = i
@@ -281,6 +298,19 @@ extension HomeVC: UITableViewDelegate {
         }
         }
 //MARK: ScrollViewDidScroll
+    private func configureLogoImage(isWhite: Bool) {
+        if isWhite {
+            homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
+            homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
+            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmWhite, for: .normal)
+            navigationBottomView.isHidden = true
+        } else {
+            homeNavigationLogo.image = ImageLiterals.icCharoLogo
+            homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
+            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmBlack, for: .normal)
+            navigationBottomView.isHidden = false
+        }
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNavigationAlpah()
         setMoveCar()
@@ -288,33 +318,22 @@ extension HomeVC: UITableViewDelegate {
     func setNavigationAlpah() {
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
+
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
                if currentHeight > -homeTableViewHeaderHeight {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
                 if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3) {
                     if currentWidth == 0 && currentHeight == 0{
-                        homeNavigationLogo.image = UIImage(named: "logoWhite.png")
-                        homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
-                        homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
-                        HomeNavigationView.removeShadowView()
+                        configureLogoImage(isWhite: true)
                     }  else {
                         if HomeTableView.contentOffset.y <= -47 && currentHeight == -47{
-                            homeNavigationLogo.image = UIImage(named: "logoWhite.png")
-                            homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
-                            homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
+                            configureLogoImage(isWhite: true)
                         } else {
-                            homeNavigationLogo.image = UIImage(named: "logo.png")
-                            homeNavigationSearchButton.setBackgroundImage(UIImage(named: "iconSearchBlack.png"), for: .normal)
-                            homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "iconAlarmBlack.png"), for: .normal)
-                            setNavigationViewShadow()
+                            configureLogoImage(isWhite: false)
                         }
                     }
                 } else if currentHeight <= -CGFloat(homeTableViewHeaderHeight/3) {
-                    homeNavigationLogo.image = UIImage(named: "logoWhite.png")
-                    homeNavigationSearchButton.setBackgroundImage(UIImage(named: "icSearchWhite.png"), for: .normal)
-                    homeNavigationNotificationButton.setBackgroundImage(UIImage(named: "icAlarmWhite.png"), for: .normal)
-                    HomeNavigationView.removeShadowView()
- 
+                    configureLogoImage(isWhite: true)
                 }
                 if currentHeight > 0{
                     HomeNavigationView.backgroundColor = UIColor.white
@@ -363,6 +382,7 @@ extension HomeVC: UITableViewDelegate {
         case 0:
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
+            print(todayData)
             if todayData.count == 0 {
                 return cell
             } else {
@@ -410,6 +430,8 @@ extension HomeVC: UITableViewDelegate {
             cell.delegate = self
             cell.buttonDelegate = self
             cell.postDelegate = self
+            
+            print("fsdgsfdg", localText)
             cell.headerText = localText
             cell.localList = localData
          
@@ -430,6 +452,7 @@ extension HomeVC: UITableViewDataSource {
 extension HomeVC: IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
+        print(tableIndex.row)
     }
 }
 
