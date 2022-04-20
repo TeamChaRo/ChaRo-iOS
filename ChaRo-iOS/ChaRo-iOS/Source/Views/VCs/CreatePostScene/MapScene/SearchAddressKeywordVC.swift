@@ -13,19 +13,18 @@ import RxSwift
 
 class SearchAddressKeywordVC: UIViewController {
 
-    static let identifier = "SearchAddressKeywordVC"
     private let viewModel = SearchKeywordViewModel()
     private var disposeBag = DisposeBag()
     
-    private var addressIndex = -1
-    private var addressType = ""
+    private var addressIndex: Int = -1
+    private var addressType: String = ""
     
     //MARK: UI Component
-    private var backButton = UIButton().then{
+    private var backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
         $0.tintColor = .gray40
     }
-    private var searchTextField = UITextField().then{
+    private var searchTextField = UITextField().then {
         $0.autocorrectionType = .no
         $0.font = .notoSansRegularFont(ofSize: 17)
         $0.textColor = .gray50
@@ -33,36 +32,44 @@ class SearchAddressKeywordVC: UIViewController {
         $0.clearButtonMode = .whileEditing
         $0.returnKeyType = .done
     }
-    private let separateLine = UIView().then{
+    private let separateLine = UIView().then {
         $0.backgroundColor = .gray20
     }
-    private var tableView = UITableView().then{
-        $0.registerCustomXib(xibName: SearchKeywordCell.identifier)
+    private var tableView = UITableView().then {
+        $0.register(cell: SearchKeywordCell.self)
         $0.rowHeight = 72
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         setupConstraints()
         setActionToComponent()
         bindToViewModel()
     }
     
-    public func setAddressModel(model: AddressDataModel, cellType: String, index: Int){
+    //MARK: - public func
+    public func setAddressModel(model: AddressDataModel, cellType: String, index: Int) {
         searchTextField.placeholder = "\(cellType)를 입력해주세요"
         addressType = cellType
         addressIndex = index
     }
     
-    public func setSearchKeyword(list: [KeywordResult]){
+    public func setSearchKeyword(list: [KeywordResult]) {
         print(list)
     }
     
-    private func bindToViewModel(){
+    // MARK: - private func
+    
+    private func configureUI() {
+        view.backgroundColor = .white
+    }
+    
+    private func bindToViewModel() {
         viewModel
             .addressSubject
-            .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.identifier,
-                                                cellType: SearchKeywordCell.self)){ row, element, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.className,
+                                                cellType: SearchKeywordCell.self)) { row, element, cell in
                 cell.titleLabel.text = element.title
                 cell.addressLabel.text = element.address
                 cell.dateLabel.text = self.viewModel.getCurrentDate()
@@ -79,36 +86,27 @@ class SearchAddressKeywordVC: UIViewController {
             .subscribe(onNext: {
                 self.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
             }).disposed(by: disposeBag)
-        
     }
     
-    private func pushNextVC(address: AddressDataModel){
-        let nextVC = self.getAddressConfirmVC()
+    private func pushNextVC(address: AddressDataModel) {
+        let nextVC = AddressConfirmVC()
         nextVC.setPresentingAddress(address: address)
         nextVC.setSearchType(type: self.addressType, index: self.addressIndex)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    private func getAddressConfirmVC() -> AddressConfirmVC{
-        let storyboard = UIStoryboard(name: "AddressConfirm", bundle: nil)
-        guard let nextVC = storyboard.instantiateViewController(identifier: AddressConfirmVC.identifier) as? AddressConfirmVC else {
-            return AddressConfirmVC()
-        }
-        return nextVC
-    }
-    
-    public func setActionToComponent(){
+    public func setActionToComponent() {
         backButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
     }
     
-    @objc func dismissAction(){
+    @objc func dismissAction() {
         self.navigationController?.popViewController(animated: true)
     }
 }
 
 //MARK: Layout
 extension SearchAddressKeywordVC {
-    private func setupConstraints(){
+    private func setupConstraints() {
         view.addSubviews([backButton,
                           searchTextField,
                           separateLine,

@@ -11,7 +11,7 @@ import SnapKit
 class PostCellTitleView: UIView {
 
     //title만 있으면 높이 22
-    public var titleLabel : UILabel = {
+    public var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSansBoldFont(ofSize: 16)
         label.textColor = .mainBlack
@@ -34,19 +34,19 @@ class PostCellTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, subTitle:String = ""){
+    init(title: String, subTitle:String = "") {
         super.init(frame: .zero)
         titleLabel.text = title
         
         if subTitle == ""{
             setTitleContraints()
-        }else{
+        } else {
             subTitleLabel.text = subTitle
             setSubTitleContraints()
         }
     }
     
-    private func setTitleContraints(){
+    private func setTitleContraints() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints{make in
             make.top.equalTo(self.snp.top)
@@ -54,7 +54,7 @@ class PostCellTitleView: UIView {
         }
     }
     
-    private func setSubTitleContraints(){
+    private func setSubTitleContraints() {
         addSubviews([titleLabel,
                      subTitleLabel])
         

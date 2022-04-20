@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import SnapKit
+import Then
+import RxSwift
 
 protocol AddressButtonCellDelegate {
     func addressButtonCellForPreseting(cell: AddressButtonCell)
@@ -13,138 +16,130 @@ protocol AddressButtonCellDelegate {
     func addressButtonCellForAdding(cell: AddressButtonCell)
 }
 
-class AddressButtonCell: UITableViewCell {
+enum AddressCellType: String{
+    case start = "출발지"
+    case mid = "경유지"
+    case end = "도착지"
+}
 
-    static let identifier = "AddressButtonCell"
+class AddressButtonCell: UITableViewCell {
+    
+    private let disposeBag = DisposeBag()
     public var address = AddressDataModel()
     public var delegate: AddressButtonCellDelegate?
-    public var cellType = ""
+    public var cellType: AddressCellType = .start
 
-    public var searchButton : UIButton = {
-        let button = UIButton()
-        button.layer.borderWidth = 1
-        button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 47)
-        button.layer.borderColor = UIColor.gray20.cgColor
-        button.layer.cornerRadius = 20
-        button.backgroundColor = .gray10
-        button.setTitleColor(.gray30, for: .normal)
-        return button
-    }()
+    public var searchButton = UIButton().then {
+        $0.layer.borderWidth = 1
+        $0.contentHorizontalAlignment = .left
+        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 47)
+        $0.layer.borderColor = UIColor.gray20.cgColor
+        $0.layer.cornerRadius = 12
+        $0.backgroundColor = .gray10
+    }
+    private var plusButton = UIButton().then {
+        $0.setBackgroundImage(UIImage(named: "icWayPointPlusActive"), for: .normal)
+        $0.setBackgroundImage(UIImage(named: "icWayPointPlusInactive"), for: .disabled)
+        $0.isEnabled = false
+        $0.isHidden = false
+    }
     
-    private var plusButton: UIButton = {
-        let button = UIButton()
-        button.isUserInteractionEnabled = false
-        button.setBackgroundImage(UIImage(named: "icWayPointPlusInactive"), for: .normal)
-        return button
-    }()
+    private var minusButton = UIButton().then {
+        $0.setBackgroundImage(UIImage(named: "icWaypointMinusActive"), for: .normal)
+    }
     
-    private var minusButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "icWaypointMinusActive"), for: .normal)
-        return button
-    }()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        addActionIntoButtons()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        bindToButton()
         selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    public func setInitContentText(text: String){
-        let title = "\(text)를 입력해주세요"
-        setCellStyleForType(type: text)
-        searchButton.setTitle(title, for: .normal)
-        searchButton.setTitleColor(.gray30, for: .normal)
+    func setContent(of address: AddressDataModel, for type: AddressCellType, at totalCount: Int) {
+        setCellStyleForType(type: type)
+        if address.title == "" {
+            searchButton.setTitle("\(type.rawValue)를 입력해주세요", for: .normal)
+            searchButton.setTitleColor(.gray30, for: .normal)
+            return
+        } else {
+            self.address = address
+            searchButton.setTitle(address.title, for: .normal)
+            searchButton.setTitleColor(.mainBlack, for: .normal)
+        }
         
-        if text == "도착지"{
-            searchButton.isEnabled = false
-            searchButton.isUserInteractionEnabled = false
-        }
-    }
-    
-    public func setAddressText(address: AddressDataModel){
-        print("setAddressText cellType = \(cellType)")
-        self.address = address
-        searchButton.setTitle(address.title, for: .normal)
-        searchButton.setTitleColor(.mainBlack, for: .normal)
-        if cellType == "도착지"{
-            plusButton.setBackgroundImage(UIImage(named: "icWayPointPlusActive"), for: .normal)
-            plusButton.isUserInteractionEnabled = true
-        }
+        if cellType == .end {
+            let hasMidRoute = (totalCount == 3)
+            plusButton.isHidden = hasMidRoute
+            plusButton.isEnabled = !hasMidRoute
+        } else { return }
     }
 
-    private func setCellStyleForType(type: String){
+    private func setCellStyleForType(type: AddressCellType) {
         cellType = type
         switch type {
-        case "출발지":
-            setStartTypeConstraints()
-        case "도착지":
+        case .start:
+            setSearchButtonContraints()
+        case .end:
             setEndTypeConstraints()
         default:
             setMiddleTypeConstraints()
         }
     }
-    
-    private func addActionIntoButtons(){
-        print("addActionIntoButtons")
-        searchButton.addTarget(self, action: #selector(goToKeywordSearch), for: .touchUpInside)
-        plusButton.addTarget(self, action: #selector(addCellAction), for: .touchUpInside)
-        minusButton.addTarget(self, action: #selector(removeCellAction), for: .touchUpInside)
+
+    private func bindToButton() {
+        searchButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.addressButtonCellForPreseting(cell: self)
+            }).disposed(by: disposeBag)
+
+        plusButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.addressButtonCellForAdding(cell: self)
+            }).disposed(by: disposeBag)
+        
+        minusButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.addressButtonCellForRemoving(cell: self)
+            }).disposed(by: disposeBag)
     }
-    
-    
-    @objc public func goToKeywordSearch(sender: UIButton){
-        delegate!.addressButtonCellForPreseting(cell: self)
-    }
-    
-    @objc private func addCellAction(){
-        delegate!.addressButtonCellForAdding(cell: self)
-    }
-    
-    @objc private func removeCellAction(){
-        delegate!.addressButtonCellForRemoving(cell: self)
-    }
-    
 }
 
 //MARK: UI Constraints
 extension AddressButtonCell{
-    private func setSearchButtonContraints(){
-        addSubview(searchButton)
-        searchButton.snp.makeConstraints{make in
-            make.top.equalTo(self.snp.top).offset(3)
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.bottom.equalTo(self.snp.bottom).offset(-3)
+    private func setSearchButtonContraints() {
+        contentView.addSubview(searchButton)
+        searchButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(3)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-3)
+            $0.height.equalTo(42)
+        }
+    }
+
+    private func setMiddleTypeConstraints() {
+        setSearchButtonContraints()
+        contentView.addSubview(minusButton)
+        minusButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalTo(searchButton.snp.trailing)
         }
     }
     
-    
-    private func setStartTypeConstraints(){
+    private func setEndTypeConstraints() {
         setSearchButtonContraints()
-    }
-    
-    private func setMiddleTypeConstraints(){
-        setSearchButtonContraints()
-        
-        addSubview(minusButton)
-        minusButton.snp.makeConstraints{make in
-            make.centerY.equalTo(self.snp.centerY)
-            make.trailing.equalTo(searchButton.snp.trailing)
-        }
-    }
-    
-    private func setEndTypeConstraints(){
-        setSearchButtonContraints()
-        addSubview(plusButton)
-        plusButton.snp.makeConstraints{make in
-            make.centerY.equalTo(self.snp.centerY)
-            make.trailing.equalTo(searchButton.snp.trailing)
+        contentView.addSubview(plusButton)
+        plusButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalTo(searchButton.snp.trailing)
         }
     }
 }

@@ -31,19 +31,19 @@ class CommonCVC: UICollectionViewCell {
     @IBOutlet weak var heartButton: UIButton!
     
     var taglist :[String] = []
-    var clickedPostCell : ((Int) -> ())?
+    var clickedPostCell: ((Int) -> ())?
     var titleLabelHeight = -1
     
-    var image : UIImage?
+    var image: UIImage?
     
 
     //MARK: Variable
-    var callback : (() -> Void)?
+    var callback: (() -> Void)?
     var postID: Int = 1
     var isFavorite: Bool? {
         didSet {
             if isFavorite! {
-                heartButton.setImage(UIImage(named: "heart_active"), for: .normal)
+                heartButton.setImage(ImageLiterals.icHeartActive, for: .normal)
             } else {
                 heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
             }
@@ -90,7 +90,7 @@ class CommonCVC: UICollectionViewCell {
         guard let url = URL(string: image) else { return }
         self.imageView.kf.indicatorType = .activity
         self.imageView.kf.setImage(with: url, options: [.forceTransition, .keepCurrentImageWhileLoading])
-        
+                                
      
 
         imageView.layer.cornerRadius = 10
@@ -130,8 +130,7 @@ class CommonCVC: UICollectionViewCell {
                 tagButtonList[index].layer.borderWidth = 1
                 tagButtonList[index].layer.borderColor = UIColor.mainBlue.cgColor
                 tagButtonList[index].contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            }
-            else{
+            } else {
                 tagButtonList[index].setTitle("", for: .normal)
                 tagButtonList[index].layer.borderColor = UIColor.clear.cgColor
             }
@@ -139,14 +138,14 @@ class CommonCVC: UICollectionViewCell {
   
     }
     
-    func setLabel(){
+    func setLabel() {
         titleLabel.font = UIFont.notoSansBoldFont(ofSize: 17)
     }
     
-    func likeAction(){
+    func likeAction() {
         LikeService.shared.Like(userId: "jieun1211", postId: self.postID) { [self] result in
             
-            switch result{
+            switch result {
             case .success(let success):
                 if let success = success as? Bool {
                     

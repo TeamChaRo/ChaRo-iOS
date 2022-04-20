@@ -55,7 +55,7 @@ class LoginVC: UIViewController {
     }
     
     
-    func loginAction(){
+    func loginAction() {
         
         LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) {
             result in
@@ -92,11 +92,13 @@ class LoginVC: UIViewController {
     
     
     @IBAction func findPwdButtonClicked(_ sender: UIButton) {
+        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: FindPasswordVC.identifier) as? FindPasswordVC else {
             return
         }
         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
@@ -114,17 +116,17 @@ class LoginVC: UIViewController {
         self.view.endEditing(true)
     }
     
-    func setNotificationCenter(){
+    func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func removeObservers(){
+    func removeObservers() {
         NotificationCenter.default.removeObserver(self)
     }
     
     @objc
-    func textFieldMoveUp(_ notification: NSNotification){
+    func textFieldMoveUp(_ notification: NSNotification) {
         
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -136,7 +138,7 @@ class LoginVC: UIViewController {
     }
     
     @objc
-    func textFieldMoveDown(_ notification: NSNotification){
+    func textFieldMoveDown(_ notification: NSNotification) {
         view.transform = .identity
     }
     

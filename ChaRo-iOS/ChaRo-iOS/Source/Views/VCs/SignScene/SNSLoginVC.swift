@@ -38,7 +38,7 @@ class SNSLoginVC: UIViewController {
     }
     
     let logoImageView = UIImageView().then {
-        $0.image = UIImage(named: "logo")
+        $0.image = ImageLiterals.icCharoLogo
     }
     
     let logoLabel = UILabel().then {
@@ -353,6 +353,7 @@ class SNSLoginVC: UIViewController {
     
     
     @objc func goToEmailLoginVC() {
+        print(self.navigationController)
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: LoginVC.identifier)
         self.navigationController?.pushViewController(vc, animated: true)
@@ -378,7 +379,7 @@ class SNSLoginVC: UIViewController {
     
     
     private func configureUI() {
-        
+        view.backgroundColor = UIColor.white
         view.addSubviews([lookAroundBtn,
                           logoImageView,
                           logoLabel,
@@ -448,7 +449,7 @@ class SNSLoginVC: UIViewController {
     
 }
 
-extension SNSLoginVC : ASAuthorizationControllerDelegate {
+extension SNSLoginVC: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             print(credential.user)

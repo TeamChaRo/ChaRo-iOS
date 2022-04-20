@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - MypageLikeWrite
-struct MypageInpinityModel: Codable {
+struct MypageInfinityModel: Codable {
     let success: Bool
     let msg: String
     let data: MyPagePost

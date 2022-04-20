@@ -25,7 +25,7 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     }
     
     var navigationViewTitleLabel = UILabel().then {
-        $0.text = "회원가입"
+        $0.text = "비밀번호 찾기"
         $0.font = .notoSansMediumFont(ofSize: 17)
         $0.textColor = .mainBlack
     }

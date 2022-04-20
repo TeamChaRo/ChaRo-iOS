@@ -10,11 +10,10 @@ import UIKit
 
 class ThemePostDetailTVC: UITableViewCell {
 
-    @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
-    var selectText : String = "인기순"
+    var selectText: String = "인기순"
     var postCount: Int = 0
     var delegate: MenuClickedDelegate?
     var isButtonClicked: Bool = false
@@ -26,17 +25,12 @@ class ThemePostDetailTVC: UITableViewCell {
     }
 
     func setLabel(){
-        var countText : String = "전체 \(postCount)개 게시물"
-        countLabel.text = countText
         selectLabel.text = selectText
-        countLabel.textColor = UIColor.gray50
-        selectLabel.textColor = UIColor.gray50
-        selectLabel.font = .notoSansRegularFont(ofSize: 12)
-        countLabel.font = .notoSansRegularFont(ofSize: 12)
-        
+        selectLabel.textColor = UIColor.gray40
+        selectLabel.font = .notoSansRegularFont(ofSize: 13)
     }
     
-    func setTitle(data : String) {
+    func setTitle(data: String) {
         selectText = data
         selectLabel.text = selectText
     }

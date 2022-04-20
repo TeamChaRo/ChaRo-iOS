@@ -7,94 +7,89 @@
 
 import UIKit
 import SnapKit
+import Then
 import TMapSDK
 
 
 class AddressConfirmVC: UIViewController {
 
     static let identifier = "AddressConfirmVC"
-    private var addressModel : AddressDataModel?
+    private var addressModel: AddressDataModel?
     private var tMapView = MapService.getTmapView()
-    private var deviceHeight : CGFloat?
-    public var searchType = ""
-    public var presentingCellIndex = -1
-    private var isFirstLoaded = true
+    private var deviceHeight: CGFloat?
+    public var searchType: String = ""
+    public var presentingCellIndex: Int = -1
+    private var isFirstLoaded: Bool = true
     
-    private var backButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "iconCircleBackButton"), for: .normal)
-        button.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
-        return button
-    }()
-    
+    private var backButton = UIButton().then {
+        $0.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)
+        $0.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
+    }
     private var centerMarkerView = UIImageView()
+    private var bottomView = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 20
+        $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
+    }
     
-    private var bottomView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 20
-        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
-        return view
-    }()
+    private var confirmButton = UIButton().then {
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = .mainBlue
+        $0.setTitleColor(.white, for: .normal)
+        $0.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
+    }
     
-    private var confirmButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .mainBlue
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
-        return button
-    }()
+    private var titleNameLabel = UILabel().then {
+        $0.font = .notoSansMediumFont(ofSize: 16)
+        $0.textColor = .gray50
+    }
     
-    private var titleNameLabel : UILabel = {
-        let label = UILabel()
-        label.font = .notoSansMediumFont(ofSize: 16)
-        label.textColor = .gray50
-        return label
-    }()
-    
-    private var addressLabel : UILabel = {
-        let label = UILabel()
-        label.font = .notoSansRegularFont(ofSize: 14)
-        label.textColor = .gray40
-        return label
-    }()
+    private var addressLabel = UILabel().then {
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.textColor = .gray40
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         setContraints()
         initTMapView()
     }
     
-    @objc func popCurrentView(){
+    private func configureUI() {
+        view.backgroundColor = .white
+    }
+    
+    @objc func popCurrentView() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func sendDecidedAddress(){
+    @objc func sendDecidedAddress() {
         let endIndex = Int(navigationController?.viewControllers.endIndex ?? 0)
-        let addressMainVC = navigationController?.viewControllers[endIndex-3] as! AddressMainVC
-        addressMainVC.replaceAddressData(address: addressModel!, index: presentingCellIndex)
+        guard let addressMainVC = navigationController?.viewControllers[endIndex-3] as? AddressMainVC else { return }
+        addressMainVC.replaceAddressData(address: addressModel ?? AddressDataModel(),
+                                         index: presentingCellIndex)
         navigationController?.popToViewController(addressMainVC, animated: true)
     }
     
-    func setPresentingAddress(address: AddressDataModel){
+    func setPresentingAddress(address: AddressDataModel) {
         setTMapInitAddressView(address: address)
         setAddressLabels(address: address)
     }
     
-    func setSearchType(type: String, index: Int){
+    func setSearchType(type: String, index: Int) {
         confirmButton.setTitle("\(type)로 설정", for: .normal)
         presentingCellIndex = index
         setImageInCenterMarkerView(type: type)
     }
     
-    func setAddressLabels(address: AddressDataModel){
+    func setAddressLabels(address: AddressDataModel) {
         addressModel = address
         changeAddressText()
         print("first = \(address.title), \(address.address)")
     }
     
-    func setImageInCenterMarkerView(type: String){
+    func setImageInCenterMarkerView(type: String) {
         var image = UIImage()
         switch type {
         case "출발지":
@@ -108,20 +103,19 @@ class AddressConfirmVC: UIViewController {
     }
     
     
-    func changeAddressText(){
+    func changeAddressText() {
         titleNameLabel.text = addressModel!.title
         addressLabel.text = addressModel!.address
     }
     
-    func setTMapInitAddressView(address: AddressDataModel){
+    func setTMapInitAddressView(address: AddressDataModel) {
         let initPosition: CLLocationCoordinate2D = address.getPoint()
         print("setTMapInitAddressView - tMapView.getZoom() = \(tMapView.getZoom())")
         tMapView.setCenter(initPosition)
         tMapView.setZoom(18)
     }
     
-    
-    func setContraints(){
+    func setContraints() {
         view.addSubviews([tMapView,
                           backButton,
                           centerMarkerView,
@@ -182,10 +176,10 @@ class AddressConfirmVC: UIViewController {
 
     }
     
-    private func changeCoodinateToAddress(point : CLLocationCoordinate2D){
+    private func changeCoodinateToAddress(point : CLLocationCoordinate2D) {
         let pathData = TMapPathData()
         
-        pathData.reverseGeocoding(point, addressType: "A04"){ result , error in
+        pathData.reverseGeocoding(point, addressType: "A04") { result , error in
             let addressDict = result ?? [:]
             print(addressDict)
             print(addressDict["newRoadName"])
@@ -212,7 +206,7 @@ class AddressConfirmVC: UIViewController {
         
     }
 
-    private func getCenterCoordinateInCurrentMap(){
+    private func getCenterCoordinateInCurrentMap() {
         let lat: Double = (tMapView.getCenter()?.latitude)!
         let lon: Double = (tMapView.getCenter()?.longitude)!
         
@@ -221,7 +215,7 @@ class AddressConfirmVC: UIViewController {
         print("----------------------------")
     }
     
-    private func clickedToAddMarker(){
+    private func clickedToAddMarker() {
         let position = tMapView.getCenter()
         let marker = TMapMarker(position: position!)
         marker.map = tMapView
@@ -230,12 +224,12 @@ class AddressConfirmVC: UIViewController {
     
 }
 
-extension AddressConfirmVC: TMapViewDelegate{
-    func initTMapView(){
+extension AddressConfirmVC: TMapViewDelegate {
+    func initTMapView() {
         tMapView.setApiKey(MapService.mapkey)
         tMapView.delegate = self
     }
-    func mapViewDidChangeBounds(){
+    func mapViewDidChangeBounds() {
         if !isFirstLoaded {
             changeCoodinateToAddress(point: tMapView.getCenter()!)
         }

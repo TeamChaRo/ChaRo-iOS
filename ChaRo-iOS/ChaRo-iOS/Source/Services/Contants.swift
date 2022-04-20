@@ -39,6 +39,12 @@ struct Constants {
     static let myPageLikeURL = baseURL + "/user/myPage/like/" + userId
     static let myPageNewURL = baseURL + "/user/myPage/new/" + userId
     
+    ///otherMyPage
+    static let otherMyPageURL = baseURL + "/user/myPage/like/"
+    static let otherMyPageNewURL = baseURL + "/user/myPage/new/"
+    static let followURL = baseURL + "/user/follow/"
+    static let followCheckURL = baseURL + "/user/follow/check?userEmail="
+    static let getFollowURL = baseURL + "/user/follow?myPageEmail="
     
     ///필터 검색 결과 조회
     static let searchPostURL = baseURL + "/post/search/"
@@ -48,6 +54,7 @@ struct Constants {
 
     /// 게시물 상세보기
     static let detailPostURL = baseURL + "/post/detail/" + userEmail + "/"
+    static let detailPostLikeListURL = baseURL + "/post/likes/"
     
     /// 저장하기
     static let saveURL = baseURL + "/post/save"
@@ -66,4 +73,7 @@ struct Constants {
     static let kakaoLoginURL = baseURL + "/user/register/kakao"
     static let googleLoginURL = baseURL + "/user/register/google"
     static let appleLoginURL = baseURL + "/user/register/apple"
+    
+    /// 알림
+    static let notificationListURL = baseURL + "/push/"
 }

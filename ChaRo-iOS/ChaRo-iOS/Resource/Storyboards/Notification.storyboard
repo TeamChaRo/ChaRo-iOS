@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,7 +31,7 @@
                                             <constraint firstAttribute="width" constant="48" id="4LO-eZ-tcq"/>
                                             <constraint firstAttribute="height" constant="48" id="Iue-xT-J8J"/>
                                         </constraints>
-                                        <state key="normal" image="icBackButton"/>
+                                        <state key="normal" image="backIcon"/>
                                         <connections>
                                             <action selector="backButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7cC-ng-hRO"/>
                                         </connections>
@@ -54,26 +55,26 @@
                                     <constraint firstItem="4dp-XY-fGh" firstAttribute="centerX" secondItem="4VV-8K-pFu" secondAttribute="centerX" id="nv2-Ck-PxT"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notificationImage" translatesAutoresizingMaskIntoConstraints="NO" id="ENR-56-nVz">
-                                <rect key="frame" x="0.0" y="100" width="414" height="291"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="291" id="e11-Ut-mni"/>
-                                </constraints>
-                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RvA-N1-LNg">
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ENR-56-nVz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="JJp-Sf-dCM"/>
+                            <constraint firstItem="RvA-N1-LNg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="7uG-ea-uNL"/>
                             <constraint firstItem="4VV-8K-pFu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="PUO-Rf-VWJ"/>
-                            <constraint firstItem="ENR-56-nVz" firstAttribute="top" secondItem="4VV-8K-pFu" secondAttribute="bottom" id="Vf7-Kj-oCf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="RvA-N1-LNg" secondAttribute="trailing" id="Ss8-hP-k68"/>
                             <constraint firstItem="4VV-8K-pFu" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="cIp-No-dSM"/>
+                            <constraint firstItem="RvA-N1-LNg" firstAttribute="top" secondItem="4VV-8K-pFu" secondAttribute="bottom" id="g7a-HE-uaR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4VV-8K-pFu" secondAttribute="trailing" id="kUX-6U-kFJ"/>
-                            <constraint firstItem="ENR-56-nVz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wOY-Dr-Z7I"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="RvA-N1-LNg" secondAttribute="bottom" id="vNd-V6-06T"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="headerView" destination="4VV-8K-pFu" id="X7p-ri-OSg"/>
+                        <outlet property="notificationListTV" destination="RvA-N1-LNg" id="xDR-q9-xJg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -82,8 +83,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icBackButton" width="48" height="48"/>
-        <image name="notificationImage" width="375" height="291.5"/>
+        <image name="backIcon" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
