@@ -94,6 +94,7 @@ class ChangePasswordVC: UIViewController {
                         print("success", msg)
                         self.makeAlert(title: "", message: "비밀번호가 변경되었습니다.", okAction: { _ in
                             self.navigationController?.popViewController(animated: true)
+                            UserDefaults.standard.set(newPassword, forKey: Constants.UserDefaultsKey.userPassword)
                         })
                     case .requestErr(let msg):
                         print("requestERR", msg)
@@ -165,20 +166,7 @@ class ChangePasswordVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-20)
             $0.centerY.equalTo(headerTitleLabel)
         }
-        
-        //        oldPasswordInputView.snp.makeConstraints {
-        //            $0.top.equalTo(settingBackgroundView.snp.bottom).offset(26)
-        //            $0.leading.equalToSuperview().offset(20)
-        //            $0.trailing.equalToSuperview().offset(-20)
-        //            $0.height.equalTo(100)
-        //        }
-        //
-        //        newPasswordInputView.snp.makeConstraints {
-        //            $0.top.equalTo(oldPasswordInputView.snp.bottom).offset(63)
-        //            $0.leading.equalToSuperview().offset(20)
-        //            $0.trailing.equalToSuperview().offset(-20)
-        //            $0.height.equalTo(300)
-        //        }
+    
     }
 }
 
@@ -186,12 +174,13 @@ class ChangePasswordVC: UIViewController {
 extension ChangePasswordVC: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let text = textField.text
+        let oldPassword = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userPassword) as? String
         
         switch textField {
         case oldPasswordInputView.inputTextField :
             
             //TODO: - UserDefault 에 저장된 유저의 비밀번호로 변경예정
-            if text == "12345" {
+            if text == oldPassword {
                 oldPasswordInputView.setBlueTFLabelColorWithText(text: "확인되었습니다.")
                 newPasswordInputView.isHidden = false
             } else {

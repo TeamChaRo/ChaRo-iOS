@@ -14,7 +14,8 @@ struct UpdateProfileService {
     
     func putNewProfile(nickname: String, newImage: UIImage?, completion : @escaping (NetworkResult<Any>) -> Void)
     {
-        let original = Constants.updateProfile + "you@gmail.com"
+        let userEmail = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail) as? String ?? ""
+                let original = Constants.updateProfile + userEmail
         
         guard let target = original.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
@@ -23,14 +24,7 @@ struct UpdateProfileService {
         guard let url = URL(string: target) else {
             return
         }
-        
-        print(url)
-        
-        //TODO: - UserDefault 에 저장된 유저의 email로 변경예정
-        //        let userEmail = "you@gmail.com"
-        //        let originImageURL = ""
-        //        var newImageURL = ""
-        
+
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         
         let parameters: [String: Any] = [
@@ -49,7 +43,7 @@ struct UpdateProfileService {
             }
             
             if let imageData = newImage?.jpegData(compressionQuality: 1) {
-                multipartFormData.append(imageData, withName: "image", fileName: "gg.jpeg", mimeType: "image/jpeg")
+                multipartFormData.append(imageData, withName: "image", fileName: "newimage.jpeg", mimeType: "image/jpeg")
                 dicParameters.updateValue(imageData, forKey: "image")
             }
             print(dicParameters)

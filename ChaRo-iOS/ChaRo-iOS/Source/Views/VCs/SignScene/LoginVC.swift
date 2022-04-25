@@ -74,6 +74,7 @@ class LoginVC: UIViewController {
                 //UserDefaults에 이메일, 닉네임, 프로필 사진 저장
                 if let user = userData {
                     UserDefaults.standard.set(user.email, forKey: Constants.UserDefaultsKey.userEmail)
+                    UserDefaults.standard.set(userPassword, forKey: Constants.UserDefaultsKey.userPassword)
                     UserDefaults.standard.set(user.nickname, forKey: Constants.UserDefaultsKey.userNickname)
                     UserDefaults.standard.set(user.profileImage, forKey: Constants.UserDefaultsKey.userImage)
                 }

@@ -12,6 +12,7 @@ extension Constants {
 
         //유저 정보
         static let userEmail = "userEmail"
+        static let userPassword = "userPassword"
         static let userNickname = "userNickname"
         static let userImage = "userImage"
 
