@@ -43,7 +43,6 @@ class LoginVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    
     func setLoginButtonUI() {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
         
@@ -51,21 +50,20 @@ class LoginVC: UIViewController {
         loginButton.tintColor = .mainBlue
         
         joinButton.setTitleColor(.gray30, for: .normal)
-        
     }
     
     func loginAction() {
         
         LoginService.shared.login(id: self.idTextField.text!, password: self.pwdTextField.text!) {
             result in
-
+            
             switch result
             {
             case .success(let data):
                 print("일반 로그인 성공 \(data)")
                 let loginData = data as? LoginDataModel
                 let userData = loginData?.data
-
+                
                 //UserDefaults에 이메일, 닉네임, 프로필 사진, 소셜 로그인 여부 저장
                 if let user = userData {
                     UserDefaults.standard.set(user.email, forKey: "userId")
@@ -73,10 +71,12 @@ class LoginVC: UIViewController {
                     UserDefaults.standard.set(user.profileImage, forKey: "profileImage")
                     UserDefaults.standard.set(user.isSocial, forKey: "isSocial")
                 }
-
+                self.showHomeVC()
+                
             case .requestErr(let message):
                 if let message = message as? String {
-                    print(message)
+                    self.makeAlert(title: "로그인 실패",
+                                   message: message)
                 }
             default :
                 print("ERROR")
@@ -89,25 +89,24 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func findPwdButtonClicked(_ sender: UIButton) {
-        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         guard let vc = storyboard.instantiateViewController(identifier: FindPasswordVC.identifier) as? FindPasswordVC else {
             return
         }
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
+    }
+    
+    private func showHomeVC() {
         let storyboard = UIStoryboard(name: "Tabbar", bundle: nil)
         let nextVC = storyboard.instantiateViewController(withIdentifier: TabbarVC.identifier)
         nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)
-        
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -135,9 +134,6 @@ class LoginVC: UIViewController {
     func textFieldMoveDown(_ notification: NSNotification) {
         view.transform = .identity
     }
-    
-    
-    
 }
 
 extension LoginVC {
@@ -150,10 +146,5 @@ extension LoginVC {
             heightConstraint.constant = 356
             imageView.image = UIImage(named: "maskGroupSE")
         }
-        
-        
-        
-        
-        
     }
 }
