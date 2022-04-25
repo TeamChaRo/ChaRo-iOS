@@ -96,7 +96,6 @@ class LoginVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         loginAction()
     }

@@ -198,6 +198,8 @@
 		70FD425928170A1B00631BB7 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425828170A1B00631BB7 /* ChangePasswordVC.swift */; };
 		70FD425B28170A2B00631BB7 /* ChangeImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425A28170A2B00631BB7 /* ChangeImageVC.swift */; };
 		70FD425D281710C600631BB7 /* UpdatePasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425C281710C600631BB7 /* UpdatePasswordService.swift */; };
+		70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425E2817158900631BB7 /* UpdateProfileService.swift */; };
+		70FD4261281715B300631BB7 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4260281715B300631BB7 /* UserDefaultKey.swift */; };
 		8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */; };
 		DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
@@ -450,6 +452,8 @@
 		70FD425828170A1B00631BB7 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		70FD425A28170A2B00631BB7 /* ChangeImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageVC.swift; sourceTree = "<group>"; };
 		70FD425C281710C600631BB7 /* UpdatePasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordService.swift; sourceTree = "<group>"; };
+		70FD425E2817158900631BB7 /* UpdateProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileService.swift; sourceTree = "<group>"; };
+		70FD4260281715B300631BB7 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -649,6 +653,8 @@
 				368EC8EB277A15B20076BF5E /* GetFollowDataService.swift */,
 				3348E19027EA00F700D0E93D /* NotificationService.swift */,
 				70FD425C281710C600631BB7 /* UpdatePasswordService.swift */,
+				70FD425E2817158900631BB7 /* UpdateProfileService.swift */,
+				70FD4260281715B300631BB7 /* UserDefaultKey.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1635,6 +1641,7 @@
 				7062C83D270C42FE00C1CD2E /* JoinProfileView.swift in Sources */,
 				7062C849270CC04500C1CD2E /* ValidationEmailModel.swift in Sources */,
 				36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */,
+				70FD4261281715B300631BB7 /* UserDefaultKey.swift in Sources */,
 				706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */,
 				7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */,
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
@@ -1660,6 +1667,7 @@
 				F4CC1B99269D3E67009A0C01 /* CreatePostCourseTVC.swift in Sources */,
 				F4CC1B68269B9850009A0C01 /* UITextView+.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
+				70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */,
 				F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */,
 				3C2B3FD027E0A7F8005D2DC5 /* PostLocationTVC.swift in Sources */,
 				3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */,

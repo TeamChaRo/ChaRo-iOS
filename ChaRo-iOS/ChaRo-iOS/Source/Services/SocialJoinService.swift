@@ -96,13 +96,16 @@ struct SocialJoinService {
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
+        print(makeGoogleParameter(email: email,
+                                          profileImage: profileImage,
+                                          pushAgree: pushAgree,
+                                          emailAgree: emailAgree))
         
         dataRequest.responseData { dataResponse in
             
             
             switch dataResponse.result {
             case .success:
-                
                 print("구글 회원가입----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
@@ -162,16 +165,16 @@ struct SocialJoinService {
         
         let decoder = JSONDecoder()
         
-        guard let decodedData = try? decoder.decode(LoginJoinResponseDataModel.self, from: data)
+        guard let decodedData = try? decoder.decode(LikeDataModel.self, from: data)
         else {
             print("패쓰에러")
             return .pathErr
         }
         
         switch statusCode {
-        case 200:
+        case 200, 404, 401:
             print("소셜 회원가입 --- 데이터 받기 성공")
-            return .success(decodedData.data)
+            return .success(decodedData.msg)
             
         case 400: return .requestErr(decodedData.msg)
         case 500: return .serverErr
