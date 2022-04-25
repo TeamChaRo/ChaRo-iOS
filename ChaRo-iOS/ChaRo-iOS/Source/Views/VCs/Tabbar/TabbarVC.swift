@@ -62,7 +62,7 @@ class TabbarVC: UITabBarController {
         if item.title == "작성하기" {
             let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
-            let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+            let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.className)
             let createTab = UINavigationController(rootViewController: createVC)
 
             createTab.modalPresentationStyle = .fullScreen
@@ -89,7 +89,7 @@ class TabbarVC: UITabBarController {
        
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
-        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.className)
         let createTab = UINavigationController(rootViewController: createVC)
         
         createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
