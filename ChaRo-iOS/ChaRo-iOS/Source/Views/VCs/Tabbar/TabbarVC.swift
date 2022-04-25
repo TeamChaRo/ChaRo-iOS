@@ -14,7 +14,7 @@ class TabbarVC: UITabBarController {
     public var addressMainVC: AddressMainVC?
     public var tabs: [UIViewController] = []
     private var comeBackIndex = 0
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,10 @@ class TabbarVC: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         selectedViewController = tabs[comeBackIndex]
+        
+        print("유저디폴트 유저이메일 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail))")
+        print("유저디폴트 유저이미지 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userImage))")
+        print("유저디폴트 유저닉네임 : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname))")
     }
     func setBackgroundClear() {
         tabBar.isTranslucent = true
@@ -59,10 +63,10 @@ class TabbarVC: UITabBarController {
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if item.title == "작성하기" {
             let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
-
+            
             let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
             let createTab = UINavigationController(rootViewController: createVC)
-
+            
             createTab.modalPresentationStyle = .fullScreen
             self.present(createTab, animated: false, completion: nil)
         } else if item.title == "나의차로" {
@@ -78,21 +82,21 @@ class TabbarVC: UITabBarController {
     private func configTabbar() {
         self.view.tintColor = .blue
         self.view.backgroundColor = UIColor.white
-
+        
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeVC = homeStoryboard.instantiateViewController(identifier: "HomeVC")
         let homeTab = UINavigationController(rootViewController: homeVC)
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
         
-       
+        
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
-
+        
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
         let createTab = UINavigationController(rootViewController: createVC)
         
         createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
         createTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-
+        
         
         let myPageStoryboard = UIStoryboard(name: "MyPage", bundle: nil)
         let myPageVC = myPageStoryboard.instantiateViewController(identifier: "MyPageVC")
@@ -100,7 +104,7 @@ class TabbarVC: UITabBarController {
         myPageTab.navigationBar.isHidden = true
         myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
-
+        
         tabs = [homeTab,createTab, myPageTab]
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
