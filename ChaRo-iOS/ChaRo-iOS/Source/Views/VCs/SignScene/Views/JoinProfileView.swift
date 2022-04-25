@@ -48,7 +48,6 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         nicknameView.inputTextField?.delegate = self
     }
     
-    
     private func configureClosure() {
         self.nextButton.nextViewClosure = {
         }
@@ -56,7 +55,6 @@ class JoinProfileView: UIView, UITextFieldDelegate {
             //서버연결
         }
     }
-    
     
     private func configureUI() {
         
@@ -123,14 +121,14 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     }
     
     private func makeNicknameViewRed(text: String) {
-        self.isNicknamePassed = true
-        self.makeButtonsBlue()
-        self.nicknameView.setBlueTFLabelColorWithText(text: text)
+        self.isNicknamePassed = false
+        self.makeButtonsGray()
+        self.nicknameView.setOrangeTFLabelColorWithText(text: text)
     }
     
     private func makeNicknameViewBlue(text: String) {
-        self.isNicknamePassed = false
-        self.makeButtonsGray()
+        self.isNicknamePassed = true
+        self.makeButtonsBlue()
         self.nicknameView.setBlueTFLabelColorWithText(text: text)
     }
     

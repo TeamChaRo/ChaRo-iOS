@@ -14,11 +14,5 @@ struct ThemeDataModel: Codable {
     let data: Drive
 }
 
-// MARK: - TotalDrive
-struct TotalDrive: Codable {
-    let lastID: Int
-    let lastCount: Int
-    let drive: [DriveElement]
-}
 
 
