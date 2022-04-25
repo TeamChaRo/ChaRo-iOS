@@ -8,7 +8,7 @@
 import UIKit
 
 class JoinProfileView: UIView, UITextFieldDelegate {
-
+    
     var isNicknamePassed = false
     
     //MARK: - UI Variables
@@ -57,7 +57,7 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         }
     }
     
-
+    
     private func configureUI() {
         
         self.addSubviews([profileView,
@@ -122,39 +122,30 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         stickyNextButton.isEnabled = false
     }
     
-    private func isOnlyHanguel(text: String) -> Bool {
-        // String -> Array
-        let arr = Array(text)
-        // 정규식 pattern. 한글만 있어야함
-        let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ]$"
-        if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
-            var index = 0
-            while index < arr.count { // string 내 각 문자 하나하나 마다 정규식 체크 후 충족하지 못한것은 제거.
-                let results = regex.matches(in: String(arr[index]), options: [], range: NSRange(location: 0, length: 1))
-                if results.count == 0 {
-                    return false
-                } else {
-                    index += 1
-                }
-            }
-        }
-        return true
-        
+    private func makeNicknameViewRed(text: String) {
+        self.isNicknamePassed = true
+        self.makeButtonsBlue()
+        self.nicknameView.setBlueTFLabelColorWithText(text: text)
     }
     
+    private func makeNicknameViewBlue(text: String) {
+        self.isNicknamePassed = false
+        self.makeButtonsGray()
+        self.nicknameView.setBlueTFLabelColorWithText(text: text)
+    }
     
     //MARK: - TextField Delegate 함수
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        //이것도 Rx로 해야할까나 ...
-        if textField.text == "" {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let nickname = textField.text!
+        if nickname == "" {
             isNicknamePassed = false
             self.makeButtonsGray()
             nicknameView.setOrangeTFLabelColorWithText(text: "닉네임을 작성해주세요.")
-        } else if textField.text!.count > 5 {
+        } else if nickname.count > 5 {
             isNicknamePassed = false
             self.makeButtonsGray()
             nicknameView.setOrangeTFLabelColorWithText(text: "5자 이내로 작성해주세요.")
-        } else if !isOnlyHanguel(text: textField.text!) {
+        } else if !nickname.isOnlyHanguel() {
             isNicknamePassed = false
             self.makeButtonsGray()
             nicknameView.setOrangeTFLabelColorWithText(text: "한글만 사용해주세요.")
@@ -164,21 +155,20 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         }
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        isNicknamePassed = false
-    }
-    
-    
     //MARK: - 서버 연결 함수
     private func IsDuplicatedNickname(nickname: String) {
         IsDuplicatedNicknameService.shared.getNicknameInfo(nickname: nickname) { (response) in
             
             switch(response)
             {
-            case .success(_):
-                self.isNicknamePassed = true
-                self.makeButtonsBlue()
-                self.nicknameView.setBlueTFLabelColorWithText(text: "사용 가능한 닉네임입니다.")
+            case .success(let success):
+                if let success = success as? Bool {
+                    if success {
+                        self.makeNicknameViewBlue(text: "사용 가능한 닉네임입니다. ")
+                    } else {
+                        self.makeNicknameViewRed(text: "중복되는 닉네임이 존재합니다.")
+                    }
+                }
             case .requestErr(let message) :
                 print("requestERR", message)
             case .pathErr :
@@ -192,5 +182,5 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     }
     
     
-
+    
 }
