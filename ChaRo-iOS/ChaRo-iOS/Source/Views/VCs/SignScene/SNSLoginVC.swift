@@ -35,6 +35,7 @@ class SNSLoginVC: UIViewController {
         $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
         $0.setTitleColor(.mainBlue, for: .normal)
         $0.contentHorizontalAlignment = .right
+        $0.addTarget(self, action: #selector(lookAroundButtonClicked), for: .touchUpInside)
     }
     
     let logoImageView = UIImageView().then {
@@ -86,6 +87,14 @@ class SNSLoginVC: UIViewController {
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
         $0.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
+    }
+    
+    @objc func lookAroundButtonClicked() {
+        UserDefaults.standard.set(false, forKey: "isLogin")
+        //여기 둘러보기 계정을 어떻게 할 건지 논의 필요 - 일단은 ios@gmail.com 으로 해놓겠음
+        UserDefaults.standard.set("ios@gmail.com", forKey: "userId")
+        
+        self.goToHomeVC()
     }
     
     
