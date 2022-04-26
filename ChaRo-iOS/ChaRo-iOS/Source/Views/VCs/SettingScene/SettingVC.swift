@@ -19,9 +19,7 @@ class SettingVC: UIViewController {
     private let userWidth = UIScreen.main.bounds.width
     private let userheight = UIScreen.main.bounds.height
     
-    private var permissionModel = [settingDataModel(titleString: "알림", isToggle: true, toggleData: true),
-                                   settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
-                                   settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
+    private var permissionModel = [settingDataModel(titleString: "사진", isToggle: true, toggleData: true)]
     
     private var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
                                 settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
@@ -50,7 +48,7 @@ class SettingVC: UIViewController {
     
     private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
-        $0.addTarget(SettingVC.self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let bottomView = UIView().then {
@@ -70,6 +68,10 @@ class SettingVC: UIViewController {
         setHeaderLayout()
         setTableViewLayout()
         addNotificationObserver()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: Function, ServerFunction, LayoutFunction
@@ -118,7 +120,7 @@ extension SettingVC {
     
     /// SafariViewController를 불러와 화면전환을 하는 메서드 (인앱)
     private func presentToSafariVC(urlString: String) {
-        let url = NSURL(string: urlString)! as URL
+        guard let url = URL(string: urlString) else { return }
         let safariView: SFSafariViewController = SFSafariViewController(url: url)
         self.present(safariView, animated: true, completion: nil)
     }
@@ -154,17 +156,6 @@ extension SettingVC {
         settingTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
     
-    /// 알림 설정 상태를 토글에 반영하는 메서드
-    private func setNotificationSwitchStatus(_ toggle: UISwitch) {
-        let current = UNUserNotificationCenter.current()
-    
-        current.getNotificationSettings(completionHandler: { (settings) in
-            DispatchQueue.main.async {
-                toggle.isOn = settings.authorizationStatus == .notDetermined || settings.authorizationStatus == .denied ? false : true
-            }
-        })
-    }
-    
     /// 사진 접근 설정 상태를 토글에 반영하는 메서드
     private func setPhotoSwitchStatus(_ toggle: UISwitch) {
         DispatchQueue.main.async {
@@ -183,7 +174,7 @@ extension SettingVC {
 // MARK: - UITableViewDelegate
 extension SettingVC: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 5
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -217,12 +208,10 @@ extension SettingVC: UITableViewDelegate {
             titleLabel.text = "접근허용"
             bottomView.backgroundColor = UIColor.white
         case 1:
-            titleLabel.text = "마케팅 활용 및 광고 수신 동의"
-        case 2:
             titleLabel.text = "계정"
-        case 3:
+        case 2:
             titleLabel.text = "정보"
-        case 4:
+        case 3:
             titleLabel.text = "고객센터"
         default:
             titleLabel.text = "약관"
@@ -250,13 +239,11 @@ extension SettingVC: UITableViewDelegate {
 extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0, 4:
-            return 2
         case 1:
-            return 1
-        case 2:
             return 3
-        case 5:
+        case 3:
+            return 2
+        case 4:
             return 6
         default:
             return 1
@@ -270,22 +257,19 @@ extension SettingVC: UITableViewDataSource {
         switch indexPath.section {
             //0 접근허용
         case 0:
-            indexPath.row == 0 ? setNotificationSwitchStatus(cell.toggle) : setPhotoSwitchStatus(cell.toggle)
-            settingData = permissionModel[indexPath.row]
-            //1 마케팅 활용 및 광고 수신 동의
+            setPhotoSwitchStatus(cell.toggle)
+            settingData = permissionModel[0]
+            //1 계정
         case 1:
-            settingData = permissionModel[2]
-            //2 계정
-        case 2:
             settingData = accountModel[indexPath.row]
-            //3 정보
-        case 3:
+            //2 정보
+        case 2:
             settingData = infoInquiryModel[0]
-            //4 고객센터
-        case 4:
+            //3 고객센터
+        case 3:
             settingData = infoInquiryModel[indexPath.row + 1]
-            //5 약관
-        case 5:
+            //4 약관
+        case 4:
             settingData = termsModel[indexPath.row]
         default:
             return UITableViewCell()
@@ -305,11 +289,21 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
+        case 1:
+            switch indexPath.row {
+            case 0:
+                print("프로필 수정")
+                // TODO: ChangeImageVC 연결
+            case 1:
+                print("비번 수정")
+                // TODO: ChangePasswordVC 연결
+            default:
+                break
+            }
         case 2:
-            print("계정")
+            let noticeVC = NoticeVC()
+            self.navigationController?.pushViewController(noticeVC, animated: true)
         case 3:
-            print("정보")
-        case 4:
             switch indexPath.row {
             case 0:
                 /// 1:1 문의
@@ -320,7 +314,7 @@ extension SettingVC: UITableViewDataSource {
             default:
                 break
             }
-        case 5:
+        case 4:
             switch indexPath.row {
             case 0, 1, 2:
                 /// 개인정보 처리방침, 서비스 이용약관, 오픈소스 라이선스
@@ -359,8 +353,6 @@ extension SettingVC: SettingSwitchDelegate {
         switch section {
         case 0:
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-        case 1:
-            print("이메일 수신동의 체크")
         default:
             break
         }

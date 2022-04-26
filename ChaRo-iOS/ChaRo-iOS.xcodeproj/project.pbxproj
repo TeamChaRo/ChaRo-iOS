@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		330B8A70274C7B89007FB132 /* ThemePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */; };
+		33421B8F2817FAD9005EFBA5 /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */; };
+		33421B912817FC6A005EFBA5 /* NoticeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */; };
+		33421B9328180696005EFBA5 /* NoticeTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */; };
+		33421B95281806A5005EFBA5 /* NoticeContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B94281806A5005EFBA5 /* NoticeContentTVC.swift */; };
 		3348E18D27E9F2C600D0E93D /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */; };
 		3348E18F27E9FF7B00D0E93D /* NotificationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */; };
 		3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E19027EA00F700D0E93D /* NotificationService.swift */; };
-		339DEED4277A3E8B002749B2 /* TransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED3277A3E8B002749B2 /* TransitionVC.swift */; };
 		339DEED6277A44C3002749B2 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED5277A44C3002749B2 /* PresentationController.swift */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
@@ -252,6 +255,10 @@
 
 /* Begin PBXFileReference section */
 		330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopupVC.swift; sourceTree = "<group>"; };
+		33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
+		33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDataModel.swift; sourceTree = "<group>"; };
+		33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTitleTVC.swift; sourceTree = "<group>"; };
+		33421B94281806A5005EFBA5 /* NoticeContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentTVC.swift; sourceTree = "<group>"; };
 		3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTVC.swift; sourceTree = "<group>"; };
 		3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListModel.swift; sourceTree = "<group>"; };
 		3348E19027EA00F700D0E93D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -584,6 +591,7 @@
 			isa = PBXGroup;
 			children = (
 				36E445B2277CA160008E31BE /* SettingVC.swift */,
+				33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -592,6 +600,8 @@
 			isa = PBXGroup;
 			children = (
 				36E445B6277CA1F3008E31BE /* SettingTVC.swift */,
+				33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */,
+				33421B94281806A5005EFBA5 /* NoticeContentTVC.swift */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -845,6 +855,7 @@
 				368EC8ED277A16700076BF5E /* GetFollowDataModel.swift */,
 				36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */,
 				3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */,
+				33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1611,10 +1622,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33421B9328180696005EFBA5 /* NoticeTitleTVC.swift in Sources */,
 				70A18FA92778E4370069B1E5 /* FindPasswordVC.swift in Sources */,
 				F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */,
 				3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */,
 				36CEE5B6269DF9A900974EFF /* DetailModel.swift in Sources */,
+				33421B95281806A5005EFBA5 /* NoticeContentTVC.swift in Sources */,
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
@@ -1650,6 +1663,7 @@
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* UITextFeild+.swift in Sources */,
 				F4CC1B99269D3E67009A0C01 /* CreatePostCourseTVC.swift in Sources */,
+				33421B912817FC6A005EFBA5 /* NoticeDataModel.swift in Sources */,
 				F4CC1B68269B9850009A0C01 /* UITextView+.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
 				F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */,
@@ -1703,6 +1717,7 @@
 				362BC9F9269ED39A008EF625 /* MyPageDataService.swift in Sources */,
 				3C117E1E269F45D5005F4646 /* PostResultHeaderCVC.swift in Sources */,
 				7062C82A2706FAA300C1CD2E /* JoinTitleLabel.swift in Sources */,
+				33421B8F2817FAD9005EFBA5 /* NoticeVC.swift in Sources */,
 				7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */,
 				3C7A0C5127CE83AE00B78854 /* PostLikeListViewModel.swift in Sources */,
 				36E445B3277CA160008E31BE /* SettingVC.swift in Sources */,
@@ -1750,7 +1765,6 @@
 				36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */,
 				36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */,
 				362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */,
-				F4CC1AE92697570A009A0C01 /* PostPathMapTVC.swift in Sources */,
 				3348E18D27E9F2C600D0E93D /* NotificationTVC.swift in Sources */,
 				703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */,
 				3CB532D127C510A3005AAB1D /* NSObject+.swift in Sources */,
