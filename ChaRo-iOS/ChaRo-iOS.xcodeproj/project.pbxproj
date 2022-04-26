@@ -12,6 +12,7 @@
 		33421B912817FC6A005EFBA5 /* NoticeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */; };
 		33421B9328180696005EFBA5 /* NoticeTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */; };
 		33421B95281806A5005EFBA5 /* NoticeContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B94281806A5005EFBA5 /* NoticeContentTVC.swift */; };
+		33421B9728182E1F005EFBA5 /* SignNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B9628182E1F005EFBA5 /* SignNC.swift */; };
 		3348E18D27E9F2C600D0E93D /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */; };
 		3348E18F27E9FF7B00D0E93D /* NotificationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */; };
 		3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E19027EA00F700D0E93D /* NotificationService.swift */; };
@@ -259,6 +260,7 @@
 		33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDataModel.swift; sourceTree = "<group>"; };
 		33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTitleTVC.swift; sourceTree = "<group>"; };
 		33421B94281806A5005EFBA5 /* NoticeContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentTVC.swift; sourceTree = "<group>"; };
+		33421B9628182E1F005EFBA5 /* SignNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignNC.swift; sourceTree = "<group>"; };
 		3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTVC.swift; sourceTree = "<group>"; };
 		3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListModel.swift; sourceTree = "<group>"; };
 		3348E19027EA00F700D0E93D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -1121,6 +1123,7 @@
 				70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */,
 				70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */,
 				70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */,
+				33421B9628182E1F005EFBA5 /* SignNC.swift */,
 			);
 			path = SignScene;
 			sourceTree = "<group>";
@@ -1697,6 +1700,7 @@
 				3348E18F27E9FF7B00D0E93D /* NotificationListModel.swift in Sources */,
 				3C879BF1268B149800C41BB8 /* UICollectionView+.swift in Sources */,
 				368EC8EE277A16700076BF5E /* GetFollowDataModel.swift in Sources */,
+				33421B9728182E1F005EFBA5 /* SignNC.swift in Sources */,
 				36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */,
 				3C117E21269F6FCB005F4646 /* PostDetailDataModel.swift in Sources */,
 				3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */,

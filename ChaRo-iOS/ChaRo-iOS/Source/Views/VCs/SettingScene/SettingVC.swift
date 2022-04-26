@@ -169,6 +169,14 @@ extension SettingVC {
             }
         }
     }
+    
+    /// LoginSB의 루트 네비게이션 컨트롤러로 화면전환하는 메서드
+    private func presentToSignNC() {
+        guard let signNC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: SignNC.className)
+                as? SignNC else {return}
+        signNC.modalPresentationStyle = .overFullScreen
+        self.present(signNC, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -324,14 +332,19 @@ extension SettingVC: UITableViewDataSource {
                     "https://nosy-catmint-6ad.notion.site/f9a49abdcf91479987faaa83a35eb7a8"]
                 presentToSafariVC(urlString: urlData[indexPath.row])
             case 4:
-                print("로그아웃")
+                makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "") { _ in
+                    self.presentToSignNC()
+                }
             case 5:
-                print("탈퇴")
+                makeRequestAlert(title: "계정을 삭제하시겠습니까?", message: "회원 탈퇴시 계정이 모두 삭제됩니다.\n(단, 작성하신 글은 익명의 형태로 남아 사용자에게 보여집니다.)") { _ in
+                    // TODO: 회원탈퇴 서버 연결
+                    print("회원탈퇴")
+                }
             default:
                 break
             }
         default:
-            print(indexPath.section)
+            break
         }
     }
     
