@@ -13,6 +13,7 @@
 		33421B9328180696005EFBA5 /* NoticeTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */; };
 		33421B95281806A5005EFBA5 /* NoticeContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B94281806A5005EFBA5 /* NoticeContentTVC.swift */; };
 		33421B9728182E1F005EFBA5 /* SignNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B9628182E1F005EFBA5 /* SignNC.swift */; };
+		33421B992818329A005EFBA5 /* DeleteAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B982818329A005EFBA5 /* DeleteAccountService.swift */; };
 		3348E18D27E9F2C600D0E93D /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */; };
 		3348E18F27E9FF7B00D0E93D /* NotificationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */; };
 		3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E19027EA00F700D0E93D /* NotificationService.swift */; };
@@ -261,6 +262,7 @@
 		33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTitleTVC.swift; sourceTree = "<group>"; };
 		33421B94281806A5005EFBA5 /* NoticeContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentTVC.swift; sourceTree = "<group>"; };
 		33421B9628182E1F005EFBA5 /* SignNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignNC.swift; sourceTree = "<group>"; };
+		33421B982818329A005EFBA5 /* DeleteAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountService.swift; sourceTree = "<group>"; };
 		3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTVC.swift; sourceTree = "<group>"; };
 		3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListModel.swift; sourceTree = "<group>"; };
 		3348E19027EA00F700D0E93D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 				361986BE27778C2700B031F8 /* FollowCheckService.swift */,
 				368EC8EB277A15B20076BF5E /* GetFollowDataService.swift */,
 				3348E19027EA00F700D0E93D /* NotificationService.swift */,
+				33421B982818329A005EFBA5 /* DeleteAccountService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1770,6 +1773,7 @@
 				36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */,
 				362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */,
 				3348E18D27E9F2C600D0E93D /* NotificationTVC.swift in Sources */,
+				33421B992818329A005EFBA5 /* DeleteAccountService.swift in Sources */,
 				703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */,
 				3CB532D127C510A3005AAB1D /* NSObject+.swift in Sources */,
 				70D63E052694BD290036484B /* HomeAreaRecommandTVC.swift in Sources */,

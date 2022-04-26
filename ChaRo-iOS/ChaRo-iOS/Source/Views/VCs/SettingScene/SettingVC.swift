@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 import Then
-import CoreMIDI
 import SafariServices
 import MessageUI
 import PhotosUI
@@ -337,7 +336,7 @@ extension SettingVC: UITableViewDataSource {
                 }
             case 5:
                 makeRequestAlert(title: "계정을 삭제하시겠습니까?", message: "회원 탈퇴시 계정이 모두 삭제됩니다.\n(단, 작성하신 글은 익명의 형태로 남아 사용자에게 보여집니다.)") { _ in
-                    // TODO: 회원탈퇴 서버 연결
+                    self.deleteAccount()
                 }
             default:
                 break
@@ -349,6 +348,28 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+}
+
+// MARK: - Network
+extension SettingVC {
+    
+    /// 회원 탈퇴
+    private func deleteAccount() {
+        DeleteAccountService.shared.deleteAccount { response in
+            switch(response) {
+            case .success:
+                self.presentToSignNC()
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                self.makeAlert(title: "회원 탈퇴 오류", message: "")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 }
 

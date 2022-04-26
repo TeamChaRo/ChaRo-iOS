@@ -76,4 +76,7 @@ struct Constants {
     
     /// 알림
     static let notificationListURL = baseURL + "/push/"
+    
+    /// 회원탈퇴
+    static let deleteAccountURL = baseURL + "/user/" + userEmail
 }
