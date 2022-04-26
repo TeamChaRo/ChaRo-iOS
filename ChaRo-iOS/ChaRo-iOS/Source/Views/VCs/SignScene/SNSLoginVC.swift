@@ -52,9 +52,9 @@ class SNSLoginVC: UIViewController {
         $0.backgroundColor = .black
         $0.setTitle("Apple로 로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 17)
         $0.setImage(UIImage(named: "appleLogo"), for: .normal)
-        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 180)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
@@ -65,9 +65,9 @@ class SNSLoginVC: UIViewController {
         $0.backgroundColor = .white
         $0.setTitle("Google 로그인", for: .normal)
         $0.setTitleColor(.mainBlack, for: .normal)
-        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 17)
         $0.setImage(UIImage(named: "googleLogo"), for: .normal)
-        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 180)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.borderColor = UIColor.gray30.cgColor
         $0.layer.borderWidth = 1
@@ -78,12 +78,12 @@ class SNSLoginVC: UIViewController {
     
     let kakaoLoginBtn = UIButton().then {
         $0.setImage(UIImage(named: "kakaoLogo"), for: .normal)
-        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 210)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 190)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.backgroundColor = UIColor(red: 254.0 / 255.0, green: 229.0 / 255.0, blue: 0.0, alpha: 1.0)
         $0.setTitle("카카오 로그인", for: .normal)
         $0.setTitleColor(.mainBlack, for: .normal)
-        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 17)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
         $0.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
@@ -94,7 +94,6 @@ class SNSLoginVC: UIViewController {
         UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isLogin)
         self.goToHomeVC()
     }
-    
     
     @objc func testLogin() {
         snsType = "A"
@@ -387,8 +386,8 @@ class SNSLoginVC: UIViewController {
         logoImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(273)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(221)
-            $0.height.equalTo(83)
+            $0.width.equalTo(211)
+            $0.height.equalTo(74)
         }
         
         logoLabel.snp.makeConstraints {

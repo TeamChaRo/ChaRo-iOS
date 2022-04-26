@@ -30,9 +30,10 @@ class LoginVC: UIViewController {
     //MARK: 생성주기함수
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraints()
-        setLoginButtonUI()
-        setNotificationCenter()
+        configureConstraints()
+        configureLoginButtonUI()
+        configureTextfieldUI()
+        configureNotificationCenter()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -43,13 +44,51 @@ class LoginVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    func setLoginButtonUI() {
+    func configureLoginButtonUI() {
         titleLabel.font = .notoSansMediumFont(ofSize: 17)
         
         loginButton.layer.cornerRadius = 8
         loginButton.tintColor = .mainBlue
         
         joinButton.setTitleColor(.gray30, for: .normal)
+    }
+    
+    func configureTextfieldUI() {
+        let height = idTextField.frame.height
+        
+        self.idTextField.layer.cornerRadius = 10
+        self.pwdTextField.layer.cornerRadius = 10
+        
+        self.idTextField.layer.borderWidth = 1.0
+        self.pwdTextField.layer.borderWidth = 1.0
+        
+        self.idTextField.layer.borderColor = UIColor.neomorfismBlueLine.cgColor
+        self.pwdTextField.layer.borderColor = UIColor.neomorfismBlueLine.cgColor
+        
+        self.idTextField.leftViewMode = .always
+        self.pwdTextField.leftViewMode = .always
+        
+        self.idTextField.rightViewMode = .always
+        self.pwdTextField.rightViewMode = .always
+        
+        let idContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: height))
+        let pwdContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: height))
+        let rightpaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 4, height: height))
+        
+        let idImageView = UIImageView(frame: CGRect(x: 5, y: 4, width: 40, height: 40))
+        let pwdImageView = UIImageView(frame: CGRect(x: 5, y: 4, width: 40, height: 40))
+        
+        idImageView.image = ImageLiterals.icId
+        pwdImageView.image = ImageLiterals.icPassword
+        
+        idContainerView.addSubview(idImageView)
+        pwdContainerView.addSubview(pwdImageView)
+        
+        idTextField.leftView = idContainerView
+        pwdTextField.leftView = pwdContainerView
+        
+//        idTextField.rightView = rightpaddingView
+//        pwdTextField.rightView = rightpaddingView
     }
     
     func loginAction() {
@@ -118,7 +157,7 @@ class LoginVC: UIViewController {
         self.view.endEditing(true)
     }
     
-    func setNotificationCenter() {
+    func configureNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -143,7 +182,7 @@ class LoginVC: UIViewController {
 }
 
 extension LoginVC {
-    func setConstraints() {
+    func configureConstraints() {
         if UIScreen.hasNotch {
             let factor = UIScreen.main.bounds.width / 375
             
