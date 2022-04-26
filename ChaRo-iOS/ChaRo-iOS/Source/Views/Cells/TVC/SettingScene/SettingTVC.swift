@@ -105,12 +105,12 @@ extension SettingTVC {
     
     @objc
     private func toggleSwitched(_ sender: UISwitch) {
-        settingDelegate?.switchAction(sender: self.toggle, section: self.getTableSectionIndexPath())
+        settingDelegate?.switchAction(sender: self.toggle)
     }
 }
 
 // MARK: - Protocol
 protocol SettingSwitchDelegate {
-    func switchAction(sender: UISwitch, section: Int)
+    func switchAction(sender: UISwitch)
 }
 

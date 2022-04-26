@@ -338,7 +338,6 @@ extension SettingVC: UITableViewDataSource {
             case 5:
                 makeRequestAlert(title: "계정을 삭제하시겠습니까?", message: "회원 탈퇴시 계정이 모두 삭제됩니다.\n(단, 작성하신 글은 익명의 형태로 남아 사용자에게 보여집니다.)") { _ in
                     // TODO: 회원탈퇴 서버 연결
-                    print("회원탈퇴")
                 }
             default:
                 break
@@ -362,12 +361,7 @@ extension SettingVC: MFMailComposeViewControllerDelegate {
 
 // MARK: - SettingSwitchDelegate
 extension SettingVC: SettingSwitchDelegate {
-    func switchAction(sender: UISwitch, section: Int) {
-        switch section {
-        case 0:
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-        default:
-            break
-        }
+    func switchAction(sender: UISwitch) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
 }
