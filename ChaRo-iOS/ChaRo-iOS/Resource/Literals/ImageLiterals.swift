@@ -48,6 +48,7 @@ enum ImageLiterals {
     static var icMapWaypoint: UIImage { .load(name: "icMapWaypoint") }
     static var icMypageMore: UIImage { .load(name: "icMypageMore") }
     static var icNextWhite: UIImage { .load(name: "icNextWhite") }
+    static var icNoticeDown: UIImage { .load(name: "noticeDown") }
     static var icProfile: UIImage { .load(name: "icProfile") }
     static var icPreviousWhite: UIImage { .load(name: "icPreviousWhite") }
     static var icRouteEnd: UIImage { .load(name: "icRouteEnd") }
