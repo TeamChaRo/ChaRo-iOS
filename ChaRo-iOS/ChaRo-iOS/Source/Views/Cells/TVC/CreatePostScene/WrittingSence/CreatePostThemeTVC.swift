@@ -42,15 +42,15 @@ final class CreatePostThemeTVC: UITableViewCell {
     private let courseTitleView = PostCellTitleView(title: "어느 테마의 드라이브였나요?", subTitle: "드라이브 테마를 한 개 이상 선택해주세요.")
 
     private let themeFirstButton = UIButton().then {
-        $0.setImage(UIImage(named: "unselect"), for: .normal)
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
     }
     
     private let themeSecondButton = UIButton().then {
-        $0.setImage(UIImage(named: "unselect"), for: .normal)
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
     }
     
     private let themeThirdButton = UIButton().then {
-        $0.setImage(UIImage(named: "unselect"), for: .normal)
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
     }
     
     private let themeFirstField = UITextField().then {

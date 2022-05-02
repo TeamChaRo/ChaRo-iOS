@@ -47,7 +47,7 @@ final class CreatePostVC: UIViewController {
     }
     
     private let xButton = UIButton().then {
-        $0.setBackgroundImage(UIImage(named: "close"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icClose, for: .normal)
         $0.imageView?.contentMode = .scaleAspectFill
         $0.addTarget(self, action: #selector(xButtonDidTap), for: .touchUpInside)
     }

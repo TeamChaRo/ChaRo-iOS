@@ -59,13 +59,13 @@ final class CreatePostCourseTVC: UITableViewCell {
     
     private let cityButton = UIButton().then {
         $0.tag = 0
-        $0.setImage(UIImage(named: "unselect"), for: .normal)
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
         $0.imageView?.contentMode = .scaleAspectFill
     }
     
     private let regionButton = UIButton().then {
         $0.tag = 1
-        $0.setImage(UIImage(named: "unselect"), for: .normal)
+        $0.setImage(ImageLiterals.icThemeSelected, for: .normal)
         $0.imageView?.contentMode = .scaleAspectFit
     }
     
@@ -148,13 +148,13 @@ extension CreatePostCourseTVC {
             self.city = self.filterList[currentIndex]
             self.cityField.text = self.filterList[currentIndex]
             self.cityField.textColor = .mainBlue
-            self.cityButton.setImage(UIImage(named: "select"), for: .normal)
+            self.cityButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
             self.wasSelected()
         case 1:
             self.region = self.filterList[currentIndex]
             self.regionField.text = self.filterList[currentIndex]
             self.regionField.textColor = .mainBlue
-            self.regionButton.setImage(UIImage(named: "select"), for: .normal)
+            self.regionButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
         default:
             debugPrint("done error")
         }
@@ -168,7 +168,7 @@ extension CreatePostCourseTVC {
             self.filterList[1] = "" // 뒤에 애 초기화
             self.regionField.text = "시 단위"
             self.regionField.textColor = .gray40
-            self.regionButton.setImage(UIImage(named: "unselect"), for: .normal)
+            self.regionButton.setImage(ImageLiterals.icUnselect, for: .normal)
         }
     }
     
