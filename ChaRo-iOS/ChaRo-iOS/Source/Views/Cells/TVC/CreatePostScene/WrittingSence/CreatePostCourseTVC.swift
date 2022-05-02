@@ -65,7 +65,7 @@ final class CreatePostCourseTVC: UITableViewCell {
     
     private let regionButton = UIButton().then {
         $0.tag = 1
-        $0.setImage(ImageLiterals.icThemeSelected, for: .normal)
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
         $0.imageView?.contentMode = .scaleAspectFit
     }
     
@@ -115,8 +115,8 @@ final class CreatePostCourseTVC: UITableViewCell {
     private func setTextFieldAction() {
         self.cityField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         self.regionField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
-        self.bringSubviewToFront(cityField)
-        self.bringSubviewToFront(regionField)
+        self.contentView.bringSubviewToFront(cityField)
+        self.contentView.bringSubviewToFront(regionField)
     }
 }
 
@@ -247,7 +247,7 @@ extension CreatePostCourseTVC: UIPickerViewDataSource {
 extension CreatePostCourseTVC {
     
     private func configureLayout() {
-        self.addSubviews([
+        self.contentView.addSubviews([
             self.themeTitleView,
             self.cityField,
             self.regionField,
