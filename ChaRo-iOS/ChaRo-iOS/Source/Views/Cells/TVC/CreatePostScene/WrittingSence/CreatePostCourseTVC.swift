@@ -78,13 +78,17 @@ final class CreatePostCourseTVC: UITableViewCell {
         $0.tag = 1
         $0.text = "시 단위"
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureLayout()
         self.initTextField()
         self.initPickerView()
         self.setTextFieldAction()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -187,7 +191,7 @@ extension CreatePostCourseTVC {
         if index == 0 {
             self.currentList = self.filterData.state
         } else if index == 1 && self.filterList[0] != "" {
-            self.currentList = self.filterData.cityDict[filterList[0]]!
+            self.currentList = self.filterData.cityDict[filterList[0]] ?? []
         } else { // 도 선택 없이 시를 눌렀을 때
             self.endEditing(true)
         }
