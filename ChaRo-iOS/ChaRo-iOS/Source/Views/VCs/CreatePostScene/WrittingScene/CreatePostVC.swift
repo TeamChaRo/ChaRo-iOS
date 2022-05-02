@@ -107,7 +107,7 @@ extension CreatePostVC {
     private func registerXibs() {
       self.tableView.registerCustomXib(xibName: CreatePostTitleTVC.className)
       self.tableView.registerCustomXib(xibName: CreatePostPhotoTVC.className)
-      self.tableView.registerCustomXib(xibName: CreatePostCourseTVC.className)
+      self.tableView.register(cell: CreatePostCourseTVC.self)
       self.tableView.registerCustomXib(xibName: CreatePostThemeTVC.className)
       self.tableView.registerCustomXib(xibName: CreatePostParkingWarningTVC.className)
       self.tableView.registerCustomXib(xibName: CreatePostDriveCourseTVC.className)
