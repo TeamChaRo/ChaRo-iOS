@@ -263,29 +263,29 @@ extension CreatePostCourseTVC {
         self.cityButton.snp.makeConstraints {
             $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(self.snp.leading).offset(20)
-            $0.width.equalTo(buttonWidth)
             $0.height.equalTo(cityButton.snp.width).multipliedBy(heightRatio)
+            $0.width.equalTo(buttonWidth)
         }
         
         self.regionButton.snp.makeConstraints {
             $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(cityButton.snp.trailing).offset(6)
-            $0.width.equalTo(buttonWidth)
             $0.height.equalTo(regionButton.snp.width).multipliedBy(heightRatio)
+            $0.width.equalTo(buttonWidth)
         }
         
         self.cityField.snp.makeConstraints {
-            $0.height.equalTo(21)
             $0.leading.equalTo(cityButton.snp.leading).offset(12)
-            $0.width.equalTo(textWidth)
             $0.centerY.equalTo(cityButton.snp.centerY)
+            $0.height.equalTo(21)
+            $0.width.equalTo(textWidth)
         }
         
         self.regionField.snp.makeConstraints {
-            $0.height.equalTo(21)
             $0.leading.equalTo(regionButton.snp.leading).offset(12)
-            $0.width.equalTo(textWidth)
             $0.centerY.equalTo(regionButton.snp.centerY)
+            $0.height.equalTo(21)
+            $0.width.equalTo(textWidth)
         }
     }
 }

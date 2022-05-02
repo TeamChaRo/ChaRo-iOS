@@ -142,8 +142,8 @@ extension CreatePostTitleTVC {
         
         self.titleTextView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top).offset(23)
-            $0.left.equalTo(self.snp.left).offset(20)
-            $0.right.equalTo(self.snp.right).inset(20)
+            $0.leading.equalTo(self.snp.leading).offset(20)
+            $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.bottom.equalTo(self.snp.bottom).inset(24)
             $0.height.equalTo(42)
         }
