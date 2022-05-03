@@ -99,7 +99,7 @@ class SearchResultVC: UIViewController {
     @objc func presentToCreatePostVC() {
         let tabbar = presentingViewController as! TabbarVC
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
-        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.className)
         let createTab = UINavigationController(rootViewController: createVC)
         createTab.modalPresentationStyle = .fullScreen
         dismiss(animated: false) {
