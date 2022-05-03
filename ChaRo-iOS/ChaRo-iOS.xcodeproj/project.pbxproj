@@ -140,6 +140,8 @@
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
 		3CC6787927E3318200F8F9EE /* MapGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6787827E3318200F8F9EE /* MapGuideView.swift */; };
 		3CCBB32726E2201800088B82 /* SearchKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBB32626E2201800088B82 /* SearchKeywordViewModel.swift */; };
+		3CCBECF828214B22004F0F27 /* CourceRecommendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBECF728214B22004F0F27 /* CourceRecommendVC.swift */; };
+		3CCBECFB28214C01004F0F27 /* CourceShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBECFA28214C01004F0F27 /* CourceShortcutView.swift */; };
 		3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */; };
 		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
 		3CEC010C269DF4E400E9332C /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC010B269DF4E400E9332C /* Date+.swift */; };
@@ -387,6 +389,8 @@
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		3CC6787827E3318200F8F9EE /* MapGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGuideView.swift; sourceTree = "<group>"; };
 		3CCBB32626E2201800088B82 /* SearchKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordViewModel.swift; sourceTree = "<group>"; };
+		3CCBECF728214B22004F0F27 /* CourceRecommendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourceRecommendVC.swift; sourceTree = "<group>"; };
+		3CCBECFA28214C01004F0F27 /* CourceShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourceShortcutView.swift; sourceTree = "<group>"; };
 		3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordDataMadel.swift; sourceTree = "<group>"; };
 		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
 		3CEC010B269DF4E400E9332C /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -854,6 +858,7 @@
 		3C879BE9268B13C300C41BB8 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				3CCBECF428214A1F004F0F27 /* BannerScene */,
 				36B69F7E2775DC0D00FEEAAE /* FollowScene */,
 				36E445AE277CA102008E31BE /* SettingScene */,
 				3CAE51A826C2442E00DB8A41 /* CreatePostScene */,
@@ -1347,6 +1352,23 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		3CCBECF428214A1F004F0F27 /* BannerScene */ = {
+			isa = PBXGroup;
+			children = (
+				3CCBECF928214B53004F0F27 /* Component */,
+				3CCBECF728214B22004F0F27 /* CourceRecommendVC.swift */,
+			);
+			path = BannerScene;
+			sourceTree = "<group>";
+		};
+		3CCBECF928214B53004F0F27 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				3CCBECFA28214C01004F0F27 /* CourceShortcutView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		5871AE65ECA530CBED32CC7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1618,6 +1640,7 @@
 				3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */,
 				36CEE5B6269DF9A900974EFF /* DetailModel.swift in Sources */,
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
+				3CCBECF828214B22004F0F27 /* CourceRecommendVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
 				3C597C48280EA0CA007153B0 /* UINavigationController+.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
@@ -1715,6 +1738,7 @@
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
 				70D63E38269646D30036484B /* ThemePostAllTVC.swift in Sources */,
 				7062C8572710C99400C1CD2E /* EmailJoinService.swift in Sources */,
+				3CCBECFB28214C01004F0F27 /* CourceShortcutView.swift in Sources */,
 				F468C0FA269E1C410019B1B3 /* CreatePostService.swift in Sources */,
 				7062C845270C63F500C1CD2E /* NextButton.swift in Sources */,
 				7084948226A23AB7001B3C2B /* CollectionViewFooter.swift in Sources */,
