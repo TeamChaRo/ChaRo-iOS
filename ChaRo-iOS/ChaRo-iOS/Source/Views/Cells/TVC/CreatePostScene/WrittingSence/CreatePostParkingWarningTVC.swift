@@ -6,11 +6,14 @@
 //
 
 import UIKit
+
 import SnapKit
+import Then
 
-class CreatePostParkingWarningTVC: UITableViewCell {
+final class CreatePostParkingWarningTVC: UITableViewCell {
 
-    static let identifier: String = "CreatePostParkingWarningTVC"
+    // MARK: Properties
+
     private let limitTextCount: Int = 23
     private var isWarning: Bool = false {
         didSet {
@@ -33,7 +36,7 @@ class CreatePostParkingWarningTVC: UITableViewCell {
             _ = setWraningData?(self.warningValue)
         }
     }
-    public var availableParking: Bool = false {
+    var availableParking: Bool = false {
         didSet {
             _ = setParkingInfo?(self.availableParking)
         }
@@ -41,13 +44,13 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     private var parkingSelectFlag: Bool = false
     
     // 데이터 전달 closure
-    public var setParkingInfo: ((Bool) -> Void)?
-    public var setWraningData: (([Bool]) -> Void)?
-    public var setParkingDesc: ((String) -> Void)?
+    var setParkingInfo: ((Bool) -> Void)?
+    var setWraningData: (([Bool]) -> Void)?
+    var setParkingDesc: ((String) -> Void)?
     
     // cell height 동적으로 계산
-    let buttonHeightRatio: CGFloat = 42/164
-    let buttonWidth: CGFloat = (UIScreen.getDeviceWidth() - 47)/2
+    private let buttonHeightRatio: CGFloat = 42/164
+    private let buttonWidth: CGFloat = (UIScreen.getDeviceWidth() - 47)/2
     func setDynamicHeight() -> CGFloat {
         // 주차공간 타이틀 + 인셋 + 버튼높이 + 인셋 + 텍스트뷰 높이 + 인셋 + 주의사항 타이틀 + 인셋 + 버튼1 + 인셋+ 버튼2 + 바텀여백
         // 22 + 12 + 동적 + 8 + 42 + 33 + 38 + 12 + 동적 + 8 + 동적 + 33
@@ -59,104 +62,85 @@ class CreatePostParkingWarningTVC: UITableViewCell {
         
         return fixedHeight+dynamicHeight
     }
-    
-    // MARK: UI Components
+
+
+    // MARK: UI
+
     private let parkingTitleView = PostCellTitleView(title: "주차 공간은 어땠나요?")
     private let warningTitleView = PostCellTitleView(title: "드라이브 시 주의해야 할 사항이 있으셨나요?", subTitle: "고려해야 할 사항이 있다면 선택해주세요. 선택 사항입니다.")
+
+    private let parkingExistButton = UIButton().then {
+        $0.tag = 4
+        $0.setTitle("있음", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
+        $0.titleLabel?.textAlignment = .center
+        $0.setEmptyTitleColor()
+        $0.setGray20Border(21)
+    }
     
+    private let parkingNonExistButton = UIButton().then {
+        $0.tag = 5
+        $0.setTitle("없음", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
+        $0.titleLabel?.textAlignment = .center
+        $0.setEmptyTitleColor()
+        $0.setGray20Border(21)
+    }
     
+    private let parkingDescTextField = UITextField().then {
+        $0.placeholder = "주차공간에 대해 적어주세요. 예) 주차장이 협소해요."
+        $0.addLeftPadding(16)
+        $0.textColor = .gray50
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.setGray20Border(12)
+        $0.clearButtonMode = .whileEditing
+    }
     
-    private let parkingExistButton: UIButton = {
-        let button = UIButton()
-        button.tag = 4
-        button.setTitle("있음", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        button.titleLabel?.textAlignment = .center
-        button.setEmptyTitleColor()
-        button.setGray20Border(21)
-        return button
-    }()
+    private let warningLabel = UILabel().then {
+        $0.isHidden = true
+    }
     
-    private let parkingNonExistButton: UIButton = {
-        let button = UIButton()
-        button.tag = 5
-        button.setTitle("없음", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        button.titleLabel?.textAlignment = .center
-        button.setEmptyTitleColor()
-        button.setGray20Border(21)
-        return button
-    }()
+    private let highwayButton = UIButton().then {
+        $0.tag = 0
+        $0.setTitle("고속도로", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
+        $0.setEmptyTitleColor(colorNum: 40)
+        $0.setGray20Border(21)
+    }
     
-    private let parkingDescTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "주차공간에 대해 적어주세요. 예) 주차장이 협소해요."
-        textField.addLeftPadding(16)
-        textField.textColor = .gray50
-        textField.font = .notoSansRegularFont(ofSize: 14)
-        textField.setGray20Border(12)
-        textField.clearButtonMode = .whileEditing
-        return textField
-    }()
+    private let mountainButton = UIButton().then {
+        $0.tag = 1
+        $0.setTitle("산길포함", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
+        $0.setEmptyTitleColor(colorNum: 40)
+        $0.setGray20Border(21)
+    }
     
-    private let warningLabel: UILabel = {
-        let label = UILabel()
-        label.text = "공백 포함 23자 이내로 작성해주세요."
-        label.font = .notoSansRegularFont(ofSize: 11)
-        label.textColor = .mainOrange
-        label.isHidden = true
-        return label
-    }()
+    private let beginnerButton = UIButton().then {
+        $0.tag = 2
+        $0.setTitle("초보힘듦", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
+        $0.setEmptyTitleColor(colorNum: 40)
+        $0.setGray20Border(21)
+    }
     
-    private let highwayButton: UIButton = {
-        let button = UIButton()
-        button.tag = 0
-        button.setTitle("고속도로", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        button.setEmptyTitleColor(colorNum: 40)
-        button.setGray20Border(21)
-        return button
-    }()
+    private let peopleButton = UIButton().then {
+        $0.tag = 3
+        $0.setTitle("사람많음", for: .normal)
+        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
+        $0.setEmptyTitleColor(colorNum: 40)
+        $0.setGray20Border(21)
+    }
     
-    private let mountainButton: UIButton = {
-        let button = UIButton()
-        button.tag = 1
-        button.setTitle("산길포함", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        button.setEmptyTitleColor(colorNum: 40)
-        button.setGray20Border(21)
-        return button
-    }()
-    
-    private let beginnerButton: UIButton = {
-        let button = UIButton()
-        button.tag = 2
-        button.setTitle("초보힘듦", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        button.setEmptyTitleColor(colorNum: 40)
-        button.setGray20Border(21)
-        return button
-    }()
-    
-    private let peopleButton: UIButton = {
-        let button = UIButton()
-        button.tag = 3
-        button.setTitle("사람많음", for: .normal)
-        button.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        button.setEmptyTitleColor(colorNum: 40)
-        button.setGray20Border(21)
-        return button
-    }()
-    
-    func setTextFieldDelegate() {
+    private func configureTextFieldDelegate() {
         parkingDescTextField.delegate = self
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        configureLayout()
-        setButtonActions()
-        setTextFieldDelegate()
+        self.configureLayout()
+        self.addButtonActions()
+        self.configureTextFieldDelegate()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -166,64 +150,69 @@ class CreatePostParkingWarningTVC: UITableViewCell {
     
 }
 
+
+// MARK: - UITextFieldDelegate
+
 extension CreatePostParkingWarningTVC: UITextFieldDelegate {
+
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let textCount = parkingDescTextField.text!.count
         
-        if textCount <= limitTextCount {
-            parkingContent = parkingDescTextField.text!
-            isWarning = isWarning ? false : isWarning
+        if textCount <= self.limitTextCount {
+            self.parkingContent = parkingDescTextField.text!
+            self.isWarning.toggle()
         } else {
-            parkingDescTextField.text = parkingContent
-            isWarning = !isWarning ? true : isWarning
+            self.parkingDescTextField.text = parkingContent
+            self.isWarning.toggle()
         }
     }
 }
 
+
+// MARK: - Button Actions
+
 extension CreatePostParkingWarningTVC {
-    
-    //MARK: - Button Actions
-    func setButtonActions() {
-        parkingExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
-        parkingNonExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
-        highwayButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
-        mountainButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
-        beginnerButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
-        peopleButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+
+    func addButtonActions() {
+        self.parkingExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        self.parkingNonExistButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        self.highwayButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        self.mountainButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        self.beginnerButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
+        self.peopleButton.addTarget(self, action: #selector(ButtonDidTap), for: .touchUpInside)
     }
     
-    @objc
-    func ButtonDidTap(_ sender: UIButton) {
-        changeButtonStatus(tag: sender.tag)
+    @objc private func ButtonDidTap(_ sender: UIButton) {
+        self.changeButtonStatus(tag: sender.tag)
     }
     
-    func changeButtonStatus(tag: Int) {
+    private func changeButtonStatus(tag: Int) {
         switch tag {
         case 0:
-            setWarningList(highwayButton, index: 0)
+            self.configureWarningList(highwayButton, index: 0)
         case 1:
-            setWarningList(mountainButton, index: 1)
+            self.configureWarningList(mountainButton, index: 1)
         case 2:
-            setWarningList(beginnerButton, index: 2)
+            self.configureWarningList(beginnerButton, index: 2)
         case 3:
-            setWarningList(peopleButton, index: 3)
+            self.configureWarningList(peopleButton, index: 3)
         case 4:
-            if !availableParking {
-                availableParking = true
-                setTapParkingButton()
+            if self.availableParking == false {
+                self.availableParking.toggle()
+                self.updateParkingButtonState()
             } else {
                 initParkingButton()
             }
         case 5:
-            if availableParking {
-                availableParking = false
-                setTapParkingButton()
+            if self.availableParking == true {
+                self.availableParking.toggle()
+                self.updateParkingButtonState()
             } else {
                 if parkingSelectFlag {
-                    initParkingButton()
+                    self.initParkingButton()
                 } else { // 처음부터 없음 눌렀을 때
-                    availableParking = false
-                    setTapParkingButton()
+                    self.availableParking = false
+                    self.updateParkingButtonState()
                 }
             }
         default:
@@ -231,52 +220,53 @@ extension CreatePostParkingWarningTVC {
         }
         
         if tag > 3 { // parking butoon select
-            parkingSelectFlag = true
+            self.parkingSelectFlag = true
         }
     }
     
-    func setTapParkingButton() {
-        if availableParking {
-            parkingExistButton.setMainBlueBorder(8)
-            parkingExistButton.setBenefitTitleColor()
-            parkingExistButton.backgroundColor = .blueSelect
+    private func updateParkingButtonState() {
+        if self.availableParking == true {
+            self.parkingExistButton.setMainBlueBorder(8)
+            self.parkingExistButton.setBenefitTitleColor()
+            self.parkingExistButton.backgroundColor = .blueSelect
             
-            parkingNonExistButton.setGray20Border(8)
-            parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
-            parkingNonExistButton.backgroundColor = .clear
+            self.parkingNonExistButton.setGray20Border(8)
+            self.parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
+            self.parkingNonExistButton.backgroundColor = .clear
         } else {
-            parkingNonExistButton.setMainBlueBorder(8)
-            parkingNonExistButton.setBenefitTitleColor()
-            parkingNonExistButton.backgroundColor = .blueSelect
+            self.parkingNonExistButton.setMainBlueBorder(8)
+            self.parkingNonExistButton.setBenefitTitleColor()
+            self.parkingNonExistButton.backgroundColor = .blueSelect
             
-            parkingExistButton.setGray20Border(8)
-            parkingExistButton.setEmptyTitleColor(colorNum: 40)
-            parkingExistButton.backgroundColor = .clear
+            self.parkingExistButton.setGray20Border(8)
+            self.parkingExistButton.setEmptyTitleColor(colorNum: 40)
+            self.parkingExistButton.backgroundColor = .clear
         }
     }
     
-    func initParkingButton() {
-        parkingExistButton.setGray20Border(8)
-        parkingExistButton.setEmptyTitleColor(colorNum: 40)
-        parkingExistButton.backgroundColor = .clear
-        parkingNonExistButton.setGray20Border(8)
-        parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
-        parkingNonExistButton.backgroundColor = .clear
+    private func initParkingButton() {
+        self.parkingExistButton.setGray20Border(8)
+        self.parkingExistButton.setEmptyTitleColor(colorNum: 40)
+        self.parkingExistButton.backgroundColor = .clear
+
+        self.parkingNonExistButton.setGray20Border(8)
+        self.parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
+        self.parkingNonExistButton.backgroundColor = .clear
     }
     
-    func setWarningList(_ button: UIButton, index: Int) {
-        if warningValue[index] { // true 일 때
-            warningValue[index] = false
+    private func configureWarningList(_ button: UIButton, index: Int) {
+        if self.warningValue[index] { // true 일 때
+            self.warningValue[index] = false
         } else {
-            warningValue[index] = true
+            self.warningValue[index] = true
         }
         
-        setWarningButtonUI(button, warningValue[index])
+        self.updateWarningButtonUI(button, value: self.warningValue[index])
     }
     
-    func setWarningButtonUI(_ button: UIButton,_ value: Bool) {
+    private func updateWarningButtonUI(_ button: UIButton, value: Bool) {
         // warning value에 맞춰서 색상 업데이트
-        if value {
+        if value == true {
             button.setMainBlueBorder(21)
             button.setBenefitTitleColor()
             button.backgroundColor = .blueSelect
@@ -286,27 +276,38 @@ extension CreatePostParkingWarningTVC {
             button.backgroundColor = .clear
         }
     }
+}
+
     
-    
-    //MARK: - UI Layout
-    func configureLayout() {
-        addSubviews([parkingTitleView, parkingExistButton, parkingNonExistButton, parkingDescTextField, warningLabel])
+//MARK: - Layout
+
+extension CreatePostParkingWarningTVC {
+
+    private func configureLayout() {
+        // 주차정보
+        self.addSubviews([
+            self.parkingTitleView,
+            self.parkingExistButton,
+            self.parkingNonExistButton,
+            self.parkingDescTextField,
+            self.warningLabel
+        ])
         
-        parkingTitleView.snp.makeConstraints{
+        self.parkingTitleView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.height.equalTo(22)
         }
         
-        parkingExistButton.snp.makeConstraints{
+        self.parkingExistButton.snp.makeConstraints {
             $0.top.equalTo(parkingTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(parkingExistButton.snp.width).multipliedBy(buttonHeightRatio)
         }
         
-        parkingNonExistButton.snp.makeConstraints{
+        self.parkingNonExistButton.snp.makeConstraints {
             $0.top.equalTo(parkingTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(parkingExistButton.snp.trailing).offset(7)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
@@ -314,35 +315,43 @@ extension CreatePostParkingWarningTVC {
             $0.height.equalTo(parkingExistButton.snp.width).multipliedBy(buttonHeightRatio)
         }
         
-        parkingDescTextField.snp.makeConstraints{
+        self.parkingDescTextField.snp.makeConstraints {
             $0.top.equalTo(parkingExistButton.snp.bottom).offset(8)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.height.equalTo(42) // 텍스트필드는 height 고정
         }
         
-        warningLabel.snp.makeConstraints{
+        self.warningLabel.snp.makeConstraints {
             $0.top.equalTo(parkingDescTextField.snp.bottom).offset(4)
             $0.leading.equalTo(20)
         }
+
+
+        // 드라이브 특이사항
+        self.addSubviews([
+            self.warningTitleView,
+            self.highwayButton,
+            self.mountainButton,
+            self.beginnerButton,
+            self.peopleButton
+        ])
         
-        addSubviews([warningTitleView, highwayButton, mountainButton, beginnerButton, peopleButton])
-        
-        warningTitleView.snp.makeConstraints{
+        self.warningTitleView.snp.makeConstraints {
             $0.top.equalTo(parkingDescTextField.snp.bottom).offset(33)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.height.equalTo(38)
         }
         
-        highwayButton.snp.makeConstraints{
+        self.highwayButton.snp.makeConstraints {
             $0.top.equalTo(warningTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.width.equalTo(buttonWidth)
             $0.height.equalTo(parkingExistButton.snp.width).multipliedBy(buttonHeightRatio)
         }
         
-        mountainButton.snp.makeConstraints{
+        self.mountainButton.snp.makeConstraints {
             $0.top.equalTo(warningTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(highwayButton.snp.trailing).offset(7)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
@@ -350,7 +359,7 @@ extension CreatePostParkingWarningTVC {
             $0.height.equalTo(parkingExistButton.snp.width).multipliedBy(buttonHeightRatio)
         }
         
-        beginnerButton.snp.makeConstraints{
+        self.beginnerButton.snp.makeConstraints {
             $0.top.equalTo(highwayButton.snp.bottom).offset(8)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.width.equalTo(buttonWidth)
@@ -358,7 +367,7 @@ extension CreatePostParkingWarningTVC {
             $0.bottom.equalTo(self.snp.bottom).inset(33)
         }
 
-        peopleButton.snp.makeConstraints{
+        self.peopleButton.snp.makeConstraints {
             $0.top.equalTo(mountainButton.snp.bottom).offset(8)
             $0.leading.equalTo(beginnerButton.snp.trailing).offset(7)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
