@@ -62,7 +62,7 @@ class TabbarVC: UITabBarController {
     internal override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if item.title == "작성하기" {
             let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
-            
+
             let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.className)
             let createTab = UINavigationController(rootViewController: createVC)
             
@@ -89,7 +89,7 @@ class TabbarVC: UITabBarController {
         
         
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
-        
+
         let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.className)
         let createTab = UINavigationController(rootViewController: createVC)
         
