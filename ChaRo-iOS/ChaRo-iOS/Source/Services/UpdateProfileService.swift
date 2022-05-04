@@ -60,8 +60,7 @@ struct UpdateProfileService {
                 let networkResult = self.judgeStatus(by: statusCode, value!)
                 print(statusCode)
                 completion(networkResult)
-            case .failure: completion(.pathErr)
-            }
+            case .failure: completion(.pathErr) }
         }
     }
     

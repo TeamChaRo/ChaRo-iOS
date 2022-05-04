@@ -163,8 +163,6 @@ class JoinProfileView: UIView, UITextFieldDelegate {
                 if let success = success as? Bool {
                     if success {
                         self.makeNicknameViewBlue(text: "사용 가능한 닉네임입니다. ")
-                    } else {
-                        self.makeNicknameViewRed(text: "중복되는 닉네임이 존재합니다.")
                     }
                 }
             case .requestErr(let message) :
@@ -175,6 +173,7 @@ class JoinProfileView: UIView, UITextFieldDelegate {
                 print("serverERR")
             case .networkFail:
                 print("networkFail")
+                self.makeNicknameViewRed(text: "중복되는 닉네임이 존재합니다.")
             }
         }
     }

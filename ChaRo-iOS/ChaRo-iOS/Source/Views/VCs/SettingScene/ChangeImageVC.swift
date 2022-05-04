@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChangeImageVC: UIViewController, UITextFieldDelegate {
+class ChangeImageVC: UIViewController {
     
     //MARK: - Properties
     static let identifier = "ChangeImageVC"
@@ -136,8 +136,7 @@ class ChangeImageVC: UIViewController, UITextFieldDelegate {
             case .serverErr:
                 print("serverERR")
             case .networkFail:
-                print("networkFail")
-            }
+                print("networkFail") }
         }
     }
     
@@ -163,34 +162,6 @@ class ChangeImageVC: UIViewController, UITextFieldDelegate {
                 print("networkFail")
             }
             
-        }
-    }
-    
-    //MARK: - TextField Delegate 함수
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let nickname: String = textField.text ?? ""
-        if nickname == "" {
-            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
-        } else if nickname.count > 5 {
-            makeNicknameViewRed(text: "5자 이내로 작성해주세요.")
-        } else if !nickname.isOnlyHanguel() {
-            makeNicknameViewRed(text: "한글만 사용해주세요.")
-        } else {
-            self.IsDuplicatedNickname(nickname: nickname)
-        }
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        let nickname = textField.text ?? ""
-        if nickname == "" {
-            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        let nickname = textField.text ?? ""
-        if nickname == "" {
-            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
         }
     }
     
@@ -261,4 +232,34 @@ class ChangeImageVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+}
+
+extension ChangeImageVC: UITextFieldDelegate {
+    //MARK: - TextField Delegate 함수
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let nickname: String = textField.text ?? ""
+        if nickname == "" {
+            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
+        } else if nickname.count > 5 {
+            makeNicknameViewRed(text: "5자 이내로 작성해주세요.")
+        } else if !nickname.isOnlyHanguel() {
+            makeNicknameViewRed(text: "한글만 사용해주세요.")
+        } else {
+            self.IsDuplicatedNickname(nickname: nickname)
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let nickname = textField.text ?? ""
+        if nickname == "" {
+            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let nickname = textField.text ?? ""
+        if nickname == "" {
+            makeNicknameViewRed(text: "닉네임을 작성해주세요.")
+        }
+    }
 }

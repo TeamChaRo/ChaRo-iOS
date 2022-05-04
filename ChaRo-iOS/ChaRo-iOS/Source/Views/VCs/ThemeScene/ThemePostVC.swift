@@ -156,7 +156,6 @@ class ThemePostVC: UIViewController {
                     switch(response)
                     {
                     case .success(let driveData):
-                        print(driveData)
                         if let object = driveData as? Drive {
                             self.cellCount = object.drive.count
                             self.selectedDriveList = object.drive
