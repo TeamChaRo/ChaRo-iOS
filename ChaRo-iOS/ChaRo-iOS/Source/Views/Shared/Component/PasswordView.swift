@@ -8,7 +8,7 @@
 import UIKit
 
 class PasswordView: UIView, UITextFieldDelegate {
-
+    
     var isFirstPassed = false
     var isSecondPassed = false
     
@@ -38,7 +38,7 @@ class PasswordView: UIView, UITextFieldDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     init(title: String, subTitle: String) {
         super.init(frame: .zero)
         titleLabel.text = title
@@ -111,14 +111,19 @@ class PasswordView: UIView, UITextFieldDelegate {
         
         
         else {
-            if textField.text == firstTextField.text {
-                isSecondPassed = true
-                textField.setBlueBorderWithText()
-                setLabelBlueWithText(text: "비밀번호가 일치합니다.")
+            if validpassword(password: textField.text!) {
+                if textField.text == firstTextField.text {
+                    isSecondPassed = true
+                    textField.setBlueBorderWithText()
+                    setLabelBlueWithText(text: "비밀번호가 일치합니다.")
+                } else {
+                    isSecondPassed = false
+                    textField.setOrangeBorderWithText()
+                    setLabelOrangeWithText(text: "비밀번호가 일치하지 않습니다.")
+                }
             } else {
                 isSecondPassed = false
-                textField.setOrangeBorderWithText()
-                setLabelOrangeWithText(text: "비밀번호가 일치하지 않습니다.")
+                setLabelOrangeWithText(text: "비밀번호를 입력해주세요.")
             }
         }
         
@@ -137,14 +142,14 @@ class PasswordView: UIView, UITextFieldDelegate {
         }
     }
     
-
+    
     func validpassword(password: String) -> Bool {
         if password.count >= 5 && password.count < 15 {
             return true
         } else {
             return false
         }
-
+        
     }
     
     func setLabelBlueWithText(text: String) {
@@ -156,5 +161,5 @@ class PasswordView: UIView, UITextFieldDelegate {
         statusLabel.text = text
         statusLabel.textColor = .mainOrange
     }
-
+    
 }

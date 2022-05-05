@@ -295,6 +295,14 @@ class JoinVC: UIViewController {
             picker.delegate = self
             self.present(picker, animated: true)
         }
+        
+        contractView.emailDocumentPresentClosure = { safariView in
+            self.present(safariView, animated: true, completion: nil)
+        }
+        
+        contractView.pushDocumentPresentClosure = { safariView in
+            self.present(safariView, animated: true, completion: nil)
+        }
     }
     
     

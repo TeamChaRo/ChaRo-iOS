@@ -64,10 +64,10 @@ struct SocialLoginService {
         
         switch statusCode {
         
-        case 200, 401:
+        case 200, 401, 404:
             return .success(decodedData.success)
             
-        case 400:
+        case 400...499:
             print(decodedData.msg)
             return .requestErr(decodedData.msg)
             
