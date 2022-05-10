@@ -15,8 +15,8 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     let emailInputView = JoinInputView(title: "임시 비밀번호 발급",
                                        subTitle: "가입하신 이메일 주소로 임시 비밀번호가 발급됩니다. 로그인 후 꼭 비밀번호를 변경해주세요.",
                                        placeholder: "이메일 아이디를 입력해주세요")
-    let nextButton = NextButton(isSticky: false, isTheLast: false)
-    let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
+    let nextButton = NextButton(isSticky: false, isTheLast: true)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
     var stickyView: UIView?
     
     var navigationView = UIView().then {
@@ -42,6 +42,7 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         configureDelegate()
+        configureClosure()
         configureUI()
         configureStickyView()
     }
@@ -49,6 +50,16 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     //MARK: - configure 함수
     private func configureDelegate() {
         emailInputView.inputTextField?.delegate = self
+    }
+    
+    private func configureClosure() {
+        nextButton.nextPageClosure = {
+            print("여기서 통신요청")
+        }
+        
+        stickyNextButton.nextPageClosure = {
+            print("여기서 통신요청")
+        }
     }
     
     private func configureUI() {
@@ -61,7 +72,7 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         
         emailInputView.snp.makeConstraints {
             $0.top.equalTo(navigationView.snp.bottom).offset(23)
-            $0.height.equalTo(117)
+            $0.height.equalTo(200)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
@@ -127,8 +138,6 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         }
         
         emailInputView.inputTextField!.inputAccessoryView = stickyView
-        
-        
     }
     
     //MARK: - Custom 함수
@@ -149,7 +158,5 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         nextButton.isEnabled = false
         stickyNextButton.isEnabled = false
     }
-
-    
 
 }
