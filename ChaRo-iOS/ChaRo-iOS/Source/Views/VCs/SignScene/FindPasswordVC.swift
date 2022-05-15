@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FindPasswordVC: UIViewController, UITextFieldDelegate {
+class FindPasswordVC: UIViewController {
 
     static let identifier = "FindPasswordVC"
     
@@ -54,13 +54,40 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     
     private func configureClosure() {
         nextButton.nextPageClosure = {
-            print("여기서 통신요청")
+            if let email = self.emailInputView.inputTextField?.text {
+                self.sendTempPassword(email: email)
+            }
         }
         
         stickyNextButton.nextPageClosure = {
-            print("여기서 통신요청")
+            if let email = self.emailInputView.inputTextField?.text {
+                self.sendTempPassword(email: email)
+            }
         }
     }
+    
+    private func sendTempPassword(email: String) {
+        //TODO: - 로딩 인티케이터 뷰 넣기
+        FindPasswordService.shared.sendTempPassword(email: email) { result in
+            switch result {
+            case .success(let data):
+                //MARK: - 비밀번호 확인용
+                print(data)
+                self.makeAlert(title: "완료", message: "가입하신 이메일 주소로 임시 비밀번호가 발급되었습니다.", okAction: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                    UserDefaults.standard.set(data, forKey: Constants.UserDefaultsKey.userPassword)
+                })
+            case .requestErr(let message):
+                if let message = message as? String {
+                    self.makeAlert(title: "존재하지 않는 이메일입니다.",
+                                   message: message)
+                }
+            default :
+                print("ERROR")
+            }
+        }
+    }
+    
     
     private func configureUI() {
         
@@ -159,4 +186,12 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         stickyNextButton.isEnabled = false
     }
 
+}
+
+extension FindPasswordVC: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if let isEmpty = textField.text?.isEmpty {
+            isEmpty ? makeButtonsGray() : makeButtonBlue()
+        }
+    }
 }

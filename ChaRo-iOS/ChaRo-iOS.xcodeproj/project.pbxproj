@@ -177,6 +177,7 @@
 		7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084948326A2441C001B3C2B /* EmptyCVC.swift */; };
 		7084948626A2441C001B3C2B /* EmptyCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7084948426A2441C001B3C2B /* EmptyCVC.xib */; };
 		70876CD0275E08EB00096C51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70876CCF275E08EB00096C51 /* GoogleService-Info.plist */; };
+		708CDF68282AB85E00DDCEF3 /* FindPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */; };
 		70A18FA92778E4370069B1E5 /* FindPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */; };
 		70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */; };
 		70A37C3326EF60AB006CCEA9 /* SNSLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */; };
@@ -432,6 +433,7 @@
 		7084948326A2441C001B3C2B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		7084948426A2441C001B3C2B /* EmptyCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCVC.xib; sourceTree = "<group>"; };
 		70876CCF275E08EB00096C51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordService.swift; sourceTree = "<group>"; };
 		70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordVC.swift; sourceTree = "<group>"; };
 		70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
 		70A37C3226EF60AB006CCEA9 /* SNSLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginVC.swift; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 				70FD425C281710C600631BB7 /* UpdatePasswordService.swift */,
 				70FD425E2817158900631BB7 /* UpdateProfileService.swift */,
 				70FD4260281715B300631BB7 /* UserDefaultKey.swift */,
+				708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1737,6 +1740,7 @@
 				7062C8572710C99400C1CD2E /* EmailJoinService.swift in Sources */,
 				F468C0FA269E1C410019B1B3 /* CreatePostService.swift in Sources */,
 				7062C845270C63F500C1CD2E /* NextButton.swift in Sources */,
+				708CDF68282AB85E00DDCEF3 /* FindPasswordService.swift in Sources */,
 				7084948226A23AB7001B3C2B /* CollectionViewFooter.swift in Sources */,
 				360937B12699F15A005392BB /* MyPagePostCVC.swift in Sources */,
 				3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */,
