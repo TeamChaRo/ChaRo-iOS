@@ -111,6 +111,16 @@ enum ImageLiterals {
     static var imgPlaceholder: UIImage{ .load(name: "imagePlaceholder") }
     static var imgPostTextfieldLocationShow: UIImage{ .load(name: "postTextfieldLocationShow") }
     
+    static var imgCarTheaterCourse1: UIImage{ .load(name: "imgCarTheaterCourse1") }
+    static var imgCarTheaterCourse2: UIImage{ .load(name: "imgCarTheaterCourse2-1") }
+    static var imgCarTheaterCourse3: UIImage{ .load(name: "imgCarTheaterCourse2-2") }
+    static var imgCarTheaterCourse4: UIImage{ .load(name: "imgCarTheaterCourse4") }
+    
+    static var imgAboutCharo1: UIImage{ .load(name: "imgAboutCharo1") }
+    static var imgAboutCharo2: UIImage{ .load(name: "imgAboutCharo2") }
+    static var imgAboutCharo4: UIImage{ .load(name: "imgAboutCharo4") }
+    
+    static var imgGangneungCourse: UIImage{ .load(name: "imgGangneungCourse") }
     
 }
 
