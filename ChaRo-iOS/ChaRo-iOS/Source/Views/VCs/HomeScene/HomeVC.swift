@@ -123,7 +123,6 @@ class HomeVC: UIViewController {
                 $0.width.equalTo(180)
             }
             bannerTitleLableList[index].tag = index
-            print("bannerTitleLableList[index].text = \(bannerTitleLableList[index].text)")
             bannerSubtTtleLabelList[index].snp.makeConstraints{
                 $0.leading.equalTo(bannerTitleLableList[index].snp.leading)
                 $0.top.equalTo(bannerTitleLableList[index].snp.bottom).offset(5)
@@ -148,7 +147,7 @@ class HomeVC: UIViewController {
         switch currentTag {
         case 0:
             nextVC = FirstBannerVC(title: "강릉 해변 드라이브 코스와 맛집")
-        case 1: print("잘못된 경우 1 ")
+        case 1: print("두번째 배너 눌림")
         case 2:
             nextVC = ThirdBannerVC(title: "자동차 극장 드라이브 코스")
         case 3:
@@ -161,7 +160,6 @@ class HomeVC: UIViewController {
         }
     }
     
-   
     //서버 데이터 받아오는 부분
     func getServerData() {
         //lottieview
