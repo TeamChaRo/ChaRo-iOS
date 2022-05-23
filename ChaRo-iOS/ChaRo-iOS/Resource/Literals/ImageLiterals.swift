@@ -120,6 +120,10 @@ enum ImageLiterals {
     static var imgAboutCharo2: UIImage{ .load(name: "imgAboutCharo2") }
     static var imgAboutCharo4: UIImage{ .load(name: "imgAboutCharo4") }
     
+    static var imgAboutBanner1: UIImage{ .load(name: "ImgAboutBanner1") }
+    static var imgAboutBanner2: UIImage{ .load(name: "ImgAboutBanner2") }
+    static var imgAboutBanner3: UIImage{ .load(name: "ImgAboutBanner3") }
+    
     static var imgGangneungCourse: UIImage{ .load(name: "imgGangneungCourse") }
     
 }

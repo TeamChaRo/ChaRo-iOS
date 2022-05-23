@@ -85,6 +85,7 @@
 		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
+		3C73186F283BC67D00E51B05 /* BannerAboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */; };
 		3C7A0C4F27CE838100B78854 /* PostLikeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */; };
 		3C7A0C5127CE83AE00B78854 /* PostLikeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */; };
 		3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */; };
@@ -337,6 +338,7 @@
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAboutCell.swift; sourceTree = "<group>"; };
 		3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListVC.swift; sourceTree = "<group>"; };
 		3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListViewModel.swift; sourceTree = "<group>"; };
 		3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
@@ -686,6 +688,14 @@
 				3C86FA7B2694C7C6009370CD /* Resource */,
 			);
 			path = "ChaRo-iOS";
+			sourceTree = "<group>";
+		};
+		3C73186D283BC66000E51B05 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		3C86FA7B2694C7C6009370CD /* Resource */ = {
@@ -1364,6 +1374,7 @@
 		3CCBECF428214A1F004F0F27 /* BannerScene */ = {
 			isa = PBXGroup;
 			children = (
+				3C73186D283BC66000E51B05 /* Cell */,
 				3CC6BEC6282AB08E003E6755 /* BannerVC.swift */,
 				3CC6BEC4282AB07A003E6755 /* FirstBannerVC.swift */,
 				3CC6BECA282AB478003E6755 /* SecondBannerVC.swift */,
@@ -1697,6 +1708,7 @@
 				3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */,
 				F4CC1B9D269D3E7B009A0C01 /* CreatePostThemeTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
+				3C73186F283BC67D00E51B05 /* BannerAboutCell.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3C2B3FCC27E04E6B005D2DC5 /* PostDetailContentButton.swift in Sources */,
 				70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */,
