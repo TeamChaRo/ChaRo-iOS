@@ -12,19 +12,31 @@ import Then
 
 final class FirstBannerVC: BannerVC {
     
-    let imageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+    private let firstContentImageView = UIImageView(image: ImageLiterals.imgGangneungCourse1).then {
+        $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
-        $0.image = ImageLiterals.imgGangneungCourse
     }
     
+    private let secondContentImageView = UIImageView(image: ImageLiterals.imgGangneungCourse2).then {
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+    }
+
     override func setConstraints() {
         super.setConstraints()
-        scrollView.addSubview(imageView)
-        imageView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+        scrollView.addSubviews([firstContentImageView, secondContentImageView])
+        
+        firstContentImageView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(imageView.frame.height * viewRetio)
+            $0.height.equalTo(firstContentImageView.frame.height * viewRetio)
+        }
+        
+        secondContentImageView.snp.makeConstraints {
+            $0.top.equalTo(firstContentImageView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(secondContentImageView.frame.height * viewRetio)
         }
     }
 }
