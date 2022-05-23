@@ -26,7 +26,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
     
     //배너 관련 변수
-    var homeTableViewHeaderHeight:CGFloat = UIScreen.main.bounds.height * 0.65
+    var homeTableViewHeaderHeight: CGFloat = UIScreen.main.bounds.height * 0.65
     var headerView: UIView!
     var images: [UIImage] = [#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain")]
     var imageViews = [UIImageView]()
@@ -57,6 +57,7 @@ class HomeVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
     }
+    
     //헤더뷰
     func setHeader() {
         HomeTableView.rowHeight = UITableView.automaticDimension
@@ -80,54 +81,86 @@ class HomeVC: UIViewController {
     func setupHeaderViewUI() {
         var titleList: [String] = []
         var subTitleList: [String] = []
-            
-            var titleLabelList: [UILabel] = []
-            var subTitleLabelList: [UILabel] = []
-        for i in 0...3
-        {
+        
+        var titleLabelList: [UILabel] = []
+        var subTitleLabelList: [UILabel] = []
+        
+        for i in 0...3 {
             titleList.append(bannerData[i].bannerTitle)
             subTitleList.append(bannerData[i].bannerTag)
         }
         
-            for index in 0..<titleList.count {
-                let titleLabel = UILabel().then {
-                    $0.font = .notoSansBoldFont(ofSize: 28)
-                    $0.textColor = .white
-                    $0.text = titleList[index]
-                    $0.numberOfLines = 3
-                }
-                
-                let subTitleLabel = UILabel().then {
-                    $0.font = .notoSansRegularFont(ofSize: 13)
-                    $0.textColor = .white
-                    $0.text = subTitleList[index]
-                    $0.numberOfLines = 3
-                }
-                
-                titleLabelList.append(titleLabel)
-                subTitleLabelList.append(subTitleLabel)
+        for index in 0..<titleList.count {
+            let titleLabel = UILabel().then {
+                $0.font = .notoSansBoldFont(ofSize: 28)
+                $0.textColor = .white
+                $0.text = titleList[index]
+                $0.numberOfLines = 3
             }
             
-            bannerTitleLableList = titleLabelList
-            bannerSubtTtleLabelList = subTitleLabelList
-            headerView.addSubviews(bannerTitleLableList + bannerSubtTtleLabelList)
+            let subTitleLabel = UILabel().then {
+                $0.font = .notoSansRegularFont(ofSize: 13)
+                $0.textColor = .white
+                $0.text = subTitleList[index]
+                $0.numberOfLines = 3
+            }
             
+            titleLabelList.append(titleLabel)
+            subTitleLabelList.append(subTitleLabel)
         }
         
-        func setupHeaderViewLayout() {
-            for index in 0..<bannerTitleLableList.count {
-                bannerTitleLableList[index].snp.makeConstraints{
-                    $0.leading.equalTo(bannerScrollView.viewWithTag(index+1)!).offset(24)
-                    $0.bottom.equalToSuperview().inset(114)
-                    $0.width.equalTo(180)
-                }
-                
-                bannerSubtTtleLabelList[index].snp.makeConstraints{
-                    $0.leading.equalTo(bannerTitleLableList[index].snp.leading)
-                    $0.top.equalTo(bannerTitleLableList[index].snp.bottom).offset(5)
-                }
+        bannerTitleLableList = titleLabelList
+        bannerSubtTtleLabelList = subTitleLabelList
+        headerView.addSubviews(bannerTitleLableList + bannerSubtTtleLabelList)
+        
+    }
+        
+    func setupHeaderViewLayout() {
+        for index in 0..<bannerTitleLableList.count {
+            bannerTitleLableList[index].snp.makeConstraints{
+                $0.leading.equalTo(bannerScrollView.viewWithTag(index+1)!).offset(24)
+                $0.bottom.equalToSuperview().inset(114)
+                $0.width.equalTo(180)
+            }
+            bannerTitleLableList[index].tag = index
+            print("bannerTitleLableList[index].text = \(bannerTitleLableList[index].text)")
+            bannerSubtTtleLabelList[index].snp.makeConstraints{
+                $0.leading.equalTo(bannerTitleLableList[index].snp.leading)
+                $0.top.equalTo(bannerTitleLableList[index].snp.bottom).offset(5)
             }
         }
+        addTapGestureToTitleLables()
+    }
+    
+    func addTapGestureToTitleLables() {
+        bannerTitleLableList.forEach {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentToBanner(_:)))
+            tapGesture.cancelsTouchesInView = false
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    @objc
+    func presentToBanner(_ sender: UITapGestureRecognizer) {
+        guard let currentTag = sender.view?.tag else { return }
+        var nextVC: BannerVC?
+        switch currentTag {
+        case 0:
+            nextVC = FirstBannerVC(title: "강릉 해변 드라이브 코스와 맛집")
+        case 1: print("잘못된 경우 1 ")
+        case 2:
+            nextVC = ThirdBannerVC(title: "자동차 극장 드라이브 코스")
+        case 3:
+            nextVC = FourthBannerVC(title: "About 차로")
+        default: print("잘못된 경우")
+        }
+        if let nextVC = nextVC {
+            nextVC.modalPresentationStyle = .fullScreen
+            self.present(nextVC, animated: true)
+        }
+    }
+    
    
     //서버 데이터 받아오는 부분
     func getServerData() {
@@ -434,11 +467,17 @@ extension HomeVC: UITableViewDelegate {
         return UITableViewCell()
         
     }
-    
-
 }
+
 extension HomeVC: UITableViewDataSource {
 }
+
+//extension HomeVC: UIGestureRecognizerDelegate {
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
+//}
+
 extension HomeVC: IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath) {
         //tableview indexPath에 따라ㅏ 받아오고, 나중에 서버랑 연결되면 거기서 또 테이블 뷰 셀이랑 연동하면 될듯~!
