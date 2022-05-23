@@ -15,55 +15,14 @@ final class ThirdBannerVC: BannerVC {
     private var imageViewList: [UIImageView] = []
     private var buttonList: [UIButton] = []
     
-    private let firstImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.image = ImageLiterals.imgCarTheaterCourse1
-    }
-    
-    private let secondImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.image = ImageLiterals.imgCarTheaterCourse2
-    }
-    
-    private let thirdImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.image = ImageLiterals.imgCarTheaterCourse3
-    }
-    
-    private let fourImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.image = ImageLiterals.imgCarTheaterCourse4
-    }
-    
-    private let shortcutButton = UIButton().then {
-        $0.setTitle("드라이브 코스 바로가기", for: .normal)
-        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .blue
-        $0.layer.cornerRadius = 8
-    }
-    
-    private let shortcutButton2 = UIButton().then {
-        $0.setTitle("드라이브 코스 바로가기", for: .normal)
-        $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .blue
-        $0.layer.cornerRadius = 8
-    }
-    
     override func setConstraints() {
         super.setConstraints()
-        
         initImageViewList()
         initButtonList()
-        guard imageViewList.count != 4 && buttonList.count != 2 else { return }
+        if imageViewList.count != 4 && buttonList.count != 2 { return }
         
-        view.addSubviews(imageViewList)
-        view.addSubviews(buttonList)
+        scrollView.addSubviews(imageViewList)
+        scrollView.addSubviews(buttonList)
         
         imageViewList[0].snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -121,11 +80,10 @@ final class ThirdBannerVC: BannerVC {
             $0.contentMode = .scaleAspectFit
             $0.clipsToBounds = true
         }
-        
     }
     
     private func initButtonList() {
-        for i in 0..<2 {
+        for i in 0...1 {
             let button = UIButton().then {
                 $0.setTitle("드라이브 코스 바로가기", for: .normal)
                 $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
@@ -136,5 +94,23 @@ final class ThirdBannerVC: BannerVC {
             }
             buttonList.append(button)
         }
+    }
+    
+    override func bind() {
+        super.bind()
+        guard buttonList.count == 2 else { return }
+        
+        buttonList[0].rx.tap
+            .asDriver()
+            .drive(onNext: {
+                print("첫번째 버튼 눌림")
+            }).disposed(by: disposeBag)
+        
+        buttonList[1].rx.tap
+            .asDriver()
+            .drive(onNext: {
+                print("두번째 버튼 눌림")
+            }).disposed(by: disposeBag)
+
     }
 }
