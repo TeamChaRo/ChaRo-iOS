@@ -299,11 +299,11 @@ extension SettingVC: UITableViewDataSource {
         case 1:
             switch indexPath.row {
             case 0:
-                print("프로필 수정")
-                // TODO: ChangeImageVC 연결
+                let changeImageVC = ChangeImageVC()
+                self.navigationController?.pushViewController(changeImageVC, animated: true)
             case 1:
-                print("비번 수정")
-                // TODO: ChangePasswordVC 연결
+                let findPasswordVC = FindPasswordVC()
+                self.navigationController?.pushViewController(findPasswordVC, animated: true)
             default:
                 break
             }
