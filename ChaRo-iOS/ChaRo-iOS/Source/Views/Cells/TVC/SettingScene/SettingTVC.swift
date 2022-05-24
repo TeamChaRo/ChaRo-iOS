@@ -76,7 +76,6 @@ class SettingTVC: UITableViewCell {
                 $0.centerY.equalTo(titleLabel)
                 $0.trailing.equalToSuperview().offset(-20)
             }
-            
         }
     }
     
