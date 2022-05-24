@@ -10,7 +10,7 @@ import Foundation
 struct LoginJoinResponseDataModel : Codable {
     let success: Bool
     let msg: String
-    let data: UserInitialInfo
+    let data: UserInitialInfo?
 }
 
 struct UserInitialInfo : Codable {
