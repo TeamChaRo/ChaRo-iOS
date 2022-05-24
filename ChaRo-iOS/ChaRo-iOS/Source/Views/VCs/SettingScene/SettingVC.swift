@@ -9,62 +9,70 @@ import UIKit
 import SnapKit
 import Then
 import CoreMIDI
+import SafariServices
+import MessageUI
+import KakaoSDKCommon
 
 class SettingVC: UIViewController {
-    let userWidth = UIScreen.main.bounds.width
-    let userheight = UIScreen.main.bounds.height
-//MARK: Var
-        var permissionModel = [settingDataModel(titleString: "알림", isToggle: true, toggleData: true),
-                               settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
-                               settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
-        
-        var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
-                            settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
-                            settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: UserDefaults.standard.string(forKey: "userId") ?? "ios@gamil.com", subLabelColor: UIColor.black)]
-        
-        var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
-                                settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
-        var termsModel = [settingDataModel(titleString: "개인정보 처리방침", titleLabelColor: UIColor.black),
-                          settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
-                          settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
-                          settingDataModel(titleString: "버전 정보", titleLabelColor: UIColor.gray30, isSubLabel: true, subLabelString: "1.0", subLabelColor: UIColor.gray30),
-                          settingDataModel(titleString: "로그아웃", titleLabelColor: UIColor.mainBlue),
-                          settingDataModel(titleString: "회원탈퇴", titleLabelColor: UIColor.mainOrange)]
     
-    //headerView
+    // MARK: Variable
+    private let userWidth = UIScreen.main.bounds.width
+    private let userheight = UIScreen.main.bounds.height
+    
+    private var permissionModel = [settingDataModel(titleString: "알림", isToggle: true, toggleData: true),
+                                   settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
+                                   settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
+    
+    private var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
+                                settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
+                                settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: Constants.userEmail, subLabelColor: UIColor.black)]
+    
+    private var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
+                                    settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
+    private var termsModel = [settingDataModel(titleString: "개인정보 처리방침", titleLabelColor: UIColor.black),
+                              settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
+                              settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
+                              settingDataModel(titleString: "버전 정보", titleLabelColor: UIColor.gray30, isSubLabel: true, subLabelString: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "", subLabelColor: UIColor.gray30),
+                              settingDataModel(titleString: "로그아웃", titleLabelColor: UIColor.mainBlue),
+                              settingDataModel(titleString: "회원탈퇴", titleLabelColor: UIColor.mainOrange)]
+    
+    // headerView
     private let settingBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
+    
     private let headerTitleLabel = UILabel().then {
         $0.text = "설정"
         $0.font = UIFont.notoSansRegularFont(ofSize: 17)
         $0.textColor = UIColor.black
-        
     }
+    
     private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
+        $0.addTarget(SettingVC.self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
+    
     private let bottomView = UIView().then {
         $0.backgroundColor = UIColor.gray20
     }
-    //tableView
+    
+    // tableView
     private let settingTableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.backgroundColor = UIColor.white
         return tableView
     }()
     
-//MARK: ViewDidLoad
+    // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderLayout()
         setTableViewLayout()
-
+        
     }
-//MARK: Function
-//MARK: ServerFunction
-//MARK: LayoutFunction
-    func setHeaderLayout() {
+    
+    // MARK: Function, ServerFunction, LayoutFunction
+    private func setHeaderLayout() {
         let headerHeigth = userheight * 0.15
         self.view.addSubview(settingBackgroundView)
         settingBackgroundView.addSubviews([headerTitleLabel, backButton, bottomView])
@@ -87,35 +95,61 @@ class SettingVC: UIViewController {
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
-
+        
     }
     
-    func setTableViewLayout() {
-        
-        settingTableView.style
+    private func setTableViewLayout() {
         self.view.addSubview(settingTableView)
         settingTableView.separatorStyle = .none
         settingTableView.delegate = self
         settingTableView.dataSource = self
         settingTableView.registerCustomXib(xibName: "SettingTVC")
         
-        
         settingTableView.snp.makeConstraints {
             $0.top.equalTo(settingBackgroundView.snp.bottom).offset(0)
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
         }
-        
     }
-    
-    
-
 }
 
+// MARK: - Custom Methods
+extension SettingVC {
+    
+    /// SafariViewController를 불러와 화면전환을 하는 메서드 (인앱)
+    private func presentToSafariVC(urlString: String) {
+        let url = NSURL(string: urlString)! as URL
+        let safariView: SFSafariViewController = SFSafariViewController(url: url)
+        self.present(safariView, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func backButtonClicked(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    /// 1:1 문의 메일을 보내는 메서드
+    private func sendInquiryMail() {
+        if MFMailComposeViewController.canSendMail() {
+            let compseVC = MFMailComposeViewController().then {
+                $0.mailComposeDelegate = self
+                $0.setToRecipients(["charo.drive13@gmail.com"])
+                $0.setSubject("차로 1:1 문의")
+                $0.setMessageBody("1. 문의 유형(문의, 버그 제보, 기타) : \n 2. 회원 닉네임(필요시 기입) : \n 3. 문의 내용 : \n \n \n 문의하신 사항은 차로팀이 신속하게 처리하겠습니다. 감사합니다 :)", isHTML: false)
+            }
+            self.present(compseVC, animated: true, completion: nil)
+        }
+        else {
+            self.makeAlert(title: "메일 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.")
+        }
+    }
+}
 
+// MARK: - UITableViewDelegate
 extension SettingVC: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let bottomView = UIView().then {
             $0.backgroundColor = UIColor.gray20
@@ -129,17 +163,19 @@ extension SettingVC: UITableViewDelegate {
         let view = UIView().then {
             $0.backgroundColor = UIColor.white
         }
-        view.addSubview(titleLabel)
+        view.addSubviews([titleLabel, bottomView])
+        
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(18)
             $0.leading.equalToSuperview().offset(19)
             $0.width.equalTo(150)
         }
-        view.addSubview(bottomView)
+        
         bottomView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
+        
         switch section {
         case 0:
             titleLabel.text = "접근허용"
@@ -154,16 +190,18 @@ extension SettingVC: UITableViewDelegate {
             titleLabel.text = "고객센터"
         default:
             titleLabel.text = "약관"
-    }
+        }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView().then {
             $0.backgroundColor = UIColor.white
@@ -171,8 +209,8 @@ extension SettingVC: UITableViewDelegate {
         return view
     }
 }
-    
-    
+
+// MARK: - UITableViewDataSource
 extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -192,7 +230,7 @@ extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTVC.identifier) as? SettingTVC else {return UITableViewCell()}
         var settingData = settingDataModel()
-        //각섹션 별 파트입니다.
+        
         switch indexPath.section {
             //0 접근허용
         case 0:
@@ -214,8 +252,9 @@ extension SettingVC: UITableViewDataSource {
             settingData = termsModel[indexPath.row]
         default:
             return UITableViewCell()
-
+            
         }
+        
         cell.setData(isToggle: settingData.isToggle,
                      toggleData: settingData.toggleData,
                      isSubLabel: settingData.isSubLabel,
@@ -228,19 +267,35 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
+        case 0:
+            print("접근허용")
+        case 1:
+            print("마케팅동의")
         case 2:
-            if indexPath.row == 0 {
-                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangeImageVC.identifier) else { return }
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangePasswordVC.identifier) else { return }
-                self.navigationController?.pushViewController(vc, animated: true)
+            print("계정")
+        case 3:
+            print("정보")
+        case 4:
+            /// 1:1 문의
+            sendInquiryMail()
+        case 5:
+            switch indexPath.row {
+            case 0, 1, 2:
+                /// 개인정보 처리방침, 서비스 이용약관, 오픈소스 라이선스
+                let urlData = [
+                    "https://nosy-catmint-6ad.notion.site/257d36140ab74dcab89c447171f85c76",
+                    "https://nosy-catmint-6ad.notion.site/c930b0349abf41e08061d669863bde95",
+                    "https://nosy-catmint-6ad.notion.site/f9a49abdcf91479987faaa83a35eb7a8"]
+                presentToSafariVC(urlString: urlData[indexPath.row])
+            case 4:
+                print("로그아웃")
+            case 5:
+                print("탈퇴")
+            default:
+                print("default")
             }
-            break
         default:
-            break
-            
-            
+            print(indexPath.section)
         }
     }
     
@@ -249,3 +304,9 @@ extension SettingVC: UITableViewDataSource {
     }
 }
 
+// MARK: - MFMailComposeViewControllerDelegate
+extension SettingVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
