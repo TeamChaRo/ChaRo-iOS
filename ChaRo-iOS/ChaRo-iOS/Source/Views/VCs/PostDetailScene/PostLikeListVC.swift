@@ -134,10 +134,7 @@ class PostLikeListVC: UIViewController {
         output.postLikeListSubject
             .bind(to: tableView.rx.items(cellIdentifier: FollowFollowingTVC.className,
                                          cellType: FollowFollowingTVC.self)) { row, element, cell in
-                cell.setData(image: element.image,
-                             userName: element.nickname,
-                             isFollow: element.isFollow,
-                             userEmail: element.userEmail)
+                cell.setData(data: element)
                 cell.changeUIStyleAtPostListList()
                 }.disposed(by: disposeBag)
         

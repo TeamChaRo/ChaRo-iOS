@@ -32,6 +32,7 @@ class SettingTVC: UITableViewCell {
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textAlignment = .right
         $0.textColor = UIColor.black
+        $0.sizeToFit()
     }
 
     //MARK: setData
@@ -74,9 +75,7 @@ class SettingTVC: UITableViewCell {
             subLabel.snp.makeConstraints{
                 $0.centerY.equalTo(titleLabel)
                 $0.trailing.equalToSuperview().offset(-20)
-                $0.width.equalTo(150)
             }
-            
         }
     }
     

@@ -25,7 +25,7 @@ class ThemePostAllTVC: UITableViewCell {
     static let identifier = "ThemePostAllTVC"
     var cellDelegate: ThemeCollectionViewCellDelegate?
     var postDelegate: PostIdDelegate?
-    var selectedDriveList: [Drive] = []
+    var selectedDriveList: [DriveElement] = []
     private var cellCount = 0
     
     //MARK:- Life Cycle
@@ -89,16 +89,16 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.imageView.layer.cornerRadius = 10
             //요소 변수화
             let element = selectedDriveList[indexPath.row]
-            var tags = [element.drive[indexPath.row].region, element.drive[indexPath.row].theme,
-                        element.drive[indexPath.row].warning ?? ""] as [String]
+            var tags = [element.region, element.theme,
+                        element.warning ?? ""] as [String]
                         
             
-            cell.setData(image: element.drive[indexPath.row].image,
-                         title: element.drive[indexPath.row].title,
+            cell.setData(image: element.image,
+                         title: element.title,
                          tagCount: tags.count,
                          tagArr: tags,
-                         isFavorite: element.drive[indexPath.row].isFavorite,
-                         postID: element.drive[indexPath.row].postID)
+                         isFavorite: element.isFavorite,
+                         postID: element.postID)
             
             cell.titleLabel.font = .notoSansBoldFont(ofSize: 17)
             
@@ -145,10 +145,8 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
 extension ThemePostAllTVC {
     func findDriveElementFrom(postId: Int) -> DriveElement?{
         for element in selectedDriveList {
-            for driveElement in element.drive {
-                if driveElement.postID == postId {
-                    return driveElement
-                }
+            if element.postID == postId {
+                return element
             }
         }
         return nil

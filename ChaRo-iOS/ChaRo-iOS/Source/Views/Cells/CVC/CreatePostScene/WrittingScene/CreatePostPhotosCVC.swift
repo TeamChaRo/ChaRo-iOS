@@ -23,7 +23,7 @@ class CreatePostPhotosCVC: UICollectionViewCell {
     
     let deleteButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "imgDelete36px"), for: .normal)
+        button.setBackgroundImage(ImageLiterals.icDelete, for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
@@ -39,7 +39,7 @@ class CreatePostPhotosCVC: UICollectionViewCell {
     
     let plusButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "plus"), for: .normal)
+        button.setBackgroundImage(ImageLiterals.icWayPointPlusActive, for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
@@ -91,7 +91,7 @@ extension CreatePostPhotosCVC {
         }
     }
     
-    func setImageView(image: UIImage = UIImage(named: "imagePlaceholder")!) {
+    func setImageView(image: UIImage = ImageLiterals.imgPlaceholder) {
         self.imageView.image = image
     }
     
