@@ -9,32 +9,34 @@ import UIKit
 import Then
 
 class CreatePostPhotoTVC: UITableViewCell {
-    
-    static let identifier: String = "CreatePostPhotoTVC"
+
+    // MARK: Properties
+
     var receiveImageList: [UIImage] = [] {
         didSet {
-            print("receiveImageList")
-            print(receiveImageList)
+            debugPrint("receiveImageList")
+            debugPrint(receiveImageList)
         }
     }
     
     private let maxPhotoCount: Int = 6
-    
-    // MARK: UI Components
 
-    private let photoBackgroundView: UIView = UIView().then {
+
+    // MARK: UI
+
+    private let photoBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
     }
 
-    private let photoSubBackgroundView: UIView = UIView().then {
+    private let photoSubBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
 
-    private let emptyImageView: UIImageView = UIImageView().then {
+    private let emptyImageView = UIImageView().then {
         $0.image = UIImage(named: "photo1")
     }
 
-    private let discriptionText: UILabel = UILabel().then {
+    private let discriptionText = UILabel().then {
         $0.text = "이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요  (0/6)"
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.numberOfLines = 2
@@ -42,89 +44,92 @@ class CreatePostPhotoTVC: UITableViewCell {
         $0.textColor = UIColor.gray40
     }
     
-    let collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        let heigthRatio: CGFloat = 222/335
-        let width: CGFloat = UIScreen.getDeviceWidth()-40
-        let collectionView = UICollectionView(frame: .init(x: 0, y: 0, width: width, height: width*heigthRatio), collectionViewLayout: flowLayout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
-        return collectionView
-    }()
+    private let collectionView = UICollectionView(
+        frame: CGRect(
+            x: 0,
+            y: 0,
+            width: UIScreen.getDeviceWidth() - 40,
+            height: UIScreen.getDeviceWidth() - 40 * (222/335)
+        ),
+        collectionViewLayout: UICollectionViewFlowLayout()
+    ).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .white
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setNotificationCenter()
-        self.setImageGesture()
-        self.setLayout()
+        self.addNotificationCenter()
+        self.addImageGesture()
+        self.configureLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         selectionStyle = .none
     }
-    
 }
 
-extension CreatePostPhotoTVC {
-    
-    // MARK:- Functions
 
-    func setCollcetionView() {
+// MARK: Functions
+
+extension CreatePostPhotoTVC {
+
+    func configureCollcetionView() {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.registerCustomXib(xibName: CreatePostPhotosCVC.identifier)
         self.collectionView.showsHorizontalScrollIndicator = false
-        
         self.collectionView.reloadData()
     }
     
-    private func setImageGesture() {
+    private func addImageGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewDidTap))
         self.emptyImageView.addGestureRecognizer(tapGesture)
         self.emptyImageView.isUserInteractionEnabled = true
     }
-
-    private func setLayout() {
-        self.photoBackgroundView.layer.cornerRadius = 12.0
-        self.photoSubBackgroundView.layer.borderWidth = 1.0
-        self.photoSubBackgroundView.layer.borderColor = UIColor.gray20.cgColor
-        self.photoSubBackgroundView.layer.cornerRadius = 10.0
-    }
-    
 
     func receiveImageListfromVC(image: [UIImage]) {
         self.receiveImageList.removeAll()
         self.receiveImageList.append(contentsOf: image)
     }
     
-    @objc
-    func imageViewDidTap() {
+    @objc private func imageViewDidTap() {
         NotificationCenter.default.post(name: .callPhotoPicker, object: nil)
     }
 
-    func setNotificationCenter() {
+    private func addNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(imageViewDidTap), name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePhoto), name: .createPostDeletePhotoClicked, object: nil)
     
     }
     
-    func removeObservers() { // TODO: 얘를 어디서 호출할지..?
+    private func removeObservers() {
         NotificationCenter.default.removeObserver(self, name: .createPostAddPhotoClicked, object: nil)
         NotificationCenter.default.removeObserver(self, name: .createPostDeletePhotoClicked, object: nil)
     }
 
-    @objc
-    func deletePhoto(_ notification: Notification) {
-        print("====delete====")
+    @objc func deletePhoto(_ notification: Notification) {
         self.receiveImageList.remove(at: notification.object as! Int) //선택한 이미지 삭제
-        collectionView.reloadData()
+        self.collectionView.reloadData()
     }
-    
-    // MARK:- Layout
+}
+
+
+// MARK: - Layout
+
+extension CreatePostPhotoTVC {
+
+    private func configureLayout() {
+        self.photoBackgroundView.layer.cornerRadius = 12.0
+        self.photoSubBackgroundView.layer.borderWidth = 1.0
+        self.photoSubBackgroundView.layer.borderColor = UIColor.gray20.cgColor
+        self.photoSubBackgroundView.layer.cornerRadius = 10.0
+    }
+
     func emptyConfigureLayout() {
 
-        addSubviews([
+        self.addSubviews([
             self.photoBackgroundView,
             self.photoSubBackgroundView,
             self.discriptionText,
@@ -157,57 +162,66 @@ extension CreatePostPhotoTVC {
         }
     }
     
-    func photoConfigureLayout() {
-        addSubview(collectionView)
+    func configurePhotoLayout() {
+        addSubview(self.collectionView)
         
-        collectionView.snp.makeConstraints{
+        self.collectionView.snp.makeConstraints{
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.bottom.equalTo(self.snp.bottom).inset(33)
         }
     }
-    
-   
 }
+
+
+// MARK: - UICollectionViewDelegate
 
 extension CreatePostPhotoTVC: UICollectionViewDelegate {
     
 }
 
+
+// MARK: - UICollectionViewDataSource
+
 extension CreatePostPhotoTVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if receiveImageList.count >= maxPhotoCount {
-            return maxPhotoCount
+        if self.receiveImageList.count >= self.maxPhotoCount {
+            return self.maxPhotoCount
         } else {
-            return receiveImageList.count+1 // TODO: VC에 이미지 배열에서 받아와야함
+            return self.receiveImageList.count+1 // TODO: VC에 이미지 배열에서 받아와야함
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatePostPhotosCVC.identifier, for: indexPath) as? CreatePostPhotosCVC else {return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CreatePostPhotosCVC.identifier, for: indexPath
+        ) as? CreatePostPhotosCVC else { return UICollectionViewCell() }
 
         
         cell.deleteButton.tag = indexPath.row
         
-        if receiveImageList.count >= maxPhotoCount { // image가 6개면 일반 셀만
+        if self.receiveImageList.count >= self.maxPhotoCount { // image가 6개면 일반 셀만
             cell.configureLayout()
-            cell.setImageView(image: receiveImageList[indexPath.row])
+            cell.setImageView(image: self.receiveImageList[indexPath.row])
         } else {
-            if indexPath.row == receiveImageList.count { // 마지막 셀은 플러스 버튼
+            if indexPath.row == self.receiveImageList.count { // 마지막 셀은 플러스 버튼
                 cell.plusViewConfigureLayout()
             } else {
                 cell.configureLayout()
-                cell.setImageView(image: receiveImageList[indexPath.row])
+                cell.setImageView(image: self.receiveImageList[indexPath.row])
             }
         }
         
         return cell
     }
-    
 }
 
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
 extension CreatePostPhotoTVC: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellsize: CGFloat = (UIScreen.getDeviceWidth() - 54.0) / 3
         return CGSize(width: cellsize, height: cellsize)

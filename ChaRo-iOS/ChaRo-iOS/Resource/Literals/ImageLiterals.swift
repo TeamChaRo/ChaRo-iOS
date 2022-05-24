@@ -14,6 +14,9 @@ enum ImageLiterals {
     static var icAlarmBlack: UIImage { .load(name: "iconAlarmBlack") }
     static var icAppleLogo: UIImage { .load(name: "appleLogo") }
     
+    static var icId: UIImage { .load(name: "icId") }
+    static var icPassword: UIImage { .load(name: "icPassword") }
+    
     static var icBack: UIImage { .load(name: "backIcon") }
     static var icBackGray: UIImage { .load(name: "icGrayBackButton") }
     static var icBackWhite: UIImage { .load(name: "backIconWhite") }

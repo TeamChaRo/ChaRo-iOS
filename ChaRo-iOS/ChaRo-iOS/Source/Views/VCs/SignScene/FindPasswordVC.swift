@@ -15,7 +15,6 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     let emailInputView = JoinInputView(title: "임시 비밀번호 발급",
                                        subTitle: "가입하신 이메일 주소로 임시 비밀번호가 발급됩니다. 로그인 후 꼭 비밀번호를 변경해주세요.",
                                        placeholder: "이메일 아이디를 입력해주세요")
-
     let nextButton = NextButton(isSticky: false, isTheLast: false)
     let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
     var stickyView: UIView?
@@ -31,15 +30,13 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     }
     
     var backButton = UIButton().then {
-        $0.setImage(UIImage(named: "icBackButton"), for: .normal)
+        $0.setImage(ImageLiterals.icBack, for: .normal)
         $0.addTarget(self, action: #selector(moveBack), for: .touchUpInside)
     }
     
     var naviBarLine = UIView().then {
         $0.backgroundColor = .gray20
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +64,13 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
             $0.height.equalTo(117)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        emailInputView.subTitleLabel.font = .notoSansRegularFont(ofSize: 14)
+        
+        emailInputView.inputTextField!.snp.remakeConstraints {
+            $0.top.equalTo(emailInputView.subTitleLabel.snp.bottom).offset(30)
+            $0.leading.trailing.equalTo(emailInputView.titleLabel)
+            $0.height.equalTo(48)
         }
         
         nextButton.snp.makeConstraints {
@@ -129,7 +133,7 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     
     //MARK: - Custom 함수
     @objc func moveBack() {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func makeButtonBlue() {
