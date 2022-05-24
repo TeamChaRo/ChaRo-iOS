@@ -101,7 +101,7 @@ class TabbarVC: UITabBarController {
         let myPageVC = myPageStoryboard.instantiateViewController(identifier: "MyPageVC")
         let myPageTab = UINavigationController(rootViewController: myPageVC)
         myPageTab.navigationBar.isHidden = true
-        myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
+        myPageTab.tabBarItem = UITabBarItem(title: "나의 차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
         
         tabs = [homeTab,createTab, myPageTab]
