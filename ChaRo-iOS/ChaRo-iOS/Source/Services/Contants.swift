@@ -30,8 +30,8 @@ struct Constants {
     static let newDetailURL = baseURL + "/preview/new/" + userId + "/"
     
     ///4.
-    static let ThemeLikeURL = baseURL + "/preview/like/\(userId)/1?value="
-    static let ThemeNewURL = baseURL + "/preview/new/\(userId)/1?value="
+    static let ThemeLikeURL = baseURL + "/post/preview/like/\(userId)/1?value="
+    static let ThemeNewURL = baseURL + "/post/preview/new/\(userId)/1?value="
     static let likeURL = baseURL + "/post/like"
     
     ///myPage
@@ -74,6 +74,9 @@ struct Constants {
     static let googleLoginURL = baseURL + "/user/register/google"
     static let appleLoginURL = baseURL + "/user/register/apple"
     
+    //비밀번호, 프로필 수정
+    static let updatePassword = baseURL + "/user/password?"
+    static let updateProfile = baseURL + "/user/"
     /// 알림
     static let notificationListURL = baseURL + "/push/"
 }

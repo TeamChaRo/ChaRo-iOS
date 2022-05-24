@@ -201,6 +201,10 @@ class MyPageVC: UIViewController {
     }()
     
 //MARK: ViewdidLoad
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeaderLayout()
@@ -380,6 +384,7 @@ class MyPageVC: UIViewController {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
         if isLogin == true {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: myId)
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(followVC, animated: true)
         }
      }
@@ -387,6 +392,7 @@ class MyPageVC: UIViewController {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
         if isLogin == true {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: myId)
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(followVC, animated: true)
         }
      }
@@ -427,7 +433,7 @@ class MyPageVC: UIViewController {
             collectionScrollView.contentOffset.x = 0;
         }
         //작성글 무한스크롤
-        if(writeCollectionView.contentOffset.y > writeContentHeigth - writeCollectionView.frame.height) {
+        if(writeCollectionView.contentOffset.y > writeContentHeigth - writeCollectionView.frame.height) && writeCollectionView.contentOffset.x == 0 {
             let lastcount = writenPostDriveData.count
             var likeOrNew = ""
             var addURL = ""
@@ -454,7 +460,7 @@ class MyPageVC: UIViewController {
                 
             }
             //저장글 무한 스크롤
-        } else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) {
+        } else if(saveCollectioinView.contentOffset.y > saveContentHeigth - saveCollectioinView.frame.height) && saveCollectioinView.contentOffset.x == userWidth{
             let lastcount = savePostDriveData.count
             var likeOrNew = ""
             var addURL = ""
@@ -742,7 +748,8 @@ extension MyPageVC: UICollectionViewDataSource {
                                     isFavorite: driveData.isFavorite))
         }
         if indexPath.row > 0 {
-        self.navigationController?.pushViewController(detailVC, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
     
