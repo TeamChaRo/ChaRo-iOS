@@ -87,9 +87,9 @@ final class SearchAddressKeywordVC: UIViewController {
             .bind(to: tableView.rx.items(cellIdentifier: SearchKeywordCell.className,
                                          cellType: SearchKeywordCell.self)) { [weak self] row, element, cell in
                 guard let self = self else { return }
-                cell.titleLabel.text = element.title
-                cell.addressLabel.text = element.address
-                cell.dateLabel.text = self.viewModel.getCurrentDate()
+                cell.setContent(element: element,
+                                keyword: self.searchTextField.text ?? "",
+                                date: self.viewModel.getCurrentDate())
                 self.contentTitleLabel.text = self.viewModel.isSearchedHistoryList ? "최근 검색어" : "검색 결과"
             }.disposed(by: disposeBag)
         
@@ -101,8 +101,12 @@ final class SearchAddressKeywordVC: UIViewController {
         
         searchTextField.rx.text
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
+            .subscribe(onNext: { [weak self]  in
+                if $0 == "" { 
+                    self?.viewModel.refreshSearchHistory()
+                } else {
+                    self?.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
+                }
             }).disposed(by: disposeBag)
         
         backButton.rx.tap
@@ -121,9 +125,11 @@ final class SearchAddressKeywordVC: UIViewController {
     }
     
     private func addSearchedKeyword(address: AddressDataModel) {
+        viewModel.searchedHistory.append(address.getKeywordResult())
         guard let addressMainVC = self.navigationController?.previousViewController as? AddressMainVC else { return }
         addressMainVC.addSearchedKeyword(address: address)
     }
+    
 }
 
 //MARK: Layout

@@ -17,7 +17,6 @@ class AddressMainViewModel {
     var newSearchHistory: [KeywordResult] = []
     
     private let addressSubject = ReplaySubject<[(AddressDataModel, Int)]>.create(bufferSize: 1)
-    private let searchedHistorySubject = ReplaySubject<[KeywordResult]>.create(bufferSize: 1)
     private let polylineSubject = PublishSubject<[TMapPolyline]>()
     private let markerSubject = PublishSubject<[TMapMarker]>()
     private let isConfirmCheckSubject = PublishSubject<Bool>()
