@@ -11,17 +11,19 @@ import RxSwift
 
 class SearchKeywordViewModel {
     
+    var searchedHistory: [KeywordResult]
     private let tmapView = MapService.getTmapView()
     private let pathData = TMapPathData()
     private let addressSubject = ReplaySubject<[AddressDataModel]>.create(bufferSize: 1)
     var isSearchedHistoryList: Bool = true
     
     init(searchHistory: [KeywordResult]) {
+        searchedHistory = searchHistory
         addressSubject.onNext(refineSearchHistory(of: searchHistory))
     }
     
     struct Input {
-        
+    
     }
     
     struct Output {
@@ -81,5 +83,9 @@ class SearchKeywordViewModel {
     
     func getCurrentDate() -> String {
         return Date.getCurrentMonth() + "." + Date.getCurrentDay()
+    }
+    
+    func refreshSearchHistory() {
+        addressSubject.onNext(refineSearchHistory(of: searchedHistory))
     }
 }
