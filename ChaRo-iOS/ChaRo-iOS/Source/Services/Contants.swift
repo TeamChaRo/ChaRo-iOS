@@ -50,7 +50,8 @@ struct Constants {
     static let searchPostURL = baseURL + "/post/search/"
     
     /// 최근 검색 결과 관련
-    static let searchKeywordURL = baseURL + "/searchHistory"
+    static let searchKeywordURL = baseURL + "/post/readHistory/" + userEmail
+    static let saveSearchedHistory = baseURL + "/post/saveHistory"
 
     /// 게시물 상세보기
     static let detailPostURL = baseURL + "/post/detail/" + userEmail + "/"

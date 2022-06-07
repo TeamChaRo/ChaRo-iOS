@@ -11,14 +11,11 @@ import Then
 import RxSwift
 import TMapSDK
 
-class AddressMainVC: UIViewController {
+final class AddressMainVC: UIViewController {
 
     private let disposeBag = DisposeBag()
     private let viewModel: AddressMainViewModel
     private let updateAddressSubject = PublishSubject<(AddressDataModel, Int)>()
-    
-    public var searchHistory: [KeywordResult] = []
-    public var newSearchHistory: [KeywordResult] = []
     
     private var sendedPostData: WritePostData?
     private var imageList: [UIImage] = []
@@ -28,14 +25,12 @@ class AddressMainVC: UIViewController {
     private var tableViewBottomOffset: CGFloat = 0.0
     private var isFirstOpen: Bool = true
     
-    //MARK: - About Map
-    
+    // MARK: - About Map
     private let tMapView = TMapView()
     private var markerList: [TMapMarker] = []
     private var polyLineList: [TMapPolyline] = []
     
-    //MARK: UI Component
-    
+    // MARK: UI Component
     private let backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icBackGray, for: .normal)
     }
@@ -152,10 +147,9 @@ class AddressMainVC: UIViewController {
         confirmButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let newAddressList = self?.changeAddressData()
-                let nextVC = PostDetailVC()
-                // postSearchKeywords()
-                self?.navigationController?.pushViewController(nextVC, animated: true)
+                self?.viewModel.postSearchKeywords()
+                //let nextVC = PostDetailVC()
+                //self?.navigationController?.pushViewController(nextVC, animated: true)
             }).disposed(by: disposeBag)
     }
     
@@ -192,6 +186,10 @@ class AddressMainVC: UIViewController {
             viewModel.addressList = list
         }
     }
+    
+    func addSearchedKeyword(address: AddressDataModel) {
+        viewModel.newSearchHistory.append(address.getKeywordResult())
+    }
 }
 
 // MARK: - Guide Animation
@@ -225,20 +223,17 @@ extension AddressMainVC: AddressButtonCellDelegate {
     }
     
     func addressButtonCellForPreseting(cell: AddressButtonCell) {
-        let nextVC = SearchAddressKeywordVC()
+        let nextVC = SearchAddressKeywordVC(searchHistory: viewModel.getSearchHistory())
         let index = cell.getTableCellIndexPath()
         nextVC.setAddressModel(model: viewModel.addressList[index],
                                cellType: cell.cellType.rawValue,
                                index: index)
-        //nextVC.setSearchKeyword(list: newSearchHistory+searchHistory)
-        nextVC.setSearchKeyword(list: [])
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
 //MARK: - TMap
 extension AddressMainVC {
-    
     private func updatePolyline(list: [TMapPolyline]) {
         polyLineList.forEach { $0.map = nil }
         polyLineList = list

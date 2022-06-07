@@ -83,10 +83,7 @@ struct PostResultService {
     }
     
     private func judgeStatus<T: Codable>(type: T.Type, by statusCode: Int, _ data: Data) ->  NetworkResult<Any> {
-        let decoder = JSONDecoder()
-        print("status code = \(statusCode)")
-        guard let decodeData = try? decoder.decode(GenericResponse<T>.self, from: data) else {
-            print("여기서 문제?")
+        guard let decodeData = try? JSONDecoder().decode(GenericResponse<T>.self, from: data) else {
             return .pathErr
         }
         switch statusCode {

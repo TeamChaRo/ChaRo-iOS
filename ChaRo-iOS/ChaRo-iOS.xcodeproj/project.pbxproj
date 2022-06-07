@@ -79,6 +79,7 @@
 		3C45B5F326A1B6320061D64B /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45B5F226A1B6320061D64B /* SplashVC.swift */; };
 		3C45B5F526A1C0110061D64B /* lottie_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5F426A1C0110061D64B /* lottie_test.json */; };
 		3C45E637274C85640069E272 /* CommonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45E636274C85640069E272 /* CommonData.swift */; };
+		3C597C48280EA0CA007153B0 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C597C47280EA0CA007153B0 /* UINavigationController+.swift */; };
 		3C5B15B82749802600F178A8 /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5B15B72749802600F178A8 /* GenericResponse.swift */; };
 		3C6F8A6226E2358D006E3895 /* SearchAddressKeywordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F8A6126E2358D006E3895 /* SearchAddressKeywordVC.swift */; };
 		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
@@ -329,6 +330,7 @@
 		3C45B5F226A1B6320061D64B /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		3C45B5F426A1C0110061D64B /* lottie_test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_test.json; sourceTree = "<group>"; };
 		3C45E636274C85640069E272 /* CommonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonData.swift; sourceTree = "<group>"; };
+		3C597C47280EA0CA007153B0 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		3C5B15B72749802600F178A8 /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
 		3C6F8A6126E2358D006E3895 /* SearchAddressKeywordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressKeywordVC.swift; sourceTree = "<group>"; };
 		3C706798269ECE8C0082C852 /* PostResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultService.swift; sourceTree = "<group>"; };
@@ -810,6 +812,7 @@
 				3C879BF2268B14A800C41BB8 /* UIColor+.swift */,
 				3C879BF6268B14E300C41BB8 /* UIFont+.swift */,
 				70D63DEC2693938D0036484B /* UIImage+.swift */,
+				3C597C47280EA0CA007153B0 /* UINavigationController+.swift */,
 				3C840BF62696F08F001CAFE5 /* UIScreen+.swift */,
 				3C2B3FD127E0ABC2005D2DC5 /* UIStackView+.swift */,
 				3C879BEE268B147D00C41BB8 /* UITableView+.swift */,
@@ -1634,6 +1637,7 @@
 				36CEE5B6269DF9A900974EFF /* DetailModel.swift in Sources */,
 				360937A62699ECEB005392BB /* MyPageVC.swift in Sources */,
 				3C86FA202694B6D2009370CD /* AddressButtonCell.swift in Sources */,
+				3C597C48280EA0CA007153B0 /* UINavigationController+.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
 				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* UITableView+.swift in Sources */,
