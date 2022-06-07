@@ -16,6 +16,7 @@ class TabbarVC: UITabBarController {
     private var comeBackIndex = 0
 
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configTabbar()
@@ -62,9 +63,9 @@ class TabbarVC: UITabBarController {
         if item.title == "작성하기" {
             let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
-            let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+            let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.className)
             let createTab = UINavigationController(rootViewController: createVC)
-
+            
             createTab.modalPresentationStyle = .fullScreen
             self.present(createTab, animated: false, completion: nil)
         } else if item.title == "나의차로" {
@@ -86,23 +87,23 @@ class TabbarVC: UITabBarController {
         let homeTab = UINavigationController(rootViewController: homeVC)
         homeTab.tabBarItem = UITabBarItem(title: "구경하기", image: UIImage(named: "tabbarIcHomeInactive"), selectedImage: UIImage(named: "tabbarIcHomeActive"))
         
-       
+        
         let createStoryboard = UIStoryboard(name: "CreatePost", bundle: nil)
 
-        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.identifier)
+        let createVC = createStoryboard.instantiateViewController(identifier: CreatePostVC.className)
         let createTab = UINavigationController(rootViewController: createVC)
         
         createTab.tabBarItem = UITabBarItem(title: "작성하기", image: UIImage(named: "tabbarIcPostWrite"), selectedImage: UIImage(named: "tabbarIcPostWrite"))
         createTab.tabBarItem.imageInsets = UIEdgeInsets(top: -13, left: 0, bottom: 5, right: 0)
-
+        
         
         let myPageStoryboard = UIStoryboard(name: "MyPage", bundle: nil)
         let myPageVC = myPageStoryboard.instantiateViewController(identifier: "MyPageVC")
         let myPageTab = UINavigationController(rootViewController: myPageVC)
         myPageTab.navigationBar.isHidden = true
-        myPageTab.tabBarItem = UITabBarItem(title: "나의차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
+        myPageTab.tabBarItem = UITabBarItem(title: "나의 차로", image: UIImage(named: "tabbarIcMypageInactive"), selectedImage: UIImage(named: "tabbarIcMypageActive"))
         
-
+        
         tabs = [homeTab,createTab, myPageTab]
         setViewControllers(tabs, animated: true)
         selectedViewController = homeTab
