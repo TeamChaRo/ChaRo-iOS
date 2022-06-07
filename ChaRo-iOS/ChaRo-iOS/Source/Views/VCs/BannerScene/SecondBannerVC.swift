@@ -11,7 +11,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
-
+import SafariServices
 
 final class SecondBannerVC: BannerVC {
 
@@ -51,8 +51,8 @@ final class SecondBannerVC: BannerVC {
         guard let headerView = tableView.tableHeaderView as? SecondBannerHeaderView else { return }
         headerView.confirmButton.rx.tap
             .asDriver()
-            .drive(onNext: {
-                print("지금 눌린 부분 전체 링크 보기!!!")
+            .drive(onNext: { [weak self] in
+                self?.openSafari(with: "https://www.youtube.com/watch?v=xm-AhIVL_h0&list=PLs3lyuoGquKDe-eh5zPVAGIvtrWI9nFMd")
             }).disposed(by: disposeBag)
     }
     
@@ -66,7 +66,7 @@ final class SecondBannerVC: BannerVC {
         
         tableView.rx.itemSelected
             .bind(onNext: { [weak self] indexPath in
-                print("현재 눌린 indexPath = \(indexPath)")
+                self?.openSafari(with: self?.playList[indexPath.row].link ?? "" )
         }).disposed(by: disposeBag)
     }
     
@@ -101,6 +101,12 @@ final class SecondBannerVC: BannerVC {
                                            link: "https://www.youtube.com/watch?v=SSTp0rknOgA"),
                                       Song(albumImage: ImageLiterals.imgAlbumByPale, title: "Pale Waves - Noises",
                                            link: "https://www.youtube.com/watch?v=-nQessUrdk0")])
+    }
+    
+    private func openSafari(with url: String) {
+        guard let url = URL(string: url) else { return }
+        let safariViewController = SFSafariViewController(url: url)
+        self.present(safariViewController, animated: true)
     }
     
 }
