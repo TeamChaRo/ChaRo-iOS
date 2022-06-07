@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "imgAlbumByLany-ILYSB.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "imgAlbumByLany-ILYSB@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "imgAlbumByLany-ILYSB@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
