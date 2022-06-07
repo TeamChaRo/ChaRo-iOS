@@ -16,7 +16,7 @@ class BannerVC: UIViewController {
     let viewRetio: CGFloat = UIScreen.getDeviceWidth() / 375
     let scrollView = UIScrollView()
     
-    private let backButton = UIButton().then {
+    let backButton = UIButton().then {
         $0.setImage(ImageLiterals.icBack, for: .normal)
     }
     private let titleLabel = UILabel().then {
