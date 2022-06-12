@@ -85,6 +85,7 @@
 		3C706799269ECE8C0082C852 /* PostResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C706798269ECE8C0082C852 /* PostResultService.swift */; };
 		3C71FEA726881DAA007E8EAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA626881DAA007E8EAD /* AppDelegate.swift */; };
 		3C71FEA926881DAA007E8EAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */; };
+		3C73186F283BC67D00E51B05 /* BannerAboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */; };
 		3C7A0C4F27CE838100B78854 /* PostLikeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */; };
 		3C7A0C5127CE83AE00B78854 /* PostLikeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */; };
 		3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */; };
@@ -133,12 +134,17 @@
 		3C879BF7268B14E300C41BB8 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C879BF6268B14E300C41BB8 /* UIFont+.swift */; };
 		3C89542F277B24D500303B73 /* ChaRo_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C89542E277B24D500303B73 /* ChaRo_iOSTests.swift */; };
 		3CA1CE7E2692C74200D0AFAF /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1CE7D2692C74200D0AFAF /* UITableViewCell+.swift */; };
+		3CAF6D22283387E800E5BA74 /* ThirdBannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF6D21283387E800E5BA74 /* ThirdBannerVC.swift */; };
 		3CB315712690494700E3A101 /* UITextFeild+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB315702690494700E3A101 /* UITextFeild+.swift */; };
 		3CB532CC27C507DA005AAB1D /* PostDetailBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB532CB27C507DA005AAB1D /* PostDetailBottomView.swift */; };
 		3CB532CF27C50950005AAB1D /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB532CE27C50950005AAB1D /* ImageLiterals.swift */; };
 		3CB532D127C510A3005AAB1D /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB532D027C510A3005AAB1D /* NSObject+.swift */; };
 		3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */; };
 		3CC6787927E3318200F8F9EE /* MapGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6787827E3318200F8F9EE /* MapGuideView.swift */; };
+		3CC6BEC5282AB07A003E6755 /* FirstBannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6BEC4282AB07A003E6755 /* FirstBannerVC.swift */; };
+		3CC6BEC7282AB08E003E6755 /* BannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6BEC6282AB08E003E6755 /* BannerVC.swift */; };
+		3CC6BEC9282AB2D4003E6755 /* FourthBannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6BEC8282AB2D4003E6755 /* FourthBannerVC.swift */; };
+		3CC6BECB282AB478003E6755 /* SecondBannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6BECA282AB478003E6755 /* SecondBannerVC.swift */; };
 		3CCBB32726E2201800088B82 /* SearchKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBB32626E2201800088B82 /* SearchKeywordViewModel.swift */; };
 		3CE2A700269C991B00567395 /* SearchKeywordDataMadel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */; };
 		3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2A701269C99CD00567395 /* SearchKeywordService.swift */; };
@@ -337,6 +343,7 @@
 		3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChaRo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C71FEA626881DAA007E8EAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C71FEA826881DAA007E8EAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAboutCell.swift; sourceTree = "<group>"; };
 		3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListVC.swift; sourceTree = "<group>"; };
 		3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListViewModel.swift; sourceTree = "<group>"; };
 		3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
@@ -386,12 +393,17 @@
 		3C89542C277B24D500303B73 /* ChaRo-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ChaRo-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C89542E277B24D500303B73 /* ChaRo_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaRo_iOSTests.swift; sourceTree = "<group>"; };
 		3CA1CE7D2692C74200D0AFAF /* UITableViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
+		3CAF6D21283387E800E5BA74 /* ThirdBannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdBannerVC.swift; sourceTree = "<group>"; };
 		3CB315702690494700E3A101 /* UITextFeild+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFeild+.swift"; sourceTree = "<group>"; };
 		3CB532CB27C507DA005AAB1D /* PostDetailBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailBottomView.swift; sourceTree = "<group>"; };
 		3CB532CE27C50950005AAB1D /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		3CB532D027C510A3005AAB1D /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		3CB9BE53268EFEDD00EB85CB /* TabbarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarVC.swift; sourceTree = "<group>"; };
 		3CC6787827E3318200F8F9EE /* MapGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGuideView.swift; sourceTree = "<group>"; };
+		3CC6BEC4282AB07A003E6755 /* FirstBannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstBannerVC.swift; sourceTree = "<group>"; };
+		3CC6BEC6282AB08E003E6755 /* BannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerVC.swift; sourceTree = "<group>"; };
+		3CC6BEC8282AB2D4003E6755 /* FourthBannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthBannerVC.swift; sourceTree = "<group>"; };
+		3CC6BECA282AB478003E6755 /* SecondBannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondBannerVC.swift; sourceTree = "<group>"; };
 		3CCBB32626E2201800088B82 /* SearchKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordViewModel.swift; sourceTree = "<group>"; };
 		3CE2A6FF269C991B00567395 /* SearchKeywordDataMadel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordDataMadel.swift; sourceTree = "<group>"; };
 		3CE2A701269C99CD00567395 /* SearchKeywordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordService.swift; sourceTree = "<group>"; };
@@ -693,6 +705,14 @@
 			path = "ChaRo-iOS";
 			sourceTree = "<group>";
 		};
+		3C73186D283BC66000E51B05 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		3C86FA7B2694C7C6009370CD /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,6 +892,7 @@
 		3C879BE9268B13C300C41BB8 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				3CCBECF428214A1F004F0F27 /* BannerScene */,
 				36B69F7E2775DC0D00FEEAAE /* FollowScene */,
 				36E445AE277CA102008E31BE /* SettingScene */,
 				3CAE51A826C2442E00DB8A41 /* CreatePostScene */,
@@ -1365,6 +1386,19 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		3CCBECF428214A1F004F0F27 /* BannerScene */ = {
+			isa = PBXGroup;
+			children = (
+				3C73186D283BC66000E51B05 /* Cell */,
+				3CC6BEC6282AB08E003E6755 /* BannerVC.swift */,
+				3CC6BEC4282AB07A003E6755 /* FirstBannerVC.swift */,
+				3CC6BECA282AB478003E6755 /* SecondBannerVC.swift */,
+				3CAF6D21283387E800E5BA74 /* ThirdBannerVC.swift */,
+				3CC6BEC8282AB2D4003E6755 /* FourthBannerVC.swift */,
+			);
+			path = BannerScene;
+			sourceTree = "<group>";
+		};
 		5871AE65ECA530CBED32CC7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1643,6 +1677,7 @@
 				3C879BEF268B147D00C41BB8 /* UITableView+.swift in Sources */,
 				36E445BB277CD6A2008E31BE /* SettingViewDataModel.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* UIColor+.swift in Sources */,
+				3CAF6D22283387E800E5BA74 /* ThirdBannerVC.swift in Sources */,
 				F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */,
 				365FEF4727D66B6E0036E182 /* FilterView.swift in Sources */,
 				7062C83D270C42FE00C1CD2E /* JoinProfileView.swift in Sources */,
@@ -1656,6 +1691,7 @@
 				3CB532CC27C507DA005AAB1D /* PostDetailBottomView.swift in Sources */,
 				70D63DED2693938E0036484B /* UIImage+.swift in Sources */,
 				70F5D7BB271D9DBC00FF9229 /* SocialJoinService.swift in Sources */,
+				3CC6BEC9282AB2D4003E6755 /* FourthBannerVC.swift in Sources */,
 				3C7DF0F7269AEE7D0021939C /* SearchResultVC.swift in Sources */,
 				F468C0F6269DDA290019B1B3 /* Notification.Name.swift in Sources */,
 				70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */,
@@ -1669,6 +1705,7 @@
 				3C6F8A6226E2358D006E3895 /* SearchAddressKeywordVC.swift in Sources */,
 				36FB8BA727777E3100C2E642 /* DoFollowService.swift in Sources */,
 				3CE2A702269C99CD00567395 /* SearchKeywordService.swift in Sources */,
+				3CC6BEC5282AB07A003E6755 /* FirstBannerVC.swift in Sources */,
 				3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */,
 				3CB315712690494700E3A101 /* UITextFeild+.swift in Sources */,
 				F4CC1B99269D3E67009A0C01 /* CreatePostCourseTVC.swift in Sources */,
@@ -1680,6 +1717,7 @@
 				3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */,
 				F4CC1B9D269D3E7B009A0C01 /* CreatePostThemeTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
+				3C73186F283BC67D00E51B05 /* BannerAboutCell.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
 				3C2B3FCC27E04E6B005D2DC5 /* PostDetailContentButton.swift in Sources */,
 				70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */,
@@ -1748,6 +1786,7 @@
 				3C7A0C4F27CE838100B78854 /* PostLikeListVC.swift in Sources */,
 				3C34CC7127F19B010016069C /* AddressMainViewModel.swift in Sources */,
 				3CB9BE54268EFEDD00EB85CB /* TabbarVC.swift in Sources */,
+				3CC6BECB282AB478003E6755 /* SecondBannerVC.swift in Sources */,
 				330B8A70274C7B89007FB132 /* ThemePopupVC.swift in Sources */,
 				36071678269F9B030042256B /* NotificationVC.swift in Sources */,
 				36B69F802775DC2F00FEEAAE /* FollowFollwingVC.swift in Sources */,
@@ -1787,6 +1826,7 @@
 				F468C0FE269E20390019B1B3 /* CreatePostDataModel.swift in Sources */,
 				3610A89E2693730700EFC794 /* HomeThemeCVC.swift in Sources */,
 				3C86FA262694B738009370CD /* PostTitleTVC.swift in Sources */,
+				3CC6BEC7282AB08E003E6755 /* BannerVC.swift in Sources */,
 				3C45E637274C85640069E272 /* CommonData.swift in Sources */,
 				707A7D4B269C16BF0033C40F /* ThemeDataModel.swift in Sources */,
 				36B69F7D2772429F00FEEAAE /* OtherMyPageVC.swift in Sources */,
