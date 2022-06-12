@@ -10,7 +10,7 @@ import Foundation
 struct Constants {
     
     // MARK: - BASE URL
-    static let baseURL = "http://charo-server.o-r.kr"
+    static let baseURL = "http://52.79.108.141:5000"
     
     static let userId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     static let nickName = UserDefaults.standard.string(forKey: "nickname") ?? "지으니"
