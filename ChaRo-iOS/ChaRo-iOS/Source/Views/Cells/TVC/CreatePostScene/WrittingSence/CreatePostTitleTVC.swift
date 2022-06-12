@@ -106,7 +106,7 @@ extension CreatePostTitleTVC: UITextViewDelegate {
         
         if textCount <= self.limitTextCount {
             self.titleContent = titleTextView.text
-            self.isWarning.toggle()
+            self.isWarning = false
             
             // 1줄 최대 글자수 초과시, textview height 조절
             if textCount > self.limitLineTextCount { // 1줄 최대 금액 되면 줄바꾸기
@@ -127,7 +127,7 @@ extension CreatePostTitleTVC: UITextViewDelegate {
             }
         } else if textCount > limitTextCount {
             self.titleTextView.text = titleContent
-            self.isWarning.toggle()
+            self.isWarning = true
         }
     }
 }
