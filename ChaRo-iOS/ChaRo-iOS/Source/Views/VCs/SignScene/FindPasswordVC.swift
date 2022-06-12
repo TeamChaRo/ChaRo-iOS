@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FindPasswordVC: UIViewController {
+final class FindPasswordVC: UIViewController {
 
     static let identifier = "FindPasswordVC"
     
@@ -53,15 +53,15 @@ class FindPasswordVC: UIViewController {
     }
     
     private func configureClosure() {
-        nextButton.nextPageClosure = {
-            if let email = self.emailInputView.inputTextField?.text {
-                self.sendTempPassword(email: email)
+        nextButton.nextPageClosure = { [weak self] in
+            if let email = self?.emailInputView.inputTextField?.text {
+                self?.sendTempPassword(email: email)
             }
         }
         
-        stickyNextButton.nextPageClosure = {
-            if let email = self.emailInputView.inputTextField?.text {
-                self.sendTempPassword(email: email)
+        stickyNextButton.nextPageClosure = { [weak self] in
+            if let email = self?.emailInputView.inputTextField?.text {
+                self?.sendTempPassword(email: email)
             }
         }
     }

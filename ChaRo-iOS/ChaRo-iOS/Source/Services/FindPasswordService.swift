@@ -11,8 +11,7 @@ import Alamofire
 struct FindPasswordService {
     static let shared = FindPasswordService()
     
-    func sendTempPassword(email: String, completion : @escaping (NetworkResult<Any>) -> Void)
-    {
+    func sendTempPassword(email: String, completion : @escaping (NetworkResult<Any>) -> Void) {
         
         let original = Constants.findPassword + email
         let header : HTTPHeaders = ["Content-Type": "application/json"]
