@@ -12,12 +12,4 @@ struct NoticeDataModel {
     let date: DateComponents
     let content: String
     var open = false
-    
-    func convertDateToString(dateComponents: DateComponents) -> String {
-        let date = Calendar.current.date(from: dateComponents) ?? Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY.MM.dd"
-        
-        return dateFormatter.string(from: date)
-    }
 }

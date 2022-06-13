@@ -69,6 +69,6 @@ extension NoticeTitleTVC {
 extension NoticeTitleTVC {
     func setData(model: NoticeDataModel) {
         titleLabel.text = model.title
-        dateLabel.text = model.convertDateToString(dateComponents: model.date)
+        dateLabel.text = model.date.convertDateComponentsToString()
     }
 }
