@@ -160,7 +160,8 @@ class HomeVC: UIViewController {
         switch currentTag {
         case 0:
             nextVC = FirstBannerVC(title: "강릉 해변 드라이브 코스와 맛집")
-        case 1: print("두번째 배너 눌림")
+        case 1:
+            nextVC = SecondBannerVC(title: "봄 선선한 바람 플레이리스트")
         case 2:
             nextVC = ThirdBannerVC(title: "자동차 극장 드라이브 코스")
         case 3:

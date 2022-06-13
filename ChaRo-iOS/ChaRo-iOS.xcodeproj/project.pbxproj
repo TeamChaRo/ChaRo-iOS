@@ -73,6 +73,8 @@
 		3C2B3FD427E0E76B005D2DC5 /* PostPhotoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B3FD327E0E76B005D2DC5 /* PostPhotoTVC.swift */; };
 		3C2B3FD627E0EC16005D2DC5 /* PostPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B3FD527E0EC16005D2DC5 /* PostPhotoCVC.swift */; };
 		3C34CC7127F19B010016069C /* AddressMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C34CC7027F19B010016069C /* AddressMainViewModel.swift */; };
+		3C390769284F672600C0ABEE /* SecondBannerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C390768284F672500C0ABEE /* SecondBannerHeaderView.swift */; };
+		3C39076B284F6CCB00C0ABEE /* PlayListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C39076A284F6CCB00C0ABEE /* PlayListTVC.swift */; };
 		3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5EC2690244D0099B684 /* MapService.swift */; };
 		3C3AF5F426902AE90099B684 /* PostCellTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */; };
 		3C45B5F126A1B5F30061D64B /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C45B5F026A1B5F30061D64B /* Splash.storyboard */; };
@@ -330,6 +332,8 @@
 		3C2B3FD327E0E76B005D2DC5 /* PostPhotoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoTVC.swift; sourceTree = "<group>"; };
 		3C2B3FD527E0EC16005D2DC5 /* PostPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoCVC.swift; sourceTree = "<group>"; };
 		3C34CC7027F19B010016069C /* AddressMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressMainViewModel.swift; sourceTree = "<group>"; };
+		3C390768284F672500C0ABEE /* SecondBannerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondBannerHeaderView.swift; sourceTree = "<group>"; };
+		3C39076A284F6CCB00C0ABEE /* PlayListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListTVC.swift; sourceTree = "<group>"; };
 		3C3AF5EC2690244D0099B684 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		3C3AF5F326902AE90099B684 /* PostCellTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellTitleView.swift; sourceTree = "<group>"; };
 		3C45B5F026A1B5F30061D64B /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
@@ -639,6 +643,14 @@
 			path = SettingScene;
 			sourceTree = "<group>";
 		};
+		3C390767284F671300C0ABEE /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				3C390768284F672500C0ABEE /* SecondBannerHeaderView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		3C3AF5EB269024280099B684 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,6 +721,7 @@
 			isa = PBXGroup;
 			children = (
 				3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */,
+				3C39076A284F6CCB00C0ABEE /* PlayListTVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1389,6 +1402,7 @@
 		3CCBECF428214A1F004F0F27 /* BannerScene */ = {
 			isa = PBXGroup;
 			children = (
+				3C390767284F671300C0ABEE /* Component */,
 				3C73186D283BC66000E51B05 /* Cell */,
 				3CC6BEC6282AB08E003E6755 /* BannerVC.swift */,
 				3CC6BEC4282AB07A003E6755 /* FirstBannerVC.swift */,
@@ -1714,11 +1728,13 @@
 				70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */,
 				F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */,
 				3C2B3FD027E0A7F8005D2DC5 /* PostLocationTVC.swift in Sources */,
+				3C390769284F672600C0ABEE /* SecondBannerHeaderView.swift in Sources */,
 				3CEC0111269E259800E9332C /* OnBoardVC.swift in Sources */,
 				F4CC1B9D269D3E7B009A0C01 /* CreatePostThemeTVC.swift in Sources */,
 				36BBD929268DE94F008D8AD3 /* HomeVC.swift in Sources */,
 				3C73186F283BC67D00E51B05 /* BannerAboutCell.swift in Sources */,
 				3C3AF5ED2690244D0099B684 /* MapService.swift in Sources */,
+				3C39076B284F6CCB00C0ABEE /* PlayListTVC.swift in Sources */,
 				3C2B3FCC27E04E6B005D2DC5 /* PostDetailContentButton.swift in Sources */,
 				70B9E1E5269DC3A6006DACB2 /* LikeDataModel.swift in Sources */,
 				3C7DF0F5269ACE8F0021939C /* FilterDatas.swift in Sources */,
