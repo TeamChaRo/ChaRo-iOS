@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		330B8A70274C7B89007FB132 /* ThemePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */; };
+		332867FF2857421200E75C70 /* DateComponents+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332867FE2857421200E75C70 /* DateComponents+.swift */; };
 		33421B8F2817FAD9005EFBA5 /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */; };
 		33421B912817FC6A005EFBA5 /* NoticeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */; };
 		33421B9328180696005EFBA5 /* NoticeTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */; };
@@ -263,6 +264,7 @@
 
 /* Begin PBXFileReference section */
 		330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopupVC.swift; sourceTree = "<group>"; };
+		332867FE2857421200E75C70 /* DateComponents+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+.swift"; sourceTree = "<group>"; };
 		33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
 		33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDataModel.swift; sourceTree = "<group>"; };
 		33421B9228180696005EFBA5 /* NoticeTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTitleTVC.swift; sourceTree = "<group>"; };
@@ -836,6 +838,7 @@
 				F497D3EB26A0869A009A17AA /* UIViewController+.swift */,
 				3CB532D027C510A3005AAB1D /* NSObject+.swift */,
 				70FD4262281839B400631BB7 /* String+.swift */,
+				332867FE2857421200E75C70 /* DateComponents+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1689,6 +1692,7 @@
 				3CB315712690494700E3A101 /* UITextFeild+.swift in Sources */,
 				F4CC1B99269D3E67009A0C01 /* CreatePostCourseTVC.swift in Sources */,
 				33421B912817FC6A005EFBA5 /* NoticeDataModel.swift in Sources */,
+				332867FF2857421200E75C70 /* DateComponents+.swift in Sources */,
 				F4CC1B68269B9850009A0C01 /* UITextView+.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
 				70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */,
