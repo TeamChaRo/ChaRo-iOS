@@ -6,17 +6,25 @@
 //
 
 import UIKit
+
 import SnapKit
+import Then
 
-class CreatePostCourseTVC: UITableViewCell {
-    
+final class CreatePostCourseTVC: UITableViewCell {
 
-    static let identifier: String = "CreatePostCourseTVC"
-    
-    // MARK: 데이터 전달 closeur
+    // MARK: Const
 
-    public var setCityInfo: ((String) -> Void)?
-    public var setRegionInfo: ((String) -> Void)?
+    private enum Const {
+        static let cityPlaceholder = "시 단위"
+        static let regionPlaceholder = "도 단위"
+        static let unSelected = "선택안함"
+    }
+
+    // MARK: Properties
+
+    // 데이터 전달 closeur
+    var setCityInfo: ((String) -> Void)?
+    var setRegionInfo: ((String) -> Void)?
     private var city: String = ""{
         didSet {
             _ = setCityInfo?(self.city)
@@ -29,8 +37,8 @@ class CreatePostCourseTVC: UITableViewCell {
     }
     
     // cell height 동적으로 계산
-    let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
-    let heightRatio: CGFloat = 42/108
+    private let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
+    private let heightRatio: CGFloat = 42/108
     func setDynamicHeight() -> CGFloat {
         
         let buttonHeight: CGFloat = buttonWidth * heightRatio
@@ -40,7 +48,7 @@ class CreatePostCourseTVC: UITableViewCell {
         return fixedHeight+dynamicHeight
     }
 
-    // about pickerview
+    // pickerview properties
     private var pickerView = UIPickerView()
     private let toolbar = UIToolbar()
     private var textFieldList: [UITextField] = []
@@ -48,46 +56,47 @@ class CreatePostCourseTVC: UITableViewCell {
     private var currentIndex = 0 // 현재 선택된 component (0 == city, 1 == region)
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
     private var filterList: [String] = ["",""] // pickerview 선택 완료 후에 담길 결과 배열
+
+
+    // MARK: UI
+
+    private let themeTitleView = PostCellTitleView(
+        title: "어느 지역으로 다녀오셨나요?",
+        subTitle: "도/광역시, 시 단위로 선택해주세요."
+    )
     
-    // MARK: UI Components
-    private let themeTitleView = PostCellTitleView(title: "어느 지역으로 다녀오셨나요?", subTitle: "도/광역시, 시 단위로 선택해주세요.")
+    private let cityButton = UIButton().then {
+        $0.tag = 0
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFill
+    }
     
-    private let cityButton: UIButton = {
-        let button = UIButton()
-        button.tag = 0
-        button.setImage(UIImage(named: "unselect"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        return button
-    }()
+    private let regionButton = UIButton().then {
+        $0.tag = 1
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFit
+    }
     
-    private let regionButton: UIButton = {
-        let button = UIButton()
-        button.tag = 1
-        button.setImage(UIImage(named: "unselect"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        return button
-    }()
+    private let cityField = UITextField().then {
+        $0.tag = 0
+        $0.text = Const.cityPlaceholder
+    }
     
-    private let cityField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 0
-        textField.text = "도 단위"
-        return textField
-    }()
-    
-    private let regionField: UITextField = {
-        let textField = UITextField()
-        textField.tag = 1
-        textField.text = "시 단위"
-        return textField
-    }()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        configureLayout()
-        initTextField()
-        initPickerView()
-        setTextFieldAction()
+    private let regionField = UITextField().then {
+        $0.tag = 1
+        $0.text = Const.regionPlaceholder
+    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.configureLayout()
+        self.initTextField()
+        self.initPickerView()
+        self.setTextFieldAction()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -96,114 +105,128 @@ class CreatePostCourseTVC: UITableViewCell {
     }
     
     private func initTextField() {
-        textFieldList.append(contentsOf: [cityField,
+        self.textFieldList.append(contentsOf: [cityField,
                                           regionField])
-        
-        for textField in textFieldList {
-            
+
+        self.textFieldList.map { textField in
             textField.textAlignment = .center
             textField.borderStyle = .none
             textField.tintColor = .clear
             textField.font = .notoSansMediumFont(ofSize: 14)
             textField.textColor = .gray40
-            
+
             textField.inputAccessoryView = toolbar
             textField.inputView = pickerView
         }
     }
     
     private func setTextFieldAction() {
-        cityField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
-        regionField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
-        self.bringSubviewToFront(cityField)
-        self.bringSubviewToFront(regionField)
+        self.cityField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
+        self.regionField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
+        self.contentView.bringSubviewToFront(cityField)
+        self.contentView.bringSubviewToFront(regionField)
     }
-    
 }
 
+
 // MARK: - PickerView
+
 extension CreatePostCourseTVC {
     private func initPickerView() {
-        setPickerViewDelegate()
-        createPickerViewToolbar()
+        self.configurePickerViewDelegate()
+        self.createPickerViewToolbar()
     }
     
-    private func setPickerViewDelegate() {
+    private func configurePickerViewDelegate() {
         pickerView.dataSource = self
         pickerView.delegate = self
     }
     
     private func createPickerViewToolbar() {
         // ToolBar
-        toolbar.sizeToFit()
+        self.toolbar.sizeToFit()
         
         // bar button item
         let titleLabel = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(self.donePresseed))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
-
+        self.toolbar.setItems([titleLabel, flexibleSpace, doneButton], animated: true)
     }
     
-    @objc
-    func donePresseed() {
+    @objc func donePresseed() {
+        let selectText = self.filterList[currentIndex]
 
-        switch currentIndex {
-        case 0:
-            city = filterList[currentIndex]
-            cityField.text = filterList[currentIndex]
-            cityField.textColor = .mainBlue
-            cityButton.setImage(UIImage(named: "select"), for: .normal)
-            wasSelected()
-        case 1:
-            region = filterList[currentIndex]
-            regionField.text = filterList[currentIndex]
-            regionField.textColor = .mainBlue
-            regionButton.setImage(UIImage(named: "select"), for: .normal)
-        default:
-            print("done error")
+        if selectText == Const.unSelected {
+            self.wasSelected()
+            self.unselectStatus(index: currentIndex)
         }
-        
-        
+
+        switch self.currentIndex {
+        case 0:
+            guard selectText != "" && selectText != Const.unSelected else { break }
+            self.city = self.filterList[currentIndex]
+            self.cityField.text = self.filterList[currentIndex]
+            self.cityField.textColor = .mainBlue
+            self.cityButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
+            self.wasSelected()
+        case 1:
+            guard selectText != "" && selectText != Const.unSelected else { break }
+            self.region = self.filterList[currentIndex]
+            self.regionField.text = self.filterList[currentIndex]
+            self.regionField.textColor = .mainBlue
+            self.regionButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
+        default:
+            debugPrint("done error")
+        }
 
         self.endEditing(true)
     }
-    
-    func wasSelected() {
+
+    private func wasSelected() {
         // 기존에 선택되어있으면 2번째 애 초기화해주기
-        if filterList[0] != "" && filterList[0] != "선택안함" {
-            filterList[1] = "" // 뒤에 애 초기화
-            regionField.text = "시 단위"
-            regionField.textColor = .gray40
-            regionButton.setImage(UIImage(named: "unselect"), for: .normal)
+        if self.filterList[0] != "" && filterList[0] != Const.unSelected {
+            self.filterList[1] = "" // 뒤에 애 초기화
+            self.unselectStatus(index: 1)
+        }
+    }
+
+    private func unselectStatus(index: Int) {
+        switch index {
+        case 0:
+            self.cityField.text = Const.cityPlaceholder
+            self.cityField.textColor = .gray40
+            self.cityButton.setImage(ImageLiterals.icUnselect, for: .normal)
+        case 1:
+            self.regionField.text = Const.regionPlaceholder
+            self.regionField.textColor = .gray40
+            self.regionButton.setImage(ImageLiterals.icUnselect, for: .normal)
+        default:
+            return
         }
     }
     
 
-    @objc
-    func clikedTextField(_ sender: UITextField) {
+    @objc func clikedTextField(_ sender: UITextField) {
         
-        currentIndex = sender.tag
-        pickerView.selectRow(0, inComponent: 0, animated: true)
-        changeCurrentPickerData(index: currentIndex) // data 지정
-        changeToolbarText(index: currentIndex) // title 지정
-        pickerView.reloadComponent(0)
-        
+        self.currentIndex = sender.tag
+        self.pickerView.selectRow(0, inComponent: 0, animated: true)
+        self.changeCurrentPickerData(index: currentIndex) // data 지정
+        self.changeToolbarText(index: currentIndex) // title 지정
+        self.pickerView.reloadComponent(0)
     }
     
-    func changeCurrentPickerData(index: Int) {
+    private func changeCurrentPickerData(index: Int) {
         
         if index == 0 {
-            currentList = filterData.state
-        } else if  index == 1 && filterList[0] != "" {
-            currentList = filterData.cityDict[filterList[0]]!
+            self.currentList = self.filterData.state
+        } else if index == 1 && self.filterList[0] != "" && self.filterList[0] != Const.unSelected {
+            self.currentList = self.filterData.cityDict[filterList[0]] ?? []
         } else { // 도 선택 없이 시를 눌렀을 때
             self.endEditing(true)
         }
-        
     }
     
-    func changeToolbarText(index: Int) {
+    private func changeToolbarText(index: Int) {
         var newTitle = ""
         
         switch index {
@@ -213,23 +236,42 @@ extension CreatePostCourseTVC {
             newTitle = "지역(시)"
         }
 
-        toolbar.items![0].title = newTitle
+        self.toolbar.items![0].title = newTitle
     }
     
 }
 
+
+// MARK: - UIPickerViewDelegate
+
 extension CreatePostCourseTVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currentList[row]
+        return self.currentList[row]
     }
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if currentList[row] != "선택안함" && currentList[row] != "" {
-            filterList[currentIndex] = currentList[row]
+        if self.currentList[row] != Const.unSelected && currentList[row] != "" {
+            self.filterList[currentIndex] = self.currentList[row]
+            return
+        }
+
+        if self.currentList[row] == Const.unSelected {
+            switch self.currentIndex {
+            case 0:
+                self.filterList[0] = Const.unSelected
+                self.filterList[1] = Const.unSelected
+            case 1:
+                self.filterList[1] = Const.unSelected
+            default:
+                return
+            }
         }
     }
 }
+
+
+// MARK: - UIPickerViewDataSource
 
 extension CreatePostCourseTVC: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -237,52 +279,59 @@ extension CreatePostCourseTVC: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currentList.count
+        return self.currentList.count
     }
 }
 
-// MARK:- Layout (셀높이 125)
+
+// MARK: - Layout
+
 extension CreatePostCourseTVC {
     
     private func configureLayout() {
-        addSubviews([themeTitleView, cityField, regionField, regionButton, cityButton])
+        self.contentView.addSubviews([
+            self.themeTitleView,
+            self.cityField,
+            self.regionField,
+            self.regionButton,
+            self.cityButton
+        ])
         
         let textWidth: CGFloat = 65
         
-        themeTitleView.snp.makeConstraints{
+        self.themeTitleView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.height.equalTo(38)
         }
         
-        cityButton.snp.makeConstraints{
+        self.cityButton.snp.makeConstraints {
             $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(self.snp.leading).offset(20)
-            $0.width.equalTo(buttonWidth)
             $0.height.equalTo(cityButton.snp.width).multipliedBy(heightRatio)
+            $0.width.equalTo(buttonWidth)
         }
         
-        regionButton.snp.makeConstraints{
+        self.regionButton.snp.makeConstraints {
             $0.top.equalTo(themeTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(cityButton.snp.trailing).offset(6)
-            $0.width.equalTo(buttonWidth)
             $0.height.equalTo(regionButton.snp.width).multipliedBy(heightRatio)
+            $0.width.equalTo(buttonWidth)
         }
         
-        cityField.snp.makeConstraints{
-            $0.height.equalTo(21)
+        self.cityField.snp.makeConstraints {
             $0.leading.equalTo(cityButton.snp.leading).offset(12)
-            $0.width.equalTo(textWidth)
             $0.centerY.equalTo(cityButton.snp.centerY)
-        }
-        
-        regionField.snp.makeConstraints{
             $0.height.equalTo(21)
-            $0.leading.equalTo(regionButton.snp.leading).offset(12)
             $0.width.equalTo(textWidth)
-            $0.centerY.equalTo(regionButton.snp.centerY)
         }
         
+        self.regionField.snp.makeConstraints {
+            $0.leading.equalTo(regionButton.snp.leading).offset(12)
+            $0.centerY.equalTo(regionButton.snp.centerY)
+            $0.height.equalTo(21)
+            $0.width.equalTo(textWidth)
+        }
     }
 }

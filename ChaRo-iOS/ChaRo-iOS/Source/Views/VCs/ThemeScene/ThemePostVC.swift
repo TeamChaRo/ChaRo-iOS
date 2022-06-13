@@ -37,7 +37,7 @@ class ThemePostVC: UIViewController {
     var cellCount = 0
     var currentState: String = "인기순"
     private var selectedTheme = ""
-    private var selectedDriveList: [Drive] = []
+    private var selectedDriveList: [DriveElement] = []
     
     //MARK:- Constraint
     
@@ -74,9 +74,9 @@ class ThemePostVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.registerCustomXib(xibName: "ThemePostThemeTVC")
-        tableView.registerCustomXib(xibName: "ThemePostAllTVC")
-        tableView.registerCustomXib(xibName: "ThemePostDetailTVC")
+        tableView.registerCustomXib(xibName: ThemePostThemeTVC.className)
+        tableView.registerCustomXib(xibName: ThemePostAllTVC.className)
+        tableView.registerCustomXib(xibName: ThemePostDetailTVC.className)
         
         
         tableView.showsHorizontalScrollIndicator = false
@@ -156,13 +156,9 @@ class ThemePostVC: UIViewController {
                     switch(response)
                     {
                     case .success(let driveData):
-                        
-                        if let object = driveData as? TotalDrive {
-                            self.cellCount = object.totalCourse
-                                                    
-                            if let drive = object.drive as? [Drive] {
-                                self.selectedDriveList = drive
-                            }
+                        if let object = driveData as? Drive {
+                            self.cellCount = object.drive.count
+                            self.selectedDriveList = object.drive
                             
                             self.tableView.reloadData()
                         }

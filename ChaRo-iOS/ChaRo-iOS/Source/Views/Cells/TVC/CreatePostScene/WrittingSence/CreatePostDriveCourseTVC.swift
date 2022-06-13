@@ -6,18 +6,18 @@
 //
 
 import UIKit
+
 import SnapKit
+import Then
 
 final class CreatePostDriveCourseTVC: UITableViewCell {
 
-    static let identifier = "CreatePostDriveCourseTVC"
-
-    public var isEditingMode = false
+    var isEditingMode = false
     private let placeHolderText = "드라이브 코스에 대한 설명과 추가적으로 이야기하고 싶은 내용을 마음껏 남겨주세요"
     private let titleView = PostCellTitleView(title: "그래서 제 드라이브 코스는요!")
 
-    public var setCourseDesc: ((String) -> Void)?
-    public var contentText = "" {
+    var setCourseDesc: ((String) -> Void)?
+    private var contentText = "" {
         didSet {
             _ = setCourseDesc?(self.contentText)
         }
@@ -38,57 +38,53 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         }
     }
 
-    public var textCountLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansRegularFont(ofSize: 11)
-        label.textColor = .gray30
-        label.text = "0/280자"
-        return label
-    }()
+    private var textCountLabel = UILabel().then {
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .gray30
+        $0.text = "0/280자"
+    }
 
-    private var textView: UITextView = {
-        let textView = UITextView()
-        textView.font = .notoSansRegularFont(ofSize: 14)
-        textView.textColor = .gray30
-        textView.backgroundColor = .clear
-        textView.isEditable = true
-        return textView
-    }()
+    private var textView = UITextView().then {
+        $0.font = .notoSansRegularFont(ofSize: 14)
+        $0.textColor = .gray30
+        $0.backgroundColor = .clear
+        $0.isEditable = true
+    }
 
-    private let writeFormView: UIView = UIView()
+    private let writeFormView = UIView()
 
-    private let warnningLabel: UILabel = {
-        let label = UILabel()
-        label.text = "280자 이내로 작성해주세요."
-        label.font = .notoSansRegularFont(ofSize: 11)
-        label.textColor = .mainOrange
-        label.isHidden = true
-        return label
-    }()
+    private let warnningLabel = UILabel().then {
+        $0.text = "280자 이내로 작성해주세요."
+        $0.font = .notoSansRegularFont(ofSize: 11)
+        $0.textColor = .mainOrange
+        $0.isHidden = true
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        textView.delegate = self
+        self.textView.delegate = self
     }
 
     public func setContentText(text: String) {
-        textView.text = text
-        textCountLabel.text = "\(text.count)/280자"
-        self.setEditingModeConstraint()
-        setTextViewStyle()
+        self.textView.text = text
+        self.textCountLabel.text = "\(text.count)/280자"
+        self.configureEditingModeLayout()
+        self.configureTextViewStyle()
     }
 
-    private func setTextViewStyle() {
-        textView.isEditable = true
-        textView.textColor = .gray30
-        textView.text = placeHolderText
-        textView.layer.cornerRadius = 12
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.gray20.cgColor
-        textView.contentInset = UIEdgeInsets(top: 21, left: 16, bottom: 16, right: 16)
+    private func configureTextViewStyle() {
+        self.textView.do {
+            $0.isEditable = true
+            $0.textColor = .gray30
+            $0.text = placeHolderText
+            $0.layer.cornerRadius = 12
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor.gray20.cgColor
+            $0.contentInset = UIEdgeInsets(top: 21, left: 16, bottom: 16, right: 16)
+        }
     }
 
-    private func setEditingModeConstraint() {
+    private func configureEditingModeLayout() {
         addSubviews([
             self.titleView,
             self.textView,
@@ -130,36 +126,36 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.endEditing(true)
     }
-
 }
 
-//MARK: TextViewDelegate
+
+//MARK: - UITextViewDelegate
 
 extension CreatePostDriveCourseTVC: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
         let textCount = textView.text.count
         if textCount <= limitTextCount {
-            textCountLabel.text = "\(textCount)/280자"
-            isWarnning = isWarnning ? false : isWarnning
-            contentText = textView.text
+            self.textCountLabel.text = "\(textCount)/280자"
+            self.isWarnning.toggle()
+            self.contentText = textView.text
         } else {
-            textView.text = contentText
-            isWarnning = !isWarnning ? true : isWarnning
+            self.textView.text = self.contentText
+            self.isWarnning.toggle()
         }
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .gray30 {
-            textView.text = nil
-            textView.textColor = .gray50
+            self.textView.text = nil
+            self.textView.textColor = .gray50
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
-            textView.text = placeHolderText
-            textView.textColor = .gray30
+            self.textView.text = placeHolderText
+            self.textView.textColor = .gray30
         }
     }
 

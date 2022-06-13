@@ -40,7 +40,7 @@ class OtherMyPageVC: UIViewController {
         $0.layer.masksToBounds = true
         $0.layer.borderColor = UIColor.white.cgColor
         $0.layer.borderWidth = 3
-        $0.image = UIImage(named: "myimage")
+        $0.image = ImageLiterals.imgMypageDefaultProfile
         $0.layer.cornerRadius = 32
     }
     private let headerBackgroundView = UIView().then {
@@ -53,10 +53,7 @@ class OtherMyPageVC: UIViewController {
         $0.text = "MY PAGE"
     }
     
-    private let isFollowButton = UIButton().then {
-        $0.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
-        $0.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
-    }
+    private var isFollowButton = UIButton()
     
     private let userNameLabel = UILabel().then {
         $0.textColor = UIColor.white
@@ -104,8 +101,8 @@ class OtherMyPageVC: UIViewController {
     private let collectionBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
-    private let noDataImageView = UIImageView().then {
-        $0.image = UIImage(named: "no_img")
+    private let noDataImageView = UIImageView().then{
+        $0.image = ImageLiterals.imgMypageEmpty
     }
     private var collectionview: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -132,10 +129,16 @@ class OtherMyPageVC: UIViewController {
         setFilterViewCompletion()
         getMypageData()
         getFollowData()
+        setFollowButtonUI()
         self.dismissDropDownWhenTappedAround()
+        setButtonTarget()
     }
-    
-    
+
+    func setButtonTarget() {
+        isFollowButton.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
+        followerButton.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
+        followButton.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
+    }
     //MARK: setUI
     
     func setCollectionviewLayout() {
@@ -282,8 +285,7 @@ class OtherMyPageVC: UIViewController {
                 //MypageInfinityService.addURL = "/write/11/0"
                 getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
 
-            }
-            else if currentState == "최신순"{
+            } else if currentState == "최신순"{
                 //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
                 likeOrNew = "new/"
                 addURL = "/write/\(lastId)"
@@ -301,9 +303,16 @@ class OtherMyPageVC: UIViewController {
     func setOtherUserID(userID: String) {
         otherUserID = userID
     }
-    
-    
-    func setHeaderData() {
+    func setFollowButtonUI() {
+        isFollowButton.backgroundColor = isFollowButton.isSelected ? UIColor.white : .clear
+        isFollowButton.layer.cornerRadius = 13
+        isFollowButton.layer.borderColor = UIColor.white.cgColor
+        isFollowButton.layer.borderWidth = 1
+        isFollowButton.setTitleColor(isFollowButton.isSelected ? UIColor.mainBlue : UIColor.white, for: .normal)
+        isFollowButton.setTitle(isFollowButton.isSelected ? "팔로잉" : "팔로우", for: .normal)
+        isFollowButton.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 13)
+    }
+    func setHeaderData(){
         followerNum = userProfileData[0].follower
         followingNum = userProfileData[0].following
         guard let url = URL(string: userProfileData[0].profileImage) else { return }
@@ -331,10 +340,27 @@ class OtherMyPageVC: UIViewController {
     
     @objc private func doFollowButtonClicked(_ sender: UIButton) {
         postFollowUser()
-   }
+    }
+    
     @objc private func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
-   }
+    }
+    
+    @objc private func followerButtonClicked(_ sender: UIButton) {
+        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+            followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: otherUserID)
+            followVC.isOtherMypage = true
+            self.tabBarController?.tabBar.isHidden = true
+            self.navigationController?.pushViewController(followVC, animated: true)
+     }
+    
+    @objc private func followingButtonClicked(_ sender: UIButton) {
+        guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
+            followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: otherUserID)
+            followVC.isOtherMypage = true
+            self.tabBarController?.tabBar.isHidden = true
+            self.navigationController?.pushViewController(followVC, animated: true)
+     }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
@@ -376,11 +402,12 @@ class OtherMyPageVC: UIViewController {
                    case .success(let data):
                        if let response = data as? DoFollowDataModel {
                            self.isFollow = response.data.isFollow
-                           if self.isFollow == false {
-                               self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
-                           }
-                           else {
-                               self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
+                           if self.isFollow == true {
+                               self.isFollowButton.isSelected = true
+                               self.setFollowButtonUI()
+                           } else {
+                               self.isFollowButton.isSelected = false
+                               self.setFollowButtonUI()
                            }
                        }
                    case .requestErr(let message) :
@@ -409,8 +436,7 @@ class OtherMyPageVC: UIViewController {
                            if response.data.lastID == 0{
                                self.isLast = true
                                self.delegate?.endIndicator()
-                           }
-                           else {
+                           } else {
                                self.isLast = false
                            }
                            if self.isLast == false {
@@ -442,12 +468,13 @@ class OtherMyPageVC: UIViewController {
             case .success(let data):
                 if let response = data as? DoFollowDataModel {
                     self.isFollow = response.data.isFollow
-                    if self.isFollow == false {
-                        self.isFollowButton.setBackgroundImage(ImageLiterals.icFollowButtonWhite, for: .normal)
+                    if self.isFollow == false{
+                        self.isFollowButton.isSelected = false
+                        self.setFollowButtonUI()
                         self.getMypageData()
-                    }
-                    else {
-                        self.isFollowButton.setBackgroundImage(UIImage(named: "followingButton"), for: .normal)
+                    } else {
+                        self.isFollowButton.isSelected = true
+                        self.setFollowButtonUI()
                         self.getMypageData()
                     }
                     
@@ -489,12 +516,19 @@ extension OtherMyPageVC: UICollectionViewDataSource {
     
         if(indexPath.row == 0){
             return detailCell
-        }
-        else {
+        } else {
             let writenElement = writenPostDriveData[indexPath.row-1]
             var writenTags = [writenElement.region, writenElement.theme,
                         writenElement.warning ?? ""] as [String]
-        cell.setData(image: writenPostDriveData[indexPath.row-1].image, title: writenPostDriveData[indexPath.row-1].title, tagCount:writenTags.count, tagArr: writenTags, heart:writenPostDriveData[indexPath.row-1].favoriteNum, save: writenPostDriveData[indexPath.row-1].saveNum, year: writenPostDriveData[indexPath.row-1].year, month: writenPostDriveData[indexPath.row-1].month, day: writenPostDriveData[indexPath.row-1].day, postID: writenPostDriveData[indexPath.row-1].postID)
+        cell.setData(image: writenPostDriveData[indexPath.row-1].image,
+                     title: writenPostDriveData[indexPath.row-1].title,
+                     tagCount:writenTags.count, tagArr: writenTags,
+                     heart:writenPostDriveData[indexPath.row-1].favoriteNum,
+                     save: writenPostDriveData[indexPath.row-1].saveNum,
+                     year: writenPostDriveData[indexPath.row-1].year,
+                     month: writenPostDriveData[indexPath.row-1].month,
+                     day: writenPostDriveData[indexPath.row-1].day,
+                     postID: writenPostDriveData[indexPath.row-1].postID)
         return cell
         
         }
@@ -528,8 +562,7 @@ extension OtherMyPageVC: UICollectionViewDelegate {
                             UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0{
             return CGSize(width: userWidth-35, height: 42)
-        }
-        else {
+        } else {
         return CGSize(width: collectionView.frame.width, height: 100)
         }
     }

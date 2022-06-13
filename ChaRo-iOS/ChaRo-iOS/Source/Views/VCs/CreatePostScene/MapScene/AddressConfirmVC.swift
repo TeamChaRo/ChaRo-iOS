@@ -10,10 +10,8 @@ import SnapKit
 import Then
 import TMapSDK
 
+final class AddressConfirmVC: UIViewController {
 
-class AddressConfirmVC: UIViewController {
-
-    static let identifier = "AddressConfirmVC"
     private var addressModel: AddressDataModel?
     private var tMapView = MapService.getTmapView()
     private var deviceHeight: CGFloat?
@@ -25,6 +23,7 @@ class AddressConfirmVC: UIViewController {
         $0.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)
         $0.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
     }
+    
     private var centerMarkerView = UIImageView()
     private var bottomView = UIView().then {
         $0.backgroundColor = .white
@@ -67,7 +66,8 @@ class AddressConfirmVC: UIViewController {
     @objc func sendDecidedAddress() {
         let endIndex = Int(navigationController?.viewControllers.endIndex ?? 0)
         guard let addressMainVC = navigationController?.viewControllers[endIndex-3] as? AddressMainVC else { return }
-        addressMainVC.replaceAddressData(address: addressModel!, index: presentingCellIndex)
+        addressMainVC.replaceAddressData(address: addressModel ?? AddressDataModel(),
+                                         index: presentingCellIndex)
         navigationController?.popToViewController(addressMainVC, animated: true)
     }
     
@@ -109,7 +109,6 @@ class AddressConfirmVC: UIViewController {
     
     func setTMapInitAddressView(address: AddressDataModel) {
         let initPosition: CLLocationCoordinate2D = address.getPoint()
-        print("setTMapInitAddressView - tMapView.getZoom() = \(tMapView.getZoom())")
         tMapView.setCenter(initPosition)
         tMapView.setZoom(18)
     }

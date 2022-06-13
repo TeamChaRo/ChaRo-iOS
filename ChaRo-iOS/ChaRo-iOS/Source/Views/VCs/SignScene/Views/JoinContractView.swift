@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class JoinContractView: UIView {
 
@@ -28,12 +29,30 @@ class JoinContractView: UIView {
     var agreePushLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 푸시 수신 동의")
     var agreeEmailLabel = JoinTitleLabel(type: .normalTitle, title: "(선택)  마케팅 이메일 수신 동의")
     
+    var showPushDocumentButton = UIButton().then {
+        $0.setTitle("보기", for: .normal)
+        $0.setTitleColor(.gray30, for: .normal)
+        $0.titleLabel?.font = .notoSansRegularFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(presentPushSafariVC), for:.touchUpInside)
+    }
+    
+    var showEmailDocumentButton = UIButton().then {
+        $0.setTitle("보기", for: .normal)
+        $0.setTitleColor(.gray30, for: .normal)
+        $0.titleLabel?.font = .notoSansRegularFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(presentEmailSafariVC), for:.touchUpInside)
+    }
+    
     var agreeAllButton = JoinAgreeButton(isBig: true).then {
         $0.addTarget(self, action: #selector(allButtonClicked), for: .touchUpInside)
     }
 
     var agreePushButton = JoinAgreeButton(isBig: false)
     var agreeEmailButton = JoinAgreeButton(isBig: false)
+    
+    //약관 SafariViewer 생성을 위한 클로져
+    var pushDocumentPresentClosure: ((SFSafariViewController) -> Void)?
+    var emailDocumentPresentClosure: ((SFSafariViewController) -> Void)?
     
     let nextButton = NextButton(isSticky: false, isTheLast: true)
     
@@ -52,6 +71,19 @@ class JoinContractView: UIView {
         super.init(frame: .zero)
         configureUI()
         makeButtonBlue()
+    }
+    
+    @objc private func presentPushSafariVC() {
+        guard let url = URL(string: "https://nosy-catmint-6ad.notion.site/a5b0820f25d741cc923bb84bbf8d3fcc") else { return }
+        let safariView: SFSafariViewController = SFSafariViewController(url: url)
+        self.pushDocumentPresentClosure!(safariView)
+    }
+    
+    @objc private func presentEmailSafariVC() {
+        guard let url = URL(string: "https://nosy-catmint-6ad.notion.site/f603f6a3d7c8413795dd42fc56a15b58") else { return }
+        let safariView: SFSafariViewController = SFSafariViewController(url: url)
+        //self.present(safariView, animated: true, completion: nil)
+        self.emailDocumentPresentClosure!(safariView)
     }
     
     private func makeButtonBlue() {
@@ -93,7 +125,9 @@ class JoinContractView: UIView {
                                        agreeEmailLabel,
                                        agreeAllButton,
                                        agreePushButton,
-                                       agreeEmailButton])
+                                       agreeEmailButton,
+                                       showPushDocumentButton,
+                                       showEmailDocumentButton])
         
         contractBackgroundImageView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
@@ -130,6 +164,12 @@ class JoinContractView: UIView {
             $0.leading.equalToSuperview().offset(18)
         }
         
+        showPushDocumentButton.snp.makeConstraints {
+            $0.top.equalTo(agreePushLabel.snp.top)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(22)
+        }
+        
         agreeEmailLabel.snp.makeConstraints {
             $0.top.equalTo(agreePushLabel.snp.bottom).offset(20)
             $0.leading.equalTo(agreeAllLabel.snp.leading)
@@ -139,6 +179,12 @@ class JoinContractView: UIView {
         agreeEmailButton.snp.makeConstraints {
             $0.height.width.leading.equalTo(agreePushButton)
             $0.top.equalTo(agreeLine.snp.bottom).offset(58)
+        }
+        
+        showEmailDocumentButton.snp.makeConstraints {
+            $0.top.equalTo(agreeEmailLabel.snp.top)
+            $0.trailing.equalTo(showPushDocumentButton.snp.trailing)
+            $0.height.equalTo(22)
         }
         
         nextButton.snp.makeConstraints {

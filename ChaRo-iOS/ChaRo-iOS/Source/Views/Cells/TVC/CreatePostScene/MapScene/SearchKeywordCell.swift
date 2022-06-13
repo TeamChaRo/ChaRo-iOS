@@ -14,20 +14,19 @@ class SearchKeywordCell: UITableViewCell {
     private var addressData: AddressDataModel?
     public var presentingMapViewClosure: ((AddressDataModel) -> Void)?
     
-    var titleLabel = UILabel().then {
+    private var titleLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 16)
         $0.textColor = .gray50
     }
     
-    var addressLabel = UILabel().then {
+    private var addressLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .gray40
     }
     
-    var dateLabel = UILabel().then {
+    private var dateLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 12)
         $0.textColor = .gray30
-        $0.text = ""
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -68,20 +67,14 @@ class SearchKeywordCell: UITableViewCell {
         }
     }
     
-    public func setContents(addressMadel: AddressDataModel) {
-        addressData = addressMadel
-        titleLabel.text = addressData!.title
-        addressLabel.text = addressData!.address
-        dateLabel.text = ""
-    }
-    
-    public func setContents(addressMadel: KeywordResult) {
-        addressData = AddressDataModel(title: addressMadel.latitude,
-                                       address: addressMadel.longitude,
-                                       latitude: addressMadel.address,
-                                       longitude: addressMadel.title)
-        titleLabel.text = addressData!.title
-        addressLabel.text = addressData!.address
-        dateLabel.text = "\(addressMadel.month). \(addressMadel.day)"
+    func setContent(element: AddressDataModel, keyword: String, date: String) {
+        titleLabel.text = element.title
+        let attributedKeyword = NSMutableAttributedString(string: titleLabel.text ?? "")
+        attributedKeyword.addAttribute(.foregroundColor,
+                                       value: UIColor.mainBlue,
+                                       range: NSString(string: element.title).range(of: keyword))
+        titleLabel.attributedText = attributedKeyword
+        addressLabel.text = element.address
+        dateLabel.text = date
     }
 }

@@ -14,6 +14,9 @@ enum ImageLiterals {
     static var icAlarmBlack: UIImage { .load(name: "iconAlarmBlack") }
     static var icAppleLogo: UIImage { .load(name: "appleLogo") }
     
+    static var icId: UIImage { .load(name: "icId") }
+    static var icPassword: UIImage { .load(name: "icPassword") }
+    
     static var icBack: UIImage { .load(name: "backIcon") }
     static var icBackGray: UIImage { .load(name: "icGrayBackButton") }
     static var icBackWhite: UIImage { .load(name: "backIconWhite") }
@@ -36,7 +39,6 @@ enum ImageLiterals {
     static var icFollowingButton: UIImage { .load(name: "followingButton") }
     static var icFollowingButtonImage: UIImage { .load(name: "followingButtonImage") }
     static var icGoogleLogo: UIImage { .load(name: "googleLogo") }
-    
     static var icHeartActive: UIImage { .load(name: "icHeartActive")}
     static var icHeartCountNoText: UIImage { .load(name: "heart_count_no text") }
     static var icHeartInactive: UIImage { .load(name: "bigheartInactive")}
@@ -49,16 +51,17 @@ enum ImageLiterals {
     static var icMapWaypoint: UIImage { .load(name: "icMapWaypoint") }
     static var icMypageMore: UIImage { .load(name: "icMypageMore") }
     static var icNextWhite: UIImage { .load(name: "icNextWhite") }
+    static var icNoticeDown: UIImage { .load(name: "noticeDown") }
     static var icProfile: UIImage { .load(name: "icProfile") }
     static var icPreviousWhite: UIImage { .load(name: "icPreviousWhite") }
     static var icRouteEnd: UIImage { .load(name: "icRouteEnd") }
     static var icRouteStart: UIImage { .load(name: "icRouteStart") }
     static var icRouteWaypoint: UIImage { .load(name: "icRouteWaypoint") }
+    static var icSettingWhite: UIImage{ .load(name: "setting2_white") }
     
     //TODO: 위에 두개 중 안쓰는 거 한쪽은 삭제하기
-    static var icSaveActive: UIImage { .load(name: "icSaveActive") }
+    static var icSaveActive: UIImage { .load(name: "save_active") }
     static var icSaveInactive: UIImage { .load(name: "icSaveInactive") }
-    static var icSave_Active: UIImage { .load(name: "save_active") }
     static var icSave_Inactive: UIImage { .load(name: "save_inactive") }
     
     static var icScrapActive: UIImage { .load(name: "icSaveActive")}
@@ -70,7 +73,6 @@ enum ImageLiterals {
     static var icSearchBtnWhite: UIImage { .load(name: "searchBtnWhite") }
     static var icSearchWhite: UIImage { .load(name: "icSearchWhite") }
     static var icSelectBoxShow: UIImage { .load(name: "selectbox_show") }
-    static var icSettingWhite: UIImage { .load(name: "setting_white") }
     static var icShare: UIImage { .load(name: "icShare") }
     static var icSignupAgreeBig: UIImage { .load(name: "icSignupAgreeBig") }
     static var icSignupAgreeSmall: UIImage { .load(name: "icSignupAgreeSmall") }
@@ -100,15 +102,53 @@ enum ImageLiterals {
     static var imgBlueCarLine: UIImage { .load(name: "blueCarLine") }
     static var imgCharoCar: UIImage { .load(name: "charoCar") }
     static var imgMapFirstGuide: UIImage { .load(name: "mapFirstGuide")}
-    static var imgMyImage: UIImage { .load(name: "myimage") }
-    static var imgOnBoarding1: UIImage { .load(name: "onboardingBackground1") }
-    static var imgOnBoarding2: UIImage { .load(name: "onboardingBackground2") }
-    static var imgOnBoarding3: UIImage { .load(name: "onboardingBackground3") }
-    static var imgSearchBackground: UIImage { .load(name: "searchBackground") }
-    static var imgSearchBackgroundWhite: UIImage { .load(name: "searchBackgroundWhite") }
-    static var imgSearchNoImage: UIImage { .load(name: "searchNoImage") }
-    static var imgPlaceholder: UIImage { .load(name: "imagePlaceholder") }
-    static var imgPostTextfieldLocationShow: UIImage { .load(name: "postTextfieldLocationShow") }
+    static var imgMyImage: UIImage{ .load(name: "myimage") }
+    static var imgMypageDefaultProfile: UIImage{ .load(name: "defaultImage")}
+    static var imgMypageEmpty: UIImage{ .load(name: "no_img")}
+    static var imgOnBoarding1: UIImage{ .load(name: "onboardingBackground1") }
+    static var imgOnBoarding2: UIImage{ .load(name: "onboardingBackground2") }
+    static var imgOnBoarding3: UIImage{ .load(name: "onboardingBackground3") }
+    static var imgSearchBackground: UIImage{ .load(name: "searchBackground") }
+    static var imgSearchBackgroundWhite: UIImage{ .load(name: "searchBackgroundWhite") }
+    static var imgSearchNoImage: UIImage{ .load(name: "searchNoImage") }
+    static var imgPlaceholder: UIImage{ .load(name: "imagePlaceholder") }
+    static var imgPostTextfieldLocationShow: UIImage{ .load(name: "postTextfieldLocationShow") }
+    
+    static var imgCarTheaterCourse1: UIImage{ .load(name: "imgCarTheaterCourse1") }
+    static var imgCarTheaterCourse2: UIImage{ .load(name: "imgCarTheaterCourse2-1") }
+    static var imgCarTheaterCourse3: UIImage{ .load(name: "imgCarTheaterCourse2-2") }
+    static var imgCarTheaterCourse4: UIImage{ .load(name: "imgCarTheaterCourse4") }
+    
+    static var imgAboutBanner1: UIImage{ .load(name: "imgAboutBanner1") }
+    static var imgAboutBanner2: UIImage{ .load(name: "imgAboutBanner2") }
+    static var imgAboutBanner3: UIImage{ .load(name: "imgAboutBanner3") }
+    
+    static var imgAlbumByAnt: UIImage{ .load(name: "imgAlbumByAnt") }
+    static var imgAlbumByBaynk: UIImage{ .load(name: "imgAlbumByBaynk") }
+    static var imgAlbumByBrahny: UIImage{ .load(name: "imgAlbumByBrahny") }
+    static var imgAlbumByDanShay: UIImage{ .load(name: "imgAlbumByDanShay") }
+    static var imgAlbumByEtham: UIImage{ .load(name: "imgAlbumByEtham") }
+    static var imgAlbumByGreenDay: UIImage{ .load(name: "imgAlbumByGreenDay") }
+    static var imgAlbumByHonne: UIImage{ .load(name: "imgAlbumByHonne") }
+    static var imgAlbumByJames: UIImage{ .load(name: "imgAlbumByJames") }
+    static var imgAlbumByJosefSalvat: UIImage{ .load(name: "imgAlbumByJosefSalvat") }
+    static var imgAlbumByLanyILYSB: UIImage{ .load(name: "imgAlbumByLany-ILYSB") }
+    static var imgAlbumByLany: UIImage{ .load(name: "imgAlbumByLany") }
+    static var imgAlbumByLoote: UIImage{ .load(name: "imgAlbumByLoote") }
+    static var imgAlbumByOliver: UIImage{ .load(name: "imgAlbumByOliver") }
+    static var imgAlbumByPale: UIImage{ .load(name: "imgAlbumByPale") }
+    static var imgAlbumByVirginia: UIImage{ .load(name: "imgAlbumByVirginia") }
+    
+    static var imgAboutCharo1: UIImage{ .load(name: "imgAboutCharo1") }
+    static var imgAboutCharo2: UIImage{ .load(name: "imgAboutCharo2") }
+    static var imgAboutCharo4: UIImage{ .load(name: "imgAboutCharo4") }
+    
+    static var imgGangneungCourse1: UIImage{ .load(name: "imgGangneungCourse1") }
+    static var imgGangneungCourse2: UIImage{ .load(name: "imgGangneungCourse2") }
+    
+    static var imgPlaylistBanner: UIImage{ .load(name: "imgPlaylistBanner") }
+    static var imgSpringPlaylistText: UIImage{ .load(name: "imgSpringPlaylistText") }
+
 }
 
 extension UIImage {

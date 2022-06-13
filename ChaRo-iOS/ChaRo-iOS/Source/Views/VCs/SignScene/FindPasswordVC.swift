@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FindPasswordVC: UIViewController, UITextFieldDelegate {
+final class FindPasswordVC: UIViewController {
 
     static let identifier = "FindPasswordVC"
     
@@ -15,9 +15,8 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     let emailInputView = JoinInputView(title: "임시 비밀번호 발급",
                                        subTitle: "가입하신 이메일 주소로 임시 비밀번호가 발급됩니다. 로그인 후 꼭 비밀번호를 변경해주세요.",
                                        placeholder: "이메일 아이디를 입력해주세요")
-
-    let nextButton = NextButton(isSticky: false, isTheLast: false)
-    let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
+    let nextButton = NextButton(isSticky: false, isTheLast: true)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
     var stickyView: UIView?
     
     var navigationView = UIView().then {
@@ -31,7 +30,7 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     }
     
     var backButton = UIButton().then {
-        $0.setImage(UIImage(named: "icBackButton"), for: .normal)
+        $0.setImage(ImageLiterals.icBack, for: .normal)
         $0.addTarget(self, action: #selector(moveBack), for: .touchUpInside)
     }
     
@@ -39,12 +38,11 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         $0.backgroundColor = .gray20
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureDelegate()
+        configureClosure()
         configureUI()
         configureStickyView()
     }
@@ -53,6 +51,43 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
     private func configureDelegate() {
         emailInputView.inputTextField?.delegate = self
     }
+    
+    private func configureClosure() {
+        nextButton.nextPageClosure = { [weak self] in
+            if let email = self?.emailInputView.inputTextField?.text {
+                self?.sendTempPassword(email: email)
+            }
+        }
+        
+        stickyNextButton.nextPageClosure = { [weak self] in
+            if let email = self?.emailInputView.inputTextField?.text {
+                self?.sendTempPassword(email: email)
+            }
+        }
+    }
+    
+    private func sendTempPassword(email: String) {
+        //TODO: - 로딩 인티케이터 뷰 넣기
+        FindPasswordService.shared.sendTempPassword(email: email) { result in
+            switch result {
+            case .success(let data):
+                //MARK: - 비밀번호 확인용
+                print(data)
+                self.makeAlert(title: "완료", message: "가입하신 이메일 주소로 임시 비밀번호가 발급되었습니다.", okAction: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                    UserDefaults.standard.set(data, forKey: Constants.UserDefaultsKey.userPassword)
+                })
+            case .requestErr(let message):
+                if let message = message as? String {
+                    self.makeAlert(title: "존재하지 않는 이메일입니다.",
+                                   message: message)
+                }
+            default :
+                print("ERROR")
+            }
+        }
+    }
+    
     
     private func configureUI() {
         
@@ -64,9 +99,16 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         
         emailInputView.snp.makeConstraints {
             $0.top.equalTo(navigationView.snp.bottom).offset(23)
-            $0.height.equalTo(117)
+            $0.height.equalTo(200)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        emailInputView.subTitleLabel.font = .notoSansRegularFont(ofSize: 14)
+        
+        emailInputView.inputTextField!.snp.remakeConstraints {
+            $0.top.equalTo(emailInputView.subTitleLabel.snp.bottom).offset(30)
+            $0.leading.trailing.equalTo(emailInputView.titleLabel)
+            $0.height.equalTo(48)
         }
         
         nextButton.snp.makeConstraints {
@@ -123,13 +165,11 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         }
         
         emailInputView.inputTextField!.inputAccessoryView = stickyView
-        
-        
     }
     
     //MARK: - Custom 함수
     @objc func moveBack() {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func makeButtonBlue() {
@@ -146,6 +186,12 @@ class FindPasswordVC: UIViewController, UITextFieldDelegate {
         stickyNextButton.isEnabled = false
     }
 
-    
+}
 
+extension FindPasswordVC: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if let isEmpty = textField.text?.isEmpty {
+            isEmpty ? makeButtonsGray() : makeButtonBlue()
+        }
+    }
 }

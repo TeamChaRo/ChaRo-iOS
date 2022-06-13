@@ -6,15 +6,14 @@
 //
 
 import UIKit
+import Then
 
 class PresentationController: UIPresentationController {
-    let blurEffectView: UIVisualEffectView!
+    let dimView = UIView().then {
+        $0.backgroundColor = .black
+    }
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
-        
-        let blurEffect = UIBlurEffect(style: .dark)
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
-        
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
     }
     
@@ -25,10 +24,10 @@ class PresentationController: UIPresentationController {
     }
 
     override func presentationTransitionWillBegin() {
-        blurEffectView.alpha = 0
-        containerView?.addSubview(blurEffectView)
+        dimView.alpha = 0
+        containerView?.addSubview(dimView)
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [self] (UIViewControllerTransitionCoordinatorContext) in
-            blurEffectView.alpha = 0.7
+            dimView.alpha = 0.5
         }, completion: {
             (UIViewControllerTransitionCoordinatorContext) in
             
@@ -37,10 +36,10 @@ class PresentationController: UIPresentationController {
     
     override func dismissalTransitionWillBegin() {
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [self] (UIViewControllerTransitionCoordinatorContext) in
-            blurEffectView.alpha = 0
+            dimView.alpha = 0
         }, completion: {
             (UIViewControllerTransitionCoordinatorContext) in
-            self.blurEffectView.removeFromSuperview()
+            self.dimView.removeFromSuperview()
         })
     }
     
@@ -52,7 +51,7 @@ class PresentationController: UIPresentationController {
         super.containerViewDidLayoutSubviews()
         
         presentedView?.frame = frameOfPresentedViewInContainerView
-        blurEffectView.frame = containerView!.bounds
+        dimView.frame = containerView!.bounds
     }
 
     @objc func dismissController() {
