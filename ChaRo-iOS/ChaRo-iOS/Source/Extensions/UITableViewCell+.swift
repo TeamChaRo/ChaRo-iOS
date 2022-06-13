@@ -11,25 +11,30 @@ import UIKit
 protocol ReusableTableViewCell {
     static var reuseIdentifier: String { get }
 }
+
 extension ReusableTableViewCell {
     static var reuseIdentifier: String {
         return String(describing: self)
     }
 }
+
 extension UITableViewCell: ReusableTableViewCell { }
 
-extension UITableViewCell{
-    
+extension UITableViewCell {
     func getTableCellIndexPath() -> Int {
-        var indexPath = 0
-        
-        guard let superView = self.superview as? UITableView else {
+        if let superView = self.superview as? UITableView {
+            return superView.indexPath(for: self)?.row ?? 0
+        } else {
             return -1
         }
-        indexPath = superView.indexPath(for: self)!.row
-
-        return indexPath
     }
     
+    func getTableSectionIndexPath() -> Int {
+        if let superView = self.superview as? UITableView {
+            return superView.indexPath(for: self)?.section ?? 0
+        } else {
+            return -1
+        }
+    }
 }
 

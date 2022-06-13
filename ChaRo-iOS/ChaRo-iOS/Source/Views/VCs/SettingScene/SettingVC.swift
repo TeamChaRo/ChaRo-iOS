@@ -8,27 +8,25 @@
 import UIKit
 import SnapKit
 import Then
-import CoreMIDI
 import SafariServices
 import MessageUI
-import KakaoSDKCommon
+import PhotosUI
 
-class SettingVC: UIViewController {
+final class SettingVC: UIViewController {
     
     // MARK: Variable
     private let userWidth = UIScreen.main.bounds.width
     private let userheight = UIScreen.main.bounds.height
     
-    private var permissionModel = [settingDataModel(titleString: "알림", isToggle: true, toggleData: true),
-                                   settingDataModel(titleString: "사진", isToggle: true, toggleData: true),
-                                   settingDataModel(titleString: "이메일 수신 동의", isToggle: true, toggleData: true)]
+    private var permissionModel = [settingDataModel(titleString: "사진", isToggle: true, toggleData: true)]
     
     private var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
                                 settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
                                 settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: Constants.userEmail, subLabelColor: UIColor.black)]
     
     private var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
-                                    settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black)]
+                                    settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black),
+                                    settingDataModel(titleString: "신고하기", titleLabelColor: UIColor.black)]
     private var termsModel = [settingDataModel(titleString: "개인정보 처리방침", titleLabelColor: UIColor.black),
                               settingDataModel(titleString: "서비스 이용약관", titleLabelColor: UIColor.black),
                               settingDataModel(titleString: "오픈소스 라이선스", titleLabelColor: UIColor.black),
@@ -49,7 +47,7 @@ class SettingVC: UIViewController {
     
     private let backButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
-        $0.addTarget(SettingVC.self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
     }
     
     private let bottomView = UIView().then {
@@ -68,7 +66,11 @@ class SettingVC: UIViewController {
         super.viewDidLoad()
         setHeaderLayout()
         setTableViewLayout()
-        
+        addNotificationObserver()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: Function, ServerFunction, LayoutFunction
@@ -117,7 +119,7 @@ extension SettingVC {
     
     /// SafariViewController를 불러와 화면전환을 하는 메서드 (인앱)
     private func presentToSafariVC(urlString: String) {
-        let url = NSURL(string: urlString)! as URL
+        guard let url = URL(string: urlString) else { return }
         let safariView: SFSafariViewController = SFSafariViewController(url: url)
         self.present(safariView, animated: true, completion: nil)
     }
@@ -142,12 +144,44 @@ extension SettingVC {
             self.makeAlert(title: "메일 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.")
         }
     }
+    
+    /// Notification Observer를 추가하는 메서드
+    private func addNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    /// 앱 foreground로 진입했을 때 tableView의 section을 reload하는 메서드(토글 관련)
+    @objc func willEnterForeground() {
+        settingTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
+    
+    /// 사진 접근 설정 상태를 토글에 반영하는 메서드
+    private func setPhotoSwitchStatus(_ toggle: UISwitch) {
+        DispatchQueue.main.async {
+            switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+            case .authorized:
+                toggle.isOn = true
+            case .limited, .restricted, .denied, .notDetermined:
+                toggle.isOn = false
+            default:
+                break
+            }
+        }
+    }
+    
+    /// LoginSB의 루트 네비게이션 컨트롤러로 화면전환하는 메서드
+    private func presentToSignNC() {
+        guard let signNC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: SignNC.className)
+                as? SignNC else {return}
+        signNC.modalPresentationStyle = .overFullScreen
+        self.present(signNC, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension SettingVC: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 5
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -181,12 +215,10 @@ extension SettingVC: UITableViewDelegate {
             titleLabel.text = "접근허용"
             bottomView.backgroundColor = UIColor.white
         case 1:
-            titleLabel.text = "마케팅 활용 및 광고 수신 동의"
-        case 2:
             titleLabel.text = "계정"
-        case 3:
+        case 2:
             titleLabel.text = "정보"
-        case 4:
+        case 3:
             titleLabel.text = "고객센터"
         default:
             titleLabel.text = "약관"
@@ -214,13 +246,11 @@ extension SettingVC: UITableViewDelegate {
 extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return 2
         case 1:
-            return 1
-        case 2:
             return 3
-        case 5:
+        case 3:
+            return 2
+        case 4:
             return 6
         default:
             return 1
@@ -234,27 +264,26 @@ extension SettingVC: UITableViewDataSource {
         switch indexPath.section {
             //0 접근허용
         case 0:
-            settingData = permissionModel[indexPath.row]
-            //1 마케팅 활용 및 광고 수신 동의
+            setPhotoSwitchStatus(cell.toggle)
+            settingData = permissionModel[0]
+            //1 계정
         case 1:
-            settingData = permissionModel[2]
-            //2 계정
-        case 2:
             settingData = accountModel[indexPath.row]
-            //3 정보
-        case 3:
+            //2 정보
+        case 2:
             settingData = infoInquiryModel[0]
-            //4 고객센터
+            //3 고객센터
+        case 3:
+            settingData = infoInquiryModel[indexPath.row + 1]
+            //4 약관
         case 4:
-            settingData = infoInquiryModel[1]
-            //5 약관
-        case 5:
             settingData = termsModel[indexPath.row]
         default:
             return UITableViewCell()
             
         }
         
+        cell.settingDelegate = self
         cell.setData(isToggle: settingData.isToggle,
                      toggleData: settingData.toggleData,
                      isSubLabel: settingData.isSubLabel,
@@ -267,18 +296,32 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            print("접근허용")
         case 1:
-            print("마케팅동의")
+            switch indexPath.row {
+            case 0:
+                let changeImageVC = ChangeImageVC()
+                self.navigationController?.pushViewController(changeImageVC, animated: true)
+            case 1:
+                let findPasswordVC = FindPasswordVC()
+                self.navigationController?.pushViewController(findPasswordVC, animated: true)
+            default:
+                break
+            }
         case 2:
-            print("계정")
+            let noticeVC = NoticeVC()
+            self.navigationController?.pushViewController(noticeVC, animated: true)
         case 3:
-            print("정보")
+            switch indexPath.row {
+            case 0:
+                /// 1:1 문의
+                sendInquiryMail()
+            case 1:
+                /// 신고하기
+                presentToSafariVC(urlString: "https://docs.google.com/forms/d/1A1I8b2xQLgKVGsx112udNrHRp51n1p0m2ymot-kofy4/viewform?edit_requested=true")
+            default:
+                break
+            }
         case 4:
-            /// 1:1 문의
-            sendInquiryMail()
-        case 5:
             switch indexPath.row {
             case 0, 1, 2:
                 /// 개인정보 처리방침, 서비스 이용약관, 오픈소스 라이선스
@@ -288,14 +331,18 @@ extension SettingVC: UITableViewDataSource {
                     "https://nosy-catmint-6ad.notion.site/f9a49abdcf91479987faaa83a35eb7a8"]
                 presentToSafariVC(urlString: urlData[indexPath.row])
             case 4:
-                print("로그아웃")
+                makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "") { _ in
+                    self.presentToSignNC()
+                }
             case 5:
-                print("탈퇴")
+                makeRequestAlert(title: "계정을 삭제하시겠습니까?", message: "회원 탈퇴시 계정이 모두 삭제됩니다.\n(단, 작성하신 글은 익명의 형태로 남아 사용자에게 보여집니다.)") { _ in
+                    self.deleteAccount()
+                }
             default:
-                print("default")
+                break
             }
         default:
-            print(indexPath.section)
+            break
         }
     }
     
@@ -304,9 +351,38 @@ extension SettingVC: UITableViewDataSource {
     }
 }
 
+// MARK: - Network
+extension SettingVC {
+    
+    /// 회원 탈퇴
+    private func deleteAccount() {
+        DeleteAccountService.shared.deleteAccount { response in
+            switch(response) {
+            case .success:
+                self.presentToSignNC()
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                self.makeAlert(title: "회원 탈퇴 오류", message: "")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+}
+
 // MARK: - MFMailComposeViewControllerDelegate
 extension SettingVC: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - SettingSwitchDelegate
+extension SettingVC: SettingSwitchDelegate {
+    func switchAction(sender: UISwitch) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
 }
