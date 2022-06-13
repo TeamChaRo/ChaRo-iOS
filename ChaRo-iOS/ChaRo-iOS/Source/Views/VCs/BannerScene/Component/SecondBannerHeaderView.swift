@@ -68,8 +68,8 @@ final class SecondBannerHeaderView: UIView {
         $0.text = "개별 음원을 선택하고 싶으면\n아래 앨범 커버를 클릭해주세요."
         $0.numberOfLines = 2
     }
-    
-    
+
+   //MARK: - init 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setContraints()
