@@ -110,6 +110,7 @@ final class CreatePostThemeTVC: UITableViewCell {
 
 extension CreatePostThemeTVC {
     @objc func clikedTextField(_ sender: UITextField) {
+        sender.resignFirstResponder()
         self.tapSetThemeButtonAction?()
     }
     

@@ -12,6 +12,14 @@ import Then
 
 final class CreatePostCourseTVC: UITableViewCell {
 
+    // MARK: Const
+
+    private enum Const {
+        static let cityPlaceholder = "시 단위"
+        static let regionPlaceholder = "도 단위"
+        static let unSelected = "선택안함"
+    }
+
     // MARK: Properties
 
     // 데이터 전달 closeur
@@ -65,18 +73,18 @@ final class CreatePostCourseTVC: UITableViewCell {
     
     private let regionButton = UIButton().then {
         $0.tag = 1
-        $0.setImage(ImageLiterals.icThemeSelected, for: .normal)
+        $0.setImage(ImageLiterals.icUnselect, for: .normal)
         $0.imageView?.contentMode = .scaleAspectFit
     }
     
     private let cityField = UITextField().then {
         $0.tag = 0
-        $0.text = "도 단위"
+        $0.text = Const.cityPlaceholder
     }
     
     private let regionField = UITextField().then {
         $0.tag = 1
-        $0.text = "시 단위"
+        $0.text = Const.regionPlaceholder
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -115,8 +123,8 @@ final class CreatePostCourseTVC: UITableViewCell {
     private func setTextFieldAction() {
         self.cityField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
         self.regionField.addTarget(self, action: #selector(clikedTextField), for: .allEvents)
-        self.bringSubviewToFront(cityField)
-        self.bringSubviewToFront(regionField)
+        self.contentView.bringSubviewToFront(cityField)
+        self.contentView.bringSubviewToFront(regionField)
     }
 }
 
@@ -146,15 +154,23 @@ extension CreatePostCourseTVC {
     }
     
     @objc func donePresseed() {
+        let selectText = self.filterList[currentIndex]
+
+        if selectText == Const.unSelected {
+            self.wasSelected()
+            self.unselectStatus(index: currentIndex)
+        }
 
         switch self.currentIndex {
         case 0:
+            guard selectText != "" && selectText != Const.unSelected else { break }
             self.city = self.filterList[currentIndex]
             self.cityField.text = self.filterList[currentIndex]
             self.cityField.textColor = .mainBlue
             self.cityButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
             self.wasSelected()
         case 1:
+            guard selectText != "" && selectText != Const.unSelected else { break }
             self.region = self.filterList[currentIndex]
             self.regionField.text = self.filterList[currentIndex]
             self.regionField.textColor = .mainBlue
@@ -168,11 +184,24 @@ extension CreatePostCourseTVC {
 
     private func wasSelected() {
         // 기존에 선택되어있으면 2번째 애 초기화해주기
-        if self.filterList[0] != "" && filterList[0] != "선택안함" {
+        if self.filterList[0] != "" && filterList[0] != Const.unSelected {
             self.filterList[1] = "" // 뒤에 애 초기화
-            self.regionField.text = "시 단위"
+            self.unselectStatus(index: 1)
+        }
+    }
+
+    private func unselectStatus(index: Int) {
+        switch index {
+        case 0:
+            self.cityField.text = Const.cityPlaceholder
+            self.cityField.textColor = .gray40
+            self.cityButton.setImage(ImageLiterals.icUnselect, for: .normal)
+        case 1:
+            self.regionField.text = Const.regionPlaceholder
             self.regionField.textColor = .gray40
             self.regionButton.setImage(ImageLiterals.icUnselect, for: .normal)
+        default:
+            return
         }
     }
     
@@ -190,7 +219,7 @@ extension CreatePostCourseTVC {
         
         if index == 0 {
             self.currentList = self.filterData.state
-        } else if index == 1 && self.filterList[0] != "" {
+        } else if index == 1 && self.filterList[0] != "" && self.filterList[0] != Const.unSelected {
             self.currentList = self.filterData.cityDict[filterList[0]] ?? []
         } else { // 도 선택 없이 시를 눌렀을 때
             self.endEditing(true)
@@ -222,8 +251,21 @@ extension CreatePostCourseTVC: UIPickerViewDelegate {
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if self.currentList[row] != "선택안함" && currentList[row] != "" {
+        if self.currentList[row] != Const.unSelected && currentList[row] != "" {
             self.filterList[currentIndex] = self.currentList[row]
+            return
+        }
+
+        if self.currentList[row] == Const.unSelected {
+            switch self.currentIndex {
+            case 0:
+                self.filterList[0] = Const.unSelected
+                self.filterList[1] = Const.unSelected
+            case 1:
+                self.filterList[1] = Const.unSelected
+            default:
+                return
+            }
         }
     }
 }
@@ -247,7 +289,7 @@ extension CreatePostCourseTVC: UIPickerViewDataSource {
 extension CreatePostCourseTVC {
     
     private func configureLayout() {
-        self.addSubviews([
+        self.contentView.addSubviews([
             self.themeTitleView,
             self.cityField,
             self.regionField,
