@@ -12,7 +12,7 @@ import SafariServices
 import MessageUI
 import PhotosUI
 
-class SettingVC: UIViewController {
+final class SettingVC: UIViewController {
     
     // MARK: Variable
     private let userWidth = UIScreen.main.bounds.width

@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import SwiftUI
 
-class NoticeVC: UIViewController {
+final class NoticeVC: UIViewController {
     
     // MARK: UIComponent
     private lazy var tableView = UITableView().then {
@@ -133,11 +133,11 @@ extension NoticeVC: UITableViewDataSource {
     /// cellForRowAt
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let titleCell = NoticeTitleTVC()
+            guard let titleCell = tableView.dequeueReusableCell(withType: NoticeTitleTVC.self, for: indexPath) else { return UITableViewCell() }
             titleCell.setData(model: noticeData[indexPath.section])
             return titleCell
         } else {
-            let contentCell = NoticeContentTVC()
+            guard let contentCell = tableView.dequeueReusableCell(withType: NoticeContentTVC.self, for: indexPath) else { return UITableViewCell() }
             contentCell.setData(model: noticeData[indexPath.section])
             return contentCell
         }
