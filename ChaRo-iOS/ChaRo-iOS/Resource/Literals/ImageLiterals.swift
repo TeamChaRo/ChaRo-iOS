@@ -43,7 +43,7 @@ enum ImageLiterals {
     static var icGoogleLogo: UIImage { .load(name: "googleLogo") }
     static var icHeartActive: UIImage { .load(name: "icHeartActive")}
     static var icHeartCountNoText: UIImage { .load(name: "heart_count_no text") }
-    static var icHeartInactive: UIImage { .load(name: "bigheartInactive")}
+    static var icHeartInactive: UIImage { .load(name: "icHeartInactive")}
     static var icHeartWhiteLine: UIImage { .load(name: "icHeartWhiteLine")}
     static var icKakaoLogo: UIImage { .load(name: "kakaoLogo") }
     static var icLoginFieldBackground: UIImage { .load(name: "idBackgroud") }
