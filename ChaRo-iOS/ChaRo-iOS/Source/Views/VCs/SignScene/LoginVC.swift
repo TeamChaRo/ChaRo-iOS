@@ -34,8 +34,13 @@ class LoginVC: UIViewController {
         configureLoginButtonUI()
         configureTextfieldUI()
         configureNotificationCenter()
+        addTestUserAccount()
     }
     
+    private func addTestUserAccount() {
+        self.idTextField.text = "gpfud1998@naver.com"
+        self.pwdTextField.text = "charo0505"
+    }
     override func viewDidDisappear(_ animated: Bool) {
         removeObservers()
     }
