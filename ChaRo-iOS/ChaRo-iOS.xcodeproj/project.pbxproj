@@ -219,6 +219,7 @@
 		70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425E2817158900631BB7 /* UpdateProfileService.swift */; };
 		70FD4261281715B300631BB7 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4260281715B300631BB7 /* UserDefaultKey.swift */; };
 		70FD4263281839B400631BB7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4262281839B400631BB7 /* String+.swift */; };
+		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
 		8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */; };
@@ -494,6 +495,7 @@
 		70FD425E2817158900631BB7 /* UpdateProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileService.swift; sourceTree = "<group>"; };
 		70FD4260281715B300631BB7 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		70FD4262281839B400631BB7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
 		83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */,
+				7F950A2128664CF8005E5E5C /* FollowButton.swift */,
 			);
 			path = FollowScene;
 			sourceTree = "<group>";
@@ -1739,6 +1742,7 @@
 				70D63E252694E13B0036484B /* ThemePostVC.swift in Sources */,
 				703DD83C269F867D004416A9 /* LoginService.swift in Sources */,
 				3CCBB32726E2201800088B82 /* SearchKeywordViewModel.swift in Sources */,
+				7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */,
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
 				7062C847270CBF4F00C1CD2E /* ValidateEmailService.swift in Sources */,
 				7062C8592710DCC800C1CD2E /* JoinDataModel.swift in Sources */,
