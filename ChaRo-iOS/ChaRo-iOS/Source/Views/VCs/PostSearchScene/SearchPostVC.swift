@@ -24,16 +24,8 @@ class SearchPostVC: UIViewController {
     private var currentList: [String] = []
     private var filterList: [String] = ["","","",""]
     private var canActiveButton = false {
-        didSet {
-            if canActiveButton {
-                changeFindButtonToActive()
-            }
-            else {
-                changeFindButtonToUnactive()
-            }
-        }
+        didSet { canActiveButton ? changeFindButtonToActive() : changeFindButtonToUnactive() }
     }
-    
     
     //MARK: Component
     lazy private var backButton = XmarkDismissButton(toDismiss: self)
@@ -52,7 +44,7 @@ class SearchPostVC: UIViewController {
     private let userSubLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 17)
         $0.textColor = .white
-        $0.text = "원하는 코스를 검색해보세요"
+        $0.text = "원하는 코스를 검색해 보세요"
     }
     
     private let fileterView = UIImageView().then {
