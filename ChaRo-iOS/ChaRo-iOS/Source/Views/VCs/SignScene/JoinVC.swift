@@ -122,8 +122,8 @@ class JoinVC: UIViewController {
             let password = self.passwordView.passwordInputView.secondTextField.text
             let nickname = self.profileView.nicknameView.inputTextField?.text
             let image = self.profileView.profileView.profileImageView.image
-            let marketingPush = self.contractView.agreePushButton.Agreed
-            let marketingEmail = self.contractView.agreeEmailButton.Agreed
+            let marketingPush = self.contractView.agreePushButton.agreed
+            let marketingEmail = self.contractView.agreeEmailButton.agreed
             
             
             self.postJoin(userEmail: userEmail!,

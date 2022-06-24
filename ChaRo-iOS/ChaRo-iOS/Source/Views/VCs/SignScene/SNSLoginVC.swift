@@ -217,8 +217,8 @@ class SNSLoginVC: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
         
         nextVC.contractView.nextButton.nextPageClosure = {
-            let isPushAgree = nextVC.contractView.agreePushButton.Agreed
-            let isEmailAgree = nextVC.contractView.agreeEmailButton.Agreed
+            let isPushAgree = nextVC.contractView.agreePushButton.agreed
+            let isEmailAgree = nextVC.contractView.agreeEmailButton.agreed
             
             switch self.socialType {
             case .apple:
