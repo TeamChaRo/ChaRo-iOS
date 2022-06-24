@@ -7,18 +7,24 @@
 
 import Foundation
 
+enum NotificationType: String, Codable {
+    case post = "post"
+    case following = "following"
+}
+
 // MARK: - NotificationListModel
 struct NotificationListModel: Codable {
-    let pushID, pushCode, isRead: Int?
+    let pushID, isRead, postID: Int?
     let token: String?
     let image: String?
-    let title, body, month, day: String?
+    let title, body, month, day, type: String?
+    let followed: Bool?
 
     enum CodingKeys: String, CodingKey {
         case pushID = "push_id"
-        case pushCode = "push_code"
         case isRead = "is_read"
-        case token, image, title, body, month, day
+        case postID = "postId"
+        case token, image, title, body, month, day, type, followed
     }
     
     /// 알림 날짜 표시 형식에 맞춰 convert하는 함수
