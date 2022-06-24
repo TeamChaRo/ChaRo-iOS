@@ -11,9 +11,34 @@ import RxSwift
 
 class SearchKeywordViewModel {
     
-    let tmapView = MapService.getTmapView()
-    let pathData = TMapPathData()
-    var addressSubject = PublishSubject<[AddressDataModel]>()
+    var searchedHistory: [KeywordResult]
+    private let tmapView = MapService.getTmapView()
+    private let pathData = TMapPathData()
+    private let addressSubject = ReplaySubject<[AddressDataModel]>.create(bufferSize: 1)
+    var isSearchedHistoryList: Bool = true
+    
+    init(searchHistory: [KeywordResult]) {
+        searchedHistory = searchHistory
+        addressSubject.onNext(refineSearchHistory(of: searchHistory))
+    }
+    
+    struct Input {
+    
+    }
+    
+    struct Output {
+        let addressSubject: ReplaySubject<[AddressDataModel]>
+    }
+    
+    func transform(input: Input, disposeBag: DisposeBag) -> Output{
+        return Output(addressSubject: addressSubject)
+    }
+    
+    private func refineSearchHistory(of list: [KeywordResult]) -> [AddressDataModel] {
+        var addressModelList: [AddressDataModel] = []
+        list.forEach { addressModelList.append($0.getAddressModel()) }
+        return addressModelList
+    }
     
     public func findAutoCompleteAddressList(keyword: String) {
         pathData.autoComplete(keyword) { autoAddressList, error in
@@ -52,10 +77,15 @@ class SearchKeywordViewModel {
                                       longitude: $0.coordinate?.longitude.description ?? "0.0")
             addressList.append(address)
         }
+        isSearchedHistoryList = false
         addressSubject.onNext(addressList)
     }
     
     func getCurrentDate() -> String {
         return Date.getCurrentMonth() + "." + Date.getCurrentDay()
+    }
+    
+    func refreshSearchHistory() {
+        addressSubject.onNext(refineSearchHistory(of: searchedHistory))
     }
 }

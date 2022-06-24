@@ -141,10 +141,10 @@
             </objects>
             <point key="canvasLocation" x="1217" y="35"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--SignNC-->
         <scene sceneID="zU7-Fu-17N">
             <objects>
-                <navigationController id="39T-Re-Mxg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SignNC" id="39T-Re-Mxg" customClass="SignNC" customModule="ChaRo_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="S9T-fh-yXl">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

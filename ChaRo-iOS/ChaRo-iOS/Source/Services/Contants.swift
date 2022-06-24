@@ -10,7 +10,7 @@ import Foundation
 struct Constants {
     
     // MARK: - BASE URL
-    static let baseURL = "http://charo-server.o-r.kr"
+    static let baseURL = "http://52.79.108.141:5000"
     
     static let userId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
     static let nickName = UserDefaults.standard.string(forKey: "nickname") ?? "지으니"
@@ -50,7 +50,8 @@ struct Constants {
     static let searchPostURL = baseURL + "/post/search/"
     
     /// 최근 검색 결과 관련
-    static let searchKeywordURL = baseURL + "/searchHistory"
+    static let searchKeywordURL = baseURL + "/post/readHistory/" + userEmail
+    static let saveSearchedHistory = baseURL + "/post/saveHistory"
 
     /// 게시물 상세보기
     static let detailPostURL = baseURL + "/post/detail/" + userEmail + "/"
@@ -77,6 +78,10 @@ struct Constants {
     //비밀번호, 프로필 수정
     static let updatePassword = baseURL + "/user/password?"
     static let updateProfile = baseURL + "/user/"
+    static let findPassword = baseURL + "/user/password/"
     /// 알림
     static let notificationListURL = baseURL + "/push/"
+    
+    /// 회원탈퇴
+    static let deleteAccountURL = baseURL + "/user/" + userEmail
 }

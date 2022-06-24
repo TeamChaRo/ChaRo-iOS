@@ -51,6 +51,7 @@ enum ImageLiterals {
     static var icMapWaypoint: UIImage { .load(name: "icMapWaypoint") }
     static var icMypageMore: UIImage { .load(name: "icMypageMore") }
     static var icNextWhite: UIImage { .load(name: "icNextWhite") }
+    static var icNoticeDown: UIImage { .load(name: "noticeDown") }
     static var icProfile: UIImage { .load(name: "icProfile") }
     static var icPreviousWhite: UIImage { .load(name: "icPreviousWhite") }
     static var icRouteEnd: UIImage { .load(name: "icRouteEnd") }
@@ -113,7 +114,41 @@ enum ImageLiterals {
     static var imgPlaceholder: UIImage{ .load(name: "imagePlaceholder") }
     static var imgPostTextfieldLocationShow: UIImage{ .load(name: "postTextfieldLocationShow") }
     
+    static var imgCarTheaterCourse1: UIImage{ .load(name: "imgCarTheaterCourse1") }
+    static var imgCarTheaterCourse2: UIImage{ .load(name: "imgCarTheaterCourse2-1") }
+    static var imgCarTheaterCourse3: UIImage{ .load(name: "imgCarTheaterCourse2-2") }
+    static var imgCarTheaterCourse4: UIImage{ .load(name: "imgCarTheaterCourse4") }
     
+    static var imgAboutBanner1: UIImage{ .load(name: "imgAboutBanner1") }
+    static var imgAboutBanner2: UIImage{ .load(name: "imgAboutBanner2") }
+    static var imgAboutBanner3: UIImage{ .load(name: "imgAboutBanner3") }
+    
+    static var imgAlbumByAnt: UIImage{ .load(name: "imgAlbumByAnt") }
+    static var imgAlbumByBaynk: UIImage{ .load(name: "imgAlbumByBaynk") }
+    static var imgAlbumByBrahny: UIImage{ .load(name: "imgAlbumByBrahny") }
+    static var imgAlbumByDanShay: UIImage{ .load(name: "imgAlbumByDanShay") }
+    static var imgAlbumByEtham: UIImage{ .load(name: "imgAlbumByEtham") }
+    static var imgAlbumByGreenDay: UIImage{ .load(name: "imgAlbumByGreenDay") }
+    static var imgAlbumByHonne: UIImage{ .load(name: "imgAlbumByHonne") }
+    static var imgAlbumByJames: UIImage{ .load(name: "imgAlbumByJames") }
+    static var imgAlbumByJosefSalvat: UIImage{ .load(name: "imgAlbumByJosefSalvat") }
+    static var imgAlbumByLanyILYSB: UIImage{ .load(name: "imgAlbumByLany-ILYSB") }
+    static var imgAlbumByLany: UIImage{ .load(name: "imgAlbumByLany") }
+    static var imgAlbumByLoote: UIImage{ .load(name: "imgAlbumByLoote") }
+    static var imgAlbumByOliver: UIImage{ .load(name: "imgAlbumByOliver") }
+    static var imgAlbumByPale: UIImage{ .load(name: "imgAlbumByPale") }
+    static var imgAlbumByVirginia: UIImage{ .load(name: "imgAlbumByVirginia") }
+    
+    static var imgAboutCharo1: UIImage{ .load(name: "imgAboutCharo1") }
+    static var imgAboutCharo2: UIImage{ .load(name: "imgAboutCharo2") }
+    static var imgAboutCharo4: UIImage{ .load(name: "imgAboutCharo4") }
+    
+    static var imgGangneungCourse1: UIImage{ .load(name: "imgGangneungCourse1") }
+    static var imgGangneungCourse2: UIImage{ .load(name: "imgGangneungCourse2") }
+    
+    static var imgPlaylistBanner: UIImage{ .load(name: "imgPlaylistBanner") }
+    static var imgSpringPlaylistText: UIImage{ .load(name: "imgSpringPlaylistText") }
+
 }
 
 extension UIImage {
