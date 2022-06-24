@@ -11,10 +11,11 @@ import Then
 import Kingfisher
 import Lottie
 import SwiftUI
+import RxSwift
 
 class HomeVC: UIViewController {
-
-//MARK: Var
+    
+    //MARK: Var
     @IBOutlet weak var HomeTableView: UITableView!
     @IBOutlet weak var HomeNavigationView: UIView!
     @IBOutlet weak var homeNavigationLogo: UIImageView!
@@ -43,7 +44,7 @@ class HomeVC: UIViewController {
     private var localData: [DriveElement] = []
     private var customText: String = ""
     private var localText: String = ""
-
+    
     private let lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     private var delegate: AnimateIndicatorDelegate?
     private var tableIndex: IndexPath = [0,0]
@@ -51,6 +52,9 @@ class HomeVC: UIViewController {
     private let navigationBottomView = UIView().then {
         $0.backgroundColor = UIColor.gray20
     }
+    private var notificationListData = BehaviorSubject<[NotificationListModel]>(value: [])
+    private let bag = DisposeBag()
+    private var notificationActivate: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +64,11 @@ class HomeVC: UIViewController {
         setActionToSearchButton()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
+        bindNotificationData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getNotificationListData()
     }
     
     //navigationView
@@ -276,7 +285,25 @@ class HomeVC: UIViewController {
         self.navigationController?.pushViewController(notiVC, animated: true)
     }
     
-
+    private func bindNotificationData() {
+        notificationListData.subscribe(onNext: { [weak self] data in
+            var isActivate: Bool = false
+            
+            for i in data {
+                if i.isRead == 0 {
+                    isActivate = true
+                }
+            }
+            
+            self?.notificationActivate = isActivate
+            self?.setNaviBarNotificationItem(isActive: isActivate)
+        }).disposed(by: bag)
+    }
+    
+    private func setNaviBarNotificationItem(isActive: Bool) {
+        homeNavigationNotificationButton.rx.image()
+            .onNext(isActive ? ImageLiterals.icAlarmActiveWhite : ImageLiterals.icAlarmWhite)
+    }
 }
 
 extension HomeVC: UITableViewDelegate {
@@ -318,41 +345,45 @@ extension HomeVC: UITableViewDelegate {
                     let imageView = UIImageView()
                     imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
                     print(bannerData.count)
-                        guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
-                        imageView.kf.setImage(with: url)
+                    guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
+                    imageView.kf.setImage(with: url)
                     imageView.tag = i
                     bannerScrollView.addSubview(imageView)
                     bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i)
                     bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: homeTableViewHeaderHeight)
                 }
             }
-
+            
         }
-        }
-//MARK: ScrollViewDidScroll
+    }
+    //MARK: ScrollViewDidScroll
     private func configureLogoImage(isWhite: Bool) {
         if isWhite {
             homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
-            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmWhite, for: .normal)
+            if let noti = notificationActivate {
+                homeNavigationNotificationButton.rx.image().onNext(noti ? ImageLiterals.icAlarmActiveWhite :ImageLiterals.icAlarmWhite)
+            }
             navigationBottomView.isHidden = true
         } else {
             homeNavigationLogo.image = ImageLiterals.icCharoLogo
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
-            homeNavigationNotificationButton.setBackgroundImage(ImageLiterals.icAlarmBlack, for: .normal)
+            if let noti = notificationActivate {
+                homeNavigationNotificationButton.rx.image().onNext(noti ? ImageLiterals.icAlarmActiveBlack :ImageLiterals.icAlarmBlack)
+            }
             navigationBottomView.isHidden = false
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNavigationAlpah()
         setMoveCar()
-       }
+    }
     func setNavigationAlpah() {
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
-
+        
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
-               if currentHeight > -homeTableViewHeaderHeight {
+            if currentHeight > -homeTableViewHeaderHeight {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
                 if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3) {
                     if currentWidth == 0 && currentHeight == 0{
@@ -561,5 +592,27 @@ extension HomeVC: AnimateIndicatorDelegate {
     func endIndicator() {
         lottieView.lottieView.stop()
         lottieView.isHidden = true
+    }
+}
+
+// MARK: - Networking
+extension HomeVC {
+    private func getNotificationListData() {
+        NotificationService.shared.getNotificationList { [weak self] response in
+            switch(response) {
+            case .success(let resultData):
+                if let data =  resultData as? [NotificationListModel]{
+                    self?.notificationListData.onNext(data)
+                }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 }
