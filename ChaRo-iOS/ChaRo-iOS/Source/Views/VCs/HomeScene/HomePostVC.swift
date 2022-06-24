@@ -101,8 +101,6 @@ class HomePostVC: UIViewController {
         setNavigationBottomLineView()
         setFilterViewCompletion()
         self.dismissDropDownWhenTappedAround()
-        // Do any additional setup after loading the view.
-
     }
 
     @IBAction func backButtonClicked(_ sender: Any) {
@@ -116,12 +114,11 @@ class HomePostVC: UIViewController {
             case .success(let data) :
                 if let response = data as? DetailModel {
                     print("인기순 데이터")
-
                     DispatchQueue.global().sync {
-                        self.postCount = response.data.totalCourse
+                        self.postCount = response.data.drive.count
                         self.postData = [response]
                     }
-                    self.postCount = response.data.totalCourse
+                    self.postCount = response.data.drive.count
                     self.collectionView.reloadData()
                 }
             case .requestErr(let message) :
@@ -162,11 +159,8 @@ class HomePostVC: UIViewController {
         }
     }
     
-
-    
 }
 extension HomePostVC: UICollectionViewDelegate {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -208,13 +202,7 @@ extension HomePostVC: UICollectionViewDelegate {
                 return cell
             }
             else {
-                cell.setData(image: postData[0].data.drive[indexPath.row].image,
-                             title: postData[0].data.drive[indexPath.row].title,
-                             tagCount: postData[0].data.drive[indexPath.row].tags.count,
-                             tagArr: postData[0].data.drive[indexPath.row].tags,
-                             isFavorite: postData[0].data.drive[indexPath.row].isFavorite,
-                             postID: postData[0].data.drive[indexPath.row].postID, height: 60)
-                //cell.titleHeight?.constant = 60
+                cell.setData(viewModel: self.configureCommonVeiwModel(index: indexPath.row))
                 cell.setLabel()
                 return cell
             }
@@ -305,4 +293,23 @@ extension HomePostVC: PostIdDelegate {
         tabBarController?.present(nextVC, animated: true, completion: nil)
     }
     
+    private func setTagArr(region: String, theme: String, warning: String) -> [String]{
+        let temp: [String] = [region == nil ? "": region, theme == nil ? "": theme, warning == nil ? "": warning]
+        return temp
+    }
+    
+    private func configureCommonVeiwModel(index: Int) -> CommonCVC.ViewModel {
+        var tag = setTagArr(region: postData[0].data.drive[index].region,
+                                  theme: postData[0].data.drive[index].theme,
+                                  warning: postData[0].data.drive[index].warning ?? "")
+        return CommonCVC.ViewModel(
+            image: postData[0].data.drive[index].image,
+            title: postData[0].data.drive[index].title,
+            tagCount: tag.count,
+            tagArr: tag,
+            isFavorite: postData[0].data.drive[index].isFavorite,
+            postID: postData[0].data.drive[index].postID,
+            height: 60
+        )
+    }
 }
