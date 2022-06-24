@@ -1,17 +1,22 @@
-//MARK: made by Jack
-
+//MARK: made in vietnam
 import Alamofire
 import Foundation
 
-struct GetDetailDataService
+struct GetInfinityDetailDataService
 {
-    static var value: String = "1?value=summer"
-    static let detailData = GetDetailDataService()
-    func getRecommendInfo(completion: @escaping (NetworkResult<Any>) -> Void)
+    static var value: String = ""
+    static var identifier: String = ""
+    
+    static let detailData = GetInfinityDetailDataService()
+    func getInfo(postId: Int,
+                 count: Int,
+                 type: getDataThemeType,
+                 completion: @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
-///post/preview/like/:userEmail/:identifier
-        let URL = Constants.detailURL + GetDetailDataService.value
+        print(count)
+        let URL = type == .recommend ?  Constants.detailURL + GetInfinityDetailDataService.identifier + "/\(String(postId))/\(String(count))/" + GetInfinityDetailDataService.value:
+        Constants.newDetailURL + GetInfinityDetailDataService.identifier + "/\(String(postId))/" + GetInfinityDetailDataService.value
         print(URL)
         let header: HTTPHeaders = ["Content-Type": "application/json"]
 

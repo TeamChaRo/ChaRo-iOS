@@ -13,6 +13,11 @@ protocol SetTopTitleDelegate {
     func setTopTitle(name: String)
 }
 
+enum getDataThemeType {
+    case recommend
+    case new
+}
+
 class HomePostVC: UIViewController {
     @IBOutlet weak var NavigationTitleLabel: UILabel!
     @IBOutlet weak var homePostNavigationView: UIView!
@@ -21,6 +26,8 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var newUpdateButton: UIButton!
     @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
+    
+    var flag: Bool = true
     
     var delegate: SetTopTitleDelegate?
     var isFirstLoaded = true
@@ -31,9 +38,11 @@ class HomePostVC: UIViewController {
     var cellIndexpath: IndexPath = [0,0]
     var postCount: Int = 0
     var newPostCount: Int = 0
-    var postData: [DetailModel] = []
-    var newPostData: [DetailModel] = []
+    var postData: [DetailDrive] = []
     var cellLoadFirst: Bool = true
+    
+    var lastCount = 0
+    var lastId = 0
     
     var currentState: String = "인기순"
     let filterView = FilterView()
@@ -101,8 +110,6 @@ class HomePostVC: UIViewController {
         setNavigationBottomLineView()
         setFilterViewCompletion()
         self.dismissDropDownWhenTappedAround()
-        // Do any additional setup after loading the view.
-
     }
 
     @IBAction func backButtonClicked(_ sender: Any) {
@@ -110,21 +117,24 @@ class HomePostVC: UIViewController {
     }
     
     func getData() {
-        GetDetailDataService.detailData.getRecommendInfo{ (response) in
+        GetDetailDataService.detailData.getRecommendInfo{ (
+            response) in
             switch response
             {
-            case .success(let data) :
+            case .success(let data):
                 if let response = data as? DetailModel {
                     print("인기순 데이터")
-
                     DispatchQueue.global().sync {
-                        self.postCount = response.data.totalCourse
-                        self.postData = [response]
+                        self.flag = true
+                        self.postCount = response.data.drive.count
+                        self.postData = response.data.drive
+                        self.lastId = response.data.lastID
+                        self.lastCount = response.data.lastCount ?? 0
                     }
-                    self.postCount = response.data.totalCourse
+                    self.postCount = response.data.drive.count
                     self.collectionView.reloadData()
                 }
-            case .requestErr(let message) :
+            case .requestErr(let message):
                 print("requestERR")
             case .pathErr :
                 print("pathERR")
@@ -144,13 +154,16 @@ class HomePostVC: UIViewController {
                 if let response = data as? DetailModel {
                     print("최신순 데이터")
                     DispatchQueue.global().sync {
+                        self.flag = true
                         self.postCount = response.data.drive.count
+                        self.lastCount = response.data.lastCount ?? 0
+                        self.lastId = response.data.lastID
                         self.newPostCount = response.data.drive.count
-                    self.postData = [response]
+                        self.postData = response.data.drive
                     }
                     self.collectionView.reloadData()
                 }
-            case .requestErr(let message) :
+            case .requestErr(let message):
                 print("requestERR")
             case .pathErr :
                 print("pathERR")
@@ -162,11 +175,45 @@ class HomePostVC: UIViewController {
         }
     }
     
-
-    
+    func getInfinityData(postId: Int, count: Int, type: getDataThemeType){
+        GetInfinityDetailDataService.detailData.getInfo(postId: postId, count: count, type: type){ (response) in
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? DetailModel {
+                    print("무한스크롤 테스트")
+                    if response.data.drive.count == 0 {
+                        break
+                    }
+                    self.flag = true
+                    DispatchQueue.global().sync {
+                        if self.currentState == "인기순"{
+                            self.lastCount = response.data.lastCount ?? 0
+                            self.lastId = response.data.lastID
+                            self.postData.append(contentsOf: response.data.drive)
+                        }
+                        else{
+                            self.lastCount = response.data.lastCount ?? 0
+                            self.lastId = response.data.lastID
+                            self.postData.append(contentsOf: response.data.drive)
+                        }
+                    }
+                    print(self.postData)
+                    self.collectionView.reloadData()
+                }
+            case .requestErr(let message):
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
 }
 extension HomePostVC: UICollectionViewDelegate {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -176,7 +223,7 @@ extension HomePostVC: UICollectionViewDelegate {
             return 1
         }
         else {
-            return postCount
+            return currentState == "인기순" ? postData.count: postData.count
         }
     }
     
@@ -208,13 +255,7 @@ extension HomePostVC: UICollectionViewDelegate {
                 return cell
             }
             else {
-                cell.setData(image: postData[0].data.drive[indexPath.row].image,
-                             title: postData[0].data.drive[indexPath.row].title,
-                             tagCount: postData[0].data.drive[indexPath.row].tags.count,
-                             tagArr: postData[0].data.drive[indexPath.row].tags,
-                             isFavorite: postData[0].data.drive[indexPath.row].isFavorite,
-                             postID: postData[0].data.drive[indexPath.row].postID, height: 60)
-                //cell.titleHeight?.constant = 60
+                cell.setData(viewModel: self.configureCommonVeiwModel(index: indexPath.row))
                 cell.setLabel()
                 return cell
             }
@@ -224,7 +265,6 @@ extension HomePostVC: UICollectionViewDelegate {
         }
      return UICollectionViewCell()
     }
-    
 }
 
 
@@ -305,4 +345,41 @@ extension HomePostVC: PostIdDelegate {
         tabBarController?.present(nextVC, animated: true, completion: nil)
     }
     
+    private func setTagArr(region: String, theme: String, warning: String) -> [String]{
+        let temp: [String] = [region == nil ? "": region, theme == nil ? "": theme, warning == nil ? "": warning]
+        return temp
+    }
+    
+    private func configureCommonVeiwModel(index: Int) -> CommonCVC.ViewModel {
+        var tag = setTagArr(region: postData[index].region,
+                                  theme: postData[index].theme,
+                                  warning: postData[index].warning ?? "")
+        return CommonCVC.ViewModel(
+            image: postData[index].image,
+            title: postData[index].title,
+            tagCount: tag.count,
+            tagArr: tag,
+            isFavorite: postData[index].isFavorite,
+            postID: postData[index].postID,
+            height: 60
+        )
+    }
+}
+
+extension HomePostVC {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = collectionView.contentSize.height
+        if(collectionView.contentOffset.y > contentHeight - collectionView.frame.height) && collectionView.contentOffset.x == 0 {
+            if flag {
+                if currentState == "인기순"{
+                    flag = false
+                    getInfinityData(postId: lastId, count: lastCount, type: .recommend)
+                }
+                else {
+                    flag = false
+                    getInfinityData(postId: lastId, count: lastCount, type: .new)
+                }
+            }
+        }
+    }
 }

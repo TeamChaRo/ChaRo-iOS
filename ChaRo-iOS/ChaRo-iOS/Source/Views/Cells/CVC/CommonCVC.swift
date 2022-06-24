@@ -16,6 +16,16 @@ class ImageCacheManager {
 
 class CommonCVC: UICollectionViewCell {
 
+    struct ViewModel {
+        let image: String
+        let title: String
+        let tagCount: Int
+        let tagArr: [String]
+        let isFavorite: Bool
+        let postID: Int
+        let height: Int
+    }
+    
     //MARK: IBOutlet
     static let identifier = "CommonCVC"
     
@@ -62,17 +72,16 @@ class CommonCVC: UICollectionViewCell {
         
     }
     //setData 지원이꺼
-    func setData(image: String,
-                 title: String,
-                 tagCount: Int,
-                 tagArr: [String],
-                 isFavorite: Bool,
-                 postID: Int,
-                 height: Int) {
-        
-        setData(image: image, title: title, tagCount: tagCount, tagArr: tagArr, isFavorite: isFavorite, postID: postID)
-        
-        titleLabelHeight = height
+    func setData(viewModel: ViewModel) {
+        self.setData(
+            image: viewModel.image,
+            title: viewModel.title,
+            tagCount: viewModel.tagCount,
+            tagArr: viewModel.tagArr,
+            isFavorite: viewModel.isFavorite,
+            postID: viewModel.postID
+        )
+        titleLabelHeight = viewModel.height
         print("setData -> \(titleLabelHeight)")
     }
 

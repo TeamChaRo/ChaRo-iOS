@@ -534,14 +534,19 @@ extension HomeVC: SeeMorePushDelegate {
             smVC.topText = "요즘 뜨는 드라이브 코스"
             GetDetailDataService.value = "0"
             GetNewDetailDataService.value = "0"
+            GetInfinityDetailDataService.identifier = "0"
         case 4:
             smVC.topText = customText
-            GetDetailDataService.value = "1?value=summer"
-            GetNewDetailDataService.value = "1?value=summer"
+            GetDetailDataService.value = "1?value=lake"
+            GetNewDetailDataService.value = "1?value=lake"
+            GetInfinityDetailDataService.identifier = "1"
+            GetInfinityDetailDataService.value = "?value=lake"
         case 5:
             smVC.topText = localText
             GetDetailDataService.value = "2?value=busan"
             GetNewDetailDataService.value = "2?value=busan"
+            GetInfinityDetailDataService.identifier = "2"
+            GetInfinityDetailDataService.value = "?value=busan"
         default:
             print("Error")
         }
