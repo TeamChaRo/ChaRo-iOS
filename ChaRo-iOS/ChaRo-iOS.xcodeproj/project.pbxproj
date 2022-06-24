@@ -218,6 +218,9 @@
 		70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425E2817158900631BB7 /* UpdateProfileService.swift */; };
 		70FD4261281715B300631BB7 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4260281715B300631BB7 /* UserDefaultKey.swift */; };
 		70FD4263281839B400631BB7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4262281839B400631BB7 /* String+.swift */; };
+		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
+		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
+		7FC24560286601F300B3756F /* PostDetailPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455F286601F300B3756F /* PostDetailPhotoCVC.swift */; };
 		8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */; };
 		DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
@@ -490,6 +493,9 @@
 		70FD425E2817158900631BB7 /* UpdateProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileService.swift; sourceTree = "<group>"; };
 		70FD4260281715B300631BB7 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		70FD4262281839B400631BB7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
+		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
+		7FC2455F286601F300B3756F /* PostDetailPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailPhotoCVC.swift; sourceTree = "<group>"; };
 		83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -565,13 +571,13 @@
 		3610A8902693730700EFC794 /* CVC */ = {
 			isa = PBXGroup;
 			children = (
+				7FC2455E286601DE00B3756F /* PostDetailScene */,
 				706A671426F358FD001AB884 /* JoinScene */,
 				3CAE519626C240D800DB8A41 /* CreatePostScene */,
 				3CAE519B26C2419800DB8A41 /* HomeScene */,
 				3CAE519D26C241D300DB8A41 /* MyPageScene */,
 				3CAE519726C240E100DB8A41 /* OnBoardScene */,
 				3CAE519C26C241B500DB8A41 /* PostSearchScene */,
-				36A2FECE278F206800B1D87A /* New Group */,
 				3610A8912693730700EFC794 /* CommonCVC.swift */,
 				360937AB2699EF7B005392BB /* TabbarCVC.swift */,
 				7084948126A23AB7001B3C2B /* CollectionViewFooter.swift */,
@@ -600,13 +606,6 @@
 				368EC8E62779C48B0076BF5E /* FollowFollowingTVC.swift */,
 			);
 			path = FollowScene;
-			sourceTree = "<group>";
-		};
-		36A2FECE278F206800B1D87A /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		36B69F7E2775DC0D00FEEAAE /* FollowScene */ = {
@@ -1224,6 +1223,7 @@
 				3CB532CA27C507C2005AAB1D /* Component */,
 				F49DE532268E148300A8185C /* PostDetailVC.swift */,
 				3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */,
+				7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */,
 			);
 			path = PostDetailScene;
 			sourceTree = "<group>";
@@ -1419,6 +1419,7 @@
 				3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */,
 				3C86C1BA27DF92CE00A41FCE /* PostDetailViewModel.swift */,
 				3C34CC7027F19B010016069C /* AddressMainViewModel.swift */,
+				7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1464,6 +1465,14 @@
 				706A671526F35945001AB884 /* JoinViewCVC.swift */,
 			);
 			path = JoinScene;
+			sourceTree = "<group>";
+		};
+		7FC2455E286601DE00B3756F /* PostDetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				7FC2455F286601F300B3756F /* PostDetailPhotoCVC.swift */,
+			);
+			path = PostDetailScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1714,6 +1723,7 @@
 				3C597C48280EA0CA007153B0 /* UINavigationController+.swift in Sources */,
 				F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */,
 				F4CC1B65269B943B009A0C01 /* CreatePostPhotoTVC.swift in Sources */,
+				7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */,
 				3C879BEF268B147D00C41BB8 /* UITableView+.swift in Sources */,
 				36E445BB277CD6A2008E31BE /* SettingViewDataModel.swift in Sources */,
 				3C879BF3268B14A800C41BB8 /* UIColor+.swift in Sources */,
@@ -1723,6 +1733,7 @@
 				7062C83D270C42FE00C1CD2E /* JoinProfileView.swift in Sources */,
 				7062C849270CC04500C1CD2E /* ValidationEmailModel.swift in Sources */,
 				36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */,
+				7FC24560286601F300B3756F /* PostDetailPhotoCVC.swift in Sources */,
 				70FD4261281715B300631BB7 /* UserDefaultKey.swift in Sources */,
 				706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */,
 				7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */,
@@ -1800,6 +1811,7 @@
 				70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */,
 				3CB532CF27C50950005AAB1D /* ImageLiterals.swift in Sources */,
 				7062C84B270CDE6F00C1CD2E /* IsDuplicatedNicknameService.swift in Sources */,
+				7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */,
 				365FEF4927D66C9C0036E182 /* FilterCellView.swift in Sources */,
 				F4CC1B90269C5EFA009A0C01 /* CreatePostPhotosCVC.swift in Sources */,
 				3C5B15B82749802600F178A8 /* GenericResponse.swift in Sources */,
@@ -2045,7 +2057,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2ZS26WP93H;
+				DEVELOPMENT_TEAM = JCV986BPR5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2077,7 +2089,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2ZS26WP93H;
+				DEVELOPMENT_TEAM = JCV986BPR5;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
