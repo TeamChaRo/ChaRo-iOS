@@ -12,6 +12,8 @@ enum ImageLiterals {
     //MARK: - icon
     static var icAlarmWhite: UIImage { .load(name: "icAlarmWhite") }
     static var icAlarmBlack: UIImage { .load(name: "iconAlarmBlack") }
+    static var icAlarmActiveBlack: UIImage{ .load(name: "icAlarmActive") }
+    static var icAlarmActiveWhite: UIImage{ .load(name: "icAlarmActiveWhite") }
     static var icAppleLogo: UIImage { .load(name: "appleLogo") }
     
     static var icId: UIImage { .load(name: "icId") }
@@ -148,7 +150,6 @@ enum ImageLiterals {
     
     static var imgPlaylistBanner: UIImage{ .load(name: "imgPlaylistBanner") }
     static var imgSpringPlaylistText: UIImage{ .load(name: "imgSpringPlaylistText") }
-
 }
 
 extension UIImage {

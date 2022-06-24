@@ -8,7 +8,7 @@
 import UIKit
 
 class NotificationVC: UIViewController {
-
+    
     // MARK: @IBOutlet
     @IBOutlet weak var headerView: UIView!
     @IBOutlet var notificationListTV: UITableView! {
@@ -45,6 +45,32 @@ extension NotificationVC {
     }
 }
 
+// MARK: - Custom Methods
+extension NotificationVC {
+    
+    /// 알림 타입에 따라 화면전환을 하는 메서드
+    private func navigateByNotificationType(indexPath: IndexPath) {
+        if notificationList[indexPath.row].type ?? "" == NotificationType.following.rawValue {
+            guard let otherVC = UIStoryboard(name: "OtherMyPage", bundle: nil).instantiateViewController(withIdentifier: "OtherMyPageVC") as? OtherMyPageVC else {return}
+            otherVC.setOtherUserID(userID: notificationList[indexPath.row].followed ?? "")
+            self.navigationController?.pushViewController(otherVC, animated: true)
+        } else {
+            let detailVC = PostDetailVC()
+            detailVC.setPostId(id: notificationList[indexPath.row].postID ?? -1)
+            detailVC.modalPresentationStyle = .fullScreen
+            self.present(detailVC, animated: true)
+        }
+    }
+    
+    /// 알림을 읽음처리하는 메서드
+    private func readNotification(indexPath: IndexPath) {
+        // isRead: 0 - 읽지 않음 // isRead: 1 - 읽음
+        if notificationList[indexPath.row].isRead == 0 {
+            readNotificationData(pushId: notificationList[indexPath.row].pushID ?? -1)
+        }
+    }
+}
+
 // MARK: - UITableViewDataSource
 extension NotificationVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,13 +86,23 @@ extension NotificationVC: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension NotificationVC: UITableViewDelegate {
+    
+    /// heightForRowAt
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 97
+    }
+    
+    /// didSelectRowAt
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        readNotification(indexPath: indexPath)
+        navigateByNotificationType(indexPath: indexPath)
     }
 }
 
 // MARK: - Network
 extension NotificationVC {
+    
+    /// 알림 목록 조회를 요청하는 메서드
     private func getNotificationListData() {
         NotificationService.shared.getNotificationList { response in
             switch(response) {
@@ -75,6 +111,24 @@ extension NotificationVC {
                     self.notificationList = data
                     self.notificationListTV.reloadData()
                 }
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    /// 새로 온 알림을 클릭했을 때 '읽음' 요청을 보내는 메서드
+    private func readNotificationData(pushId: Int) {
+        NotificationService.shared.postNotificationIsRead(pushId: pushId) { response in
+            switch(response) {
+            case .success(_):
+                print("success!")
             case .requestErr(let message):
                 print("requestErr", message)
             case .pathErr:
