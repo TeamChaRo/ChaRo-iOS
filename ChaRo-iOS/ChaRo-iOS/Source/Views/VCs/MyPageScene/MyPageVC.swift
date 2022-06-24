@@ -18,8 +18,7 @@ class MyPageVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
-//    var isLogin: Bool = UserDefaults.standard.bool(forKey: "isLogin") ?? true
-    var isLogin: Bool = true
+    var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin) ?? false
     
     private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
@@ -31,7 +30,7 @@ class MyPageVC: UIViewController {
     var currentState: String = "인기순"
     
     //무한스크롤을 위함
-    var myId: String = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
+    var myId: String = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com"
     var lastId: Int = 0
     var lastFavorite: Int = 0
     var isLast: Bool = false

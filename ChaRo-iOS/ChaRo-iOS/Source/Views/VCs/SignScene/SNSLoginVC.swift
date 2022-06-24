@@ -91,6 +91,7 @@ class SNSLoginVC: UIViewController {
     
     @objc func lookAroundButtonClicked() {
         //isLogin 값을 false로 설정 - 둘러보기이므로 계정 없음
+        Constants.removeAllUserDefaults()
         UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isLogin)
         self.goToHomeVC()
     }
@@ -118,7 +119,14 @@ class SNSLoginVC: UIViewController {
         snsType = "G"
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
-            let userEmail = user?.profile?.email
+            
+            guard let userEmail = user?.profile?.email else {
+                self.makeAlert(title: "로그인 오류",
+                               message: "선택된 구글 아이디가 없습니다.")
+                return
+            }
+            
+            self.socialLogin(email: userEmail, profileImage: nil, nickname: nil)
             //여기 유저 이미지 ... String 으로 변환 모루겟다
             //            do {
             //                var userProfileImageString = try String(contentsOf: URL(string: (user?.profile?.imageURL(withDimension: 320)!)!)!)
@@ -128,7 +136,6 @@ class SNSLoginVC: UIViewController {
             //            }
             
             //로그인
-            self.socialLogin(email: userEmail!, profileImage: nil, nickname: nil)
         }
     }
     

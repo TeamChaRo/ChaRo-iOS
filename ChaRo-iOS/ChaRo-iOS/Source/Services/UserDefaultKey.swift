@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Constants {
     struct UserDefaultsKey {
@@ -23,5 +24,18 @@ extension Constants {
         static let isAppleLogin = "isAppleLogin"
         static let isKakaoLogin = "isKakaoLogin"
         static let isGoogleLogin = "isGoogleLogin"
+    }
+    
+    static func removeAllUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userEmail)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userPassword)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userNickname)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userImage)
+        
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLogin)
+        
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isAppleLogin)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isKakaoLogin)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isGoogleLogin)
     }
 }

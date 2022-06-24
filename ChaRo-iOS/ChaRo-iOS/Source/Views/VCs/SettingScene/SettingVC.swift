@@ -171,8 +171,9 @@ extension SettingVC {
     
     /// LoginSB의 루트 네비게이션 컨트롤러로 화면전환하는 메서드
     private func presentToSignNC() {
+        Constants.removeAllUserDefaults()
         guard let signNC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: SignNC.className)
-                as? SignNC else {return}
+                as? SignNC else { return }
         signNC.modalPresentationStyle = .overFullScreen
         self.present(signNC, animated: true, completion: nil)
     }
@@ -302,8 +303,8 @@ extension SettingVC: UITableViewDataSource {
                 let changeImageVC = ChangeImageVC()
                 self.navigationController?.pushViewController(changeImageVC, animated: true)
             case 1:
-                let findPasswordVC = FindPasswordVC()
-                self.navigationController?.pushViewController(findPasswordVC, animated: true)
+                let changePasswordVC = ChangePasswordVC()
+                self.navigationController?.pushViewController(changePasswordVC, animated: true)
             default:
                 break
             }
