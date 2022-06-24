@@ -10,6 +10,7 @@ import Foundation
 enum NotificationType: String, Codable {
     case post = "post"
     case following = "following"
+    case like = "like"
 }
 
 // MARK: - NotificationListModel
@@ -18,7 +19,7 @@ struct NotificationListModel: Codable {
     let token: String?
     let image: String?
     let title, body, month, day, type: String?
-    let followed: Bool?
+    let followed: String?
 
     enum CodingKeys: String, CodingKey {
         case pushID = "push_id"
