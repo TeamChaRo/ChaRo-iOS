@@ -12,7 +12,6 @@ protocol ThemeCollectionViewCellDelegate: class {
 }
 
 protocol PostIdDelegate {
-    func sendPostID(data: Int)
     func sendPostDriveElement(data: DriveElement?)
 }
 
@@ -117,7 +116,6 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
         let postId = cell!.postID
-        postDelegate?.sendPostID(data: postId)
         let sendingData = findDriveElementFrom(postId: postId)
         postDelegate?.sendPostDriveElement(data: sendingData)
     }

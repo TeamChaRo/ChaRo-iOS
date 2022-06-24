@@ -330,13 +330,6 @@ func dismissDropDownWhenTappedAround() {
 
 //postID 넘기기 위한 Delegate 구현
 extension HomePostVC: PostIdDelegate {
-    
-    func sendPostID(data: Int) {
-        let nextVC = PostDetailVC()
-        nextVC.setPostId(id: data)
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
     func sendPostDriveElement(data: DriveElement?) {
         let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
