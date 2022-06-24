@@ -121,9 +121,9 @@ enum ImageLiterals {
     static var imgCarTheaterCourse3: UIImage{ .load(name: "imgCarTheaterCourse2-2") }
     static var imgCarTheaterCourse4: UIImage{ .load(name: "imgCarTheaterCourse4") }
     
-    static var imgAboutBanner1: UIImage{ .load(name: "imgAboutBanner1") }
-    static var imgAboutBanner2: UIImage{ .load(name: "imgAboutBanner2") }
-    static var imgAboutBanner3: UIImage{ .load(name: "imgAboutBanner3") }
+    static var imgAboutBanner1: UIImage{ .load(name: "ImgAboutBanner1") }
+    static var imgAboutBanner2: UIImage{ .load(name: "ImgAboutBanner2") }
+    static var imgAboutBanner3: UIImage{ .load(name: "ImgAboutBanner3") }
     
     static var imgAlbumByAnt: UIImage{ .load(name: "imgAlbumByAnt") }
     static var imgAlbumByBaynk: UIImage{ .load(name: "imgAlbumByBaynk") }
