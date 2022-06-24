@@ -20,7 +20,7 @@ final class ExpendedImageVC: UIViewController {
     private let photoSubject = ReplaySubject<[String]>.create(bufferSize: 1)
     
     private let xmarkButton = UIButton().then {
-        $0.setImage(ImageLiterals.icBack, for: .normal)
+        $0.setImage(ImageLiterals.icCloseWhite, for: .normal)
     }
     
     private lazy var photoNumberButton = UIButton().then {
@@ -53,8 +53,7 @@ final class ExpendedImageVC: UIViewController {
         self.imageList = imageList
         self.photoSubject.onNext(imageList)
         self.viewModel = ExpendedImageViewModel()
-        super.init()
-        hidesBottomBarWhenPushed = true
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -77,13 +76,13 @@ final class ExpendedImageVC: UIViewController {
         
         xmarkButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(11)
-            $0.trailing.equalToSuperview().inset(21)
-            $0.width.height.equalTo(30)
+            $0.trailing.equalToSuperview().inset(10)
+            $0.width.height.equalTo(50)
         }
         
         photoNumberButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(4)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.width.equalTo(61)
             $0.height.equalTo(25)
         }
@@ -134,8 +133,8 @@ final class ExpendedImageVC: UIViewController {
         photoSubject
             .bind(to: collectionView.rx.items(cellIdentifier: PostPhotoCVC.className,
                                                      cellType: PostPhotoCVC.self)) { row, element, cell in
+                cell.imageView.contentMode = .scaleAspectFit
                 cell.setImage(to: element)
-                
         }.disposed(by: disposeBag)
         
         xmarkButton.rx.tap
