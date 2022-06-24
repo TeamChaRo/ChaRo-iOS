@@ -302,8 +302,8 @@ extension SettingVC: UITableViewDataSource {
                 let changeImageVC = ChangeImageVC()
                 self.navigationController?.pushViewController(changeImageVC, animated: true)
             case 1:
-                let findPasswordVC = FindPasswordVC()
-                self.navigationController?.pushViewController(findPasswordVC, animated: true)
+                let changePasswordVC = ChangePasswordVC()
+                self.navigationController?.pushViewController(changePasswordVC, animated: true)
             default:
                 break
             }
