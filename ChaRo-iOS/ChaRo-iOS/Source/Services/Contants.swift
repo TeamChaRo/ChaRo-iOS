@@ -12,10 +12,10 @@ struct Constants {
     // MARK: - BASE URL
     static let baseURL = "http://52.79.108.141:5000"
     
-    static let userId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
-    static let nickName = UserDefaults.standard.string(forKey: "nickname") ?? "지으니"
-    static let profileName = UserDefaults.standard.string(forKey: "profileImage") ?? "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/jieun.JPG"
-    static let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "ios@gmail.com"
+    static let userId = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com"
+    static let nickName = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userNickname) ?? "지으니"
+    static let profileName = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userImage) ?? "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/jieun.JPG"
+    static let userEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com"
 
     
     // MARK: - Feature URL
