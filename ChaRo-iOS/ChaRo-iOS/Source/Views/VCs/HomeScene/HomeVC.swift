@@ -570,20 +570,15 @@ extension HomeVC: CollectionViewCellDelegate {
 extension HomeVC: PostIdDelegate {
     
     func sendPostID(data: Int) {
-        print("이거임 ~~~~\(data)")
         let nextVC = PostDetailVC()
         nextVC.setPostId(id: data)
-        nextVC.modalPresentationStyle = .currentContext
-        tabBarController?.present(nextVC, animated: true, completion: nil)
-        //navigationController?.pushViewController(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func sendPostDriveElement(data: DriveElement?) {
         let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
-        print("sendPostDriveElement | 이거 잘 불렸나?? \(data)")
-        nextVC.modalPresentationStyle = .currentContext
-        tabBarController?.present(nextVC, animated: true, completion: nil)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
