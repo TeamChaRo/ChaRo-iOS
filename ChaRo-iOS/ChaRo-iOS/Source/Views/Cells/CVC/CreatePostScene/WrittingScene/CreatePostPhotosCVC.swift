@@ -17,12 +17,12 @@ final class CreatePostPhotosCVC: UICollectionViewCell {
     static let identifier: String = "CreatePostPhotosCVC"
     
     // MARK: UIComponent
+
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        
         return imageView
     }()
     
@@ -48,14 +48,30 @@ final class CreatePostPhotosCVC: UICollectionViewCell {
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
+
+
+    // MARK: Properties
+
+    private var postIndex: Int?
     weak var actionDelegate: CreatePostPhotosCVCActionDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        deleteButton.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
-        plusButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
+        self.addTargets()
     }
 
+    private func addTargets() {
+        self.deleteButton.addTarget(
+            self,
+            action: #selector(didTapDeleteButton(_:)),
+            for: .touchUpInside
+        )
+        self.plusButton.addTarget(
+            self,
+            action: #selector(didTapAddButton(_:)),
+            for: .touchUpInside
+        )
+    }
 }
 
 extension CreatePostPhotosCVC {

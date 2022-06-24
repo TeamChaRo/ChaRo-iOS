@@ -13,35 +13,40 @@ protocol CreatePostPhotoTVCActionDelegate: AnyObject {
     func didTapDeleteImageButton(index: Int)
 }
 
-    // MARK: Properties
 final class CreatePostPhotoTVC: UITableViewCell {
 
-    var receiveImageList: [UIImage] = [] {
-        didSet {
-            debugPrint("receiveImageList")
-            debugPrint(receiveImageList)
-        }
+    // MARK: Constants
+
+    private enum Metric {
+        static let maxCount: Int = 6
     }
-    
-    private let maxPhotoCount: Int = 6
+
+
+    // MARK: Properties
+
+    private var receiveImageList: [UIImage] = []
     weak var actionDelegate: CreatePostPhotoTVCActionDelegate?
 
 
     // MARK: UI
 
     private let photoBackgroundView = UIView().then {
+        $0.isUserInteractionEnabled = true
         $0.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
     }
 
     private let photoSubBackgroundView = UIView().then {
+        $0.isUserInteractionEnabled = true
         $0.backgroundColor = UIColor.white
     }
 
     private let emptyImageView = UIImageView().then {
+        $0.isUserInteractionEnabled = true
         $0.image = UIImage(named: "photo1")
     }
 
     private let discriptionText = UILabel().then {
+        $0.isUserInteractionEnabled = true
         $0.text = "이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요  (0/6)"
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.numberOfLines = 2
@@ -50,14 +55,19 @@ final class CreatePostPhotoTVC: UITableViewCell {
     }
     
     private let collectionView = UICollectionView(
-        frame: CGRect(
-            x: 0,
-            y: 0,
-            width: UIScreen.getDeviceWidth() - 40,
-            height: UIScreen.getDeviceWidth() - 40 * (222/335)
-        ),
+        frame: CGRect.zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     ).then {
+        let layout = UICollectionViewFlowLayout().then {
+            $0.itemSize = CGSize(
+                width: (UIScreen.getDeviceWidth() - 54.0) / 3,
+                height: (UIScreen.getDeviceWidth() - 54.0) / 3
+            )
+            $0.minimumLineSpacing = 0
+            $0.minimumInteritemSpacing = 0
+            $0.scrollDirection = .vertical
+        }
+        $0.setCollectionViewLayout(layout, animated: true)
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
     }
@@ -88,9 +98,22 @@ extension CreatePostPhotoTVC {
     }
     
     private func addImageGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewDidTap))
-        self.emptyImageView.addGestureRecognizer(tapGesture)
-        self.emptyImageView.isUserInteractionEnabled = true
+        self.photoBackgroundView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
+        self.photoSubBackgroundView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
+        self.discriptionText.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
+        self.emptyImageView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
     }
 
     func receiveImageListfromVC(image: [UIImage]) {
@@ -182,8 +205,8 @@ extension CreatePostPhotoTVC: UICollectionViewDelegate {
 
 extension CreatePostPhotoTVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.receiveImageList.count >= self.maxPhotoCount {
-            return self.maxPhotoCount
+        if self.receiveImageList.count >= Metric.maxCount {
+            return Metric.maxCount
         } else {
             return self.receiveImageList.count+1 // TODO: VC에 이미지 배열에서 받아와야함
         }
@@ -194,11 +217,9 @@ extension CreatePostPhotoTVC: UICollectionViewDataSource {
             withReuseIdentifier: CreatePostPhotosCVC.identifier, for: indexPath
         ) as? CreatePostPhotosCVC else { return UICollectionViewCell() }
 
-        
-        cell.deleteButton.tag = indexPath.row
-        
-        if self.receiveImageList.count >= self.maxPhotoCount { // image가 6개면 일반 셀만
         cell.actionDelegate = self
+
+        if self.receiveImageList.count >= Metric.maxCount { // image가 6개면 일반 셀만
             cell.configureLayout()
             cell.setImageView(image: self.receiveImageList[indexPath.row])
         } else {

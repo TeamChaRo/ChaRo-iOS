@@ -13,7 +13,11 @@ import SnapKit
 import Then
 
 final class CreatePostVC: UIViewController {
-    
+
+    private enum Metric {
+        static let maxCount: Int = 6
+    }
+
     // 데이터 전달
     var postTitle: String = ""
     var province: String = ""
@@ -232,9 +236,9 @@ extension CreatePostVC {
     }
 
     @objc private func addPhotoButtonDidTap() {
-        if #available(iOS 14, *) { // 14이상 부터 쓸 수 있음
+        if #available(iOS 14, *) {
             var configuration = PHPickerConfiguration()
-            configuration.selectionLimit = 6 - selectImages.count // 최대 6개 선택
+            configuration.selectionLimit = 6 - self.selectImages.count // 최대 6개 선택
             configuration.filter = .images
 
             let picker = PHPickerViewController(configuration: configuration)
@@ -271,7 +275,7 @@ extension CreatePostVC {
             ]
         )
 
-        CreatePostService.shared.createPost(model: dummyModel, image: selectImages) { result in
+        CreatePostService.shared.createPost(model: dummyModel, image: self.selectImages) { result in
             switch result {
             case let .success(message):
                 debugPrint("POST /writePost success: \(message)")
@@ -399,7 +403,7 @@ extension CreatePostVC: PHPickerViewControllerDelegate {
         itemProviders = results.map(\.itemProvider)
         var count = 0
         
-        if results.count + selectImages.count > 6 {
+        if results.count + self.selectImages.count > 6 {
             // 선택된 사진 갯수가 6개 초과면 alert을 띄워줌
             self.makeAlert(title: "사진 용량 초과", message: "사진은 최대 6장까지 추가가 가능합니다.")
         } else {
@@ -449,9 +453,7 @@ extension CreatePostVC {
         photoCell.actionDelegate = self
 
         // 여기서 VC 이미지를 Cell에 전달
-    
-        photoCell.receiveImageListfromVC(image: selectImages)
-        
+        photoCell.receiveImageListfromVC(image: self.selectImages)
         
         if selectImages.count > 0 {
             photoCell.configurePhotoLayout()
