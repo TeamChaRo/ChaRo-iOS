@@ -22,6 +22,8 @@ extension Constants {
 
         //소셜 로그인 구분
         static let isAppleLogin = "isAppleLogin"
+        static let savedAppleEmail = "savedAppleEmail"
+        
         static let isKakaoLogin = "isKakaoLogin"
         static let isGoogleLogin = "isGoogleLogin"
     }

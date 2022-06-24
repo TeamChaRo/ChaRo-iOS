@@ -60,6 +60,9 @@ class HomeVC: UIViewController {
         setActionToSearchButton()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
+        
+        print("kami : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail))")
+        print("kami : \(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname))")
     }
     
     //navigationView

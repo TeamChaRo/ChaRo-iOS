@@ -211,7 +211,6 @@
 		70D63E39269646D30036484B /* ThemePostAllTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D63E37269646D30036484B /* ThemePostAllTVC.xib */; };
 		70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */; };
 		70F5D7BB271D9DBC00FF9229 /* SocialJoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */; };
-		70F5D7BF271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */; };
 		70FD425928170A1B00631BB7 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425828170A1B00631BB7 /* ChangePasswordVC.swift */; };
 		70FD425B28170A2B00631BB7 /* ChangeImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425A28170A2B00631BB7 /* ChangeImageVC.swift */; };
 		70FD425D281710C600631BB7 /* UpdatePasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425C281710C600631BB7 /* UpdatePasswordService.swift */; };
@@ -485,7 +484,6 @@
 		70D63E37269646D30036484B /* ThemePostAllTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemePostAllTVC.xib; sourceTree = "<group>"; };
 		70F5D7B8271D954F00FF9229 /* SNSJoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSJoinVC.swift; sourceTree = "<group>"; };
 		70F5D7BA271D9DBB00FF9229 /* SocialJoinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialJoinService.swift; sourceTree = "<group>"; };
-		70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginJoinResponseDataModel.swift; sourceTree = "<group>"; };
 		70FD425828170A1B00631BB7 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		70FD425A28170A2B00631BB7 /* ChangeImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageVC.swift; sourceTree = "<group>"; };
 		70FD425C281710C600631BB7 /* UpdatePasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordService.swift; sourceTree = "<group>"; };
@@ -911,7 +909,6 @@
 				36FB8BA427777DF900C2E642 /* DoFollowDataModel.swift */,
 				7062C848270CC04500C1CD2E /* ValidationEmailModel.swift */,
 				7062C8582710DCC800C1CD2E /* JoinDataModel.swift */,
-				70F5D7BE271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift */,
 				367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */,
 				368EC8ED277A16700076BF5E /* GetFollowDataModel.swift */,
 				36E445BA277CD6A2008E31BE /* SettingViewDataModel.swift */,
@@ -1851,7 +1848,6 @@
 				36CEE5B8269DFA8400974EFF /* DatailDataService.swift in Sources */,
 				7062C8282704BA5500C1CD2E /* ProfileView.swift in Sources */,
 				3610A8A02693730700EFC794 /* HomeTodayDriveTVC.swift in Sources */,
-				70F5D7BF271DAF8F00FF9229 /* LoginJoinResponseDataModel.swift in Sources */,
 				3CEC010F269E1C0700E9332C /* Contants.swift in Sources */,
 				3610A89C2693730700EFC794 /* CommonCVC.swift in Sources */,
 				36B8B495269B6DB8008DC781 /* HomeDataModel.swift in Sources */,
@@ -2077,7 +2073,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JCV986BPR5;
+				DEVELOPMENT_TEAM = J8A843466G;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

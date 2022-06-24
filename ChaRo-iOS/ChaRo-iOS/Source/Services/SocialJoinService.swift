@@ -165,7 +165,7 @@ struct SocialJoinService {
         
         let decoder = JSONDecoder()
         
-        guard let decodedData = try? decoder.decode(LoginDataModel.self, from: data)
+        guard let decodedData = try? decoder.decode(JoinDataModel.self, from: data)
         else {
             print("패쓰에러")
             return .pathErr
