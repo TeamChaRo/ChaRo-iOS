@@ -8,35 +8,45 @@
 import UIKit
 import Then
 
-class CreatePostPhotoTVC: UITableViewCell {
+protocol CreatePostPhotoTVCActionDelegate: AnyObject {
+    func didTapAddImageButton()
+    func didTapDeleteImageButton(index: Int)
+}
+
+final class CreatePostPhotoTVC: UITableViewCell {
+
+    // MARK: Constants
+
+    private enum Metric {
+        static let maxCount: Int = 6
+    }
+
 
     // MARK: Properties
 
-    var receiveImageList: [UIImage] = [] {
-        didSet {
-            debugPrint("receiveImageList")
-            debugPrint(receiveImageList)
-        }
-    }
-    
-    private let maxPhotoCount: Int = 6
+    private var receiveImageList: [UIImage] = []
+    weak var actionDelegate: CreatePostPhotoTVCActionDelegate?
 
 
     // MARK: UI
 
     private let photoBackgroundView = UIView().then {
+        $0.isUserInteractionEnabled = true
         $0.backgroundColor = UIColor.mainBlue.withAlphaComponent(0.2)
     }
 
     private let photoSubBackgroundView = UIView().then {
+        $0.isUserInteractionEnabled = true
         $0.backgroundColor = UIColor.white
     }
 
     private let emptyImageView = UIImageView().then {
+        $0.isUserInteractionEnabled = true
         $0.image = UIImage(named: "photo1")
     }
 
     private let discriptionText = UILabel().then {
+        $0.isUserInteractionEnabled = true
         $0.text = "이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요  (0/6)"
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.numberOfLines = 2
@@ -45,21 +55,25 @@ class CreatePostPhotoTVC: UITableViewCell {
     }
     
     private let collectionView = UICollectionView(
-        frame: CGRect(
-            x: 0,
-            y: 0,
-            width: UIScreen.getDeviceWidth() - 40,
-            height: UIScreen.getDeviceWidth() - 40 * (222/335)
-        ),
+        frame: CGRect.zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     ).then {
+        let layout = UICollectionViewFlowLayout().then {
+            $0.itemSize = CGSize(
+                width: (UIScreen.getDeviceWidth() - 54.0) / 3,
+                height: (UIScreen.getDeviceWidth() - 54.0) / 3
+            )
+            $0.minimumLineSpacing = 0
+            $0.minimumInteritemSpacing = 0
+            $0.scrollDirection = .vertical
+        }
+        $0.setCollectionViewLayout(layout, animated: true)
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addNotificationCenter()
         self.addImageGesture()
         self.configureLayout()
     }
@@ -84,9 +98,22 @@ extension CreatePostPhotoTVC {
     }
     
     private func addImageGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewDidTap))
-        self.emptyImageView.addGestureRecognizer(tapGesture)
-        self.emptyImageView.isUserInteractionEnabled = true
+        self.photoBackgroundView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
+        self.photoSubBackgroundView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
+        self.discriptionText.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
+        self.emptyImageView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageViewDidTap)
+        ))
     }
 
     func receiveImageListfromVC(image: [UIImage]) {
@@ -95,23 +122,27 @@ extension CreatePostPhotoTVC {
     }
     
     @objc private func imageViewDidTap() {
-        NotificationCenter.default.post(name: .callPhotoPicker, object: nil)
+        self.actionDelegate?.didTapAddImageButton()
     }
 
-    private func addNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(imageViewDidTap), name: .createPostAddPhotoClicked, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deletePhoto), name: .createPostDeletePhotoClicked, object: nil)
-    
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: .createPostAddPhotoClicked, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .createPostDeletePhotoClicked, object: nil)
-    }
-
-    @objc func deletePhoto(_ notification: Notification) {
-        self.receiveImageList.remove(at: notification.object as! Int) //선택한 이미지 삭제
+    @objc func deletePhoto(index: Int) {
+        guard self.receiveImageList.count > index else { return }
+        self.receiveImageList.remove(at: index) //선택한 이미지 삭제
         self.collectionView.reloadData()
+    }
+
+    func updateEmptyViewVisible(isHidden: Bool) {
+        if isHidden {
+            self.photoBackgroundView.isHidden = true
+            self.photoSubBackgroundView.isHidden = true
+            self.discriptionText.isHidden = true
+            self.emptyImageView.isHidden = true
+        } else {
+            self.photoBackgroundView.isHidden = false
+            self.photoSubBackgroundView.isHidden = false
+            self.discriptionText.isHidden = false
+            self.emptyImageView.isHidden = false
+        }
     }
 }
 
@@ -186,8 +217,8 @@ extension CreatePostPhotoTVC: UICollectionViewDelegate {
 
 extension CreatePostPhotoTVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.receiveImageList.count >= self.maxPhotoCount {
-            return self.maxPhotoCount
+        if self.receiveImageList.count >= Metric.maxCount {
+            return Metric.maxCount
         } else {
             return self.receiveImageList.count+1 // TODO: VC에 이미지 배열에서 받아와야함
         }
@@ -198,18 +229,35 @@ extension CreatePostPhotoTVC: UICollectionViewDataSource {
             withReuseIdentifier: CreatePostPhotosCVC.identifier, for: indexPath
         ) as? CreatePostPhotosCVC else { return UICollectionViewCell() }
 
-        
-        cell.deleteButton.tag = indexPath.row
-        
-        if self.receiveImageList.count >= self.maxPhotoCount { // image가 6개면 일반 셀만
+        cell.actionDelegate = self
+
+        if self.receiveImageList.count >= Metric.maxCount { // image가 6개면 일반 셀만
             cell.configureLayout()
-            cell.setImageView(image: self.receiveImageList[indexPath.row])
+            cell.updateimageViewVisible(isHidden: false)
+            cell.setImageView(
+                data: CreatePostPhotosCVC.PostImage(
+                    image: self.receiveImageList[indexPath.row],
+                    index: indexPath.row
+                )
+            )
+        } else if self.receiveImageList.isEmpty {
+            self.emptyConfigureLayout()
+            self.updateEmptyViewVisible(isHidden: false)
+            cell.updateplusViewVisible(isHidden: true)
+            cell.updateimageViewVisible(isHidden: true)
         } else {
             if indexPath.row == self.receiveImageList.count { // 마지막 셀은 플러스 버튼
                 cell.plusViewConfigureLayout()
+                cell.updateplusViewVisible(isHidden: false)
             } else {
                 cell.configureLayout()
-                cell.setImageView(image: self.receiveImageList[indexPath.row])
+                cell.updateimageViewVisible(isHidden: false)
+                cell.setImageView(
+                    data: CreatePostPhotosCVC.PostImage(
+                        image: self.receiveImageList[indexPath.row],
+                        index: indexPath.row
+                    )
+                )
             }
         }
         
@@ -237,5 +285,20 @@ extension CreatePostPhotoTVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+}
+
+
+// MARK: - CreatePostPhotosCVCActionDelegate
+
+extension CreatePostPhotoTVC: CreatePostPhotosCVCActionDelegate {
+
+    func didTapAddButton() {
+        self.imageViewDidTap()
+    }
+
+    func didTapDeleteButton(index: Int) {
+        self.actionDelegate?.didTapDeleteImageButton(index: index)
+        self.deletePhoto(index: index)
     }
 }
