@@ -109,7 +109,7 @@ iOSInjectionProject/
 .DS_Store
 
 #Delete Pods/
-*/Pods/
+#*/Pods/
 
 #delete .Podfile.swp
 */.Podfile.swp
