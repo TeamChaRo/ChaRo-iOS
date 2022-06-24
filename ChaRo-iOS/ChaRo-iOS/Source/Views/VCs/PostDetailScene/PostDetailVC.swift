@@ -335,7 +335,8 @@ extension PostDetailVC: UITableViewDataSource {
             cell.setContent(imageList: imageList)
             cell.presentingClosure = { [weak self] in
                 let nextVC = ExpendedImageVC(imageList: imageList)
-                self?.navigationController?.pushViewController(nextVC, animated: true)
+                nextVC.modalPresentationStyle = .fullScreen
+                self?.present(nextVC, animated: true)
             }
             return cell
             
