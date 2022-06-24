@@ -79,8 +79,10 @@ struct Constants {
     static let updatePassword = baseURL + "/user/password?"
     static let updateProfile = baseURL + "/user/"
     static let findPassword = baseURL + "/user/password/"
+   
     /// 알림
     static let notificationListURL = baseURL + "/push/"
+    static let notificationReadURL = baseURL + "/push/read"
     
     /// 회원탈퇴
     static let deleteAccountURL = baseURL + "/user/" + userEmail
