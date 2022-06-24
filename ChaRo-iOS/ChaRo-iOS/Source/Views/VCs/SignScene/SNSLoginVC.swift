@@ -159,9 +159,9 @@ class SNSLoginVC: UIViewController {
                             let profile = user?.kakaoAccount?.profile?.profileImageUrl
                             //여기서도 URL 을 String 으로 바꾸는 법을 모르겠군요 ...
                             
-                            UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isAppleLogin)
-                            UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isGoogleLogin)
-                            UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isKakaoLogin)
+                            Constants.addLoginUserDefaults(isAppleLogin: false,
+                                                           isKakaoLogin: false,
+                                                           isGoogleLogin: true)
                             
                             //로그인
                             self.socialLogin(email: email, profileImage: nil, nickname: nickname)
@@ -186,9 +186,10 @@ class SNSLoginVC: UIViewController {
                     if success {
                         print("로그인 성공")
                         //여기서 UserDefault 에 저장
-                        UserDefaults.standard.set(email, forKey: Constants.UserDefaultsKey.userEmail)
-                        UserDefaults.standard.set(profileImage ?? "", forKey: Constants.UserDefaultsKey.userImage)
-                        UserDefaults.standard.set(nickname ?? "", forKey: Constants.UserDefaultsKey.userNickname)
+                        Constants.addUserDefaults(userEmail: email,
+                                                  userPassword: "",
+                                                  userNickname: nickname ?? "",
+                                                  userImage: profileImage ?? "")
                         self.goToHomeVC()
                     } else {
                         print("회원가입 갈겨")
@@ -231,9 +232,10 @@ class SNSLoginVC: UIViewController {
                         
                     case .success(let data):
                         if let personData = data as? JoinUserModel {
-                            UserDefaults.standard.set(personData.email, forKey: Constants.UserDefaultsKey.userEmail)
-                            UserDefaults.standard.set(personData.profileImage, forKey: Constants.UserDefaultsKey.userImage)
-                            UserDefaults.standard.set(personData.nickname, forKey: Constants.UserDefaultsKey.userNickname)
+                            Constants.addUserDefaults(userEmail: personData.email,
+                                                      userPassword: "",
+                                                      userNickname: personData.nickname,
+                                                      userImage: personData.profileImage)
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -264,9 +266,10 @@ class SNSLoginVC: UIViewController {
                         
                     case .success(let data):
                         if let personData = data as? JoinUserModel {
-                            UserDefaults.standard.set(personData.email, forKey: Constants.UserDefaultsKey.userEmail)
-                            UserDefaults.standard.set(personData.profileImage, forKey: Constants.UserDefaultsKey.userImage)
-                            UserDefaults.standard.set(personData.nickname, forKey: Constants.UserDefaultsKey.userNickname)
+                            Constants.addUserDefaults(userEmail: personData.email,
+                                                      userPassword: "",
+                                                      userNickname: personData.nickname,
+                                                      userImage: personData.profileImage)
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -297,9 +300,10 @@ class SNSLoginVC: UIViewController {
                         
                     case .success(let data):
                         if let personData = data as? JoinUserModel {
-                            UserDefaults.standard.set(personData.email, forKey: Constants.UserDefaultsKey.userEmail)
-                            UserDefaults.standard.set(personData.profileImage, forKey: Constants.UserDefaultsKey.userImage)
-                            UserDefaults.standard.set(personData.nickname, forKey: Constants.UserDefaultsKey.userNickname)
+                            Constants.addUserDefaults(userEmail: personData.email,
+                                                      userPassword: "",
+                                                      userNickname: personData.nickname,
+                                                      userImage: personData.profileImage)
                         }
                         
                         self.navigationController?.popViewController(animated: true)

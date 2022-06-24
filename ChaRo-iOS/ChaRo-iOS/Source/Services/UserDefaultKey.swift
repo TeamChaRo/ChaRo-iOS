@@ -28,6 +28,20 @@ extension Constants {
         static let isGoogleLogin = "isGoogleLogin"
     }
     
+    static func addLoginUserDefaults(isAppleLogin: Bool, isKakaoLogin: Bool, isGoogleLogin: Bool) {
+        UserDefaults.standard.set(isAppleLogin, forKey: Constants.UserDefaultsKey.isAppleLogin)
+        UserDefaults.standard.set(isKakaoLogin, forKey: Constants.UserDefaultsKey.isKakaoLogin)
+        UserDefaults.standard.set(isGoogleLogin, forKey: Constants.UserDefaultsKey.isGoogleLogin)
+    }
+    
+    static func addUserDefaults(userEmail: String, userPassword: String, userNickname: String, userImage: String) {
+        UserDefaults.standard.set(userEmail, forKey: Constants.UserDefaultsKey.userEmail)
+        UserDefaults.standard.set(userPassword, forKey: Constants.UserDefaultsKey.userPassword)
+        UserDefaults.standard.set(userNickname, forKey: Constants.UserDefaultsKey.userNickname)
+        UserDefaults.standard.set(userImage, forKey: Constants.UserDefaultsKey.userImage)
+        UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isLogin)
+    }
+    
     static func removeAllUserDefaults() {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userEmail)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userPassword)
