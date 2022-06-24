@@ -220,7 +220,6 @@
 		70FD4263281839B400631BB7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4262281839B400631BB7 /* String+.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
-		7FC24560286601F300B3756F /* PostDetailPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455F286601F300B3756F /* PostDetailPhotoCVC.swift */; };
 		8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */; };
 		DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
@@ -495,7 +494,6 @@
 		70FD4262281839B400631BB7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
-		7FC2455F286601F300B3756F /* PostDetailPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailPhotoCVC.swift; sourceTree = "<group>"; };
 		83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -571,7 +569,6 @@
 		3610A8902693730700EFC794 /* CVC */ = {
 			isa = PBXGroup;
 			children = (
-				7FC2455E286601DE00B3756F /* PostDetailScene */,
 				706A671426F358FD001AB884 /* JoinScene */,
 				3CAE519626C240D800DB8A41 /* CreatePostScene */,
 				3CAE519B26C2419800DB8A41 /* HomeScene */,
@@ -1467,14 +1464,6 @@
 			path = JoinScene;
 			sourceTree = "<group>";
 		};
-		7FC2455E286601DE00B3756F /* PostDetailScene */ = {
-			isa = PBXGroup;
-			children = (
-				7FC2455F286601F300B3756F /* PostDetailPhotoCVC.swift */,
-			);
-			path = PostDetailScene;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1733,7 +1722,6 @@
 				7062C83D270C42FE00C1CD2E /* JoinProfileView.swift in Sources */,
 				7062C849270CC04500C1CD2E /* ValidationEmailModel.swift in Sources */,
 				36CACA1F2698F3CF007E02CA /* ThemePostDetailTVC.swift in Sources */,
-				7FC24560286601F300B3756F /* PostDetailPhotoCVC.swift in Sources */,
 				70FD4261281715B300631BB7 /* UserDefaultKey.swift in Sources */,
 				706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */,
 				7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */,
@@ -2057,7 +2045,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JCV986BPR5;
+				DEVELOPMENT_TEAM = J8A843466G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
