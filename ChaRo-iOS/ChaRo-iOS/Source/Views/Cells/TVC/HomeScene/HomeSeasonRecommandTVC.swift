@@ -85,40 +85,27 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
-        
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
         let postid = cell!.postID
         let sengingData = findDriveElementFrom(postId: postid)
-        postDelegate?.sendPostID(data: postid)
         postDelegate?.sendPostDriveElement(data: sengingData)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-        
-        if customList.count == 0 {
-            return cell
-        }
-        
-        else {
-            
-            let element = customList[indexPath.row]
-            var tags = [element.region, element.theme,
-                        element.warning ?? ""] as [String]
-                        
-            
-            cell.setData(image: element.image,
-                         title: element.title,
-                         tagCount: tags.count,
-                         tagArr: tags,
-                         isFavorite: element.isFavorite,
-                         postID: element.postID)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.className, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
+        if customList.isEmpty { return cell }
+        let element = customList[indexPath.row]
+        var tags = [element.region, element.theme,
+                    element.warning ?? ""] as [String]
 
-            return cell
-            
-        }
-    
+        cell.setData(image: element.image,
+                     title: element.title,
+                     tagCount: tags.count,
+                     tagArr: tags,
+                     isFavorite: element.isFavorite,
+                     postID: element.postID)
+        return cell
         
     }
     
@@ -129,7 +116,7 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
         return size
     }
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.className, for: indexPath) as? CommonCVC
         cell!.imageView.kf.cancelDownloadTask()
     }
     
@@ -149,12 +136,11 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
 }
 
 extension HomeSeasonRecommandTVC {
-    func findDriveElementFrom(postId: Int) -> DriveElement?{
-        for driveElement in customList {
-            if driveElement.postID == postId {
-                return driveElement
-            }
+    func findDriveElementFrom(postId: Int) -> DriveElement? {
+        var item: DriveElement?
+        customList.forEach {
+            if $0.postID == postId { item = $0 }
         }
-        return nil
+        return item
     }
 }
