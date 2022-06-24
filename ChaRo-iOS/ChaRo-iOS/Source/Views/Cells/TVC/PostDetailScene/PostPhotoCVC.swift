@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 final class PostPhotoCVC: UICollectionViewCell{
-
+    
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
@@ -18,6 +18,7 @@ final class PostPhotoCVC: UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupContraints()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -29,10 +30,28 @@ final class PostPhotoCVC: UICollectionViewCell{
         imageView.snp.makeConstraints{
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
+        setupGesture()
     }
     
     func setImage(to imgString: String) {
         imageView.kf.setImage(with: URL(string: imgString))
+    }
+    
+    private func setupGesture() {
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(gesture:)))
+        self.contentView.addGestureRecognizer(pinchGesture)
+    }
+    
+    @objc
+    private func handlePinchGesture(gesture: UIPinchGestureRecognizer) {
+        switch gesture.state {
+        case .changed:
+            imageView.transform = imageView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+            gesture.scale = 1
+        case .ended:
+            imageView.transform = CGAffineTransform.identity
+        default: print("")
+        }
     }
     
 }
