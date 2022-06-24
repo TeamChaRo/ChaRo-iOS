@@ -22,7 +22,7 @@ final class SettingVC: UIViewController {
     
     private var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
                                 settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
-                                settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: Constants.userEmail, subLabelColor: UIColor.black)]
+                                settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: "\(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com")", subLabelColor: UIColor.black)]
     
     private var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
                                     settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black),
@@ -171,8 +171,9 @@ extension SettingVC {
     
     /// LoginSB의 루트 네비게이션 컨트롤러로 화면전환하는 메서드
     private func presentToSignNC() {
+        Constants.removeAllUserDefaults()
         guard let signNC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: SignNC.className)
-                as? SignNC else {return}
+                as? SignNC else { return }
         signNC.modalPresentationStyle = .overFullScreen
         self.present(signNC, animated: true, completion: nil)
     }
@@ -302,8 +303,8 @@ extension SettingVC: UITableViewDataSource {
                 let changeImageVC = ChangeImageVC()
                 self.navigationController?.pushViewController(changeImageVC, animated: true)
             case 1:
-                let findPasswordVC = FindPasswordVC()
-                self.navigationController?.pushViewController(findPasswordVC, animated: true)
+                let changePasswordVC = ChangePasswordVC()
+                self.navigationController?.pushViewController(changePasswordVC, animated: true)
             default:
                 break
             }
