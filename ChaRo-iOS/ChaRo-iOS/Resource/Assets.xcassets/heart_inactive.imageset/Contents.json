@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icSaveInactive.png",
+      "filename" : "heart_inactive.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icSaveInactive@2x.png",
+      "filename" : "heart_inactive@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icSaveInactive@3x.png",
+      "filename" : "heart_inactive@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
