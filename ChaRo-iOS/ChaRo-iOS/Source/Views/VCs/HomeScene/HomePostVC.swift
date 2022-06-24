@@ -332,7 +332,6 @@ func dismissDropDownWhenTappedAround() {
 extension HomePostVC: PostIdDelegate {
     
     func sendPostID(data: Int) {
-        print("이거임 ~~~~\(data)")
         let nextVC = PostDetailVC()
         nextVC.setPostId(id: data)
         navigationController?.pushViewController(nextVC, animated: true)
@@ -341,8 +340,7 @@ extension HomePostVC: PostIdDelegate {
     func sendPostDriveElement(data: DriveElement?) {
         let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
-        nextVC.modalPresentationStyle = .currentContext
-        tabBarController?.present(nextVC, animated: true, completion: nil)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     private func setTagArr(region: String, theme: String, warning: String) -> [String]{

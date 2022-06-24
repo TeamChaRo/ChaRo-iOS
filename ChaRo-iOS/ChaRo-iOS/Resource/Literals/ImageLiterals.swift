@@ -43,7 +43,7 @@ enum ImageLiterals {
     static var icGoogleLogo: UIImage { .load(name: "googleLogo") }
     static var icHeartActive: UIImage { .load(name: "icHeartActive")}
     static var icHeartCountNoText: UIImage { .load(name: "heart_count_no text") }
-    static var icHeartInactive: UIImage { .load(name: "bigheartInactive")}
+    static var icHeartInactive: UIImage { .load(name: "icHeartInactive")}
     static var icHeartWhiteLine: UIImage { .load(name: "icHeartWhiteLine")}
     static var icKakaoLogo: UIImage { .load(name: "kakaoLogo") }
     static var icLoginFieldBackground: UIImage { .load(name: "idBackgroud") }
@@ -121,9 +121,9 @@ enum ImageLiterals {
     static var imgCarTheaterCourse3: UIImage{ .load(name: "imgCarTheaterCourse2-2") }
     static var imgCarTheaterCourse4: UIImage{ .load(name: "imgCarTheaterCourse4") }
     
-    static var imgAboutBanner1: UIImage{ .load(name: "imgAboutBanner1") }
-    static var imgAboutBanner2: UIImage{ .load(name: "imgAboutBanner2") }
-    static var imgAboutBanner3: UIImage{ .load(name: "imgAboutBanner3") }
+    static var imgAboutBanner1: UIImage{ .load(name: "ImgAboutBanner1") }
+    static var imgAboutBanner2: UIImage{ .load(name: "ImgAboutBanner2") }
+    static var imgAboutBanner3: UIImage{ .load(name: "ImgAboutBanner3") }
     
     static var imgAlbumByAnt: UIImage{ .load(name: "imgAlbumByAnt") }
     static var imgAlbumByBaynk: UIImage{ .load(name: "imgAlbumByBaynk") }

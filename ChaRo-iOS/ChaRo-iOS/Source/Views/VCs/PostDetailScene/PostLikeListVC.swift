@@ -21,6 +21,7 @@ class PostLikeListVC: UIViewController {
     private let backgroundView = UIView().then {
         $0.backgroundColor = .mainBlack.withAlphaComponent(0.8)
     }
+    
     private let containerView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 15
@@ -137,6 +138,13 @@ class PostLikeListVC: UIViewController {
                 cell.setData(data: element)
                 cell.changeUIStyleAtPostListList()
                 }.disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(Follow.self)
+            .bind(onNext: { [weak self] follow in
+                let otherVC = OtherMyPageVC()
+                otherVC.setOtherUserID(userID: follow.userEmail)
+                self?.present(otherVC, animated: true)
+            }).disposed(by: disposeBag)
         
         xmarkButton.rx.tap
             .asDriver()
