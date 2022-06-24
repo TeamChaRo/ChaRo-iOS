@@ -458,10 +458,14 @@ extension CreatePostVC {
         if selectImages.count > 0 {
             photoCell.configurePhotoLayout()
             photoCell.configureCollcetionView()
+            photoCell.updateEmptyViewVisible(isHidden: true)
         } else {
             photoCell.emptyConfigureLayout()
+            photoCell.updateEmptyViewVisible(isHidden: false)
         }
-      
+
+        self.cellHeights[1] = self.selectImages.isEmpty || self.selectImages.count > 2 ? 255.0 : 140.0
+
         return photoCell
     }
     

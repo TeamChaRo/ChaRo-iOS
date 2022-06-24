@@ -131,6 +131,18 @@ extension CreatePostPhotoTVC {
         self.collectionView.reloadData()
     }
 
+    func updateEmptyViewVisible(isHidden: Bool) {
+        if isHidden {
+            self.photoBackgroundView.isHidden = true
+            self.photoSubBackgroundView.isHidden = true
+            self.discriptionText.isHidden = true
+            self.emptyImageView.isHidden = true
+        } else {
+            self.photoBackgroundView.isHidden = false
+            self.photoSubBackgroundView.isHidden = false
+            self.discriptionText.isHidden = false
+            self.emptyImageView.isHidden = false
+        }
     }
 }
 
@@ -221,13 +233,31 @@ extension CreatePostPhotoTVC: UICollectionViewDataSource {
 
         if self.receiveImageList.count >= Metric.maxCount { // image가 6개면 일반 셀만
             cell.configureLayout()
-            cell.setImageView(image: self.receiveImageList[indexPath.row])
+            cell.updateimageViewVisible(isHidden: false)
+            cell.setImageView(
+                data: CreatePostPhotosCVC.PostImage(
+                    image: self.receiveImageList[indexPath.row],
+                    index: indexPath.row
+                )
+            )
+        } else if self.receiveImageList.isEmpty {
+            self.emptyConfigureLayout()
+            self.updateEmptyViewVisible(isHidden: false)
+            cell.updateplusViewVisible(isHidden: true)
+            cell.updateimageViewVisible(isHidden: true)
         } else {
             if indexPath.row == self.receiveImageList.count { // 마지막 셀은 플러스 버튼
                 cell.plusViewConfigureLayout()
+                cell.updateplusViewVisible(isHidden: false)
             } else {
                 cell.configureLayout()
-                cell.setImageView(image: self.receiveImageList[indexPath.row])
+                cell.updateimageViewVisible(isHidden: false)
+                cell.setImageView(
+                    data: CreatePostPhotosCVC.PostImage(
+                        image: self.receiveImageList[indexPath.row],
+                        index: indexPath.row
+                    )
+                )
             }
         }
         

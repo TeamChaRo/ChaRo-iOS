@@ -15,7 +15,14 @@ protocol CreatePostPhotosCVCActionDelegate: AnyObject {
 final class CreatePostPhotosCVC: UICollectionViewCell {
 
     static let identifier: String = "CreatePostPhotosCVC"
-    
+
+    // MARK: ViewModel
+
+    struct PostImage {
+        let image: UIImage?
+        let index: Int
+    }
+
     // MARK: UIComponent
 
     let imageView: UIImageView = {
@@ -113,9 +120,24 @@ extension CreatePostPhotosCVC {
         }
     }
     
-    func setImageView(image: UIImage = ImageLiterals.imgPlaceholder) {
+    func setImageView(data: PostImage) {
+        self.postIndex = data.index
+
+        guard let image = data.image else {
+            self.imageView.image = ImageLiterals.imgPlaceholder
+            return
+        }
         self.imageView.image = image
     }
+
+    func updateplusViewVisible(isHidden: Bool) {
+        self.plusView.isHidden = isHidden
+        self.plusButton.isHidden = isHidden
+    }
+
+    func updateimageViewVisible(isHidden: Bool) {
+        self.imageView.isHidden = isHidden
+        self.deleteButton.isHidden = isHidden
     }
     
     @objc private func didTapDeleteButton(_ sender: UIButton) {
