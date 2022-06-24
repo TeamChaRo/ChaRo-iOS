@@ -9,10 +9,10 @@ import Foundation
 
 // MARK: - NotificationListModel
 struct NotificationListModel: Codable {
-    let pushID, pushCode, isRead: Int
-    let token: String
-    let image: String
-    let title, body, month, day: String
+    let pushID, pushCode, isRead: Int?
+    let token: String?
+    let image: String?
+    let title, body, month, day: String?
 
     enum CodingKeys: String, CodingKey {
         case pushID = "push_id"
