@@ -8,9 +8,13 @@
 import UIKit
 import Then
 
-class CreatePostPhotoTVC: UITableViewCell {
+protocol CreatePostPhotoTVCActionDelegate: AnyObject {
+    func didTapAddImageButton()
+    func didTapDeleteImageButton(index: Int)
+}
 
     // MARK: Properties
+final class CreatePostPhotoTVC: UITableViewCell {
 
     var receiveImageList: [UIImage] = [] {
         didSet {
@@ -20,6 +24,7 @@ class CreatePostPhotoTVC: UITableViewCell {
     }
     
     private let maxPhotoCount: Int = 6
+    weak var actionDelegate: CreatePostPhotoTVCActionDelegate?
 
 
     // MARK: UI
@@ -59,7 +64,6 @@ class CreatePostPhotoTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addNotificationCenter()
         self.addImageGesture()
         self.configureLayout()
     }
@@ -95,23 +99,15 @@ extension CreatePostPhotoTVC {
     }
     
     @objc private func imageViewDidTap() {
-        NotificationCenter.default.post(name: .callPhotoPicker, object: nil)
+        self.actionDelegate?.didTapAddImageButton()
     }
 
-    private func addNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(imageViewDidTap), name: .createPostAddPhotoClicked, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deletePhoto), name: .createPostDeletePhotoClicked, object: nil)
-    
-    }
-    
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: .createPostAddPhotoClicked, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .createPostDeletePhotoClicked, object: nil)
-    }
-
-    @objc func deletePhoto(_ notification: Notification) {
-        self.receiveImageList.remove(at: notification.object as! Int) //선택한 이미지 삭제
+    @objc func deletePhoto(index: Int) {
+        guard self.receiveImageList.count > index else { return }
+        self.receiveImageList.remove(at: index) //선택한 이미지 삭제
         self.collectionView.reloadData()
+    }
+
     }
 }
 
@@ -202,6 +198,7 @@ extension CreatePostPhotoTVC: UICollectionViewDataSource {
         cell.deleteButton.tag = indexPath.row
         
         if self.receiveImageList.count >= self.maxPhotoCount { // image가 6개면 일반 셀만
+        cell.actionDelegate = self
             cell.configureLayout()
             cell.setImageView(image: self.receiveImageList[indexPath.row])
         } else {
@@ -237,5 +234,20 @@ extension CreatePostPhotoTVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+}
+
+
+// MARK: - CreatePostPhotosCVCActionDelegate
+
+extension CreatePostPhotoTVC: CreatePostPhotosCVCActionDelegate {
+
+    func didTapAddButton() {
+        self.imageViewDidTap()
+    }
+
+    func didTapDeleteButton(index: Int) {
+        self.actionDelegate?.didTapDeleteImageButton(index: index)
+        self.deletePhoto(index: index)
     }
 }

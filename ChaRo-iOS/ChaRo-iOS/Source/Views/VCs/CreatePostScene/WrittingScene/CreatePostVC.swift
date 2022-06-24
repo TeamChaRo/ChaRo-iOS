@@ -445,7 +445,9 @@ extension CreatePostVC {
         guard let photoCell = tableView.dequeueReusableCell(
             withIdentifier: CreatePostPhotoTVC.className
         ) as? CreatePostPhotoTVC else { return UITableViewCell() }
-        
+
+        photoCell.actionDelegate = self
+
         // 여기서 VC 이미지를 Cell에 전달
     
         photoCell.receiveImageListfromVC(image: selectImages)
@@ -596,5 +598,20 @@ extension CreatePostVC: UIViewControllerTransitioningDelegate {
         source: UIViewController
     ) -> UIPresentationController? {
         PresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+
+// MARK: - CreatePostPhotoTVCActionDelegate
+
+extension CreatePostVC: CreatePostPhotoTVCActionDelegate {
+    func didTapAddImageButton() {
+        self.addPhotoButtonDidTap()
+    }
+
+    func didTapDeleteImageButton(index: Int) {
+        guard self.selectImages.count > index else { return }
+        self.selectImages.remove(at: index)
+        self.tableView.reloadData()
     }
 }

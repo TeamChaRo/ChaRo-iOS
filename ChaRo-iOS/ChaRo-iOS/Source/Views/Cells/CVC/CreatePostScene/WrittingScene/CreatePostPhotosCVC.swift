@@ -7,7 +7,12 @@
 
 import UIKit
 
-class CreatePostPhotosCVC: UICollectionViewCell {
+protocol CreatePostPhotosCVCActionDelegate: AnyObject {
+    func didTapAddButton()
+    func didTapDeleteButton(index: Int)
+}
+
+final class CreatePostPhotosCVC: UICollectionViewCell {
 
     static let identifier: String = "CreatePostPhotosCVC"
     
@@ -43,6 +48,7 @@ class CreatePostPhotosCVC: UICollectionViewCell {
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
+    weak var actionDelegate: CreatePostPhotosCVCActionDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -94,15 +100,15 @@ extension CreatePostPhotosCVC {
     func setImageView(image: UIImage = ImageLiterals.imgPlaceholder) {
         self.imageView.image = image
     }
-    
-    @objc
-    func deleteButtonDidTap(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .createPostDeletePhotoClicked, object: sender.tag)
     }
     
-    @objc
-    func addButtonDidTap(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .createPostAddPhotoClicked, object: sender.tag)
+    @objc private func didTapDeleteButton(_ sender: UIButton) {
+        if let index = self.postIndex {
+            self.actionDelegate?.didTapDeleteButton(index: index)
+        }
     }
     
+    @objc private func didTapAddButton(_ sender: UIButton) {
+        self.actionDelegate?.didTapAddButton()
+    }
 }
