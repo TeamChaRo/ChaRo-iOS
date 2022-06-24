@@ -18,15 +18,15 @@ final class ExpendedImageVC: UIViewController {
     private let animator = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
     private let scrolledOffsetSubject = PublishSubject<CGFloat>()
     private let photoSubject = ReplaySubject<[String]>.create(bufferSize: 1)
+    private var currentIndex: Int = 0
     
     private let xmarkButton = UIButton().then {
         $0.setImage(ImageLiterals.icCloseWhite, for: .normal)
     }
     
-    private lazy var photoNumberButton = UIButton().then {
+    private let photoNumberButton = UIButton().then {
         $0.titleLabel?.font = .notoSansMediumFont(ofSize: 15)
         $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("1 / \(imageList.count)", for: .normal)
         $0.layer.cornerRadius = 25.0 / 2.0
         $0.backgroundColor = .gray10.withAlphaComponent(0.7)
     }
@@ -44,15 +44,15 @@ final class ExpendedImageVC: UIViewController {
         $0.register(cell: PostPhotoCVC.self)
         $0.rx.setDelegate(self)
         $0.showsHorizontalScrollIndicator = false
-        $0.isPagingEnabled = true
     }
     
     private let viewModel: ExpendedImageViewModel
     
-    init(imageList: [String]) {
+    init(imageList: [String], currentIndex: Int) {
         self.imageList = imageList
         self.photoSubject.onNext(imageList)
         self.viewModel = ExpendedImageViewModel()
+        self.currentIndex = currentIndex
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -91,6 +91,13 @@ final class ExpendedImageVC: UIViewController {
     private func configUI() {
         view.backgroundColor = .black.withAlphaComponent(0.9)
         setupPanGesture()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.scrollToItem(at: IndexPath(row: self.currentIndex, section: 0),
+                                              at: .left, animated: false)
+            self.collectionView.isPagingEnabled = true
+            self.photoNumberButton.setTitle("\(self.currentIndex + 1) / \(self.imageList.count)", for: .normal)
+        }
     }
 
     private func setupPanGesture() {
