@@ -9,13 +9,13 @@ import Foundation
 struct DetailModel: Codable {
     let success: Bool
     let msg: String
-    let data: DetailDataClass
+    var data: DetailDataClass
 }
 
 // MARK: - DataClass
 struct DetailDataClass: Codable {
-    let lastID: Int
-    let lastCount: Int?
+    var lastID: Int
+    var lastCount: Int?
     let drive: [DetailDrive]
 
     enum CodingKeys: String, CodingKey {

@@ -27,6 +27,8 @@ class HomePostVC: UIViewController {
     @IBOutlet weak var navigationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var fromBottomToLabel: NSLayoutConstraint!
     
+    var flag: Bool = true
+    
     var delegate: SetTopTitleDelegate?
     var isFirstLoaded = true
     var cellCount = 0
@@ -36,9 +38,11 @@ class HomePostVC: UIViewController {
     var cellIndexpath: IndexPath = [0,0]
     var postCount: Int = 0
     var newPostCount: Int = 0
-    var postData: [DetailModel] = []
-    var newPostData: [DetailModel] = []
+    var postData: [DetailDrive] = []
     var cellLoadFirst: Bool = true
+    
+    var lastCount = 0
+    var lastId = 0
     
     var currentState: String = "인기순"
     let filterView = FilterView()
@@ -117,17 +121,20 @@ class HomePostVC: UIViewController {
             response) in
             switch response
             {
-            case .success(let data) :
+            case .success(let data):
                 if let response = data as? DetailModel {
                     print("인기순 데이터")
                     DispatchQueue.global().sync {
+                        self.flag = true
                         self.postCount = response.data.drive.count
-                        self.postData = [response]
+                        self.postData = response.data.drive
+                        self.lastId = response.data.lastID
+                        self.lastCount = response.data.lastCount ?? 0
                     }
                     self.postCount = response.data.drive.count
                     self.collectionView.reloadData()
                 }
-            case .requestErr(let message) :
+            case .requestErr(let message):
                 print("requestERR")
             case .pathErr :
                 print("pathERR")
@@ -147,13 +154,16 @@ class HomePostVC: UIViewController {
                 if let response = data as? DetailModel {
                     print("최신순 데이터")
                     DispatchQueue.global().sync {
+                        self.flag = true
                         self.postCount = response.data.drive.count
+                        self.lastCount = response.data.lastCount ?? 0
+                        self.lastId = response.data.lastID
                         self.newPostCount = response.data.drive.count
-                    self.postData = [response]
+                        self.postData = response.data.drive
                     }
                     self.collectionView.reloadData()
                 }
-            case .requestErr(let message) :
+            case .requestErr(let message):
                 print("requestERR")
             case .pathErr :
                 print("pathERR")
@@ -172,12 +182,26 @@ class HomePostVC: UIViewController {
             case .success(let data) :
                 if let response = data as? DetailModel {
                     print("무한스크롤 테스트")
-                    DispatchQueue.global().sync {
-                        
+                    if response.data.drive.count == 0 {
+                        break
                     }
+                    self.flag = true
+                    DispatchQueue.global().sync {
+                        if self.currentState == "인기순"{
+                            self.lastCount = response.data.lastCount ?? 0
+                            self.lastId = response.data.lastID
+                            self.postData.append(contentsOf: response.data.drive)
+                        }
+                        else{
+                            self.lastCount = response.data.lastCount ?? 0
+                            self.lastId = response.data.lastID
+                            self.postData.append(contentsOf: response.data.drive)
+                        }
+                    }
+                    print(self.postData)
                     self.collectionView.reloadData()
                 }
-            case .requestErr(let message) :
+            case .requestErr(let message):
                 print("requestERR")
             case .pathErr :
                 print("pathERR")
@@ -188,7 +212,6 @@ class HomePostVC: UIViewController {
             }
         }
     }
-    
 }
 extension HomePostVC: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -200,7 +223,7 @@ extension HomePostVC: UICollectionViewDelegate {
             return 1
         }
         else {
-            return postCount
+            return currentState == "인기순" ? postData.count: postData.count
         }
     }
     
@@ -242,7 +265,6 @@ extension HomePostVC: UICollectionViewDelegate {
         }
      return UICollectionViewCell()
     }
-    
 }
 
 
@@ -329,16 +351,16 @@ extension HomePostVC: PostIdDelegate {
     }
     
     private func configureCommonVeiwModel(index: Int) -> CommonCVC.ViewModel {
-        var tag = setTagArr(region: postData[0].data.drive[index].region,
-                                  theme: postData[0].data.drive[index].theme,
-                                  warning: postData[0].data.drive[index].warning ?? "")
+        var tag = setTagArr(region: postData[index].region,
+                                  theme: postData[index].theme,
+                                  warning: postData[index].warning ?? "")
         return CommonCVC.ViewModel(
-            image: postData[0].data.drive[index].image,
-            title: postData[0].data.drive[index].title,
+            image: postData[index].image,
+            title: postData[index].title,
             tagCount: tag.count,
             tagArr: tag,
-            isFavorite: postData[0].data.drive[index].isFavorite,
-            postID: postData[0].data.drive[index].postID,
+            isFavorite: postData[index].isFavorite,
+            postID: postData[index].postID,
             height: 60
         )
     }
@@ -348,12 +370,15 @@ extension HomePostVC {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentHeight = collectionView.contentSize.height
         if(collectionView.contentOffset.y > contentHeight - collectionView.frame.height) && collectionView.contentOffset.x == 0 {
-            if currentState == "인기순" {
-                var len = postData[0].data.drive.count
-                getInfinityData(postId: postData[0].data.drive[len - 1].postID, count: postData[0].data.lastCount ?? 99, type: .recommend)
-            }
-            else {
-                getInfinityData(postId: newPostData[0].data.lastID, count: newPostData[0].data.lastCount ?? 0, type: .new)
+            if flag {
+                if currentState == "인기순"{
+                    flag = false
+                    getInfinityData(postId: lastId, count: lastCount, type: .recommend)
+                }
+                else {
+                    flag = false
+                    getInfinityData(postId: lastId, count: lastCount, type: .new)
+                }
             }
         }
     }

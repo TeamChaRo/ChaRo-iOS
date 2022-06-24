@@ -5,6 +5,7 @@ import Foundation
 struct GetInfinityDetailDataService
 {
     static var value: String = ""
+    static var identifier: String = ""
     
     static let detailData = GetInfinityDetailDataService()
     func getInfo(postId: Int,
@@ -13,12 +14,10 @@ struct GetInfinityDetailDataService
                  completion: @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
-        let URL = type == .recommend ?  Constants.detailURL : Constants.newDetailURL +
-        GetNewDetailDataService.value +
-        String(postId) +
-        String(count)
-        
-        print(postId, count, URL)
+        print(count)
+        let URL = type == .recommend ?  Constants.detailURL + GetInfinityDetailDataService.identifier + "/\(String(postId))/\(String(count))/" + GetInfinityDetailDataService.value:
+        Constants.newDetailURL + GetInfinityDetailDataService.identifier + "/\(String(postId))/" + GetInfinityDetailDataService.value
+        print(URL)
         let header: HTTPHeaders = ["Content-Type": "application/json"]
 
         let dataRequest = AF.request(URL,
