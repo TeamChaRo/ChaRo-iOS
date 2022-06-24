@@ -15,10 +15,12 @@ struct DetailModel: Codable {
 // MARK: - DataClass
 struct DetailDataClass: Codable {
     let lastID: Int
+    let lastCount: Int?
     let drive: [DetailDrive]
 
     enum CodingKeys: String, CodingKey {
         case lastID = "lastId"
+        case lastCount = "lastCount"
         case drive
     }
 }

@@ -505,8 +505,8 @@ extension HomeVC: SeeMorePushDelegate {
             GetNewDetailDataService.value = "0"
         case 4:
             smVC.topText = customText
-            GetDetailDataService.value = "1?value=summer"
-            GetNewDetailDataService.value = "1?value=summer"
+            GetDetailDataService.value = "1?value=lake"
+            GetNewDetailDataService.value = "1?value=lake"
         case 5:
             smVC.topText = localText
             GetDetailDataService.value = "2?value=busan"

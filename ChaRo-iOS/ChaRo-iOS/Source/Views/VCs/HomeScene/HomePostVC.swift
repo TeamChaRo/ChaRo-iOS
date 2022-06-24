@@ -13,6 +13,11 @@ protocol SetTopTitleDelegate {
     func setTopTitle(name: String)
 }
 
+enum getDataThemeType {
+    case recommend
+    case new
+}
+
 class HomePostVC: UIViewController {
     @IBOutlet weak var NavigationTitleLabel: UILabel!
     @IBOutlet weak var homePostNavigationView: UIView!
@@ -108,7 +113,8 @@ class HomePostVC: UIViewController {
     }
     
     func getData() {
-        GetDetailDataService.detailData.getRecommendInfo{ (response) in
+        GetDetailDataService.detailData.getRecommendInfo{ (
+            response) in
             switch response
             {
             case .success(let data) :
@@ -144,6 +150,30 @@ class HomePostVC: UIViewController {
                         self.postCount = response.data.drive.count
                         self.newPostCount = response.data.drive.count
                     self.postData = [response]
+                    }
+                    self.collectionView.reloadData()
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    func getInfinityData(postId: Int, count: Int, type: getDataThemeType){
+        GetInfinityDetailDataService.detailData.getInfo(postId: postId, count: count, type: type){ (response) in
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? DetailModel {
+                    print("무한스크롤 테스트")
+                    DispatchQueue.global().sync {
+                        
                     }
                     self.collectionView.reloadData()
                 }
@@ -311,5 +341,20 @@ extension HomePostVC: PostIdDelegate {
             postID: postData[0].data.drive[index].postID,
             height: 60
         )
+    }
+}
+
+extension HomePostVC {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = collectionView.contentSize.height
+        if(collectionView.contentOffset.y > contentHeight - collectionView.frame.height) && collectionView.contentOffset.x == 0 {
+            if currentState == "인기순" {
+                var len = postData[0].data.drive.count
+                getInfinityData(postId: postData[0].data.drive[len - 1].postID, count: postData[0].data.lastCount ?? 99, type: .recommend)
+            }
+            else {
+                getInfinityData(postId: newPostData[0].data.lastID, count: newPostData[0].data.lastCount ?? 0, type: .new)
+            }
+        }
     }
 }

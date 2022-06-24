@@ -35,6 +35,7 @@
 		3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8972693730700EFC794 /* HomeSquareTVC.swift */; };
 		3610A8A22693730700EFC794 /* HomeThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A8982693730700EFC794 /* HomeThemeTVC.swift */; };
 		3610A8A52693730700EFC794 /* PostParkingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3610A89B2693730700EFC794 /* PostParkingTVC.swift */; };
+		36179EE528660CA300E8E772 /* GetInfinityDetailDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36179EE428660CA300E8E772 /* GetInfinityDetailDataService.swift */; };
 		361986BF27778C2700B031F8 /* FollowCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361986BE27778C2700B031F8 /* FollowCheckService.swift */; };
 		361C6A25269E241600EA4A58 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361C6A24269E241600EA4A58 /* NetworkResult.swift */; };
 		362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362BC9F6269ED387008EF625 /* MyPageDataModel.swift */; };
@@ -302,6 +303,7 @@
 		3610A8972693730700EFC794 /* HomeSquareTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSquareTVC.swift; sourceTree = "<group>"; };
 		3610A8982693730700EFC794 /* HomeThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThemeTVC.swift; sourceTree = "<group>"; };
 		3610A89B2693730700EFC794 /* PostParkingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostParkingTVC.swift; sourceTree = "<group>"; };
+		36179EE428660CA300E8E772 /* GetInfinityDetailDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInfinityDetailDataService.swift; sourceTree = "<group>"; };
 		361986BE27778C2700B031F8 /* FollowCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCheckService.swift; sourceTree = "<group>"; };
 		361C6A24269E241600EA4A58 /* NetworkResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		362BC9F6269ED387008EF625 /* MyPageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDataModel.swift; sourceTree = "<group>"; };
@@ -704,6 +706,7 @@
 				70FD425E2817158900631BB7 /* UpdateProfileService.swift */,
 				70FD4260281715B300631BB7 /* UserDefaultKey.swift */,
 				708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */,
+				36179EE428660CA300E8E772 /* GetInfinityDetailDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1740,6 +1743,7 @@
 				3C86FA222694B713009370CD /* PostDriveCourseTVC.swift in Sources */,
 				7062C847270CBF4F00C1CD2E /* ValidateEmailService.swift in Sources */,
 				7062C8592710DCC800C1CD2E /* JoinDataModel.swift in Sources */,
+				36179EE528660CA300E8E772 /* GetInfinityDetailDataService.swift in Sources */,
 				3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */,
 				70D63E3426963C810036484B /* ThemePostThemeTVC.swift in Sources */,
 				3C6F8A6226E2358D006E3895 /* SearchAddressKeywordVC.swift in Sources */,
