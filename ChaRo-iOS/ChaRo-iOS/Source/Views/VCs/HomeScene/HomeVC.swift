@@ -127,7 +127,7 @@ class HomeVC: UIViewController {
         headerView.addSubviews(bannerTitleLableList + bannerSubtTtleLabelList)
         
     }
-        
+    
     func setupHeaderViewLayout() {
         for index in 0..<bannerTitleLableList.count {
             bannerTitleLableList[index].snp.makeConstraints{
@@ -187,42 +187,42 @@ class HomeVC: UIViewController {
                     print("겟 데이터 실행")
                     DispatchQueue.global().sync {
                         let data = response.data
-                    //배너 타이틀
+                        //배너 타이틀
                         if let banner = data.banner as? [Banner] {
-                        self.bannerData = banner
-                        self.setHeader()
-                        self.setupHeaderViewUI()
-                    }
-                    
-                    //today 차로
+                            self.bannerData = banner
+                            self.setHeader()
+                            self.setupHeaderViewUI()
+                        }
+                        
+                        //today 차로
                         if let today = data.todayCharoDrive.drive as? [DriveElement] {
-                        self.todayData = today
-                        print(self.todayData)
-                    }
-                    
-                    //trendy 차로
+                            self.todayData = today
+                            print(self.todayData)
+                        }
+                        
+                        //trendy 차로
                         if let trendy = data.trendDrive.drive as? [DriveElement] {
-                        self.trendyData = trendy
-                    }
-        
-                    //custom 차로 & 텍스트
+                            self.trendyData = trendy
+                        }
+                        
+                        //custom 차로 & 텍스트
                         if let custom = data.customDrive.drive as? [DriveElement] {
-                        self.customData = custom
-                        self.customText = data.customTitle
-                    }
-
-                    
-                    //local 차로
+                            self.customData = custom
+                            self.customText = data.customTitle
+                        }
+                        
+                        
+                        //local 차로
                         if let local = data.localDrive.drive as? [DriveElement] {
-                        self.localData = local
-                        self.localText = data.localTitle
-                        print(data.localTitle)
-
-                    }
+                            self.localData = local
+                            self.localText = data.localTitle
+                            print(data.localTitle)
+                            
+                        }
                         self.delegate?.endIndicator()
                     }
                     self.HomeTableView.reloadData()
-                   
+                    
                 }
             case .requestErr(let message):
                 print("requestERR")
@@ -285,23 +285,23 @@ extension HomeVC: UITableViewDelegate {
         
         let factor = UIScreen.main.bounds.width / 375
         switch indextPath.row {
-        
-        //배너
+            
+            //배너
         case 0:
             return 365 * factor
-        //테마
+            //테마
         case 1:
             return 178 * factor
-        //아무것도 아닌거
+            //아무것도 아닌거
         case 999:
             return 100
-        //그 외 섹션
+            //그 외 섹션
         default:
             return 570 * factor
         }
         
     }
-
+    
     func addContentScrollView() {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
@@ -373,13 +373,13 @@ extension HomeVC: UITableViewDelegate {
                     HomeNavigationView.backgroundColor = .none
                 }
                 
-               }
+            }
         } else {
             updateHeaderView()
             addContentScrollView()
             HomeNavigationView.backgroundColor = .none
-           }
-
+        }
+        
     }
     func setMoveCar() {
         let originalCarConstant = carMoveConstraint.constant
@@ -387,14 +387,14 @@ extension HomeVC: UITableViewDelegate {
         let pageCount: Int = 4
         let currentWidth = bannerScrollView.contentOffset.x
         if bannerScrollView.contentOffset.x > 0{
-               if currentWidth < 10000 {
+            if currentWidth < 10000 {
                 carMoveConstraint.constant = (currentWidth - sideMargin)/CGFloat(pageCount)
-               } else {
+            } else {
                 carMoveConstraint.constant = originalCarConstant
-               }
-           } else {
+            }
+        } else {
             carMoveConstraint.constant = originalCarConstant
-           }
+        }
     }
     
     
@@ -410,7 +410,7 @@ extension HomeVC: UITableViewDelegate {
         
         //MARK: 배너부분 구현
         switch indexPath.row {
-        //MARK: 오늘의 드라이브
+            //MARK: 오늘의 드라이브
         case 0:
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
@@ -419,13 +419,13 @@ extension HomeVC: UITableViewDelegate {
                 return cell
             } else {
                 cell.todayDriveList = todayData
-            return cell
-        }
+                return cell
+            }
         case 1:
             let cell: HomeThemeTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.cellDelegate = self
             return cell
-        //MARK: 트렌드
+            //MARK: 트렌드
         case 2:
             let cell: HomeSquareTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
@@ -437,8 +437,8 @@ extension HomeVC: UITableViewDelegate {
                 cell.trendyDriveList = trendyData
                 return cell
             }
-
-        //MARK: 커스텀 테마
+            
+            //MARK: 커스텀 테마
         case 3:
             let cell: HomeSeasonRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
@@ -451,13 +451,13 @@ extension HomeVC: UITableViewDelegate {
                 return cell
             } else {
                 cell.customList = customData
-            return cell
+                return cell
                 
             }
-           
-//MARK: 로컬 테마
+            
+            //MARK: 로컬 테마
         case 4:
-
+            
             let cell: HomeAreaRecommandTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
             cell.buttonDelegate = self
@@ -466,10 +466,10 @@ extension HomeVC: UITableViewDelegate {
             print("fsdgsfdg", localText)
             cell.headerText = localText
             cell.localList = localData
-         
+            
             return cell
-        
-        
+            
+            
         default:
             print("Error")
         }
@@ -517,7 +517,7 @@ extension HomeVC: SeeMorePushDelegate {
         self.navigationController?.pushViewController(smVC, animated: true)
     }
     
-
+    
 }
 
 extension HomeVC: CollectionViewCellDelegate {
@@ -532,7 +532,7 @@ extension HomeVC: CollectionViewCellDelegate {
 
 //postID 넘기기 위한 Delegate 구현
 extension HomeVC: PostIdDelegate {
-
+    
     func sendPostID(data: Int) {
         print("이거임 ~~~~\(data)")
         let nextVC = PostDetailVC()
