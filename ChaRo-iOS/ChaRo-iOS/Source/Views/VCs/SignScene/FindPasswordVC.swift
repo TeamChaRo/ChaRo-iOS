@@ -48,6 +48,9 @@ final class FindPasswordVC: UIViewController {
     }
     
     //MARK: - configure 함수
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.navigationView.endEditing(true)
+    }
     private func configureDelegate() {
         emailInputView.inputTextField?.delegate = self
     }
