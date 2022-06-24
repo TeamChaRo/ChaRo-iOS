@@ -278,10 +278,10 @@ extension ThemePostVC: PostIdDelegate {
 }
 
 extension ThemePostVC{
-
-func dismissDropDownWhenTappedAround() {
+    
+    func dismissDropDownWhenTappedAround() {
         let tap: UITapGestureRecognizer =
-            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
