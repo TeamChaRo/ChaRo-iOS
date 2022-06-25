@@ -121,6 +121,7 @@ class LoginVC: UIViewController {
                     UserDefaults.standard.set(userPassword, forKey: Constants.UserDefaultsKey.userPassword)
                     UserDefaults.standard.set(user.nickname, forKey: Constants.UserDefaultsKey.userNickname)
                     UserDefaults.standard.set(user.profileImage, forKey: Constants.UserDefaultsKey.userImage)
+                    UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isLogin)
                 }
                 self.showHomeVC()
                 

@@ -67,7 +67,7 @@ extension SettingSection {
         case .account:
             return [SettingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
                     SettingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
-                    SettingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: "\(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com")", subLabelColor: UIColor.black)]
+                    SettingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: "\(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail) ?? "로그인 해주세요")", subLabelColor: UIColor.black)]
         case .info:
             return [SettingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black)]
         case .serviceCenter:

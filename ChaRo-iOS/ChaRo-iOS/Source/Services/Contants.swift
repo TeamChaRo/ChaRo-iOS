@@ -7,37 +7,35 @@
 
 import Foundation
 
+
 struct Constants {
     
     // MARK: - BASE URL
     static let baseURL = "http://52.79.108.141:5000"
     
-    static let userId = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com"
     static let nickName = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userNickname) ?? "지으니"
     static let profileName = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userImage) ?? "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/jieun.JPG"
-    static let userEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com"
-
-    
+    static var userEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "로그인 해주세요"
     // MARK: - Feature URL
     ///1. 홈 데이터 URL 여기에 + 유저 아이디(111,222,333) 해줘야 함 // 일단은 111로 해놓을겡~!
-    static let HomeURL = baseURL + "/post/main/" + userId
-    static let CreatePostURL = baseURL + "/post/write"
+    static let HomeURL = baseURL + "/post/main/" + userEmail
+    static let CreatePostURL = baseURL + "/writePost"
     
     ///2. 더보기 뷰 URL
-    static let detailURL = baseURL + "/post/preview/like/" + userId + "/"
+    static let detailURL = baseURL + "/post/preview/like/" + userEmail + "/"
     
     ///3.더보기 최신순 URL
-    static let newDetailURL = baseURL + "/post/preview/new/" + userId + "/"
+    static let newDetailURL = baseURL + "/post/preview/new/" + userEmail + "/"
     
     ///4.
-    static let ThemeLikeURL = baseURL + "/post/preview/like/\(userId)/1?value="
-    static let ThemeNewURL = baseURL + "/post/preview/new/\(userId)/1?value="
+    static let ThemeLikeURL = baseURL + "/post/preview/like/\(userEmail)/1?value="
+    static let ThemeNewURL = baseURL + "/post/preview/new/\(userEmail)/1?value="
     static let likeURL = baseURL + "/post/like"
     
     ///myPage
     static let myPageURL = baseURL + "/user/myPage/"
-    static let myPageLikeURL = baseURL + "/user/myPage/like/" + userId
-    static let myPageNewURL = baseURL + "/user/myPage/new/" + userId
+    static let myPageLikeURL = baseURL + "/user/myPage/like/" + userEmail
+    static let myPageNewURL = baseURL + "/user/myPage/new/" + userEmail
     
     ///otherMyPage
     static let otherMyPageURL = baseURL + "/user/myPage/like/"
