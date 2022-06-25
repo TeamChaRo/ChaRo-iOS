@@ -30,7 +30,7 @@ class MyPageVC: UIViewController {
     var currentState: String = "인기순"
     
     //무한스크롤을 위함
-    var myId: String = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "로그인해주세요"
+    var myId: String = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? ""
     var lastId: Int = 0
     var lastFavorite: Int = 0
     var isLast: Bool = false
@@ -402,7 +402,7 @@ class MyPageVC: UIViewController {
         
         if isLogin == false {
 //요 녀석은 일단 이 뷰에 들어가면 빠져나올수가 없어서 잠시 빼놓겠습니다!
-//            LoginVC.modalPresentationStyle = .overFullScreen
+            navController.modalPresentationStyle = .overFullScreen
             self.present(navController, animated: true, completion: nil)
         }
     }

@@ -16,8 +16,9 @@ class FollowFollwingVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
-    let myId = UserDefaults.standard.string(forKey: "userId") ?? ""
-    var otherUserID: String = "and@naver.com"
+    let myId = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? ""
+
+    var otherUserID: String = ""
 
     var followerNum: Int = 0
     var followingNum: Int = 0
