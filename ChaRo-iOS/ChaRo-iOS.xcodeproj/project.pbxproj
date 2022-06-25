@@ -232,6 +232,7 @@
 		F468C0FE269E20390019B1B3 /* CreatePostDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */; };
 		F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497D3EB26A0869A009A17AA /* UIViewController+.swift */; };
 		F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49DE532268E148300A8185C /* PostDetailVC.swift */; };
+		F4C7A48B28673CF200ACE022 /* WarningType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C7A48A28673CF200ACE022 /* WarningType.swift */; };
 		F4CC1B5C269A2085009A0C01 /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */; };
 		F4CC1B5E269A20A7009A0C01 /* CreatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */; };
 		F4CC1B61269B92F0009A0C01 /* CreatePostTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */; };
@@ -508,6 +509,7 @@
 		F468C0FD269E20390019B1B3 /* CreatePostDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDataModel.swift; sourceTree = "<group>"; };
 		F497D3EB26A0869A009A17AA /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		F49DE532268E148300A8185C /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		F4C7A48A28673CF200ACE022 /* WarningType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningType.swift; sourceTree = "<group>"; };
 		F4CC1B5B269A2085009A0C01 /* CreatePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePost.storyboard; sourceTree = "<group>"; };
 		F4CC1B5D269A20A7009A0C01 /* CreatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostVC.swift; sourceTree = "<group>"; };
 		F4CC1B5F269B92F0009A0C01 /* CreatePostTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostTitleTVC.swift; sourceTree = "<group>"; };
@@ -920,6 +922,7 @@
 				36E445BA277CD6A2008E31BE /* SettingDataModel.swift */,
 				3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */,
 				33421B902817FC6A005EFBA5 /* NoticeDataModel.swift */,
+				F4C7A48A28673CF200ACE022 /* WarningType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1756,6 +1759,7 @@
 				33421B912817FC6A005EFBA5 /* NoticeDataModel.swift in Sources */,
 				332867FF2857421200E75C70 /* DateComponents+.swift in Sources */,
 				F4CC1B68269B9850009A0C01 /* UITextView+.swift in Sources */,
+				F4C7A48B28673CF200ACE022 /* WarningType.swift in Sources */,
 				3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */,
 				70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */,
 				F497D3EC26A0869A009A17AA /* UIViewController+.swift in Sources */,
