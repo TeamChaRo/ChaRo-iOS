@@ -23,7 +23,7 @@ class OtherMyPageVC: UIViewController {
     var followingNum: Int = 0
     var updateFollowNum: Bool = false
     
-    let myId = UserDefaults.standard.string(forKey: "userId") ?? ""
+    let myId = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? ""
     var otherUserID: String = ""
     
     var lastId: Int = 0

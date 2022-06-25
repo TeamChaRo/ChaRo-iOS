@@ -18,7 +18,7 @@ class MyPageVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
-    var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin) 
+    var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin) ?? false
     
     private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
@@ -118,7 +118,7 @@ class MyPageVC: UIViewController {
         $0.numberOfLines = 3
     }
     private let noSaveDataLabel = UILabel().then {
-        $0.text = "작성하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n만들어보는 것은 어떠신가요?"
+        $0.text = "저장하신 드라이브 코스가 아직 없습니다. \n직접 나만의 드라이브 코스를 \n만들어보는 것은 어떠신가요?"
         $0.textColor = UIColor.gray50
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textAlignment = .center
@@ -253,8 +253,10 @@ class MyPageVC: UIViewController {
         followNumButton.setTitle(String(userProfileData[0].following), for: .normal)
     }
     func setEmptyDataLayout() {
-        saveView.addSubviews([noSaveDataImageView, noSaveDataLabel])
-        writeView.addSubviews([noWritenDataImageView, noWritenDataLabel])
+        let saveViewArr = isLogin ? [noSaveDataImageView, noSaveDataLabel]: [noSaveDataImageView]
+        let writeViewArr = isLogin ? [noWritenDataImageView, noWritenDataLabel]: [noWritenDataImageView]
+        saveView.addSubviews(saveViewArr)
+        writeView.addSubviews(writeViewArr)
         
         noSaveDataImageView.isHidden = true
         noSaveDataLabel.isHidden = true
@@ -266,22 +268,26 @@ class MyPageVC: UIViewController {
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
         }
-        noSaveDataLabel.snp.makeConstraints{
-            $0.top.equalTo(noSaveDataImageView.snp.bottom).offset(19)
-            $0.leading.equalToSuperview().offset(71)
-            $0.trailing.equalToSuperview().offset(-71)
-            $0.height.equalTo(66)
+        if isLogin {
+            noSaveDataLabel.snp.makeConstraints{
+                $0.top.equalTo(noSaveDataImageView.snp.bottom).offset(19)
+                $0.leading.equalToSuperview().offset(71)
+                $0.trailing.equalToSuperview().offset(-71)
+                $0.height.equalTo(66)
+            }
         }
         noWritenDataImageView.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
         }
-        noWritenDataLabel.snp.makeConstraints{
-            $0.top.equalTo(noWritenDataImageView.snp.bottom).offset(19)
-            $0.leading.equalToSuperview().offset(71)
-            $0.trailing.equalToSuperview().offset(-71)
-            $0.height.equalTo(66)
+        if isLogin {
+            noWritenDataLabel.snp.makeConstraints{
+                $0.top.equalTo(noWritenDataImageView.snp.bottom).offset(19)
+                $0.leading.equalToSuperview().offset(71)
+                $0.trailing.equalToSuperview().offset(-71)
+                $0.height.equalTo(66)
+            }
         }
     }
     func isEmptyData() {
@@ -386,6 +392,9 @@ class MyPageVC: UIViewController {
             self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(followVC, animated: true)
         }
+        else {
+            self.makeAlert(title: "로그인", message: "로그인 하고 이용해 주세요", okAction: nil, completion: nil)
+        }
      }
     @objc private func followingButtonClicked(_ sender: UIButton) {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
@@ -393,6 +402,9 @@ class MyPageVC: UIViewController {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: myId)
             self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(followVC, animated: true)
+        }
+        else {
+            self.makeAlert(title: "로그인", message: "로그인 하고 이용해 주세요", okAction: nil, completion: nil)
         }
      }
     @objc func nameLabelClicked(sender: UITapGestureRecognizer) {
