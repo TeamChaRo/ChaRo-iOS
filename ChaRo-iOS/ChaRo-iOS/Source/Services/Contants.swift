@@ -21,7 +21,7 @@ struct Constants {
     // MARK: - Feature URL
     ///1. 홈 데이터 URL 여기에 + 유저 아이디(111,222,333) 해줘야 함 // 일단은 111로 해놓을겡~!
     static let HomeURL = baseURL + "/post/main/" + userId
-    static let CreatePostURL = baseURL + "/writePost"
+    static let CreatePostURL = baseURL + "/post/write"
     
     ///2. 더보기 뷰 URL
     static let detailURL = baseURL + "/post/preview/like/" + userId + "/"

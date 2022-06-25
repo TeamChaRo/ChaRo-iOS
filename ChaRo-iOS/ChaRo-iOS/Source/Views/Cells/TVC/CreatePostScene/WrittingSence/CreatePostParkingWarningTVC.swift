@@ -31,11 +31,12 @@ final class CreatePostParkingWarningTVC: UITableViewCell {
             _ = setParkingDesc?(self.parkingContent)
         }
     }
-    private var warningValue: [Bool] = [false, false, false, false] {
+    private var warning: [String] = [] {
         didSet {
-            _ = setWraningData?(self.warningValue)
+            _ = setWraningData?(self.warning)
         }
     }
+
     var availableParking: Bool = false {
         didSet {
             _ = setParkingInfo?(self.availableParking)
@@ -45,7 +46,7 @@ final class CreatePostParkingWarningTVC: UITableViewCell {
     
     // 데이터 전달 closure
     var setParkingInfo: ((Bool) -> Void)?
-    var setWraningData: (([Bool]) -> Void)?
+    var setWraningData: (([String]) -> Void)?
     var setParkingDesc: ((String) -> Void)?
     
     // cell height 동적으로 계산
@@ -189,13 +190,13 @@ extension CreatePostParkingWarningTVC {
     private func changeButtonStatus(tag: Int) {
         switch tag {
         case 0:
-            self.configureWarningList(highwayButton, index: 0)
+            self.configureWarningList(highwayButton, type: .highway)
         case 1:
-            self.configureWarningList(mountainButton, index: 1)
+            self.configureWarningList(mountainButton, type: .mountaionRoad)
         case 2:
-            self.configureWarningList(beginnerButton, index: 2)
+            self.configureWarningList(beginnerButton, type: .diffRoad)
         case 3:
-            self.configureWarningList(peopleButton, index: 3)
+            self.configureWarningList(peopleButton, type: .hotPlace)
         case 4:
             if self.availableParking == false {
                 self.availableParking.toggle()
@@ -254,26 +255,55 @@ extension CreatePostParkingWarningTVC {
         self.parkingNonExistButton.backgroundColor = .clear
     }
     
-    private func configureWarningList(_ button: UIButton, index: Int) {
-        if self.warningValue[index] { // true 일 때
-            self.warningValue[index] = false
+    private func configureWarningList(_ button: UIButton, type: WarningType) {
+        if let index = self.warning.firstIndex(of: type.rawValue) {
+            self.warning.remove(at: index)
+            self.updateWarningButtonUI(type: type, isSelected: false)
         } else {
-            self.warningValue[index] = true
+            self.warning.append(type.rawValue)
+            self.updateWarningButtonUI(type: type, isSelected: true)
         }
-        
-        self.updateWarningButtonUI(button, value: self.warningValue[index])
     }
     
-    private func updateWarningButtonUI(_ button: UIButton, value: Bool) {
-        // warning value에 맞춰서 색상 업데이트
-        if value == true {
-            button.setMainBlueBorder(21)
-            button.setBenefitTitleColor()
-            button.backgroundColor = .blueSelect
+    private func updateWarningButtonUI(type: WarningType, isSelected: Bool) {
+        if isSelected {
+            switch type {
+            case .highway:
+                self.highwayButton.setMainBlueBorder(21)
+                self.highwayButton.setBenefitTitleColor()
+                self.highwayButton.backgroundColor = .blueSelect
+            case .mountaionRoad:
+                self.mountainButton.setMainBlueBorder(21)
+                self.mountainButton.setBenefitTitleColor()
+                self.mountainButton.backgroundColor = .blueSelect
+            case .diffRoad:
+                self.beginnerButton.setMainBlueBorder(21)
+                self.beginnerButton.setBenefitTitleColor()
+                self.beginnerButton.backgroundColor = .blueSelect
+            case .hotPlace:
+                self.peopleButton.setMainBlueBorder(21)
+                self.peopleButton.setBenefitTitleColor()
+                self.peopleButton.backgroundColor = .blueSelect
+            }
         } else {
-            button.setGray20Border(21)
-            button.setEmptyTitleColor(colorNum: 40)
-            button.backgroundColor = .clear
+            switch type {
+            case .highway:
+                self.highwayButton.setGray20Border(21)
+                self.highwayButton.setEmptyTitleColor(colorNum: 40)
+                self.highwayButton.backgroundColor = .clear
+            case .mountaionRoad:
+                self.mountainButton.setGray20Border(21)
+                self.mountainButton.setEmptyTitleColor(colorNum: 40)
+                self.mountainButton.backgroundColor = .clear
+            case .diffRoad:
+                self.beginnerButton.setGray20Border(21)
+                self.beginnerButton.setEmptyTitleColor(colorNum: 40)
+                self.beginnerButton.backgroundColor = .clear
+            case .hotPlace:
+                self.peopleButton.setGray20Border(21)
+                self.peopleButton.setEmptyTitleColor(colorNum: 40)
+                self.peopleButton.backgroundColor = .clear
+            }
         }
     }
 }
