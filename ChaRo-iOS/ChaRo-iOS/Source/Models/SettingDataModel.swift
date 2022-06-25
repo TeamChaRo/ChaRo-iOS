@@ -60,7 +60,7 @@ enum SettingSection: CaseIterable {
 }
 
 extension SettingSection {
-    var settingModel: [SettingDataModel] {
+    var settingData: [SettingDataModel] {
         switch self {
         case .accessAllow:
             return [SettingDataModel(titleString: "사진", isToggle: true, toggleData: true)]

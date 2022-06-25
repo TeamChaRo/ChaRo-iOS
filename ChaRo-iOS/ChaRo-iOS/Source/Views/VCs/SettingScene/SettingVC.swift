@@ -245,15 +245,15 @@ extension SettingVC: UITableViewDataSource {
         switch SettingSection.allCases[indexPath.section] {
             
         case .accessAllow:
-            cell.setData(model: SettingSection.accessAllow.settingModel[indexPath.row])
+            cell.setData(model: SettingSection.accessAllow.settingData[indexPath.row])
         case .account:
-            cell.setData(model: SettingSection.account.settingModel[indexPath.row])
+            cell.setData(model: SettingSection.account.settingData[indexPath.row])
         case .info:
-            cell.setData(model: SettingSection.info.settingModel[indexPath.row])
+            cell.setData(model: SettingSection.info.settingData[indexPath.row])
         case .serviceCenter:
-            cell.setData(model: SettingSection.serviceCenter.settingModel[indexPath.row])
+            cell.setData(model: SettingSection.serviceCenter.settingData[indexPath.row])
         case .terms:
-            cell.setData(model: SettingSection.terms.settingModel[indexPath.row])
+            cell.setData(model: SettingSection.terms.settingData[indexPath.row])
         }
         
         cell.settingDelegate = self
