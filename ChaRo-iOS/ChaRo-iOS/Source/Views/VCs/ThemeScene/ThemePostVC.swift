@@ -270,13 +270,6 @@ extension ThemePostVC: ThemeNetworkDelegate {
 }
 
 extension ThemePostVC: PostIdDelegate {
-    func sendPostID(data: Int) {
-        let storyboard = UIStoryboard(name: "PostDetail", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: PostDetailVC.className) as! PostDetailVC
-        nextVC.setPostId(id: data)
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
     func sendPostDriveElement(data: DriveElement?) {
         let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
@@ -284,20 +277,11 @@ extension ThemePostVC: PostIdDelegate {
     }
 }
 
-//
-//extension ThemePostVC: SetThemeUpdateDelegate {
-//    
-//    func updateThemeData(filter: Filter) {
-//        getThemeData(theme: selectedTheme, filter: filter)
-//        print(selectedDriveList)
-//    }
-//
-//}
 extension ThemePostVC{
-
-func dismissDropDownWhenTappedAround() {
+    
+    func dismissDropDownWhenTappedAround() {
         let tap: UITapGestureRecognizer =
-            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }

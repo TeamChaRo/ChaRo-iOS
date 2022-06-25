@@ -342,13 +342,12 @@ extension PostDetailVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath) else { return UITableViewCell() }
             let imageList = [additionalData.image] + postData.images
             cell.setContent(imageList: imageList)
-            cell.presentingClosure = { [weak self] in
-                let nextVC = ExpendedImageVC(imageList: imageList)
+            cell.presentingClosure = { [weak self] index in
+                let nextVC = ExpendedImageVC(imageList: imageList, currentIndex: index)
                 nextVC.modalPresentationStyle = .fullScreen
                 self?.present(nextVC, animated: true)
             }
             return cell
-            
         case 2:
             guard let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(city: postData.province,

@@ -13,7 +13,7 @@ import RxSwift
 final class PostPhotoTVC: UITableViewCell{
     
     // MARK: - properties
-    var presentingClosure: (() -> ())?
+    var presentingClosure: ((Int) -> ())?
     
     private let disposeBag = DisposeBag()
     private let photoSubject = PublishSubject<[String]>()
@@ -80,7 +80,7 @@ final class PostPhotoTVC: UITableViewCell{
         }.disposed(by: disposeBag)
         
         collectionView.rx.itemSelected.bind(onNext: { [weak self] indexPath in
-            self?.presentingClosure?()
+            self?.presentingClosure?(indexPath.row)
         })
     }
     

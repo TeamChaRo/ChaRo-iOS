@@ -7,17 +7,29 @@
 
 import UIKit
 
-class CreatePostPhotosCVC: UICollectionViewCell {
+protocol CreatePostPhotosCVCActionDelegate: AnyObject {
+    func didTapAddButton()
+    func didTapDeleteButton(index: Int)
+}
+
+final class CreatePostPhotosCVC: UICollectionViewCell {
 
     static let identifier: String = "CreatePostPhotosCVC"
-    
+
+    // MARK: ViewModel
+
+    struct PostImage {
+        let image: UIImage?
+        let index: Int
+    }
+
     // MARK: UIComponent
+
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        
         return imageView
     }()
     
@@ -43,13 +55,30 @@ class CreatePostPhotosCVC: UICollectionViewCell {
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
+
+
+    // MARK: Properties
+
+    private var postIndex: Int?
+    weak var actionDelegate: CreatePostPhotosCVCActionDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        deleteButton.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
-        plusButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
+        self.addTargets()
     }
 
+    private func addTargets() {
+        self.deleteButton.addTarget(
+            self,
+            action: #selector(didTapDeleteButton(_:)),
+            for: .touchUpInside
+        )
+        self.plusButton.addTarget(
+            self,
+            action: #selector(didTapAddButton(_:)),
+            for: .touchUpInside
+        )
+    }
 }
 
 extension CreatePostPhotosCVC {
@@ -91,18 +120,33 @@ extension CreatePostPhotosCVC {
         }
     }
     
-    func setImageView(image: UIImage = ImageLiterals.imgPlaceholder) {
+    func setImageView(data: PostImage) {
+        self.postIndex = data.index
+
+        guard let image = data.image else {
+            self.imageView.image = ImageLiterals.imgPlaceholder
+            return
+        }
         self.imageView.image = image
     }
-    
-    @objc
-    func deleteButtonDidTap(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .createPostDeletePhotoClicked, object: sender.tag)
+
+    func updateplusViewVisible(isHidden: Bool) {
+        self.plusView.isHidden = isHidden
+        self.plusButton.isHidden = isHidden
+    }
+
+    func updateimageViewVisible(isHidden: Bool) {
+        self.imageView.isHidden = isHidden
+        self.deleteButton.isHidden = isHidden
     }
     
-    @objc
-    func addButtonDidTap(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .createPostAddPhotoClicked, object: sender.tag)
+    @objc private func didTapDeleteButton(_ sender: UIButton) {
+        if let index = self.postIndex {
+            self.actionDelegate?.didTapDeleteButton(index: index)
+        }
     }
     
+    @objc private func didTapAddButton(_ sender: UIButton) {
+        self.actionDelegate?.didTapAddButton()
+    }
 }

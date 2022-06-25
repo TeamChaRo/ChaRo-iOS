@@ -319,14 +319,35 @@ extension HomeVC: UITableViewDelegate {
             //테마
         case 1:
             return 178 * factor
-            //아무것도 아닌거
+            //트렌드
+        case 2:
+            if trendyData.count <= 2 {
+                return 318 * factor
+            } else {
+                return 570 * factor
+            }
+            //커스텀테마
+        case 3:
+            if customData.count <= 2 {
+                return 318 * factor
+            } else {
+                return 570 * factor
+            }
+            //지역
+        case 4:
+            if localData.count <= 2 {
+                return 318 * factor
+            } else {
+                return 570 * factor
+            }
+            //아무것도아닌거
         case 999:
             return 100
             //그 외 섹션
         default:
+            print("default")
             return 570 * factor
         }
-        
     }
     
     func addContentScrollView() {
@@ -568,13 +589,6 @@ extension HomeVC: CollectionViewCellDelegate {
 
 //postID 넘기기 위한 Delegate 구현
 extension HomeVC: PostIdDelegate {
-    
-    func sendPostID(data: Int) {
-        let nextVC = PostDetailVC()
-        nextVC.setPostId(id: data)
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
     func sendPostDriveElement(data: DriveElement?) {
         let nextVC = PostDetailVC()
         nextVC.setAdditionalDataOfPost(data: data)
