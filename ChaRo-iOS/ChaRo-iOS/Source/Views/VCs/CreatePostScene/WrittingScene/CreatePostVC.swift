@@ -464,7 +464,10 @@ extension CreatePostVC {
             photoCell.updateEmptyViewVisible(isHidden: false)
         }
 
-        self.cellHeights[1] = self.selectImages.isEmpty || self.selectImages.count > 2 ? 255.0 : 140.0
+        let height: CGFloat = (UIScreen.getDeviceWidth() - 54.0) / 3
+        self.cellHeights[1] = self.selectImages.isEmpty || self.selectImages.count > 2
+        ? height * 2 + 41.0
+        : height + 33.0
 
         return photoCell
     }
