@@ -44,6 +44,7 @@ final class NoticeVC: UIViewController {
 // MARK: - UI
 extension NoticeVC {
     private func configureUI() {
+        view.backgroundColor = .systemBackground
         view.addSubviews([navigationView, backButton, navigationTitleLabel, separateLineView, tableView])
         
         navigationView.snp.makeConstraints {
