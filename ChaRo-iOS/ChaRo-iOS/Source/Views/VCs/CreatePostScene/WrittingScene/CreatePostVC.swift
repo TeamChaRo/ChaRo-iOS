@@ -161,7 +161,7 @@ extension CreatePostVC {
 
         return WritePostData(
             title: self.postTitle,
-            userId: Constants.userId,
+            userId: Constants.userEmail,
             province: self.province,
             region: self.region,
             theme: self.theme,

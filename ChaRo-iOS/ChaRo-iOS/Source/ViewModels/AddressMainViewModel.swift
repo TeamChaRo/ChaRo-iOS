@@ -122,7 +122,7 @@ class AddressMainViewModel {
 extension AddressMainViewModel {
     
     private func getSearchKeywords() {
-        SearchKeywordService.shared.getSearchKeywords(userId: Constants.userId) { response in
+        SearchKeywordService.shared.getSearchKeywords(userId: Constants.userEmail) { response in
             switch(response) {
             case .success(let resultData):
                 if let data = resultData as? [KeywordResult] {

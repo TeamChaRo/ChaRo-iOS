@@ -18,7 +18,7 @@ class MyPageVC: UIViewController {
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
-    var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin) ?? false
+    var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin) 
     
     private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
@@ -30,7 +30,7 @@ class MyPageVC: UIViewController {
     var currentState: String = "인기순"
     
     //무한스크롤을 위함
-    var myId: String = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com"
+    var myId: String = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? "로그인해주세요"
     var lastId: Int = 0
     var lastFavorite: Int = 0
     var isLast: Bool = false
@@ -297,7 +297,7 @@ class MyPageVC: UIViewController {
 //MARK: Server
 //마이페이지 데이터 받아오는 함수
     func getMypageData() {
-        GetMyPageDataService.URL = Constants.myPageLikeURL
+        GetMyPageDataService.URL = Constants.myPageURL + "like/\(myId)"
         GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
                    switch response
                    {

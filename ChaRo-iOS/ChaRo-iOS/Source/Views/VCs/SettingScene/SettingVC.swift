@@ -22,7 +22,7 @@ final class SettingVC: UIViewController {
     
     private var accountModel = [settingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
                                 settingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
-                                settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: "\(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail) ?? "ios@gmail.com")", subLabelColor: UIColor.black)]
+                                settingDataModel(titleString: "이메일", titleLabelColor: UIColor.black, isSubLabel: true, subLabelString: "\(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userEmail) ?? "로그인 해주세요")", subLabelColor: UIColor.black)]
     
     private var infoInquiryModel = [settingDataModel(titleString: "공지사항", titleLabelColor: UIColor.black),
                                     settingDataModel(titleString: "1:1 문의", titleLabelColor: UIColor.black),
