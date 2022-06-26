@@ -181,20 +181,18 @@ class SNSLoginVC: UIViewController {
         SocialLoginService.shared.socialLogin(email: email) { (response) in
             
             switch(response) {
-            case .success(let success):
-                if let success = success as? Bool {
-                    if success {
-                        print("로그인 성공")
-                        //여기서 UserDefault 에 저장
-                        Constants.addUserDefaults(userEmail: email,
-                                                  userPassword: "",
-                                                  userNickname: nickname ?? "",
-                                                  userImage: profileImage ?? "")
-                        self.goToHomeVC()
-                    } else {
-                        print("회원가입 갈겨")
-                        self.snsJoin(email: email, profileImage: profileImage, nickname: nickname)
-                    }
+            case .success(let data):
+                if let data = data as? UserData {
+                    print("로그인 성공")
+                    //여기서 UserDefault 에 저장
+                    Constants.addUserDefaults(userEmail: data.email,
+                                              userPassword: "",
+                                              userNickname: data.nickname ?? "",
+                                              userImage: data.profileImage ?? "")
+                    self.goToHomeVC()
+                } else {
+                    print("회원가입 갈겨")
+                    self.snsJoin(email: email, profileImage: profileImage, nickname: nickname)
                 }
             case .requestErr(let message) :
                 print("requestERR", message)
