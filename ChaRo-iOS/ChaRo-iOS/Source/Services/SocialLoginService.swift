@@ -58,14 +58,11 @@ struct SocialLoginService {
         else {
             return .pathErr
         }
-        
-        print(decodedData)
-        print(statusCode)
-        
+
         switch statusCode {
         
         case 200, 401, 404:
-            return .success(decodedData.success)
+            return .success(decodedData.data)
             
         case 400...499:
             print(decodedData.msg)

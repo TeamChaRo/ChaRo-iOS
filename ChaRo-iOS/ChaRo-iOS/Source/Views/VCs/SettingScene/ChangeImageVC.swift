@@ -59,7 +59,7 @@ class ChangeImageVC: UIViewController {
     
     private let nicknameView = JoinInputView(title: "",
                                              subTitle: "닉네임",
-                                             placeholder: "기존 닉네임").then {
+                                             placeholder: "\(UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname) as? String ?? "")").then {
         $0.inputTextField?.text = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userNickname) as? String
     }
     
