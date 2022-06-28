@@ -19,15 +19,8 @@ class SettingTVC: UITableViewCell {
     }
     
     private let titleLabel = UILabel().then {
-        $0.text = "adfsfsa"
         $0.font = UIFont.notoSansRegularFont(ofSize: 14)
         $0.textColor = UIColor.black
-        
-    }
-    
-    let toggle = UISwitch().then {
-        $0.tintColor = UIColor.mainBlue
-        $0.onTintColor = UIColor.mainBlue
     }
     
     private let subLabel = UILabel().then {
@@ -37,43 +30,35 @@ class SettingTVC: UITableViewCell {
         $0.sizeToFit()
     }
     
+    let toggle = UISwitch().then {
+        $0.tintColor = UIColor.mainBlue
+        $0.onTintColor = UIColor.mainBlue
+    }
+    
     var settingDelegate: SettingSwitchDelegate?
     
     // MARK: Life Cycles
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        removeAllSubViews()
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpConstraints()
         toggle.addTarget(self, action: #selector(toggleSwitched(_:)), for: UIControl.Event.valueChanged)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.selectionStyle = .none
-
-        // Configure the view for the selected state
     }
 }
 
-// MARK: - Custom Methods
+// MARK: - UI
 extension SettingTVC {
-    
-    /// setData
-    func setData(isToggle: Bool, toggleData: Bool, isSubLabel: Bool, subLabelString: String, titleString: String, titleLabelColor: UIColor, subLabelColor: UIColor) {
-        addSubview(backGroundView)
+    private func setUpConstraints() {
+        addSubviews([backGroundView, toggle, subLabel])
         backGroundView.addSubview(titleLabel)
         
-        //배경화면
         backGroundView.snp.makeConstraints {
             $0.leading.trailing.bottom.top.equalToSuperview().offset(0)
         }
-        
-        //기본 라벨
-        titleLabel.text = titleString
-        titleLabel.textColor = titleLabelColor
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalTo(backGroundView)
@@ -81,25 +66,37 @@ extension SettingTVC {
             $0.width.equalTo(150)
         }
         
-        //토글 존재시
-        if isToggle == true {
-            addSubview(toggle)
-            toggle.isOn = toggleData
-            toggle.snp.makeConstraints{
-                $0.centerY.equalTo(titleLabel)
-                $0.trailing.equalToSuperview().offset(-20)
-            }
+        toggle.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(20)
         }
         
-        //서브라벨 존재시
-        if isSubLabel == true {
-            addSubview(subLabel)
-            subLabel.text = subLabelString
-            subLabel.textColor = subLabelColor
-            subLabel.snp.makeConstraints{
-                $0.centerY.equalTo(titleLabel)
-                $0.trailing.equalToSuperview().offset(-20)
-            }
+        subLabel.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+    }
+}
+
+// MARK: - Custom Methods
+extension SettingTVC {
+    
+    /// setData
+    func setData(model: SettingDataModel) {
+        titleLabel.text = model.titleString
+        titleLabel.textColor = model.titleLabelColor
+        
+        // 토글 존재시
+        toggle.isHidden = model.isToggle ? false : true
+        toggle.isOn = model.isToggle ? model.toggleData : false
+        
+        // 서브라벨 존재시
+        if model.isSubLabel == true {
+            subLabel.isHidden = false
+            subLabel.text = model.subLabelString
+            subLabel.textColor = model.subLabelColor
+        } else {
+            subLabel.isHidden = true
         }
     }
     

@@ -9,7 +9,9 @@ struct GetFollowDataService
     static let followData = GetFollowDataService()
     func getRecommendInfo(otherId: String, userId: String, completion : @escaping (NetworkResult<Any>) -> Void) {
         // completion 클로저를 @escaping closure로 정의합니다.
-        let dataRequest = AF.request(Constants.getFollowURL + otherId + "&userEmail=" + userId,
+        let URL = Constants.getFollowURL + otherId + "&userEmail=" + userId
+        print(URL)
+        let dataRequest = AF.request(URL,
                                      method: .get,
                                      encoding: JSONEncoding.default,
                                      headers: ["Content-Type": "application/json"])

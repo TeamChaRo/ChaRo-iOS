@@ -429,7 +429,7 @@ extension PostDetailVC {
     }
     
     func requestPostLike() {
-        LikeService.shared.Like(userId: Constants.userId,
+        LikeService.shared.Like(userId: Constants.userEmail,
                                 postId: postId) { [self] result in
             switch result {
             case .success(let success):
@@ -447,7 +447,7 @@ extension PostDetailVC {
     }
     
     func requestPostScrap() {
-        SaveService.shared.requestScrapPost(userId: Constants.userId,
+        SaveService.shared.requestScrapPost(userId: Constants.userEmail,
                                             postId: postId) { [self] result in
             
             switch result {

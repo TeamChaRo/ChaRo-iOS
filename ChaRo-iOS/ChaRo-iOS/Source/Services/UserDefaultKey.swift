@@ -48,7 +48,7 @@ extension Constants {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userNickname)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userImage)
         
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isLogin)
+        UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isLogin)
         
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isAppleLogin)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isKakaoLogin)

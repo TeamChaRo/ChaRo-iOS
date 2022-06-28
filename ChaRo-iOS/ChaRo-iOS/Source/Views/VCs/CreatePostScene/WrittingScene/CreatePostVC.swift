@@ -27,7 +27,7 @@ final class CreatePostVC: UIViewController {
             tableView.reloadRows(at: [[0, 3]], with: .automatic)
         }
     }
-    var warning: [Bool] = [false, false, false, false]
+    var warning: [String] = []
     var isParking: Bool = false
     var parkingDesc: String = ""
     var courseDesc: String = ""
@@ -161,11 +161,11 @@ extension CreatePostVC {
 
     private func writePostData() -> WritePostData {
 
-        self.theme = self.theme.filter{ $0 != "" }
+        self.theme = self.theme.filter { $0 != "" }
 
         return WritePostData(
             title: self.postTitle,
-            userId: Constants.userId,
+            userEmail: Constants.userEmail,
             province: self.province,
             region: self.region,
             theme: self.theme,
@@ -261,11 +261,11 @@ extension CreatePostVC {
         // NOTE: test dummy data (서버 테스트 안정화 후 제거 예정 - 인정)
         let dummyModel: WritePostData = WritePostData(
             title: "하이",
-            userId: "injeong0418",
+            userEmail: "injeong0418",
             province: "특별시",
             region: "서울",
             theme: ["여름","산"],
-            warning: [true,true,false,false],
+            warning: self.warning,
             isParking: false,
             parkingDesc: "예원아 새벽까지 고생이 많아",
             courseDesc: "코스 드립크",
@@ -464,7 +464,10 @@ extension CreatePostVC {
             photoCell.updateEmptyViewVisible(isHidden: false)
         }
 
-        self.cellHeights[1] = self.selectImages.isEmpty || self.selectImages.count > 2 ? 255.0 : 140.0
+        let height: CGFloat = (UIScreen.getDeviceWidth() - 54.0) / 3
+        self.cellHeights[1] = self.selectImages.isEmpty || self.selectImages.count > 2
+        ? height * 2 + 41.0
+        : height + 33.0
 
         return photoCell
     }
