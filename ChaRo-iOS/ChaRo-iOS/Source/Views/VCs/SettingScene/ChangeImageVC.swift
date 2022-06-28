@@ -85,10 +85,13 @@ class ChangeImageVC: UIViewController {
         
         let actionsheetController = UIAlertController(title: "프로필 사진 바꾸기", message: nil, preferredStyle: .actionSheet)
         let actionDefaultImage = UIAlertAction(title: "기본 이미지 설정", style: .default, handler: { action in
-            print("디폴트 action called")
+            self.profileView.image = UIImage(named: "icProfile")
         })
         let actionLibraryImage = UIAlertAction(title: "라이브러리에서 선택", style: .default, handler: { action in
-            print("디폴트 action called")
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            self.present(picker, animated: true)
         })
         let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: { action in
             print("캔슬 action called")
@@ -143,7 +146,7 @@ class ChangeImageVC: UIViewController {
     @objc private func doneButtonClicked() {
         let newNickname = nicknameView.inputTextField?.text
         UpdateProfileService.shared.putNewProfile(nickname: newNickname!,
-                                                  newImage: nil) { result in
+                                                  newImage: self.profileView.image) { result in
             
             switch result {
             case .success(let msg):
@@ -261,5 +264,27 @@ extension ChangeImageVC: UITextFieldDelegate {
         if nickname == "" {
             makeNicknameViewRed(text: "닉네임을 작성해주세요.")
         }
+    }
+}
+
+
+extension ChangeImageVC : UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        //이미지 선택 Cancel
+        picker.dismiss(animated: true) { () in
+            self.makeAlert(title: "", message: "이미지 선택이 취소되었습니다.")
+        }
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        //이미지 Choose
+        picker.dismiss(animated: false) { () in
+            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+            self.profileView.image = image
+        }
+        
     }
 }

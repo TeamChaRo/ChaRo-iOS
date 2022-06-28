@@ -28,7 +28,6 @@ struct UpdateProfileService {
         let header: HTTPHeaders = ["Content-Type": "multipart/form-data"]
         
         let parameters: [String: Any] = [
-            "image": newImage,
             "originImage": "",
             "newNickname": nickname,
         ]
