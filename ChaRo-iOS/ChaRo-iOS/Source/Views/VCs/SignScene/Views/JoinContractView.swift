@@ -97,8 +97,8 @@ class JoinContractView: UIView {
     }
     
     @objc func allButtonClicked() {
-        agreePushButton.buttonClicked()
-        agreeEmailButton.buttonClicked()
+        agreePushButton.agreed = agreeAllButton.agreed
+        agreeEmailButton.agreed = agreeAllButton.agreed
     }
     
     //MARK: - configure 함수
