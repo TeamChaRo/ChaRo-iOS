@@ -7,40 +7,26 @@
 
 import Foundation
 
-struct CreatePostDataModel: Decodable {
+struct CreatePostDataModel: Codable {
     let success: Bool
     let message: String
-//    let data: UserData?
-
-    enum CodingKeys: String, CodingKey {
-        case success
-        case message
-//        case data
-    }
-
-    init(from decoder : Decoder) throws
-    {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        success = (try? values.decode(Bool.self, forKey: .success)) ?? false
-        message = (try? values.decode(String.self, forKey: .message)) ?? ""
-//        data = (try? values.decode(UserData.self, forKey: .data)) ?? nil
-    }
+    let data: WritePostData
 }
 
-struct WritePostData {
+struct WritePostData: Codable {
     let title: String
-    let userId: String
+    let userEmail: String
     let province: String
     let region: String
     let theme: [String]
-    let warning: [Bool]
+    let warning: [String]
     let isParking: Bool
     let parkingDesc: String
     let courseDesc: String
     var course: [Address]
 }
 
-struct Address {
+struct Address: Codable {
     let address: String
     let latitude: String
     let longtitude: String

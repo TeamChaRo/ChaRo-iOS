@@ -23,8 +23,8 @@ class OtherMyPageVC: UIViewController {
     var followingNum: Int = 0
     var updateFollowNum: Bool = false
     
-    let myId = UserDefaults.standard.string(forKey: "userId") ?? "ios@gmail.com"
-    var otherUserID: String = "and@naver.com"
+    let myId = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) ?? ""
+    var otherUserID: String = ""
     
     var lastId: Int = 0
     var lastFavorite: Int = 0
@@ -33,6 +33,7 @@ class OtherMyPageVC: UIViewController {
     var lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     var delegate: AnimateIndicatorDelegate?
 
+    
     //헤더뷰 유아이
     private let profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -312,6 +313,7 @@ class OtherMyPageVC: UIViewController {
         isFollowButton.setTitle(isFollowButton.isSelected ? "팔로잉" : "팔로우", for: .normal)
         isFollowButton.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 13)
     }
+    
     func setHeaderData(){
         followerNum = userProfileData[0].follower
         followingNum = userProfileData[0].following
@@ -321,6 +323,7 @@ class OtherMyPageVC: UIViewController {
         followerNumButton.setTitle(String(followerNum), for: .normal)
         followNumButton.setTitle(String(followingNum), for: .normal)
     }
+    
     func isNoData() {
         collectionBackgroundView.addSubview(noDataImageView)
         

@@ -34,8 +34,13 @@ class LoginVC: UIViewController {
         configureLoginButtonUI()
         configureTextfieldUI()
         configureNotificationCenter()
+        addTestUserAccount()
     }
     
+    private func addTestUserAccount() {
+        self.idTextField.text = "gpfud1998@naver.com"
+        self.pwdTextField.text = "charo0505"
+    }
     override func viewDidDisappear(_ animated: Bool) {
         removeObservers()
     }
@@ -116,6 +121,7 @@ class LoginVC: UIViewController {
                     UserDefaults.standard.set(userPassword, forKey: Constants.UserDefaultsKey.userPassword)
                     UserDefaults.standard.set(user.nickname, forKey: Constants.UserDefaultsKey.userNickname)
                     UserDefaults.standard.set(user.profileImage, forKey: Constants.UserDefaultsKey.userImage)
+                    UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isLogin)
                 }
                 self.showHomeVC()
                 

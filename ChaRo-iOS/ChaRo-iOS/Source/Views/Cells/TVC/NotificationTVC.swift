@@ -19,13 +19,15 @@ class NotificationTVC: UITableViewCell {
         $0.layer.masksToBounds = true
     }
     
-    private let stateLabel = UILabel().then {
+    private let notificationTypeButton = UIButton().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.mainBlue.cgColor
         $0.layer.cornerRadius = 8.5
-        $0.font = UIFont.notoSansMediumFont(ofSize: 10)
-        $0.textColor = .mainBlue
-        $0.textAlignment = .center
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
+        $0.isUserInteractionEnabled = false
+        $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 10)
+        $0.titleLabel?.textAlignment = .center
+        $0.setTitleColor(.mainBlue, for: .normal)
     }
     
     private let titleLabel = UILabel().then {
@@ -62,7 +64,7 @@ class NotificationTVC: UITableViewCell {
 // MARK: - UI
 extension NotificationTVC {
     private func configureUI() {
-        self.addSubviews([profileImageView, stateLabel, titleLabel, dateLabel])
+        self.addSubviews([profileImageView, notificationTypeButton, titleLabel, dateLabel])
         
         profileImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
@@ -70,23 +72,22 @@ extension NotificationTVC {
             $0.centerY.equalToSuperview()
         }
         
-        stateLabel.snp.makeConstraints {
+        notificationTypeButton.snp.makeConstraints {
             let heightRatio: CGFloat = 17/45
             $0.top.equalTo(profileImageView.snp.top)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
             $0.height.equalTo(profileImageView.snp.height).multipliedBy(heightRatio)
-            $0.width.equalTo(43)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalTo(stateLabel.snp.leading)
+            $0.leading.equalTo(notificationTypeButton.snp.leading)
             $0.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(profileImageView.snp.bottom)
         }
         
         dateLabel.snp.makeConstraints {
             $0.trailing.equalTo(titleLabel.snp.trailing)
-            $0.centerY.equalTo(stateLabel)
+            $0.centerY.equalTo(notificationTypeButton)
         }
     }
 }
@@ -94,12 +95,12 @@ extension NotificationTVC {
 // MARK: - Custom Method
 extension NotificationTVC {
     func setContent(model: NotificationListModel) {
-        guard let url = URL(string: model.image) else { return }
+        guard let url = URL(string: model.image ?? "") else { return }
         profileImageView.kf.setImage(with: url)
-        stateLabel.text = model.title
+        notificationTypeButton.setTitle(model.title, for: .normal)
         titleLabel.text = model.body
-        dateLabel.text = model.convertNotiDateString(month: model.month, day: model.day)
-        self.backgroundColor = model.isRead == 0 ? .blueSelect : .blueSelect
+        dateLabel.text = model.convertNotiDateString(month: model.month ?? "", day: model.day ?? "")
+        self.backgroundColor = model.isRead == 0 ? .blueSelect : .white
     }
 }
 

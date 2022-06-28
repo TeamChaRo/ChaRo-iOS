@@ -98,6 +98,14 @@ class HomeSquareTVC: UITableViewCell {
     }
     //MARK:- Function
     
+    func findDriveElementFrom(postId: Int) -> DriveElement?{
+        var item: DriveElement?
+        trendyDriveList.forEach {
+            if $0.postID == postId { item = $0 }
+        }
+        return item
+    }
+    
 }
 
 //MARK:- extension
@@ -106,10 +114,10 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
-        
         let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
-        let postid = cell!.postID
-        postDelegate?.sendPostID(data: postid)
+        let postId = cell!.postID
+        let sendingData = findDriveElementFrom(postId: postId)
+        postDelegate?.sendPostDriveElement(data: sendingData)
     }
     
     
@@ -120,35 +128,19 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCVC.identifier, for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
-        
-        
-        if trendyDriveList.count == 0 {
-            return cell
-        }
-        else {
-            
-            let element = trendyDriveList[indexPath.row]
-            var tags = [element.region, element.theme,
-                        element.warning ?? ""] as [String]
-                        
-            
-            cell.setData(image: element.image,
-                         title: element.title,
-                         tagCount: tags.count,
-                         tagArr: tags,
-                         isFavorite: element.isFavorite,
-                         postID: element.postID)
+                
+        if trendyDriveList.isEmpty { return cell }
+        let element = trendyDriveList[indexPath.row]
+        var tags = [element.region, element.theme, element.warning ?? ""] as [String]
 
-            
-            return cell
-            
-        }
-
+        cell.setData(image: element.image,
+                     title: element.title,
+                     tagCount: tags.count,
+                     tagArr: tags,
+                     isFavorite: element.isFavorite,
+                     postID: element.postID)
         return cell
-        
     }
-    
-
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

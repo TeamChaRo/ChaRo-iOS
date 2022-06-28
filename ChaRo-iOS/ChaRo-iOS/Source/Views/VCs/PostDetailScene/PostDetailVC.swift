@@ -10,7 +10,8 @@ import SnapKit
 import Then
 import RxSwift
 
-class PostDetailVC: UIViewController {
+final class PostDetailVC: UIViewController {
+    
     private let disposeBag = DisposeBag()
     private var viewModel: PostDetailViewModel?
     
@@ -27,13 +28,13 @@ class PostDetailVC: UIViewController {
     
     private var isFavorite: Bool? {
         didSet {
-            bottomView.likeButton.isSelected = isFavorite! ? true: false
+            bottomView.likeButton.isSelected = isFavorite! ? true : false
         }
     }
     
     private var isStored: Bool? {
         didSet {
-            bottomView.likeButton.isSelected = isStored! ? true: false
+            bottomView.likeButton.isSelected = isStored! ? true : false
         }
     }
     
@@ -52,7 +53,7 @@ class PostDetailVC: UIViewController {
         $0.register(cell: PostLocationTVC.self)
     }
     private let navigationView = UIView()
-    private lazy var backButton = LeftBackButton(toPop: self, isModal: true)
+    private lazy var backButton = LeftBackButton(toPop: self, isModal: false)
     private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
                                                             color: .mainBlack)
     private var bottomView = PostDetailBottomView()
@@ -76,6 +77,14 @@ class PostDetailVC: UIViewController {
         //checkModeForSendingServer()
         setupConstraints()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     public func setPostMode(isAuthor: Bool, isEditing: Bool) {
@@ -117,7 +126,7 @@ extension PostDetailVC{
         print("등록 버튼")
         makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?") { _ in
             self.postCreatePost()
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -331,9 +340,14 @@ extension PostDetailVC: UITableViewDataSource {
             
         case 1:
             guard let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath) else { return UITableViewCell() }
-            cell.setContent(imageList: [additionalData.image] + postData.images)
+            let imageList = [additionalData.image] + postData.images
+            cell.setContent(imageList: imageList)
+            cell.presentingClosure = { [weak self] index in
+                let nextVC = ExpendedImageVC(imageList: imageList, currentIndex: index)
+                nextVC.modalPresentationStyle = .fullScreen
+                self?.present(nextVC, animated: true)
+            }
             return cell
-            
         case 2:
             guard let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(city: postData.province,
@@ -415,7 +429,7 @@ extension PostDetailVC {
     }
     
     func requestPostLike() {
-        LikeService.shared.Like(userId: Constants.userId,
+        LikeService.shared.Like(userId: Constants.userEmail,
                                 postId: postId) { [self] result in
             switch result {
             case .success(let success):
@@ -433,7 +447,7 @@ extension PostDetailVC {
     }
     
     func requestPostScrap() {
-        SaveService.shared.requestScrapPost(userId: Constants.userId,
+        SaveService.shared.requestScrapPost(userId: Constants.userEmail,
                                             postId: postId) { [self] result in
             
             switch result {

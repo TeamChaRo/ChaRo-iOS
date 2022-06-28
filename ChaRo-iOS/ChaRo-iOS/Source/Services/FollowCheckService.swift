@@ -10,7 +10,9 @@ struct FollowCheckService
     func getRecommendInfo(userId: String, otherId: String, completion : @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
-        let dataRequest = AF.request(Constants.followCheckURL + userId + "&targetEmail=" + otherId,
+        let URL = Constants.followCheckURL + userId + "&targetEmail=" + otherId
+        print(URL)
+        let dataRequest = AF.request(URL,
                                      method: .get,
                                      encoding: JSONEncoding.default,
                                      headers: ["Content-Type": "application/json"])

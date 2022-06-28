@@ -6,14 +6,11 @@ import Foundation
 struct GetDetailDataService
 {
     static var value: String = "1?value=summer"
-    
-
-    
     static let detailData = GetDetailDataService()
     func getRecommendInfo(completion: @escaping (NetworkResult<Any>) -> Void)
     {
         // completion 클로저를 @escaping closure로 정의합니다.
-        
+///post/preview/like/:userEmail/:identifier
         let URL = Constants.detailURL + GetDetailDataService.value
         print(URL)
         let header: HTTPHeaders = ["Content-Type": "application/json"]
@@ -24,7 +21,6 @@ struct GetDetailDataService
                                      headers: header)
 
         dataRequest.responseData { dataResponse in
-//            dump(dataResponse)
             switch dataResponse.result {
             
             case .success:

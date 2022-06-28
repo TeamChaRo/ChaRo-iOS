@@ -13,7 +13,11 @@ import SnapKit
 import Then
 
 final class CreatePostVC: UIViewController {
-    
+
+    private enum Metric {
+        static let maxCount: Int = 6
+    }
+
     // 데이터 전달
     var postTitle: String = ""
     var province: String = ""
@@ -23,7 +27,7 @@ final class CreatePostVC: UIViewController {
             tableView.reloadRows(at: [[0, 3]], with: .automatic)
         }
     }
-    var warning: [Bool] = [false, false, false, false]
+    var warning: [String] = []
     var isParking: Bool = false
     var parkingDesc: String = ""
     var courseDesc: String = ""
@@ -157,11 +161,11 @@ extension CreatePostVC {
 
     private func writePostData() -> WritePostData {
 
-        self.theme = self.theme.filter{ $0 != "" }
+        self.theme = self.theme.filter { $0 != "" }
 
         return WritePostData(
             title: self.postTitle,
-            userId: Constants.userId,
+            userEmail: Constants.userEmail,
             province: self.province,
             region: self.region,
             theme: self.theme,
@@ -232,9 +236,9 @@ extension CreatePostVC {
     }
 
     @objc private func addPhotoButtonDidTap() {
-        if #available(iOS 14, *) { // 14이상 부터 쓸 수 있음
+        if #available(iOS 14, *) {
             var configuration = PHPickerConfiguration()
-            configuration.selectionLimit = 6 - selectImages.count // 최대 6개 선택
+            configuration.selectionLimit = 6 - self.selectImages.count // 최대 6개 선택
             configuration.filter = .images
 
             let picker = PHPickerViewController(configuration: configuration)
@@ -257,11 +261,11 @@ extension CreatePostVC {
         // NOTE: test dummy data (서버 테스트 안정화 후 제거 예정 - 인정)
         let dummyModel: WritePostData = WritePostData(
             title: "하이",
-            userId: "injeong0418",
+            userEmail: "injeong0418",
             province: "특별시",
             region: "서울",
             theme: ["여름","산"],
-            warning: [true,true,false,false],
+            warning: self.warning,
             isParking: false,
             parkingDesc: "예원아 새벽까지 고생이 많아",
             courseDesc: "코스 드립크",
@@ -271,7 +275,7 @@ extension CreatePostVC {
             ]
         )
 
-        CreatePostService.shared.createPost(model: dummyModel, image: selectImages) { result in
+        CreatePostService.shared.createPost(model: dummyModel, image: self.selectImages) { result in
             switch result {
             case let .success(message):
                 debugPrint("POST /writePost success: \(message)")
@@ -399,7 +403,7 @@ extension CreatePostVC: PHPickerViewControllerDelegate {
         itemProviders = results.map(\.itemProvider)
         var count = 0
         
-        if results.count + selectImages.count > 6 {
+        if results.count + self.selectImages.count > 6 {
             // 선택된 사진 갯수가 6개 초과면 alert을 띄워줌
             self.makeAlert(title: "사진 용량 초과", message: "사진은 최대 6장까지 추가가 가능합니다.")
         } else {
@@ -445,19 +449,26 @@ extension CreatePostVC {
         guard let photoCell = tableView.dequeueReusableCell(
             withIdentifier: CreatePostPhotoTVC.className
         ) as? CreatePostPhotoTVC else { return UITableViewCell() }
-        
+
+        photoCell.actionDelegate = self
+
         // 여기서 VC 이미지를 Cell에 전달
-    
-        photoCell.receiveImageListfromVC(image: selectImages)
-        
+        photoCell.receiveImageListfromVC(image: self.selectImages)
         
         if selectImages.count > 0 {
             photoCell.configurePhotoLayout()
             photoCell.configureCollcetionView()
+            photoCell.updateEmptyViewVisible(isHidden: true)
         } else {
             photoCell.emptyConfigureLayout()
+            photoCell.updateEmptyViewVisible(isHidden: false)
         }
-      
+
+        let height: CGFloat = (UIScreen.getDeviceWidth() - 54.0) / 3
+        self.cellHeights[1] = self.selectImages.isEmpty || self.selectImages.count > 2
+        ? height * 2 + 41.0
+        : height + 33.0
+
         return photoCell
     }
     
@@ -596,5 +607,20 @@ extension CreatePostVC: UIViewControllerTransitioningDelegate {
         source: UIViewController
     ) -> UIPresentationController? {
         PresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+
+// MARK: - CreatePostPhotoTVCActionDelegate
+
+extension CreatePostVC: CreatePostPhotoTVCActionDelegate {
+    func didTapAddImageButton() {
+        self.addPhotoButtonDidTap()
+    }
+
+    func didTapDeleteImageButton(index: Int) {
+        guard self.selectImages.count > index else { return }
+        self.selectImages.remove(at: index)
+        self.tableView.reloadData()
     }
 }

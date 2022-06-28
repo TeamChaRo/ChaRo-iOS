@@ -12,13 +12,20 @@ import AuthenticationServices
 import GoogleSignIn
 import KakaoSDKUser
 
+enum socialType: String {
+    case google
+    case kakao
+    case apple
+    case none
+}
+
 class SNSLoginVC: UIViewController {
     
     let userInfo = UserInfo.shared
     let signInConfig = GIDConfiguration.init(clientID: "316255098127-usdg37h4sgpondqjh818cl3n002vaach.apps.googleusercontent.com")
     
     static let identifier = "SNSLoginVC"
-    var snsType: String = "DEFAULT"
+    var socialType: socialType = .none
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +65,7 @@ class SNSLoginVC: UIViewController {
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
-        $0.addTarget(self, action: #selector(testLogin), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(appleLogin), for: .touchUpInside)
     }
     
     let googleLoginBtn = UIButton().then {
@@ -91,17 +98,18 @@ class SNSLoginVC: UIViewController {
     
     @objc func lookAroundButtonClicked() {
         //isLogin 값을 false로 설정 - 둘러보기이므로 계정 없음
+        Constants.removeAllUserDefaults()
         UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isLogin)
         self.goToHomeVC()
     }
     
     @objc func testLogin() {
-        snsType = "A"
-        socialLogin(email: "yyaggdgggffaa3ao4ng22hh2@naver.com", profileImage: nil, nickname: nil)
+        socialType = .apple
+        socialLogin(email: "aggd662@naver.com", profileImage: nil, nickname: nil)
     }
     
     @objc func appleLogin() {
-        snsType = "A"
+        socialType = .apple
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -115,10 +123,12 @@ class SNSLoginVC: UIViewController {
     
     
     @objc func googleLogin() {
-        snsType = "G"
+        socialType = .google
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else { return }
+            
             let userEmail = user?.profile?.email
+            self.socialLogin(email: userEmail, profileImage: nil, nickname: nil)
             //여기 유저 이미지 ... String 으로 변환 모루겟다
             //            do {
             //                var userProfileImageString = try String(contentsOf: URL(string: (user?.profile?.imageURL(withDimension: 320)!)!)!)
@@ -126,14 +136,11 @@ class SNSLoginVC: UIViewController {
             //            catch let error {
             //                print("URL 인코딩 에러")
             //            }
-            
-            //로그인
-            self.socialLogin(email: userEmail!, profileImage: nil, nickname: nil)
         }
     }
     
     @objc func kakaoLogin() {
-        snsType = "K"
+        socialType = .kakao
         
         if (UserApi.isKakaoTalkLoginAvailable()) {
             UserApi.shared.loginWithKakaoTalk {(_, error) in
@@ -141,54 +148,53 @@ class SNSLoginVC: UIViewController {
                     print(error)
                 }
                 else {
-                    print("카카오 로긘 성공")
                     UserApi.shared.me() { (user, error) in
                         if let error = error {
                             print(error)
                         }
                         else {
-                            print("me() 성공")
-                            
                             // 닉네임, 이메일 정보
                             let email = user?.kakaoAccount?.email
                             let nickname = user?.kakaoAccount?.profile?.nickname
                             let profile = user?.kakaoAccount?.profile?.profileImageUrl
                             //여기서도 URL 을 String 으로 바꾸는 법을 모르겠군요 ...
                             
-                            UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isAppleLogin)
-                            UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isGoogleLogin)
-                            UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isKakaoLogin)
+                            Constants.addLoginUserDefaults(isAppleLogin: false,
+                                                           isKakaoLogin: false,
+                                                           isGoogleLogin: true)
                             
                             //로그인
-                            self.socialLogin(email: email!, profileImage: nil, nickname: nickname)
+                            self.socialLogin(email: email, profileImage: nil, nickname: nickname)
                         }
                     }
-                    
                 }
             }
         }
-        
     }
     
-    @objc func socialLogin(email: String, profileImage: String?, nickname: String?) {
+    @objc func socialLogin(email: String?, profileImage: String?, nickname: String?) {
+        guard let email = email else {
+            self.makeAlert(title: "오류", message: "이메일이 존재하지 않습니다.")
+            return
+        }
+
         SocialLoginService.shared.socialLogin(email: email) { (response) in
             
-            switch(response)
-            {
+            switch(response) {
             case .success(let success):
                 if let success = success as? Bool {
                     if success {
                         print("로그인 성공")
                         //여기서 UserDefault 에 저장
-                        UserDefaults.standard.set(email, forKey: Constants.UserDefaultsKey.userEmail)
-                        UserDefaults.standard.set(profileImage ?? "", forKey: Constants.UserDefaultsKey.userImage)
-                        UserDefaults.standard.set(nickname ?? "", forKey: Constants.UserDefaultsKey.userNickname)
+                        Constants.addUserDefaults(userEmail: email,
+                                                  userPassword: "",
+                                                  userNickname: nickname ?? "",
+                                                  userImage: profileImage ?? "")
                         self.goToHomeVC()
                     } else {
                         print("회원가입 갈겨")
                         self.snsJoin(email: email, profileImage: profileImage, nickname: nickname)
                     }
-                    
                 }
             case .requestErr(let message) :
                 print("requestERR", message)
@@ -207,28 +213,29 @@ class SNSLoginVC: UIViewController {
     func snsJoin(email: String, profileImage: String?, nickname: String?) {
         
         let storyboard = UIStoryboard(name: "Join", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(withIdentifier: SNSJoinVC.identifier) as? SNSJoinVC
-        self.navigationController?.pushViewController(nextVC!, animated: true)
+        guard let nextVC = storyboard.instantiateViewController(withIdentifier: SNSJoinVC.identifier) as? SNSJoinVC else { return }
+        self.navigationController?.pushViewController(nextVC, animated: true)
         
-        nextVC?.contractView.nextButton.nextPageClosure = {
-            let isPushAgree = nextVC?.contractView.agreePushButton.Agreed
-            let isEmailAgree = nextVC?.contractView.agreeEmailButton.Agreed
+        nextVC.contractView.nextButton.nextPageClosure = {
+            let isPushAgree = nextVC.contractView.agreePushButton.Agreed
+            let isEmailAgree = nextVC.contractView.agreeEmailButton.Agreed
             
-            switch self.snsType {
-            case "A":
+            switch self.socialType {
+            case .apple:
                 print("애플 소셜 회원가입")
                 SocialJoinService.shared.appleJoin(email: email,
-                                                   pushAgree: isPushAgree!,
-                                                   emailAgree: isEmailAgree!) { result in
+                                                   pushAgree: isPushAgree,
+                                                   emailAgree: isEmailAgree) { result in
                     
                     
                     switch result {
                         
                     case .success(let data):
-                        if let personData = data as? UserInitialInfo {
-                            UserDefaults.standard.set(personData.email, forKey: Constants.UserDefaultsKey.userEmail)
-                            UserDefaults.standard.set(personData.profileImage, forKey: Constants.UserDefaultsKey.userImage)
-                            UserDefaults.standard.set(personData.nickname, forKey: Constants.UserDefaultsKey.userNickname)
+                        if let personData = data as? JoinUserModel {
+                            Constants.addUserDefaults(userEmail: personData.email,
+                                                      userPassword: "",
+                                                      userNickname: personData.nickname,
+                                                      userImage: personData.profileImage)
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -247,23 +254,22 @@ class SNSLoginVC: UIViewController {
                 }
                 break
                 
-            case "G":
+            case .google:
                 print("구글 소셜 회원가입")
                 SocialJoinService.shared.googleJoin(email: email,
                                                     profileImage: "",
-                                                    pushAgree: isPushAgree!,
-                                                    emailAgree: isEmailAgree!) { result in
+                                                    pushAgree: isPushAgree,
+                                                    emailAgree: isEmailAgree) { result in
                     
                     
                     switch result {
                         
                     case .success(let data):
-                        if let personData = data as? UserInitialInfo {
-                            
-                            UserDefaults.standard.set(personData.email, forKey: Constants.UserDefaultsKey.userEmail)
-                            UserDefaults.standard.set(personData.profileImage, forKey: Constants.UserDefaultsKey.userImage)
-                            UserDefaults.standard.set(personData.nickname, forKey: Constants.UserDefaultsKey.userNickname)
-                            
+                        if let personData = data as? JoinUserModel {
+                            Constants.addUserDefaults(userEmail: personData.email,
+                                                      userPassword: "",
+                                                      userNickname: personData.nickname,
+                                                      userImage: personData.profileImage)
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -282,21 +288,22 @@ class SNSLoginVC: UIViewController {
                 }
                 break
                 
-            case "K":
+            case .kakao:
                 print("카카오 소셜 회원가입")
                 SocialJoinService.shared.kakaoJoin(email: email,
                                                    profileImage: "",
-                                                   pushAgree: isPushAgree!,
-                                                   emailAgree: isEmailAgree!,
+                                                   pushAgree: isPushAgree,
+                                                   emailAgree: isEmailAgree,
                                                    nickname: nickname!) { result in
                     
                     switch result {
                         
                     case .success(let data):
-                        if let personData = data as? UserInitialInfo {
-                            UserDefaults.standard.set(personData.email, forKey: Constants.UserDefaultsKey.userEmail)
-                            UserDefaults.standard.set(personData.profileImage, forKey: Constants.UserDefaultsKey.userImage)
-                            UserDefaults.standard.set(personData.nickname, forKey: Constants.UserDefaultsKey.userNickname)
+                        if let personData = data as? JoinUserModel {
+                            Constants.addUserDefaults(userEmail: personData.email,
+                                                      userPassword: "",
+                                                      userNickname: personData.nickname,
+                                                      userImage: personData.profileImage)
                         }
                         
                         self.navigationController?.popViewController(animated: true)
@@ -317,7 +324,7 @@ class SNSLoginVC: UIViewController {
                 break
                 
             default:
-                print(self.snsType)
+                print(self.socialType)
                 break
             }
             
@@ -442,24 +449,12 @@ extension SNSLoginVC : ASAuthorizationControllerDelegate, ASAuthorizationControl
     // AppleID 연동 성공
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            print(credential.user)
-            let user = credential.user
-            print("👨‍🍳 \(user)")
             if let email = credential.email {
+                print("애플 최초 로그인 이메일 \(email)")
+                UserDefaults.standard.set(email, forKey: Constants.UserDefaultsKey.savedAppleEmail)
                 socialLogin(email: email, profileImage: nil, nickname: nil)
             }
         }
-        
-        //            // AppleID 로 로그인 시도
-        //        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-        //            if let userEmail = appleIDCredential.email {
-        //                socialLogin(email: userEmail, profileImage: nil, nickname: nil)
-        //            }
-        //
-        //            UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isAppleLogin)
-        //            UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isKakaoLogin)
-        //            UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isGoogleLogin)
-        //
     }
     
     // AppleID 연동 실패

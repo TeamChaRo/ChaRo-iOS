@@ -19,8 +19,8 @@ class PostDetailBottomView: UIView{
     }
     
     var scrapButton = UIButton().then {
-        $0.setBackgroundImage(ImageLiterals.icScrapInactive, for: .normal)
-        $0.setBackgroundImage(ImageLiterals.icScrapActive, for: .selected)
+        $0.setBackgroundImage(ImageLiterals.icSaveInactive, for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icSaveActive, for: .selected)
     }
     
     var shareButton = UIButton().then {
