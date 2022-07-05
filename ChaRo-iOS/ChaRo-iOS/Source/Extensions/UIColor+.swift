@@ -74,6 +74,10 @@ extension UIColor {
         return UIColor(red: 157.0 / 255.0, green: 195.0 / 255.0, blue: 253.0 / 255.0, alpha: 1.0)
     }
     
+    @nonobjc class var semiBlack: UIColor {
+        return UIColor(red: 37.0 / 255.0, green: 34.0 / 255.0, blue: 34.0 / 255.0, alpha: 1.0)
+    }
+    
 }
 
 extension UIColor {
