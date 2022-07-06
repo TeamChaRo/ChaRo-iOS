@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,12 +45,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7d-Lh-OaD">
+                                        <rect key="frame" x="0.0" y="99" width="414" height="1"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="l8z-kA-j7s"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="7qu-Sv-DkV"/>
+                                    <constraint firstAttribute="trailing" secondItem="f7d-Lh-OaD" secondAttribute="trailing" id="Boo-9m-CXE"/>
                                     <constraint firstItem="j7O-BY-XYf" firstAttribute="leading" secondItem="4VV-8K-pFu" secondAttribute="leading" id="CZ0-sc-aXq"/>
                                     <constraint firstItem="4dp-XY-fGh" firstAttribute="centerY" secondItem="j7O-BY-XYf" secondAttribute="centerY" id="EaP-6w-s44"/>
+                                    <constraint firstItem="f7d-Lh-OaD" firstAttribute="leading" secondItem="4VV-8K-pFu" secondAttribute="leading" id="OzE-4B-mBg"/>
+                                    <constraint firstAttribute="bottom" secondItem="f7d-Lh-OaD" secondAttribute="bottom" id="Sh0-Qm-272"/>
                                     <constraint firstAttribute="bottom" secondItem="j7O-BY-XYf" secondAttribute="bottom" constant="9" id="T7g-cR-HKN"/>
                                     <constraint firstItem="4dp-XY-fGh" firstAttribute="centerX" secondItem="4VV-8K-pFu" secondAttribute="centerX" id="nv2-Ck-PxT"/>
                                 </constraints>
@@ -73,6 +83,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerBottomLineView" destination="f7d-Lh-OaD" id="3iO-97-ffP"/>
                         <outlet property="headerView" destination="4VV-8K-pFu" id="X7p-ri-OSg"/>
                         <outlet property="notificationListTV" destination="RvA-N1-LNg" id="xDR-q9-xJg"/>
                     </connections>

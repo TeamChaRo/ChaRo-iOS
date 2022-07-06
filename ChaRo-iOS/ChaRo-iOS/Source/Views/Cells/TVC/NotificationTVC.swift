@@ -43,8 +43,7 @@ class NotificationTVC: UITableViewCell {
 
     // MARK: Life Cycle
     override func layoutSubviews() {
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.gray20.cgColor
+        super.layoutSubviews()
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
     }
     

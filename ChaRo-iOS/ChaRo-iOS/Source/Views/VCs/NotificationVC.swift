@@ -6,17 +6,37 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class NotificationVC: UIViewController {
     
     // MARK: @IBOutlet
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var headerBottomLineView: UIView! {
+        didSet {
+            headerBottomLineView.backgroundColor = .gray20
+        }
+    }
+    
     @IBOutlet var notificationListTV: UITableView! {
         didSet {
             notificationListTV.register(cell: NotificationTVC.self)
             notificationListTV.delegate = self
             notificationListTV.dataSource = self
+            notificationListTV.separatorInset = .zero
+            notificationListTV.separatorColor = .gray20
         }
+    }
+    
+    private let emptyImageView = UIImageView().then {
+        $0.image = ImageLiterals.icAlarmEmpty
+    }
+    
+    private let emptyLabel = UILabel().then {
+        $0.text = "아직 알림이 없어요."
+        $0.font = UIFont.notoSansRegularFont(ofSize: 13.0)
+        $0.textColor = .semiBlack
     }
     
     // MARK: Variable
@@ -25,7 +45,6 @@ class NotificationVC: UIViewController {
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,8 +59,26 @@ class NotificationVC: UIViewController {
 
 // MARK: - UI
 extension NotificationVC {
-    private func setShadow(){
-        headerView.getShadowView(color: UIColor.black.cgColor, masksToBounds: false, shadowOffset: CGSize(width: 0, height: 0), shadowRadius: 8, shadowOpacity: 0.3)
+    private func setUIWhenAlarmIsEmpty() {
+        notificationListTV.removeFromSuperview()
+        view.addSubviews([emptyImageView, emptyLabel])
+        
+        emptyImageView.snp.makeConstraints {
+            $0.top.equalTo(headerView.snp.bottom).offset(223)
+            $0.height.equalTo(calculateHeightbyScreenHeight(originalHeight: 132))
+            $0.width.equalTo(calculateHeightbyScreenHeight(originalHeight: 132) * 238 / 132)
+            $0.centerX.equalToSuperview()
+        }
+        
+        emptyLabel.snp.makeConstraints {
+            $0.top.equalTo(emptyImageView.snp.bottom).offset(17)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    private func calculateHeightbyScreenHeight(originalHeight: CGFloat) -> CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        return originalHeight * (screenHeight / 812)
     }
 }
 
@@ -57,8 +94,7 @@ extension NotificationVC {
         } else {
             let detailVC = PostDetailVC()
             detailVC.setPostId(id: notificationList[indexPath.row].postID ?? -1)
-            detailVC.modalPresentationStyle = .fullScreen
-            self.present(detailVC, animated: true)
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
     
@@ -109,7 +145,12 @@ extension NotificationVC {
             case .success(let resultData):
                 if let data =  resultData as? [NotificationListModel]{
                     self.notificationList = data
-                    self.notificationListTV.reloadData()
+                    
+                    if self.notificationList.count == 0 {
+                        self.setUIWhenAlarmIsEmpty()
+                    } else {
+                        self.notificationListTV.reloadData()
+                    }
                 }
             case .requestErr(let message):
                 print("requestErr", message)
