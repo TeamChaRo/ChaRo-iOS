@@ -300,9 +300,11 @@ extension SettingVC: UITableViewDelegate {
             switch indexPath.row {
             case 0:
                 let changeImageVC = ChangeImageVC()
+                changeImageVC.view.backgroundColor = .white
                 self.navigationController?.pushViewController(changeImageVC, animated: true)
             case 1:
                 let changePasswordVC = ChangePasswordVC()
+                changePasswordVC.view.backgroundColor = .white
                 self.navigationController?.pushViewController(changePasswordVC, animated: true)
             default:
                 break
