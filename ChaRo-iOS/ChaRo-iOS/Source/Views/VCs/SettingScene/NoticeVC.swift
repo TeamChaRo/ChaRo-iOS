@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 import Then
-import SwiftUI
 
 final class NoticeVC: UIViewController {
     
