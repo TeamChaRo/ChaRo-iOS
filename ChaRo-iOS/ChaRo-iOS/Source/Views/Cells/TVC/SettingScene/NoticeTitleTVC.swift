@@ -70,5 +70,6 @@ extension NoticeTitleTVC {
     func setData(model: NoticeDataModel) {
         titleLabel.text = model.title
         dateLabel.text = model.date.convertDateComponentsToString()
+        expandBtn.setBackgroundImage(model.open ? ImageLiterals.icNoticeOpen : ImageLiterals.icNoticeDown, for: .normal)
     }
 }
