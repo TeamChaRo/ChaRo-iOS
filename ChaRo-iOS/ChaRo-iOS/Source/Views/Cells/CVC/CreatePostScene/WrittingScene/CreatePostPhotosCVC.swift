@@ -51,7 +51,7 @@ final class CreatePostPhotosCVC: UICollectionViewCell {
     
     let plusButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(ImageLiterals.icWayPointPlusActive, for: .normal)
+        button.setBackgroundImage(ImageLiterals.icPlus, for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
         return button
     }()
