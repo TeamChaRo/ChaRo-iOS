@@ -56,6 +56,6 @@ struct Course: Codable {
     let address, latitude, longitude: String
     
     func getPoint() -> CLLocationCoordinate2D{
-        return CLLocationCoordinate2D(latitude: Double(latitude)!, longitude: Double(longitude)!)
+        return CLLocationCoordinate2D(latitude: Double(latitude) ?? 0.0, longitude: Double(longitude) ?? 0.0)
     }
 }
