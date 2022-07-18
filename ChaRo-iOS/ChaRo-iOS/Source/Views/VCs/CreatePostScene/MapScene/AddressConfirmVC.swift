@@ -177,24 +177,22 @@ final class AddressConfirmVC: UIViewController {
         let pathData = TMapPathData()
         
         pathData.reverseGeocoding(point, addressType: "A04") { result , error in
-            let addressDict = result ?? [:]
-            print(addressDict)
-            print(addressDict["newRoadName"])
-            
+            guard let addressDict = result else { return }
+            print("addressDict = \(addressDict)")
             var newTitle = ""
-            
-            if let tmp = addressDict["roadName"] as? String {
-                newTitle = tmp != "" ? tmp : ""
+            if let roadName = addressDict["roadName"] as? String, roadName != "" {
+                newTitle = roadName
             }
-            
-            if let tmp = addressDict["buildingName"] as? String {
-                newTitle = tmp != "" ? tmp : ""
+            if let buildingName = addressDict["buildingName"] as? String,buildingName != "" {
+                newTitle = buildingName
+                
             }
+            guard let addressTitle = addressDict["fullAddress"] as? String else { return }
             
-            let newAddress = AddressDataModel(title: String(point.latitude),
-                                              address: String(point.longitude),
-                                              latitude: addressDict["fullAddress"] as! String,
-                                              longitude: newTitle)
+            let newAddress = AddressDataModel(title: newTitle,
+                                              address: addressTitle,
+                                              latitude: String(point.latitude),
+                                              longitude: String(point.longitude))
             
             DispatchQueue.main.async {
                 self.setAddressLabels(address: newAddress)
@@ -229,11 +227,9 @@ extension AddressConfirmVC: TMapViewDelegate {
     func mapViewDidChangeBounds() {
         if !isFirstLoaded {
             changeCoodinateToAddress(point: tMapView.getCenter()!)
+        } else {
+            isFirstLoaded = false
         }
-        isFirstLoaded  = isFirstLoaded ? false : isFirstLoaded
-        getCenterCoordinateInCurrentMap()
-        //clickedToAddMarker()
-        
     }
 }
 
