@@ -161,10 +161,10 @@ extension CreatePostParkingWarningTVC: UITextFieldDelegate {
         
         if textCount <= self.limitTextCount {
             self.parkingContent = parkingDescTextField.text!
-            self.isWarning.toggle()
+            self.isWarning = false
         } else {
             self.parkingDescTextField.text = parkingContent
-            self.isWarning.toggle()
+            self.isWarning = true
         }
     }
 }

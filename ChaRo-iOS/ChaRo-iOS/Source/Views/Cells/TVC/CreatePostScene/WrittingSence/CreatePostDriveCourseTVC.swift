@@ -23,9 +23,9 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         }
     }
     private let limitTextCount = 280
-    private var isWarnning: Bool = false {
+    private var isWarning: Bool = false {
         didSet {
-            if isWarnning{
+            if isWarning {
                 warnningLabel.isHidden = false
                 textView.layer.borderColor = UIColor.mainOrange.cgColor
                 textCountLabel.textColor = .mainOrange
@@ -137,11 +137,11 @@ extension CreatePostDriveCourseTVC: UITextViewDelegate {
         let textCount = textView.text.count
         if textCount <= limitTextCount {
             self.textCountLabel.text = "\(textCount)/280자"
-            self.isWarnning.toggle()
+            self.isWarning = false
             self.contentText = textView.text
         } else {
             self.textView.text = self.contentText
-            self.isWarnning.toggle()
+            self.isWarning = true
         }
     }
 
