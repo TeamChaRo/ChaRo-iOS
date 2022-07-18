@@ -85,18 +85,17 @@ final class AddressConfirmVC: UIViewController {
     func setAddressLabels(address: AddressDataModel) {
         addressModel = address
         changeAddressText()
-        print("first = \(address.title), \(address.address)")
     }
     
     func setImageInCenterMarkerView(type: String) {
         var image = UIImage()
         switch type {
         case "출발지":
-            image = UIImage(named: "icMapStart")!
+            image = ImageLiterals.icMapStart
         case "도착지":
-            image = UIImage(named: "icMapEnd")!
+            image = ImageLiterals.icMapEnd
         default:
-            image = UIImage(named: "icMapWaypoint")!
+            image = ImageLiterals.icMapWaypoint
         }
         centerMarkerView = UIImageView(image: image)
     }
