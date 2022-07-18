@@ -41,7 +41,7 @@ final class AddressMainVC: UIViewController {
     }
     
     private var confirmButton = UIButton().then {
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 12
         $0.backgroundColor = .mainBlue
         $0.setTitleColor(.white, for: .normal)
         $0.isHidden = true
