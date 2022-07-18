@@ -28,7 +28,7 @@ final class CreatePostVC: UIViewController {
         }
     }
     var warning: [String] = []
-    var isParking: Bool = false
+    var isParking: Bool?
     var parkingDesc: String = ""
     var courseDesc: String = ""
     
@@ -162,7 +162,6 @@ extension CreatePostVC {
     private func writePostData() -> WritePostData {
 
         self.theme = self.theme.filter { $0 != "" }
-
         return WritePostData(
             title: self.postTitle,
             userEmail: Constants.userEmail,
@@ -170,7 +169,7 @@ extension CreatePostVC {
             region: self.region,
             theme: self.theme,
             warning: self.warning,
-            isParking: self.isParking,
+            isParking: self.isParking ?? false,
             parkingDesc: self.parkingDesc,
             courseDesc: self.courseDesc,
             course: []
@@ -227,6 +226,9 @@ extension CreatePostVC {
     }
 
     @objc private func nextButtonDidTap(sender: UIButton) {
+
+        guard self.checkValidation() else { return }
+
         let nextVC = AddressMainVC()
         let images: [UIImage] = self.selectImages
         let model: WritePostData = self.writePostData()
@@ -622,5 +624,59 @@ extension CreatePostVC: CreatePostPhotoTVCActionDelegate {
         guard self.selectImages.count > index else { return }
         self.selectImages.remove(at: index)
         self.tableView.reloadData()
+    }
+}
+
+extension CreatePostVC {
+    private func checkValidation() -> Bool {
+
+        if self.postTitle.count < 1 {
+            self.pushAlertValidation(message: "게시글 제목을 입력하지 않았어요.")
+            return false
+        }
+
+        if self.selectImages.isEmpty {
+            self.pushAlertValidation(message: "코스에 대한 사진을 1장 이상 선택해주세요.")
+            return false
+        }
+
+        if self.province.count < 1 || self.region.count < 1 {
+            self.pushAlertValidation(message: "드라이브 코스 지역을 입력해주세요.")
+            return false
+        }
+
+        if self.lastThemeList.isEmpty {
+            self.pushAlertValidation(message: "테마를 선택해주세요.")
+            return false
+        }
+
+        if self.isParking == nil {
+            self.pushAlertValidation(message: "주차 공간을 체크해주세요.")
+            return false
+        }
+
+        if self.courseDesc.count < 1 {
+            self.pushAlertValidation(message: "코스 설명을 입력해주세요.")
+            return false
+        }
+
+        return true
+    }
+
+    private func pushAlertValidation(message: String) {
+        let alertViewController = UIAlertController(
+            title: "",
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let okAction = UIAlertAction(
+            title: "네, 작성할게요.",
+            style: .default,
+            handler: nil
+        )
+
+        alertViewController.addAction(okAction)
+        self.present(alertViewController, animated: true, completion: nil)
     }
 }
