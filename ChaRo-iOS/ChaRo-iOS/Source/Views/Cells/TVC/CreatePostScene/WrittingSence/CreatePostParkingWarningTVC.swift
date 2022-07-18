@@ -227,30 +227,30 @@ extension CreatePostParkingWarningTVC {
     
     private func updateParkingButtonState() {
         if self.availableParking == true {
-            self.parkingExistButton.setMainBlueBorder(8)
+            self.parkingExistButton.setMainBlueBorder(21)
             self.parkingExistButton.setBenefitTitleColor()
             self.parkingExistButton.backgroundColor = .blueSelect
             
-            self.parkingNonExistButton.setGray20Border(8)
+            self.parkingNonExistButton.setGray20Border(21)
             self.parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
             self.parkingNonExistButton.backgroundColor = .clear
         } else {
-            self.parkingNonExistButton.setMainBlueBorder(8)
+            self.parkingNonExistButton.setMainBlueBorder(21)
             self.parkingNonExistButton.setBenefitTitleColor()
             self.parkingNonExistButton.backgroundColor = .blueSelect
             
-            self.parkingExistButton.setGray20Border(8)
+            self.parkingExistButton.setGray20Border(21)
             self.parkingExistButton.setEmptyTitleColor(colorNum: 40)
             self.parkingExistButton.backgroundColor = .clear
         }
     }
     
     private func initParkingButton() {
-        self.parkingExistButton.setGray20Border(8)
+        self.parkingExistButton.setGray20Border(21)
         self.parkingExistButton.setEmptyTitleColor(colorNum: 40)
         self.parkingExistButton.backgroundColor = .clear
 
-        self.parkingNonExistButton.setGray20Border(8)
+        self.parkingNonExistButton.setGray20Border(21)
         self.parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
         self.parkingNonExistButton.backgroundColor = .clear
     }
