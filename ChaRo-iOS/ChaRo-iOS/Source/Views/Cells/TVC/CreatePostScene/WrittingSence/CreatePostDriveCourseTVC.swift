@@ -13,8 +13,8 @@ import Then
 final class CreatePostDriveCourseTVC: UITableViewCell {
 
     var isEditingMode = false
-    private let placeHolderText = "드라이브 코스에 대한 설명과 추가적으로 이야기하고 싶은 내용을 마음껏 남겨주세요"
-    private let titleView = PostCellTitleView(title: "그래서 제 드라이브 코스는요!")
+    private let placeHolderText = "앞서 담지 못한 드라이브 코스에 대한 소개 및 표현을 자유롭게 해주세요."
+    private let titleView = PostCellTitleView(title: "코스 설명")
 
     var setCourseDesc: ((String) -> Void)?
     private var contentText = "" {
@@ -23,9 +23,9 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
         }
     }
     private let limitTextCount = 280
-    private var isWarnning: Bool = false {
+    private var isWarning: Bool = false {
         didSet {
-            if isWarnning{
+            if isWarning {
                 warnningLabel.isHidden = false
                 textView.layer.borderColor = UIColor.mainOrange.cgColor
                 textCountLabel.textColor = .mainOrange
@@ -54,7 +54,7 @@ final class CreatePostDriveCourseTVC: UITableViewCell {
     private let writeFormView = UIView()
 
     private let warnningLabel = UILabel().then {
-        $0.text = "280자 이내로 작성해주세요."
+        $0.text = "공백 제외 280자 이내로 작성해주세요."
         $0.font = .notoSansRegularFont(ofSize: 11)
         $0.textColor = .mainOrange
         $0.isHidden = true
@@ -137,11 +137,11 @@ extension CreatePostDriveCourseTVC: UITextViewDelegate {
         let textCount = textView.text.count
         if textCount <= limitTextCount {
             self.textCountLabel.text = "\(textCount)/280자"
-            self.isWarnning.toggle()
+            self.isWarning = false
             self.contentText = textView.text
         } else {
             self.textView.text = self.contentText
-            self.isWarnning.toggle()
+            self.isWarning = true
         }
     }
 

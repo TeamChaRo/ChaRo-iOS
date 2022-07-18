@@ -45,7 +45,6 @@ struct CreatePostService {
         
         AF.upload(
             multipartFormData: { multipartFormData in
-
                 multipartFormData.append(Data(model.title.utf8), withName: "title")
                 multipartFormData.append(Data(model.userEmail.utf8), withName: "userEmail")
                 multipartFormData.append(Data(model.province.utf8), withName: "province")
@@ -113,6 +112,4 @@ struct CreatePostService {
             return .networkFail
         }
     }
-
-        
 }

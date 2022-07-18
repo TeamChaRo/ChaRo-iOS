@@ -15,8 +15,8 @@ final class CreatePostCourseTVC: UITableViewCell {
     // MARK: Const
 
     private enum Const {
-        static let cityPlaceholder = "시 단위"
-        static let regionPlaceholder = "도 단위"
+        static let cityPlaceholder = "도 단위"
+        static let regionPlaceholder = "시 단위"
         static let unSelected = "선택안함"
     }
 
@@ -61,7 +61,7 @@ final class CreatePostCourseTVC: UITableViewCell {
     // MARK: UI
 
     private let themeTitleView = PostCellTitleView(
-        title: "어느 지역으로 다녀오셨나요?",
+        title: "드라이브 코스 지역",
         subTitle: "도/광역시, 시 단위로 선택해주세요."
     )
     

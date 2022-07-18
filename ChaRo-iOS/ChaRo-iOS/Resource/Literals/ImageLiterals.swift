@@ -98,6 +98,7 @@ enum ImageLiterals {
     static var icWaypointMinusActive: UIImage { .load(name: "icWaypointMinusActive") }
     static var icWayPointPlusActive: UIImage { .load(name: "icWayPointPlusActive") }
     static var icWayPointPlusInactive: UIImage { .load(name: "icWayPointPlusInactive") }
+    static var icPlus: UIImage { .load(name: "plus") }
     static var icWriteActive: UIImage { .load(name: "write_active") }
     static var icWriteInactive: UIImage { .load(name: "write_inactive") }
     
