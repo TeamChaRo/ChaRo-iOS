@@ -115,10 +115,33 @@ extension CreatePostThemeTVC {
     }
     
     func configureThemeData(themeList: [String]) {
-        if themeList.isEmpty == false {
+        guard themeList.isEmpty == false else { return }
+        if themeList[0].count > 0 && themeList[0] != "선택안함" {
             self.themeFirstField.text = themeList[0]
+            self.themeFirstField.textColor = .mainBlue
+            self.themeFirstButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
+        } else {
+            self.themeFirstField.text = "테마 1"
+            self.themeFirstField.textColor = .gray40
+            self.themeFirstButton.setImage(ImageLiterals.icUnselect, for: .normal)
+        }
+        if themeList[1].count > 0 && themeList[1] != "선택안함" {
             self.themeSecondField.text = themeList[1]
+            self.themeSecondField.textColor = .mainBlue
+            self.themeSecondButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
+        } else {
+            self.themeSecondField.text = "테마 2"
+            self.themeSecondField.textColor = .gray40
+            self.themeSecondButton.setImage(ImageLiterals.icUnselect, for: .normal)
+        }
+        if themeList[2].count > 0 && themeList[2] != "선택안함"{
             self.themeThirdField.text = themeList[2]
+            self.themeThirdField.textColor = .mainBlue
+            self.themeThirdButton.setImage(ImageLiterals.icThemeSelected, for: .normal)
+        } else {
+            self.themeThirdField.text = "테마 3"
+            self.themeThirdField.textColor = .gray40
+            self.themeThirdButton.setImage(ImageLiterals.icUnselect, for: .normal)
         }
     }
 }
