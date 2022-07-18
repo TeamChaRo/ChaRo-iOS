@@ -24,7 +24,7 @@ class SearchKeywordCell: UITableViewCell {
         $0.textColor = .gray40
     }
     
-    private var dateLabel = UILabel().then {
+    var dateLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 12)
         $0.textColor = .gray30
     }

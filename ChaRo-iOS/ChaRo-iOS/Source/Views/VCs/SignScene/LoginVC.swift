@@ -38,7 +38,7 @@ class LoginVC: UIViewController {
     }
     
     private func addTestUserAccount() {
-        self.idTextField.text = "gpfud1998@naver.com"
+        self.idTextField.text = "charo@ios.com"
         self.pwdTextField.text = "charo0505"
     }
     override func viewDidDisappear(_ animated: Bool) {
