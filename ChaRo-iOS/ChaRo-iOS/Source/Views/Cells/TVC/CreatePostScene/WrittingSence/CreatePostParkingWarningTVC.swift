@@ -67,8 +67,8 @@ final class CreatePostParkingWarningTVC: UITableViewCell {
 
     // MARK: UI
 
-    private let parkingTitleView = PostCellTitleView(title: "주차 공간은 어땠나요?")
-    private let warningTitleView = PostCellTitleView(title: "드라이브 시 주의해야 할 사항이 있으셨나요?", subTitle: "고려해야 할 사항이 있다면 선택해주세요. 선택 사항입니다.")
+    private let parkingTitleView = PostCellTitleView(title: "주차 공간")
+    private let warningTitleView = PostCellTitleView(title: "주의 사항", subTitle: "드라이브 시 주의해야 할 요소들을 선택해주세요.")
 
     private let parkingExistButton = UIButton().then {
         $0.tag = 4
