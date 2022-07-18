@@ -33,7 +33,6 @@ class TabbarVC: UITabBarController {
     }
     func setShadow() {
         tabBar.drawShadow(color: .black, opacity: 0.5, offset: .zero, radius: 10)
-        )
     }
     func setRadius() {
         tabBar.backgroundColor = .white
