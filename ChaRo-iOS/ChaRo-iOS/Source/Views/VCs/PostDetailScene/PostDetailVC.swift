@@ -54,7 +54,7 @@ final class PostDetailVC: UIViewController {
     }
     private let navigationView = UIView()
     private lazy var backButton = LeftBackButton(toPop: self, isModal: false)
-    private var navigationTitleLabel = NavigationTitleLabel(title: "게시물 상세보기",
+    private var navigationTitleLabel = NavigationTitleLabel(title: "구경하기",
                                                             color: .mainBlack)
     private var bottomView = PostDetailBottomView()
     private let separateLineView = UIView().then {
@@ -389,7 +389,7 @@ extension PostDetailVC: UITableViewDataSource {
 //MARK: Network
 extension PostDetailVC {
     func bindToViewModel() {
-        viewModel = PostDetailViewModel(postId: additionalDataOfPost?.postID ?? -1)
+        viewModel = PostDetailViewModel(postId: additionalDataOfPost?.postID ?? postId)
         let output = viewModel?.transform(input: PostDetailViewModel.Input(), disposeBag: disposeBag)
         output?.postDetailSubject.bind(onNext: { [weak self] postDetailData in
             self?.setPostContentView(postData: postDetailData)
