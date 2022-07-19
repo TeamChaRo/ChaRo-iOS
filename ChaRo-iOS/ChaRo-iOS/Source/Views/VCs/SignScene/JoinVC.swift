@@ -60,6 +60,7 @@ class JoinVC: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         configureUI()
+        configureNotificationCenter()
         configureClosure()
         
         showView(number: pageNumber)
@@ -69,6 +70,9 @@ class JoinVC: UIViewController {
         configureNavigationController()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+            removeObservers()
+    }
     
     //MARK: - configure 함수
     private func configureNavigationController() {
@@ -137,6 +141,29 @@ class JoinVC: UIViewController {
     }
     
     //MARK: - Custom 함수
+    func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func textFieldMoveUp(_ notification: NSNotification) {
+        if (!self.emailView.isHidden && !self.emailView.emailVerifyInputView.isHidden) || !self.profileView.isHidden {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+                })
+            }
+        }
+    }
+    
+    @objc func textFieldMoveDown(_ notification: NSNotification) {
+        view.transform = .identity
+    }
+
     private func showView(number: Int) {
         
         if number == 0 {

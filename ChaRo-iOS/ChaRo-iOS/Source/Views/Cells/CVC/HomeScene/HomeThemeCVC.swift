@@ -78,7 +78,7 @@ class HomeThemeCVC: UICollectionViewCell {
     
     
     public func setThemeTitle(name: String) {
-        themeLabel.text = "#\(name)"
+        themeLabel.text = name
     }
     
     public func setData() {
