@@ -23,6 +23,7 @@ class PostLocationTVC: UITableViewCell {
     private let midAddressView = PostDetailAddressView(title: "경유지")
     private let endAddressView = PostDetailAddressView(title: "도착지")
     var copyAddressClouser: ((String) -> ())?
+    var presentExpendedMapView: (([Course]) -> ())?
     
     private let addressStackView = UIStackView().then {
         $0.axis = .vertical
@@ -30,6 +31,7 @@ class PostLocationTVC: UITableViewCell {
         $0.distribution = .fillEqually
     }
     private lazy var tMapView = TMapView()
+    private let buttonForTouchedMap = UIButton().then { $0.backgroundColor = .clear }
     private var courseList: [Course] = []
     private var polyLineSubjuect = PublishSubject<TMapPolyline>()
     private var polyLineList: [TMapPolyline] = []
@@ -38,6 +40,7 @@ class PostLocationTVC: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
         configureUI()
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -59,7 +62,7 @@ class PostLocationTVC: UITableViewCell {
             $0.leading.trailing.equalToSuperview().inset(20)
         }
         
-        backgourndView.addSubviews([addressStackView, tMapView])
+        backgourndView.addSubviews([addressStackView, tMapView, buttonForTouchedMap])
         addressStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(12)
             $0.leading.trailing.equalToSuperview()
@@ -73,6 +76,10 @@ class PostLocationTVC: UITableViewCell {
             $0.bottom.equalToSuperview().offset(-15)
             $0.height.equalTo(351)
         }
+        
+        buttonForTouchedMap.snp.makeConstraints {
+            $0.edges.equalTo(tMapView)
+        }
     }
     
     private func configureUI() {
@@ -82,15 +89,23 @@ class PostLocationTVC: UITableViewCell {
     
     private func configureMapView() {
         tMapView.delegate = self
-        DispatchQueue.main.async {
-            self.tMapView.setApiKey(MapService.mapkey)
-        }
+        tMapView.isUserInteractionEnabled = false
+        tMapView.setApiKey(MapService.mapkey)
     }
     
     func setCopyClosure() {
         startAddressView.copyAddressClouser = copyAddressClouser
         midAddressView.copyAddressClouser = copyAddressClouser
         endAddressView.copyAddressClouser = copyAddressClouser
+    }
+    
+    func bind() {
+        buttonForTouchedMap.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.presentExpendedMapView?(self.courseList)
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -116,7 +131,6 @@ extension PostLocationTVC {
     private func addPathInMapView() {
         let pathData = TMapPathData()
         polyLineList = []
-        print("count = \(courseList.count)")
         for index in 0..<courseList.count-1 {
             pathData.findPathData(startPoint: courseList[index].getPoint(),
                                   endPoint: courseList[index+1].getPoint()) { result, error in
