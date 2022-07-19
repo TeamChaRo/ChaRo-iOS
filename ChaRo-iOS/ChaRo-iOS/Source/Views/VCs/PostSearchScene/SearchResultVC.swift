@@ -10,7 +10,6 @@ import SnapKit
 import Then
 
 class SearchResultVC: UIViewController {
-    static let identifier = "SearchResultVC"
     
     //MARK: Result Data
     public var lastPostId: Int = 0
