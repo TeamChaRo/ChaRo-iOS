@@ -21,10 +21,10 @@ class NextButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(isSticky: Bool, isTheLast: Bool) {
+    init(isSticky: Bool, isTheLast: Bool, isTempPassword: Bool = false) {
         super.init(frame: .zero)
         self.isTheLast = isTheLast
-        configureUI(isSticky: isSticky)
+        configureUI(isSticky: isSticky, isTempPassword: isTempPassword)
         self.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
     }
     
@@ -43,9 +43,9 @@ class NextButton: UIButton {
         
     }
     
-    private func configureUI(isSticky: Bool) {
+    private func configureUI(isSticky: Bool, isTempPassword: Bool) {
         
-        self.setTitle("다음", for: .normal)
+        self.setTitle(isTempPassword ? "임시 비밀번호 전송" : "다음", for: .normal)
         self.setTitleColor(.white, for: .normal)
         self.backgroundColor = .gray30
         
