@@ -290,7 +290,7 @@ class HomeVC: UIViewController {
     
     @objc func presentSearchPost() {
         let storyboard = UIStoryboard(name: "SearchPost", bundle: nil)
-        let nextVC = storyboard.instantiateViewController(identifier: SearchPostVC.identifier) as! SearchPostVC
+        guard let nextVC = storyboard.instantiateViewController(identifier: SearchPostVC.className) as? SearchPostVC else { return }
         let navigation = UINavigationController(rootViewController: nextVC)
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true, completion: nil)
