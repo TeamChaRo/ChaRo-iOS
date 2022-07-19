@@ -347,7 +347,12 @@ class OtherMyPageVC: UIViewController {
     }
     
     @objc private func backButtonClicked(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if self.navigationController != nil {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
     @objc private func followerButtonClicked(_ sender: UIButton) {
