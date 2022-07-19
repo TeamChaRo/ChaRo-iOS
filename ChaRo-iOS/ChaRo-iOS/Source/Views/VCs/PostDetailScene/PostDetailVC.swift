@@ -125,7 +125,7 @@ extension PostDetailVC{
     @objc func clickedToSaveButton() {
         print("등록 버튼")
         makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?") { _ in
-            self.postCreatePost()
+            self.viewModel?.postCreatePost()
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -158,12 +158,12 @@ extension PostDetailVC{
     func setupConstraints() {
         view.addSubviews([navigationView, separateLineView])
         navigationView.snp.makeConstraints{
-            $0.top.leading.trailing.equalTo(self.view)
+            $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(UIScreen.hasNotch ? UIScreen.getNotchHeight() + 58: 93)
         }
         separateLineView.snp.makeConstraints{
-            $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
-            $0.top.equalTo(self.navigationView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(navigationView.snp.bottom)
             $0.height.equalTo(1)
         }
         
@@ -183,7 +183,7 @@ extension PostDetailVC{
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints{
-            $0.top.equalTo(navigationView.snp.bottom).offset(5)
+            $0.top.equalTo(separateLineView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview().inset(88)
         }
@@ -283,7 +283,7 @@ extension PostDetailVC {
             .drive(onNext:{
                 [weak self] _ in
                 self?.bottomView.likeButton.isSelected.toggle()
-                self?.requestPostLike()
+                //self?.viewModel?.requestPostLike()
             })
             .disposed(by: disposeBag)
         
@@ -291,7 +291,7 @@ extension PostDetailVC {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 self?.bottomView.scrapButton.isSelected.toggle()
-                self?.requestPostScrap()
+                //self?.viewModel?.requestPostScrap()
             })
             .disposed(by: disposeBag)
         
@@ -409,60 +409,5 @@ extension PostDetailVC {
         configureBottomView()
     }
   
-    func postCreatePost() {
-        dump(writedPostData!)
-        print("===서버통신 시작=====")
-        CreatePostService.shared.createPost(model: writedPostData!, image: imageList) { result in
-            switch result {
-            case .success(let message):
-                print(message)
-            case .requestErr(let message):
-                print(message)
-            case .serverErr:
-                print("서버에러")
-            case .networkFail:
-                print("네트워크에러")
-            default:
-                print("몰라에러")
-            }
-        }
-    }
     
-    func requestPostLike() {
-        LikeService.shared.Like(userId: Constants.userEmail,
-                                postId: postId) { [self] result in
-            switch result {
-            case .success(let success):
-                if let success = success as? Bool {
-                    self.isFavorite!.toggle()
-                }
-            case .requestErr(let msg):
-                if let msg = msg as? String {
-                    print(msg)
-                }
-            default :
-                print("ERROR")
-            }
-        }
-    }
-    
-    func requestPostScrap() {
-        SaveService.shared.requestScrapPost(userId: Constants.userEmail,
-                                            postId: postId) { [self] result in
-            
-            switch result {
-            case .success(let success):
-                if let success = success as? Bool {
-                    print("스크랩 성공해서 바뀝니다")
-                    self.isStored!.toggle()
-                }
-            case .requestErr(let msg):
-                if let msg = msg as? String {
-                    print(msg)
-                }
-            default :
-                print("ERROR")
-            }
-        }
-    }
 }

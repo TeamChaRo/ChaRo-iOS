@@ -28,7 +28,7 @@ final class ExpendedImageVC: UIViewController {
         $0.titleLabel?.font = .notoSansMediumFont(ofSize: 15)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 25.0 / 2.0
-        $0.backgroundColor = .gray10.withAlphaComponent(0.7)
+        $0.backgroundColor = .gray30
     }
     
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {

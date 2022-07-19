@@ -6,21 +6,21 @@
 //
 
 import UIKit
+
 import SnapKit
 import Then
 import RxSwift
 
-
-class PostDetailBottomView: UIView{
+class PostDetailBottomView: UIView {
     
     var likeButton = UIButton().then {
-        $0.setBackgroundImage(ImageLiterals.icHeartInactive, for: .normal)
-        $0.setBackgroundImage(ImageLiterals.icHeartActive, for: .selected)
+        $0.setBackgroundImage(ImageLiterals.icBigHeartInactive, for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icBigHeartActive, for: .selected)
     }
     
     var scrapButton = UIButton().then {
-        $0.setBackgroundImage(ImageLiterals.icSaveInactive, for: .normal)
-        $0.setBackgroundImage(ImageLiterals.icSaveActive, for: .selected)
+        $0.setBackgroundImage(ImageLiterals.icBigSaveInactive, for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icBigSaveActive, for: .selected)
     }
     
     var shareButton = UIButton().then {
@@ -47,24 +47,24 @@ class PostDetailBottomView: UIView{
         addSubviews([likeButton, likeDescriptionButton,
                      scrapButton, shareButton])
         
-        likeButton.snp.makeConstraints{
+        likeButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(7)
             $0.leading.equalToSuperview().inset(20)
             $0.height.equalTo(42)
         }
         
-        likeDescriptionButton.snp.makeConstraints{
+        likeDescriptionButton.snp.makeConstraints {
             $0.centerY.equalTo(likeButton.snp.centerY)
             $0.leading.equalTo(likeButton.snp.trailing).inset(2)
         }
         
-        shareButton.snp.makeConstraints{
+        shareButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(7)
             $0.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(42)
         }
         
-        scrapButton.snp.makeConstraints{
+        scrapButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(7)
             $0.trailing.equalTo(shareButton.snp.leading).offset(-14)
             $0.height.equalTo(42)
