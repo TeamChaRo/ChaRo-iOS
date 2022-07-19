@@ -54,6 +54,12 @@ class InputTextField: UITextField {
         }
     }
     
+    override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
+        let originalRect = super.clearButtonRect(forBounds: bounds)
+
+        return originalRect.offsetBy(dx: -6, dy: 0)
+    }
+
     private func configureShowPasswordButton() {
         
         let iconImageView = UIImageView()
@@ -103,7 +109,7 @@ class InputTextField: UITextField {
     
     //테두리 색상을 변경
     public func setBlueBorderWithText() {
-        self.layer.borderColor = UIColor.mainBlue.cgColor
+        self.layer.borderColor = UIColor.neomorfismBlueLine.cgColor
     }
     
     public func setOrangeBorderWithText() {

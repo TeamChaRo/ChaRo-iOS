@@ -67,8 +67,8 @@ final class CreatePostParkingWarningTVC: UITableViewCell {
 
     // MARK: UI
 
-    private let parkingTitleView = PostCellTitleView(title: "주차 공간은 어땠나요?")
-    private let warningTitleView = PostCellTitleView(title: "드라이브 시 주의해야 할 사항이 있으셨나요?", subTitle: "고려해야 할 사항이 있다면 선택해주세요. 선택 사항입니다.")
+    private let parkingTitleView = PostCellTitleView(title: "주차 공간")
+    private let warningTitleView = PostCellTitleView(title: "주의 사항", subTitle: "드라이브 시 주의해야 할 요소들을 선택해주세요.")
 
     private let parkingExistButton = UIButton().then {
         $0.tag = 4
@@ -161,10 +161,10 @@ extension CreatePostParkingWarningTVC: UITextFieldDelegate {
         
         if textCount <= self.limitTextCount {
             self.parkingContent = parkingDescTextField.text!
-            self.isWarning.toggle()
+            self.isWarning = false
         } else {
             self.parkingDescTextField.text = parkingContent
-            self.isWarning.toggle()
+            self.isWarning = true
         }
     }
 }
@@ -227,30 +227,30 @@ extension CreatePostParkingWarningTVC {
     
     private func updateParkingButtonState() {
         if self.availableParking == true {
-            self.parkingExistButton.setMainBlueBorder(8)
+            self.parkingExistButton.setMainBlueBorder(21)
             self.parkingExistButton.setBenefitTitleColor()
             self.parkingExistButton.backgroundColor = .blueSelect
             
-            self.parkingNonExistButton.setGray20Border(8)
+            self.parkingNonExistButton.setGray20Border(21)
             self.parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
             self.parkingNonExistButton.backgroundColor = .clear
         } else {
-            self.parkingNonExistButton.setMainBlueBorder(8)
+            self.parkingNonExistButton.setMainBlueBorder(21)
             self.parkingNonExistButton.setBenefitTitleColor()
             self.parkingNonExistButton.backgroundColor = .blueSelect
             
-            self.parkingExistButton.setGray20Border(8)
+            self.parkingExistButton.setGray20Border(21)
             self.parkingExistButton.setEmptyTitleColor(colorNum: 40)
             self.parkingExistButton.backgroundColor = .clear
         }
     }
     
     private func initParkingButton() {
-        self.parkingExistButton.setGray20Border(8)
+        self.parkingExistButton.setGray20Border(21)
         self.parkingExistButton.setEmptyTitleColor(colorNum: 40)
         self.parkingExistButton.backgroundColor = .clear
 
-        self.parkingNonExistButton.setGray20Border(8)
+        self.parkingNonExistButton.setGray20Border(21)
         self.parkingNonExistButton.setEmptyTitleColor(colorNum: 40)
         self.parkingNonExistButton.backgroundColor = .clear
     }

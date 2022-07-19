@@ -17,8 +17,8 @@ class LoginVC: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var findPasswordButton: UIButton!
     
-    @IBOutlet weak var idTextField: UITextField!
-    @IBOutlet weak var pwdTextField: UITextField!
+    @IBOutlet weak var idTextField: LoginTextField!
+    @IBOutlet weak var pwdTextField: LoginTextField!
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -38,7 +38,7 @@ class LoginVC: UIViewController {
     }
     
     private func addTestUserAccount() {
-        self.idTextField.text = "gpfud1998@naver.com"
+        self.idTextField.text = "charo@ios.com"
         self.pwdTextField.text = "charo0505"
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -73,12 +73,11 @@ class LoginVC: UIViewController {
         self.idTextField.leftViewMode = .always
         self.pwdTextField.leftViewMode = .always
         
-        self.idTextField.rightViewMode = .always
-        self.pwdTextField.rightViewMode = .always
+        self.idTextField.clearButtonMode = .whileEditing
+        self.pwdTextField.clearButtonMode = .whileEditing
         
         let idContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: height))
         let pwdContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: height))
-        let rightpaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 4, height: height))
         
         let idImageView = UIImageView(frame: CGRect(x: 5, y: 4, width: 40, height: 40))
         let pwdImageView = UIImageView(frame: CGRect(x: 5, y: 4, width: 40, height: 40))
@@ -91,9 +90,6 @@ class LoginVC: UIViewController {
         
         idTextField.leftView = idContainerView
         pwdTextField.leftView = pwdContainerView
-        
-//        idTextField.rightView = rightpaddingView
-//        pwdTextField.rightView = rightpaddingView
     }
     
     func loginAction() {
@@ -197,5 +193,12 @@ extension LoginVC {
             heightConstraint.constant = 356
             imageView.image = UIImage(named: "maskGroupSE")
         }
+    }
+}
+
+class LoginTextField: UITextField {
+    override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
+        let originalRect = super.clearButtonRect(forBounds: bounds)
+        return originalRect.offsetBy(dx: -10, dy: 0)
     }
 }

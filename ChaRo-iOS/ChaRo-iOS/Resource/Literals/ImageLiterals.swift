@@ -23,6 +23,10 @@ enum ImageLiterals {
     static var icBack: UIImage { .load(name: "backIcon") }
     static var icBackGray: UIImage { .load(name: "icGrayBackButton") }
     static var icBackWhite: UIImage { .load(name: "backIconWhite") }
+    static var icBigHeartActive: UIImage { .load(name: "icBigHeartActive") }
+    static var icBigHeartInactive: UIImage { .load(name: "icBigHeartInactive") }
+    static var icBigSaveActive: UIImage { .load(name: "icBigSaveActive") }
+    static var icBigSaveInactive: UIImage { .load(name: "icBigSaveInactive") }
     static var icBlueCheck: UIImage { .load(name: "blueCheck")}
 
     static var icCamera: UIImage { .load(name: "icCamera") }
@@ -55,6 +59,7 @@ enum ImageLiterals {
     static var icMypageMore: UIImage { .load(name: "icMypageMore") }
     static var icNextWhite: UIImage { .load(name: "icNextWhite") }
     static var icNoticeDown: UIImage { .load(name: "noticeDown") }
+    static var icNoticeOpen: UIImage { .load(name: "icNoticeOpen") }
     static var icProfile: UIImage { .load(name: "icProfile") }
     static var icPreviousWhite: UIImage { .load(name: "icPreviousWhite") }
     static var icRouteEnd: UIImage { .load(name: "icRouteEnd") }
@@ -97,6 +102,7 @@ enum ImageLiterals {
     static var icWaypointMinusActive: UIImage { .load(name: "icWaypointMinusActive") }
     static var icWayPointPlusActive: UIImage { .load(name: "icWayPointPlusActive") }
     static var icWayPointPlusInactive: UIImage { .load(name: "icWayPointPlusInactive") }
+    static var icPlus: UIImage { .load(name: "plus") }
     static var icWriteActive: UIImage { .load(name: "write_active") }
     static var icWriteInactive: UIImage { .load(name: "write_inactive") }
     

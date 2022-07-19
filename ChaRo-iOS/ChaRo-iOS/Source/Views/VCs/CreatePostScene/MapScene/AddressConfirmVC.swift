@@ -19,39 +19,40 @@ final class AddressConfirmVC: UIViewController {
     public var presentingCellIndex: Int = -1
     private var isFirstLoaded: Bool = true
     
-    private var backButton = UIButton().then {
+    private lazy var backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icCircleBack, for: .normal)
         $0.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
     }
     
     private var centerMarkerView = UIImageView()
-    private var bottomView = UIView().then {
+    private let bottomView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
         $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
+        $0.drawShadow(color: .black, opacity: 0.1, offset: CGSize(width: 0, height: -4), radius: 5)
     }
     
-    private var confirmButton = UIButton().then {
-        $0.layer.cornerRadius = 8
+    private lazy var confirmButton = UIButton().then {
+        $0.layer.cornerRadius = 12
         $0.backgroundColor = .mainBlue
         $0.setTitleColor(.white, for: .normal)
         $0.addTarget(self, action: #selector(sendDecidedAddress), for: .touchUpInside)
     }
     
-    private var titleNameLabel = UILabel().then {
+    private let titleNameLabel = UILabel().then {
         $0.font = .notoSansMediumFont(ofSize: 16)
         $0.textColor = .gray50
     }
     
-    private var addressLabel = UILabel().then {
+    private let addressLabel = UILabel().then {
         $0.font = .notoSansRegularFont(ofSize: 14)
         $0.textColor = .gray40
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         setContraints()
+        configureUI()
         initTMapView()
     }
     
@@ -85,18 +86,17 @@ final class AddressConfirmVC: UIViewController {
     func setAddressLabels(address: AddressDataModel) {
         addressModel = address
         changeAddressText()
-        print("first = \(address.title), \(address.address)")
     }
     
     func setImageInCenterMarkerView(type: String) {
         var image = UIImage()
         switch type {
         case "출발지":
-            image = UIImage(named: "icMapStart")!
+            image = ImageLiterals.icMapStart
         case "도착지":
-            image = UIImage(named: "icMapEnd")!
+            image = ImageLiterals.icMapEnd
         default:
-            image = UIImage(named: "icMapWaypoint")!
+            image = ImageLiterals.icMapWaypoint
         }
         centerMarkerView = UIImageView(image: image)
     }
@@ -119,19 +119,15 @@ final class AddressConfirmVC: UIViewController {
                           centerMarkerView,
                           bottomView])
         
-        let height = UIScreen.main.bounds.height
-        print("deviceHeight = \(height)")
-        let viewRate = height / 812
-        let bottomViewHeight = 172 * viewRate
-        print("viewRate = \(viewRate)")
+        let viewRate = UIScreen.getDeviceHeight() / 812.0
+        let bottomViewHeight = 194 * viewRate
         
-        let mapFrameHeight = height - bottomViewHeight - CGFloat(UIScreen.getIndecatorHeight()) + 30
+        let mapFrameHeight = UIScreen.getDeviceHeight() - bottomViewHeight + 30
         
         tMapView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: mapFrameHeight)
         tMapView.snp.makeConstraints{
-            $0.top.equalTo(view.snp.top)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(bottomView.snp.top)
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalTo(bottomView.snp.top).offset(-20)
         }
         
         backButton.snp.makeConstraints{
@@ -144,58 +140,50 @@ final class AddressConfirmVC: UIViewController {
         }
         
         bottomView.snp.makeConstraints{
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(bottomViewHeight)
         }
-        
-        
-        bottomView.addSubviews([ confirmButton,
-                                 addressLabel,
-                                 titleNameLabel])
+    
+        bottomView.addSubviews([confirmButton,
+                                addressLabel,
+                                titleNameLabel])
        
         confirmButton.snp.makeConstraints{
-            $0.leading.equalTo(bottomView.snp.leading).offset(20)
-            $0.trailing.equalTo(bottomView.snp.trailing).offset(-20)
-            $0.bottom.equalTo(bottomView.snp.bottom).offset(-23)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(35)
             $0.height.equalTo(48 * viewRate)
         }
         
         addressLabel.snp.makeConstraints{
-            $0.leading.equalTo(bottomView.snp.leading).offset(20)
-            $0.trailing.equalTo(bottomView.snp.trailing).offset(-20)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(confirmButton.snp.top).offset(-27)
         }
         
         titleNameLabel.snp.makeConstraints{
-            $0.leading.equalTo(bottomView.snp.leading).offset(20)
-            $0.trailing.equalTo(bottomView.snp.trailing).offset(-20)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(addressLabel.snp.top).offset(-2)
         }
-
     }
     
     private func changeCoodinateToAddress(point : CLLocationCoordinate2D) {
         let pathData = TMapPathData()
         
         pathData.reverseGeocoding(point, addressType: "A04") { result , error in
-            let addressDict = result ?? [:]
-            print(addressDict)
-            print(addressDict["newRoadName"])
-            
+            guard let addressDict = result else { return }
             var newTitle = ""
-            
-            if let tmp = addressDict["roadName"] as? String {
-                newTitle = tmp != "" ? tmp : ""
+            if let roadName = addressDict["roadName"] as? String, roadName != "" {
+                newTitle = roadName
+            }
+            if let buildingName = addressDict["buildingName"] as? String,buildingName != "" {
+                newTitle = buildingName
             }
             
-            if let tmp = addressDict["buildingName"] as? String {
-                newTitle = tmp != "" ? tmp : ""
-            }
+            guard let addressTitle = addressDict["fullAddress"] as? String else { return }
             
-            let newAddress = AddressDataModel(title: String(point.latitude),
-                                              address: String(point.longitude),
-                                              latitude: addressDict["fullAddress"] as! String,
-                                              longitude: newTitle)
+            let newAddress = AddressDataModel(title: newTitle,
+                                              address: addressTitle,
+                                              latitude: String(point.latitude),
+                                              longitude: String(point.longitude))
             
             DispatchQueue.main.async {
                 self.setAddressLabels(address: newAddress)
@@ -218,8 +206,6 @@ final class AddressConfirmVC: UIViewController {
         let marker = TMapMarker(position: position!)
         marker.map = tMapView
     }
-  
-    
 }
 
 extension AddressConfirmVC: TMapViewDelegate {
@@ -230,11 +216,9 @@ extension AddressConfirmVC: TMapViewDelegate {
     func mapViewDidChangeBounds() {
         if !isFirstLoaded {
             changeCoodinateToAddress(point: tMapView.getCenter()!)
+        } else {
+            isFirstLoaded = false
         }
-        isFirstLoaded  = isFirstLoaded ? false : isFirstLoaded
-        getCenterCoordinateInCurrentMap()
-        //clickedToAddMarker()
-        
     }
 }
 

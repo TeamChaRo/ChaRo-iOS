@@ -247,8 +247,9 @@ class MyPageVC: UIViewController {
     
     func setHeaderData() {
         guard let url = URL(string: userProfileData[0].profileImage) else { return }
+        if url != URL(string: "null"){profileImageView.kf.setImage(with: url)}
+        else {profileImageView.image = ImageLiterals.imgMypageDefaultProfile}
         userNameLabel.text = userProfileData[0].nickname
-        profileImageView.kf.setImage(with: url)
         followerNumButton.setTitle(String(userProfileData[0].follower), for: .normal)
         followNumButton.setTitle(String(userProfileData[0].following), for: .normal)
     }
@@ -566,7 +567,7 @@ class MyPageVC: UIViewController {
             $0.top.equalTo(tabbarBottomView.snp.bottom).offset(0)
             $0.trailing.equalTo(view).offset(0)
             $0.leading.equalTo(view).offset(0)
-            $0.bottom.equalTo(view).offset(0)
+            $0.bottom.equalTo(view).offset(-100)
         }
         writeView.snp.makeConstraints {
             $0.top.equalTo(collectionScrollView.snp.top).offset(0)

@@ -41,7 +41,7 @@ final class AddressMainVC: UIViewController {
     }
     
     private var confirmButton = UIButton().then {
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 12
         $0.backgroundColor = .mainBlue
         $0.setTitleColor(.white, for: .normal)
         $0.isHidden = true
@@ -66,9 +66,9 @@ final class AddressMainVC: UIViewController {
         initMapView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupGuideAnimationView()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupGuideView()
     }
     
     private func setConstraints() {
@@ -93,8 +93,7 @@ final class AddressMainVC: UIViewController {
         }
         
         confirmButton.snp.makeConstraints {
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
             $0.height.equalTo(48)
         }
@@ -179,12 +178,8 @@ final class AddressMainVC: UIViewController {
     }
     
     func setAddressListData(list: [AddressDataModel]) {
-        if list.isEmpty {
-            isFirstOpen = true
-        } else {
-            isFirstOpen = false
-            viewModel.addressList = list
-        }
+        guard !list.isEmpty else { return }
+        viewModel.addressList = list
     }
     
     func addSearchedKeyword(address: AddressDataModel) {
@@ -193,20 +188,27 @@ final class AddressMainVC: UIViewController {
 }
 
 // MARK: - Guide Animation
-extension AddressMainVC{
-    private func setupGuideAnimationView() {
-        guard isFirstOpen else { return }
-        let animator = UIViewPropertyAnimator(duration: 7, curve: .easeInOut)
-        let guideView = MapGuideView()
+extension AddressMainVC {
+    private func setupGuideView() {
+        guard isFirstOpen else {
+            removeGuideView()
+            return
+        }
+        
+        let guideView = MapGuideView().then { $0.tag = 999 }
         self.view.addSubview(guideView)
         guideView.snp.makeConstraints {
             $0.top.equalTo(tableView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-        animator.addAnimations { guideView.alpha = 0 }
-        animator.addCompletion { _ in guideView.removeFromSuperview() }
-        animator.startAnimation()
         isFirstOpen = false
+    }
+    
+    private func removeGuideView() {
+        if let guideView = view.viewWithTag(999) {
+            guideView.removeFromSuperview()
+            return
+        }
     }
 }
 

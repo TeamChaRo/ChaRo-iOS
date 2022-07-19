@@ -16,13 +16,19 @@ final class SearchAddressKeywordVC: UIViewController {
     private let viewModel: SearchKeywordViewModel
     private var disposeBag = DisposeBag()
     private var searchKeywordSubject = PublishSubject<AddressDataModel>()
-    
     private var addressIndex: Int = -1
     private var addressType: String = ""
+    private var keywordType: KeywordType = .recently
+    
+    enum KeywordType: String {
+        case recently = "최근 검색"
+        case related = "연관 검색어"
+        case result = "검색 결과"
+    }
     
     //MARK: UI Component
     private var backButton = UIButton().then {
-        $0.setBackgroundImage(UIImage(named: "backIcon"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icBack, for: .normal)
         $0.tintColor = .gray40
     }
     private var searchTextField = UITextField().then {
@@ -79,6 +85,7 @@ final class SearchAddressKeywordVC: UIViewController {
     // MARK: - private func
     private func configureUI() {
         view.backgroundColor = .white
+        contentTitleLabel.text = keywordType.rawValue
     }
     
     private func bind() {
@@ -90,7 +97,8 @@ final class SearchAddressKeywordVC: UIViewController {
                 cell.setContent(element: element,
                                 keyword: self.searchTextField.text ?? "",
                                 date: self.viewModel.getCurrentDate())
-                self.contentTitleLabel.text = self.viewModel.isSearchedHistoryList ? "최근 검색어" : "검색 결과"
+                cell.dateLabel.isHidden = self.keywordType != .recently
+                self.contentTitleLabel.text = self.keywordType.rawValue                
             }.disposed(by: disposeBag)
         
         tableView.rx.modelSelected(AddressDataModel.self)
@@ -102,11 +110,20 @@ final class SearchAddressKeywordVC: UIViewController {
         searchTextField.rx.text
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self]  in
-                if $0 == "" { 
+                if $0 == "" {
                     self?.viewModel.refreshSearchHistory()
+                    self?.keywordType = .recently
                 } else {
                     self?.viewModel.findAutoCompleteAddressList(keyword: $0 ?? "")
+                    self?.keywordType = .related
                 }
+            }).disposed(by: disposeBag)
+
+        searchTextField.rx.controlEvent(.editingDidEndOnExit)
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.keywordType = .result
+                self?.viewModel.findAutoCompleteAddressList(keyword: self?.searchTextField.text ?? "")
             }).disposed(by: disposeBag)
         
         backButton.rx.tap

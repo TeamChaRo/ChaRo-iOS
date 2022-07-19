@@ -11,14 +11,14 @@ import SnapKit
 import Then
 
 final class CreatePostThemeTVC: UITableViewCell {
-
+    
     // MARK: Properties
-
+    
     // cell height 동적으로 계산
     private let buttonWidth: CGFloat = (UIScreen.getDeviceWidth()-52) / 3
     private let heightRatio: CGFloat = 42/108
     func setDynamicHeight() -> CGFloat {
-
+        
         let buttonHeight: CGFloat = buttonWidth * heightRatio
         let fixedHeight: CGFloat = 38 + 12 + 33 // 기본 여백, 타이틀 높이
         let dynamicHeight: CGFloat = buttonHeight
@@ -28,19 +28,19 @@ final class CreatePostThemeTVC: UITableViewCell {
     
     // 데이터 전달 closeur
     var tapSetThemeButtonAction : (() -> ())?
-
+    
     private var textFieldList: [UITextField] = []
     private var currentIndex = 0 // 현재 선택된 component
     private var filterData = FilterDatas() //pickerview에 표시 될 list data model
     private var currentList: [String] = [] //pickerview에 표시 될 List
     private var filterList: [String] = ["","",""]
     private var pickerSelectFlag: Bool = false
-
-
+    
+    
     // MARK: UI
-
-    private let courseTitleView = PostCellTitleView(title: "어느 테마의 드라이브였나요?", subTitle: "드라이브 테마를 한 개 이상 선택해주세요.")
-
+    
+    private let courseTitleView = PostCellTitleView(title: "테마", subTitle: "드라이브 코스를 표현할 수 있는 키워드를 선택해주세요. (최대 3개)")
+    
     private let themeFirstButton = UIButton().then {
         $0.setImage(ImageLiterals.icUnselect, for: .normal)
     }
@@ -74,7 +74,7 @@ final class CreatePostThemeTVC: UITableViewCell {
         self.initTextField()
         self.addTextFieldAction()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         selectionStyle = .none
@@ -115,10 +115,17 @@ extension CreatePostThemeTVC {
     }
     
     func configureThemeData(themeList: [String]) {
-        if themeList.isEmpty == false {
-            self.themeFirstField.text = themeList[0]
-            self.themeSecondField.text = themeList[1]
-            self.themeThirdField.text = themeList[2]
+        guard themeList.isEmpty == false else { return }
+        
+        for (index, fieldList) in [themeFirstField, themeSecondField, themeThirdField].enumerated() {
+            fieldList.text = themeList[index]
+        }
+        
+        let themeFieldButtonDic: [UITextField: UIButton] = [themeFirstField: themeFirstButton, themeSecondField: themeSecondButton, themeThirdField: themeThirdButton]
+        
+        themeFieldButtonDic.forEach {
+            $0.key.textColor = $0.key.text == "선택안함" ? .gray40 : .mainBlue
+            $0.value.setImage($0.key.text == "선택안함" ? ImageLiterals.icUnselect : ImageLiterals.icThemeSelected, for: .normal)
         }
     }
 }
@@ -126,7 +133,7 @@ extension CreatePostThemeTVC {
 
 // MARK: - Layout
 extension CreatePostThemeTVC {
-
+    
     private func configureLayout() {
         self.addSubviews([
             self.courseTitleView,

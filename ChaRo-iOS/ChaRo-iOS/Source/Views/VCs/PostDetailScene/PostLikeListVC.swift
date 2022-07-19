@@ -35,7 +35,7 @@ class PostLikeListVC: UIViewController {
         $0.setBackgroundImage(ImageLiterals.icClose, for: .normal)
     }
     private let titleLabel = UILabel().then {
-        $0.text = "좋아요"
+        $0.text = "좋아요한 사람"
         $0.font = .notoSansMediumFont(ofSize: 17)
     }
     
@@ -143,6 +143,7 @@ class PostLikeListVC: UIViewController {
             .bind(onNext: { [weak self] follow in
                 let otherVC = OtherMyPageVC()
                 otherVC.setOtherUserID(userID: follow.userEmail)
+                otherVC.modalPresentationStyle = .overFullScreen
                 self?.present(otherVC, animated: true)
             }).disposed(by: disposeBag)
         

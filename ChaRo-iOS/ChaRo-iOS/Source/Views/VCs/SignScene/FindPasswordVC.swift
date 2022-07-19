@@ -15,8 +15,8 @@ final class FindPasswordVC: UIViewController {
     let emailInputView = JoinInputView(title: "임시 비밀번호 발급",
                                        subTitle: "가입하신 이메일 주소로 임시 비밀번호가 발급됩니다. 로그인 후 꼭 비밀번호를 변경해주세요.",
                                        placeholder: "이메일 아이디를 입력해주세요")
-    let nextButton = NextButton(isSticky: false, isTheLast: true)
-    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
+    let nextButton = NextButton(isSticky: false, isTheLast: true, isTempPassword: true)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: true, isTempPassword: true)
     var stickyView: UIView?
     
     var navigationView = UIView().then {

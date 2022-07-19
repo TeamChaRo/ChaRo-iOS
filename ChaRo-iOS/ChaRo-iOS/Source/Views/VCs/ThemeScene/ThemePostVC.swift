@@ -46,7 +46,6 @@ class ThemePostVC: UIViewController {
     override func viewDidLoad() {
         setTableView()
         setTitleLabelUI()
-        setHeaderBottomView()
         filterViewCompletion()
         filterViewLayout()
         dismissDropDownWhenTappedAround()

@@ -41,7 +41,7 @@ final class MapGuideView: UIView {
         self.addSubview(containerView)
         containerView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(225)
             $0.height.equalTo(73)
         }
         

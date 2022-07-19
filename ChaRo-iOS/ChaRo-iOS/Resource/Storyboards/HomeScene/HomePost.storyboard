@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o9H-kv-aaH">
-                                <rect key="frame" x="20" y="100" width="374" height="762"/>
+                                <rect key="frame" x="20" y="100" width="374" height="786"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g6F-Bl-aSr">
                                     <size key="itemSize" width="128" height="128"/>
@@ -86,7 +86,7 @@
                             <constraint firstItem="dA3-Dq-nfP" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="o8d-WM-tHV"/>
                             <constraint firstItem="dA3-Dq-nfP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="rtq-aL-3wG"/>
                             <constraint firstItem="o9H-kv-aaH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="utQ-pT-7zb"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="o9H-kv-aaH" secondAttribute="bottom" id="vj5-Vy-Q11"/>
+                            <constraint firstAttribute="bottom" secondItem="o9H-kv-aaH" secondAttribute="bottom" constant="10" id="vj5-Vy-Q11"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
