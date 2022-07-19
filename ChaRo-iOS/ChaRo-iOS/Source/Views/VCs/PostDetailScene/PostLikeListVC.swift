@@ -143,6 +143,7 @@ class PostLikeListVC: UIViewController {
             .bind(onNext: { [weak self] follow in
                 let otherVC = OtherMyPageVC()
                 otherVC.setOtherUserID(userID: follow.userEmail)
+                otherVC.modalPresentationStyle = .overFullScreen
                 self?.present(otherVC, animated: true)
             }).disposed(by: disposeBag)
         

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J9H-Uf-xbB">
-                                <rect key="frame" x="0.0" y="-50" width="414" height="946"/>
+                                <rect key="frame" x="0.0" y="-50" width="414" height="846"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="7qs-nN-Uoz">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
@@ -89,7 +90,7 @@
                             <constraint firstItem="J9H-Uf-xbB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="OzP-xw-Y2e"/>
                             <constraint firstItem="J9H-Uf-xbB" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="-50" id="WK8-TK-lgW"/>
                             <constraint firstItem="KbL-a3-YBW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="d4l-Al-ABb"/>
-                            <constraint firstAttribute="bottom" secondItem="J9H-Uf-xbB" secondAttribute="bottom" id="qxB-JE-xvY"/>
+                            <constraint firstAttribute="bottom" secondItem="J9H-Uf-xbB" secondAttribute="bottom" constant="100" id="qxB-JE-xvY"/>
                             <constraint firstItem="J9H-Uf-xbB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sfj-FX-oVk"/>
                         </constraints>
                     </view>

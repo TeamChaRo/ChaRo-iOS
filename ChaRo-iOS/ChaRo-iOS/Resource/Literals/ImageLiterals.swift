@@ -22,7 +22,7 @@ enum ImageLiterals {
     
     static var icBack: UIImage { .load(name: "backIcon") }
     static var icBackGray: UIImage { .load(name: "icGrayBackButton") }
-    static var icBackWhite: UIImage { .load(name: "backIconWhite") }
+    static var icBackWhite: UIImage { .load(name: "BackIconWhite") }
     static var icBlueCheck: UIImage { .load(name: "blueCheck")}
 
     static var icCamera: UIImage { .load(name: "icCamera") }
