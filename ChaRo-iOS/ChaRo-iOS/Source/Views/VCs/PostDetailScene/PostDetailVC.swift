@@ -362,6 +362,11 @@ extension PostDetailVC: UITableViewDataSource {
                 self.view.showToast(message: "\(locationTitle) 주소를 복사했습니다")
             }
             cell.setCopyClosure()
+            cell.presentExpendedMapView = { [weak self] courses in
+                let nextVC = ExpendedMapVC(courseList: courses)
+                nextVC.modalPresentationStyle = .fullScreen
+                self?.present(nextVC, animated: true)
+            }
             return cell
             
         case 4:
