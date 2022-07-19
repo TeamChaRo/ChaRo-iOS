@@ -88,7 +88,7 @@ final class ThirdBannerVC: BannerVC {
                 $0.setTitle("드라이브 코스 바로가기", for: .normal)
                 $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
                 $0.setTitleColor(.white, for: .normal)
-                $0.backgroundColor = .blue
+                $0.backgroundColor = .mainBlue
                 $0.layer.cornerRadius = 8
                 $0.tag = i
             }
@@ -102,14 +102,18 @@ final class ThirdBannerVC: BannerVC {
         
         buttonList[0].rx.tap
             .asDriver()
-            .drive(onNext: {
-                print("첫번째 버튼 눌림")
+            .drive(onNext: { [weak self] in
+                let nextVC = PostDetailVC()
+                nextVC.setPostId(id: 41)
+                self?.present(nextVC, animated: true)
             }).disposed(by: disposeBag)
         
         buttonList[1].rx.tap
             .asDriver()
-            .drive(onNext: {
-                print("두번째 버튼 눌림")
+            .drive(onNext: { [weak self] in
+                let nextVC = PostDetailVC()
+                nextVC.setPostId(id: 27)
+                self?.present(nextVC, animated: true)
             }).disposed(by: disposeBag)
 
     }

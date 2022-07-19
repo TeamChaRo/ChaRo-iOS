@@ -10,7 +10,8 @@ import UIKit
 class BannerAboutCell: UICollectionViewCell {
     
     private let contentImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        //$0.contentMode = .scaleAspectFit
+        $0.contentMode = .top
     }
     
     private let titleLabel = UILabel().then {
