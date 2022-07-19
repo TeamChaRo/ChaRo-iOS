@@ -88,7 +88,7 @@ final class ThirdBannerVC: BannerVC {
                 $0.setTitle("드라이브 코스 바로가기", for: .normal)
                 $0.titleLabel?.font = .notoSansMediumFont(ofSize: 14)
                 $0.setTitleColor(.white, for: .normal)
-                $0.backgroundColor = .blue
+                $0.backgroundColor = .mainBlue
                 $0.layer.cornerRadius = 8
                 $0.tag = i
             }
