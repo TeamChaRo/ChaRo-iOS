@@ -567,7 +567,7 @@ class MyPageVC: UIViewController {
             $0.top.equalTo(tabbarBottomView.snp.bottom).offset(0)
             $0.trailing.equalTo(view).offset(0)
             $0.leading.equalTo(view).offset(0)
-            $0.bottom.equalTo(view).offset(0)
+            $0.bottom.equalTo(view).offset(-100)
         }
         writeView.snp.makeConstraints {
             $0.top.equalTo(collectionScrollView.snp.top).offset(0)
