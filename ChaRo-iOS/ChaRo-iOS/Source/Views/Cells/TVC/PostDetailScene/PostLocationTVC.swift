@@ -90,7 +90,9 @@ class PostLocationTVC: UITableViewCell {
     private func configureMapView() {
         tMapView.delegate = self
         tMapView.isUserInteractionEnabled = false
-        tMapView.setApiKey(MapService.mapkey)
+        DispatchQueue.main.async { [weak self] in
+            self?.tMapView.setApiKey(MapService.mapkey)
+        }
     }
     
     func setCopyClosure() {
@@ -122,8 +124,10 @@ extension PostLocationTVC {
 
     private func checkDrawingPolyLine() {
         if polyLineList.count == courseList.count - 1 {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.tMapView.fitMapBoundsWithPolylines(self.polyLineList)
+                self.tMapView.isUserInteractionEnabled = true
             }
         }
     }
