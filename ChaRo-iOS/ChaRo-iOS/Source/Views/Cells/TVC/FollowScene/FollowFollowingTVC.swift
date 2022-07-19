@@ -53,7 +53,8 @@ class FollowFollowingTVC: UITableViewCell {
         guard let url = URL(string: data.image) else { return }
         userNameLabel.text = data.nickname
         otherUserID = data.userEmail
-        profileImageView.kf.setImage(with: url)
+        if url != URL(string: "null"){profileImageView.kf.setImage(with: url)}
+        else {profileImageView.image = ImageLiterals.imgMypageDefaultProfile}
         isMyAccount(email: data.userEmail)
         if data.isFollow {
             followButton.isSelected = true

@@ -94,6 +94,12 @@ class OtherMyPageVC: UIViewController {
         $0.titleLabel?.textColor = UIColor.white
         $0.contentHorizontalAlignment = .left
     }
+    private let wordingLabel = UILabel().then {
+        $0.text = "작성된 드라이브 코스가 아직 없습니다"
+        $0.font = UIFont.notoSansRegularFont(ofSize: 14)
+        $0.textColor = UIColor.gray50
+    }
+    
     private let backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icBackWhite, for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
@@ -318,21 +324,28 @@ class OtherMyPageVC: UIViewController {
         followerNum = userProfileData[0].follower
         followingNum = userProfileData[0].following
         guard let url = URL(string: userProfileData[0].profileImage) else { return }
+        if url != URL(string: "null"){ profileImageView.kf.setImage(with: url) }
+        else {profileImageView.image = ImageLiterals.imgMypageDefaultProfile}
         userNameLabel.text = userProfileData[0].nickname
-        profileImageView.kf.setImage(with: url)
         followerNumButton.setTitle(String(followerNum), for: .normal)
         followNumButton.setTitle(String(followingNum), for: .normal)
     }
     
     func isNoData() {
-        collectionBackgroundView.addSubview(noDataImageView)
+        collectionBackgroundView.addSubviews([noDataImageView, wordingLabel])
         
         noDataImageView.isHidden = true
         
         noDataImageView.snp.makeConstraints{
-            $0.top.leading.trailing.equalToSuperview().offset(0)
+            $0.top.equalToSuperview().offset(61)
+            $0.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
+        }
+        wordingLabel.snp.makeConstraints {
+            $0.top.equalTo(noDataImageView.snp.bottom).offset(19)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(225)
         }
       
         if writenPostDriveData.isEmpty == true {
@@ -346,7 +359,12 @@ class OtherMyPageVC: UIViewController {
     }
     
     @objc private func backButtonClicked(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if self.navigationController != nil {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
     @objc private func followerButtonClicked(_ sender: UIButton) {
