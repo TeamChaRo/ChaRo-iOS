@@ -11,7 +11,6 @@ import Then
 
 class SearchPostVC: UIViewController {
 
-    static let identifier = "SearchPostVC"
     private let userName = Constants.nickName
     
     //MARK: About PickerView
@@ -32,7 +31,7 @@ class SearchPostVC: UIViewController {
     private let titleLabel = NavigationTitleLabel(title: "드라이브 맞춤 검색", color: .white)
     
     private let backgroundImageView = UIImageView().then {
-        $0.image = UIImage(named: "searchBackground")
+        $0.image = ImageLiterals.imgSearchBackground
         $0.contentMode = .scaleToFill
     }
     
@@ -48,7 +47,7 @@ class SearchPostVC: UIViewController {
     }
     
     private let fileterView = UIImageView().then {
-        $0.image = UIImage(named: "searchBackgroundWhite")
+        $0.image = ImageLiterals.imgSearchBackgroundWhite
         $0.contentMode = .scaleToFill
     }
     
@@ -109,10 +108,10 @@ class SearchPostVC: UIViewController {
     
     private let findButton = UIButton().then {
         $0.isUserInteractionEnabled = false
-        $0.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
+        $0.setBackgroundImage(ImageLiterals.icSearchBtnWhite, for: .normal)
         $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
         $0.imageView?.contentMode = .scaleToFill
-        $0.setTitle("찾아보기", for: .normal)
+        $0.setTitle("검색하기", for: .normal)
         $0.setTitleColor(.mainBlue, for: .normal)
         $0.addTarget(self, action: #selector(pushNextVC), for: .touchUpInside)
     }
@@ -128,7 +127,7 @@ class SearchPostVC: UIViewController {
     
     @objc func pushNextVC() {
         let storyboard = UIStoryboard(name: "SearchResult", bundle: nil)
-        guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.identifier)as? SearchResultVC else {
+        guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.className ) as? SearchResultVC else {
             return
         }
         refineFilterList()
@@ -138,10 +137,8 @@ class SearchPostVC: UIViewController {
     }
     
     func refineFilterList() {
-        for index in 0..<4{
-            if filterList[index] == "선택안함"{
-                filterList[index] = ""
-            }
+        for index in 0..<4 {
+            if filterList[index] == "선택안함"{ filterList[index] = "" }
         }
     }
     
@@ -174,7 +171,7 @@ extension SearchPostVC {
                                           cautionImageView])
         
         imageViewList.forEach {
-            $0.image = UIImage(named: "searchBtnUnselect")
+            $0.image = ImageLiterals.icSearchBtnUnselect
             $0.contentMode = .scaleToFill
         }
         
@@ -182,13 +179,13 @@ extension SearchPostVC {
     
     func changeFindButtonToActive() {
         findButton.isUserInteractionEnabled = true
-        findButton.setBackgroundImage(UIImage(named: "searchBtnBlue"), for: .normal)
+        findButton.setBackgroundImage(ImageLiterals.icSearchBtnBlue, for: .normal)
         findButton.setTitleColor(.white, for: .normal)
     }
     
     func changeFindButtonToUnactive() {
         findButton.isUserInteractionEnabled = false
-        findButton.setBackgroundImage(UIImage(named: "searchBtnWhite"), for: .normal)
+        findButton.setBackgroundImage(ImageLiterals.icSearchBtnWhite, for: .normal)
         findButton.setTitleColor(.mainBlue, for: .normal)
     }
     
@@ -202,7 +199,7 @@ extension SearchPostVC {
     }
 
     func changeFilterActive(index: Int) {
-        imageViewList[index].image = UIImage(named: "searchBtnSelect")
+        imageViewList[index].image = ImageLiterals.icsearchBtnSelect
         textFieldList[index].text = filterList[index]
         textFieldList[index].textColor = .mainBlue
     }
@@ -235,7 +232,7 @@ extension SearchPostVC {
     
     func changeCityFilterUnactive() {
         textFieldList[1].isUserInteractionEnabled = false
-        imageViewList[1].image = UIImage(named: "searchBtnUnselect")
+        imageViewList[1].image = ImageLiterals.icSearchBtnUnselect
         textFieldList[1].text = "지역"
         textFieldList[1].textColor = .gray40
         filterList[1] = ""
