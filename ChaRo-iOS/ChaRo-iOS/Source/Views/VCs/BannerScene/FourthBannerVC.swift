@@ -48,13 +48,8 @@ final class FourthBannerVC: BannerVC {
     }
     
     private lazy var shadowView = UIView().then {
-        $0.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0,
-                                                        width: UIScreen.main.bounds.width - 40,
-                                                        height: 527 * viewRetio)).cgPath
+        $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
-        $0.layer.shadowOpacity = 0.1
-        $0.layer.shadowRadius = 7
-        $0.layer.shadowColor = UIColor.mainBlue.cgColor
         $0.layer.masksToBounds = false
     }
     
@@ -78,23 +73,24 @@ final class FourthBannerVC: BannerVC {
             $0.height.equalTo(aboutCharoIamgeViewList[1].frame.height * viewRetio)
         }
         
-        collectionView.snp.makeConstraints {
+        shadowView.snp.makeConstraints {
             $0.top.equalTo(aboutCharoIamgeViewList[1].snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(522 * viewRetio)
+            $0.height.equalTo(572 * viewRetio) //522
         }
         
-        shadowView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalTo(collectionView)
+        collectionView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(shadowView)
+            $0.height.equalTo(522 * viewRetio) //522
         }
         
         pageControl.snp.makeConstraints {
-            $0.bottom.equalTo(collectionView.snp.bottom).inset(30)
+            $0.bottom.equalTo(shadowView.snp.bottom).inset(20)
             $0.centerX.equalToSuperview()
         }
         
         aboutCharoIamgeViewList[2].snp.makeConstraints {
-            $0.top.equalTo(collectionView.snp.bottom).offset(30)
+            $0.top.equalTo(shadowView.snp.bottom).offset(30)
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(aboutCharoIamgeViewList[2].frame.height * viewRetio)
         }
@@ -108,6 +104,8 @@ final class FourthBannerVC: BannerVC {
                                                       title: "검색하고", subTitle: "원하는 지역과 테마로\n맞춤 드라이브 코스를 찾아보세요."),
                                          ContentModel(image: ImageLiterals.imgAboutBanner3,
                                                       title: "작성하고", subTitle: "나만의 드라이브 코스를\n기록하고 공유해보세요.")])
+        
+        shadowView.drawShadow(color: .mainBlue, opacity: 0.1, offset: .zero, radius: 20)
     }
     
     override func bind() {

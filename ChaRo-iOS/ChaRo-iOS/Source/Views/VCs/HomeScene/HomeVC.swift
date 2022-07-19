@@ -35,6 +35,13 @@ class HomeVC: UIViewController {
     var bannerTitleLableList: [UILabel] = []
     var bannerSubtTtleLabelList: [UILabel] = []
     
+    enum BannerContent: String, CaseIterable {
+        case seaDriveCource = "강릉 해변 드라이브 코스와 맛집"
+        case playList = "드라이브 할 때 좋은 플레이리스트"
+        case carDriceCource = "자동차 극장 드라이브 코스"
+        case aboutCharo = "About 차로"
+    }
+    
     
     //데이타
     private var bannerData: [Banner] = []
@@ -138,7 +145,10 @@ class HomeVC: UIViewController {
     }
     
     func setupHeaderViewLayout() {
+        guard BannerContent.allCases.count == bannerTitleLableList.count else { return }
+        let bannerTitleList = BannerContent.allCases
         for index in 0..<bannerTitleLableList.count {
+            bannerTitleLableList[index].text = bannerTitleList[index].rawValue
             bannerTitleLableList[index].snp.makeConstraints{
                 $0.leading.equalTo(bannerScrollView.viewWithTag(index+1)!).offset(24)
                 $0.bottom.equalToSuperview().inset(114)
@@ -150,7 +160,7 @@ class HomeVC: UIViewController {
                 $0.top.equalTo(bannerTitleLableList[index].snp.bottom).offset(5)
             }
         }
-        addTapGestureToTitleLables()
+        //addTapGestureToTitleLables()
     }
     
     func addTapGestureToTitleLables() {
@@ -162,19 +172,26 @@ class HomeVC: UIViewController {
         }
     }
     
+    func addTapGestrue(in imageView: UIImageView) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentToBanner(_:)))
+        tapGesture.cancelsTouchesInView = false
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGesture)
+    }
+    
     @objc
     func presentToBanner(_ sender: UITapGestureRecognizer) {
         guard let currentTag = sender.view?.tag else { return }
         var nextVC: BannerVC?
         switch currentTag {
-        case 0:
-            nextVC = FirstBannerVC(title: "강릉 해변 드라이브 코스와 맛집")
         case 1:
-            nextVC = SecondBannerVC(title: "봄 선선한 바람 플레이리스트")
+            nextVC = FirstBannerVC(title: BannerContent.seaDriveCource.rawValue)
         case 2:
-            nextVC = ThirdBannerVC(title: "자동차 극장 드라이브 코스")
+            nextVC = SecondBannerVC(title: BannerContent.playList.rawValue)
         case 3:
-            nextVC = FourthBannerVC(title: "About 차로")
+            nextVC = ThirdBannerVC(title: BannerContent.carDriceCource.rawValue)
+        case 4:
+            nextVC = FourthBannerVC(title: BannerContent.aboutCharo.rawValue)
         default: print("잘못된 경우")
         }
         if let nextVC = nextVC {
@@ -182,6 +199,7 @@ class HomeVC: UIViewController {
             self.present(nextVC, animated: true)
         }
     }
+
     
     //서버 데이터 받아오는 부분
     func getServerData() {
@@ -353,28 +371,28 @@ extension HomeVC: UITableViewDelegate {
     func addContentScrollView() {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
-        if bannerScrollView.subviews.count > 3{
+        if bannerScrollView.subviews.count > 3 {
             print(bannerScrollView.subviews)
             bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
         }  else {
-            if bannerData.count != 0{
+            
+            if bannerData.count != 0 {
                 for i in 1..<images.count + 1 {
                     let xPos = self.view.frame.width * CGFloat(i-1)
                     let imageView = UIImageView()
                     imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
-                    print(bannerData.count)
                     guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
                     imageView.kf.setImage(with: url)
                     imageView.tag = i
                     bannerScrollView.addSubview(imageView)
                     bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i)
                     bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: homeTableViewHeaderHeight)
+                    addTapGestrue(in: imageView)
                 }
             }
-            
         }
     }
     //MARK: ScrollViewDidScroll
@@ -424,7 +442,6 @@ extension HomeVC: UITableViewDelegate {
                 } else if currentHeight < -homeTableViewHeaderHeight {
                     HomeNavigationView.backgroundColor = .none
                 }
-                
             }
         } else {
             updateHeaderView()
