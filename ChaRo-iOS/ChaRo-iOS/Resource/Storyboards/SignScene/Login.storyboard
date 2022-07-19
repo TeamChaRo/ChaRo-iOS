@@ -150,12 +150,28 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="3Jv-cf-BbT" kind="relationship" relationship="rootViewController" id="8vP-9I-v44"/>
+                        <segue destination="0CE-hc-miW" kind="relationship" relationship="rootViewController" id="bGf-f4-D7t"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Km-5k-d4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1316" y="35"/>
+        </scene>
+        <!--On BoardVC-->
+        <scene sceneID="5Aj-53-PS5">
+            <objects>
+                <viewController storyboardIdentifier="OnBoardVC" id="0CE-hc-miW" customClass="OnBoardVC" customModule="ChaRo_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RGG-oM-WZJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Iw9-vZ-qRb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uw3-g1-dpM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BO7-fT-6U8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-384" y="-677"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="v2F-md-1GI">
