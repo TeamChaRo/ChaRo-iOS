@@ -102,14 +102,18 @@ final class ThirdBannerVC: BannerVC {
         
         buttonList[0].rx.tap
             .asDriver()
-            .drive(onNext: {
-                print("첫번째 버튼 눌림")
+            .drive(onNext: { [weak self] in
+                let nextVC = PostDetailVC()
+                nextVC.setPostId(id: 41)
+                self?.present(nextVC, animated: true)
             }).disposed(by: disposeBag)
         
         buttonList[1].rx.tap
             .asDriver()
-            .drive(onNext: {
-                print("두번째 버튼 눌림")
+            .drive(onNext: { [weak self] in
+                let nextVC = PostDetailVC()
+                nextVC.setPostId(id: 27)
+                self?.present(nextVC, animated: true)
             }).disposed(by: disposeBag)
 
     }
