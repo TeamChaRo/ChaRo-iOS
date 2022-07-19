@@ -318,8 +318,9 @@ class OtherMyPageVC: UIViewController {
         followerNum = userProfileData[0].follower
         followingNum = userProfileData[0].following
         guard let url = URL(string: userProfileData[0].profileImage) else { return }
+        if url != URL(string: "null"){ profileImageView.kf.setImage(with: url) }
+        else {profileImageView.image = ImageLiterals.imgMypageDefaultProfile}
         userNameLabel.text = userProfileData[0].nickname
-        profileImageView.kf.setImage(with: url)
         followerNumButton.setTitle(String(followerNum), for: .normal)
         followNumButton.setTitle(String(followingNum), for: .normal)
     }
