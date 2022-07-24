@@ -44,17 +44,9 @@ class ChangeImageVC: UIViewController {
         $0.backgroundColor = UIColor.gray20
     }
     
-    private let profileView = UIImageView().then {
-        $0.image = UIImage(named: "icProfile")
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 95 / 2
-    }
-    
-    private let profileChangeButton = UIButton().then {
-        $0.setTitle("프로필 사진 바꾸기", for: .normal)
-        $0.setTitleColor(.mainBlue, for: .normal)
-        $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 14)
-        $0.addTarget(self, action: #selector(profileChangeButtonClicked), for: .touchUpInside)
+    private let profileView = ProfileView().then {
+        guard let urlString = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userImage) else { return }
+        $0.profileImageView.kf.setImage(with: URL(string: urlString))
     }
     
     private let nicknameView = JoinInputView(title: "",
@@ -85,7 +77,7 @@ class ChangeImageVC: UIViewController {
         
         let actionsheetController = UIAlertController(title: "프로필 사진 바꾸기", message: nil, preferredStyle: .actionSheet)
         let actionDefaultImage = UIAlertAction(title: "기본 이미지 설정", style: .default, handler: { action in
-            self.profileView.image = UIImage(named: "icProfile")
+            self.profileView.profileImageView.image = UIImage(named: "icProfile")
         })
         let actionLibraryImage = UIAlertAction(title: "라이브러리에서 선택", style: .default, handler: { action in
             let picker = UIImagePickerController()
@@ -146,7 +138,7 @@ class ChangeImageVC: UIViewController {
     @objc private func doneButtonClicked() {
         let newNickname = nicknameView.inputTextField?.text
         UpdateProfileService.shared.putNewProfile(nickname: newNickname!,
-                                                  newImage: self.profileView.image) { result in
+                                                  newImage: self.profileView.profileImageView.image) { result in
             
             switch result {
             case .success(let msg):
@@ -172,7 +164,6 @@ class ChangeImageVC: UIViewController {
     private func configureUI() {
         self.view.addSubviews([
             profileView,
-            profileChangeButton,
             nicknameView
         ])
         
@@ -182,15 +173,13 @@ class ChangeImageVC: UIViewController {
             $0.width.height.equalTo(95)
         }
         
-        profileChangeButton.snp.makeConstraints {
-            $0.top.equalTo(profileView.snp.bottom).offset(18)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(19)
-            $0.width.equalTo(200)
+        profileView.imagePickerPresentClosure = { picker in
+            picker.delegate = self
+            self.present(picker, animated: true)
         }
         
         nicknameView.snp.makeConstraints {
-            $0.top.equalTo(profileChangeButton.snp.bottom).offset(20)
+            $0.top.equalTo(profileView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(100)
@@ -282,9 +271,10 @@ extension ChangeImageVC : UIImagePickerControllerDelegate & UINavigationControll
         
         //이미지 Choose
         picker.dismiss(animated: false) { () in
-            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-            self.profileView.image = image
+            let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            self.profileView.profileImageView.image = image
         }
-        
+        self.doneButton.isEnabled = true
+        self.doneButton.setTitleColor(.mainBlue, for: .normal)
     }
 }
