@@ -89,6 +89,7 @@ class OnBoardVC: UIViewController {
     
     
     @objc func dismissAction() {
+        UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.onBoardSeen)
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let nextVC = storyboard.instantiateViewController(identifier: SNSLoginVC.className)
         self.navigationController?.pushViewController(nextVC, animated: true)
