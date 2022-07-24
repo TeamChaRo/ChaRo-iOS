@@ -12,6 +12,7 @@ class ChangeImageVC: UIViewController {
     //MARK: - Properties
     static let identifier = "ChangeImageVC"
     var isNicknamePassed = false
+    var newImageString = ""
     
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
@@ -69,6 +70,16 @@ class ChangeImageVC: UIViewController {
         nicknameView.inputTextField?.delegate = self
     }
     
+    private func makeDoneEnable() {
+        self.doneButton.isEnabled = true
+        self.doneButton.setTitleColor(.mainBlue, for: .normal)
+    }
+    
+    private func makeDoneUnable() {
+        self.doneButton.isEnabled = false
+        self.doneButton.setTitleColor(.gray40, for: .normal)
+    }
+    
     @objc private func backButtonClicked() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -77,7 +88,7 @@ class ChangeImageVC: UIViewController {
         
         let actionsheetController = UIAlertController(title: "프로필 사진 바꾸기", message: nil, preferredStyle: .actionSheet)
         let actionDefaultImage = UIAlertAction(title: "기본 이미지 설정", style: .default, handler: { action in
-            self.profileView.profileImageView.image = UIImage(named: "icProfile")
+            self.profileView.profileImageView.image = ImageLiterals.imgMypageDefaultProfile
         })
         let actionLibraryImage = UIAlertAction(title: "라이브러리에서 선택", style: .default, handler: { action in
             let picker = UIImagePickerController()
@@ -99,15 +110,13 @@ class ChangeImageVC: UIViewController {
     private func makeNicknameViewRed(text: String) {
         self.isNicknamePassed = false
         nicknameView.setOrangeTFLabelColorWithText(text: text)
-        self.doneButton.isEnabled = false
-        self.doneButton.setTitleColor(.gray40, for: .normal)
+        makeDoneUnable()
     }
     
     private func makeNicknameViewBlue(text: String) {
         self.isNicknamePassed = true
         nicknameView.setBlueTFLabelColorWithText(text: text)
-        self.doneButton.isEnabled = true
-        self.doneButton.setTitleColor(.mainBlue, for: .normal)
+        makeDoneEnable()
     }
     
     //MARK: - Service Function
@@ -136,16 +145,18 @@ class ChangeImageVC: UIViewController {
     }
     
     @objc private func doneButtonClicked() {
-        let newNickname = nicknameView.inputTextField?.text
-        UpdateProfileService.shared.putNewProfile(nickname: newNickname!,
-                                                  newImage: self.profileView.profileImageView.image) { result in
-            
+        guard let newNickname = nicknameView.inputTextField?.text else { return }
+        let newImage = profileView.profileImageView.image
+        UpdateProfileService.shared.putNewProfile(nickname: newNickname,
+                                                  newImage: newImage) { result in
             switch result {
             case .success(let msg):
                 print("success", msg)
                 self.makeAlert(title: "", message: "프로필이 변경되었습니다.", okAction: { _ in
-                    self.navigationController?.popViewController(animated: true)
                     UserDefaults.standard.set(newNickname, forKey: Constants.UserDefaultsKey.userNickname)
+                    let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+                    guard let nextVC = storyboard.instantiateViewController(withIdentifier: MyPageVC.className) as? MyPageVC else { return }
+                    self.navigationController?.pushViewController(nextVC, animated: true)
                 })
             case .requestErr(let msg):
                 print("requestERR", msg)
@@ -158,6 +169,7 @@ class ChangeImageVC: UIViewController {
             }
             
         }
+        
     }
     
     //MARK: - Configure UI
@@ -274,7 +286,6 @@ extension ChangeImageVC : UIImagePickerControllerDelegate & UINavigationControll
             let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
             self.profileView.profileImageView.image = image
         }
-        self.doneButton.isEnabled = true
-        self.doneButton.setTitleColor(.mainBlue, for: .normal)
+        makeDoneEnable()
     }
 }

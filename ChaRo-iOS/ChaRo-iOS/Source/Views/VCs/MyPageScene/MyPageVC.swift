@@ -247,6 +247,7 @@ class MyPageVC: UIViewController {
     
     func setHeaderData() {
         guard let url = URL(string: userProfileData[0].profileImage) else { return }
+        UserDefaults.standard.set(userProfileData[0].profileImage, forKey: Constants.UserDefaultsKey.userImage)
         if url != URL(string: "null"){profileImageView.kf.setImage(with: url)}
         else {profileImageView.image = ImageLiterals.imgMypageDefaultProfile}
         userNameLabel.text = userProfileData[0].nickname
