@@ -106,7 +106,7 @@ class SearchPostVC: UIViewController {
         $0.text = "은 피하고 싶어요"
     }
     
-    private let findButton = UIButton().then {
+    private lazy var findButton = UIButton().then {
         $0.isUserInteractionEnabled = false
         $0.setBackgroundImage(ImageLiterals.icSearchBtnWhite, for: .normal)
         $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
@@ -126,10 +126,7 @@ class SearchPostVC: UIViewController {
     }
     
     @objc func pushNextVC() {
-        let storyboard = UIStoryboard(name: "SearchResult", bundle: nil)
-        guard let nextVC = storyboard.instantiateViewController(identifier: SearchResultVC.className ) as? SearchResultVC else {
-            return
-        }
+        let nextVC = SearchResultVC()
         refineFilterList()
         print("정제됨 -> \(filterList)")
         nextVC.setFilterTagList(list: filterList)
@@ -138,7 +135,7 @@ class SearchPostVC: UIViewController {
     
     func refineFilterList() {
         for index in 0..<4 {
-            if filterList[index] == "선택안함"{ filterList[index] = "" }
+            if filterList[index] == "선택안함" { filterList[index] = "" }
         }
     }
     

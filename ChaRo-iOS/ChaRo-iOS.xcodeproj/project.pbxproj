@@ -100,13 +100,11 @@
 		3C7A0C5127CE83AE00B78854 /* PostLikeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */; };
 		3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */; };
 		3C7A0C5427CE8E1F00B78854 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */; };
 		3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */; };
 		3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */; };
 		3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */; };
 		3C7DF0F5269ACE8F0021939C /* FilterDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */; };
 		3C7DF0F7269AEE7D0021939C /* SearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */; };
-		3C7DF0F9269AEE910021939C /* SearchResult.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F8269AEE910021939C /* SearchResult.storyboard */; };
 		3C7DF0FB269AF14A0021939C /* LeftBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */; };
 		3C840BF0269589DF001CAFE5 /* SearchKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */; };
 		3C840BF72696F08F001CAFE5 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C840BF62696F08F001CAFE5 /* UIScreen+.swift */; };
@@ -372,13 +370,11 @@
 		3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListVC.swift; sourceTree = "<group>"; };
 		3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListViewModel.swift; sourceTree = "<group>"; };
 		3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
-		3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchPost.storyboard; sourceTree = "<group>"; };
 		3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostVC.swift; sourceTree = "<group>"; };
 		3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmarkDismissButton.swift; sourceTree = "<group>"; };
 		3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
 		3C7DF0F4269ACE8F0021939C /* FilterDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDatas.swift; sourceTree = "<group>"; };
 		3C7DF0F6269AEE7D0021939C /* SearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultVC.swift; sourceTree = "<group>"; };
-		3C7DF0F8269AEE910021939C /* SearchResult.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchResult.storyboard; sourceTree = "<group>"; };
 		3C7DF0FA269AF14A0021939C /* LeftBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBackButton.swift; sourceTree = "<group>"; };
 		3C840BEE269589DF001CAFE5 /* SearchKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeywordCell.swift; sourceTree = "<group>"; };
 		3C840BF62696F08F001CAFE5 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
@@ -811,7 +807,6 @@
 				3CAE51BD26C2478300DB8A41 /* HomeScene */,
 				3CAE51BE26C249FE00DB8A41 /* MyPageScene */,
 				3CAE51C426C24A6E00DB8A41 /* OnBoardScene */,
-				3CAE51C226C24A5100DB8A41 /* PostSearchScene */,
 				3CAE51C526C24A7B00DB8A41 /* SignScene */,
 				3CAE51C126C24A3F00DB8A41 /* SplachScene */,
 				3CAE51C026C24A2B00DB8A41 /* Tabbar */,
@@ -1358,15 +1353,6 @@
 			path = SplachScene;
 			sourceTree = "<group>";
 		};
-		3CAE51C226C24A5100DB8A41 /* PostSearchScene */ = {
-			isa = PBXGroup;
-			children = (
-				3C7DF0F8269AEE910021939C /* SearchResult.storyboard */,
-				3C7DF0EC269A1BED0021939C /* SearchPost.storyboard */,
-			);
-			path = PostSearchScene;
-			sourceTree = "<group>";
-		};
 		3CAE51C426C24A6E00DB8A41 /* OnBoardScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1558,7 +1544,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C7DF0ED269A1BED0021939C /* SearchPost.storyboard in Resources */,
 				3C86FAB62694C7C6009370CD /* NotoSansCJKkr-Black.otf in Resources */,
 				36CACA202698F3CF007E02CA /* ThemePostDetailTVC.xib in Resources */,
 				3C86FAA32694C7C6009370CD /* CommonCVC.xib in Resources */,
@@ -1605,7 +1590,6 @@
 				3C86FAA12694C7C6009370CD /* HomeThemeCVC.xib in Resources */,
 				36B69F832775DC6500FEEAAE /* FollowFollowing.storyboard in Resources */,
 				3C86FAAC2694C7C6009370CD /* HomeThemeTVC.xib in Resources */,
-				3C7DF0F9269AEE910021939C /* SearchResult.storyboard in Resources */,
 				3C86FABC2694C7C6009370CD /* NotoSansCJKkr-Bold.otf in Resources */,
 				F4CC1B9A269D3E67009A0C01 /* CreatePostCourseTVC.xib in Resources */,
 				36E445B9277CA1F3008E31BE /* SettingTVC.xib in Resources */,
