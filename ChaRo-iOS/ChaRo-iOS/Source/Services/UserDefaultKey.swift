@@ -11,6 +11,9 @@ import SwiftUI
 extension Constants {
     struct UserDefaultsKey {
 
+        //온보드 유무
+        static let onBoardSeen = "onBoardSeen"
+        
         //유저 정보
         static let userEmail = "userEmail"
         static let userPassword = "userPassword"
