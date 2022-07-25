@@ -33,26 +33,23 @@ final class SearchResultVC: UIViewController {
         $0.backgroundColor = .gray20
     }
     
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        
+    private lazy var collectionView = UICollectionView(frame: .zero,
+                                                       collectionViewLayout: UICollectionViewFlowLayout() ).then {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: 624)
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
-        collectionView.setCollectionViewLayout(layout, animated: true)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.registerCustomXib(xibName: CommonCVC.identifier)
-        collectionView.registerCustomXib(xibName: HomePostDetailCVC.identifier)
-        return collectionView
-    }()
-    
+        
+        $0.isPagingEnabled = false
+        $0.backgroundColor = .clear
+        $0.showsHorizontalScrollIndicator = false
+        $0.setCollectionViewLayout(layout, animated: true)
+        $0.delegate = self
+        $0.dataSource = self
+        $0.registerCustomXib(xibName: CommonCVC.identifier)
+        $0.registerCustomXib(xibName: HomePostDetailCVC.identifier)
+    }
     
     private lazy var closeButton = UIButton().then {
         $0.setTitle("닫기", for: .normal)
@@ -144,6 +141,7 @@ final class SearchResultVC: UIViewController {
     }
 }
 
+// MARK: collection view
 extension SearchResultVC: UICollectionViewDelegate {
     
 }
@@ -191,20 +189,9 @@ extension SearchResultVC: UICollectionViewDelegateFlowLayout {
         let height = indexPath.row == 0 ? 57 : 260
         return CGSize(width: UIScreen.getDeviceWidth() - 40, height: height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
-    }
 }
 
+// MARK: - UI
 extension SearchResultVC {
     
     private func setupConstraint() {
@@ -303,8 +290,9 @@ extension SearchResultVC {
         
         view.addSubview(stackView)
         stackView.snp.makeConstraints{
+            $0.top.equalToSuperview().inset(13)
             $0.leading.equalTo(view.snp.leading).offset(20)
-            $0.centerY.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(15)
             $0.height.equalTo(34)
         }
         return view
@@ -331,7 +319,7 @@ extension SearchResultVC {
 }
 
 
-//MARK: Network
+// MARK: Network
 extension SearchResultVC{
     func refinePostResultData(data: Drive?) {
         postData = data?.drive ?? []
