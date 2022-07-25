@@ -336,6 +336,11 @@ extension PostDetailVC: UITableViewDataSource {
                                  userName: postData.author,
                                  date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
                                  imageName: postData.profileImage)
+            //TODO: -  user 이미지 + 텍스트 눌렀을 때 해당 유저 마이페이지로 이동
+    //            let otherVC = OtherMyPageVC()
+    //            otherVC.setOtherUserID(userID: follow.userEmail)
+    //            otherVC.modalPresentationStyle = .overFullScreen
+    //            self?.present(otherVC, animated: true)
             return cell
             
         case 1:

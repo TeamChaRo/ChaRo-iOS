@@ -101,11 +101,8 @@ class LoginVC: UIViewController {
             self.makeAlert(title: "로그인 실패", message: "비밀번호를 입력해주세요.")
             return
         }
-        LoginService.shared.login(id: userEmail, password: userPassword) {
-            result in
-            
-            switch result
-            {
+        LoginService.shared.login(id: userEmail, password: userPassword) { result in
+            switch result {
             case .success(let data):
                 print("일반 로그인 성공 \(data)")
                 let loginData = data as? LoginDataModel
