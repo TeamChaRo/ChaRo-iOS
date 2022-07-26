@@ -123,8 +123,14 @@ class LoginVC: UIViewController {
                 
             case .requestErr(let message):
                 if let message = message as? String {
-                    self.makeAlert(title: "로그인 실패",
+                    if message.contains("아이디") {
+                        self.makeAlert(title: "로그인 실패",
+                                       message: "가입된 아이디가 없습니다. 회원가입 후 이용해 주세요.")
+                    }
+                    else {
+                        self.makeAlert(title: "로그인 실패",
                                    message: message)
+                    }
                 }
             default :
                 print("ERROR")
