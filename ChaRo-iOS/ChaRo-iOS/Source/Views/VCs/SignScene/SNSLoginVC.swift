@@ -31,6 +31,7 @@ class SNSLoginVC: UIViewController {
         super.viewDidLoad()
         configureNavigationController()
         configureUI()
+        autoLogin()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,6 +102,28 @@ class SNSLoginVC: UIViewController {
         Constants.removeAllUserDefaults()
         UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isLogin)
         self.goToHomeVC()
+    }
+    
+    private func autoLogin() {
+        guard let userEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) else { return }
+        
+        guard let userPassword = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userPassword) else { return }
+        
+        LoginService.shared.login(id: userEmail, password: userPassword) { result in
+            switch result {
+            case .success(let data) :
+                print("자동 로그인 성공!")
+                self.goToHomeVC()
+            case .requestErr(let message) :
+                if let message = message as? String {
+                    self.makeAlert(title: "로그인 실패",
+                               message: message)
+                }
+            default :
+                print("자동 로그인 ERROR")
+            }
+            
+        }
     }
     
     @objc func testLogin() {
