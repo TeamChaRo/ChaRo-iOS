@@ -55,9 +55,9 @@ struct PostResultService {
         dataRequeat.responseData{ dataResponse in
             switch dataResponse.result {
             case .success:
-                guard let statusCode = dataResponse.response?.statusCode else { return}
-                guard let value = dataResponse.value  else {return}
-                let networkResult = self.judgeStatus(type: PostDetailData.self, by: statusCode, value)
+                guard let statusCode = dataResponse.response?.statusCode else { return }
+                guard let value = dataResponse.value else { return }
+                let networkResult = self.judgeStatus(type: PostDetailDataModel.self, by: statusCode, value)
                 completion(networkResult)
                 
             case .failure(_): completion(.pathErr)

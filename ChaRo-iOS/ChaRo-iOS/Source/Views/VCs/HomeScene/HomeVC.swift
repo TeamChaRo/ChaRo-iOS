@@ -195,8 +195,7 @@ class HomeVC: UIViewController {
         default: print("잘못된 경우")
         }
         if let nextVC = nextVC {
-            nextVC.modalPresentationStyle = .fullScreen
-            self.present(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: true)
         }
     }
 
@@ -605,9 +604,8 @@ extension HomeVC: CollectionViewCellDelegate {
 
 //postID 넘기기 위한 Delegate 구현
 extension HomeVC: PostIdDelegate {
-    func sendPostDriveElement(data: DriveElement?) {
-        let nextVC = PostDetailVC()
-        nextVC.setAdditionalDataOfPost(data: data)
+    func sendPostDetail(with postId: Int) {
+        let nextVC = PostDetailVC(postId: postId)
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

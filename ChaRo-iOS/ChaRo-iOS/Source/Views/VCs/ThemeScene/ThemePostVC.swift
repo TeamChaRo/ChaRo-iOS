@@ -269,9 +269,8 @@ extension ThemePostVC: ThemeNetworkDelegate {
 }
 
 extension ThemePostVC: PostIdDelegate {
-    func sendPostDriveElement(data: DriveElement?) {
-        let nextVC = PostDetailVC()
-        nextVC.setAdditionalDataOfPost(data: data)
+    func sendPostDetail(with postId: Int) {
+        let nextVC = PostDetailVC(postId: postId)
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

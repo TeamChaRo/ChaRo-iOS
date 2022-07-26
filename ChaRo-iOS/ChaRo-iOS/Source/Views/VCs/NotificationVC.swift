@@ -92,8 +92,8 @@ extension NotificationVC {
             otherVC.setOtherUserID(userID: notificationList[indexPath.row].followed ?? "")
             self.navigationController?.pushViewController(otherVC, animated: true)
         } else {
-            let detailVC = PostDetailVC()
-            detailVC.setPostId(id: notificationList[indexPath.row].postID ?? -1)
+            let postId =  notificationList[indexPath.row].postID ?? -1
+            let detailVC = PostDetailVC(postId: postId)
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }

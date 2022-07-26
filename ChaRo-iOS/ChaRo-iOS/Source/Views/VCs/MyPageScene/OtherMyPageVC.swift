@@ -534,49 +534,34 @@ extension OtherMyPageVC: UICollectionViewDataSource {
         let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier:HomePostDetailCVC.identifier , for: indexPath) as! HomePostDetailCVC
         detailCell.delegate = self
         detailCell.setSelectName(name: currentState)
-    
+        
         if(indexPath.row == 0){
             return detailCell
         } else {
             let writenElement = writenPostDriveData[indexPath.row-1]
             var writenTags = [writenElement.region, writenElement.theme,
-                        writenElement.warning ?? ""] as [String]
-        cell.setData(image: writenPostDriveData[indexPath.row-1].image,
-                     title: writenPostDriveData[indexPath.row-1].title,
-                     tagCount:writenTags.count, tagArr: writenTags,
-                     heart:writenPostDriveData[indexPath.row-1].favoriteNum,
-                     save: writenPostDriveData[indexPath.row-1].saveNum,
-                     year: writenPostDriveData[indexPath.row-1].year,
-                     month: writenPostDriveData[indexPath.row-1].month,
-                     day: writenPostDriveData[indexPath.row-1].day,
-                     postID: writenPostDriveData[indexPath.row-1].postID)
-        return cell
-        
+                              writenElement.warning ?? ""] as [String]
+            cell.setData(image: writenPostDriveData[indexPath.row-1].image,
+                         title: writenPostDriveData[indexPath.row-1].title,
+                         tagCount:writenTags.count, tagArr: writenTags,
+                         heart:writenPostDriveData[indexPath.row-1].favoriteNum,
+                         save: writenPostDriveData[indexPath.row-1].saveNum,
+                         year: writenPostDriveData[indexPath.row-1].year,
+                         month: writenPostDriveData[indexPath.row-1].month,
+                         day: writenPostDriveData[indexPath.row-1].day,
+                         postID: writenPostDriveData[indexPath.row-1].postID)
+            return cell
+            
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = PostDetailVC()
-        if indexPath.row > 0{
-            //detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
-            detailVC.setAdditionalDataOfPost(data: DriveElement.init(
-                postID: writenPostDriveData[indexPath.row-1].postID,
-                title: writenPostDriveData[indexPath.row-1].title,
-                image: writenPostDriveData[indexPath.row-1].image,
-                region: writenPostDriveData[indexPath.row-1].region,
-                theme: writenPostDriveData[indexPath.row-1].theme,
-                warning: writenPostDriveData[indexPath.row-1].warning,
-                year: writenPostDriveData[indexPath.row-1].year,
-                month: writenPostDriveData[indexPath.row-1].month,
-                day: writenPostDriveData[indexPath.row-1].day,
-                isFavorite: writenPostDriveData[indexPath.row-1].isFavorite))
+        if indexPath.row > 0 {
+            let postId = writenPostDriveData[indexPath.row-1].postID
+            let detailVC = PostDetailVC(postId: postId)
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
-    
-    
-    
 }
 extension OtherMyPageVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:

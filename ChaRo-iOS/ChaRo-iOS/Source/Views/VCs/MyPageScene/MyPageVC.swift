@@ -737,32 +737,24 @@ extension MyPageVC: UICollectionViewDelegate {
 extension MyPageVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = PostDetailVC()
+        var postId = 0
         var driveData = MyPageDrive()
         //내가 작성한 글 태그 = 1 / 저장한 글 컬렉션 뷰 태그 = 2
         if indexPath.row > 0 {
-        if collectionView.tag == 1 {
-            detailVC.setPostId(id: writenPostDriveData[indexPath.row-1].postID)
-            driveData = writenPostDriveData[indexPath.row-1]
-        } else {
-            detailVC.setPostId(id: savePostDriveData[indexPath.row-1].postID)
+            if collectionView.tag == 1 {
+                postId = writenPostDriveData[indexPath.row-1].postID
+                driveData = writenPostDriveData[indexPath.row-1]
+            } else {
+                postId = savePostDriveData[indexPath.row-1].postID
                 driveData = savePostDriveData[indexPath.row-1]
-        }
-        detailVC.setAdditionalDataOfPost(data: DriveElement(
-                                    postID: driveData.postID,
-                                    title: driveData.title,
-                                    image: driveData.image,
-                                    region: driveData.region,
-                                    theme: driveData.theme,
-                                    warning: driveData.warning,
-                                    year: driveData.year,
-                                    month: driveData.month,
-                                    day: driveData.day,
-                                    isFavorite: driveData.isFavorite))
-        }
-        if indexPath.row > 0 {
-            self.tabBarController?.tabBar.isHidden = true
-            self.navigationController?.pushViewController(detailVC, animated: true)
+            }
+            
+            let detailVC = PostDetailVC(postId: postId)
+            
+            if indexPath.row > 0 {
+                self.tabBarController?.tabBar.isHidden = true
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            }
         }
     }
     

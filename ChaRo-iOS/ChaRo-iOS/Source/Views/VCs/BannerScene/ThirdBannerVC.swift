@@ -103,17 +103,15 @@ final class ThirdBannerVC: BannerVC {
         buttonList[0].rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let nextVC = PostDetailVC()
-                nextVC.setPostId(id: 41)
-                self?.present(nextVC, animated: true)
+                let nextVC = PostDetailVC(postId: 41)
+                self?.navigationController?.pushViewController(nextVC, animated: true)
             }).disposed(by: disposeBag)
         
         buttonList[1].rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let nextVC = PostDetailVC()
-                nextVC.setPostId(id: 27)
-                self?.present(nextVC, animated: true)
+                let nextVC = PostDetailVC(postId: 27)
+                self?.navigationController?.pushViewController(nextVC, animated: true)
             }).disposed(by: disposeBag)
 
     }

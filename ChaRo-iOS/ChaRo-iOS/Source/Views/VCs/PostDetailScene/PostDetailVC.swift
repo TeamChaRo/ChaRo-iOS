@@ -13,14 +13,11 @@ import RxSwift
 final class PostDetailVC: UIViewController {
     
     private let disposeBag = DisposeBag()
-    private var viewModel: PostDetailViewModel?
+    private let viewModel: PostDetailViewModel
     
     private var isAuthor = false
     private var isEditingMode = false
-    private var postId: Int = -1
-    private var postData: PostDetail?
-    private var postDetailData: PostDetailData?
-    private var additionalDataOfPost: DriveElement?
+    //private var postData: PostDetail?
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [Course] = []
     private var imageList: [UIImage] = []
@@ -60,15 +57,24 @@ final class PostDetailVC: UIViewController {
     private let separateLineView = UIView().then {
         $0.backgroundColor = .gray20
     }
-    private var modifyButton = UIButton().then {
+    private lazy var modifyButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icMypageMore, for: .normal)
         $0.addTarget(self, action: #selector(registActionSheet), for: .touchUpInside)
     }
-    private let saveButton = UIButton().then {
+    private lazy var saveButton = UIButton().then {
         $0.setTitle("등록", for: .normal)
         $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
         $0.setTitleColor(.mainBlue, for: .normal)
         $0.addTarget(self, action: #selector(clickedToSaveButton), for: .touchUpInside)
+    }
+    
+    init(postId: Int) {
+        viewModel = PostDetailViewModel(postId: postId)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -92,20 +98,10 @@ final class PostDetailVC: UIViewController {
         self.isEditingMode = isEditing
     }
     
-    public func setPostId(id: Int) {
-        print("setPost PostDetailVC - \(id)")
-        postId = id
-    }
-    
-    public func setAdditionalDataOfPost(data: DriveElement?) {
-        additionalDataOfPost = data
-        print("넘어온 데이터 = \(additionalDataOfPost)")
-    }
-    
     private func checkModeForSendingServer() {
         if isEditingMode {
             print("editing 모드로 넘겨받음")
-            print("postData = \(postData)")
+            //print("postData = \(postData)")
             print("addressList = \(addressList)")
             print("isAuthor = \(isAuthor)")
         } else {
@@ -125,7 +121,7 @@ extension PostDetailVC{
     @objc func clickedToSaveButton() {
         print("등록 버튼")
         makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?") { _ in
-            self.viewModel?.postCreatePost()
+            self.viewModel.postCreatePost()
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -214,55 +210,6 @@ extension PostDetailVC{
         }
     }
     
-    //    public func setDataWhenConfirmPost(data: WritePostData,
-    //                                       imageList: [UIImage],
-    //                                       addressList: [AddressDataModel]) {
-    //        isEditingMode = true
-    //        isAuthor = true
-    //        self.addressList = addressList
-    //        self.imageList = imageList
-    //        writedPostData = data
-    //
-    //        let sendedPostDate = PostDetail(title: data.title,
-    //                                  author: Constants.userId,
-    //                                  isAuthor: true,
-    //                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
-    //                                  postingYear: Date.getCurrentYear(),
-    //                                  postingMonth: Date.getCurrentMonth(),
-    //                                  postingDay: Date.getCurrentDay(),
-    //                                  isStored: false,
-    //                                  isFavorite: false,
-    //                                  likesCount: 0,
-    //                                  images: [""],
-    //                                  province: data.province,
-    //                                  city: data.region,
-    //                                  themes: data.theme,
-    //                                  source: "",
-    //                                  wayPoint: [""],
-    //                                  destination: "",
-    //                                  longtitude: [""],
-    //                                  latitude: [""],
-    //                                  isParking: data.isParking,
-    //                                  parkingDesc: data.parkingDesc,
-    //                                  warnings: data.warning,
-    //                                  courseDesc: data.courseDesc)
-    //
-    //        self.postData = sendedPostDate
-    //
-    //        dump(writedPostData)
-    //
-    //        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    //        print("imageList = \(imageList)")
-    //        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    //
-    //        var newAddressList :[Address] = []
-    //        for address in addressList {
-    //            newAddressList.append(address.getAddressDataModel())
-    //        }
-    //
-    //        writedPostData?.course = newAddressList
-    //    }
-    
 }
 
 //MARK: - Bottom View
@@ -273,7 +220,7 @@ extension PostDetailVC {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(88)
         }
-        bottomView.likeDescriptionButton.setTitle("\(postDetailData?.likesCount ?? 0)명이 좋아해요", for: .normal)
+        bottomView.likeDescriptionButton.setTitle("\(viewModel.postDetailData?.likesCount ?? 0)명이 좋아해요", for: .normal)
         bindToBottomView()
     }
     
@@ -305,7 +252,7 @@ extension PostDetailVC {
         bottomView.likeDescriptionButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] in
-                let nextVC = PostLikeListVC(postId: self?.additionalDataOfPost?.postID ?? -1)
+                let nextVC = PostLikeListVC(postId: self?.viewModel.postId ?? -1)
                 nextVC.modalPresentationStyle = .overFullScreen
                 self?.present(nextVC, animated: false, completion: nil)
             })
@@ -325,17 +272,16 @@ extension PostDetailVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let additionalData = additionalDataOfPost,
-              let postData = postDetailData else {
+        guard let postData = viewModel.postDetailData else {
                   return UITableViewCell()
               }
         switch indexPath.row {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath) else { return UITableViewCell() }
-            cell.setContent(title: additionalData.title,
-                                 userName: postData.author,
-                                 date: "\(additionalData.year)년 \(additionalData.month)월 \(additionalData.day)일",
-                                 imageName: postData.profileImage)
+            cell.setContent(title: postData.title ?? "" ,
+                                 userName: postData.author ?? "",
+                                 date: postData.getCreatedTimeText(),
+                                 imageName: postData.profileImage ?? "")
             //TODO: -  user 이미지 + 텍스트 눌렀을 때 해당 유저 마이페이지로 이동
     //            let otherVC = OtherMyPageVC()
     //            otherVC.setOtherUserID(userID: follow.userEmail)
@@ -345,7 +291,7 @@ extension PostDetailVC: UITableViewDataSource {
             
         case 1:
             guard let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath) else { return UITableViewCell() }
-            let imageList = [additionalData.image] + postData.images
+            let imageList = postData.images ?? []
             cell.setContent(imageList: imageList)
             cell.presentingClosure = { [weak self] index in
                 let nextVC = ExpendedImageVC(imageList: imageList, currentIndex: index)
@@ -355,14 +301,14 @@ extension PostDetailVC: UITableViewDataSource {
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath) else { return UITableViewCell() }
-            cell.setContent(city: postData.province,
-                            region: additionalData.region,
-                            theme: postData.themes)
+            cell.setContent(city: postData.province ?? "",
+                            region: postData.region ?? "",
+                            theme: postData.themes ?? [])
             return cell
             
         case 3:
             guard let cell = tableView.dequeueReusableCell(withType: PostLocationTVC.self, for: indexPath) else { return UITableViewCell() }
-            cell.setContent(courseList: postData.course)
+            cell.setContent(courseList: postData.course ?? [])
             cell.copyAddressClouser = { locationTitle in
                 self.view.showToast(message: "\(locationTitle) 주소를 복사했습니다")
             }
@@ -376,18 +322,18 @@ extension PostDetailVC: UITableViewDataSource {
             
         case 4:
             guard let cell = tableView.dequeueReusableCell(withType: PostParkingTVC.self, for: indexPath) else { return UITableViewCell() }
-            cell.setContent(isParking: postData.isParking,
-                            description: postData.parkingDesc)
+            cell.setContent(isParking: postData.isParking ?? false,
+                            description: postData.parkingDesc ?? "주차공간에 대한 설명이 없습니다.")
             return cell
             
         case 5:
             guard let cell = tableView.dequeueReusableCell(withType: PostAttentionTVC.self, for: indexPath) else { return UITableViewCell() }
-            cell.setAttentionList(list: postData.warnings)
+            cell.setAttentionList(list: postData.warnings ?? [] )
             return cell
             
         case 6:
             guard let cell = tableView.dequeueReusableCell(withType: PostDriveCourseTVC.self, for: indexPath) else { return UITableViewCell() }
-            cell.setContent(text: postData.courseDesc)
+            cell.setContent(text: postData.courseDesc ?? "" )
             return cell
         default:
             return UITableViewCell()
@@ -399,20 +345,18 @@ extension PostDetailVC: UITableViewDataSource {
 //MARK: Network
 extension PostDetailVC {
     func bindToViewModel() {
-        viewModel = PostDetailViewModel(postId: additionalDataOfPost?.postID ?? postId)
-        let output = viewModel?.transform(input: PostDetailViewModel.Input(), disposeBag: disposeBag)
-        output?.postDetailSubject.bind(onNext: { [weak self] postDetailData in
+        let output = viewModel.transform(input: PostDetailViewModel.Input(), disposeBag: disposeBag)
+        output.postDetailSubject.bind(onNext: { [weak self] postDetailData in
             self?.setPostContentView(postData: postDetailData)
         }).disposed(by: disposeBag)
     }
     
-    func setPostContentView(postData: PostDetailData?) {
-        print("additionalDataOfPost = \(additionalDataOfPost)")
-        postDetailData = postData
-        isAuthor = postDetailData?.isAuthor ?? false
-        isFavorite = postDetailData?.isFavorite == 0 ? false: true
-        isStored = postDetailData?.isStored == 0 ? false: true
-        addressList = postDetailData?.course ?? []
+    func setPostContentView(postData: PostDetailDataModel?) {
+        guard let postData = postData else { return }
+        isAuthor = postData.isAuthor ?? false
+        isFavorite = postData.isFavorite == 0 ? false: true
+        isStored = postData.isStored == 0 ? false: true
+        addressList = postData.course ?? []
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()

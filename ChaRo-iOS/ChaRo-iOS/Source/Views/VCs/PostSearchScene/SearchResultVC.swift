@@ -157,10 +157,9 @@ extension SearchResultVC: UICollectionViewDataSource {
         let dropDownCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePostDetailCVC.identifier, for: indexPath) as? HomePostDetailCVC
         dropDownCell?.delegate = self
         topCVCCell?.delegate = self
-        cell?.clickedPostCell = { postid in
-            let nextVC = PostDetailVC()
-            nextVC.setPostId(id: postid)
-            self.navigationController?.pushViewController(nextVC, animated: true)
+        cell?.clickedPostCell = { [weak self] postId in
+            let nextVC = PostDetailVC(postId: postId)
+            self?.navigationController?.pushViewController(nextVC, animated: true)
         }
         if indexPath.row == 0 {
             if myCellIsFirstLoaded {
