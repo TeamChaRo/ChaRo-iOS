@@ -11,20 +11,20 @@ import Alamofire
 struct LikeService {
     static let shared = LikeService()
     
-    private func makeParameter(userId: String, postId: Int) -> Parameters
+    private func makeParameter(userEmail: String, postId: Int) -> Parameters
     {
-        return ["userId": userId,
+        return ["userEmail": userEmail,
                 "postId": postId ]
     }
     
-    func Like(userId: String,
+    func Like(userEmail: String,
               postId: Int,
               completion: @escaping (NetworkResult<Any>) -> Void)
     {
         let header: HTTPHeaders = ["Content-Type": "application/json"]
         let dataRequest = AF.request(Constants.likeURL,
                                      method: .post,
-                                     parameters: makeParameter(userId: userId, postId: postId),
+                                     parameters: makeParameter(userEmail: userEmail, postId: postId),
                                      encoding: JSONEncoding.default,
                                      headers: header)
         

@@ -77,7 +77,7 @@ extension PostDetailViewModel {
     }
     
     func requestPostLike() {
-        LikeService.shared.Like(userId: Constants.userEmail,
+        LikeService.shared.Like(userEmail: Constants.userEmail,
                                 postId: postId) { [weak self] result in
             switch result {
             case .success(let success):
