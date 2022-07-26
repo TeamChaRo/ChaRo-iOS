@@ -7,33 +7,45 @@
 
 import Foundation
 import TMapSDK
-
-// MARK: - Welcome
-struct PostDatailDataModel: Codable {
-    let success: Bool
-    let msg: String
-    let data: PostDetailData?
-}
+import UIKit
 
 //// MARK: - Datum
-struct PostDetail: Codable {
-    let title, author: String
-    let isAuthor: Bool
-    let profileImage: String
-    let postingYear, postingMonth, postingDay: String
-    let isStored, isFavorite: Bool
-    let likesCount: Int
-    let images: [String]
-    let province, city: String
-    let themes: [String]
-    let source: String
-    let wayPoint: [String]
-    let destination: String
-    let longtitude, latitude: [String]
-    let isParking: Bool
-    let parkingDesc: String
-    let warnings: [Bool]
-    let courseDesc: String
+struct PostDetailDataModel: Codable {
+    let postId: Int?
+    let title: String?
+    let author: String?
+    let authorEmail: String?
+    let profileImage: String?
+    
+    let isAuthor: Bool?
+    let isStored: Int?
+    let isFavorite: Int?
+    let isParking: Bool?
+
+    let parkingDesc: String?
+    let courseDesc: String?
+
+    let province: String?
+    let region: String?
+    let themes: [String]?
+
+    let likesCount: Int?
+
+    let createdAt: String?
+    let images: [String]?
+    let course: [Course]?
+    let warnings: [Bool]?
+    
+    //2022-06-13T16:35:31.000Z
+    func getCreatedTimeText() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        dateFormatter.locale = Locale(identifier:"ko_KR")
+        let convertDate = dateFormatter.date(from: createdAt ?? "") ?? Date()
+        let dateString = dateFormatter.string(from: convertDate)
+        return dateString
+    }
+    
 }
 
 // MARK: - DataClass
