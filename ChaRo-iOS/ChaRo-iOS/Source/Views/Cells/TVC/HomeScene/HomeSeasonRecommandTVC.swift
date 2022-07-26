@@ -85,10 +85,8 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
-        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
-        let postid = cell!.postID
-        let sengingData = findDriveElementFrom(postId: postid)
-        postDelegate?.sendPostDriveElement(data: sengingData)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC else { return }
+        postDelegate?.sendPostDetail(with: cell.postID)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

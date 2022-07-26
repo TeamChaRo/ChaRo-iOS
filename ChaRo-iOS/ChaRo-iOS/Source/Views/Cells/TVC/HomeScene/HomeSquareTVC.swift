@@ -114,10 +114,8 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
-        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
-        let postId = cell!.postID
-        let sendingData = findDriveElementFrom(postId: postId)
-        postDelegate?.sendPostDriveElement(data: sendingData)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC else { return }
+        postDelegate?.sendPostDetail(with: cell.postID)
     }
     
     

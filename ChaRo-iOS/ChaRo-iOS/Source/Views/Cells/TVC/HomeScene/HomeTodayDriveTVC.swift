@@ -67,7 +67,8 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        postDelegate?.sendPostDriveElement(data: todayDriveList[indexPath.row])
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC else { return }
+        postDelegate?.sendPostDetail(with: cell.postID)
     }
     
     
