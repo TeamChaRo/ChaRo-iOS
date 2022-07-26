@@ -152,11 +152,9 @@ class JoinVC: UIViewController {
     
     @objc func textFieldMoveUp(_ notification: NSNotification) {
         if (!self.emailView.isHidden && !self.emailView.emailVerifyInputView.isHidden) || !self.profileView.isHidden {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
-                })
-            }
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -120)
+            })
         }
     }
     
@@ -401,7 +399,7 @@ extension JoinVC: UICollectionViewDataSource, UICollectionViewDelegate {
 
 extension JoinVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height - 250)
+        return CGSize(width: view.frame.width, height: view.frame.height - 180)
     }
 }
 
