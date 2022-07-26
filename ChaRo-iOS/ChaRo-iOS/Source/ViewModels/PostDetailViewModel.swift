@@ -13,7 +13,8 @@ class PostDetailViewModel {
     let postId: Int
     var isFavorite: Bool = false
     var isStored: Bool = false
-    let postDetailSubject = ReplaySubject<PostDetailData>.create(bufferSize: 1)
+    var postDetailData: PostDetailDataModel?
+    let postDetailSubject = ReplaySubject<PostDetailDataModel>.create(bufferSize: 1)
     
     init(postId: Int) {
         self.postId = postId
@@ -21,27 +22,28 @@ class PostDetailViewModel {
     }
     
     struct Input {
+        
     }
     
     struct Output {
-        let postDetailSubject: ReplaySubject<PostDetailData>
+        let postDetailSubject: ReplaySubject<PostDetailDataModel>
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         return Output(postDetailSubject: postDetailSubject)
     }
-    
-    
 }
 
 extension PostDetailViewModel {
     
     func getPostDetailData(postId: Int) {
-        PostResultService.shared.getPostDetail(postId: postId) { response in
+        PostResultService.shared.getPostDetail(postId: postId) { [weak self] response in
             switch(response) {
             case .success(let resultData):
-                if let data = resultData as? PostDetailData{
-                    self.postDetailSubject.onNext(data)
+                print(resultData)
+                if let data = resultData as? PostDetailDataModel {
+                    self?.postDetailData = data
+                    self?.postDetailSubject.onNext(data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -112,3 +114,53 @@ extension PostDetailViewModel {
         }
     }
 }
+
+// TODO: - 게시물 작성하기 마지막 눌렀을 때, 구경하기와 같은 뷰로 보이도록
+//    public func setDataWhenConfirmPost(data: WritePostData,
+//                                       imageList: [UIImage],
+//                                       addressList: [AddressDataModel]) {
+//        isEditingMode = true
+//        isAuthor = true
+//        self.addressList = addressList
+//        self.imageList = imageList
+//        writedPostData = data
+//
+//        let sendedPostDate = PostDetail(title: data.title,
+//                                  author: Constants.userId,
+//                                  isAuthor: true,
+//                                  profileImage: UserDefaults.standard.string(forKey: "profileImage")!,
+//                                  postingYear: Date.getCurrentYear(),
+//                                  postingMonth: Date.getCurrentMonth(),
+//                                  postingDay: Date.getCurrentDay(),
+//                                  isStored: false,
+//                                  isFavorite: false,
+//                                  likesCount: 0,
+//                                  images: [""],
+//                                  province: data.province,
+//                                  city: data.region,
+//                                  themes: data.theme,
+//                                  source: "",
+//                                  wayPoint: [""],
+//                                  destination: "",
+//                                  longtitude: [""],
+//                                  latitude: [""],
+//                                  isParking: data.isParking,
+//                                  parkingDesc: data.parkingDesc,
+//                                  warnings: data.warning,
+//                                  courseDesc: data.courseDesc)
+//
+//        self.postData = sendedPostDate
+//
+//        dump(writedPostData)
+//
+//        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//        print("imageList = \(imageList)")
+//        print("넘겨져온 이미지야~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//
+//        var newAddressList :[Address] = []
+//        for address in addressList {
+//            newAddressList.append(address.getAddressDataModel())
+//        }
+//
+//        writedPostData?.course = newAddressList
+//    }
