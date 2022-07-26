@@ -20,6 +20,7 @@ class HomeTodayDriveTVC: UITableViewCell {
     
     var todayDriveList: [DriveElement] = []
     var postDelegate: PostIdDelegate?
+    var likeButtonDelegate: LikeButtonDelegate?
     
     //MARK:- Life Cycle
     override func awakeFromNib() {
@@ -80,7 +81,7 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
         var tags = [element.region, element.theme,
                     element.warning ?? ""] as [String]
                     
-        
+        cell.likeButtonDelegate = self
         cell.setData(image: element.image,
                      title: element.title,
                      tagCount: tags.count,
@@ -117,9 +118,16 @@ extension HomeTodayDriveTVC: UICollectionViewDelegate ,UICollectionViewDataSourc
         
         
     }
+}
 
-
-
-    
+extension HomeTodayDriveTVC: LikeButtonDelegate {
+    func sendFavoriteInfo(postId: Int, isFavorite: Bool) {
+        for (index, element) in todayDriveList.enumerated() {
+            if element.postID == postId {
+                todayDriveList[index].isFavorite = isFavorite
+                likeButtonDelegate?.sendFavoriteInfo(postId: postId, isFavorite: isFavorite)
+            }
+        }
+    }
 }
 

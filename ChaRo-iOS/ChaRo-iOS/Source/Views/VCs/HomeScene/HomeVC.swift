@@ -483,7 +483,7 @@ extension HomeVC: UITableViewDelegate {
         case 0:
             let cell: HomeTodayDriveTVC = tableView.dequeueReusableCell(for: indexPath)
             cell.postDelegate = self
-            print(todayData)
+            cell.likeButtonDelegate = self
             if todayData.count == 0 {
                 return cell
             } else {
@@ -500,6 +500,7 @@ extension HomeVC: UITableViewDelegate {
             cell.delegate = self
             cell.ButtonDelegate = self
             cell.postDelegate = self
+            cell.likeButtonDelegate = self
             if trendyData.count == 0 {
                 return cell
             } else {
@@ -513,6 +514,7 @@ extension HomeVC: UITableViewDelegate {
             cell.delegate = self
             cell.buttonDelegate = self
             cell.postDelegate = self
+            cell.likeButtonDelegate = self
             
             cell.headerText = customText
             
@@ -531,8 +533,7 @@ extension HomeVC: UITableViewDelegate {
             cell.delegate = self
             cell.buttonDelegate = self
             cell.postDelegate = self
-            
-            print("fsdgsfdg", localText)
+            cell.likeButtonDelegate = self
             cell.headerText = localText
             cell.localList = localData
             
@@ -645,5 +646,38 @@ extension HomeVC {
                 print("networkFail")
             }
         }
+    }
+}
+
+extension HomeVC: LikeButtonDelegate {
+    func sendFavoriteInfo(postId: Int, isFavorite: Bool) {
+        for (index, element) in trendyData.enumerated() {
+            if element.postID == postId {
+                trendyData[index].isFavorite = isFavorite
+                print("와 \(postId) \(isFavorite)")
+            }
+        }
+        
+        for (index, element) in todayData.enumerated() {
+            if element.postID == postId {
+                todayData[index].isFavorite = isFavorite
+                print("와 \(postId) \(isFavorite)")
+            }
+        }
+        
+        for (index, element) in customData.enumerated() {
+            if element.postID == postId {
+                customData[index].isFavorite = isFavorite
+                print("와 \(postId) \(isFavorite)")
+            }
+        }
+        
+        for (index, element) in localData.enumerated() {
+            if element.postID == postId {
+                localData[index].isFavorite = isFavorite
+                print("와 \(postId) \(isFavorite)")
+            }
+        }
+        
     }
 }

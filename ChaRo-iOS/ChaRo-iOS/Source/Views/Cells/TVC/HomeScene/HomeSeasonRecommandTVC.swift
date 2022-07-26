@@ -16,6 +16,7 @@ class HomeSeasonRecommandTVC: UITableViewCell {
     var delegate: IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
     var postDelegate: PostIdDelegate?
+    var likeButtonDelegate: LikeButtonDelegate?
     let cellTag: Int = 4
     
     var customList: [DriveElement] = []
@@ -99,6 +100,7 @@ extension HomeSeasonRecommandTVC: UICollectionViewDelegate, UICollectionViewData
         var tags = [element.region, element.theme,
                     element.warning ?? ""] as [String]
 
+        cell.likeButtonDelegate = self
         cell.setData(image: element.image,
                      title: element.title,
                      tagCount: tags.count,
@@ -142,5 +144,16 @@ extension HomeSeasonRecommandTVC {
             if $0.postID == postId { item = $0 }
         }
         return item
+    }
+}
+
+extension HomeSeasonRecommandTVC: LikeButtonDelegate {
+    func sendFavoriteInfo(postId: Int, isFavorite: Bool) {
+        for (index, element) in customList.enumerated() {
+            if element.postID == postId {
+                customList[index].isFavorite = isFavorite
+                likeButtonDelegate?.sendFavoriteInfo(postId: postId, isFavorite: isFavorite)
+            }
+        }
     }
 }
