@@ -75,12 +75,14 @@ class SNSLoginVC: UIViewController {
         $0.setTitleColor(.mainBlack, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 17)
         $0.setImage(UIImage(named: "googleLogo"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 180)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.borderColor = UIColor.gray30.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
+        $0.showsTouchWhenHighlighted = false
         $0.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
     }
     

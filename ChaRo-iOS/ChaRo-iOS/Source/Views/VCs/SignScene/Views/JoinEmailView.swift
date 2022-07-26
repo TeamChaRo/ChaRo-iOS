@@ -161,7 +161,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
             print(text)
         }
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         let text = textField.text
@@ -192,6 +192,13 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     //MARK: - 서버 요청 함수
     private func IsDuplicatedEmail(email: String) {
             
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", regex)
+        if !emailTest.evaluate(with: email) {
+            self.emailInputView.setOrangeTFLabelColorWithText(text: "이메일 형식이 올바르지 않습니다.")
+            self.makeButtonsGray()
+        }
+        
         IsDuplicatedEmailService.shared.getEmailInfo(email: email) { (response) in
             
             switch(response)
