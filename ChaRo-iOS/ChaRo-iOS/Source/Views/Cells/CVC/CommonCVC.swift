@@ -152,8 +152,9 @@ class CommonCVC: UICollectionViewCell {
     }
     
     func likeAction() {
-        LikeService.shared.Like(userId: "jieun1211", postId: self.postID) { [self] result in
-            
+        guard let userEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) else { return }
+        
+        LikeService.shared.Like(userEmail: userEmail, postId: self.postID) { [self] result in
             switch result {
             case .success(let success):
                 if let success = success as? Bool {
