@@ -57,11 +57,6 @@ extension UIScreen {
         return UIScreen.main.bounds.height
     }
     
-    
-    class func getDeviceWidth() -> Int {
-        return Int(UIScreen.main.bounds.width)
-    }
-    
     class func getDeviceWidth() -> CGFloat {
         return UIScreen.main.bounds.width
     }

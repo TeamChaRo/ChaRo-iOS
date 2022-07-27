@@ -6,10 +6,11 @@
 //
 
 import UIKit
+
 import SnapKit
 import Then
 
-class SearchResultVC: UIViewController {
+final class SearchResultVC: UIViewController {
     
     //MARK: Result Data
     public var lastPostId: Int = 0
@@ -31,28 +32,26 @@ class SearchResultVC: UIViewController {
     private let separateLineView = UIView().then {
         $0.backgroundColor = .gray20
     }
-    private var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: UICollectionViewFlowLayout())
-        
-        collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        
+    
+    private lazy var collectionView = UICollectionView(frame: .zero,
+                                                       collectionViewLayout: UICollectionViewFlowLayout() ).then {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.getDeviceWidth(), height: 624)
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
-        collectionView.setCollectionViewLayout(layout, animated: true)
         
-        collectionView.registerCustomXib(xibName: PostResultHeaderCVC.identifier)
-        collectionView.registerCustomXib(xibName: CommonCVC.identifier)
-        
-        return collectionView
-    }()
+        $0.isPagingEnabled = false
+        $0.backgroundColor = .clear
+        $0.showsHorizontalScrollIndicator = false
+        $0.setCollectionViewLayout(layout, animated: true)
+        $0.delegate = self
+        $0.dataSource = self
+        $0.registerCustomXib(xibName: CommonCVC.identifier)
+        $0.registerCustomXib(xibName: HomePostDetailCVC.identifier)
+    }
     
-    private let closeButton = UIButton().then {
+    private lazy var closeButton = UIButton().then {
         $0.setTitle("닫기", for: .normal)
         $0.titleLabel?.font = .notoSansMediumFont(ofSize: 17)
         $0.setTitleColor(.mainBlue, for: .normal)
@@ -70,7 +69,7 @@ class SearchResultVC: UIViewController {
         $0.textColor = .gray50
     }
     
-    private let searchButton = UIButton().then {
+    private lazy var searchButton = UIButton().then {
         $0.setTitle("드라이브 코스 작성하기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = .notoSansBoldFont(ofSize: 16)
@@ -83,8 +82,12 @@ class SearchResultVC: UIViewController {
         super.viewDidLoad()
         postSearchPost(type: "like")
         setupConstraint()
+        configureUI()
         setFilterViewCompletion()
-        configureCollectionView()
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = .white
     }
     
     public func setFilterTagList(list: [String]) {
@@ -106,20 +109,7 @@ class SearchResultVC: UIViewController {
         }
     }
     
-    func configureCollectionView() {
-        collectionView.register(UINib(nibName: PostResultHeaderCVC.identifier, bundle: nil),
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: PostResultHeaderCVC.identifier)
-
-        collectionView.registerCustomXib(xibName: CommonCVC.identifier)
-        collectionView.registerCustomXib(xibName: HomePostDetailCVC.identifier)
-
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.isPagingEnabled = false
-    }
-    
-    func setFilterViewLayout() {
+    private func setFilterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
         filterView.snp.makeConstraints{
@@ -130,9 +120,9 @@ class SearchResultVC: UIViewController {
         }
     }
     
-    func setFilterViewCompletion(){
+    private func setFilterViewCompletion() {
         filterView.touchCellCompletion = { index in
-            switch index{
+            switch index {
             case 0:
                 self.currentState = "인기순"
                 self.postSearchPost(type: "new")
@@ -151,6 +141,7 @@ class SearchResultVC: UIViewController {
     }
 }
 
+// MARK: collection view
 extension SearchResultVC: UICollectionViewDelegate {
     
 }
@@ -166,12 +157,11 @@ extension SearchResultVC: UICollectionViewDataSource {
         let dropDownCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePostDetailCVC.identifier, for: indexPath) as? HomePostDetailCVC
         dropDownCell?.delegate = self
         topCVCCell?.delegate = self
-        cell?.clickedPostCell = { postid in
-            let nextVC = PostDetailVC()
-            nextVC.setPostId(id: postid)
-            self.navigationController?.pushViewController(nextVC, animated: true)
+        cell?.clickedPostCell = { [weak self] postId in
+            let nextVC = PostDetailVC(postId: postId)
+            self?.navigationController?.pushViewController(nextVC, animated: true)
         }
-        if indexPath.row == 0{
+        if indexPath.row == 0 {
             if myCellIsFirstLoaded {
                 myCellIsFirstLoaded = false
                 topCVCCell = dropDownCell
@@ -189,53 +179,18 @@ extension SearchResultVC: UICollectionViewDataSource {
                       postID: post.postID)
         return cell!
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PostResultHeaderCVC.identifier, for: indexPath) as? PostResultHeaderCVC else {
-            return UICollectionReusableView()
-        }
-        header.setStackViewData(list: filterResultList)
-        header.addSubview(separateLineView)
-        separateLineView.snp.makeConstraints{
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-        return header
-    }
 
 }
 
-extension SearchResultVC: UICollectionViewDelegateFlowLayout { 
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: UIScreen.getDeviceWidth(), height: 40)
-    }
+extension SearchResultVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if indexPath.row == 0 {
-            return CGSize(width: collectionView.frame.size.width-40, height: 57)
-        }
-        
-        return CGSize(width: collectionView.frame.size.width-40, height: 260)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
+        let height: CGFloat = indexPath.row == 0 ? 57 : 260
+        return CGSize(width: UIScreen.getDeviceWidth() - 40.0, height: height)
     }
 }
 
+// MARK: - UI
 extension SearchResultVC {
     
     private func setupConstraint() {
@@ -246,18 +201,18 @@ extension SearchResultVC {
         }
         
         navigationView.addSubviews([backButton,navigationTitleLabel,closeButton])
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(1)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-9)
         }
         
-        navigationTitleLabel.snp.makeConstraints{
+        navigationTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(backButton.snp.centerY)
         }
         
-        closeButton.snp.makeConstraints{
+        closeButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-20)
             $0.centerY.equalTo(backButton.snp.centerY)
         }
@@ -294,20 +249,76 @@ extension SearchResultVC {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.height.equalTo(48)
         }
-        
     }
     
     private func setResultViewConstraint() {
-        view.addSubview(collectionView)
+        let tagHeaderView = initTagHearderView()
+        view.addSubviews([collectionView, separateLineView, tagHeaderView])
+        tagHeaderView.snp.makeConstraints {
+            $0.top.equalTo(navigationView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(65)
+        }
+        
+        separateLineView.snp.makeConstraints {
+            $0.top.equalTo(tagHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
         collectionView.snp.makeConstraints{
-            $0.top.equalTo(self.navigationView.snp.bottom).offset(15)
+            $0.top.equalTo(separateLineView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
 
+// MARK: - 상단 tag header view
+extension SearchResultVC {
+    private func initTagHearderView() -> UIView {
+        let view = UIView(frame: CGRect(x: 0, y: 0,
+                                        width: UIScreen.getDeviceWidth(),
+                                        height: 65))
+        view.backgroundColor = .white
+        
+        let stackView = UIStackView(arrangedSubviews: makeTagLabelList())
+        stackView.axis = .horizontal
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.spacing = 4
+        
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints{
+            $0.top.equalToSuperview().inset(13)
+            $0.leading.equalTo(view.snp.leading).offset(20)
+            $0.bottom.equalToSuperview().inset(15)
+            $0.height.equalTo(34)
+        }
+        return view
+    }
+    
+    private func makeTagLabelList() -> [UIButton] {
+        var list: [UIButton] = []
+        for index in 0..<filterResultList.count {
+            if filterResultList[index] == "" || filterResultList[index] == "선택안함" { continue }
+            let isWarningIndex = index == 3
+            let buttonTitle = isWarningIndex ? " #\(filterResultList[index])X " : " #\(filterResultList[index]) "
+            let button = UIButton().then {
+                $0.titleLabel?.font = .notoSansRegularFont(ofSize: 12)
+                $0.layer.cornerRadius = 15
+                $0.layer.borderWidth = 1
+                $0.setTitle(buttonTitle, for: .normal)
+                $0.setTitleColor(isWarningIndex ? .gray30 : .mainBlue, for: .normal)
+                $0.layer.borderColor = isWarningIndex ? UIColor.gray30.cgColor : UIColor.mainLightBlue.cgColor
+            }
+            list.append(button)
+        }
+        return list
+    }
+}
 
-//MARK: Network
+
+// MARK: Network
 extension SearchResultVC{
     func refinePostResultData(data: Drive?) {
         postData = data?.drive ?? []
@@ -319,12 +330,10 @@ extension SearchResultVC{
     func postSearchPost(type: String) {
         let themeEng = CommonData.themeDict[filterResultList[2]] ?? ""
         let warningEng = CommonData.warningDataDict[filterResultList[3]] ?? ""
-        print("themeEng =\(themeEng), warningEng = \(warningEng)")
         PostResultService.shared.postSearchKeywords(region: filterResultList[1],
                                                     theme: themeEng,
                                                     warning: warningEng,
                                                     type: type) { response in
-            
             switch(response) {
             case .success(let resultData):
                 if let data = resultData as? Drive {

@@ -334,6 +334,7 @@ extension SettingVC: UITableViewDelegate {
                 presentToSafariVC(urlString: urlData[indexPath.row])
             case 4:
                 makeRequestAlert(title: "로그아웃 하시겠습니까?", message: "") { _ in
+                    Constants.removeAllUserDefaults()
                     self.presentToSignNC()
                 }
             case 5:

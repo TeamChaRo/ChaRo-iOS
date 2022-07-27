@@ -67,6 +67,10 @@ class ChangePasswordVC: UIViewController {
         self.newPasswordInputView.isHidden = true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     private func configureDelegate() {
         self.oldPasswordInputView.inputTextField?.delegate = self
         
@@ -172,6 +176,12 @@ class ChangePasswordVC: UIViewController {
 
 
 extension ChangePasswordVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let text = textField.text
         let oldPassword = UserDefaults.standard.object(forKey: Constants.UserDefaultsKey.userPassword) as? String

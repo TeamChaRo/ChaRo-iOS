@@ -12,6 +12,7 @@ class ChangeImageVC: UIViewController {
     //MARK: - Properties
     static let identifier = "ChangeImageVC"
     var isNicknamePassed = false
+    var newImageString = ""
     
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
@@ -44,17 +45,9 @@ class ChangeImageVC: UIViewController {
         $0.backgroundColor = UIColor.gray20
     }
     
-    private let profileView = UIImageView().then {
-        $0.image = UIImage(named: "icProfile")
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 95 / 2
-    }
-    
-    private let profileChangeButton = UIButton().then {
-        $0.setTitle("프로필 사진 바꾸기", for: .normal)
-        $0.setTitleColor(.mainBlue, for: .normal)
-        $0.titleLabel?.font = UIFont.notoSansRegularFont(ofSize: 14)
-        $0.addTarget(self, action: #selector(profileChangeButtonClicked), for: .touchUpInside)
+    private let profileView = ProfileView().then {
+        guard let urlString = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userImage) else { return }
+        $0.profileImageView.kf.setImage(with: URL(string: urlString))
     }
     
     private let nicknameView = JoinInputView(title: "",
@@ -77,6 +70,16 @@ class ChangeImageVC: UIViewController {
         nicknameView.inputTextField?.delegate = self
     }
     
+    private func makeDoneEnable() {
+        self.doneButton.isEnabled = true
+        self.doneButton.setTitleColor(.mainBlue, for: .normal)
+    }
+    
+    private func makeDoneUnable() {
+        self.doneButton.isEnabled = false
+        self.doneButton.setTitleColor(.gray40, for: .normal)
+    }
+    
     @objc private func backButtonClicked() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -85,7 +88,7 @@ class ChangeImageVC: UIViewController {
         
         let actionsheetController = UIAlertController(title: "프로필 사진 바꾸기", message: nil, preferredStyle: .actionSheet)
         let actionDefaultImage = UIAlertAction(title: "기본 이미지 설정", style: .default, handler: { action in
-            self.profileView.image = UIImage(named: "icProfile")
+            self.profileView.profileImageView.image = ImageLiterals.imgMypageDefaultProfile
         })
         let actionLibraryImage = UIAlertAction(title: "라이브러리에서 선택", style: .default, handler: { action in
             let picker = UIImagePickerController()
@@ -107,15 +110,13 @@ class ChangeImageVC: UIViewController {
     private func makeNicknameViewRed(text: String) {
         self.isNicknamePassed = false
         nicknameView.setOrangeTFLabelColorWithText(text: text)
-        self.doneButton.isEnabled = false
-        self.doneButton.setTitleColor(.gray40, for: .normal)
+        makeDoneUnable()
     }
     
     private func makeNicknameViewBlue(text: String) {
         self.isNicknamePassed = true
         nicknameView.setBlueTFLabelColorWithText(text: text)
-        self.doneButton.isEnabled = true
-        self.doneButton.setTitleColor(.mainBlue, for: .normal)
+        makeDoneEnable()
     }
     
     //MARK: - Service Function
@@ -144,16 +145,18 @@ class ChangeImageVC: UIViewController {
     }
     
     @objc private func doneButtonClicked() {
-        let newNickname = nicknameView.inputTextField?.text
-        UpdateProfileService.shared.putNewProfile(nickname: newNickname!,
-                                                  newImage: self.profileView.image) { result in
-            
+        guard let newNickname = nicknameView.inputTextField?.text else { return }
+        let newImage = profileView.profileImageView.image
+        UpdateProfileService.shared.putNewProfile(nickname: newNickname,
+                                                  newImage: newImage) { result in
             switch result {
             case .success(let msg):
                 print("success", msg)
                 self.makeAlert(title: "", message: "프로필이 변경되었습니다.", okAction: { _ in
-                    self.navigationController?.popViewController(animated: true)
                     UserDefaults.standard.set(newNickname, forKey: Constants.UserDefaultsKey.userNickname)
+                    let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+                    guard let nextVC = storyboard.instantiateViewController(withIdentifier: MyPageVC.className) as? MyPageVC else { return }
+                    self.navigationController?.pushViewController(nextVC, animated: true)
                 })
             case .requestErr(let msg):
                 print("requestERR", msg)
@@ -166,13 +169,13 @@ class ChangeImageVC: UIViewController {
             }
             
         }
+        
     }
     
     //MARK: - Configure UI
     private func configureUI() {
         self.view.addSubviews([
             profileView,
-            profileChangeButton,
             nicknameView
         ])
         
@@ -182,15 +185,13 @@ class ChangeImageVC: UIViewController {
             $0.width.height.equalTo(95)
         }
         
-        profileChangeButton.snp.makeConstraints {
-            $0.top.equalTo(profileView.snp.bottom).offset(18)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(19)
-            $0.width.equalTo(200)
+        profileView.imagePickerPresentClosure = { picker in
+            picker.delegate = self
+            self.present(picker, animated: true)
         }
         
         nicknameView.snp.makeConstraints {
-            $0.top.equalTo(profileChangeButton.snp.bottom).offset(20)
+            $0.top.equalTo(profileView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(100)
@@ -282,9 +283,9 @@ extension ChangeImageVC : UIImagePickerControllerDelegate & UINavigationControll
         
         //이미지 Choose
         picker.dismiss(animated: false) { () in
-            let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-            self.profileView.image = image
+            let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            self.profileView.profileImageView.image = image
         }
-        
+        makeDoneEnable()
     }
 }

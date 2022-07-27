@@ -12,24 +12,11 @@ import Then
 
 final class SecondBannerHeaderView: UIView {
     
-    let viewRetio: CGFloat = UIScreen.getDeviceWidth() / 375
+    let viewRetio: CGFloat = UIScreen.getDeviceWidth() / 375.0
     
     private let headerImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.image = ImageLiterals.imgPlaylistBanner
-    }
-    
-    private let textImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = ImageLiterals.imgSpringPlaylistText
-    }
-    
-    private let titleLabel = UILabel().then {
-        $0.text = "봄의 신선한 바람\n플레이리스트"
-        $0.numberOfLines = 2
-        $0.textAlignment = .center
-        $0.font = .notoSansBoldFont(ofSize: 29)
-        $0.textColor = .white
     }
     
     private let contentTextView = UITextView().then {
@@ -80,21 +67,10 @@ final class SecondBannerHeaderView: UIView {
     }
     
     func setContraints() {
-        self.addSubviews([headerImageView, textImageView, titleLabel,
-                         contentTextView, descriptionLabel, confirmButton, guideLabel])
+        self.addSubviews([headerImageView, contentTextView, descriptionLabel, confirmButton, guideLabel])
         
         headerImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-        }
-        
-        textImageView.snp.makeConstraints {
-            $0.top.equalTo(headerImageView.snp.top).inset(44)
-            $0.centerX.equalToSuperview()
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(textImageView.snp.bottom)
-            $0.centerX.equalToSuperview()
         }
         
         contentTextView.snp.makeConstraints {

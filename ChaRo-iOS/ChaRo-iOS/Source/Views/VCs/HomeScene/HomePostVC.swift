@@ -230,13 +230,10 @@ extension HomePostVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCVC", for: indexPath) as? CommonCVC else { return UICollectionViewCell() }
         
-        cell.clickedPostCell = { postid in
-            let nextVC = PostDetailVC()
-            nextVC.setPostId(id: postid)
-            self.navigationController?.pushViewController(nextVC, animated: true)
+        cell.clickedPostCell = { [weak self] postId in
+            let nextVC = PostDetailVC(postId: postId)
+            self?.navigationController?.pushViewController(nextVC, animated: true)
         }
-        
-      
         cell.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
         
         guard let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePostDetailCVC", for: indexPath) as? HomePostDetailCVC else {return UICollectionViewCell()}
@@ -330,9 +327,8 @@ func dismissDropDownWhenTappedAround() {
 
 //postID 넘기기 위한 Delegate 구현
 extension HomePostVC: PostIdDelegate {
-    func sendPostDriveElement(data: DriveElement?) {
-        let nextVC = PostDetailVC()
-        nextVC.setAdditionalDataOfPost(data: data)
+    func sendPostDetail(with postId: Int) {
+        let nextVC = PostDetailVC(postId: postId)
         navigationController?.pushViewController(nextVC, animated: true)
     }
     

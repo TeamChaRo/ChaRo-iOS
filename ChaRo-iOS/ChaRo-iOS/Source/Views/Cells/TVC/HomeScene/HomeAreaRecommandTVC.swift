@@ -72,7 +72,8 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.isSelectedCVC(indexPath: indexPath)
-        postDelegate?.sendPostDriveElement(data: localList[indexPath.row])
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC else { return }
+        postDelegate?.sendPostDetail(with: cell.postID)
     }
     
     

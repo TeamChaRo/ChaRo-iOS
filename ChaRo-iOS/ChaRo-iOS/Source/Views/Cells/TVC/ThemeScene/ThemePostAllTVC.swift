@@ -12,7 +12,7 @@ protocol ThemeCollectionViewCellDelegate: class {
 }
 
 protocol PostIdDelegate {
-    func sendPostDriveElement(data: DriveElement?)
+    func sendPostDetail(with postId: Int)
 }
 
 class ThemePostAllTVC: UITableViewCell {
@@ -114,10 +114,8 @@ extension ThemePostAllTVC: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC
-        let postId = cell!.postID
-        let sendingData = findDriveElementFrom(postId: postId)
-        postDelegate?.sendPostDriveElement(data: sendingData)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CommonCVC else { return }
+        postDelegate?.sendPostDetail(with: cell.postID)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

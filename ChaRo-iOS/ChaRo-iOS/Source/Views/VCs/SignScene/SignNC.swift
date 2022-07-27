@@ -11,8 +11,12 @@ class SignNC: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if self.viewControllers[0].isKind(of: OnBoardVC.self) && UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.onBoardSeen) {
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: SNSLoginVC.className)
+            self.pushViewController(nextVC, animated: true)
+        }
     }
     
 

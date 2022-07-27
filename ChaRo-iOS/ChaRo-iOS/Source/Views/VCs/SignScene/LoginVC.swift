@@ -38,8 +38,8 @@ class LoginVC: UIViewController {
     }
     
     private func addTestUserAccount() {
-        self.idTextField.text = "charo@ios.com"
-        self.pwdTextField.text = "charo0505"
+        self.idTextField.text = "charo-ios@gmail.com"
+        self.pwdTextField.text = "charo111"
     }
     override func viewDidDisappear(_ animated: Bool) {
         removeObservers()
@@ -101,11 +101,8 @@ class LoginVC: UIViewController {
             self.makeAlert(title: "로그인 실패", message: "비밀번호를 입력해주세요.")
             return
         }
-        LoginService.shared.login(id: userEmail, password: userPassword) {
-            result in
-            
-            switch result
-            {
+        LoginService.shared.login(id: userEmail, password: userPassword) { result in
+            switch result {
             case .success(let data):
                 print("일반 로그인 성공 \(data)")
                 let loginData = data as? LoginDataModel
@@ -123,8 +120,14 @@ class LoginVC: UIViewController {
                 
             case .requestErr(let message):
                 if let message = message as? String {
-                    self.makeAlert(title: "로그인 실패",
+                    if message.contains("아이디") {
+                        self.makeAlert(title: "로그인 실패",
+                                       message: "가입된 아이디가 없습니다. 회원가입 후 이용해 주세요.")
+                    }
+                    else {
+                        self.makeAlert(title: "로그인 실패",
                                    message: message)
+                    }
                 }
             default :
                 print("ERROR")

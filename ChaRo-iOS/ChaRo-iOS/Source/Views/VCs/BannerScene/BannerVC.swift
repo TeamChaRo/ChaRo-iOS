@@ -39,6 +39,14 @@ class BannerVC: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func setConstraints() {
         view.addSubviews([backButton, titleLabel, scrollView])
         backButton.snp.makeConstraints {
@@ -65,7 +73,7 @@ class BannerVC: UIViewController {
     func bind() {
         backButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in
-                self?.dismiss(animated: true)
+                self?.navigationController?.popViewController(animated: true)
         }).disposed(by: disposeBag)
     }
 }
