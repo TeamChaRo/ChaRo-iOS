@@ -12,7 +12,7 @@ import Then
 
 final class SecondBannerHeaderView: UIView {
     
-    let viewRetio: CGFloat = UIScreen.getDeviceWidth() / 375
+    let viewRetio: CGFloat = UIScreen.getDeviceWidth() / 375.0
     
     private let headerImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
