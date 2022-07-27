@@ -10,7 +10,7 @@ API_UNAVAILABLE(macCatalyst, macos, tvos, watchos)
 /// Initiates on-device conversion measurement given a user email address. Requires dependency
 /// GoogleAppMeasurementOnDeviceConversion to be linked in, otherwise it is a no-op.
 /// @param emailAddress User email address. Include a domain name for all email addresses
-///   (e.g. gmail.com or hotmail.co.jp). Remove any spaces in between the email address.
+///   (e.g. gmail.com or hotmail.co.jp).
 + (void)initiateOnDeviceConversionMeasurementWithEmailAddress:(NSString *)emailAddress
     NS_SWIFT_NAME(initiateOnDeviceConversionMeasurement(emailAddress:));
 

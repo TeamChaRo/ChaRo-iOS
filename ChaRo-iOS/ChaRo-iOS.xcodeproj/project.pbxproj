@@ -220,8 +220,8 @@
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
-		A60BDC7EA235D4B07F51693B /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 997696C1956DF85441024CA8 /* Pods_ChaRo_iOS.framework */; };
-		B022838BEE31C97650691A75 /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F35151981350F742E6E1030 /* Pods_ChaRo_iOSTests.framework */; };
+		91680D4F9099A7171D440C9A /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2507E54E0B460AF4B4EF58 /* Pods_ChaRo_iOS.framework */; };
+		A4246AA57F1C824974F7E7DC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0448C8F92DB3FBC8D5B5693 /* Pods_ChaRo_iOSTests.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */; };
@@ -465,7 +465,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0F35151981350F742E6E1030 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopupVC.swift; sourceTree = "<group>"; };
 		332867FE2857421200E75C70 /* DateComponents+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+.swift"; sourceTree = "<group>"; };
 		33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
@@ -479,7 +478,6 @@
 		3348E19027EA00F700D0E93D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		336D2CFC26E72F0900E64042 /* ChaRo-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChaRo-iOS.entitlements"; sourceTree = "<group>"; };
 		339DEED5277A44C3002749B2 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
-		35B985F0693E01223A56E8C6 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
 		36071675269F9AE10042256B /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
@@ -625,6 +623,9 @@
 		3CEC0112269E25AB00E9332C /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		3CEC0114269E277A00E9332C /* OnBoardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardCVC.swift; sourceTree = "<group>"; };
 		3CEC0115269E277A00E9332C /* OnBoardCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardCVC.xib; sourceTree = "<group>"; };
+		4A9681066A725ADDFF70B1A6 /* Pods-ChaRo-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4BF9F696F56E9228DAC58020 /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		5612BC8B1319841200A4EA8C /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		703DD82F269F3A7E004416A9 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		703DD831269F3B19004416A9 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		703DD839269F810D004416A9 /* LoginDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataModel.swift; sourceTree = "<group>"; };
@@ -679,15 +680,15 @@
 		70FD425E2817158900631BB7 /* UpdateProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileService.swift; sourceTree = "<group>"; };
 		70FD4260281715B300631BB7 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		70FD4262281839B400631BB7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		729CCC46E6A6454297C72B42 /* Pods-ChaRo-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedMapVC.swift; sourceTree = "<group>"; };
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FBFCB94286AF3E200A9031F /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		7FBFCB95286AF41300A9031F /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
-		997696C1956DF85441024CA8 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9B6D42355C37327C0734016 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		EA5B843A3F7E6D60541231D7 /* Pods-ChaRo-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A0448C8F92DB3FBC8D5B5693 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2507E54E0B460AF4B4EF58 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDriveCourseTVC.swift; sourceTree = "<group>"; };
@@ -715,7 +716,6 @@
 		F4FB2EC6269F8F6B000C339B /* CreatePostParkingWarningTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostParkingWarningTVC.swift; sourceTree = "<group>"; };
 		F4FB2EC7269F8F6B000C339B /* CreatePostParkingWarningTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostParkingWarningTVC.xib; sourceTree = "<group>"; };
 		F4FB2ECA269FD7AE000C339B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
-		FF30955DA51F726FBCA745C1 /* Pods-ChaRo-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -724,7 +724,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */,
-				A60BDC7EA235D4B07F51693B /* Pods_ChaRo_iOS.framework in Frameworks */,
+				91680D4F9099A7171D440C9A /* Pods_ChaRo_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,7 +732,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B022838BEE31C97650691A75 /* Pods_ChaRo_iOSTests.framework in Frameworks */,
+				A4246AA57F1C824974F7E7DC /* Pods_ChaRo_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,10 +742,10 @@
 		0CA8D00E5168EC02612F0BAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A9B6D42355C37327C0734016 /* Pods-ChaRo-iOS.debug.xcconfig */,
-				35B985F0693E01223A56E8C6 /* Pods-ChaRo-iOS.release.xcconfig */,
-				EA5B843A3F7E6D60541231D7 /* Pods-ChaRo-iOSTests.debug.xcconfig */,
-				FF30955DA51F726FBCA745C1 /* Pods-ChaRo-iOSTests.release.xcconfig */,
+				5612BC8B1319841200A4EA8C /* Pods-ChaRo-iOS.debug.xcconfig */,
+				4BF9F696F56E9228DAC58020 /* Pods-ChaRo-iOS.release.xcconfig */,
+				4A9681066A725ADDFF70B1A6 /* Pods-ChaRo-iOSTests.debug.xcconfig */,
+				729CCC46E6A6454297C72B42 /* Pods-ChaRo-iOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1627,8 +1627,8 @@
 				7FBFCB95286AF41300A9031F /* Pods.xcodeproj */,
 				7FBFCB94286AF3E200A9031F /* Pods */,
 				3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */,
-				997696C1956DF85441024CA8 /* Pods_ChaRo_iOS.framework */,
-				0F35151981350F742E6E1030 /* Pods_ChaRo_iOSTests.framework */,
+				BB2507E54E0B460AF4B4EF58 /* Pods_ChaRo_iOS.framework */,
+				A0448C8F92DB3FBC8D5B5693 /* Pods_ChaRo_iOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1693,12 +1693,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C71FEB726881DAB007E8EAD /* Build configuration list for PBXNativeTarget "ChaRo-iOS" */;
 			buildPhases = (
-				64240EBC19576222B4E48062 /* [CP] Check Pods Manifest.lock */,
+				57FB09DF042B9B089C0E14BC /* [CP] Check Pods Manifest.lock */,
 				3C71FE9F26881DAA007E8EAD /* Sources */,
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
 				36F8F6BD2713445200092338 /* Embed Frameworks */,
-				21C3004B88ADF597C5763C5A /* [CP] Embed Pods Frameworks */,
+				C7BF870FD3010A2E35439C37 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1713,11 +1713,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C895432277B24D500303B73 /* Build configuration list for PBXNativeTarget "ChaRo-iOSTests" */;
 			buildPhases = (
-				7BDA277083BBFE77ECF75C91 /* [CP] Check Pods Manifest.lock */,
+				7419CF6E0A2A389AD0E1535A /* [CP] Check Pods Manifest.lock */,
 				3C895428277B24D500303B73 /* Sources */,
 				3C895429277B24D500303B73 /* Frameworks */,
 				3C89542A277B24D500303B73 /* Resources */,
-				C62B613147D9D02FFCBC0918 /* [CP] Embed Pods Frameworks */,
+				09A769AE66D6A77DA3A7900B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2061,23 +2061,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		21C3004B88ADF597C5763C5A /* [CP] Embed Pods Frameworks */ = {
+		09A769AE66D6A77DA3A7900B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-		64240EBC19576222B4E48062 /* [CP] Check Pods Manifest.lock */ = {
+		57FB09DF042B9B089C0E14BC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2099,7 +2100,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7BDA277083BBFE77ECF75C91 /* [CP] Check Pods Manifest.lock */ = {
+		7419CF6E0A2A389AD0E1535A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2121,21 +2122,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C62B613147D9D02FFCBC0918 /* [CP] Embed Pods Frameworks */ = {
+		C7BF870FD3010A2E35439C37 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2484,7 +2485,7 @@
 		};
 		3C71FEB826881DAB007E8EAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9B6D42355C37327C0734016 /* Pods-ChaRo-iOS.debug.xcconfig */;
+			baseConfigurationReference = 5612BC8B1319841200A4EA8C /* Pods-ChaRo-iOS.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2518,7 +2519,7 @@
 		};
 		3C71FEB926881DAB007E8EAD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35B985F0693E01223A56E8C6 /* Pods-ChaRo-iOS.release.xcconfig */;
+			baseConfigurationReference = 4BF9F696F56E9228DAC58020 /* Pods-ChaRo-iOS.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2552,7 +2553,7 @@
 		};
 		3C895433277B24D500303B73 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA5B843A3F7E6D60541231D7 /* Pods-ChaRo-iOSTests.debug.xcconfig */;
+			baseConfigurationReference = 4A9681066A725ADDFF70B1A6 /* Pods-ChaRo-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2573,7 +2574,7 @@
 		};
 		3C895434277B24D500303B73 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF30955DA51F726FBCA745C1 /* Pods-ChaRo-iOSTests.release.xcconfig */;
+			baseConfigurationReference = 729CCC46E6A6454297C72B42 /* Pods-ChaRo-iOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

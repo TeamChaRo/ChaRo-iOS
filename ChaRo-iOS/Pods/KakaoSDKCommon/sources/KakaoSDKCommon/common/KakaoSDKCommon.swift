@@ -32,7 +32,7 @@ final public class KakaoSDK {
     // MARK: Fields
     
     //static 라이브러리용 버전.
-    private let _version = "2.10.1"
+    private let _version = "2.11.0"
     
     /// 카카오 SDK의 싱글톤 객체입니다. SDK를 사용할 때 반드시 이 객체가 가장 먼저 초기화되어야 합니다.
     public static let shared = KakaoSDK()
