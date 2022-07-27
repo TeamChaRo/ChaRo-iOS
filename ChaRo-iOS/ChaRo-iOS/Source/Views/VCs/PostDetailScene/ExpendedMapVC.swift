@@ -23,9 +23,9 @@ final class ExpendedMapVC: UIViewController {
     private let disposeBag = DisposeBag()
     private let xmarkButton = UIButton().then {
         $0.setImage(ImageLiterals.icClose, for: .normal)
-        $0.layer.cornerRadius = 50.0 / 2.0
+        $0.layer.cornerRadius = 48.0 / 2.0
         $0.backgroundColor = .white
-        $0.drawShadow(color: .black, opacity: 5, offset: .zero, radius: 5)
+        $0.drawShadow(color: .black.withAlphaComponent(0.3), opacity: 10, offset: .zero, radius: 10)
     }
     
     init(courseList: [Course]) {
@@ -55,9 +55,9 @@ final class ExpendedMapVC: UIViewController {
         view.addSubviews([tmapView, xmarkButton])
         
         xmarkButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(11)
-            $0.trailing.equalToSuperview().inset(10)
-            $0.width.height.equalTo(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(23)
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.height.equalTo(48)
         }
         
         tmapView.snp.makeConstraints {

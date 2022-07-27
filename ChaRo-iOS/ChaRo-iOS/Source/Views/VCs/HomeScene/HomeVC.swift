@@ -28,12 +28,9 @@ class HomeVC: UIViewController {
     
     
     //배너 관련 변수
-    var homeTableViewHeaderHeight: CGFloat = UIScreen.main.bounds.height * 0.65
+    var homeTableViewHeaderHeight: CGFloat = UIScreen.getDeviceWidth() * 517.0 / 375.0
     var headerView: UIView!
-    var images: [UIImage] = [#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain"),#imageLiteral(resourceName: "dummyMain")]
-    var imageViews = [UIImageView]()
-    var bannerTitleLableList: [UILabel] = []
-    var bannerSubtTtleLabelList: [UILabel] = []
+    private var bannerImageList: [UIImage] = []
     
     enum BannerContent: String, CaseIterable {
         case seaDriveCource = "강릉 해변 드라이브 코스와 맛집"
@@ -44,7 +41,6 @@ class HomeVC: UIViewController {
     
     
     //데이타
-    private var bannerData: [Banner] = []
     private var todayData: [DriveElement] = []
     private var trendyData: [DriveElement] = []
     private var customData: [DriveElement] = []
@@ -88,7 +84,8 @@ class HomeVC: UIViewController {
         navigationBottomView.isHidden = true
     }
     //헤더뷰
-    func setHeader() {
+    func setBannerInHeaderView() {
+        initBannerImageList()
         HomeTableView.rowHeight = UITableView.automaticDimension
         headerView = HomeTableView.tableHeaderView
         HomeTableView.tableHeaderView = nil
@@ -96,8 +93,15 @@ class HomeVC: UIViewController {
         HomeTableView.contentInset = UIEdgeInsets(top: homeTableViewHeaderHeight, left: 0, bottom: 0, right: 0)
         HomeTableView.contentOffset = CGPoint(x: 0, y: -homeTableViewHeaderHeight)
         updateHeaderView()
-        setupHeaderViewLayout()
     }
+    
+    private func initBannerImageList() {
+        bannerImageList.append(contentsOf: [ ImageLiterals.imgHomeBannerGangneung,
+                                             ImageLiterals.imgHomeBannerPlaylist,
+                                             ImageLiterals.imgHomeBannerCarTheater,
+                                             ImageLiterals.imgHomeBannerAboutCharo ])
+    }
+    
     func updateHeaderView() {
         var headerRect = CGRect(x: 0, y: -homeTableViewHeaderHeight, width: HomeTableView.bounds.width, height: homeTableViewHeaderHeight)
         if HomeTableView.contentOffset.y < homeTableViewHeaderHeight {
@@ -105,98 +109,6 @@ class HomeVC: UIViewController {
             headerRect.size.height = -HomeTableView.contentOffset.y
         }
         headerView.frame = headerRect
-    }
-    
-    func setupHeaderViewUI() {
-        var titleList: [String] = []
-        var subTitleList: [String] = []
-        
-        var titleLabelList: [UILabel] = []
-        var subTitleLabelList: [UILabel] = []
-        
-        for i in 0...3 {
-            titleList.append(bannerData[i].bannerTitle)
-            subTitleList.append(bannerData[i].bannerTag)
-        }
-        
-        for index in 0..<titleList.count {
-            let titleLabel = UILabel().then {
-                $0.font = .notoSansBoldFont(ofSize: 28)
-                $0.textColor = .white
-                $0.text = titleList[index]
-                $0.numberOfLines = 3
-            }
-            
-            let subTitleLabel = UILabel().then {
-                $0.font = .notoSansRegularFont(ofSize: 13)
-                $0.textColor = .white
-                $0.text = subTitleList[index]
-                $0.numberOfLines = 3
-            }
-            
-            titleLabelList.append(titleLabel)
-            subTitleLabelList.append(subTitleLabel)
-        }
-        
-        bannerTitleLableList = titleLabelList
-        bannerSubtTtleLabelList = subTitleLabelList
-        headerView.addSubviews(bannerTitleLableList + bannerSubtTtleLabelList)
-        
-    }
-    
-    func setupHeaderViewLayout() {
-        guard BannerContent.allCases.count == bannerTitleLableList.count else { return }
-        let bannerTitleList = BannerContent.allCases
-        for index in 0..<bannerTitleLableList.count {
-            bannerTitleLableList[index].text = bannerTitleList[index].rawValue
-            bannerTitleLableList[index].snp.makeConstraints{
-                $0.leading.equalTo(bannerScrollView.viewWithTag(index+1)!).offset(24)
-                $0.bottom.equalToSuperview().inset(114)
-                $0.width.equalTo(180)
-            }
-            bannerTitleLableList[index].tag = index
-            bannerSubtTtleLabelList[index].snp.makeConstraints{
-                $0.leading.equalTo(bannerTitleLableList[index].snp.leading)
-                $0.top.equalTo(bannerTitleLableList[index].snp.bottom).offset(5)
-            }
-        }
-        //addTapGestureToTitleLables()
-    }
-    
-    func addTapGestureToTitleLables() {
-        bannerTitleLableList.forEach {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentToBanner(_:)))
-            tapGesture.cancelsTouchesInView = false
-            $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    func addTapGestrue(in imageView: UIImageView) {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentToBanner(_:)))
-        tapGesture.cancelsTouchesInView = false
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc
-    func presentToBanner(_ sender: UITapGestureRecognizer) {
-        guard let currentTag = sender.view?.tag else { return }
-        var nextVC: BannerVC?
-        switch currentTag {
-        case 1:
-            nextVC = FirstBannerVC(title: BannerContent.seaDriveCource.rawValue)
-        case 2:
-            nextVC = SecondBannerVC(title: BannerContent.playList.rawValue)
-        case 3:
-            nextVC = ThirdBannerVC(title: BannerContent.carDriceCource.rawValue)
-        case 4:
-            nextVC = FourthBannerVC(title: BannerContent.aboutCharo.rawValue)
-        default: print("잘못된 경우")
-        }
-        if let nextVC = nextVC {
-            navigationController?.pushViewController(nextVC, animated: true)
-        }
     }
 
     
@@ -213,12 +125,7 @@ class HomeVC: UIViewController {
                     print("겟 데이터 실행")
                     DispatchQueue.global().sync {
                         let data = response.data
-                        //배너 타이틀
-                        if let banner = data.banner as? [Banner] {
-                            self.bannerData = banner
-                            self.setHeader()
-                            self.setupHeaderViewUI()
-                        }
+                        self.setBannerInHeaderView()
                         
                         //today 차로
                         if let today = data.todayCharoDrive.drive as? [DriveElement] {
@@ -264,17 +171,12 @@ class HomeVC: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.addContentScrollView()
                 self?.HomeTableView.reloadData()
-                self?.setupHeaderViewLayout()
             }
-            
-            
         }
     }
     func setTableView() {
-        
         HomeTableView.delegate = self
         HomeTableView.dataSource = self
-        
         HomeTableView.registerCustomXib(xibName: "HomeAnimationTVC")
         HomeTableView.registerCustomXib(xibName: "HomeTodayDriveTVC")
         HomeTableView.registerCustomXib(xibName: "HomeThemeTVC")
@@ -370,29 +272,52 @@ extension HomeVC: UITableViewDelegate {
         bannerScrollView.delegate = self
         bannerScrollView.bounces = false
         if bannerScrollView.subviews.count > 3 {
-            print(bannerScrollView.subviews)
+            bannerScrollView.viewWithTag(0)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(1)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(2)?.frame.size.height = -HomeTableView.contentOffset.y
             bannerScrollView.viewWithTag(3)?.frame.size.height = -HomeTableView.contentOffset.y
-            bannerScrollView.viewWithTag(4)?.frame.size.height = -HomeTableView.contentOffset.y
-        }  else {
-            
-            if bannerData.count != 0 {
-                for i in 1..<images.count + 1 {
-                    let xPos = self.view.frame.width * CGFloat(i-1)
-                    let imageView = UIImageView()
-                    imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.main.bounds.width, height: homeTableViewHeaderHeight)
-                    guard let url = URL(string: bannerData[i-1].bannerImage ) else { return }
-                    imageView.kf.setImage(with: url)
-                    imageView.tag = i
-                    bannerScrollView.addSubview(imageView)
-                    bannerScrollView.contentSize.width = imageView.frame.width * CGFloat(i)
-                    bannerScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 4, height: homeTableViewHeaderHeight)
-                    addTapGestrue(in: imageView)
-                }
+        }  else if !bannerImageList.isEmpty {
+            for index in 0..<bannerImageList.count {
+                let xPos = self.view.frame.width * CGFloat(index)
+                let imageView = UIImageView(image: bannerImageList[index])
+                imageView.contentMode = .scaleAspectFit
+                imageView.frame = CGRect(x: xPos, y: 0, width: UIScreen.getDeviceWidth(), height: homeTableViewHeaderHeight)
+                imageView.tag = index
+                bannerScrollView.addSubview(imageView)
+                bannerScrollView.contentSize = CGSize(width: UIScreen.getDeviceWidth() * 4, height: homeTableViewHeaderHeight)
+                addTapGestrue(in: imageView)
             }
         }
     }
+    
+    func addTapGestrue(in imageView: UIImageView) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentToBanner(_:)))
+        tapGesture.cancelsTouchesInView = false
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc
+    func presentToBanner(_ sender: UITapGestureRecognizer) {
+        guard let currentTag = sender.view?.tag else { return }
+        var nextVC: BannerVC?
+        switch currentTag {
+        case 0:
+            nextVC = FirstBannerVC(title: BannerContent.seaDriveCource.rawValue)
+        case 1:
+            nextVC = SecondBannerVC(title: BannerContent.playList.rawValue)
+        case 2:
+            nextVC = ThirdBannerVC(title: BannerContent.carDriceCource.rawValue)
+        case 3:
+            nextVC = FourthBannerVC(title: BannerContent.aboutCharo.rawValue)
+        default: print("잘못된 경우")
+        }
+        if let nextVC = nextVC {
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
+    
+    
     //MARK: ScrollViewDidScroll
     private func configureLogoImage(isWhite: Bool) {
         if isWhite {
@@ -419,14 +344,14 @@ extension HomeVC: UITableViewDelegate {
         let currentWidth = HomeTableView.contentOffset.x
         let currentHeight = HomeTableView.contentOffset.y
         
-        if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0{
+        if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0 {
             if currentHeight > -homeTableViewHeaderHeight {
                 HomeNavigationView.backgroundColor = UIColor(white: 1, alpha: 0 + (homeTableViewHeaderHeight / (-currentHeight * 3)))
                 if currentHeight >= -CGFloat(homeTableViewHeaderHeight/3) {
-                    if currentWidth == 0 && currentHeight == 0{
+                    if currentWidth == 0 && currentHeight == 0 {
                         configureLogoImage(isWhite: true)
                     }  else {
-                        if HomeTableView.contentOffset.y <= -47 && currentHeight == -47{
+                        if HomeTableView.contentOffset.y <= -47 && currentHeight == -47 {
                             configureLogoImage(isWhite: true)
                         } else {
                             configureLogoImage(isWhite: false)
@@ -442,8 +367,8 @@ extension HomeVC: UITableViewDelegate {
                 }
             }
         } else {
-            updateHeaderView()
-            addContentScrollView()
+            //updateHeaderView()
+            //addContentScrollView()
             HomeNavigationView.backgroundColor = .none
         }
         

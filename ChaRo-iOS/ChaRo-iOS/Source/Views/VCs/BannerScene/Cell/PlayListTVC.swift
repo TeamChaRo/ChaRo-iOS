@@ -12,7 +12,7 @@ import Then
 
 final class PlayListTVC: UITableViewCell {
     
-    private let viewRatio: CGFloat = UIScreen.getDeviceWidth() / 375
+    private let viewRatio: CGFloat = UIScreen.getDeviceWidth() / 375.0
     private let albumImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = ImageLiterals.imgAlbumByPale

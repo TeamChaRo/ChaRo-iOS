@@ -185,8 +185,8 @@ extension SearchResultVC: UICollectionViewDataSource {
 extension SearchResultVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = indexPath.row == 0 ? 57 : 260
-        return CGSize(width: UIScreen.getDeviceWidth() - 40, height: height)
+        let height: CGFloat = indexPath.row == 0 ? 57 : 260
+        return CGSize(width: UIScreen.getDeviceWidth() - 40.0, height: height)
     }
 }
 
