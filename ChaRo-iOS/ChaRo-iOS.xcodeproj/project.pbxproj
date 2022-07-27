@@ -2492,7 +2492,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20220719;
+				CURRENT_PROJECT_VERSION = 20220728;
 				DEVELOPMENT_TEAM = J8A843466G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2505,7 +2505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2526,7 +2526,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20220719;
+				CURRENT_PROJECT_VERSION = 20220728;
 				DEVELOPMENT_TEAM = J8A843466G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2539,7 +2539,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
