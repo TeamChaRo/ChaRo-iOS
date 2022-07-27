@@ -39,6 +39,14 @@ class BannerVC: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func setConstraints() {
         view.addSubviews([backButton, titleLabel, scrollView])
         backButton.snp.makeConstraints {
