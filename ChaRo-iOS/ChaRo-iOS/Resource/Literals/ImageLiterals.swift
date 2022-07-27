@@ -131,6 +131,9 @@ enum ImageLiterals {
     static var imgAboutBanner1: UIImage{ .load(name: "ImgAboutBanner1") }
     static var imgAboutBanner2: UIImage{ .load(name: "ImgAboutBanner2") }
     static var imgAboutBanner3: UIImage{ .load(name: "ImgAboutBanner3") }
+    static var imgAboutCharo1: UIImage{ .load(name: "imgAboutCharo1") }
+    static var imgAboutCharo2: UIImage{ .load(name: "imgAboutCharo2") }
+    static var imgAboutCharo4: UIImage{ .load(name: "imgAboutCharo4") }
     
     static var imgAlbumByAnt: UIImage{ .load(name: "imgAlbumByAnt") }
     static var imgAlbumByBaynk: UIImage{ .load(name: "imgAlbumByBaynk") }
@@ -148,15 +151,17 @@ enum ImageLiterals {
     static var imgAlbumByPale: UIImage{ .load(name: "imgAlbumByPale") }
     static var imgAlbumByVirginia: UIImage{ .load(name: "imgAlbumByVirginia") }
     
-    static var imgAboutCharo1: UIImage{ .load(name: "imgAboutCharo1") }
-    static var imgAboutCharo2: UIImage{ .load(name: "imgAboutCharo2") }
-    static var imgAboutCharo4: UIImage{ .load(name: "imgAboutCharo4") }
-    
     static var imgGangneungCourse1: UIImage{ .load(name: "imgGangneungCourse1") }
     static var imgGangneungCourse2: UIImage{ .load(name: "imgGangneungCourse2") }
     
+    static var imgHomeBannerAboutCharo: UIImage{ .load(name: "imgHomeBannerAboutCharo") }
+    static var imgHomeBannerCarTheater: UIImage{ .load(name: "imgHomeBannerCarTheater") }
+    static var imgHomeBannerGangneung: UIImage{ .load(name: "imgHomeBannerGangneung") }
+    static var imgHomeBannerPlaylist: UIImage{ .load(name: "imgHomeBannerPlaylist") }
+    
     static var imgPlaylistBanner: UIImage{ .load(name: "imgPlaylistBanner") }
     static var imgSpringPlaylistText: UIImage{ .load(name: "imgSpringPlaylistText") }
+    
 }
 
 extension UIImage {
