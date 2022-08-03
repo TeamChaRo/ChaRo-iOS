@@ -118,8 +118,7 @@ class SNSLoginVC: UIViewController {
                 self.goToHomeVC()
             case .requestErr(let message) :
                 if let message = message as? String {
-                    self.makeAlert(title: "로그인 실패",
-                               message: message)
+                    print("자동 로그인 ERROR :\(message)")
                 }
             default :
                 print("자동 로그인 ERROR")
