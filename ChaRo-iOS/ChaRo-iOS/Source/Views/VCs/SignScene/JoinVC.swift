@@ -192,7 +192,7 @@ class JoinVC: UIViewController {
             profileView.isHidden = true
             contractView.isHidden = false
         default:
-            print("엥")
+            break
         }
         
     }

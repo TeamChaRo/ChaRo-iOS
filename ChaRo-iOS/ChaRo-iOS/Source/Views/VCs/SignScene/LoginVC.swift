@@ -41,9 +41,6 @@ class LoginVC: UIViewController {
         self.idTextField.text = "charo@ios.com"
         self.pwdTextField.text = "charo0505"
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        removeObservers()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -176,16 +173,12 @@ class LoginVC: UIViewController {
     
     @objc
     func textFieldMoveUp(_ notification: NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
-            })
-        }
+        self.view.frame.origin.y = -150
     }
     
     @objc
     func textFieldMoveDown(_ notification: NSNotification) {
-        view.transform = .identity
+        self.view.frame.origin.y = 0
     }
 }
 
