@@ -120,6 +120,22 @@ class JoinVC: UIViewController {
                 self.moveCar(toPage: 4)
         }
         
+        profileView.profileView.actionSheetPresentClosure = { actionSheet in
+            self.present(actionSheet, animated: true)
+        }
+        profileView.profileView.imagePickerPresentClosure = { picker in
+            picker.delegate = self
+            self.present(picker, animated: true)
+        }
+        
+        contractView.emailDocumentPresentClosure = { safariView in
+            self.present(safariView, animated: true, completion: nil)
+        }
+        
+        contractView.pushDocumentPresentClosure = { safariView in
+            self.present(safariView, animated: true, completion: nil)
+        }
+        
         contractView.nextButton.nextPageClosure = {
             //회원가입 요청
             let userEmail = self.emailView.emailInputView.inputTextField?.text
@@ -128,7 +144,6 @@ class JoinVC: UIViewController {
             let image = self.profileView.profileView.profileImageView.image
             let marketingPush = self.contractView.agreePushButton.agreed
             let marketingEmail = self.contractView.agreeEmailButton.agreed
-            
             
             self.postJoin(userEmail: userEmail!,
                           password: password!,
@@ -315,19 +330,6 @@ class JoinVC: UIViewController {
         contractView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
-        
-        profileView.profileView.imagePickerPresentClosure = { picker in
-            picker.delegate = self
-            self.present(picker, animated: true)
-        }
-        
-        contractView.emailDocumentPresentClosure = { safariView in
-            self.present(safariView, animated: true, completion: nil)
-        }
-        
-        contractView.pushDocumentPresentClosure = { safariView in
-            self.present(safariView, animated: true, completion: nil)
-        }
     }
     
     
@@ -348,7 +350,9 @@ class JoinVC: UIViewController {
             
             case .success(let msg):
                 print("success", msg)
-                self.navigationController?.popViewController(animated: true)
+                self.makeAlert(title: "회원가입 성공", message: "회원가입이 완료 되었습니다!", okAction: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }, completion: nil)
             case .requestErr(let msg):
                 print("requestERR", msg)
             case .pathErr:
@@ -404,7 +408,7 @@ extension JoinVC: UICollectionViewDelegateFlowLayout {
 }
 
 
-//MARK: -이미지 피커 extension
+//MARK: - 이미지 피커 extension
 extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
