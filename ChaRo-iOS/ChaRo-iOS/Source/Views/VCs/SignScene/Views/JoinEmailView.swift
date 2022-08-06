@@ -103,6 +103,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
                 self.emailVerifyInputView.isHidden = false
                 self.ValidateEmail(email: (self.emailInputView.inputTextField?.text!)!)
                 self.makeButtonsGray()
+                NotificationCenter.default.post(name: UIResponder.keyboardWillShowNotification, object: nil, userInfo: nil)
             }
         }
     }

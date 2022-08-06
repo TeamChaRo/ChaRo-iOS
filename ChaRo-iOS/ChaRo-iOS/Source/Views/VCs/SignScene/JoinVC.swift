@@ -70,10 +70,6 @@ class JoinVC: UIViewController {
         configureNavigationController()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-            removeObservers()
-    }
-    
     //MARK: - configure 함수
     private func configureNavigationController() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -91,23 +87,27 @@ class JoinVC: UIViewController {
     
     private func configureClosure() {
         emailView.nextButton.nextPageClosure = {
-                self.showView(number: 2)
-                self.moveCar(toPage: 2)
+            self.showView(number: 2)
+            self.moveCar(toPage: 2)
         }
         
         emailView.stickyNextButton.nextPageClosure = {
-                self.showView(number: 2)
-                self.moveCar(toPage: 2)
+            self.showView(number: 2)
+            self.moveCar(toPage: 2)
+            self.emailView.emailInputView.inputTextField?.resignFirstResponder()
+            self.emailView.emailVerifyInputView.inputTextField?.resignFirstResponder()
         }
         
         passwordView.nextButton.nextPageClosure = {
-                self.showView(number: 3)
-                self.moveCar(toPage: 3)
+            self.showView(number: 3)
+            self.moveCar(toPage: 3)
         }
         
         passwordView.stickyNextButton.nextPageClosure = {
-                self.showView(number: 3)
-                self.moveCar(toPage: 3)
+            self.showView(number: 3)
+            self.moveCar(toPage: 3)
+            self.passwordView.passwordInputView.firstTextField.resignFirstResponder()
+            self.passwordView.passwordInputView.secondTextField.resignFirstResponder()
         }
         
         profileView.nextButton.nextPageClosure = {
@@ -116,8 +116,9 @@ class JoinVC: UIViewController {
         }
         
         profileView.stickyNextButton.nextPageClosure = {
-                self.showView(number: 4)
-                self.moveCar(toPage: 4)
+            self.showView(number: 4)
+            self.moveCar(toPage: 4)
+            self.profileView.nicknameView.inputTextField?.resignFirstResponder()
         }
         
         profileView.profileView.actionSheetPresentClosure = { actionSheet in

@@ -135,7 +135,7 @@ extension ThemePostThemeTVC: UICollectionViewDataSource {
         let themeName = themeList[indexPath.row]
         
         cell.setThemeTitle(name: themeName)
-        cell.themeImageView.image = UIImage(named: ThemeDic[themeName] ?? "gear")
+        cell.themeImageView.image = UIImage(named: CommonData.themeDict[themeName] ?? "gear")
         cell.location = .ThemeTopTVC
         
         if indexPath.row == 0 {

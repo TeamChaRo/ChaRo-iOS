@@ -137,8 +137,6 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         let element = trendyDriveList[indexPath.row]
         var tags = [element.region, element.theme, element.warning ?? ""] as [String]
 
-        print("카미 \(element.title)")
-        print("카미 \(element.isFavorite)")
         cell.likeButtonDelegate = self
         cell.setData(image: element.image,
                      title: element.title,
