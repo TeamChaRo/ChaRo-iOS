@@ -34,12 +34,18 @@ class LoginVC: UIViewController {
         configureLoginButtonUI()
         configureTextfieldUI()
         configureNotificationCenter()
+        configureDelegate()
         addTestUserAccount()
     }
     
     private func addTestUserAccount() {
         self.idTextField.text = "charo@ios.com"
         self.pwdTextField.text = "charo0505"
+    }
+    
+    private func configureDelegate() {
+        idTextField.delegate = self
+        pwdTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,3 +224,13 @@ extension LoginVC {
     }
 }
 
+extension LoginVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == idTextField {
+            pwdTextField.becomeFirstResponder()
+        } else {
+            pwdTextField.resignFirstResponder()
+        }
+        return true
+    }
+}

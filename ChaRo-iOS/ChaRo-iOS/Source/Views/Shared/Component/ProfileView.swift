@@ -8,11 +8,14 @@
 import UIKit
 
 class ProfileView: UIView {
-
-    var profileImageView = UIImageView().then {
+    lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(carmeraButtonClicked))
+    
+    lazy var profileImageView = UIImageView().then {
         $0.image = UIImage(named: "icProfile")
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 112 / 2
+        $0.addGestureRecognizer(tapGesture)
+        $0.isUserInteractionEnabled = true
     }
     
     var cameraButton = UIButton().then {
