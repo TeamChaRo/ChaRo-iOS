@@ -342,7 +342,9 @@ extension HomeVC: UITableViewDelegate {
     }
     func setNavigationAlpah() {
         let currentWidth = HomeTableView.contentOffset.x
-        let currentHeight = HomeTableView.contentOffset.y
+        let currentHeight = HomeTableView.contentOffset.y - 50
+        
+        print(currentHeight, homeTableViewHeaderHeight, "height")
         
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0 {
             if currentHeight > -homeTableViewHeaderHeight {
