@@ -181,7 +181,6 @@ class HomePostVC: UIViewController {
             {
             case .success(let data) :
                 if let response = data as? DetailModel {
-                    print("무한스크롤 테스트")
                     if response.data.drive.count == 0 {
                         break
                     }
@@ -284,20 +283,11 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout {
     }
 
        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 0{
-            return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        }
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
-
-       }
+           return UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if section == 0{
-            return 0
-        }
-        else {
-        return 35
-        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

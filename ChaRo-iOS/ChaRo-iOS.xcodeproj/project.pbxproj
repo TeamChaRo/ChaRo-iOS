@@ -23,6 +23,7 @@
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
 		36071676269F9AE10042256B /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36071675269F9AE10042256B /* Notification.storyboard */; };
 		36071678269F9B030042256B /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36071677269F9B030042256B /* NotificationVC.swift */; };
+		3608440C289F9D850084C397 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3608440B289F9D850084C397 /* UILabel+.swift */; };
 		360937A42699E52F005392BB /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 360937A32699E52F005392BB /* MyPage.storyboard */; };
 		360937A62699ECEB005392BB /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360937A52699ECEB005392BB /* MyPageVC.swift */; };
 		360937AD2699EF7B005392BB /* TabbarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360937AB2699EF7B005392BB /* TabbarCVC.swift */; };
@@ -293,6 +294,7 @@
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
 		36071675269F9AE10042256B /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		36071677269F9B030042256B /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		3608440B289F9D850084C397 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		360937A32699E52F005392BB /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		360937A52699ECEB005392BB /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		360937AB2699EF7B005392BB /* TabbarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCVC.swift; sourceTree = "<group>"; };
@@ -877,6 +879,7 @@
 				3CB532D027C510A3005AAB1D /* NSObject+.swift */,
 				70FD4262281839B400631BB7 /* String+.swift */,
 				332867FE2857421200E75C70 /* DateComponents+.swift */,
+				3608440B289F9D850084C397 /* UILabel+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1856,6 +1859,7 @@
 				3C879BF7268B14E300C41BB8 /* UIFont+.swift in Sources */,
 				3C86FA532694C169009370CD /* PostAttentionTVC.swift in Sources */,
 				7062C8262703194300C1CD2E /* InputTextField.swift in Sources */,
+				3608440C289F9D850084C397 /* UILabel+.swift in Sources */,
 				36FB8BA527777DF900C2E642 /* DoFollowDataModel.swift in Sources */,
 				36E445B8277CA1F3008E31BE /* SettingTVC.swift in Sources */,
 				362BC9F7269ED387008EF625 /* MyPageDataModel.swift in Sources */,
