@@ -18,9 +18,9 @@ class PostDetailViewModel {
         }
     }
     
-    var isStored: Bool = false {
+    var isStored: Bool? {
         didSet {
-            likeSubject.onNext(isStored)
+            storeSubject.onNext(isStored)
         }
     }
     
@@ -60,7 +60,6 @@ extension PostDetailViewModel {
                     self.isLiked = data.isFavorite != 0
                     self.isStored = data.isStored != 0
                     dump(data)
-                    print("=================")
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -112,14 +111,12 @@ extension PostDetailViewModel {
     }
     
     func requestPostScrap() {
-        SaveService.shared.requestScrapPost(userId: Constants.userEmail,
-                                            postId: postId) { [weak self] result in
-            
+        SaveService.shared.requestScrapPost(postId: postId) { [weak self] result in
             switch result {
             case .success(let success):
                 if let _ = success as? Bool {
                     print("스크랩 성공해서 바뀝니다")
-                    self?.isStored.toggle()
+                    self?.isStored?.toggle()
                 }
             case .requestErr(let msg):
                 if let msg = msg as? String {
