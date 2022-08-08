@@ -156,7 +156,7 @@ class SNSLoginVC: UIViewController {
     
     @objc func testLogin() {
         socialType = .apple
-        socialLogin(email: "aggd662@naver.com", profileImage: nil, nickname: nil)
+        socialLogin(email: "aggdddswe662@naver.com", profileImage: nil, nickname: nil)
     }
     
     @objc func appleLogin() {
