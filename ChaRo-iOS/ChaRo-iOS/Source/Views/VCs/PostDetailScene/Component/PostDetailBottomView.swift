@@ -78,5 +78,7 @@ class PostDetailBottomView: UIView {
         self.layer.shadowRadius = 5
     }
     
-    
+    func changeLikeDescription(to count: Int) {
+        likeDescriptionButton.setTitle("\(count)명이 좋아합니다.", for: .normal)
+    }
 }

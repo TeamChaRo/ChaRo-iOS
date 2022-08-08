@@ -11,8 +11,21 @@ import RxSwift
 class PostDetailViewModel {
     
     let postId: Int
-    var isFavorite: Bool = false
-    var isStored: Bool = false
+    var postLikeClosure: ((Bool?) -> ())?
+    var isLiked: Bool? {
+        didSet {
+            postLikeClosure?(isLiked)
+        }
+    }
+    
+    var isStored: Bool? {
+        didSet {
+            storeSubject.onNext(isStored)
+        }
+    }
+    
+    let likeSubject = PublishSubject<Bool?>()
+    let storeSubject = PublishSubject<Bool?>()
     var postDetailData: PostDetailDataModel?
     let postDetailSubject = ReplaySubject<PostDetailDataModel>.create(bufferSize: 1)
     
@@ -21,16 +34,16 @@ class PostDetailViewModel {
         getPostDetailData(postId: postId)
     }
     
-    struct Input {
-        
-    }
+    struct Input {}
     
     struct Output {
         let postDetailSubject: ReplaySubject<PostDetailDataModel>
+        let likeSubject: PublishSubject<Bool?>
+        let storeSubject: PublishSubject<Bool?>
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        return Output(postDetailSubject: postDetailSubject)
+        return Output(postDetailSubject: postDetailSubject, likeSubject: likeSubject, storeSubject: storeSubject)
     }
 }
 
@@ -40,10 +53,13 @@ extension PostDetailViewModel {
         PostResultService.shared.getPostDetail(postId: postId) { [weak self] response in
             switch(response) {
             case .success(let resultData):
-                print(resultData)
+                guard let self = self else { return }
                 if let data = resultData as? PostDetailDataModel {
-                    self?.postDetailData = data
-                    self?.postDetailSubject.onNext(data)
+                    self.postDetailData = data
+                    self.postDetailSubject.onNext(data)
+                    self.isLiked = data.isFavorite != 0
+                    self.isStored = data.isStored != 0
+                    dump(data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -81,8 +97,8 @@ extension PostDetailViewModel {
                                 postId: postId) { [weak self] result in
             switch result {
             case .success(let success):
-                if let success = success as? Bool {
-                    self?.isFavorite.toggle()
+                if let _ = success as? Bool {
+                    self?.isLiked?.toggle()
                 }
             case .requestErr(let msg):
                 if let msg = msg as? String {
@@ -95,14 +111,12 @@ extension PostDetailViewModel {
     }
     
     func requestPostScrap() {
-        SaveService.shared.requestScrapPost(userId: Constants.userEmail,
-                                            postId: postId) { [self] result in
-            
+        SaveService.shared.requestScrapPost(postId: postId) { [weak self] result in
             switch result {
             case .success(let success):
-                if let success = success as? Bool {
+                if let _ = success as? Bool {
                     print("스크랩 성공해서 바뀝니다")
-                    self.isStored.toggle()
+                    self?.isStored?.toggle()
                 }
             case .requestErr(let msg):
                 if let msg = msg as? String {
