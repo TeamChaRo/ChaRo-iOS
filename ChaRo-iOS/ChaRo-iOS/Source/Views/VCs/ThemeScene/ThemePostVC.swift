@@ -142,11 +142,8 @@ class ThemePostVC: UIViewController {
     //MARK: - 테마 서버 통신
     func getThemeData(theme: String, filter: Filter) {
         
-        //문자열에서 # 제거
-        let strimmedTheme = theme.trimmingCharacters(in: ["#"])
-        
         //영어로 변환
-        let themeNames = CommonData.themeDict["\(strimmedTheme)"]!
+        let themeNames = CommonData.themeDict["\(theme)"]!
 
         //서버에 통신 요청
         GetThemeDataService.shared.getThemeInfo(theme: themeNames, filter: filter) { (response) in
@@ -261,6 +258,7 @@ extension ThemePostVC: MenuClickedDelegate {
 
 extension ThemePostVC: ThemeNetworkDelegate {
     func setClickedThemeData(themeName: String) {
+        self.selectedTheme = themeName
         getThemeData(theme: themeName, filter: Filter.new)
     }
     
