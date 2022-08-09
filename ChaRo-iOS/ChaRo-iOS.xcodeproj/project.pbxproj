@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -162,6 +162,7 @@
 		3CEC0113269E25AB00E9332C /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC0112269E25AB00E9332C /* OnBoard.storyboard */; };
 		3CEC0116269E277A00E9332C /* OnBoardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC0114269E277A00E9332C /* OnBoardCVC.swift */; };
 		3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC0115269E277A00E9332C /* OnBoardCVC.xib */; };
+		4A58368E32EBBEFA9CE42849 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408F8247C12336EF9B0EE58F /* Pods_ChaRo_iOS.framework */; };
 		703DD830269F3A7E004416A9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 703DD82F269F3A7E004416A9 /* Login.storyboard */; };
 		703DD832269F3B19004416A9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD831269F3B19004416A9 /* LoginVC.swift */; };
 		703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD839269F810D004416A9 /* LoginDataModel.swift */; };
@@ -216,12 +217,18 @@
 		70FD425F2817158900631BB7 /* UpdateProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD425E2817158900631BB7 /* UpdateProfileService.swift */; };
 		70FD4261281715B300631BB7 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4260281715B300631BB7 /* UserDefaultKey.swift */; };
 		70FD4263281839B400631BB7 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD4262281839B400631BB7 /* String+.swift */; };
+		7F0BED8B28A16C4B00BB3A8F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED8A28A16C4B00BB3A8F /* KakaoSDKAuth */; };
+		7F0BED8D28A16C4B00BB3A8F /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED8C28A16C4B00BB3A8F /* KakaoSDKCommon */; };
+		7F0BED8F28A16C4B00BB3A8F /* KakaoSDKCommonCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED8E28A16C4B00BB3A8F /* KakaoSDKCommonCore */; };
+		7F0BED9128A16C4B00BB3A8F /* KakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9028A16C4B00BB3A8F /* KakaoSDKShare */; };
+		7F0BED9328A16C4B00BB3A8F /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9228A16C4B00BB3A8F /* KakaoSDKTemplate */; };
+		7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9428A16C4B00BB3A8F /* KakaoSDKUser */; };
+		7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */; };
 		7F33C1252886E2280040E4F3 /* ExpendedMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */; };
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
-		8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */; };
-		DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */; };
+		9406A88EF002446E1FC66C40 /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8B3FE282DCF35D515F6481 /* Pods_ChaRo_iOSTests.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */; };
@@ -276,6 +283,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D208EFE50191294160743E3 /* Pods-ChaRo-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		1DE7F386946217C90FC45C71 /* Pods-ChaRo-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D8B3FE282DCF35D515F6481 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopupVC.swift; sourceTree = "<group>"; };
 		332867FE2857421200E75C70 /* DateComponents+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+.swift"; sourceTree = "<group>"; };
 		33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
@@ -434,9 +444,7 @@
 		3CEC0112269E25AB00E9332C /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		3CEC0114269E277A00E9332C /* OnBoardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardCVC.swift; sourceTree = "<group>"; };
 		3CEC0115269E277A00E9332C /* OnBoardCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardCVC.xib; sourceTree = "<group>"; };
-		4F55205AE995C0401D3486C5 /* Pods-ChaRo-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		69D8450DFCBA2FE515BDBBDE /* Pods-ChaRo-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6EAAA0587FAF0BFEB459D9B7 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		408F8247C12336EF9B0EE58F /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		703DD82F269F3A7E004416A9 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		703DD831269F3B19004416A9 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		703DD839269F810D004416A9 /* LoginDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataModel.swift; sourceTree = "<group>"; };
@@ -495,9 +503,7 @@
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
-		83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87B5BDE3383A94B27F81F631 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDriveCourseTVC.swift; sourceTree = "<group>"; };
@@ -525,6 +531,7 @@
 		F4FB2EC6269F8F6B000C339B /* CreatePostParkingWarningTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostParkingWarningTVC.swift; sourceTree = "<group>"; };
 		F4FB2EC7269F8F6B000C339B /* CreatePostParkingWarningTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostParkingWarningTVC.xib; sourceTree = "<group>"; };
 		F4FB2ECA269FD7AE000C339B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		F5461E5C7AFBD0446719C6EE /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,8 +539,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDA7344339CF4453CB1007E6 /* Pods_ChaRo_iOS.framework in Frameworks */,
+				7F0BED8D28A16C4B00BB3A8F /* KakaoSDKCommon in Frameworks */,
+				7F0BED9328A16C4B00BB3A8F /* KakaoSDKTemplate in Frameworks */,
+				7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */,
 				3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */,
+				7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */,
+				7F0BED8F28A16C4B00BB3A8F /* KakaoSDKCommonCore in Frameworks */,
+				7F0BED8B28A16C4B00BB3A8F /* KakaoSDKAuth in Frameworks */,
+				7F0BED9128A16C4B00BB3A8F /* KakaoSDKShare in Frameworks */,
+				4A58368E32EBBEFA9CE42849 /* Pods_ChaRo_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,7 +555,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B188860E6B0E2739A7DC8FC /* Pods_ChaRo_iOSTests.framework in Frameworks */,
+				9406A88EF002446E1FC66C40 /* Pods_ChaRo_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,10 +565,10 @@
 		0CA8D00E5168EC02612F0BAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6EAAA0587FAF0BFEB459D9B7 /* Pods-ChaRo-iOS.debug.xcconfig */,
-				83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */,
-				69D8450DFCBA2FE515BDBBDE /* Pods-ChaRo-iOSTests.debug.xcconfig */,
-				4F55205AE995C0401D3486C5 /* Pods-ChaRo-iOSTests.release.xcconfig */,
+				87B5BDE3383A94B27F81F631 /* Pods-ChaRo-iOS.debug.xcconfig */,
+				F5461E5C7AFBD0446719C6EE /* Pods-ChaRo-iOS.release.xcconfig */,
+				1DE7F386946217C90FC45C71 /* Pods-ChaRo-iOSTests.debug.xcconfig */,
+				0D208EFE50191294160743E3 /* Pods-ChaRo-iOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1434,8 +1448,8 @@
 			isa = PBXGroup;
 			children = (
 				3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */,
-				A28755551AA4AA1EE63FA224 /* Pods_ChaRo_iOSTests.framework */,
-				D2D4415326DCA1FAFA4CF005 /* Pods_ChaRo_iOS.framework */,
+				408F8247C12336EF9B0EE58F /* Pods_ChaRo_iOS.framework */,
+				2D8B3FE282DCF35D515F6481 /* Pods_ChaRo_iOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1466,18 +1480,27 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C71FEB726881DAB007E8EAD /* Build configuration list for PBXNativeTarget "ChaRo-iOS" */;
 			buildPhases = (
-				BBD94621979C0E0EB329C1DE /* [CP] Check Pods Manifest.lock */,
+				D034E2BEBE04168DF55B6809 /* [CP] Check Pods Manifest.lock */,
 				3C71FE9F26881DAA007E8EAD /* Sources */,
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
 				36F8F6BD2713445200092338 /* Embed Frameworks */,
-				12E7D82FFD8128D59F9B41C7 /* [CP] Embed Pods Frameworks */,
+				9567942784ACB54BCA9FA08C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "ChaRo-iOS";
+			packageProductDependencies = (
+				7F0BED8A28A16C4B00BB3A8F /* KakaoSDKAuth */,
+				7F0BED8C28A16C4B00BB3A8F /* KakaoSDKCommon */,
+				7F0BED8E28A16C4B00BB3A8F /* KakaoSDKCommonCore */,
+				7F0BED9028A16C4B00BB3A8F /* KakaoSDKShare */,
+				7F0BED9228A16C4B00BB3A8F /* KakaoSDKTemplate */,
+				7F0BED9428A16C4B00BB3A8F /* KakaoSDKUser */,
+				7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */,
+			);
 			productName = "ChaRo-iOS";
 			productReference = 3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -1486,11 +1509,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C895432277B24D500303B73 /* Build configuration list for PBXNativeTarget "ChaRo-iOSTests" */;
 			buildPhases = (
-				FC511F2719421C17A3CDEA02 /* [CP] Check Pods Manifest.lock */,
+				11044BF75A1F804E4BB40F9C /* [CP] Check Pods Manifest.lock */,
 				3C895428277B24D500303B73 /* Sources */,
 				3C895429277B24D500303B73 /* Frameworks */,
 				3C89542A277B24D500303B73 /* Resources */,
-				F82A009C2F2FACA1E04CB117 /* [CP] Embed Pods Frameworks */,
+				24B8A89E11933DDEB36C6FEC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1529,6 +1552,10 @@
 				Base,
 			);
 			mainGroup = 3C71FE9A26881DAA007E8EAD;
+			packageReferences = (
+				7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				7F0BED9628A16C8D00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
+			);
 			productRefGroup = 3C71FEA426881DAA007E8EAD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1609,24 +1636,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12E7D82FFD8128D59F9B41C7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BBD94621979C0E0EB329C1DE /* [CP] Check Pods Manifest.lock */ = {
+		11044BF75A1F804E4BB40F9C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1641,14 +1651,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChaRo-iOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ChaRo-iOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F82A009C2F2FACA1E04CB117 /* [CP] Embed Pods Frameworks */ = {
+		24B8A89E11933DDEB36C6FEC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1665,7 +1675,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FC511F2719421C17A3CDEA02 /* [CP] Check Pods Manifest.lock */ = {
+		9567942784ACB54BCA9FA08C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D034E2BEBE04168DF55B6809 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1680,7 +1707,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChaRo-iOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ChaRo-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2033,7 +2060,7 @@
 		};
 		3C71FEB826881DAB007E8EAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6EAAA0587FAF0BFEB459D9B7 /* Pods-ChaRo-iOS.debug.xcconfig */;
+			baseConfigurationReference = 87B5BDE3383A94B27F81F631 /* Pods-ChaRo-iOS.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2065,7 +2092,7 @@
 		};
 		3C71FEB926881DAB007E8EAD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83D65C0CC1D310B45627BC8F /* Pods-ChaRo-iOS.release.xcconfig */;
+			baseConfigurationReference = F5461E5C7AFBD0446719C6EE /* Pods-ChaRo-iOS.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2098,7 +2125,7 @@
 		};
 		3C895433277B24D500303B73 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69D8450DFCBA2FE515BDBBDE /* Pods-ChaRo-iOSTests.debug.xcconfig */;
+			baseConfigurationReference = 1DE7F386946217C90FC45C71 /* Pods-ChaRo-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2119,7 +2146,7 @@
 		};
 		3C895434277B24D500303B73 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F55205AE995C0401D3486C5 /* Pods-ChaRo-iOSTests.release.xcconfig */;
+			baseConfigurationReference = 0D208EFE50191294160743E3 /* Pods-ChaRo-iOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2169,6 +2196,63 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		7F0BED9628A16C8D00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk-rx";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7F0BED8A28A16C4B00BB3A8F /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		7F0BED8C28A16C4B00BB3A8F /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		7F0BED8E28A16C4B00BB3A8F /* KakaoSDKCommonCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommonCore;
+		};
+		7F0BED9028A16C4B00BB3A8F /* KakaoSDKShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKShare;
+		};
+		7F0BED9228A16C4B00BB3A8F /* KakaoSDKTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKTemplate;
+		};
+		7F0BED9428A16C4B00BB3A8F /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
+		};
+		7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F0BED9628A16C8D00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */;
+			productName = RxKakaoSDKShare;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3C71FE9B26881DAA007E8EAD /* Project object */;
 }
