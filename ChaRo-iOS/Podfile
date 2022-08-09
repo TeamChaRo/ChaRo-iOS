@@ -14,9 +14,12 @@ def pods
   pod 'RxSwift', '6.2.0'
   pod 'RxCocoa', '6.2.0'
   pod 'GoogleSignIn'
-  pod 'KakaoSDKUser'
-  pod 'KakaoSDKCommon'
-  pod 'KakaoSDKAuth'
+#  pod 'KakaoSDKUser'
+#  pod 'KakaoSDKCommon'
+#  pod 'KakaoSDKAuth'
+#  pod 'KakaoSDKLink'
+#  pod 'KakaoSDKTemplate'
+#  pod 'RxKakaoSDKShare'
 end
 
 target 'ChaRo-iOS' do

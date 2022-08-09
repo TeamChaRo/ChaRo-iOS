@@ -111,17 +111,6 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.7.2)
-  - KakaoSDKAuth (2.10.1):
-    - KakaoSDKCommon (= 2.10.1)
-  - KakaoSDKCommon (2.10.1):
-    - KakaoSDKCommon/Common (= 2.10.1)
-    - KakaoSDKCommon/Network (= 2.10.1)
-  - KakaoSDKCommon/Common (2.10.1)
-  - KakaoSDKCommon/Network (2.10.1):
-    - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.10.1)
-  - KakaoSDKUser (2.10.1):
-    - KakaoSDKAuth (= 2.10.1)
   - Kingfisher (6.3.1)
   - lottie-ios (3.3.0)
   - nanopb (2.30909.0):
@@ -144,9 +133,6 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Messaging
   - GoogleSignIn
-  - KakaoSDKAuth
-  - KakaoSDKCommon
-  - KakaoSDKUser
   - Kingfisher (~> 6.0)
   - lottie-ios
   - RxCocoa (= 6.2.0)
@@ -171,9 +157,6 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
-    - KakaoSDKAuth
-    - KakaoSDKCommon
-    - KakaoSDKUser
     - Kingfisher
     - lottie-ios
     - nanopb
@@ -200,9 +183,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GTMAppAuth: 4d8f864896f3646f0c33baf38a28362f4c601e15
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
-  KakaoSDKAuth: b4fec62192c2ac8a9375847f666c0932e38afeb5
-  KakaoSDKCommon: 4989e3bae5f4884903bc1df7134e13d0e903d587
-  KakaoSDKUser: 5c5fd4b5864e8b5ac9587fdbb473daf2fa675abf
   Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
@@ -213,6 +193,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 4ba9d1763f0672977ce4568f3decdf3e7f199bc3
+PODFILE CHECKSUM: 6a1e2b9df345b4cf095ae20f2c4feeac4c2f9480
 
 COCOAPODS: 1.11.3
