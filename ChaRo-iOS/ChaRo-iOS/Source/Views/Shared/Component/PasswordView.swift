@@ -111,13 +111,8 @@ class PasswordView: UIView, UITextFieldDelegate {
                 if text == "" {
                     self.setLabelOrangeWithText(text: "비밀번호를 입력해주세요.")
                     self.firstRelay.onNext(false)
-                    return
-                }
-                if !(self.validCountPassword(password: text)) {
+                } else if !(self.validCountPassword(password: text)) {
                     self.setLabelOrangeWithText(text: "5자 이상 15자 이내로 작성해 주세요.")
-                    self.firstRelay.onNext(false)
-                } else if !(self.validExPassword(password: text)) {
-                    self.setLabelOrangeWithText(text: "영문과 숫자만 사용해주세요.")
                     self.firstRelay.onNext(false)
                 } else {
                     self.setLabelBlueWithText(text: "사용가능한 비밀번호 입니다.")
@@ -158,6 +153,11 @@ class PasswordView: UIView, UITextFieldDelegate {
         }).disposed(by: disposeBag)
         
         validateRelay.subscribe(onNext: { result in
+            guard self.firstTextField.text == self.secondTextField.text else {
+                self.setLabelBlueWithText(text: "비밀번호가 일치하지 않습니다.")
+                self.secondTextField.setOrangeBorderWithText()
+                return
+            }
             if result {
                 self.enableNextButtonClosure!()
             } else {

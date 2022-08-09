@@ -97,7 +97,7 @@ class ThemePostThemeTVC: UITableViewCell {
     private func swapArray() {
         
         for (index, element) in themeList.enumerated() {
-            if "#\(element)" == firstTheme {
+            if "\(element)" == firstTheme {
                 themeList.swapAt(0, index)
             }
         }
