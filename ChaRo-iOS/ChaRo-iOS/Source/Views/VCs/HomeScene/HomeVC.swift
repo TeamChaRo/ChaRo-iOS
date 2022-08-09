@@ -13,7 +13,7 @@ import Lottie
 import SwiftUI
 import RxSwift
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController, UIGestureRecognizerDelegate {
     
     //MARK: Var
     @IBOutlet weak var HomeTableView: UITableView!
@@ -69,6 +69,7 @@ class HomeVC: UIViewController {
         getServerData()
         setTableView()
         setActionToSearchButton()
+        configureSwipeBackNavi()
         navigationController?.isNavigationBarHidden = true
         HomeTableView.separatorStyle = .none
         bindNotificationData()
@@ -76,6 +77,11 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getNotificationListData()
+    }
+    
+    func configureSwipeBackNavi() {
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     //navigationView
