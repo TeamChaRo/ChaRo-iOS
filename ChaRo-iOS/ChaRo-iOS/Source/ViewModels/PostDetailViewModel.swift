@@ -5,11 +5,16 @@
 //  Created by 장혜령 on 2022/03/15.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 
+import KakaoSDKTemplate
+import KakaoSDKShare
+import RxKakaoSDKShare
+import KakaoSDKCommon
+
 class PostDetailViewModel {
-    
+    private let disposeBag = DisposeBag()
     let postId: Int
     var postLikeClosure: ((Bool?) -> ())?
     var isLiked: Bool? {
@@ -178,3 +183,48 @@ extension PostDetailViewModel {
 //
 //        writedPostData?.course = newAddressList
 //    }
+
+
+//MARK: 카카오톡 공유하기
+extension PostDetailViewModel {
+    func shareToKakaotalk() {
+        guard let title = postDetailData?.title,
+              let description = postDetailData?.courseDesc,
+              let firstImage = postDetailData?.images?.first else { return }
+        let feedTemplateJsonStringData =
+            """
+            {
+                "object_type": "feed",
+                "content": {
+                    "title": "\(title)",
+                    "description": "\(description)",
+                    "image_url": "\(firstImage)",
+                    "link": {
+                        "mobile_web_url": "https://developers.kakao.com",
+                        "web_url": "https://developers.kakao.com"
+                    }
+                },
+                "buttons": [
+                    {
+                        "title": "자세히 보기",
+                        "link": {
+                            "mobile_web_url": "https://developers.kakao.com",
+                            "web_url": "https://developers.kakao.com"
+                        }
+                    }
+                ]
+            }
+            """.data(using: .utf8)!
+        
+        if let templatable = try? SdkJSONDecoder.custom.decode(FeedTemplate.self, from: feedTemplateJsonStringData) {
+            ShareApi.shared.rx.shareDefault(templatable:templatable)
+                .subscribe(onSuccess: { (sharingResult) in
+                    print("shareDefault() success.")
+                    UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                }, onFailure: {error in
+                    print(error)
+                })
+                .disposed(by: disposeBag)
+        }
+    }
+}

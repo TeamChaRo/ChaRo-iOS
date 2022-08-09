@@ -17,7 +17,6 @@ final class PostDetailVC: UIViewController {
     
     private var isAuthor = false
     private var isEditingMode = false
-    //private var postData: PostDetail?
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [Course] = []
     private var imageList: [UIImage] = []
@@ -216,23 +215,20 @@ extension PostDetailVC {
         
         
         bottomView.likeButton.rx.tap.asDriver()
-            .drive(onNext: {
-                [weak self] _ in
-                //self?.bottomView.likeButton.isSelected.toggle()
+            .drive(onNext: { [weak self] _ in
                 self?.viewModel.requestPostLike()
             })
             .disposed(by: disposeBag)
         
         bottomView.scrapButton.rx.tap.asDriver()
             .drive(onNext:{ [weak self] _ in
-                //self?.bottomView.scrapButton.isSelected.toggle()
                 self?.viewModel.requestPostScrap()
             })
             .disposed(by: disposeBag)
         
         bottomView.shareButton.rx.tap.asDriver()
-            .drive(onNext:{ _ in
-                print("shareButton 눌림")
+            .drive(onNext:{ [weak self] _ in
+                self?.viewModel.shareToKakaotalk()
             })
             .disposed(by: disposeBag)
         
@@ -330,6 +326,7 @@ extension PostDetailVC: UITableViewDataSource {
 
 //MARK: Network
 extension PostDetailVC {
+    
     func bindToViewModel() {
         let output = viewModel.transform(input: PostDetailViewModel.Input(), disposeBag: disposeBag)
         output.postDetailSubject.bind(onNext: { [weak self] postDetailData in
@@ -369,6 +366,5 @@ extension PostDetailVC {
         tableView.reloadData()
         configureBottomView()
     }
-  
-    
+
 }
