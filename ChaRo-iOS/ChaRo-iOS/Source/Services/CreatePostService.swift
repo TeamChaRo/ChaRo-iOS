@@ -5,7 +5,7 @@
 //  Created by 최인정 on 2021/07/14.
 //
 
-import Foundation
+import UIKit
 import Alamofire
 
 struct CreatePostService {
