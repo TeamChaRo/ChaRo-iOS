@@ -162,7 +162,6 @@
 		3CEC0113269E25AB00E9332C /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC0112269E25AB00E9332C /* OnBoard.storyboard */; };
 		3CEC0116269E277A00E9332C /* OnBoardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC0114269E277A00E9332C /* OnBoardCVC.swift */; };
 		3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC0115269E277A00E9332C /* OnBoardCVC.xib */; };
-		4A58368E32EBBEFA9CE42849 /* Pods_ChaRo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408F8247C12336EF9B0EE58F /* Pods_ChaRo_iOS.framework */; };
 		703DD830269F3A7E004416A9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 703DD82F269F3A7E004416A9 /* Login.storyboard */; };
 		703DD832269F3B19004416A9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD831269F3B19004416A9 /* LoginVC.swift */; };
 		703DD83A269F810D004416A9 /* LoginDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DD839269F810D004416A9 /* LoginDataModel.swift */; };
@@ -225,10 +224,21 @@
 		7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9428A16C4B00BB3A8F /* KakaoSDKUser */; };
 		7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */; };
 		7F33C1252886E2280040E4F3 /* ExpendedMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */; };
+		7F7704E828A279270077F8A2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704E728A279270077F8A2 /* SnapKit */; };
+		7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704EA28A279420077F8A2 /* Alamofire */; };
+		7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704ED28A2796D0077F8A2 /* Lottie */; };
+		7F7704F128A279940077F8A2 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704F028A279940077F8A2 /* Then */; };
+		7F7704F428A279B90077F8A2 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704F328A279B90077F8A2 /* RxCocoa */; };
+		7F7704F628A279B90077F8A2 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704F528A279B90077F8A2 /* RxRelay */; };
+		7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704F728A279B90077F8A2 /* RxSwift */; };
+		7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FA28A27A130077F8A2 /* GoogleSignIn */; };
+		7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FD28A27A8A0077F8A2 /* Kingfisher */; };
+		7F77050128A27B5D0077F8A2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F77050028A27B5D0077F8A2 /* FirebaseAnalytics */; };
+		7F77050328A27B5D0077F8A2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F77050228A27B5D0077F8A2 /* FirebaseCrashlytics */; };
+		7F77050528A27B5D0077F8A2 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 7F77050428A27B5D0077F8A2 /* FirebaseMessaging */; };
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
-		9406A88EF002446E1FC66C40 /* Pods_ChaRo_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D8B3FE282DCF35D515F6481 /* Pods_ChaRo_iOSTests.framework */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */; };
@@ -283,9 +293,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0D208EFE50191294160743E3 /* Pods-ChaRo-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		1DE7F386946217C90FC45C71 /* Pods-ChaRo-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2D8B3FE282DCF35D515F6481 /* Pods_ChaRo_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		330B8A6F274C7B89007FB132 /* ThemePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePopupVC.swift; sourceTree = "<group>"; };
 		332867FE2857421200E75C70 /* DateComponents+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+.swift"; sourceTree = "<group>"; };
 		33421B8E2817FAD9005EFBA5 /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
@@ -444,7 +451,6 @@
 		3CEC0112269E25AB00E9332C /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		3CEC0114269E277A00E9332C /* OnBoardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardCVC.swift; sourceTree = "<group>"; };
 		3CEC0115269E277A00E9332C /* OnBoardCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardCVC.xib; sourceTree = "<group>"; };
-		408F8247C12336EF9B0EE58F /* Pods_ChaRo_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChaRo_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		703DD82F269F3A7E004416A9 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		703DD831269F3B19004416A9 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		703DD839269F810D004416A9 /* LoginDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataModel.swift; sourceTree = "<group>"; };
@@ -503,7 +509,6 @@
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
-		87B5BDE3383A94B27F81F631 /* Pods-ChaRo-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDriveCourseTVC.swift; sourceTree = "<group>"; };
@@ -531,7 +536,6 @@
 		F4FB2EC6269F8F6B000C339B /* CreatePostParkingWarningTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostParkingWarningTVC.swift; sourceTree = "<group>"; };
 		F4FB2EC7269F8F6B000C339B /* CreatePostParkingWarningTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostParkingWarningTVC.xib; sourceTree = "<group>"; };
 		F4FB2ECA269FD7AE000C339B /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
-		F5461E5C7AFBD0446719C6EE /* Pods-ChaRo-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChaRo-iOS.release.xcconfig"; path = "Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -539,15 +543,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F7704F628A279B90077F8A2 /* RxRelay in Frameworks */,
 				7F0BED8D28A16C4B00BB3A8F /* KakaoSDKCommon in Frameworks */,
 				7F0BED9328A16C4B00BB3A8F /* KakaoSDKTemplate in Frameworks */,
 				7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */,
 				3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */,
 				7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */,
+				7F7704F128A279940077F8A2 /* Then in Frameworks */,
+				7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */,
+				7F77050128A27B5D0077F8A2 /* FirebaseAnalytics in Frameworks */,
 				7F0BED8F28A16C4B00BB3A8F /* KakaoSDKCommonCore in Frameworks */,
+				7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */,
 				7F0BED8B28A16C4B00BB3A8F /* KakaoSDKAuth in Frameworks */,
+				7F77050528A27B5D0077F8A2 /* FirebaseMessaging in Frameworks */,
 				7F0BED9128A16C4B00BB3A8F /* KakaoSDKShare in Frameworks */,
-				4A58368E32EBBEFA9CE42849 /* Pods_ChaRo_iOS.framework in Frameworks */,
+				7F7704F428A279B90077F8A2 /* RxCocoa in Frameworks */,
+				7F77050328A27B5D0077F8A2 /* FirebaseCrashlytics in Frameworks */,
+				7F7704E828A279270077F8A2 /* SnapKit in Frameworks */,
+				7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */,
+				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
+				7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,24 +570,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9406A88EF002446E1FC66C40 /* Pods_ChaRo_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0CA8D00E5168EC02612F0BAB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				87B5BDE3383A94B27F81F631 /* Pods-ChaRo-iOS.debug.xcconfig */,
-				F5461E5C7AFBD0446719C6EE /* Pods-ChaRo-iOS.release.xcconfig */,
-				1DE7F386946217C90FC45C71 /* Pods-ChaRo-iOSTests.debug.xcconfig */,
-				0D208EFE50191294160743E3 /* Pods-ChaRo-iOSTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		3610A88F2693730700EFC794 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,7 +731,6 @@
 				3C71FEA526881DAA007E8EAD /* ChaRo-iOS */,
 				3C89542D277B24D500303B73 /* ChaRo-iOSTests */,
 				3C71FEA426881DAA007E8EAD /* Products */,
-				0CA8D00E5168EC02612F0BAB /* Pods */,
 				5871AE65ECA530CBED32CC7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -1448,8 +1450,6 @@
 			isa = PBXGroup;
 			children = (
 				3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */,
-				408F8247C12336EF9B0EE58F /* Pods_ChaRo_iOS.framework */,
-				2D8B3FE282DCF35D515F6481 /* Pods_ChaRo_iOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1480,12 +1480,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C71FEB726881DAB007E8EAD /* Build configuration list for PBXNativeTarget "ChaRo-iOS" */;
 			buildPhases = (
-				D034E2BEBE04168DF55B6809 /* [CP] Check Pods Manifest.lock */,
 				3C71FE9F26881DAA007E8EAD /* Sources */,
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
 				36F8F6BD2713445200092338 /* Embed Frameworks */,
-				9567942784ACB54BCA9FA08C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1500,6 +1498,18 @@
 				7F0BED9228A16C4B00BB3A8F /* KakaoSDKTemplate */,
 				7F0BED9428A16C4B00BB3A8F /* KakaoSDKUser */,
 				7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */,
+				7F7704E728A279270077F8A2 /* SnapKit */,
+				7F7704EA28A279420077F8A2 /* Alamofire */,
+				7F7704ED28A2796D0077F8A2 /* Lottie */,
+				7F7704F028A279940077F8A2 /* Then */,
+				7F7704F328A279B90077F8A2 /* RxCocoa */,
+				7F7704F528A279B90077F8A2 /* RxRelay */,
+				7F7704F728A279B90077F8A2 /* RxSwift */,
+				7F7704FA28A27A130077F8A2 /* GoogleSignIn */,
+				7F7704FD28A27A8A0077F8A2 /* Kingfisher */,
+				7F77050028A27B5D0077F8A2 /* FirebaseAnalytics */,
+				7F77050228A27B5D0077F8A2 /* FirebaseCrashlytics */,
+				7F77050428A27B5D0077F8A2 /* FirebaseMessaging */,
 			);
 			productName = "ChaRo-iOS";
 			productReference = 3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */;
@@ -1509,11 +1519,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C895432277B24D500303B73 /* Build configuration list for PBXNativeTarget "ChaRo-iOSTests" */;
 			buildPhases = (
-				11044BF75A1F804E4BB40F9C /* [CP] Check Pods Manifest.lock */,
 				3C895428277B24D500303B73 /* Sources */,
 				3C895429277B24D500303B73 /* Frameworks */,
 				3C89542A277B24D500303B73 /* Resources */,
-				24B8A89E11933DDEB36C6FEC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1555,6 +1563,14 @@
 			packageReferences = (
 				7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				7F0BED9628A16C8D00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
+				7F7704E628A279270077F8A2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				7F7704E928A279410077F8A2 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				7F7704EC28A2796D0077F8A2 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				7F7704EF28A279940077F8A2 /* XCRemoteSwiftPackageReference "Then" */,
+				7F7704F228A279B90077F8A2 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				7F7704F928A27A130077F8A2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				7F7704FC28A27A8A0077F8A2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7F7704FF28A27B5D0077F8A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3C71FEA426881DAA007E8EAD /* Products */;
 			projectDirPath = "";
@@ -1634,87 +1650,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		11044BF75A1F804E4BB40F9C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChaRo-iOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		24B8A89E11933DDEB36C6FEC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOSTests/Pods-ChaRo-iOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9567942784ACB54BCA9FA08C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChaRo-iOS/Pods-ChaRo-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D034E2BEBE04168DF55B6809 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChaRo-iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3C71FE9F26881DAA007E8EAD /* Sources */ = {
@@ -2060,7 +1995,6 @@
 		};
 		3C71FEB826881DAB007E8EAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87B5BDE3383A94B27F81F631 /* Pods-ChaRo-iOS.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2092,7 +2026,6 @@
 		};
 		3C71FEB926881DAB007E8EAD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5461E5C7AFBD0446719C6EE /* Pods-ChaRo-iOS.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2125,7 +2058,6 @@
 		};
 		3C895433277B24D500303B73 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DE7F386946217C90FC45C71 /* Pods-ChaRo-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2146,7 +2078,6 @@
 		};
 		3C895434277B24D500303B73 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D208EFE50191294160743E3 /* Pods-ChaRo-iOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2214,6 +2145,70 @@
 				kind = branch;
 			};
 		};
+		7F7704E628A279270077F8A2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		7F7704E928A279410077F8A2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		7F7704EC28A2796D0077F8A2 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		7F7704EF28A279940077F8A2 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		7F7704F228A279B90077F8A2 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		7F7704F928A27A130077F8A2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		7F7704FC28A27A8A0077F8A2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		7F7704FF28A27B5D0077F8A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2251,6 +2246,66 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F0BED9628A16C8D00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */;
 			productName = RxKakaoSDKShare;
+		};
+		7F7704E728A279270077F8A2 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704E628A279270077F8A2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		7F7704EA28A279420077F8A2 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704E928A279410077F8A2 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		7F7704ED28A2796D0077F8A2 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704EC28A2796D0077F8A2 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		7F7704F028A279940077F8A2 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704EF28A279940077F8A2 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		7F7704F328A279B90077F8A2 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704F228A279B90077F8A2 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		7F7704F528A279B90077F8A2 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704F228A279B90077F8A2 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		7F7704F728A279B90077F8A2 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704F228A279B90077F8A2 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		7F7704FA28A27A130077F8A2 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704F928A27A130077F8A2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		7F7704FD28A27A8A0077F8A2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704FC28A27A8A0077F8A2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		7F77050028A27B5D0077F8A2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704FF28A27B5D0077F8A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		7F77050228A27B5D0077F8A2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704FF28A27B5D0077F8A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		7F77050428A27B5D0077F8A2 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7704FF28A27B5D0077F8A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
