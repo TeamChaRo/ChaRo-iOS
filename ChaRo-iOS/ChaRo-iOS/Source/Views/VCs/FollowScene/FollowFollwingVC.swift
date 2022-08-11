@@ -260,14 +260,13 @@ class FollowFollwingVC: UIViewController {
         }
         //MYPAGELabel
         headerTitleLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(58)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(14)
             $0.centerX.equalToSuperview()
         }
         //settingButton
         backButton.snp.makeConstraints{
             $0.width.equalTo(48)
             $0.height.equalTo(48)
-            $0.top.equalToSuperview().offset(58)
             $0.centerY.equalTo(headerTitleLabel)
             $0.leading.equalToSuperview().offset(0)
         }
