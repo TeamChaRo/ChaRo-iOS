@@ -172,11 +172,13 @@ extension SearchResultVC: UICollectionViewDataSource {
         cell?.titleLabel.font = UIFont.notoSansBoldFont(ofSize: 14)
         let post = postData[indexPath.row-1]
         
-        cell?.setData(image: post.image,
-                      title: post.title,
-                      tagCount: 3, tagArr: ["배열이","있는데","개수를왜"],
-                      isFavorite: post.isFavorite,
-                      postID: post.postID)
+        cell?.setData(viewModel: CommonCVC.ViewModel(image: post.image,
+                                                     title: post.title,
+                                                     tagCount: 3,
+                                                     tagArr: [post.region, post.theme, post.warning ?? ""],
+                                                     isFavorite: post.isFavorite,
+                                                     postID: post.postID,
+                                                     height: 0))
         return cell!
     }
 
@@ -302,7 +304,7 @@ extension SearchResultVC {
         for index in 0..<filterResultList.count {
             if filterResultList[index] == "" || filterResultList[index] == "선택안함" { continue }
             let isWarningIndex = index == 3
-            let buttonTitle = isWarningIndex ? " #\(filterResultList[index])X " : " #\(filterResultList[index]) "
+            let buttonTitle = isWarningIndex ? "    \(filterResultList[index])X    " : "    \(filterResultList[index])    "
             let button = UIButton().then {
                 $0.titleLabel?.font = .notoSansRegularFont(ofSize: 12)
                 $0.layer.cornerRadius = 15

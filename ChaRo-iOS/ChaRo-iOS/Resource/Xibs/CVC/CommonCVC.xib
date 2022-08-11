@@ -24,12 +24,12 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRj-TE-ZDO">
-                        <rect key="frame" x="0.0" y="190" width="326" height="20.5"/>
+                        <rect key="frame" x="0.0" y="190" width="326" height="19"/>
                         <attributedString key="attributedText">
                             <fragment content="해안도로 정복할 수 있는 포항 드라이브 코스">
                                 <attributes>
                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <font key="NSFont" metaFont="system" size="17"/>
+                                    <font key="NSFont" size="17" name=".AppleSDGothicNeoI-Regular"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bb5-sj-Y94">
-                        <rect key="frame" x="0.0" y="220.5" width="146" height="17"/>
+                        <rect key="frame" x="0.0" y="219" width="146" height="17"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="de2-7j-LiS">
                                 <rect key="frame" x="0.0" y="0.0" width="46" height="17"/>

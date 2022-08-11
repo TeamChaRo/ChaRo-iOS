@@ -74,6 +74,7 @@ class CommonCVC: UICollectionViewCell {
             isFavorite: viewModel.isFavorite,
             postID: viewModel.postID
         )
+        setLabel()
         setCellLabelHeight()
     }
 
