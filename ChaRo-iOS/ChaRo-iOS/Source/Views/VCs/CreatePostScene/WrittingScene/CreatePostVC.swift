@@ -39,7 +39,7 @@ final class CreatePostVC: UIViewController {
     private var itemProviders: [NSItemProvider] = []
     private var iterator: IndexingIterator<[NSItemProvider]>?
     private var titleSelectFlag: Bool = false // 제목 textfield 선택했는지 여부
-
+    private var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin)
 
     // MARK: UI
 
@@ -100,6 +100,7 @@ final class CreatePostVC: UIViewController {
       self.tableView.separatorStyle = .none
       self.tableView.dismissKeyboardWhenTappedAround()
       self.initCellHeight()
+      self.makeAlertWhenLookAround()
   }
 }
 
@@ -174,6 +175,16 @@ extension CreatePostVC {
             courseDesc: self.courseDesc,
             course: []
         )
+    }
+    
+    private func makeAlertWhenLookAround() {
+        if !isLogin {
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소", cancelAction: { [weak self] _ in
+                self?.dismiss(animated: true)
+            }, completion: nil)
+        }
     }
 }
 
