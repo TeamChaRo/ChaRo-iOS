@@ -547,8 +547,14 @@ extension HomeVC: CollectionViewCellDelegate {
 //postID 넘기기 위한 Delegate 구현
 extension HomeVC: PostIdDelegate {
     func sendPostDetail(with postId: Int) {
-        let nextVC = PostDetailVC(postId: postId)
-        navigationController?.pushViewController(nextVC, animated: true)
+        if isLogin {
+            let nextVC = PostDetailVC(postId: postId)
+            navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
     }
 }
 
