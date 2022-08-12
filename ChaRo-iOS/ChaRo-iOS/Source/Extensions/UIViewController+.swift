@@ -33,6 +33,28 @@ extension UIViewController {
         self.present(alertViewController, animated: true, completion: completion)
     }
     
+    func makeRequestAlert(title: String,
+                          message: String,
+                          okTitle: String,
+                          okAction: ((UIAlertAction) -> Void)?,
+                          cancelTitle: String,
+                          cancelAction: ((UIAlertAction) -> Void)? = nil,
+                          completion: (() -> Void)? = nil) {
+        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        let alertViewController = UIAlertController(title: title, message: message,
+                                                    preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: cancelAction)
+        alertViewController.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(title: okTitle, style: .default, handler: okAction)
+        alertViewController.addAction(okAction)
+        
+        self.present(alertViewController, animated: true, completion: completion)
+    }
     
     func makeAlert(title: String,
                    message: String,
