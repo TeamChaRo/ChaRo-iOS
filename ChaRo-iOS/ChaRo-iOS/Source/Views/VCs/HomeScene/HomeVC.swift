@@ -505,33 +505,37 @@ extension HomeVC: IsSelectedCVCDelegate {
 
 extension HomeVC: SeeMorePushDelegate {
     func seeMorePushDelegate(data: Int) {
-        guard let smVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
-        
-        switch data {
-        case 3:
-            smVC.topText = "요즘 뜨는 드라이브 코스"
-            GetDetailDataService.value = "0"
-            GetNewDetailDataService.value = "0"
-            GetInfinityDetailDataService.identifier = "0"
-        case 4:
-            smVC.topText = customText
-            GetDetailDataService.value = "1?value=lake"
-            GetNewDetailDataService.value = "1?value=lake"
-            GetInfinityDetailDataService.identifier = "1"
-            GetInfinityDetailDataService.value = "?value=lake"
-        case 5:
-            smVC.topText = localText
-            GetDetailDataService.value = "2?value=busan"
-            GetNewDetailDataService.value = "2?value=busan"
-            GetInfinityDetailDataService.identifier = "2"
-            GetInfinityDetailDataService.value = "?value=busan"
-        default:
-            print("Error")
+        if isLogin {
+            guard let smVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
+            
+            switch data {
+            case 3:
+                smVC.topText = "요즘 뜨는 드라이브 코스"
+                GetDetailDataService.value = "0"
+                GetNewDetailDataService.value = "0"
+                GetInfinityDetailDataService.identifier = "0"
+            case 4:
+                smVC.topText = customText
+                GetDetailDataService.value = "1?value=lake"
+                GetNewDetailDataService.value = "1?value=lake"
+                GetInfinityDetailDataService.identifier = "1"
+                GetInfinityDetailDataService.value = "?value=lake"
+            case 5:
+                smVC.topText = localText
+                GetDetailDataService.value = "2?value=busan"
+                GetNewDetailDataService.value = "2?value=busan"
+                GetInfinityDetailDataService.identifier = "2"
+                GetInfinityDetailDataService.value = "?value=busan"
+            default:
+                print("Error")
+            }
+            self.navigationController?.pushViewController(smVC, animated: true)
+        } else {
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
         }
-        self.navigationController?.pushViewController(smVC, animated: true)
     }
-    
-    
 }
 
 extension HomeVC: CollectionViewCellDelegate {
