@@ -233,8 +233,7 @@ class HomeVC: UIViewController {
     }
     
     private func setNaviBarNotificationItem(isActive: Bool) {
-        homeNavigationNotificationButton.rx.image()
-            .onNext(isActive ? ImageLiterals.icAlarmActiveWhite : ImageLiterals.icAlarmWhite)
+        homeNavigationNotificationButton.setBackgroundImage(isActive ? ImageLiterals.icAlarmActiveWhite : ImageLiterals.icAlarmWhite, for: .normal) 
     }
 }
 
@@ -337,16 +336,13 @@ extension HomeVC: UITableViewDelegate {
         if isWhite {
             homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
-            if let noti = notificationActivate {
-                homeNavigationNotificationButton.rx.image().onNext(noti ? ImageLiterals.icAlarmActiveWhite :ImageLiterals.icAlarmWhite)
-            }
+            homeNavigationNotificationButton.setBackgroundImage(notificationActivate ?? false ? ImageLiterals.icAlarmActiveWhite :ImageLiterals.icAlarmWhite, for: .normal)
             navigationBottomView.isHidden = true
         } else {
             homeNavigationLogo.image = ImageLiterals.icCharoLogo
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
-            if let noti = notificationActivate {
-                homeNavigationNotificationButton.rx.image().onNext(noti ? ImageLiterals.icAlarmActiveBlack :ImageLiterals.icAlarmBlack)
-            }
+            homeNavigationNotificationButton.setBackgroundImage(notificationActivate ?? false ? ImageLiterals.icAlarmActiveBlack : ImageLiterals.icAlarmBlack, for: .normal)
+
             navigationBottomView.isHidden = false
         }
     }
