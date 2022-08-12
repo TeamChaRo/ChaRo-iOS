@@ -58,6 +58,7 @@ class HomeVC: UIViewController {
     private var notificationListData = BehaviorSubject<[NotificationListModel]>(value: [])
     private let bag = DisposeBag()
     private var notificationActivate: Bool?
+    private var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,17 +191,30 @@ class HomeVC: UIViewController {
     }
     
     @objc func presentSearchPost() {
-        let nextVC = SearchPostVC()
-        let navigation = UINavigationController(rootViewController: nextVC)
-        navigation.modalPresentationStyle = .fullScreen
-        present(navigation, animated: true, completion: nil)
+        if isLogin {
+            let nextVC = SearchPostVC()
+            let navigation = UINavigationController(rootViewController: nextVC)
+            navigation.modalPresentationStyle = .fullScreen
+            present(navigation, animated: true, completion: nil)
+        } else {
+            // 로그인을 하지 않았을 때 - 둘러보기
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
     }
     
     @IBAction func notificationButtonClicked(_ sender: Any) {
-        
-        guard let notiVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(identifier: "NotificationVC") as? NotificationVC else {return}
-        
-        self.navigationController?.pushViewController(notiVC, animated: true)
+        if isLogin {
+            guard let notiVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(identifier: "NotificationVC") as? NotificationVC else {return}
+            
+            self.navigationController?.pushViewController(notiVC, animated: true)
+        } else {
+            // 로그인을 하지 않았을 때 - 둘러보기
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
     }
     
     private func bindNotificationData() {
