@@ -31,6 +31,7 @@ class HomeVC: UIViewController {
     var homeTableViewHeaderHeight: CGFloat = UIScreen.getDeviceWidth() * 517.0 / 375.0
     var headerView: UIView!
     private var bannerImageList: [UIImage] = []
+    private var currentNaviIconColorIsWhite: Bool = false
     
     enum BannerContent: String, CaseIterable {
         case seaDriveCource = "강릉 해변 드라이브 코스와 맛집"
@@ -111,7 +112,7 @@ class HomeVC: UIViewController {
         }
         headerView.frame = headerRect
     }
-
+    
     
     //서버 데이터 받아오는 부분
     func getServerData() {
@@ -228,12 +229,16 @@ class HomeVC: UIViewController {
             }
             
             self?.notificationActivate = isActivate
-            self?.setNaviBarNotificationItem(isActive: isActivate)
+            self?.setNaviBarNotificationItem(isActive: isActivate, isWhite: self?.currentNaviIconColorIsWhite ?? false)
         }).disposed(by: bag)
     }
     
-    private func setNaviBarNotificationItem(isActive: Bool) {
-        homeNavigationNotificationButton.setBackgroundImage(isActive ? ImageLiterals.icAlarmActiveWhite : ImageLiterals.icAlarmWhite, for: .normal) 
+    private func setNaviBarNotificationItem(isActive: Bool, isWhite: Bool) {
+        if isActive {
+            homeNavigationNotificationButton.setBackgroundImage(isWhite ? ImageLiterals.icAlarmActiveWhite : ImageLiterals.icAlarmActiveBlack, for: .normal)
+        } else {
+            homeNavigationNotificationButton.setBackgroundImage(isWhite ? ImageLiterals.icAlarmWhite : ImageLiterals.icAlarmBlack, for: .normal)
+        }
     }
 }
 
@@ -334,15 +339,17 @@ extension HomeVC: UITableViewDelegate {
     //MARK: ScrollViewDidScroll
     private func configureLogoImage(isWhite: Bool) {
         if isWhite {
+            currentNaviIconColorIsWhite = true
             homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
             homeNavigationNotificationButton.setBackgroundImage(notificationActivate ?? false ? ImageLiterals.icAlarmActiveWhite :ImageLiterals.icAlarmWhite, for: .normal)
             navigationBottomView.isHidden = true
         } else {
+            currentNaviIconColorIsWhite = false
             homeNavigationLogo.image = ImageLiterals.icCharoLogo
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
             homeNavigationNotificationButton.setBackgroundImage(notificationActivate ?? false ? ImageLiterals.icAlarmActiveBlack : ImageLiterals.icAlarmBlack, for: .normal)
-
+            
             navigationBottomView.isHidden = false
         }
     }
