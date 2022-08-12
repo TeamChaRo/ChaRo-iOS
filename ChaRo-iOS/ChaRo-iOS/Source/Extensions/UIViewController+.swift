@@ -112,4 +112,11 @@ extension UIViewController {
         
     }
     
+    /// LoginSB의 루트 네비게이션 컨트롤러로 화면전환하는 메서드
+    public func presentToSignNC() {
+        guard let signNC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: SignNC.className)
+                as? SignNC else { return }
+        signNC.modalPresentationStyle = .overFullScreen
+        self.present(signNC, animated: true, completion: nil)
+    }
 }
