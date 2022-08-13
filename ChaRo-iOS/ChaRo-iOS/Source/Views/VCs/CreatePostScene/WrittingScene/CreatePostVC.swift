@@ -40,6 +40,9 @@ final class CreatePostVC: UIViewController {
     private var iterator: IndexingIterator<[NSItemProvider]>?
     private var titleSelectFlag: Bool = false // 제목 textfield 선택했는지 여부
     private var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin)
+    private var shownPhotoAuth: Bool = UserDefaults.standard.bool(
+        forKey: Constants.UserDefaultsKey.shownPhotoAuth
+    )
 
     // MARK: UI
 
@@ -260,6 +263,9 @@ extension CreatePostVC {
 
                 self.present(picker, animated: true, completion: nil)
             } else {
+                guard UserDefaults.standard.bool(
+                    forKey: Constants.UserDefaultsKey.shownPhotoAuth
+                ) == true else { return }
                 self.AuthSettingOpen(AuthString: "갤러리")
             }
         } else {
@@ -679,6 +685,7 @@ extension CreatePostVC {
                     isAuth = true
                 }
             }
+            Constants.shownPhotoLibrary()
             return isAuth
         case .restricted:
             // 앱이 사진 라이브러리에 액세스 할 수있는 권한이 없으며 사용자는 이러한 권한을 부여 할 수 없습니다.
