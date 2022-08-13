@@ -31,6 +31,7 @@ class HomeVC: UIViewController {
     var homeTableViewHeaderHeight: CGFloat = UIScreen.getDeviceWidth() * 517.0 / 375.0
     var headerView: UIView!
     private var bannerImageList: [UIImage] = []
+    private var currentNaviIconColorIsWhite: Bool = false
     
     enum BannerContent: String, CaseIterable {
         case seaDriveCource = "강릉 해변 드라이브 코스와 맛집"
@@ -58,6 +59,7 @@ class HomeVC: UIViewController {
     private var notificationListData = BehaviorSubject<[NotificationListModel]>(value: [])
     private let bag = DisposeBag()
     private var notificationActivate: Bool?
+    private var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +112,7 @@ class HomeVC: UIViewController {
         }
         headerView.frame = headerRect
     }
-
+    
     
     //서버 데이터 받아오는 부분
     func getServerData() {
@@ -190,17 +192,30 @@ class HomeVC: UIViewController {
     }
     
     @objc func presentSearchPost() {
-        let nextVC = SearchPostVC()
-        let navigation = UINavigationController(rootViewController: nextVC)
-        navigation.modalPresentationStyle = .fullScreen
-        present(navigation, animated: true, completion: nil)
+        if isLogin {
+            let nextVC = SearchPostVC()
+            let navigation = UINavigationController(rootViewController: nextVC)
+            navigation.modalPresentationStyle = .fullScreen
+            present(navigation, animated: true, completion: nil)
+        } else {
+            // 로그인을 하지 않았을 때 - 둘러보기
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
     }
     
     @IBAction func notificationButtonClicked(_ sender: Any) {
-        
-        guard let notiVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(identifier: "NotificationVC") as? NotificationVC else {return}
-        
-        self.navigationController?.pushViewController(notiVC, animated: true)
+        if isLogin {
+            guard let notiVC = UIStoryboard(name: "Notification", bundle: nil).instantiateViewController(identifier: "NotificationVC") as? NotificationVC else {return}
+            
+            self.navigationController?.pushViewController(notiVC, animated: true)
+        } else {
+            // 로그인을 하지 않았을 때 - 둘러보기
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
     }
     
     private func bindNotificationData() {
@@ -214,13 +229,16 @@ class HomeVC: UIViewController {
             }
             
             self?.notificationActivate = isActivate
-            self?.setNaviBarNotificationItem(isActive: isActivate)
+            self?.setNaviBarNotificationItem(isActive: isActivate, isWhite: self?.currentNaviIconColorIsWhite ?? false)
         }).disposed(by: bag)
     }
     
-    private func setNaviBarNotificationItem(isActive: Bool) {
-        homeNavigationNotificationButton.rx.image()
-            .onNext(isActive ? ImageLiterals.icAlarmActiveWhite : ImageLiterals.icAlarmWhite)
+    private func setNaviBarNotificationItem(isActive: Bool, isWhite: Bool) {
+        if isActive {
+            homeNavigationNotificationButton.setBackgroundImage(isWhite ? ImageLiterals.icAlarmActiveWhite : ImageLiterals.icAlarmActiveBlack, for: .normal)
+        } else {
+            homeNavigationNotificationButton.setBackgroundImage(isWhite ? ImageLiterals.icAlarmWhite : ImageLiterals.icAlarmBlack, for: .normal)
+        }
     }
 }
 
@@ -321,18 +339,17 @@ extension HomeVC: UITableViewDelegate {
     //MARK: ScrollViewDidScroll
     private func configureLogoImage(isWhite: Bool) {
         if isWhite {
+            currentNaviIconColorIsWhite = true
             homeNavigationLogo.image = ImageLiterals.icCharoLogoWhite
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchWhite, for: .normal)
-            if let noti = notificationActivate {
-                homeNavigationNotificationButton.rx.image().onNext(noti ? ImageLiterals.icAlarmActiveWhite :ImageLiterals.icAlarmWhite)
-            }
+            homeNavigationNotificationButton.setBackgroundImage(notificationActivate ?? false ? ImageLiterals.icAlarmActiveWhite :ImageLiterals.icAlarmWhite, for: .normal)
             navigationBottomView.isHidden = true
         } else {
+            currentNaviIconColorIsWhite = false
             homeNavigationLogo.image = ImageLiterals.icCharoLogo
             homeNavigationSearchButton.setBackgroundImage(ImageLiterals.icSearchBlack, for: .normal)
-            if let noti = notificationActivate {
-                homeNavigationNotificationButton.rx.image().onNext(noti ? ImageLiterals.icAlarmActiveBlack :ImageLiterals.icAlarmBlack)
-            }
+            homeNavigationNotificationButton.setBackgroundImage(notificationActivate ?? false ? ImageLiterals.icAlarmActiveBlack : ImageLiterals.icAlarmBlack, for: .normal)
+            
             navigationBottomView.isHidden = false
         }
     }
@@ -488,33 +505,37 @@ extension HomeVC: IsSelectedCVCDelegate {
 
 extension HomeVC: SeeMorePushDelegate {
     func seeMorePushDelegate(data: Int) {
-        guard let smVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
-        
-        switch data {
-        case 3:
-            smVC.topText = "요즘 뜨는 드라이브 코스"
-            GetDetailDataService.value = "0"
-            GetNewDetailDataService.value = "0"
-            GetInfinityDetailDataService.identifier = "0"
-        case 4:
-            smVC.topText = customText
-            GetDetailDataService.value = "1?value=lake"
-            GetNewDetailDataService.value = "1?value=lake"
-            GetInfinityDetailDataService.identifier = "1"
-            GetInfinityDetailDataService.value = "?value=lake"
-        case 5:
-            smVC.topText = localText
-            GetDetailDataService.value = "2?value=busan"
-            GetNewDetailDataService.value = "2?value=busan"
-            GetInfinityDetailDataService.identifier = "2"
-            GetInfinityDetailDataService.value = "?value=busan"
-        default:
-            print("Error")
+        if isLogin {
+            guard let smVC = UIStoryboard(name: "HomePost", bundle: nil).instantiateViewController(identifier: "HomePostVC") as? HomePostVC else {return}
+            
+            switch data {
+            case 3:
+                smVC.topText = "요즘 뜨는 드라이브 코스"
+                GetDetailDataService.value = "0"
+                GetNewDetailDataService.value = "0"
+                GetInfinityDetailDataService.identifier = "0"
+            case 4:
+                smVC.topText = customText
+                GetDetailDataService.value = "1?value=lake"
+                GetNewDetailDataService.value = "1?value=lake"
+                GetInfinityDetailDataService.identifier = "1"
+                GetInfinityDetailDataService.value = "?value=lake"
+            case 5:
+                smVC.topText = localText
+                GetDetailDataService.value = "2?value=busan"
+                GetNewDetailDataService.value = "2?value=busan"
+                GetInfinityDetailDataService.identifier = "2"
+                GetInfinityDetailDataService.value = "?value=busan"
+            default:
+                print("Error")
+            }
+            self.navigationController?.pushViewController(smVC, animated: true)
+        } else {
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
         }
-        self.navigationController?.pushViewController(smVC, animated: true)
     }
-    
-    
 }
 
 extension HomeVC: CollectionViewCellDelegate {
@@ -530,8 +551,14 @@ extension HomeVC: CollectionViewCellDelegate {
 //postID 넘기기 위한 Delegate 구현
 extension HomeVC: PostIdDelegate {
     func sendPostDetail(with postId: Int) {
-        let nextVC = PostDetailVC(postId: postId)
-        navigationController?.pushViewController(nextVC, animated: true)
+        if isLogin {
+            let nextVC = PostDetailVC(postId: postId)
+            navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
     }
 }
 

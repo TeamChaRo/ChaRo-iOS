@@ -38,6 +38,7 @@ class ThemePostVC: UIViewController {
     var currentState: String = "인기순"
     private var selectedTheme = ""
     private var selectedDriveList: [DriveElement] = []
+    private var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin)
     
     //MARK:- Constraint
     
@@ -270,8 +271,14 @@ extension ThemePostVC: ThemeNetworkDelegate {
 
 extension ThemePostVC: PostIdDelegate {
     func sendPostDetail(with postId: Int) {
-        let nextVC = PostDetailVC(postId: postId)
-        navigationController?.pushViewController(nextVC, animated: true)
+        if isLogin {
+            let nextVC = PostDetailVC(postId: postId)
+            navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
     }
 }
 
