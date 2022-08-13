@@ -46,9 +46,14 @@ class JoinContractView: UIView {
     var agreeAllButton = JoinAgreeButton(isBig: true).then {
         $0.addTarget(self, action: #selector(allButtonClicked), for: .touchUpInside)
     }
-
-    var agreePushButton = JoinAgreeButton(isBig: false)
-    var agreeEmailButton = JoinAgreeButton(isBig: false)
+    
+    var agreePushButton = JoinAgreeButton(isBig: false).then {
+        $0.addTarget(self, action: #selector(smallButtonClicked), for: .touchUpInside)
+    }
+    
+    var agreeEmailButton = JoinAgreeButton(isBig: false).then {
+        $0.addTarget(self, action: #selector(smallButtonClicked), for: .touchUpInside)
+    }
     
     //약관 SafariViewer 생성을 위한 클로져
     var pushDocumentPresentClosure: ((SFSafariViewController) -> Void)?
@@ -99,6 +104,12 @@ class JoinContractView: UIView {
     @objc func allButtonClicked() {
         agreePushButton.agreed = agreeAllButton.agreed
         agreeEmailButton.agreed = agreeAllButton.agreed
+    }
+    
+    @objc func smallButtonClicked() {
+        if agreePushButton.agreed == agreeEmailButton.agreed {
+            self.agreeAllButton.agreed = agreePushButton.agreed
+        }
     }
     
     //MARK: - configure 함수

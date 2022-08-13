@@ -53,6 +53,7 @@ enum ImageLiterals {
     static var icKakaoLogo: UIImage { .load(name: "kakaoLogo") }
     static var icLoginFieldBackground: UIImage { .load(name: "idBackgroud") }
     
+    static var icMapSearchClose: UIImage { .load(name: "icMapSearchClose") }
     static var icMapEnd: UIImage { .load(name: "icMapEnd") }
     static var icMapStart: UIImage { .load(name: "icMapStart") }
     static var icMapWaypoint: UIImage { .load(name: "icMapWaypoint") }

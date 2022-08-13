@@ -22,23 +22,13 @@ extension Constants {
 
         //둘러보기를 위한 로그인 여부
         static let isLogin = "isLogin"
-
-        //소셜 로그인 구분
-        static let isAppleLogin = "isAppleLogin"
-        static let savedAppleEmail = "savedAppleEmail"
         
-        static let isKakaoLogin = "isKakaoLogin"
-        static let isGoogleLogin = "isGoogleLogin"
+        //소셜 로그인 구분
+        static let isSNSLogin = "isSNSLogin"
+        static let savedAppleEmail = "savedAppleEmail"
 
         //포토 라이브러리 권한 팝업 여부
         static let shownPhotoAuth = "shownPhotoAuth"
-    }
-    
-    static func addLoginUserDefaults(isAppleLogin: Bool, isKakaoLogin: Bool, isGoogleLogin: Bool) {
-        UserDefaults.standard.set(isAppleLogin, forKey: Constants.UserDefaultsKey.isAppleLogin)
-        UserDefaults.standard.set(isKakaoLogin, forKey: Constants.UserDefaultsKey.isKakaoLogin)
-        UserDefaults.standard.set(isGoogleLogin, forKey: Constants.UserDefaultsKey.isGoogleLogin)
-        UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.shownPhotoAuth)
     }
     
     static func addUserDefaults(userEmail: String, userPassword: String, userNickname: String, userImage: String) {
@@ -61,11 +51,8 @@ extension Constants {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.userImage)
         
         UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isLogin)
+        UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isSNSLogin)
         
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isAppleLogin)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isKakaoLogin)
-        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isGoogleLogin)
-
         UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.shownPhotoAuth)
     }
 }

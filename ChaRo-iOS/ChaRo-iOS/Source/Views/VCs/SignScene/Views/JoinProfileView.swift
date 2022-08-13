@@ -17,8 +17,8 @@ class JoinProfileView: UIView, UITextFieldDelegate {
     let profileView = ProfileView()
     let nicknameView = JoinInputView(title: "닉네임 작성", placeholder: "5자 이내 한글")
     
-    let nextButton = NextButton(isSticky: false, isTheLast: false)
-    let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
+    let nextButton = NextButton(isSticky: false, isTheLast: true)
+    let stickyNextButton = NextButton(isSticky: true, isTheLast: true)
     var stickyView: UIView?
     
     
@@ -52,7 +52,6 @@ class JoinProfileView: UIView, UITextFieldDelegate {
         self.nextButton.nextViewClosure = {
         }
         self.stickyNextButton.nextViewClosure = {
-            //서버연결
         }
     }
     

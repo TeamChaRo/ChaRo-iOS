@@ -17,8 +17,8 @@ class LoginVC: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var findPasswordButton: UIButton!
     
-    @IBOutlet weak var idTextField: LoginTextField!
-    @IBOutlet weak var pwdTextField: LoginTextField!
+    @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var pwdTextField: UITextField!
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -34,6 +34,7 @@ class LoginVC: UIViewController {
         configureLoginButtonUI()
         configureTextfieldUI()
         configureNotificationCenter()
+        configureDelegate()
         addTestUserAccount()
     }
     
@@ -41,8 +42,10 @@ class LoginVC: UIViewController {
         self.idTextField.text = "charo-ios@gmail.com"
         self.pwdTextField.text = "charo111"
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        removeObservers()
+    
+    private func configureDelegate() {
+        idTextField.delegate = self
+        pwdTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,36 +63,49 @@ class LoginVC: UIViewController {
     
     func configureTextfieldUI() {
         let height = idTextField.frame.height
-        
         self.idTextField.layer.cornerRadius = 10
         self.pwdTextField.layer.cornerRadius = 10
         
         self.idTextField.layer.borderWidth = 1.0
         self.pwdTextField.layer.borderWidth = 1.0
-        
+
         self.idTextField.layer.borderColor = UIColor.neomorfismBlueLine.cgColor
         self.pwdTextField.layer.borderColor = UIColor.neomorfismBlueLine.cgColor
-        
+
         self.idTextField.leftViewMode = .always
         self.pwdTextField.leftViewMode = .always
-        
-        self.idTextField.clearButtonMode = .whileEditing
-        self.pwdTextField.clearButtonMode = .whileEditing
-        
+
+        self.idTextField.clearButtonMode = .never
+        self.pwdTextField.clearButtonMode = .never
+
+        self.idTextField.rightViewMode = .whileEditing
+        self.pwdTextField.rightViewMode = .whileEditing
+
         let idContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: height))
         let pwdContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: height))
-        
+
         let idImageView = UIImageView(frame: CGRect(x: 5, y: 4, width: 40, height: 40))
         let pwdImageView = UIImageView(frame: CGRect(x: 5, y: 4, width: 40, height: 40))
-        
+
         idImageView.image = ImageLiterals.icId
         pwdImageView.image = ImageLiterals.icPassword
-        
+
         idContainerView.addSubview(idImageView)
         pwdContainerView.addSubview(pwdImageView)
-        
+
         idTextField.leftView = idContainerView
         pwdTextField.leftView = pwdContainerView
+        
+        let idClearButton = UIButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+        idClearButton.setImage(ImageLiterals.icMapSearchClose, for: [])
+        idClearButton.addTarget(self, action: #selector(clearIdTextField), for: .touchUpInside)
+        
+        let pwdClearButton = UIButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+        pwdClearButton.setImage(ImageLiterals.icMapSearchClose, for: [])
+        pwdClearButton.addTarget(self, action: #selector(clearPwdTextField), for: .touchUpInside)
+        
+        self.idTextField.rightView = idClearButton
+        self.pwdTextField.rightView = pwdClearButton
     }
     
     func loginAction() {
@@ -115,6 +131,8 @@ class LoginVC: UIViewController {
                     UserDefaults.standard.set(user.nickname, forKey: Constants.UserDefaultsKey.userNickname)
                     UserDefaults.standard.set(user.profileImage, forKey: Constants.UserDefaultsKey.userImage)
                     UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isLogin)
+                    UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.isSNSLogin)
+                    UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.shownPhotoAuth)
                 }
                 self.showHomeVC()
                 
@@ -173,16 +191,22 @@ class LoginVC: UIViewController {
     
     @objc
     func textFieldMoveUp(_ notification: NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
-            })
-        }
+        self.view.frame.origin.y = -150
     }
     
     @objc
     func textFieldMoveDown(_ notification: NSNotification) {
-        view.transform = .identity
+        self.view.frame.origin.y = 0
+    }
+    
+    @objc
+    func clearIdTextField() {
+        self.idTextField.text = ""
+    }
+    
+    @objc
+    func clearPwdTextField() {
+        self.pwdTextField.text = ""
     }
 }
 
@@ -199,9 +223,13 @@ extension LoginVC {
     }
 }
 
-class LoginTextField: UITextField {
-    override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
-        let originalRect = super.clearButtonRect(forBounds: bounds)
-        return originalRect.offsetBy(dx: -10, dy: 0)
+extension LoginVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == idTextField {
+            pwdTextField.becomeFirstResponder()
+        } else {
+            pwdTextField.resignFirstResponder()
+        }
+        return true
     }
 }

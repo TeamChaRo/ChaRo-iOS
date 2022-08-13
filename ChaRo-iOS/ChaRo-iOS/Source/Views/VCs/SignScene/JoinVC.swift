@@ -70,10 +70,6 @@ class JoinVC: UIViewController {
         configureNavigationController()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-            removeObservers()
-    }
-    
     //MARK: - configure 함수
     private func configureNavigationController() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -91,23 +87,27 @@ class JoinVC: UIViewController {
     
     private func configureClosure() {
         emailView.nextButton.nextPageClosure = {
-                self.showView(number: 2)
-                self.moveCar(toPage: 2)
+            self.showView(number: 2)
+            self.moveCar(toPage: 2)
         }
         
         emailView.stickyNextButton.nextPageClosure = {
-                self.showView(number: 2)
-                self.moveCar(toPage: 2)
+            self.showView(number: 2)
+            self.moveCar(toPage: 2)
+            self.emailView.emailInputView.inputTextField?.resignFirstResponder()
+            self.emailView.emailVerifyInputView.inputTextField?.resignFirstResponder()
         }
         
         passwordView.nextButton.nextPageClosure = {
-                self.showView(number: 3)
-                self.moveCar(toPage: 3)
+            self.showView(number: 3)
+            self.moveCar(toPage: 3)
         }
         
         passwordView.stickyNextButton.nextPageClosure = {
-                self.showView(number: 3)
-                self.moveCar(toPage: 3)
+            self.showView(number: 3)
+            self.moveCar(toPage: 3)
+            self.passwordView.passwordInputView.firstTextField.resignFirstResponder()
+            self.passwordView.passwordInputView.secondTextField.resignFirstResponder()
         }
         
         profileView.nextButton.nextPageClosure = {
@@ -116,8 +116,25 @@ class JoinVC: UIViewController {
         }
         
         profileView.stickyNextButton.nextPageClosure = {
-                self.showView(number: 4)
-                self.moveCar(toPage: 4)
+            self.showView(number: 4)
+            self.moveCar(toPage: 4)
+            self.profileView.nicknameView.inputTextField?.resignFirstResponder()
+        }
+        
+        profileView.profileView.actionSheetPresentClosure = { actionSheet in
+            self.present(actionSheet, animated: true)
+        }
+        profileView.profileView.imagePickerPresentClosure = { picker in
+            picker.delegate = self
+            self.present(picker, animated: true)
+        }
+        
+        contractView.emailDocumentPresentClosure = { safariView in
+            self.present(safariView, animated: true, completion: nil)
+        }
+        
+        contractView.pushDocumentPresentClosure = { safariView in
+            self.present(safariView, animated: true, completion: nil)
         }
         
         contractView.nextButton.nextPageClosure = {
@@ -128,7 +145,6 @@ class JoinVC: UIViewController {
             let image = self.profileView.profileView.profileImageView.image
             let marketingPush = self.contractView.agreePushButton.agreed
             let marketingEmail = self.contractView.agreeEmailButton.agreed
-            
             
             self.postJoin(userEmail: userEmail!,
                           password: password!,
@@ -152,11 +168,9 @@ class JoinVC: UIViewController {
     
     @objc func textFieldMoveUp(_ notification: NSNotification) {
         if (!self.emailView.isHidden && !self.emailView.emailVerifyInputView.isHidden) || !self.profileView.isHidden {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
-                })
-            }
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -120)
+            })
         }
     }
     
@@ -194,7 +208,7 @@ class JoinVC: UIViewController {
             profileView.isHidden = true
             contractView.isHidden = false
         default:
-            print("엥")
+            break
         }
         
     }
@@ -317,19 +331,6 @@ class JoinVC: UIViewController {
         contractView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
-        
-        profileView.profileView.imagePickerPresentClosure = { picker in
-            picker.delegate = self
-            self.present(picker, animated: true)
-        }
-        
-        contractView.emailDocumentPresentClosure = { safariView in
-            self.present(safariView, animated: true, completion: nil)
-        }
-        
-        contractView.pushDocumentPresentClosure = { safariView in
-            self.present(safariView, animated: true, completion: nil)
-        }
     }
     
     
@@ -350,7 +351,9 @@ class JoinVC: UIViewController {
             
             case .success(let msg):
                 print("success", msg)
-                self.navigationController?.popViewController(animated: true)
+                self.makeAlert(title: "회원가입 성공", message: "회원가입이 완료 되었습니다!", okAction: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }, completion: nil)
             case .requestErr(let msg):
                 print("requestERR", msg)
             case .pathErr:
@@ -401,12 +404,12 @@ extension JoinVC: UICollectionViewDataSource, UICollectionViewDelegate {
 
 extension JoinVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height - 250)
+        return CGSize(width: view.frame.width, height: view.frame.height - 180)
     }
 }
 
 
-//MARK: -이미지 피커 extension
+//MARK: - 이미지 피커 extension
 extension JoinVC:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
