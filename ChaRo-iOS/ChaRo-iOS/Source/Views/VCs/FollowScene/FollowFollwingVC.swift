@@ -159,7 +159,11 @@ class FollowFollwingVC: UIViewController {
         followingButton.setTitleColor(UIColor.mainBlue, for: .normal)
      }
     @objc private func backButtonClicked(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if self.navigationController == nil {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
      }
 //MARK: ServerFunction
     func getFollowData() {

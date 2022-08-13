@@ -372,7 +372,12 @@ class OtherMyPageVC: UIViewController {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: otherUserID)
             followVC.isOtherMypage = true
             self.tabBarController?.tabBar.isHidden = true
+        if self.navigationController == nil {
+            followVC.modalPresentationStyle = .overFullScreen
+            self.present(followVC, animated: true)
+        } else {
             self.navigationController?.pushViewController(followVC, animated: true)
+        }
      }
     
     @objc private func followingButtonClicked(_ sender: UIButton) {
@@ -380,7 +385,12 @@ class OtherMyPageVC: UIViewController {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: otherUserID)
             followVC.isOtherMypage = true
             self.tabBarController?.tabBar.isHidden = true
+        if self.navigationController == nil {
+            followVC.modalPresentationStyle = .overFullScreen
+            self.present(followVC, animated: true)
+        } else {
             self.navigationController?.pushViewController(followVC, animated: true)
+        }
      }
     
     //MARK: Server
