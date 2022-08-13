@@ -363,10 +363,13 @@ extension FollowFollwingVC: UITableViewDataSource {
         } else {
             otherVC.setOtherUserID(userID: followDataList?.following[indexPath.row].userEmail ?? "")
         }
-        self.navigationController?.pushViewController(otherVC, animated: true)
+        if self.navigationController == nil {
+            otherVC.modalPresentationStyle = .overFullScreen
+            self.present(otherVC, animated: true)
+        } else {
+            self.navigationController?.pushViewController(otherVC, animated: true)
+        }
     }
-    
-    
 }
 
 extension FollowFollwingVC: isFollowButtonClickedDelegate {
