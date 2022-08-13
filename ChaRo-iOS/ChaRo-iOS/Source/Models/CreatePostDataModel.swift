@@ -9,8 +9,7 @@ import Foundation
 
 struct CreatePostDataModel: Codable {
     let success: Bool
-    let message: String
-    let data: WritePostData
+    let msg: String
 }
 
 struct WritePostData: Codable {
@@ -18,7 +17,7 @@ struct WritePostData: Codable {
     let userEmail: String
     let province: String
     let region: String
-    let theme: [String]
+    var theme: [String]
     let warning: [String]
     let isParking: Bool
     let parkingDesc: String
@@ -29,5 +28,5 @@ struct WritePostData: Codable {
 struct Address: Codable {
     let address: String
     let latitude: String
-    let longtitude: String
+    let longitude: String
 }
