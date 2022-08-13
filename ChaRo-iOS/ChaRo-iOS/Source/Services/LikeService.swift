@@ -19,8 +19,7 @@ struct LikeService {
     
     func Like(userEmail: String,
               postId: Int,
-              completion: @escaping (NetworkResult<Any>) -> Void)
-    {
+              completion: @escaping (NetworkResult<Any>) -> Void) {
         let header: HTTPHeaders = ["Content-Type": "application/json"]
         let dataRequest = AF.request(Constants.likeURL,
                                      method: .post,

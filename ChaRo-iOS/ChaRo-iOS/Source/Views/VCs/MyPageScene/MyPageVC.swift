@@ -12,13 +12,13 @@ import Then
 import Kingfisher
 
 class MyPageVC: UIViewController {
-//MARK: VAR
+    //MARK: VAR
     //var
     let userWidth = UIScreen.main.bounds.width
     let userheight = UIScreen.main.bounds.height
     var tabbarBottomConstraint: Int = 0
     
-    var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin) ?? false
+    var isLogin: Bool = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isLogin)
     
     private var userProfileData: [UserInformation] = []
     //var writenPostData: [MyPagePost] = []
@@ -52,8 +52,8 @@ class MyPageVC: UIViewController {
         $0.backgroundColor = UIColor.mainBlue
     }
     //팔로우 버튼하나 추가 하고, 밑에 컬뷰 하나 넣고 끝 내일 마무리 치기
-
-
+    
+    
     private let headerTitleLabel = UILabel().then {
         $0.textColor = UIColor.white
         $0.font = UIFont.notoSansMediumFont(ofSize: 17)
@@ -63,7 +63,7 @@ class MyPageVC: UIViewController {
     private let settingButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icSettingWhite , for: .normal)
         $0.addTarget(self, action: #selector(settingButtonClicked(_:)), for: .touchUpInside)
-
+        
     }
     
     private let userNameLabel = UILabel().then {
@@ -124,7 +124,7 @@ class MyPageVC: UIViewController {
         $0.textAlignment = .center
         $0.numberOfLines = 3
     }
-
+    
     
     //tabbarUI
     private let tabbarBackgroundView = UIView().then {
@@ -175,7 +175,7 @@ class MyPageVC: UIViewController {
     private let saveView = UIView().then {
         $0.backgroundColor = UIColor.white
     }
-
+    
     private var writeCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
@@ -199,7 +199,7 @@ class MyPageVC: UIViewController {
         return collectionView
     }()
     
-//MARK: ViewdidLoad
+    //MARK: ViewdidLoad
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tabBarController?.tabBar.isHidden = false
@@ -225,7 +225,7 @@ class MyPageVC: UIViewController {
         }
     }
     
-//MARK: function
+    //MARK: function
     //탭바 쉬트 이동 및 버튼클릭시 애니메이션
     func setTabbarBottomViewMove() {
         var contentOffsetX = collectionScrollView.contentOffset.x
@@ -302,91 +302,99 @@ class MyPageVC: UIViewController {
             noSaveDataLabel.isHidden = false
         }
     }
-//MARK: Server
-//마이페이지 데이터 받아오는 함수
+    //MARK: Server
+    //마이페이지 데이터 받아오는 함수
     func getMypageData() {
         GetMyPageDataService.URL = Constants.myPageURL + "like/\(myId)"
         GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
-                   switch response
-                   {
-                   case .success(let data) :
-                       if let response = data as? MyPageDataModel {
-                           self.userProfileData = []
-                           self.writenPostDriveData = []
-                           self.savePostDriveData = []
-                           self.userProfileData.append(response.data.userInformation)
-                           self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
-                           self.savePostDriveData.append(contentsOf: response.data.savedPost.drive)
-                           self.setHeaderData()
-                           self.writeCollectionView.reloadData()
-                           self.saveCollectioinView.reloadData()
-                           self.isEmptyData()
-                       }
-                   case .requestErr(let message) :
-                       print("requestERR")
-                   case .pathErr :
-                       print("pathERR")
-                   case .serverErr:
-                       print("serverERR")
-                   case .networkFail:
-                       print("networkFail")
-                   }
-               }
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? MyPageDataModel {
+                    self.userProfileData = []
+                    self.writenPostDriveData = []
+                    self.savePostDriveData = []
+                    self.userProfileData.append(response.data.userInformation)
+                    self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
+                    self.savePostDriveData.append(contentsOf: response.data.savedPost.drive)
+                    self.setHeaderData()
+                    self.writeCollectionView.reloadData()
+                    self.saveCollectioinView.reloadData()
+                    self.isEmptyData()
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
     
     func getInfinityData(addUrl: String, LikeOrNew: String) {
         delegate = self
         self.delegate?.startIndicator()
         MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: myId, addURL: addUrl,likeOrNew: LikeOrNew) { (response) in
-                   switch response
-                   {
-                   case .success(let data) :
-                       if let response = data as? MypageInfinityModel {
-                           if response.data.lastID == 0{
-                               self.isLast = true
-                               self.delegate?.endIndicator()
-                           }
-                           else {
-                               self.isLast = false
-                           }
-                           if self.isLast == false {
-                               self.writenPostDriveData.append(contentsOf: response.data.drive)
-                               self.writeCollectionView.reloadData()
-                               self.saveCollectioinView.reloadData()
-                               self.delegate?.endIndicator()
-                           }
-
-                       }
-                   case .requestErr(let message) :
-                       print("requestERR")
-                   case .pathErr :
-                       print("pathERR")
-                   case .serverErr:
-                       print("serverERR")
-                   case .networkFail:
-                       print("networkFail")
-                   }
-               }
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? MypageInfinityModel {
+                    if response.data.lastID == 0{
+                        self.isLast = true
+                        self.delegate?.endIndicator()
+                    }
+                    else {
+                        self.isLast = false
+                    }
+                    if self.isLast == false {
+                        self.writenPostDriveData.append(contentsOf: response.data.drive)
+                        self.writeCollectionView.reloadData()
+                        self.saveCollectioinView.reloadData()
+                        self.delegate?.endIndicator()
+                    }
+                    
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
-
-
-
-//MARK: buttonClicked
-   @objc private func saveButtonClicked(_ sender: UIButton) {
-       collectionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-       tabbarWriteButton.setImage(ImageLiterals.icWriteActive, for: .normal)
-       tabbarSaveButton.setImage(ImageLiterals.icSaveInactive, for: .normal)
+    
+    // MARK: buttonClicked
+    @objc private func saveButtonClicked(_ sender: UIButton) {
+        collectionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        tabbarWriteButton.setImage(ImageLiterals.icWriteActive, for: .normal)
+        tabbarSaveButton.setImage(ImageLiterals.icSaveInactive, for: .normal)
     }
+    
     @objc private func writeButtonClicked(_ sender: UIButton) {
         collectionScrollView.setContentOffset(CGPoint(x: userWidth, y: 0), animated: true)
         tabbarWriteButton.setImage(ImageLiterals.icWriteInactive, for: .normal)
         tabbarSaveButton.setImage(ImageLiterals.icSaveActive, for: .normal)
-     }
+    }
+    
     @objc private func settingButtonClicked(_ sender: UIButton) {
-        guard let setVC = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "SettingVC") as? SettingVC else {return}
-        
-        self.navigationController?.pushViewController(setVC, animated: true)
-     }
+        if isLogin {
+            // 로그인을 했을 때
+            guard let setVC = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "SettingVC") as? SettingVC else {return}
+            self.navigationController?.pushViewController(setVC, animated: true)
+        } else {
+            // 로그인을 하지 않았을 때 - 둘러보기
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
+    }
+    
     @objc private func followerButtonClicked(_ sender: UIButton) {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
         if isLogin == true {
@@ -395,9 +403,12 @@ class MyPageVC: UIViewController {
             self.navigationController?.pushViewController(followVC, animated: true)
         }
         else {
-            self.makeAlert(title: "로그인", message: "로그인 하고 이용해 주세요", okAction: nil, completion: nil)
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
         }
-     }
+    }
+    
     @objc private func followingButtonClicked(_ sender: UIButton) {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
         if isLogin == true {
@@ -406,23 +417,21 @@ class MyPageVC: UIViewController {
             self.navigationController?.pushViewController(followVC, animated: true)
         }
         else {
-            self.makeAlert(title: "로그인", message: "로그인 하고 이용해 주세요", okAction: nil, completion: nil)
-        }
-     }
-    @objc func nameLabelClicked(sender: UITapGestureRecognizer) {
-        guard let LoginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: SNSLoginVC.identifier)
-                as? SNSLoginVC else {return}
-        let navController = UINavigationController(rootViewController: LoginVC)
-        
-        if isLogin == false {
-//요 녀석은 일단 이 뷰에 들어가면 빠져나올수가 없어서 잠시 빼놓겠습니다!
-            navController.modalPresentationStyle = .overFullScreen
-            self.present(navController, animated: true, completion: nil)
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
         }
     }
-
     
-//MARK: ScrollViewdidScroll
+    @objc func nameLabelClicked(sender: UITapGestureRecognizer) {
+        if isLogin == false {
+            makeRequestAlert(title: "로그인이 필요해요", message: "", okTitle: "로그인하기", okAction: { [weak self] _ in
+                self?.presentToSignNC()
+            }, cancelTitle: "취소")
+        }
+    }
+    
+    //MARK: ScrollViewdidScroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let writeContentHeigth = writeCollectionView.contentSize.height
         let saveContentHeigth = saveCollectioinView.contentSize.height
@@ -451,25 +460,25 @@ class MyPageVC: UIViewController {
             var likeOrNew = ""
             var addURL = ""
             if lastcount > 0 && scrollTriger == false {
-            scrollTriger = true
-            lastId = writenPostDriveData[lastcount-1].postID
-            lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
-            
-            if currentState == "인기순" {
-                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
-                likeOrNew = "like/"
-                addURL = "/write/\(lastId)/\(lastFavorite)"
-                //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
-                //MypageInfinityService.addURL = "/write/11/0"
-                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
-
-            } else if currentState == "최신순" {
-                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
-                likeOrNew = "new/"
-                addURL = "/write/\(lastId)"
-                //MypageInfinityService.addURL = "/write/5/0"
-                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
-            }
+                scrollTriger = true
+                lastId = writenPostDriveData[lastcount-1].postID
+                lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
+                
+                if currentState == "인기순" {
+                    //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                    likeOrNew = "like/"
+                    addURL = "/write/\(lastId)/\(lastFavorite)"
+                    //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
+                    //MypageInfinityService.addURL = "/write/11/0"
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                    
+                } else if currentState == "최신순" {
+                    //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                    likeOrNew = "new/"
+                    addURL = "/write/\(lastId)"
+                    //MypageInfinityService.addURL = "/write/5/0"
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                }
                 
             }
             //저장글 무한 스크롤
@@ -480,25 +489,25 @@ class MyPageVC: UIViewController {
             
             if lastcount > 0 && scrollTriger == false {
                 scrollTriger = true
-            lastId = savePostDriveData[lastcount-1].postID
-            lastFavorite = savePostDriveData[lastcount-1].favoriteNum
-            
-            if currentState == "인기순" {
-                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
-                likeOrNew = "like/"
-                addURL = "/write/\(lastId)/\(lastFavorite)"
-                //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
-                //MypageInfinityService.addURL = "/write/5/0"
-                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
-            } else if currentState == "최신순" {
-                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
-                likeOrNew = "new/"
-                addURL = "/write/\(lastId)"
-                //MypageInfinityService.addURL = "/write/5/0"
-                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                lastId = savePostDriveData[lastcount-1].postID
+                lastFavorite = savePostDriveData[lastcount-1].favoriteNum
+                
+                if currentState == "인기순" {
+                    //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                    likeOrNew = "like/"
+                    addURL = "/write/\(lastId)/\(lastFavorite)"
+                    //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
+                    //MypageInfinityService.addURL = "/write/5/0"
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                } else if currentState == "최신순" {
+                    //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                    likeOrNew = "new/"
+                    addURL = "/write/\(lastId)"
+                    //MypageInfinityService.addURL = "/write/5/0"
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                }
+                
             }
-            
-        }
         }
         
         if (writeCollectionView.contentOffset.y < writeContentHeigth - writeCollectionView.frame.height) {scrollTriger = false}
@@ -506,8 +515,8 @@ class MyPageVC: UIViewController {
         
         
     }
-//MARK: filterTableView
-        func setFilterViewLayout() {
+    //MARK: filterTableView
+    func setFilterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
         filterView.snp.makeConstraints{
@@ -537,11 +546,11 @@ class MyPageVC: UIViewController {
             return index
         }
     }
-//MARK: CollectionViewLayout
+    //MARK: CollectionViewLayout
     func setCollectionViewLayout() {
         
         let collectionviewHeight  = userheight - (userheight * 0.27 + 130)
-                
+        
         collectionScrollView.delegate = self
         writeCollectionView.delegate = self
         writeCollectionView.dataSource = self
@@ -555,7 +564,7 @@ class MyPageVC: UIViewController {
         saveCollectioinView.registerCustomXib(xibName: "MyPagePostCVC")
         writeCollectionView.registerCustomXib(xibName: "HomePostDetailCVC")
         saveCollectioinView.registerCustomXib(xibName: "HomePostDetailCVC")
-             
+        
         
         self.view.addSubview(collectionScrollView)
         collectionScrollView.addSubview(writeView)
@@ -563,7 +572,7 @@ class MyPageVC: UIViewController {
         writeView.addSubview(writeCollectionView)
         saveView.addSubview(saveCollectioinView)
         
-       
+        
         collectionScrollView.snp.makeConstraints {
             $0.top.equalTo(tabbarBottomView.snp.bottom).offset(0)
             $0.trailing.equalTo(view).offset(0)
@@ -594,9 +603,9 @@ class MyPageVC: UIViewController {
             $0.leading.equalTo(saveView.snp.leading).offset(0)
             $0.trailing.equalTo(saveView.snp.trailing).offset(0)
         }
-       
+        
     }
-//MARK: TabbarLayout
+    //MARK: TabbarLayout
     func setTabbarLayout() {
         self.view.addSubview(tabbarBackgroundView)
         tabbarBackgroundView.addSubview(tabbarSaveButton)
@@ -643,7 +652,7 @@ class MyPageVC: UIViewController {
         
         
     }
-//MARK: HeaderViewLayout
+    //MARK: HeaderViewLayout
     
     func setHeaderLayout() {
         self.view.addSubview(headerBackgroundView)
@@ -724,11 +733,11 @@ class MyPageVC: UIViewController {
 
 extension MyPageVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
-                            UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
             return CGSize(width: userWidth-35, height: 42)
         } else {
-        return CGSize(width: collectionView.frame.width, height: 100)
+            return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
 }
@@ -795,18 +804,18 @@ extension MyPageVC: UICollectionViewDataSource {
             } else {
                 let writenElement = writenPostDriveData[indexPath.row-1]
                 var writenTags = [writenElement.region, writenElement.theme,
-                            writenElement.warning ?? ""] as [String]
+                                  writenElement.warning ?? ""] as [String]
                 print(writenPostDriveData, "왜 안뜨냐?")
                 cell.setData(image: writenElement.image,
-                         title: writenElement.title,
-                         tagCount: writenTags.count, tagArr: writenTags,
-                         heart: writenElement.favoriteNum,
-                         save: writenElement.saveNum,
-                         year: writenElement.year,
-                         month: writenElement.month,
-                         day: writenElement.day,
-                         postID: writenElement.postID)
-            return cell
+                             title: writenElement.title,
+                             tagCount: writenTags.count, tagArr: writenTags,
+                             heart: writenElement.favoriteNum,
+                             save: writenElement.saveNum,
+                             year: writenElement.year,
+                             month: writenElement.month,
+                             day: writenElement.day,
+                             postID: writenElement.postID)
+                return cell
             }
         case 2:
             if(indexPath.row == 0) {
@@ -815,16 +824,16 @@ extension MyPageVC: UICollectionViewDataSource {
                 let saveElement = savePostDriveData[indexPath.row-1]
                 var saveTags = [saveElement.region, saveElement.theme, saveElement.warning ?? ""] as [String]
                 
-            cell.setData(image: savePostDriveData[indexPath.row-1].image,
-                         title: savePostDriveData[indexPath.row-1].title,
-                         tagCount:saveTags.count, tagArr: saveTags,
-                         heart:savePostDriveData[indexPath.row-1].favoriteNum,
-                         save: savePostDriveData[indexPath.row-1].saveNum,
-                         year: savePostDriveData[indexPath.row-1].year,
-                         month: savePostDriveData[indexPath.row-1].month,
-                         day: savePostDriveData[indexPath.row-1].day,
-                         postID: savePostDriveData[indexPath.row-1].postID)
-            return cell
+                cell.setData(image: savePostDriveData[indexPath.row-1].image,
+                             title: savePostDriveData[indexPath.row-1].title,
+                             tagCount:saveTags.count, tagArr: saveTags,
+                             heart:savePostDriveData[indexPath.row-1].favoriteNum,
+                             save: savePostDriveData[indexPath.row-1].saveNum,
+                             year: savePostDriveData[indexPath.row-1].year,
+                             month: savePostDriveData[indexPath.row-1].month,
+                             day: savePostDriveData[indexPath.row-1].day,
+                             postID: savePostDriveData[indexPath.row-1].postID)
+                return cell
             }
         default:
             return UICollectionViewCell()
@@ -854,9 +863,9 @@ extension MyPageVC: MenuClickedDelegate {
     }
 }
 extension MyPageVC{
-func dismissDropDownWhenTappedAround() {
+    func dismissDropDownWhenTappedAround() {
         let tap: UITapGestureRecognizer =
-            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
@@ -871,7 +880,7 @@ extension MyPageVC: AnimateIndicatorDelegate {
         lottieView.isHidden = false
         lottieView.lottieView.play()
     }
-
+    
     func endIndicator() {
         lottieView.lottieView.stop()
         lottieView.isHidden = true

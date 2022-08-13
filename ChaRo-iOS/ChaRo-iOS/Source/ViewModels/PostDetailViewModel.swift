@@ -5,14 +5,32 @@
 //  Created by 장혜령 on 2022/03/15.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 
+import KakaoSDKTemplate
+import KakaoSDKShare
+import RxKakaoSDKShare
+import KakaoSDKCommon
+
 class PostDetailViewModel {
-    
+    private let disposeBag = DisposeBag()
     let postId: Int
-    var isFavorite: Bool = false
-    var isStored: Bool = false
+    var postLikeClosure: ((Bool?) -> ())?
+    var isLiked: Bool? {
+        didSet {
+            postLikeClosure?(isLiked)
+        }
+    }
+    
+    var isStored: Bool? {
+        didSet {
+            storeSubject.onNext(isStored)
+        }
+    }
+    
+    let likeSubject = PublishSubject<Bool?>()
+    let storeSubject = PublishSubject<Bool?>()
     var postDetailData: PostDetailDataModel?
     let postDetailSubject = ReplaySubject<PostDetailDataModel>.create(bufferSize: 1)
     
@@ -21,16 +39,16 @@ class PostDetailViewModel {
         getPostDetailData(postId: postId)
     }
     
-    struct Input {
-        
-    }
+    struct Input {}
     
     struct Output {
         let postDetailSubject: ReplaySubject<PostDetailDataModel>
+        let likeSubject: PublishSubject<Bool?>
+        let storeSubject: PublishSubject<Bool?>
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        return Output(postDetailSubject: postDetailSubject)
+        return Output(postDetailSubject: postDetailSubject, likeSubject: likeSubject, storeSubject: storeSubject)
     }
 }
 
@@ -40,10 +58,13 @@ extension PostDetailViewModel {
         PostResultService.shared.getPostDetail(postId: postId) { [weak self] response in
             switch(response) {
             case .success(let resultData):
-                print(resultData)
+                guard let self = self else { return }
                 if let data = resultData as? PostDetailDataModel {
-                    self?.postDetailData = data
-                    self?.postDetailSubject.onNext(data)
+                    self.postDetailData = data
+                    self.postDetailSubject.onNext(data)
+                    self.isLiked = data.isFavorite != 0
+                    self.isStored = data.isStored != 0
+                    dump(data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -81,8 +102,8 @@ extension PostDetailViewModel {
                                 postId: postId) { [weak self] result in
             switch result {
             case .success(let success):
-                if let success = success as? Bool {
-                    self?.isFavorite.toggle()
+                if let _ = success as? Bool {
+                    self?.isLiked?.toggle()
                 }
             case .requestErr(let msg):
                 if let msg = msg as? String {
@@ -95,14 +116,12 @@ extension PostDetailViewModel {
     }
     
     func requestPostScrap() {
-        SaveService.shared.requestScrapPost(userId: Constants.userEmail,
-                                            postId: postId) { [self] result in
-            
+        SaveService.shared.requestScrapPost(postId: postId) { [weak self] result in
             switch result {
             case .success(let success):
-                if let success = success as? Bool {
+                if let _ = success as? Bool {
                     print("스크랩 성공해서 바뀝니다")
-                    self.isStored.toggle()
+                    self?.isStored?.toggle()
                 }
             case .requestErr(let msg):
                 if let msg = msg as? String {
@@ -164,3 +183,48 @@ extension PostDetailViewModel {
 //
 //        writedPostData?.course = newAddressList
 //    }
+
+
+//MARK: 카카오톡 공유하기
+extension PostDetailViewModel {
+    func shareToKakaotalk() {
+        guard let title = postDetailData?.title,
+              let description = postDetailData?.courseDesc,
+              let firstImage = postDetailData?.images?.first else { return }
+        let feedTemplateJsonStringData =
+            """
+            {
+                "object_type": "feed",
+                "content": {
+                    "title": "\(title)",
+                    "description": "\(description)",
+                    "image_url": "\(firstImage)",
+                    "link": {
+                        "mobile_web_url": "https://developers.kakao.com",
+                        "web_url": "https://developers.kakao.com"
+                    }
+                },
+                "buttons": [
+                    {
+                        "title": "자세히 보기",
+                        "link": {
+                            "mobile_web_url": "https://developers.kakao.com",
+                            "web_url": "https://developers.kakao.com"
+                        }
+                    }
+                ]
+            }
+            """.data(using: .utf8)!
+        
+        if let templatable = try? SdkJSONDecoder.custom.decode(FeedTemplate.self, from: feedTemplateJsonStringData) {
+            ShareApi.shared.rx.shareDefault(templatable:templatable)
+                .subscribe(onSuccess: { (sharingResult) in
+                    print("shareDefault() success.")
+                    UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                }, onFailure: {error in
+                    print(error)
+                })
+                .disposed(by: disposeBag)
+        }
+    }
+}

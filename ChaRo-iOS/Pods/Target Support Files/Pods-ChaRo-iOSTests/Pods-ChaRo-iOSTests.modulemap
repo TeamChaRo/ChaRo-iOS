@@ -1,6 +1,0 @@
-framework module Pods_ChaRo_iOSTests {
-  umbrella header "Pods-ChaRo-iOSTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -17,23 +17,10 @@ final class PostDetailVC: UIViewController {
     
     private var isAuthor = false
     private var isEditingMode = false
-    //private var postData: PostDetail?
     private var driveCell: PostDriveCourseTVC?
     private var addressList: [Course] = []
     private var imageList: [UIImage] = []
     let cellFixedCount: Int = 3 // 0~2 cell은 무조건 존재
-    
-    private var isFavorite: Bool? {
-        didSet {
-            bottomView.likeButton.isSelected = isFavorite! ? true : false
-        }
-    }
-    
-    private var isStored: Bool? {
-        didSet {
-            bottomView.likeButton.isSelected = isStored! ? true : false
-        }
-    }
     
     //MARK: For Sending Data
     private var writedPostData: WritePostData?
@@ -220,37 +207,32 @@ extension PostDetailVC {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(88)
         }
-        bottomView.likeDescriptionButton.setTitle("\(viewModel.postDetailData?.likesCount ?? 0)명이 좋아해요", for: .normal)
+        bottomView.changeLikeDescription(to: viewModel.postDetailData?.likesCount ?? 0)
         bindToBottomView()
     }
     
     private func bindToBottomView() {
-        bottomView.likeButton.rx.tap
-            .asDriver()
-            .drive(onNext:{
-                [weak self] _ in
-                self?.bottomView.likeButton.isSelected.toggle()
-                //self?.viewModel?.requestPostLike()
+        
+        
+        bottomView.likeButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.viewModel.requestPostLike()
             })
             .disposed(by: disposeBag)
         
-        bottomView.scrapButton.rx.tap
-            .asDriver()
+        bottomView.scrapButton.rx.tap.asDriver()
             .drive(onNext:{ [weak self] _ in
-                self?.bottomView.scrapButton.isSelected.toggle()
-                //self?.viewModel?.requestPostScrap()
+                self?.viewModel.requestPostScrap()
             })
             .disposed(by: disposeBag)
         
-        bottomView.shareButton.rx.tap
-            .asDriver()
-            .drive(onNext:{ _ in
-                print("shareButton 눌림")
+        bottomView.shareButton.rx.tap.asDriver()
+            .drive(onNext:{ [weak self] _ in
+                self?.viewModel.shareToKakaotalk()
             })
             .disposed(by: disposeBag)
         
-        bottomView.likeDescriptionButton.rx.tap
-            .asDriver()
+        bottomView.likeDescriptionButton.rx.tap.asDriver()
             .drive(onNext:{ [weak self] in
                 let nextVC = PostLikeListVC(postId: self?.viewModel.postId ?? -1)
                 nextVC.modalPresentationStyle = .overFullScreen
@@ -344,24 +326,45 @@ extension PostDetailVC: UITableViewDataSource {
 
 //MARK: Network
 extension PostDetailVC {
+    
     func bindToViewModel() {
         let output = viewModel.transform(input: PostDetailViewModel.Input(), disposeBag: disposeBag)
         output.postDetailSubject.bind(onNext: { [weak self] postDetailData in
             self?.setPostContentView(postData: postDetailData)
         }).disposed(by: disposeBag)
+        
+        output.storeSubject.bind(onNext: { [weak self] isStored in
+            guard let isStored = isStored,
+                  let self = self else { return }
+            self.bottomView.scrapButton.isSelected = isStored
+        }).disposed(by: disposeBag)
+        
+        
+        viewModel.postLikeClosure = { [weak self] isLiked in
+            guard let isLiked = isLiked,
+                  let self = self else { return }
+            var likeCount = self.viewModel.postDetailData?.likesCount ?? 0
+            let isOriginFavarite = self.viewModel.postDetailData?.isFavorite != 0
+            
+            if !isOriginFavarite && isLiked { // 처음에 좋아요 안누름
+                likeCount += 1
+            } else if isOriginFavarite && !isLiked { // 처음에 눌렀다가 취소했을 때
+                likeCount -= 1
+            }
+            self.bottomView.likeButton.isSelected = isLiked
+            self.bottomView.changeLikeDescription(to: likeCount)
+        }
+        
     }
     
     func setPostContentView(postData: PostDetailDataModel?) {
         guard let postData = postData else { return }
         isAuthor = postData.isAuthor ?? false
-        isFavorite = postData.isFavorite == 0 ? false: true
-        isStored = postData.isStored == 0 ? false: true
         addressList = postData.course ?? []
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
         configureBottomView()
     }
-  
-    
+
 }

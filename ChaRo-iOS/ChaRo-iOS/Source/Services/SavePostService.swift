@@ -11,41 +11,29 @@ import Alamofire
 struct SaveService {
     static let shared = SaveService()
     
-    private func makeParameter(userId : String, postId : Int) -> Parameters
-    {
-        return ["userId" : userId,
-                "postId" : postId ]
+    private func makeParameter(userEmail : String, postId : Int) -> Parameters {
+        return ["userEmail" : userEmail, "postId" : postId ]
     }
     
-    func requestScrapPost(userId : String,
-              postId : Int,
-              completion : @escaping (NetworkResult<Any>) -> Void)
-    {
+    func requestScrapPost(postId : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
         let header : HTTPHeaders = ["Content-Type": "application/json"]
         let dataRequest = AF.request(Constants.saveURL,
                                      method: .post,
-                                     parameters: makeParameter(userId: userId, postId: postId),
+                                     parameters: makeParameter(userEmail: Constants.userEmail, postId: postId),
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
-        
         dataRequest.responseData { dataResponse in
-            
             switch dataResponse.result {
             case .success:
-                
                 print("----- 데이터 요청 성공")
                 guard let statusCode = dataResponse.response?.statusCode else {return}
-                print(dataRequest.response?.statusCode)
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value)
                 completion(networkResult)
-                
             case .failure: completion(.pathErr)
-                
             }
         }
-        
     }
     
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
