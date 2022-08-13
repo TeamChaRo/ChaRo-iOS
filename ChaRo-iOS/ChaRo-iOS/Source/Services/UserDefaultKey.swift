@@ -29,12 +29,16 @@ extension Constants {
         
         static let isKakaoLogin = "isKakaoLogin"
         static let isGoogleLogin = "isGoogleLogin"
+
+        //포토 라이브러리 권한 팝업 여부
+        static let shownPhotoAuth = "shownPhotoAuth"
     }
     
     static func addLoginUserDefaults(isAppleLogin: Bool, isKakaoLogin: Bool, isGoogleLogin: Bool) {
         UserDefaults.standard.set(isAppleLogin, forKey: Constants.UserDefaultsKey.isAppleLogin)
         UserDefaults.standard.set(isKakaoLogin, forKey: Constants.UserDefaultsKey.isKakaoLogin)
         UserDefaults.standard.set(isGoogleLogin, forKey: Constants.UserDefaultsKey.isGoogleLogin)
+        UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.shownPhotoAuth)
     }
     
     static func addUserDefaults(userEmail: String, userPassword: String, userNickname: String, userImage: String) {
@@ -43,6 +47,11 @@ extension Constants {
         UserDefaults.standard.set(userNickname, forKey: Constants.UserDefaultsKey.userNickname)
         UserDefaults.standard.set(userImage, forKey: Constants.UserDefaultsKey.userImage)
         UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isLogin)
+        UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.shownPhotoAuth)
+    }
+
+    static func shownPhotoLibrary() {
+        UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.shownPhotoAuth)
     }
     
     static func removeAllUserDefaults() {
@@ -56,5 +65,7 @@ extension Constants {
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isAppleLogin)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isKakaoLogin)
         UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.isGoogleLogin)
+
+        UserDefaults.standard.set(false, forKey: Constants.UserDefaultsKey.shownPhotoAuth)
     }
 }

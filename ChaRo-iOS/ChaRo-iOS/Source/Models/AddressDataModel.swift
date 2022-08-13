@@ -19,7 +19,7 @@ struct AddressDataModel: Codable {
         print("title = \(title)")
         print("address = \(address)")
         print("latitude = \(latitude)")
-        print("longtitude = \(longitude)")
+        print("longitude = \(longitude)")
     }
     
     func getPoint() -> CLLocationCoordinate2D{
@@ -37,7 +37,6 @@ struct AddressDataModel: Codable {
     }
     
     func getAddressDataModel() -> Address{
-        return Address(address: address, latitude: latitude, longtitude: longitude)
+        return Address(address: address, latitude: latitude, longitude: longitude)
     }
-    
 }
