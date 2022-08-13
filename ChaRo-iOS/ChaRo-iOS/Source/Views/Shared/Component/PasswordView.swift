@@ -6,8 +6,20 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 class PasswordView: UIView, UITextFieldDelegate {
+    
+    var firstRelay = PublishSubject<Bool>()
+    var secondRelay = PublishSubject<Bool>()
+    var validateRelay: Observable<Bool> {
+        return Observable.combineLatest(firstRelay, secondRelay)
+            .map { first, second in
+                return first && second
+            }
+    }
+    let disposeBag = DisposeBag()
     
     var isFirstPassed = false
     var isSecondPassed = false
@@ -45,6 +57,7 @@ class PasswordView: UIView, UITextFieldDelegate {
         subTitleLabel.text = subTitle
         configureTextField()
         setConstraints()
+        bind()
     }
     
     
@@ -92,64 +105,79 @@ class PasswordView: UIView, UITextFieldDelegate {
         
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let textField = textField as! InputTextField
-        if textField == firstTextField {
-            isSecondPassed = false
-            
-            if validpassword(password: textField.text!) {
-                isFirstPassed = true
-                textField.setBlueBorderWithText()
-                setLabelBlueWithText(text: "사용가능한 비밀번호 입니다.")
-            } else {
-                isFirstPassed = false
-                textField.setOrangeBorderWithText()
-                secondTextField.setOrangeBorderWithText()
-                setLabelOrangeWithText(text: "5자 이상 15자 이내로 작성해 주세요.")
-            }
-        }
-        
-        
-        else {
-            if validpassword(password: textField.text!) {
-                if textField.text == firstTextField.text {
-                    isSecondPassed = true
-                    textField.setBlueBorderWithText()
-                    setLabelBlueWithText(text: "비밀번호가 일치합니다.")
+    func bind() {
+        self.firstTextField.rx.text.orEmpty
+            .subscribe(onNext: { text in
+                if text == "" {
+                    self.setLabelOrangeWithText(text: "비밀번호를 입력해주세요.")
+                    self.firstRelay.onNext(false)
+                } else if !(self.validCountPassword(password: text)) {
+                    self.setLabelOrangeWithText(text: "5자 이상 15자 이내로 작성해 주세요.")
+                    self.firstRelay.onNext(false)
                 } else {
-                    isSecondPassed = false
-                    textField.setOrangeBorderWithText()
-                    setLabelOrangeWithText(text: "비밀번호가 일치하지 않습니다.")
+                    self.setLabelBlueWithText(text: "사용가능한 비밀번호 입니다.")
+                    self.firstRelay.onNext(true)
                 }
-            } else {
-                isSecondPassed = false
-                setLabelOrangeWithText(text: "비밀번호를 입력해주세요.")
-            }
-        }
+            }).disposed(by: disposeBag)
         
-        if isFirstPassed && isSecondPassed {
-            self.enableNextButtonClosure!()
-        } else {
-            self.unableNextButtonClosure!()
-        }
+        self.secondTextField.rx.text.orEmpty
+            .subscribe(onNext: { text in
+                if text == "" {
+                    self.setLabelOrangeWithText(text: "비밀번호를 입력해주세요.")
+                    self.secondRelay.onNext(false)
+                    return
+                }
+                if self.firstTextField.text != text {
+                    self.setLabelOrangeWithText(text: "비밀번호가 일치하지 않습니다.")
+                    self.secondRelay.onNext(false)
+                } else {
+                    self.setLabelBlueWithText(text: "비밀번호가 일치합니다.")
+                    self.secondRelay.onNext(true)
+                }
+            }).disposed(by: disposeBag)
+        
+        self.firstRelay.subscribe(onNext: { result in
+            if result {
+                self.firstTextField.setBlueBorderWithText()
+            } else {
+                self.firstTextField.setOrangeBorderWithText()
+            }
+        }).disposed(by: disposeBag)
+        
+        self.secondRelay.subscribe(onNext: { result in
+            if result {
+                self.secondTextField.setBlueBorderWithText()
+            } else {
+                self.secondTextField.setOrangeBorderWithText()
+            }
+        }).disposed(by: disposeBag)
+        
+        validateRelay.subscribe(onNext: { result in
+            guard self.firstTextField.text == self.secondTextField.text else {
+                self.setLabelBlueWithText(text: "비밀번호가 일치하지 않습니다.")
+                self.secondTextField.setOrangeBorderWithText()
+                return
+            }
+            if result {
+                self.enableNextButtonClosure!()
+            } else {
+                self.unableNextButtonClosure!()
+            }
+        }).disposed(by: disposeBag)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        let textField = textField as! InputTextField
-        if textField.text == nil {
-            textField.setOrangeBorderWithText()
-            setLabelOrangeWithText(text: "비밀번호를 작성해주세요.")
-        }
-    }
-    
-    
-    func validpassword(password: String) -> Bool {
+    func validCountPassword(password: String) -> Bool {
         if password.count >= 5 && password.count < 15 {
             return true
         } else {
             return false
         }
-        
+    }
+    
+    func validExPassword(password: String) -> Bool {
+        let pwRegEx = "[A-Za-z0-9]"
+        let pred = NSPredicate(format: "SELF MATCHES %@", pwRegEx)
+        return pred.evaluate(with: password)
     }
     
     func setLabelBlueWithText(text: String) {

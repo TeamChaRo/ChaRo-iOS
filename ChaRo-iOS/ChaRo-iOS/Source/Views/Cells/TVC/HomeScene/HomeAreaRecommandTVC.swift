@@ -16,6 +16,7 @@ class HomeAreaRecommandTVC: UITableViewCell {
     var delegate: IsSelectedCVCDelegate?
     var buttonDelegate: SeeMorePushDelegate?
     var postDelegate: PostIdDelegate?
+    var likeButtonDelegate: LikeButtonDelegate?
     let cellTag: Int = 5
     
     //MARK: - Variable
@@ -92,7 +93,7 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
             var tags = [element.region, element.theme,
                         element.warning ?? ""] as [String]
                         
-            
+            cell.likeButtonDelegate = self
             cell.setData(image: element.image,
                          title: element.title,
                          tagCount: tags.count,
@@ -135,4 +136,15 @@ extension HomeAreaRecommandTVC: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     
+}
+
+extension HomeAreaRecommandTVC: LikeButtonDelegate {
+    func sendFavoriteInfo(postId: Int, isFavorite: Bool) {
+        for (index, element) in localList.enumerated() {
+            if element.postID == postId {
+                localList[index].isFavorite = isFavorite
+                likeButtonDelegate?.sendFavoriteInfo(postId: postId, isFavorite: isFavorite)
+            }
+        }
+    }
 }

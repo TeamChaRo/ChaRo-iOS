@@ -63,11 +63,25 @@ class ChangeImageVC: UIViewController {
         configureHeaderLayout()
         configureUI()
         configureDelegate()
+        configureClosure()
     }
     
     //MARK: - Custom Function
     private func configureDelegate() {
         nicknameView.inputTextField?.delegate = self
+    }
+    
+    private func configureClosure() {
+        profileView.actionSheetPresentClosure = { actionSheet in
+            self.present(actionSheet, animated: true)
+        }
+        profileView.imagePickerPresentClosure = { picker in
+            picker.delegate = self
+            self.present(picker, animated: true)
+        }
+        profileView.doneButtonClosure = {
+            self.makeDoneEnable()
+        }
     }
     
     private func makeDoneEnable() {
@@ -82,29 +96,6 @@ class ChangeImageVC: UIViewController {
     
     @objc private func backButtonClicked() {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc private func profileChangeButtonClicked() {
-        
-        let actionsheetController = UIAlertController(title: "프로필 사진 바꾸기", message: nil, preferredStyle: .actionSheet)
-        let actionDefaultImage = UIAlertAction(title: "기본 이미지 설정", style: .default, handler: { action in
-            self.profileView.profileImageView.image = ImageLiterals.imgMypageDefaultProfile
-        })
-        let actionLibraryImage = UIAlertAction(title: "라이브러리에서 선택", style: .default, handler: { action in
-            let picker = UIImagePickerController()
-            picker.sourceType = .photoLibrary
-            picker.delegate = self
-            self.present(picker, animated: true)
-        })
-        let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: { action in
-            print("캔슬 action called")
-        })
-        
-        actionsheetController.addAction(actionDefaultImage)
-        actionsheetController.addAction(actionLibraryImage)
-        actionsheetController.addAction(actionCancel)
-        
-        self.present(actionsheetController, animated: true)
     }
     
     private func makeNicknameViewRed(text: String) {
@@ -184,12 +175,7 @@ class ChangeImageVC: UIViewController {
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(95)
         }
-        
-        profileView.imagePickerPresentClosure = { picker in
-            picker.delegate = self
-            self.present(picker, animated: true)
-        }
-        
+    
         nicknameView.snp.makeConstraints {
             $0.top.equalTo(profileView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)

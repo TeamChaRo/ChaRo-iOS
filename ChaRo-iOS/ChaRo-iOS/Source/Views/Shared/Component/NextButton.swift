@@ -38,7 +38,6 @@ class NextButton: UIButton {
         }
         else {
             self.nextViewClosure!()
-            isTheLast.toggle()
         }
         
     }

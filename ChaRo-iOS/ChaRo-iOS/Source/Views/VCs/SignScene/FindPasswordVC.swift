@@ -71,6 +71,13 @@ final class FindPasswordVC: UIViewController {
     
     private func sendTempPassword(email: String) {
         //TODO: - 로딩 인티케이터 뷰 넣기
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", regex)
+        if !emailTest.evaluate(with: email) {
+            self.makeAlert(title: "비밀번호 찾기 오류",
+                           message: "이메일 형식이 올바르지 않습니다.")
+        }
+        
         FindPasswordService.shared.sendTempPassword(email: email) { result in
             switch result {
             case .success(let data):
@@ -80,15 +87,12 @@ final class FindPasswordVC: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                     UserDefaults.standard.set(data, forKey: Constants.UserDefaultsKey.userPassword)
                 })
-            case .requestErr(let message):
-                if let message = message as? String {
-                    self.makeAlert(title: "존재하지 않는 이메일입니다.",
-                                   message: message)
-                }
-            default :
-                print("ERROR")
+            default:
+                self.makeAlert(title: "비밀번호 찾기 오류",
+                               message: "존재하지 않는 유저입니다.")
             }
         }
+        
     }
     
     

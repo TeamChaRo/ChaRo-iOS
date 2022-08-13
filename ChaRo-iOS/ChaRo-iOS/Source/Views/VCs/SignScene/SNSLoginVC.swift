@@ -75,12 +75,14 @@ class SNSLoginVC: UIViewController {
         $0.setTitleColor(.mainBlack, for: .normal)
         $0.titleLabel?.font = UIFont.notoSansMediumFont(ofSize: 17)
         $0.setImage(UIImage(named: "googleLogo"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
         $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 180)
         $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: -40, bottom: 0, right: 0)
         $0.layer.borderColor = UIColor.gray30.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
         $0.clipsToBounds = true
+        $0.showsTouchWhenHighlighted = false
         $0.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
     }
     
@@ -107,20 +109,46 @@ class SNSLoginVC: UIViewController {
     private func autoLogin() {
         guard let userEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) else { return }
         
+        //소셜로그인
+        if let isSNSLogin = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.isSNSLogin) {
+            SocialLoginService.shared.socialLogin(email: userEmail) { (response) in
+                switch(response) {
+                case .success(let data):
+                    if let data = data as? UserData {
+                        print("자동 로그인 성공! - 소셜 로그인")
+                        Constants.addUserDefaults(userEmail: data.email,
+                                                  userPassword: "",
+                                                  userNickname: data.nickname ?? "",
+                                                  userImage: data.profileImage ?? "")
+                        UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isSNSLogin)
+                        self.goToHomeVC()
+                    }
+                case .requestErr(let message) :
+                    if let message = message as? String {
+                        print("자동 로그인 ERROR - 소셜 로그인: \(message)")
+                    }
+                default :
+                    print("자동 로그인 ERROR - 소셜 로그인")
+                }
+                
+            }
+            return
+        }
+
+        //일반로그인
         guard let userPassword = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userPassword) else { return }
         
         LoginService.shared.login(id: userEmail, password: userPassword) { result in
             switch result {
             case .success(let data) :
-                print("자동 로그인 성공!")
+                print("자동 로그인 성공! - 이메일 로그인")
                 self.goToHomeVC()
             case .requestErr(let message) :
                 if let message = message as? String {
-                    self.makeAlert(title: "로그인 실패",
-                               message: message)
+                    print("자동 로그인 ERROR - 이메일 로그인 : \(message)")
                 }
             default :
-                print("자동 로그인 ERROR")
+                print("자동 로그인 ERROR - 이메일 로그인")
             }
             
         }
@@ -128,7 +156,7 @@ class SNSLoginVC: UIViewController {
     
     @objc func testLogin() {
         socialType = .apple
-        socialLogin(email: "aggd662@naver.com", profileImage: nil, nickname: nil)
+        socialLogin(email: "aggdddswe662@naver.com", profileImage: nil, nickname: nil)
     }
     
     @objc func appleLogin() {
@@ -182,10 +210,6 @@ class SNSLoginVC: UIViewController {
                             let profile = user?.kakaoAccount?.profile?.profileImageUrl
                             //여기서도 URL 을 String 으로 바꾸는 법을 모르겠군요 ...
                             
-                            Constants.addLoginUserDefaults(isAppleLogin: false,
-                                                           isKakaoLogin: false,
-                                                           isGoogleLogin: true)
-                            
                             //로그인
                             self.socialLogin(email: email, profileImage: nil, nickname: nickname)
                         }
@@ -212,6 +236,7 @@ class SNSLoginVC: UIViewController {
                                               userPassword: "",
                                               userNickname: data.nickname ?? "",
                                               userImage: data.profileImage ?? "")
+                    UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isSNSLogin)
                     self.goToHomeVC()
                 } else {
                     print("회원가입 갈겨")
@@ -257,6 +282,7 @@ class SNSLoginVC: UIViewController {
                                                       userPassword: "",
                                                       userNickname: personData.nickname,
                                                       userImage: personData.profileImage)
+                            UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isSNSLogin)
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -291,6 +317,7 @@ class SNSLoginVC: UIViewController {
                                                       userPassword: "",
                                                       userNickname: personData.nickname,
                                                       userImage: personData.profileImage)
+                            UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isSNSLogin)
                         }
                         self.navigationController?.popViewController(animated: true)
                         self.goToHomeVC()
@@ -325,6 +352,7 @@ class SNSLoginVC: UIViewController {
                                                       userPassword: "",
                                                       userNickname: personData.nickname,
                                                       userImage: personData.profileImage)
+                            UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isSNSLogin)
                         }
                         
                         self.navigationController?.popViewController(animated: true)

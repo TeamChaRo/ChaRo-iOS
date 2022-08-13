@@ -71,6 +71,7 @@ class OnBoardVC: UIViewController {
         initContentList()
         setConstraints()
         configureCollectionView()
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     private func initContentList() {

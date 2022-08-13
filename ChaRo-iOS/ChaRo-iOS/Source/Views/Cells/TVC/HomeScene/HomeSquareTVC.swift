@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import SwiftUI
 
 protocol IsSelectedCVCDelegate {
     func isSelectedCVC(indexPath: IndexPath)
@@ -24,6 +26,7 @@ class HomeSquareTVC: UITableViewCell {
     var delegate: IsSelectedCVCDelegate?
     var ButtonDelegate: SeeMorePushDelegate?
     var postDelegate: PostIdDelegate?
+    var likeButtonDelegate: LikeButtonDelegate?
     let cellTag: Int = 3
 //
 //    var imageNameText: [String] = []
@@ -35,6 +38,7 @@ class HomeSquareTVC: UITableViewCell {
 //    var heart: [Bool] = []
 //
 //    var cellList: [CommonCVC] = []
+    
     var trendyDriveList: [DriveElement] = []
     
     //MARK:- Variable
@@ -131,6 +135,7 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
         let element = trendyDriveList[indexPath.row]
         var tags = [element.region, element.theme, element.warning ?? ""] as [String]
 
+        cell.likeButtonDelegate = self
         cell.setData(image: element.image,
                      title: element.title,
                      tagCount: tags.count,
@@ -164,5 +169,16 @@ extension HomeSquareTVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 15
+    }
+}
+
+extension HomeSquareTVC: LikeButtonDelegate {
+    func sendFavoriteInfo(postId: Int, isFavorite: Bool) {
+        for (index, element) in trendyDriveList.enumerated() {
+            if element.postID == postId {
+                trendyDriveList[index].isFavorite = isFavorite
+                likeButtonDelegate?.sendFavoriteInfo(postId: postId, isFavorite: isFavorite)
+            }
+        }
     }
 }

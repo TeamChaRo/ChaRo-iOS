@@ -14,6 +14,10 @@ class ImageCacheManager {
     private init() {}
 }
 
+protocol LikeButtonDelegate {
+    func sendFavoriteInfo(postId: Int, isFavorite: Bool)
+}
+
 class CommonCVC: UICollectionViewCell {
 
     struct ViewModel {
@@ -28,6 +32,7 @@ class CommonCVC: UICollectionViewCell {
     
     //MARK: IBOutlet
     static let identifier = "CommonCVC"
+    var likeButtonDelegate: LikeButtonDelegate?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -50,9 +55,9 @@ class CommonCVC: UICollectionViewCell {
     //MARK: Variable
     var callback: (() -> Void)?
     var postID: Int = 1
-    var isFavorite: Bool? {
+    var isFavorite: Bool = false {
         didSet {
-            if isFavorite! {
+            if isFavorite {
                 heartButton.setImage(ImageLiterals.icHeartActive, for: .normal)
             } else {
                 heartButton.setImage(UIImage(named: "icHeartWhiteLine"), for: .normal)
@@ -131,7 +136,6 @@ class CommonCVC: UICollectionViewCell {
         
         //하트 설정
         self.isFavorite = isFavorite
-       
         //태그설정
         for index in 0..<3{
             if index > tagArr.count - 1 {
@@ -168,11 +172,9 @@ class CommonCVC: UICollectionViewCell {
             switch result {
             case .success(let success):
                 if let success = success as? Bool {
-                    
-                    self.isFavorite = success ? !isFavorite! : isFavorite
-                    
                     prepareForReuse()
-                    
+                    self.isFavorite = success ? !isFavorite : isFavorite
+                    self.likeButtonDelegate?.sendFavoriteInfo(postId: self.postID, isFavorite: self.isFavorite)
                 }
                 
             case .requestErr(let msg):

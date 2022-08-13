@@ -92,18 +92,16 @@ class ThemePostThemeTVC: UITableViewCell {
     
     //MARK:- Function
     
-    
     //초기 선택된 테마를 위해 배열의 순서를 바꿉니다. 선택된 테마가 인덱스 0으로 올 수 있도록!
     private func swapArray() {
         
         for (index, element) in themeList.enumerated() {
-            if "#\(element)" == firstTheme {
+            if "\(element)" == firstTheme {
                 themeList.swapAt(0, index)
+                return
             }
         }
-        
     }
-    
 }
 
 
@@ -135,7 +133,7 @@ extension ThemePostThemeTVC: UICollectionViewDataSource {
         let themeName = themeList[indexPath.row]
         
         cell.setThemeTitle(name: themeName)
-        cell.themeImageView.image = UIImage(named: ThemeDic[themeName] ?? "gear")
+        cell.themeImageView.image = UIImage(named: CommonData.themeDict[themeName] ?? "gear")
         cell.location = .ThemeTopTVC
         
         if indexPath.row == 0 {

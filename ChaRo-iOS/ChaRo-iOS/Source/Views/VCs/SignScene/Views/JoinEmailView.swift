@@ -11,6 +11,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
 
     
     var verifyNumber: String?
+    var passedEmail: String = ""
     var DuplicateCheck: Bool = false
     var ValidateCheck: Bool = false
     
@@ -102,6 +103,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
                 self.emailVerifyInputView.isHidden = false
                 self.ValidateEmail(email: (self.emailInputView.inputTextField?.text!)!)
                 self.makeButtonsGray()
+                NotificationCenter.default.post(name: UIResponder.keyboardWillShowNotification, object: nil, userInfo: nil)
             }
         }
     }
@@ -140,58 +142,63 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
         let text = textField.text
-        
-        switch textField {
-        
-        case emailInputView.inputTextField:
-            DuplicateCheck = false
-            break
-        
-        case emailVerifyInputView.inputTextField:
-            if verifyNumber == text {
-                ValidateCheck = true
-                emailVerifyInputView.setBlueTFLabelColorWithText(text: "인증되었습니다.")
-                makeButtonsBlue()
-            } else {
-                ValidateCheck = false
-                emailVerifyInputView.setOrangeTFLabelColorWithText(text: "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요.")
-                makeButtonsGray()
-            }
-        default:
-            print(text)
+        if !(passedEmail == emailInputView.inputTextField?.text) {
+            self.emailVerifyInputView.isHidden = true
+            self.emailVerifyInputView.inputTextField?.text = ""
+            self.emailVerifyInputView.setOrangeTFLabelColorWithText(text: "인증번호를 입력해주세요.")
+            self.nextButton.isTheLast = false
+            self.stickyNextButton.isTheLast = false
         }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        let text = textField.text
         
         switch textField {
         
         case emailInputView.inputTextField:
+            self.DuplicateCheck = false
             if textField.text == "" {
                 emailInputView.setOrangeTFLabelColorWithText(text: "이메일을 입력해주세요.")
                 makeButtonsGray()
+                self.emailVerifyInputView.isHidden = true
             } else {
                 IsDuplicatedEmail(email: textField.text!)
             }
-            
+            break
+        
         case emailVerifyInputView.inputTextField:
             if textField.text == "" {
                 emailVerifyInputView.setOrangeTFLabelColorWithText(text: "인증번호를 입력해주세요.")
                 makeButtonsGray()
             }
-            
+            else if verifyNumber == text {
+                ValidateCheck = true
+                emailVerifyInputView.setBlueTFLabelColorWithText(text: "인증되었습니다.")
+                makeButtonsBlue()
+                if passedEmail == emailInputView.inputTextField?.text {
+                    nextButton.isTheLast = true
+                    stickyNextButton.isTheLast = true
+                }
+            } else {
+                ValidateCheck = false
+                emailVerifyInputView.setOrangeTFLabelColorWithText(text: "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요.")
+                makeButtonsGray()
+            }
+            break
         default:
             print(text)
         }
-        
     }
-    
     
     //MARK: - 서버 요청 함수
     private func IsDuplicatedEmail(email: String) {
             
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", regex)
+        if !emailTest.evaluate(with: email) {
+            self.emailInputView.setOrangeTFLabelColorWithText(text: "이메일 형식이 올바르지 않습니다.")
+            self.makeButtonsGray()
+            self.emailVerifyInputView.isHidden = true
+            return
+        }
+        
         IsDuplicatedEmailService.shared.getEmailInfo(email: email) { (response) in
             
             switch(response)
@@ -203,10 +210,12 @@ class JoinEmailView: UIView, UITextFieldDelegate {
                         self.DuplicateCheck = true
                         self.emailInputView.setBlueTFLabelColorWithText(text: "사용가능한 이메일 형식입니다.")
                         self.makeButtonsBlue()
+                        self.passedEmail = email
                     } else {
                         self.DuplicateCheck = false
                         self.emailInputView.setOrangeTFLabelColorWithText(text: "중복되는 이메일이 존재합니다.")
                         self.makeButtonsGray()
+                        self.emailVerifyInputView.isHidden = true
                     }
                 }
             case .requestErr(let message) :
@@ -232,7 +241,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
             case .success(let data):
                 if let data = data as? ValidationEmailModel {
                     self.verifyNumber = data.data
-                    print(data.data)
+                    print("이메일 인증 번호 : \(data.data)")
                 }
             case .requestErr(let message) :
                 print("requestERR", message)

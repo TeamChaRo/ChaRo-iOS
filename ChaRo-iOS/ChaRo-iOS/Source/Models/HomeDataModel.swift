@@ -48,7 +48,7 @@ struct DriveElement: Codable {
     let region, theme: String
     let warning: String?
     let year, month, day: String
-    let isFavorite: Bool
+    var isFavorite: Bool
 
     enum CodingKeys: String, CodingKey {
         case postID = "postId"

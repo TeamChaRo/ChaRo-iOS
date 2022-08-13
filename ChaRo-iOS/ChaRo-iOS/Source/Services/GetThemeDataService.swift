@@ -69,6 +69,12 @@ struct GetThemeDataService {
             switch statusCode {
             
             case 200:
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+                   let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+                    print(String(decoding: jsonData, as: UTF8.self))
+                } else {
+                    print("json data malformed")
+                }
                 return .success(decodedData.data)
             case 400: return .pathErr
             case 500: return .serverErr
