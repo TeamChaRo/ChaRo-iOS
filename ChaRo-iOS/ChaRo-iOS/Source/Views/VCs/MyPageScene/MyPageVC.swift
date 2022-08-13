@@ -273,8 +273,8 @@ class MyPageVC: UIViewController {
         if isLogin {
             noSaveDataLabel.snp.makeConstraints{
                 $0.top.equalTo(noSaveDataImageView.snp.bottom).offset(19)
-                $0.leading.equalToSuperview().offset(71)
-                $0.trailing.equalToSuperview().offset(-71)
+                $0.leading.equalToSuperview().offset(50)
+                $0.trailing.equalToSuperview().offset(50)
                 $0.height.equalTo(66)
             }
         }
@@ -286,8 +286,8 @@ class MyPageVC: UIViewController {
         if isLogin {
             noWritenDataLabel.snp.makeConstraints{
                 $0.top.equalTo(noWritenDataImageView.snp.bottom).offset(19)
-                $0.leading.equalToSuperview().offset(71)
-                $0.trailing.equalToSuperview().offset(-71)
+                $0.leading.equalToSuperview().offset(50)
+                $0.trailing.equalToSuperview().offset(-50)
                 $0.height.equalTo(66)
             }
         }
@@ -577,7 +577,7 @@ class MyPageVC: UIViewController {
             $0.top.equalTo(tabbarBottomView.snp.bottom).offset(0)
             $0.trailing.equalTo(view).offset(0)
             $0.leading.equalTo(view).offset(0)
-            $0.bottom.equalTo(view).offset(-100)
+            $0.bottom.equalTo(view).offset(UIScreen.hasNotch ? -100 : -66)
         }
         writeView.snp.makeConstraints {
             $0.top.equalTo(collectionScrollView.snp.top).offset(0)
@@ -676,14 +676,13 @@ class MyPageVC: UIViewController {
         }
         //MYPAGELabel
         headerTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(58)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalToSuperview()
         }
         //settingButton
         settingButton.snp.makeConstraints {
             $0.width.equalTo(48)
             $0.height.equalTo(48)
-            $0.top.equalToSuperview().offset(58)
             $0.centerY.equalTo(headerTitleLabel)
             $0.trailing.equalToSuperview().offset(-6)
         }

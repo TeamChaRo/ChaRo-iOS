@@ -37,7 +37,7 @@ class CommonCVC: UICollectionViewCell {
     
     @IBOutlet weak var lengthBtwImgLabel: NSLayoutConstraint!
   
-    @IBOutlet weak var titleHeight: NSLayoutConstraint!
+    @IBOutlet weak var imageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var heartButton: UIButton!
     
     var taglist :[String] = []
@@ -63,13 +63,6 @@ class CommonCVC: UICollectionViewCell {
     //MARK:- Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.sizeToFit()
-         print("titleLabelHeight = \(titleLabelHeight)")
-        if titleLabelHeight != -1 {
-            titleHeight.constant = CGFloat(titleLabelHeight)
-            print("titleLabelHeight \(titleLabelHeight)")
-        }
-        
     }
     //setData 지원이꺼
     func setData(viewModel: ViewModel) {
@@ -81,10 +74,28 @@ class CommonCVC: UICollectionViewCell {
             isFavorite: viewModel.isFavorite,
             postID: viewModel.postID
         )
-        titleLabelHeight = viewModel.height
-        print("setData -> \(titleLabelHeight)")
+        setLabel()
+        setCellLabelHeight()
     }
 
+    private func setCellLabelHeight() {
+        if titleLabel.maxNumberOfLines(width: self.frame.width) < 2 {
+            titleLabel.snp.remakeConstraints {
+                $0.top.equalTo(imageView.snp.bottom).offset(10)
+                $0.leading.trailing.equalToSuperview()
+                $0.height.equalTo(22)
+            }
+        } else {
+            titleLabel.snp.remakeConstraints {
+                $0.top.equalTo(imageView.snp.bottom).offset(10)
+                $0.leading.trailing.equalToSuperview()
+                $0.height.equalTo(self.frame.width < 200 ? 43: 52)
+            }
+        }
+        imageViewHeight.constant = self.frame.height * 0.65
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.sizeToFit()
+    }
     
 
     //setData 지원이꺼
@@ -94,13 +105,10 @@ class CommonCVC: UICollectionViewCell {
                  tagArr: [String],
                  isFavorite: Bool,
                  postID: Int) {
-        
         //이미지 설정
         guard let url = URL(string: image) else { return }
         self.imageView.kf.indicatorType = .activity
         self.imageView.kf.setImage(with: url, options: [.forceTransition, .keepCurrentImageWhileLoading])
-                                
-     
 
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
@@ -110,9 +118,11 @@ class CommonCVC: UICollectionViewCell {
         //제목 설정
         self.titleLabel.text = title
         titleLabel.numberOfLines = 0
-        titleLabel.sizeToFit()
+        titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.font = .notoSansRegularFont(ofSize: 14)
-    
+        
+        setCellLabelHeight()
+
         let attrString = NSMutableAttributedString(string: titleLabel.text!)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 0.1

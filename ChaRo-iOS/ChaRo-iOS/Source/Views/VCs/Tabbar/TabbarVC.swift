@@ -44,7 +44,7 @@ class TabbarVC: UITabBarController {
     override func viewDidLayoutSubviews() {
         let tabbarY = view.getDeviceHeight()
         let tabbarX = view.getDeviceWidth()
-        var tabbarHeight = 100
+        var tabbarHeight = UIScreen.hasNotch ? 100 : 67
         setRadius()
         setShadow()
         let frame = CGRect(x: 0,

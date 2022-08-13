@@ -25,6 +25,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var charoIconImageView: NSLayoutConstraint!
     @IBOutlet weak var bannerScrollView: UIScrollView!
     @IBOutlet weak var carMoveConstraint: NSLayoutConstraint!
+    @IBOutlet weak var homeTableViewBottomConstraint: NSLayoutConstraint!
     
     
     //배너 관련 변수
@@ -185,6 +186,7 @@ class HomeVC: UIViewController {
         HomeTableView.registerCustomXib(xibName: "HomeSquareTVC")
         HomeTableView.registerCustomXib(xibName: "HomeSeasonRecommandTVC")
         HomeTableView.registerCustomXib(xibName: "HomeAreaRecommandTVC")
+        homeTableViewBottomConstraint.constant = UIScreen.hasNotch ? 100 : 66
     }
     
     func setActionToSearchButton() {
@@ -251,10 +253,10 @@ extension HomeVC: UITableViewDelegate {
             
             //배너
         case 0:
-            return 365 * factor
+            return 340 * factor
             //테마
         case 1:
-            return 178 * factor
+            return 160 * factor
             //트렌드
         case 2:
             if trendyData.count <= 2 {
@@ -359,7 +361,9 @@ extension HomeVC: UITableViewDelegate {
     }
     func setNavigationAlpah() {
         let currentWidth = HomeTableView.contentOffset.x
-        let currentHeight = HomeTableView.contentOffset.y
+        let currentHeight = HomeTableView.contentOffset.y - 50
+        
+        print(currentHeight, homeTableViewHeaderHeight, "height")
         
         if currentHeight > -homeTableViewHeaderHeight && currentWidth == 0 {
             if currentHeight > -homeTableViewHeaderHeight {

@@ -172,7 +172,7 @@ class OtherMyPageVC: UIViewController {
         self.view.addSubview(headerBackgroundView)
         headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton, backButton])
         
-        let headerViewHeight = userheight * 0.27
+        let headerViewHeight = userheight * 0.29
         
         //backgroundView
         headerBackgroundView.snp.makeConstraints{
@@ -183,7 +183,7 @@ class OtherMyPageVC: UIViewController {
         }
         //MYPAGELabel
         headerTitleLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(58)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalToSuperview()
         }
         //isFollowButton
@@ -192,7 +192,7 @@ class OtherMyPageVC: UIViewController {
             $0.height.equalTo(25)
             $0.top.equalTo(headerTitleLabel.snp.bottom).offset(34)
             $0.centerY.equalTo(userNameLabel)
-            $0.leading.equalTo(userNameLabel.snp.trailing).offset(12)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         //profileImage
         profileImageView.snp.makeConstraints{
@@ -372,7 +372,12 @@ class OtherMyPageVC: UIViewController {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: otherUserID)
             followVC.isOtherMypage = true
             self.tabBarController?.tabBar.isHidden = true
+        if self.navigationController == nil {
+            followVC.modalPresentationStyle = .overFullScreen
+            self.present(followVC, animated: true)
+        } else {
             self.navigationController?.pushViewController(followVC, animated: true)
+        }
      }
     
     @objc private func followingButtonClicked(_ sender: UIButton) {
@@ -380,7 +385,12 @@ class OtherMyPageVC: UIViewController {
             followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: otherUserID)
             followVC.isOtherMypage = true
             self.tabBarController?.tabBar.isHidden = true
+        if self.navigationController == nil {
+            followVC.modalPresentationStyle = .overFullScreen
+            self.present(followVC, animated: true)
+        } else {
             self.navigationController?.pushViewController(followVC, animated: true)
+        }
      }
     
     //MARK: Server
