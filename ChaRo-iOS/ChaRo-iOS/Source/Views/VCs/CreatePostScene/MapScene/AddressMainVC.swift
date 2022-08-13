@@ -146,7 +146,12 @@ final class AddressMainVC: UIViewController {
         confirmButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                self?.viewModel.postSearchKeywords()
+                guard let self = self else { return }
+                self.viewModel.postSearchKeywords()
+                self.viewModel.postWritePost(
+                    writePostData: self.sendedPostData,
+                    imageList: self.imageList
+                )
                 //let nextVC = PostDetailVC()
                 //self?.navigationController?.pushViewController(nextVC, animated: true)
             }).disposed(by: disposeBag)

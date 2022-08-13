@@ -6,16 +6,22 @@
 //
 
 import Foundation
+import CoreMedia
+
 import RxSwift
 import TMapSDK
-import CoreMedia
+import Then
 
 class AddressMainViewModel {
     
     var addressList: [AddressDataModel]
     var searchedHistory: [KeywordResult] = []
     var newSearchHistory: [KeywordResult] = []
-    
+
+    private enum Const {
+        static let ThemeDic: Dictionary = ["봄":"spring", "여름":"summer", "가을":"fall", "겨울":"winter", "산":"mountain", "바다":"sea", "호수":"lake", "강":"river", "해안도로":"oceanRoad", "벚꽃":"blossom", "단풍":"maple", "여유":"relax", "스피드":"speed", "야경":"nightView", "도심":"cityView"]
+    }
+
     private let addressSubject = ReplaySubject<[(AddressDataModel, Int)]>.create(bufferSize: 1)
     private let polylineSubject = PublishSubject<[TMapPolyline]>()
     private let markerSubject = PublishSubject<[TMapMarker]>()
@@ -158,6 +164,40 @@ extension AddressMainViewModel {
                 print("serverErr")
             case .networkFail:
                 print("networkFail")
+            }
+        }
+    }
+
+    func postWritePost(writePostData: WritePostData?, imageList: [UIImage]) {
+        guard var writePostData = writePostData else { return }
+
+        writePostData.course = self.addressList.map { address -> Address in
+            return Address(
+                address: address.address,
+                latitude: address.latitude,
+                longitude: address.longitude
+            )
+        }
+
+        writePostData.theme = writePostData.theme.compactMap { title in
+            return Const.ThemeDic[title]
+        }
+
+        CreatePostService.shared.createPost(
+            model: writePostData,
+            image: imageList
+        ) { result in
+            switch result {
+            case let .success(resultData):
+                debugPrint("POST /post/write success: \(resultData)")
+            case let .requestErr(message):
+                debugPrint("POST /post/write requestErr: \(message)")
+            case .serverErr:
+                debugPrint("POST /post/write serverErr")
+            case .networkFail:
+                debugPrint("POST /post/write networkFail")
+            default:
+                debugPrint("POST /post/write error")
             }
         }
     }
