@@ -89,10 +89,11 @@ class CommonCVC: UICollectionViewCell {
             titleLabel.snp.remakeConstraints {
                 $0.top.equalTo(imageView.snp.bottom).offset(10)
                 $0.leading.trailing.equalToSuperview()
-                $0.height.equalTo(43)
+                $0.height.equalTo(self.frame.width < 200 ? 43: 52)
             }
         }
         imageViewHeight.constant = self.frame.height * 0.65
+        titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.sizeToFit()
     }
     

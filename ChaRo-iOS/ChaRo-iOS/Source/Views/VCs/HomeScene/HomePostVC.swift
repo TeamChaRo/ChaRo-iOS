@@ -61,8 +61,10 @@ class HomePostVC: UIViewController {
     }
     
     func setCollectionView(){
+        let collectionViewLayout = CustomCollectionViewFlowLayout(stickyIndexPath: [0,0])
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.registerCustomXib(xibName: "CommonCVC")
         collectionView.registerCustomXib(xibName: "HomePostDetailCVC")
     }
@@ -272,12 +274,12 @@ extension HomePostVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let Cellwidth = UIScreen.main.bounds.width-40
+        let Cellwidth = UIScreen.main.bounds.width - 40
         if indexPath.section == 0{
             return CGSize(width: Cellwidth, height: 50)
         }
         else {
-            return CGSize(width: Cellwidth, height: 260)
+            return CGSize(width: Cellwidth, height: 280)
 
         }
     }

@@ -47,6 +47,7 @@ final class SearchResultVC: UIViewController {
         $0.setCollectionViewLayout(layout, animated: true)
         $0.delegate = self
         $0.dataSource = self
+        $0.collectionViewLayout = CustomCollectionViewFlowLayout(stickyIndexPath: [0, 0])
         $0.registerCustomXib(xibName: CommonCVC.identifier)
         $0.registerCustomXib(xibName: HomePostDetailCVC.identifier)
     }

@@ -43,6 +43,7 @@
 		362BC9F9269ED39A008EF625 /* MyPageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362BC9F8269ED39A008EF625 /* MyPageDataService.swift */; };
 		365FEF4727D66B6E0036E182 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FEF4627D66B6E0036E182 /* FilterView.swift */; };
 		365FEF4927D66C9C0036E182 /* FilterCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FEF4827D66C9C0036E182 /* FilterCellView.swift */; };
+		3660A9FB28A799E300E2F753 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3660A9FA28A799E300E2F753 /* CustomCollectionViewFlowLayout.swift */; };
 		367B318B274A725C007A2C18 /* MypageInfinityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */; };
 		367B318D274A74C7007A2C18 /* MypageInfinityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B318C274A74C7007A2C18 /* MypageInfinityService.swift */; };
 		367D598F26F768EB0072C7C9 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D598E26F768EB0072C7C9 /* IndicatorView.swift */; };
@@ -314,6 +315,7 @@
 		362BC9F8269ED39A008EF625 /* MyPageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDataService.swift; sourceTree = "<group>"; };
 		365FEF4627D66B6E0036E182 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		365FEF4827D66C9C0036E182 /* FilterCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCellView.swift; sourceTree = "<group>"; };
+		3660A9FA28A799E300E2F753 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		367B318A274A725C007A2C18 /* MypageInfinityDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageInfinityDataModel.swift; sourceTree = "<group>"; };
 		367B318C274A74C7007A2C18 /* MypageInfinityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageInfinityService.swift; sourceTree = "<group>"; };
 		367D598E26F768EB0072C7C9 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
@@ -893,6 +895,7 @@
 				367D598E26F768EB0072C7C9 /* IndicatorView.swift */,
 				365FEF4627D66B6E0036E182 /* FilterView.swift */,
 				365FEF4827D66C9C0036E182 /* FilterCellView.swift */,
+				3660A9FA28A799E300E2F753 /* CustomCollectionViewFlowLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1722,6 +1725,7 @@
 				706A671626F35945001AB884 /* JoinViewCVC.swift in Sources */,
 				7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */,
 				F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */,
+				3660A9FB28A799E300E2F753 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				7062C84D270CE46400C1CD2E /* SocialLoginService.swift in Sources */,
 				3CB532CC27C507DA005AAB1D /* PostDetailBottomView.swift in Sources */,
 				70D63DED2693938E0036484B /* UIImage+.swift in Sources */,
