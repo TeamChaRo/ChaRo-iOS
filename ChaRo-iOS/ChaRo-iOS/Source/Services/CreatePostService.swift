@@ -56,12 +56,14 @@ struct CreatePostService {
                 multipartFormData.append(Data(String(model.isParking).utf8), withName: "isParking")
                 multipartFormData.append(Data(model.parkingDesc.utf8), withName: "parkingDesc")
                 multipartFormData.append(Data(model.courseDesc.utf8), withName: "courseDesc")
-                model.course.map {
-                    multipartFormData.append(Data($0.address.utf8), withName: "course[address]")
-                    multipartFormData.append(Data($0.latitude.utf8), withName: "course[latitude]")
-                    multipartFormData.append(Data($0.longtitude.utf8), withName: "course[longtitude]")
+
+                for (index, data) in model.course.enumerated() {
+                    multipartFormData.append(Data(data.address.utf8), withName: "course[\(index)][address]")
+                    multipartFormData.append(Data(data.latitude.utf8), withName: "course[\(index)][latitude]")
+                    multipartFormData.append(Data(data.longitude.utf8), withName: "course[\(index)][longitude]")
                 }
-                image.map{
+
+                image.map {
                     if let imageData = $0.jpegData(compressionQuality: 1) {
                         multipartFormData.append(imageData, withName: "image", fileName: ".jpeg", mimeType: "image/jpeg")
                     }
@@ -93,19 +95,19 @@ struct CreatePostService {
             }
         }
     }
-    
+
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        
+
         guard let decodedData = try? decoder.decode(CreatePostDataModel.self, from: data)
         else { return .pathErr }
 
         switch statusCode {
         case 200...299:
             print("[Success] 작성하기 Post 요청 데이터 받기 성공")
-            return .success(decodedData.message)
+            return .success(decodedData.msg)
         case 400...499:
-            return .requestErr(decodedData.message)
+            return .requestErr(decodedData.msg)
         case 500:
             return .serverErr
         default:
