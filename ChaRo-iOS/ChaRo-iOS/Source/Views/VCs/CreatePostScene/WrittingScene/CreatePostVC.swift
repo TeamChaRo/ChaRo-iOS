@@ -264,48 +264,6 @@ extension CreatePostVC {
     }
 }
 
-
-// MARK: - Networking
-
-extension CreatePostVC {
-
-    // NOTE: POST /writePost
-    private func postCreatePost() {
-        // NOTE: test dummy data (서버 테스트 안정화 후 제거 예정 - 인정)
-        let dummyModel: WritePostData = WritePostData(
-            title: "하이",
-            userEmail: "injeong0418",
-            province: "특별시",
-            region: "서울",
-            theme: ["여름","산"],
-            warning: self.warning,
-            isParking: false,
-            parkingDesc: "예원아 새벽까지 고생이 많아",
-            courseDesc: "코스 드립크",
-            course: [
-                Address(address: "123", latitude: "123", longtitude: "123"),
-                Address(address: "123", latitude: "123", longtitude: "123")
-            ]
-        )
-
-        CreatePostService.shared.createPost(model: dummyModel, image: self.selectImages) { result in
-            switch result {
-            case let .success(message):
-                debugPrint("POST /writePost success: \(message)")
-            case let .requestErr(message):
-                debugPrint("POST /writePost requestErr: \(message)")
-            case .serverErr:
-                debugPrint("POST /writePost serverErr")
-            case .networkFail:
-                debugPrint("POST /writePost networkFail")
-            default:
-                debugPrint("POST /writePost error")
-            }
-        }
-    }
-}
-    
-
 // MARK: - Layout
 
 extension CreatePostVC {
