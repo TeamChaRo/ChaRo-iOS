@@ -74,7 +74,7 @@ class TabbarVC: UITabBarController {
     
     
     private func configTabbar() {
-        self.view.tintColor = .blue
+        self.view.tintColor = .mainBlue
         self.view.backgroundColor = UIColor.white
 
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
