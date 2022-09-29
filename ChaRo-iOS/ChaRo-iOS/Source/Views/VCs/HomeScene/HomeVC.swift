@@ -168,13 +168,17 @@ class HomeVC: UIViewController, UIGestureRecognizerDelegate {
                 }
             case .requestErr(let message):
                 print("requestERR")
+                self.delegate?.endIndicator()
             case .pathErr:
                 print("pathERR")
                 print("한번 더 실행ㅋ")
+                self.delegate?.endIndicator()
             case .serverErr:
                 print("serverERR")
+                self.delegate?.endIndicator()
             case .networkFail:
                 print("networkFail")
+                self.delegate?.endIndicator()
             }
             //shot out to 'Jang PARTZZANG'
             DispatchQueue.main.async { [weak self] in
