@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import PhotosUI
 
 // MARK: - SettingDataModel
 struct SettingDataModel {
@@ -63,7 +64,9 @@ extension SettingSection {
     var settingData: [SettingDataModel] {
         switch self {
         case .accessAllow:
-            return [SettingDataModel(titleString: "사진", isToggle: true, toggleData: true)]
+            let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+            let toggleStatus = (authorizationStatus == .authorized || authorizationStatus == .limited) ? true : false
+            return [SettingDataModel(titleString: "사진", isToggle: true, toggleData: toggleStatus)]
         case .account:
             return [SettingDataModel(titleString: "프로필 수정", titleLabelColor: UIColor.black),
                     SettingDataModel(titleString: "비밀번호 수정", titleLabelColor: UIColor.black),
