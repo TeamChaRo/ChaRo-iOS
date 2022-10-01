@@ -126,7 +126,7 @@ extension CreatePostVC {
     }
     
     private func initCellHeight() {
-        self.cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408])
+        self.cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408, 210])
     }
     
     private func registerNotificationCenter() {
@@ -368,6 +368,8 @@ extension CreatePostVC: UITableViewDataSource {
             return self.getCreatePostParkingWarningCell(tableView: tableView)
         case 5:
             return self.getCreatePostCourseDescCell(tableView: tableView)
+        case 6:
+            return UITableViewCell()
         default:
             return self.getCreatePostTitleCell(tableView: tableView)
         }
