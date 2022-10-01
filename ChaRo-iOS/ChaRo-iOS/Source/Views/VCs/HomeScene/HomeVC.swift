@@ -263,7 +263,7 @@ extension HomeVC: UITableViewDelegate {
             
             //배너
         case 0:
-            return 340 * factor
+            return 330 * factor
             //테마
         case 1:
             return 160 * factor
@@ -272,21 +272,21 @@ extension HomeVC: UITableViewDelegate {
             if trendyData.count <= 2 {
                 return 318 * factor
             } else {
-                return 570 * factor
+                return 550 * factor
             }
             //커스텀테마
         case 3:
             if customData.count <= 2 {
                 return 318 * factor
             } else {
-                return 570 * factor
+                return 550 * factor
             }
             //지역
         case 4:
             if localData.count <= 2 {
                 return 318 * factor
             } else {
-                return 570 * factor
+                return 550 * factor
             }
             //아무것도아닌거
         case 999:
