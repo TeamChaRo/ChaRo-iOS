@@ -274,7 +274,7 @@ class MyPageVC: UIViewController {
             noSaveDataLabel.snp.makeConstraints{
                 $0.top.equalTo(noSaveDataImageView.snp.bottom).offset(19)
                 $0.leading.equalToSuperview().offset(50)
-                $0.trailing.equalToSuperview().offset(50)
+                $0.trailing.equalToSuperview().offset(-50)
                 $0.height.equalTo(66)
             }
         }
