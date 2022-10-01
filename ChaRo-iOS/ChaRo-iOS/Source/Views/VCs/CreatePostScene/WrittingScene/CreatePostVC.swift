@@ -634,6 +634,11 @@ extension CreatePostVC {
             return false
         }
 
+        if self.isParking == true && self.parkingDesc == "" {
+            self.pushAlertValidation(message: "주차 공간이 있다고 체크해주셨어요! 주차 공간에 대한 설명도 작성해주세요.")
+            return false
+        }
+
         if self.courseDesc.count < 1 {
             self.pushAlertValidation(message: "코스 설명을 입력해주세요.")
             return false
