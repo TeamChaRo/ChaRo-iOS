@@ -665,16 +665,16 @@ class MyPageVC: UIViewController {
         headerBackgroundView.addSubview(followerButton)
         headerBackgroundView.addSubview(followerNumButton)
         
-        let headerViewHeight = userheight * 0.27
+//        let headerRatio = UIScreen.main.bounds.width / 375
         
         //backgroundView
         headerBackgroundView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(0)
             $0.leading.equalToSuperview().offset(0)
             $0.trailing.equalToSuperview().offset(0)
-            $0.height.equalTo(headerViewHeight)
+            $0.bottom.equalTo(followButton.snp.bottom).offset(25)
         }
-        //MYPAGELabel
+        //MYPAGELabel\
         headerTitleLabel.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalToSuperview()
@@ -805,7 +805,6 @@ extension MyPageVC: UICollectionViewDataSource {
                 let writenElement = writenPostDriveData[indexPath.row-1]
                 var writenTags = [writenElement.region, writenElement.theme,
                                   writenElement.warning ?? ""] as [String]
-                print(writenPostDriveData, "왜 안뜨냐?")
                 cell.setData(image: writenElement.image,
                              title: writenElement.title,
                              tagCount: writenTags.count, tagArr: writenTags,
