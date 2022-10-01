@@ -126,7 +126,7 @@ extension CreatePostVC {
     }
     
     private func initCellHeight() {
-        self.cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408])
+        self.cellHeights.append(contentsOf: [89, 255, 125, 135, 334, 408, 210])
     }
     
     private func registerNotificationCenter() {
@@ -201,7 +201,7 @@ extension CreatePostVC {
     }
     
     @objc private func textFieldMoveUp(_ notification: NSNotification) {
-
+        self.separatorView.isHidden = true
         if tableView.contentOffset.y != 0.0 && titleSelectFlag == false {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 UIView.animate(
@@ -218,6 +218,7 @@ extension CreatePostVC {
     }
     
     @objc private func textFieldMoveDown(_ notification: NSNotification) {
+        self.separatorView.isHidden = false
         self.tableView.transform = .identity
     }
 
@@ -263,9 +264,10 @@ extension CreatePostVC {
 
                 self.present(picker, animated: true, completion: nil)
             } else {
-                guard UserDefaults.standard.bool(
-                    forKey: Constants.UserDefaultsKey.shownPhotoAuth
-                ) == true else { return }
+                guard self.shownPhotoAuth == true else {
+                    Constants.shownPhotoLibrary()
+                    return
+                }
                 self.AuthSettingOpen(AuthString: "갤러리")
             }
         } else {
@@ -367,6 +369,8 @@ extension CreatePostVC: UITableViewDataSource {
             return self.getCreatePostParkingWarningCell(tableView: tableView)
         case 5:
             return self.getCreatePostCourseDescCell(tableView: tableView)
+        case 6:
+            return UITableViewCell()
         default:
             return self.getCreatePostTitleCell(tableView: tableView)
         }
@@ -631,6 +635,11 @@ extension CreatePostVC {
 
         if self.isParking == nil {
             self.pushAlertValidation(message: "주차 공간을 체크해주세요.")
+            return false
+        }
+
+        if self.isParking == true && self.parkingDesc == "" {
+            self.pushAlertValidation(message: "주차 공간이 있다고 체크해주셨어요! 주차 공간에 대한 설명도 작성해주세요.")
             return false
         }
 

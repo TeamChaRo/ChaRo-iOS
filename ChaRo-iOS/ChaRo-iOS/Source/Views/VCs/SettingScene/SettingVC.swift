@@ -45,10 +45,15 @@ final class SettingVC: UIViewController {
         configureUI()
         configureTableView()
         configureButtonAddTarget()
+        addNotificationObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeNotificationObserver()
     }
 }
 
@@ -180,23 +185,14 @@ extension SettingVC {
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
+    /// Notification Observer를 제거하는 메서드
+    private func removeNotificationObserver() {
+        NotificationCenter.default.removeObserver(UIApplication.willEnterForegroundNotification)
+    }
+    
     /// 앱 foreground로 진입했을 때 tableView의 section을 reload하는 메서드(토글 관련)
     @objc func willEnterForeground() {
         settingTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-    }
-    
-    /// 사진 접근 설정 상태를 토글에 반영하는 메서드
-    private func setPhotoSwitchStatus(_ toggle: UISwitch) {
-        DispatchQueue.main.async {
-            switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
-            case .authorized:
-                toggle.isOn = true
-            case .limited, .restricted, .denied, .notDetermined:
-                toggle.isOn = false
-            default:
-                break
-            }
-        }
     }
     
     @objc

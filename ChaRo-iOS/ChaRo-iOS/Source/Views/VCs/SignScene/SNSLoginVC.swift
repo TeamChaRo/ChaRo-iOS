@@ -110,7 +110,8 @@ class SNSLoginVC: UIViewController {
         guard let userEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userEmail) else { return }
         
         //소셜로그인
-        if let isSNSLogin = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.isSNSLogin) {
+        let isSNSLogin = UserDefaults.standard.bool(forKey: Constants.UserDefaultsKey.isSNSLogin)
+        if isSNSLogin {
             SocialLoginService.shared.socialLogin(email: userEmail) { (response) in
                 switch(response) {
                 case .success(let data):

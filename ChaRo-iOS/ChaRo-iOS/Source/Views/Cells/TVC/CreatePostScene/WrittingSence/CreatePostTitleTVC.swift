@@ -90,7 +90,9 @@ extension CreatePostTitleTVC: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        titleTextView.text = ""
+        if textView.text == "제목을 입력해주세요" {
+            titleTextView.text = ""
+        }
         titleTextView.textColor = UIColor.black
     }
     

@@ -22,7 +22,7 @@ class JoinEmailView: UIView, UITextFieldDelegate {
     
     let emailVerifyInputView = JoinInputView(title: "이메일 인증번호",
                                         subTitle: "이메일로 보내드린 인증번호를 입력해주세요.",
-                                        placeholder: "ex)울랄라")
+                                        placeholder: "ex)123123")
     
     let nextButton = NextButton(isSticky: false, isTheLast: false)
     let stickyNextButton = NextButton(isSticky: true, isTheLast: false)
