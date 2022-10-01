@@ -263,9 +263,10 @@ extension CreatePostVC {
 
                 self.present(picker, animated: true, completion: nil)
             } else {
-                guard UserDefaults.standard.bool(
-                    forKey: Constants.UserDefaultsKey.shownPhotoAuth
-                ) == true else { return }
+                guard self.shownPhotoAuth == true else {
+                    Constants.shownPhotoLibrary()
+                    return
+                }
                 self.AuthSettingOpen(AuthString: "갤러리")
             }
         } else {
