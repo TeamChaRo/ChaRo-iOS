@@ -201,7 +201,7 @@ extension CreatePostVC {
     }
     
     @objc private func textFieldMoveUp(_ notification: NSNotification) {
-
+        self.separatorView.isHidden = true
         if tableView.contentOffset.y != 0.0 && titleSelectFlag == false {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 UIView.animate(
@@ -218,6 +218,7 @@ extension CreatePostVC {
     }
     
     @objc private func textFieldMoveDown(_ notification: NSNotification) {
+        self.separatorView.isHidden = false
         self.tableView.transform = .identity
     }
 
