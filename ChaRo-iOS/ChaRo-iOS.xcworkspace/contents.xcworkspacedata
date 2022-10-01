@@ -4,4 +4,7 @@
    <FileRef
       location = "group:ChaRo-iOS.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>

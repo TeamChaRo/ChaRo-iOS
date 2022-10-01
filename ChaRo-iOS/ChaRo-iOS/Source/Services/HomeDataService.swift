@@ -19,7 +19,7 @@ struct GetHomeDataService
                                      headers: header)
 
         dataRequest.responseData { dataResponse in
-//            dump(dataResponse)
+            dump(dataResponse)
             switch dataResponse.result {
             
             case .success:
