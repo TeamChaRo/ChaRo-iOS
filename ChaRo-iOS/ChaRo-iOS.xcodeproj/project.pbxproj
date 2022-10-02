@@ -236,6 +236,7 @@
 		7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704F728A279B90077F8A2 /* RxSwift */; };
 		7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FA28A27A130077F8A2 /* GoogleSignIn */; };
 		7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FD28A27A8A0077F8A2 /* Kingfisher */; };
+		7F88B78A28E99F8000044463 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F88B78928E99F8000044463 /* FirebaseCrashlytics */; };
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
@@ -565,6 +566,7 @@
 				CB20C56528F30FCA0025FC69 /* FirebaseCrashlytics in Frameworks */,
 				7F7704E828A279270077F8A2 /* SnapKit in Frameworks */,
 				7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */,
+				7F88B78A28E99F8000044463 /* FirebaseCrashlytics in Frameworks */,
 				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
 				337D85362902F5A50016C3D1 /* TMapSDK.framework in Frameworks */,
 				7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */,
