@@ -43,9 +43,9 @@ struct PostDetailDataModel: Codable {
         dateFormatter.locale = Locale(identifier:"ko_KR")
         let convertDate = dateFormatter.date(from: createdAt ?? "") ?? Date()
         let dateString = dateFormatter.string(from: convertDate)
+        print("convertDate = \(convertDate), dateString = \(dateString)")
         return dateString
     }
-    
 }
 
 // MARK: - DataClass
