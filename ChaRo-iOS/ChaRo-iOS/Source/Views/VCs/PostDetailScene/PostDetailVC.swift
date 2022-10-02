@@ -140,11 +140,11 @@ extension PostDetailVC{
     
     func setupConstraints() {
         view.addSubviews([navigationView, separateLineView])
-        navigationView.snp.makeConstraints{
+        navigationView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(UIScreen.hasNotch ? UIScreen.getNotchHeight() + 58: 93)
         }
-        separateLineView.snp.makeConstraints{
+        separateLineView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(navigationView.snp.bottom)
             $0.height.equalTo(1)
@@ -153,19 +153,19 @@ extension PostDetailVC{
         navigationView.addSubviews([backButton,
                                     navigationTitleLabel])
         
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(1)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-9)
         }
         
-        navigationTitleLabel.snp.makeConstraints{
+        navigationTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(backButton.snp.centerY)
         }
         
         view.addSubview(tableView)
-        tableView.snp.makeConstraints{
+        tableView.snp.makeConstraints {
             $0.top.equalTo(separateLineView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview().inset(88)
@@ -191,7 +191,7 @@ extension PostDetailVC{
     
     func setNavigationViewInConfirmMode() {
         navigationView.addSubview(modifyButton)
-        modifyButton.snp.makeConstraints{
+        modifyButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-11)
             $0.centerY.equalTo(self.backButton.snp.centerY)
         }
@@ -203,7 +203,7 @@ extension PostDetailVC{
 extension PostDetailVC {
     private func configureBottomView() {
         view.addSubview(bottomView)
-        bottomView.snp.makeConstraints{
+        bottomView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(88)
         }

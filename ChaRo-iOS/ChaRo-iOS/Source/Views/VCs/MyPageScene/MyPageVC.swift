@@ -229,7 +229,7 @@ class MyPageVC: UIViewController {
     //탭바 쉬트 이동 및 버튼클릭시 애니메이션
     func setTabbarBottomViewMove() {
         var contentOffsetX = collectionScrollView.contentOffset.x
-        tabbarWriteBottomView.snp.remakeConstraints{
+        tabbarWriteBottomView.snp.remakeConstraints {
             $0.leading.equalTo(collectionScrollView.contentOffset.x / 2)
             $0.bottom.equalTo(tabbarBottomView.snp.top).offset(0)
             $0.width.equalTo(userWidth/2)
@@ -265,26 +265,26 @@ class MyPageVC: UIViewController {
         noWritenDataImageView.isHidden = true
         noWritenDataLabel.isHidden = true
         
-        noSaveDataImageView.snp.makeConstraints{
+        noSaveDataImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
         }
         if isLogin {
-            noSaveDataLabel.snp.makeConstraints{
+            noSaveDataLabel.snp.makeConstraints {
                 $0.top.equalTo(noSaveDataImageView.snp.bottom).offset(19)
                 $0.leading.equalToSuperview().offset(50)
                 $0.trailing.equalToSuperview().offset(-50)
                 $0.height.equalTo(66)
             }
         }
-        noWritenDataImageView.snp.makeConstraints{
+        noWritenDataImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(259)
         }
         if isLogin {
-            noWritenDataLabel.snp.makeConstraints{
+            noWritenDataLabel.snp.makeConstraints {
                 $0.top.equalTo(noWritenDataImageView.snp.bottom).offset(19)
                 $0.leading.equalToSuperview().offset(50)
                 $0.trailing.equalToSuperview().offset(-50)
@@ -519,7 +519,7 @@ class MyPageVC: UIViewController {
     func setFilterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
-        filterView.snp.makeConstraints{
+        filterView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(310)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)

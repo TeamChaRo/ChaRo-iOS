@@ -54,7 +54,7 @@ class HomePostVC: UIViewController {
             $0.backgroundColor = UIColor.gray20
         }
         homePostNavigationView.addSubview(bottomLineView)
-        bottomLineView.snp.makeConstraints{
+        bottomLineView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }
@@ -77,7 +77,7 @@ class HomePostVC: UIViewController {
     func setFilterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
-        filterView.snp.makeConstraints{
+        filterView.snp.makeConstraints {
             $0.top.equalTo(homePostNavigationView.snp.bottom).offset(60)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)

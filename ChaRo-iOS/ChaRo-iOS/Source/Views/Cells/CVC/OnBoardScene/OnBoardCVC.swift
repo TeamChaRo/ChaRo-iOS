@@ -45,17 +45,17 @@ class OnBoardCVC: UICollectionViewCell {
                      titleLabel,
                      subTitleLabel])
         
-        subTitleLabel.snp.makeConstraints{
+        subTitleLabel.snp.makeConstraints {
             $0.bottom.equalTo(self.snp.bottom).offset(-50)
             $0.centerX.equalTo(self.snp.centerX)
         }
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.bottom.equalTo(subTitleLabel.snp.top).offset(-21)
             $0.centerX.equalTo(self.snp.centerX)
         }
         
-        imageView.snp.makeConstraints{
+        imageView.snp.makeConstraints {
             $0.bottom.equalTo(titleLabel.snp.top).offset(-15)
             $0.top.leading.trailing.equalToSuperview()
         }

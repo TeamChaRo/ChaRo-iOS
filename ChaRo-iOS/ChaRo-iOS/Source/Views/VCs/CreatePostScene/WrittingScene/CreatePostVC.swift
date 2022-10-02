@@ -285,7 +285,7 @@ extension CreatePostVC {
         
         let titleRatio: CGFloat = 102/375
         
-        self.titleView.snp.makeConstraints{
+        self.titleView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -298,7 +298,7 @@ extension CreatePostVC {
             $0.leading.equalTo(self.titleView.snp.leading)
             $0.trailing.equalTo(self.titleView.snp.trailing)
         }
-        self.tableView.snp.makeConstraints{
+        self.tableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets).offset(UIScreen.getDeviceWidth()*titleRatio)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -309,21 +309,21 @@ extension CreatePostVC {
     func configureConponentLayout() {
         self.titleView.addSubviews([self.titleLabel, self.xButton, self.nextButton])
         
-        self.titleLabel.snp.makeConstraints{
+        self.titleLabel.snp.makeConstraints {
             $0.bottom.equalTo(titleView.snp.bottom).inset(23)
             $0.width.equalTo(150) // 크게 넣기
             $0.centerX.equalTo(titleView.snp.centerX)
             $0.height.equalTo(21)
         }
         
-        self.xButton.snp.makeConstraints{
+        self.xButton.snp.makeConstraints {
             $0.leading.equalTo(titleView.snp.leading).offset(7)
             $0.width.equalTo(48)
             $0.height.equalTo(xButton.snp.width)
             $0.centerY.equalTo(titleLabel.snp.centerY)
         }
         
-        self.nextButton.snp.makeConstraints{
+        self.nextButton.snp.makeConstraints {
             $0.trailing.equalTo(titleView.snp.trailing).inset(20)
             $0.height.equalTo(22)
             $0.centerY.equalTo(titleLabel.snp.centerY)

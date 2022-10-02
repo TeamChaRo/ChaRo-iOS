@@ -104,25 +104,25 @@ class OnBoardVC: UIViewController {
         
         view.backgroundColor = UIColor(red: 241.0/255.0, green: 243/255.0, blue: 246/255.0, alpha: 1.0)
         
-        skipButton.snp.makeConstraints{
+        skipButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
             $0.height.equalTo(46)
             $0.width.equalTo(74)
         }
         
-        collectionView.snp.makeConstraints{
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(skipButton.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-49)
         }
         
-        pageControl.snp.makeConstraints{
+        pageControl.snp.makeConstraints {
             $0.centerX.equalTo(view.snp.centerX)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-42)
         }
         
-        startButton.snp.makeConstraints{
+        startButton.snp.makeConstraints {
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-26)

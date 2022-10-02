@@ -142,7 +142,7 @@ extension CreatePostTitleTVC {
     private func configureLayout() {
         self.addSubviews([titleTextView, warningLabel])
         
-        self.titleTextView.snp.makeConstraints{
+        self.titleTextView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top).offset(23)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
@@ -150,20 +150,20 @@ extension CreatePostTitleTVC {
             $0.height.equalTo(42)
         }
         
-        self.warningLabel.snp.makeConstraints{
+        self.warningLabel.snp.makeConstraints {
             $0.top.equalTo(self.titleTextView.snp.bottom).offset(4)
             $0.leading.equalTo(self.snp.leading).offset(20)
         }
     }
     
     func increaseTitleHight() {
-        titleTextView.snp.makeConstraints{
+        titleTextView.snp.makeConstraints {
             $0.height.equalTo(64)
         }
     }
     
     func decreaseTitleHight() {
-        titleTextView.snp.makeConstraints{
+        titleTextView.snp.makeConstraints {
             $0.height.equalTo(42)
         }
     }

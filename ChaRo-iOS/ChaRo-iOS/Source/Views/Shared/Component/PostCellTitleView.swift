@@ -48,7 +48,7 @@ class PostCellTitleView: UIView {
     
     private func setTitleContraints() {
         addSubview(titleLabel)
-        titleLabel.snp.makeConstraints{make in
+        titleLabel.snp.makeConstraints {make in
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(self.snp.leading)
         }
@@ -58,13 +58,13 @@ class PostCellTitleView: UIView {
         addSubviews([titleLabel,
                      subTitleLabel])
         
-        titleLabel.snp.makeConstraints{make in
+        titleLabel.snp.makeConstraints {make in
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(self.snp.leading)
             make.height.equalTo(22)
         }
         
-        subTitleLabel.snp.makeConstraints{make in
+        subTitleLabel.snp.makeConstraints {make in
             make.top.equalTo(titleLabel.snp.bottom).offset(2)
             make.leading.equalTo(self.snp.leading)
         }

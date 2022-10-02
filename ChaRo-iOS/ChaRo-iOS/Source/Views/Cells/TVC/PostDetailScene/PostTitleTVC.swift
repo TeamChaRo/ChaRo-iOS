@@ -67,7 +67,7 @@ class PostTitleTVC: UITableViewCell {
             $0.leading.equalToSuperview().inset(63)
         }
         
-        postDateLabel.snp.makeConstraints{
+        postDateLabel.snp.makeConstraints {
             $0.top.equalTo(userNameLabel.snp.bottom).inset(1)
             $0.leading.equalTo(userNameLabel.snp.leading)
             $0.height.equalTo(22)

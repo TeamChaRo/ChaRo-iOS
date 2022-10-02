@@ -159,20 +159,20 @@ extension SearchAddressKeywordVC {
                           contentSeparateLine,
                           tableView])
         
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(13)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(48)
             $0.width.equalTo(48)
         }
         
-        searchTextField.snp.makeConstraints{
+        searchTextField.snp.makeConstraints {
             $0.centerY.equalTo(backButton.snp.centerY)
             $0.leading.equalTo(backButton.snp.trailing)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(26)
         }
         
-        textFieldSeparateLine.snp.makeConstraints{
+        textFieldSeparateLine.snp.makeConstraints {
             $0.top.equalTo(backButton.snp.bottom).offset(11)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(2)
@@ -189,7 +189,7 @@ extension SearchAddressKeywordVC {
             $0.height.equalTo(1)
         }
         
-        tableView.snp.makeConstraints{
+        tableView.snp.makeConstraints {
             $0.top.equalTo(contentSeparateLine.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }

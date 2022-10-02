@@ -104,7 +104,7 @@ class ThemePostVC: UIViewController {
     func filterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
-        filterView.snp.makeConstraints{
+        filterView.snp.makeConstraints {
             $0.top.equalTo(navigationView.snp.bottom).offset(168)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)
@@ -117,7 +117,7 @@ class ThemePostVC: UIViewController {
             $0.backgroundColor = UIColor.gray20
         }
         navigationView.addSubview(bottomView)
-        bottomView.snp.makeConstraints{
+        bottomView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(1)
         }

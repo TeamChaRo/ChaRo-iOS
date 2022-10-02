@@ -58,18 +58,18 @@ class FilterCellView: UIView {
     }
     private func setCellLayout(){
         addSubviews([orderLabel, checkImageView, bottomLineView])
-        orderLabel.snp.makeConstraints{
+        orderLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
             $0.height.equalTo(22)
             $0.width.equalTo(39)
         }
-        checkImageView.snp.makeConstraints{
+        checkImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-16)
             $0.width.height.equalTo(22)
         }
-        bottomLineView.snp.makeConstraints{
+        bottomLineView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(1)
             $0.bottom.equalToSuperview().offset(1)

@@ -43,13 +43,13 @@ class FilterView: UIView {
         self.clipsToBounds = true
         addSubviews([popularOlderView, newOlderView])
         
-        popularOlderView.snp.makeConstraints{
+        popularOlderView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
             $0.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(40)
         }
         
-        newOlderView.snp.makeConstraints{
+        newOlderView.snp.makeConstraints {
             $0.top.equalTo(popularOlderView.snp.bottom).offset(0)
             $0.leading.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(40)

@@ -196,7 +196,7 @@ extension CreatePostPhotoTVC {
     func configurePhotoLayout() {
         addSubview(self.collectionView)
         
-        self.collectionView.snp.makeConstraints{
+        self.collectionView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)

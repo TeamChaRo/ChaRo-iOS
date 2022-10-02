@@ -147,28 +147,28 @@ extension CreatePostThemeTVC {
         
         let textWidth: CGFloat = 65
         
-        self.courseTitleView.snp.makeConstraints{
+        self.courseTitleView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
             $0.height.equalTo(38)
         }
         
-        self.themeFirstButton.snp.makeConstraints{
+        self.themeFirstButton.snp.makeConstraints {
             $0.top.equalTo(self.courseTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.width.equalTo(self.buttonWidth)
             $0.height.equalTo(self.themeFirstButton.snp.width).multipliedBy(heightRatio)
         }
         
-        self.themeSecondButton.snp.makeConstraints{
+        self.themeSecondButton.snp.makeConstraints {
             $0.top.equalTo(self.courseTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(self.themeFirstButton.snp.trailing).offset(6)
             $0.width.equalTo(self.buttonWidth)
             $0.height.equalTo(self.themeSecondButton.snp.width).multipliedBy(heightRatio)
         }
         
-        self.themeThirdButton.snp.makeConstraints{
+        self.themeThirdButton.snp.makeConstraints {
             $0.top.equalTo(self.courseTitleView.snp.bottom).offset(12)
             $0.leading.equalTo(self.themeSecondButton.snp.trailing).offset(6)
             $0.trailing.equalTo(self.snp.trailing).inset(20)
@@ -176,21 +176,21 @@ extension CreatePostThemeTVC {
             $0.height.equalTo(self.themeThirdButton.snp.width).multipliedBy(heightRatio)
         }
         
-        self.themeFirstField.snp.makeConstraints{
+        self.themeFirstField.snp.makeConstraints {
             $0.height.equalTo(21)
             $0.leading.equalTo(self.themeFirstButton.snp.leading).offset(12)
             $0.width.equalTo(textWidth)
             $0.centerY.equalTo(self.themeFirstButton.snp.centerY)
         }
         
-        self.themeSecondField.snp.makeConstraints{
+        self.themeSecondField.snp.makeConstraints {
             $0.height.equalTo(21)
             $0.leading.equalTo(self.themeSecondButton.snp.leading).offset(12)
             $0.width.equalTo(textWidth)
             $0.centerY.equalTo(self.themeSecondButton.snp.centerY)
         }
         
-        self.themeThirdField.snp.makeConstraints{
+        self.themeThirdField.snp.makeConstraints {
             $0.height.equalTo(21)
             $0.leading.equalTo(self.themeThirdButton.snp.leading).offset(12)
             $0.width.equalTo(textWidth)

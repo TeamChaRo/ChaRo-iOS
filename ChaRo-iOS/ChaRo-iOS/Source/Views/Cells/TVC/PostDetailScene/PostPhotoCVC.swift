@@ -27,7 +27,7 @@ final class PostPhotoCVC: UICollectionViewCell{
     
     private func setupContraints() {
         addSubview(imageView)
-        imageView.snp.makeConstraints{
+        imageView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
         setupGesture()

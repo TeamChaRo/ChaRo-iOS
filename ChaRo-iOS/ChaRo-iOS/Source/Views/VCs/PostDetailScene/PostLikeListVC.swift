@@ -64,27 +64,27 @@ class PostLikeListVC: UIViewController {
     
     private func setupConstraints() {
         view.addSubviews([backgroundView, containerView])
-        backgroundView.snp.makeConstraints{
+        backgroundView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
         
-        containerView.snp.makeConstraints{
+        containerView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(300)
         }
         
         containerView.addSubviews([xmarkButton, titleLabel, tableView])
-        xmarkButton.snp.makeConstraints{
+        xmarkButton.snp.makeConstraints {
             $0.top.leading.equalToSuperview().inset(7)
             $0.width.height.equalTo(48)
         }
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(19)
             $0.centerX.equalToSuperview()
         }
         
-        tableView.snp.makeConstraints{
+        tableView.snp.makeConstraints {
             $0.top.equalTo(xmarkButton.snp.bottom).inset(4)
             $0.leading.trailing.bottom.equalToSuperview()
         }
@@ -115,7 +115,7 @@ class PostLikeListVC: UIViewController {
     }
     
     private func updateContainerView(height: CGFloat) {
-        containerView.snp.updateConstraints{
+        containerView.snp.updateConstraints {
             $0.height.equalTo(height)
         }
     }

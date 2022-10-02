@@ -131,7 +131,7 @@ class FollowFollwingVC: UIViewController {
     }
     func setTabbarBottomViewMove() {
         var contentOffsetX = tableScrollView.contentOffset.x
-        tabbarWriteBottomView.snp.remakeConstraints{
+        tabbarWriteBottomView.snp.remakeConstraints {
             tabbarSaveBottomView.backgroundColor = .none
             $0.leading.equalTo(tableScrollView.contentOffset.x / 2)
             $0.bottom.equalTo(tabbarBottomView.snp.top).offset(0)
@@ -216,31 +216,31 @@ class FollowFollwingVC: UIViewController {
         followerView.addSubview(followerTableView)
         followingView.addSubview(followingTableView)
         
-        tableScrollView.snp.makeConstraints{
+        tableScrollView.snp.makeConstraints {
             $0.top.equalTo(tabbarBottomView.snp.bottom).offset(0)
             $0.trailing.equalTo(view).offset(0)
             $0.leading.equalTo(view).offset(0)
             $0.bottom.equalTo(view).offset(0)
         }
-        followerView.snp.makeConstraints{
+        followerView.snp.makeConstraints {
             $0.top.equalTo(tableScrollView.snp.top).offset(0)
             $0.leading.equalTo(tableScrollView.snp.leading).offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(tableViewHeight)
         }
-        followerTableView.snp.makeConstraints{
+        followerTableView.snp.makeConstraints {
             $0.top.equalTo(followerView.snp.top).offset(0)
             $0.bottom.equalTo(followerView.snp.bottom).offset(0)
             $0.leading.equalTo(followerView.snp.leading).offset(0)
             $0.trailing.equalTo(followerView.snp.trailing).offset(0)
         }
-        followingView.snp.makeConstraints{
+        followingView.snp.makeConstraints {
             $0.top.equalTo(tableScrollView.snp.top).offset(0)
             $0.leading.equalTo(followerView.snp.trailing).offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(tableViewHeight)
         }
-        followingTableView.snp.makeConstraints{
+        followingTableView.snp.makeConstraints {
             $0.top.equalTo(followingView.snp.top).offset(0)
             $0.bottom.equalTo(followingView.snp.bottom).offset(0)
             $0.leading.equalTo(followingView.snp.leading).offset(0)
@@ -256,19 +256,19 @@ class FollowFollwingVC: UIViewController {
         let headerViewHeight = userheight * 0.15
         
         //backgroundView
-        headerBackgroundView.snp.makeConstraints{
+        headerBackgroundView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(0)
             $0.leading.equalToSuperview().offset(0)
             $0.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(headerViewHeight)
         }
         //MYPAGELabel
-        headerTitleLabel.snp.makeConstraints{
+        headerTitleLabel.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(14)
             $0.centerX.equalToSuperview()
         }
         //settingButton
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.width.equalTo(48)
             $0.height.equalTo(48)
             $0.centerY.equalTo(headerTitleLabel)
@@ -284,36 +284,36 @@ class FollowFollwingVC: UIViewController {
         tabbarBackgroundView.addSubview(tabbarWriteBottomView)
         tabbarBackgroundView.addSubview(tabbarSaveBottomView)
         
-        tabbarBackgroundView.snp.makeConstraints{
+        tabbarBackgroundView.snp.makeConstraints {
             $0.top.equalTo(headerBackgroundView.snp.bottom).offset(0)
             $0.leading.equalToSuperview().offset(0)
             $0.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(50)
         }
-        followerButton.snp.makeConstraints{
+        followerButton.snp.makeConstraints {
             $0.top.equalTo(tabbarBackgroundView).offset(0)
             $0.leading.equalTo(tabbarBackgroundView).offset(0)
             $0.bottom.equalTo(tabbarBackgroundView).offset(0)
             $0.width.equalTo(userWidth/2)
         }
-        followingButton.snp.makeConstraints{
+        followingButton.snp.makeConstraints {
             $0.top.equalTo(tabbarBackgroundView).offset(0)
             $0.trailing.equalTo(tabbarBackgroundView).offset(0)
             $0.bottom.equalTo(tabbarBackgroundView).offset(0)
             $0.width.equalTo(userWidth/2)
         }
-        tabbarBottomView.snp.makeConstraints{
+        tabbarBottomView.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)
             $0.height.equalTo(1)
         }
-        tabbarWriteBottomView.snp.makeConstraints{
+        tabbarWriteBottomView.snp.makeConstraints {
             $0.bottom.equalTo(tabbarBottomView.snp.top).offset(0)
             $0.leading.equalToSuperview().offset(tabbarBottomConstraint)
             $0.width.equalTo(userWidth/2)
             $0.height.equalTo(2)
         }
-        tabbarSaveBottomView.snp.makeConstraints{
+        tabbarSaveBottomView.snp.makeConstraints {
             $0.bottom.equalTo(tabbarBottomView.snp.top).offset(0)
             $0.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth/2)

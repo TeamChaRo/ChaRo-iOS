@@ -30,7 +30,7 @@ class PostResultHeaderCVC: UICollectionViewCell {
         let header = setHearderView()
         addSubview(header)
         
-        header.snp.makeConstraints{
+        header.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
@@ -78,7 +78,7 @@ class PostResultHeaderCVC: UICollectionViewCell {
         stackView.spacing = 4
         
         view.addSubview(stackView)
-        stackView.snp.makeConstraints{
+        stackView.snp.makeConstraints {
             $0.top.equalTo(view.snp.top).offset(0)
             $0.leading.equalTo(view.snp.leading).offset(20)
             $0.height.equalTo(34)

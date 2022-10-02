@@ -86,14 +86,14 @@ extension CreatePostPhotosCVC {
     // MARK: Layout
     func plusViewConfigureLayout() {
         addSubviews([plusView, plusButton])
-        plusView.snp.makeConstraints{
+        plusView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading)
             $0.trailing.equalTo(self.snp.trailing)
             $0.height.equalTo(plusView.snp.width).multipliedBy(1) // 1:1 ratio
         }
         
-        plusButton.snp.makeConstraints{
+        plusButton.snp.makeConstraints {
             $0.top.equalTo(plusView.snp.top).offset(30)
             $0.leading.equalTo(plusView.snp.leading).offset(30)
             $0.trailing.equalTo(plusView.snp.trailing).inset(29)
@@ -104,14 +104,14 @@ extension CreatePostPhotosCVC {
     
     func configureLayout() {
         addSubviews([imageView, deleteButton])
-        imageView.snp.makeConstraints{
+        imageView.snp.makeConstraints {
             $0.top.equalTo(self.snp.top)
             $0.leading.equalTo(self.snp.leading)
             $0.trailing.equalTo(self.snp.trailing)
             $0.height.equalTo(imageView.snp.width).multipliedBy(1)
         }
         
-        deleteButton.snp.makeConstraints{
+        deleteButton.snp.makeConstraints {
             let heightRatio: CGFloat = 36/107
             $0.top.equalTo(imageView.snp.top)
             $0.trailing.equalTo(imageView.snp.trailing)

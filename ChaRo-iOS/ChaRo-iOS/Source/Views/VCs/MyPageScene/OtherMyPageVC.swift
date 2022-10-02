@@ -162,7 +162,7 @@ class OtherMyPageVC: UIViewController {
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
         }
         
-        collectionview.snp.makeConstraints{
+        collectionview.snp.makeConstraints {
             $0.top.equalToSuperview().offset(0)
             $0.leading.trailing.bottom.equalToSuperview().offset(0)
         }
@@ -175,19 +175,19 @@ class OtherMyPageVC: UIViewController {
         let headerViewHeight = userheight * 0.29
         
         //backgroundView
-        headerBackgroundView.snp.makeConstraints{
+        headerBackgroundView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(0)
             $0.leading.equalToSuperview().offset(0)
             $0.trailing.equalToSuperview().offset(0)
             $0.height.equalTo(headerViewHeight)
         }
         //MYPAGELabel
-        headerTitleLabel.snp.makeConstraints{
+        headerTitleLabel.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalToSuperview()
         }
         //isFollowButton
-        isFollowButton.snp.makeConstraints{
+        isFollowButton.snp.makeConstraints {
             $0.width.equalTo(60)
             $0.height.equalTo(25)
             $0.top.equalTo(headerTitleLabel.snp.bottom).offset(34)
@@ -195,44 +195,44 @@ class OtherMyPageVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-20)
         }
         //profileImage
-        profileImageView.snp.makeConstraints{
+        profileImageView.snp.makeConstraints {
             $0.width.equalTo(62)
             $0.height.equalTo(62)
             $0.leading.equalToSuperview().offset(27)
             $0.top.equalTo(headerTitleLabel.snp.bottom).offset(29)
         }
         //userName
-        userNameLabel.snp.makeConstraints{
+        userNameLabel.snp.makeConstraints {
             $0.leading.equalTo(profileImageView.snp.trailing).offset(27)
             $0.top.equalTo(headerTitleLabel.snp.bottom).offset(34)
             $0.width.equalTo(180)
         }
         //followerButton
-        followerButton.snp.makeConstraints{
+        followerButton.snp.makeConstraints {
             $0.top.equalTo(userNameLabel.snp.bottom).offset(11)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(27)
             $0.width.equalTo(45)
         }
         //followerNumButton
-        followerNumButton.snp.makeConstraints{
+        followerNumButton.snp.makeConstraints {
             $0.centerY.equalTo(followerButton)
             $0.leading.equalTo(followerButton.snp.trailing).offset(3)
             $0.width.equalTo(25)
         }
         //followButton
-        followButton.snp.makeConstraints{
+        followButton.snp.makeConstraints {
             $0.centerY.equalTo(followerButton)
             $0.leading.equalTo(followerNumButton.snp.trailing).offset(21)
             $0.width.equalTo(45)
         }
         //followNumButton
-        followNumButton.snp.makeConstraints{
+        followNumButton.snp.makeConstraints {
             $0.centerY.equalTo(followButton)
             $0.leading.equalTo(followButton.snp.trailing).offset(3)
             $0.width.equalTo(25)
         }
         //뒤로가기 버튼
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.width.height.equalTo(48)
             $0.leading.equalToSuperview().offset(0)
             $0.centerY.equalTo(headerTitleLabel)
@@ -243,7 +243,7 @@ class OtherMyPageVC: UIViewController {
         func setFilterViewLayout() {
             self.view.addSubview(filterView)
             filterView.isHidden = true
-            filterView.snp.makeConstraints{
+            filterView.snp.makeConstraints {
                 $0.top.equalTo(headerBackgroundView.snp.bottom).offset(49)
                 $0.trailing.equalToSuperview().offset(-10)
                 $0.height.equalTo(97)
@@ -336,7 +336,7 @@ class OtherMyPageVC: UIViewController {
         
         noDataImageView.isHidden = true
         
-        noDataImageView.snp.makeConstraints{
+        noDataImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(61)
             $0.leading.trailing.equalToSuperview().offset(0)
             $0.width.equalTo(userWidth)

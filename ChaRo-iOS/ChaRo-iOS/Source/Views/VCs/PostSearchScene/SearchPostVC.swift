@@ -348,39 +348,39 @@ extension SearchPostVC {
                           fileterView,
                           findButton])
         
-        backgroundImageView.snp.makeConstraints{
+        backgroundImageView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
         
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(1)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(7)
             $0.height.width.equalTo(48)
         }
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(14)
             $0.centerX.equalTo(view.snp.centerX)
         }
         
-        userNameLabel.snp.makeConstraints{
+        userNameLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(116)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
         
         userNameLabel.text = "\(userName)님의"
         
-        userSubLabel.snp.makeConstraints{
+        userSubLabel.snp.makeConstraints {
             $0.top.equalTo(userNameLabel.snp.bottom).offset(3)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
         
-        fileterView.snp.makeConstraints{
+        fileterView.snp.makeConstraints {
             $0.top.equalTo(userSubLabel.snp.bottom).offset(2)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(7)
         }
     
-        findButton.snp.makeConstraints{
+        findButton.snp.makeConstraints {
             $0.top.equalTo(fileterView.snp.top).offset(286)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
@@ -392,13 +392,13 @@ extension SearchPostVC {
         fileterView.addSubviews([filterTitleLabel
                                  ,filterSubtitleLabel])
         
-        filterTitleLabel.snp.makeConstraints{
+        filterTitleLabel.snp.makeConstraints {
             $0.top.equalTo(fileterView.snp.top).offset(37)
             $0.leading.equalTo(fileterView.snp.leading).offset(33)
         }
         
         
-        filterSubtitleLabel.snp.makeConstraints{
+        filterSubtitleLabel.snp.makeConstraints {
             $0.top.equalTo(filterTitleLabel.snp.bottom).offset(2)
             $0.leading.equalTo(fileterView.snp.leading).offset(33)
         }
@@ -415,33 +415,33 @@ extension SearchPostVC {
                                  cityTextField,
                                  cityLabel])
         
-        stateImageView.snp.makeConstraints{
+        stateImageView.snp.makeConstraints {
             $0.top.equalTo(filterTitleLabel.snp.bottom).offset(30)
             $0.leading.equalTo(fileterView.snp.leading).offset(22)
         }
         
         view.addSubview(stateTextField)
-        stateTextField.snp.makeConstraints{
+        stateTextField.snp.makeConstraints {
             $0.top.equalTo(stateImageView.snp.top).offset(5)
             $0.leading.equalTo(stateImageView.snp.leading).offset(5)
             $0.height.equalTo(42)
             $0.width.equalTo(108)
         }
       
-        cityImageView.snp.makeConstraints{
+        cityImageView.snp.makeConstraints {
             $0.top.equalTo(filterTitleLabel.snp.bottom).offset(30)
             $0.leading.equalTo(stateImageView.snp.leading).offset(116)
         }
         
         view.addSubview(cityTextField)
-        cityTextField.snp.makeConstraints{
+        cityTextField.snp.makeConstraints {
             $0.top.equalTo(cityImageView.snp.top).offset(5)
             $0.leading.equalTo(cityImageView.snp.leading).offset(5)
             $0.height.equalTo(42)
             $0.width.equalTo(108)
         }
         
-        cityLabel.snp.makeConstraints{
+        cityLabel.snp.makeConstraints {
             $0.centerY.equalTo(cityImageView.snp.centerY)
             $0.leading.equalTo(cityImageView.snp.leading).offset(127)
         }
@@ -453,20 +453,20 @@ extension SearchPostVC {
                                  themaTextField,
                                  themaLabel])
         
-        themaImageView.snp.makeConstraints{
+        themaImageView.snp.makeConstraints {
             $0.top.equalTo(stateImageView.snp.top).offset(62)
             $0.centerX.equalTo(stateImageView.snp.centerX)
         }
         
         view.addSubview(themaTextField)
-        themaTextField.snp.makeConstraints{
+        themaTextField.snp.makeConstraints {
             $0.top.equalTo(themaImageView.snp.top).offset(5)
             $0.leading.equalTo(themaImageView.snp.leading).offset(5)
             $0.height.equalTo(42)
             $0.width.equalTo(108)
         }
         
-        themaLabel.snp.makeConstraints{
+        themaLabel.snp.makeConstraints {
             $0.centerY.equalTo(themaImageView.snp.centerY)
             $0.leading.equalTo(themaImageView.snp.leading).offset(127)
         }
@@ -478,20 +478,20 @@ extension SearchPostVC {
                                  cautionTextField,
                                  cautionLabel])
         
-        cautionImageView.snp.makeConstraints{
+        cautionImageView.snp.makeConstraints {
             $0.top.equalTo(themaImageView.snp.top).offset(62)
             $0.centerX.equalTo(themaImageView.snp.centerX)
         }
         
         view.addSubview(cautionTextField)
-        cautionTextField.snp.makeConstraints{
+        cautionTextField.snp.makeConstraints {
             $0.top.equalTo(cautionImageView.snp.top).offset(5)
             $0.leading.equalTo(cautionImageView.snp.leading).offset(5)
             $0.height.equalTo(42)
             $0.width.equalTo(108)
         }
         
-        cautionLabel.snp.makeConstraints{
+        cautionLabel.snp.makeConstraints {
             $0.centerY.equalTo(cautionImageView.snp.centerY)
             $0.leading.equalTo(cautionImageView.snp.leading).offset(127)
         }

@@ -50,18 +50,18 @@ class SearchKeywordCell: UITableViewCell {
                      addressLabel,
                      dateLabel])
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.top.equalTo(self.snp.top).offset(13)
             $0.leading.equalTo(self.snp.leading).offset(20)
             $0.trailing.equalTo(self.snp.trailing).offset(-70)
         }
         
-        addressLabel.snp.makeConstraints{
+        addressLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(2)
             $0.leading.equalTo(self.snp.leading).offset(20)
         }
         
-        dateLabel.snp.makeConstraints{
+        dateLabel.snp.makeConstraints {
             $0.top.equalTo(self.snp.top).offset(16)
             $0.trailing.equalTo(self.snp.trailing).offset(-20)
         }

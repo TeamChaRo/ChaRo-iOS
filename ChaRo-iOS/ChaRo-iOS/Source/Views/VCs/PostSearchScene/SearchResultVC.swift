@@ -113,7 +113,7 @@ final class SearchResultVC: UIViewController {
     private func setFilterViewLayout() {
         self.view.addSubview(filterView)
         filterView.isHidden = true
-        filterView.snp.makeConstraints{
+        filterView.snp.makeConstraints {
             $0.top.equalTo(navigationView.snp.bottom).offset(119)
             $0.trailing.equalToSuperview().offset(-10)
             $0.height.equalTo(97)
@@ -198,7 +198,7 @@ extension SearchResultVC {
     
     private func setupConstraint() {
         view.addSubview(navigationView)
-        navigationView.snp.makeConstraints{
+        navigationView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(58)
         }
@@ -232,23 +232,23 @@ extension SearchResultVC {
     
     private func setEmptyViewConstraint() {
         view.addSubviews([separateLineView, searchNoImageView, searchNoLabel, searchButton])
-        separateLineView.snp.makeConstraints{
+        separateLineView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(navigationView.snp.bottom)
             $0.height.equalTo(1)
         }
         
-        searchNoImageView.snp.makeConstraints{
+        searchNoImageView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(navigationView.snp.bottom).offset(28)
         }
         
-        searchNoLabel.snp.makeConstraints{
+        searchNoLabel.snp.makeConstraints {
             $0.top.equalTo(searchNoImageView.snp.bottom).offset(19)
             $0.centerX.equalTo(view.snp.centerX)
         }
         
-        searchButton.snp.makeConstraints{
+        searchButton.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             $0.height.equalTo(48)
         }
@@ -269,7 +269,7 @@ extension SearchResultVC {
             $0.height.equalTo(1)
         }
         
-        collectionView.snp.makeConstraints{
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(separateLineView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
@@ -291,7 +291,7 @@ extension SearchResultVC {
         stackView.spacing = 4
         
         view.addSubview(stackView)
-        stackView.snp.makeConstraints{
+        stackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(13)
             $0.leading.equalTo(view.snp.leading).offset(20)
             $0.bottom.equalToSuperview().inset(15)

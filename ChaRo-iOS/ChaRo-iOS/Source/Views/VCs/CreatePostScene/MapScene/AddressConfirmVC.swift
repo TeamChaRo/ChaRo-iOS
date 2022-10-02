@@ -125,21 +125,21 @@ final class AddressConfirmVC: UIViewController {
         let mapFrameHeight = UIScreen.getDeviceHeight() - bottomViewHeight + 30
         
         tMapView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: mapFrameHeight)
-        tMapView.snp.makeConstraints{
+        tMapView.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()
             $0.bottom.equalTo(bottomView.snp.top).offset(-20)
         }
         
-        backButton.snp.makeConstraints{
+        backButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
         }
     
-        centerMarkerView.snp.makeConstraints{
+        centerMarkerView.snp.makeConstraints {
             $0.center.equalTo(tMapView.snp.center)
         }
         
-        bottomView.snp.makeConstraints{
+        bottomView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(bottomViewHeight)
         }
@@ -148,18 +148,18 @@ final class AddressConfirmVC: UIViewController {
                                 addressLabel,
                                 titleNameLabel])
        
-        confirmButton.snp.makeConstraints{
+        confirmButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().inset(35)
             $0.height.equalTo(48 * viewRate)
         }
         
-        addressLabel.snp.makeConstraints{
+        addressLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(confirmButton.snp.top).offset(-27)
         }
         
-        titleNameLabel.snp.makeConstraints{
+        titleNameLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(addressLabel.snp.top).offset(-2)
         }

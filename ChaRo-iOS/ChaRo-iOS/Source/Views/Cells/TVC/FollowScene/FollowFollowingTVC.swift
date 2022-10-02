@@ -94,17 +94,17 @@ class FollowFollowingTVC: UITableViewCell {
 //MARK: layoutFunction
     func setLayout() {
         self.contentView.addSubviews([profileImageView, userNameLabel, followButton])
-        profileImageView.snp.makeConstraints{
+        profileImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(24)
             $0.width.height.equalTo(42)
         }
-        userNameLabel.snp.makeConstraints{
+        userNameLabel.snp.makeConstraints {
             $0.centerY.equalTo(profileImageView)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(21)
             $0.width.equalTo(200)
         }
-        followButton.snp.makeConstraints{
+        followButton.snp.makeConstraints {
             $0.centerY.equalTo(profileImageView)
             $0.trailing.equalToSuperview().offset(-20)
             $0.width.equalTo(60)
@@ -113,17 +113,17 @@ class FollowFollowingTVC: UITableViewCell {
     }
     
     func updateLayoutArPostLikeList() {
-        profileImageView.snp.remakeConstraints{
+        profileImageView.snp.remakeConstraints {
             $0.top.bottom.equalToSuperview().inset(11)
             $0.leading.equalToSuperview().offset(20)
             $0.width.height.equalTo(38)
         }
         
-        userNameLabel.snp.makeConstraints{
+        userNameLabel.snp.makeConstraints {
             $0.centerY.equalTo(profileImageView)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
         }
-        followButton.snp.makeConstraints{
+        followButton.snp.makeConstraints {
             $0.centerY.equalTo(profileImageView)
             $0.trailing.equalToSuperview().inset(19)
             $0.width.equalTo(56)
