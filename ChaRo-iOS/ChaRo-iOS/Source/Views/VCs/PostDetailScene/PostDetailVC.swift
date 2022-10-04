@@ -81,9 +81,9 @@ final class PostDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupConstraints()
         bindToViewModel()
         //checkModeForSendingServer()
-        setupConstraints()
         configureUI()
     }
     
@@ -95,36 +95,19 @@ final class PostDetailVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    public func setPostMode(isAuthor: Bool, isEditing: Bool) {
-        self.isAuthor = isAuthor
-        self.isEditingMode = isEditing
-    }
-    
-    private func checkModeForSendingServer() {
-        if isEditingMode {
-            print("editing 모드로 넘겨받음")
-            //print("postData = \(postData)")
-            print("addressList = \(addressList)")
-            print("isAuthor = \(isAuthor)")
-        } else {
-            print("그냥 구경하러 왔음")
-        }
-    }
-    
     private func configureUI() {
         view.backgroundColor = .white
     }
 }
 
 //MARK: Button Action
-extension PostDetailVC{
+extension PostDetailVC {
     
     //등록 버튼 눌렀을 때 post 서버 통신
     @objc func clickedToSaveButton() {
-        print("등록 버튼")
         makeRequestAlert(title: "", message: "게시물 작성을 완료하시겠습니까?") { _ in
-            self.viewModel.postCreatePost()
-            self.navigationController?.popViewController(animated: true)
+            self.viewModel.postWritePost()
+            //self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -151,7 +134,7 @@ extension PostDetailVC{
 }
 
 //MARK: UI
-extension PostDetailVC{
+extension PostDetailVC {
     
     func setupConstraints() {
         view.addSubviews([navigationView, separateLineView])
@@ -190,7 +173,7 @@ extension PostDetailVC{
     private func configureNavigaitionView() {
         if isAuthor {
             navigationTitleLabel.text = "내가 작성한 글"
-            isEditingMode ? setNavigationViewInSaveMode(): setNavigationViewInConfirmMode()
+            viewModel.isEditingMode ? setNavigationViewInSaveMode(): setNavigationViewInConfirmMode()
         } else {
             navigationTitleLabel.text = "구경하기"
         }
@@ -227,8 +210,6 @@ extension PostDetailVC {
     }
     
     private func bindToBottomView() {
-        
-        
         bottomView.likeButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.viewModel.requestPostLike()
@@ -290,7 +271,7 @@ extension PostDetailVC: UITableViewDataSource {
             
         case .photo:
             guard let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath) else { return UITableViewCell() }
-            if let imageList = postData.images {
+            if let imageList = postData.images, !imageList.isEmpty {
                 cell.setContent(imageList: imageList)
                 cell.presentingClosure = { [weak self] index in
                     let nextVC = ExpendedImageVC(imageList: imageList, currentIndex: index)
@@ -375,6 +356,39 @@ extension PostDetailVC {
             self.bottomView.changeLikeDescription(to: likeCount)
         }
         
+        let rootVC = self.navigationController?.viewControllers.last
+        print("navigationController viewControllers = \(self.navigationController?.viewControllers)")
+        print("self.presentingViewController = \(self.presentingViewController)")
+        print("rootVC = \(rootVC)")
+        viewModel.postCreateResultClosure = { [weak self] success in
+            guard let self = self else { return }
+            print("포스트 결과!!!!!!")
+            let title = success ? "게시물 등록 완료" : "게시물 등록 실패"
+            let message = success ? "게시물이 성공적으로 등록되었습니다" : "게시물이 등록되지 않았습니다\n다시 한번 시도해주세요"
+            self.makeRequestAlert(title: title,
+                                  message: message,
+                                  okAction: { _ in
+                self.presentingViewController?.dismiss(animated: true)
+                print("navigationController viewControllers = \(self.navigationController?.viewControllers)")
+                
+                //self.dismiss(animated: true)
+            })
+        }
+        
+        
+        if viewModel.isEditingMode {
+            viewModel.postCreateResultClosure = { [weak self] success in
+                guard let self = self else { return }
+                let title = success ? "게시물 등록 완료" : "게시물 등록 실패"
+                let message = success ? "게시물이 성공적으로 등록되었습니다" : "게시물이 등록되지 않았습니다\n다시 한번 시도해주세요"
+                self.makeRequestAlert(title: title,
+                                      message: message,
+                                      okAction: { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                })
+            }
+        }
+        
     }
     
     func setPostContentView(postData: PostDetailDataModel?) {
@@ -385,6 +399,7 @@ extension PostDetailVC {
         tableView.dataSource = self
         tableView.reloadData()
         configureBottomView()
+        configureNavigaitionView()
     }
 
 }
