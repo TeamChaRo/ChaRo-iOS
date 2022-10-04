@@ -15,6 +15,16 @@ final class PostDetailVC: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel: PostDetailViewModel
     
+    private enum PostDetailRow: Int {
+        case title
+        case photo
+        case courseAndTheme
+        case location
+        case parking
+        case attention
+        case driveCourse
+    }
+    
     private var isAuthor = false
     private var isEditingMode = false
     private var driveCell: PostDriveCourseTVC?
@@ -254,11 +264,13 @@ extension PostDetailVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let postData = viewModel.postDetailData else {
+        guard let postData = viewModel.postDetailData,
+              let row = PostDetailRow.init(rawValue: indexPath.row) else {
                   return UITableViewCell()
               }
-        switch indexPath.row {
-        case 0:
+        
+        switch row {
+        case .title:
             guard let cell = tableView.dequeueReusableCell(withType: PostTitleTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(title: postData.title ?? "" ,
                                  userName: postData.author ?? "",
@@ -271,24 +283,27 @@ extension PostDetailVC: UITableViewDataSource {
     //            self?.present(otherVC, animated: true)
             return cell
             
-        case 1:
+        case .photo:
             guard let cell = tableView.dequeueReusableCell(withType: PostPhotoTVC.self, for: indexPath) else { return UITableViewCell() }
-            let imageList = postData.images ?? []
-            cell.setContent(imageList: imageList)
-            cell.presentingClosure = { [weak self] index in
-                let nextVC = ExpendedImageVC(imageList: imageList, currentIndex: index)
-                nextVC.modalPresentationStyle = .fullScreen
-                self?.present(nextVC, animated: true)
+            if let imageList = postData.images {
+                cell.setContent(imageList: imageList)
+                cell.presentingClosure = { [weak self] index in
+                    let nextVC = ExpendedImageVC(imageList: imageList, currentIndex: index)
+                    nextVC.modalPresentationStyle = .fullScreen
+                    self?.present(nextVC, animated: true)
+                }
+            } else {
+                cell.setContent(imageList: viewModel.writedImageList ?? [])
             }
             return cell
-        case 2:
+        case .courseAndTheme:
             guard let cell = tableView.dequeueReusableCell(withType: PostCourseThemeTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(city: postData.province ?? "",
                             region: postData.region ?? "",
                             theme: postData.themes ?? [])
             return cell
             
-        case 3:
+        case .location:
             guard let cell = tableView.dequeueReusableCell(withType: PostLocationTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(courseList: postData.course ?? [])
             cell.copyAddressClouser = { locationTitle in
@@ -302,18 +317,18 @@ extension PostDetailVC: UITableViewDataSource {
             }
             return cell
             
-        case 4:
+        case .parking:
             guard let cell = tableView.dequeueReusableCell(withType: PostParkingTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(isParking: postData.isParking ?? false,
                             description: postData.parkingDesc ?? "주차공간에 대한 설명이 없습니다.")
             return cell
             
-        case 5:
+        case .attention:
             guard let cell = tableView.dequeueReusableCell(withType: PostAttentionTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setAttentionList(list: postData.warnings ?? [] )
             return cell
             
-        case 6:
+        case .driveCourse:
             guard let cell = tableView.dequeueReusableCell(withType: PostDriveCourseTVC.self, for: indexPath) else { return UITableViewCell() }
             cell.setContent(text: postData.courseDesc ?? "" )
             return cell
