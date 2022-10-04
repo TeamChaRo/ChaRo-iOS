@@ -18,6 +18,9 @@ final class PostDetailViewModel {
     let postId: Int
     var postLikeClosure: ((Bool?) -> ())?
     var writedImageList: [UIImage]?
+    var writePostData: WritePostData?
+    var postCreateResultClosure: ((Bool) -> ())?
+    var isEditingMode = false
     
     var isLiked: Bool? {
         didSet {
@@ -43,7 +46,10 @@ final class PostDetailViewModel {
     
     init(writePostData: WritePostData?, imageList: [UIImage]) {
         self.postId = -1
-        refineWriteDataToPostData(writePostData: writePostData, imageList: imageList)
+        self.writePostData = writePostData
+        self.writedImageList = imageList
+        self.isEditingMode = true
+        refineWriteDataToPostData(writePostData: writePostData)
     }
     
     struct Input {}
@@ -58,14 +64,8 @@ final class PostDetailViewModel {
         return Output(postDetailSubject: postDetailSubject, likeSubject: likeSubject, storeSubject: storeSubject)
     }
     
-    func refineWriteDataToPostData(writePostData: WritePostData?, imageList: [UIImage]) {
+    func refineWriteDataToPostData(writePostData: WritePostData?) {
         guard let writedData = writePostData else { return }
-        var courseList: [Course] = []
-        writedData.course.forEach {
-            let course = Course(address: $0.address, latitude: $0.latitude, longitude: $0.longitude)
-            courseList.append(course)
-        }
-        
         let detilaData = PostDetailDataModel(postId: -1,
                                              title: writedData.title,
                                              author: Constants.nickName,
@@ -83,17 +83,14 @@ final class PostDetailViewModel {
                                              likesCount: 0,
                                              createdAt: "",
                                              images: [],
-                                             course: courseList,
+                                             course: writedData.course,
                                              warnings: writedData.changeWaningToBool())
         self.postDetailData = detilaData
         self.postDetailSubject.onNext(detilaData)
-        self.writedImageList = imageList
         self.isLiked = false
         self.isStored = false
     }
 }
-
-
 
 extension PostDetailViewModel {
     
@@ -107,7 +104,6 @@ extension PostDetailViewModel {
                     self.postDetailSubject.onNext(data)
                     self.isLiked = data.isFavorite != 0
                     self.isStored = data.isStored != 0
-                    dump(data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -121,24 +117,34 @@ extension PostDetailViewModel {
         }
     }
     
-    func postCreatePost() {
+    
+    func postWritePost() {
+        guard let writedData = writePostData,
+              let imageList = writedImageList else { return }
         
-        print("===서버통신 시작=====")
-//        CreatePostService.shared.createPost(model: writedPostData!, image: imageList) { result in
-//            switch result {
-//            case .success(let message):
-//                print(message)
-//            case .requestErr(let message):
-//                print(message)
-//            case .serverErr:
-//                print("서버에러")
-//            case .networkFail:
-//                print("네트워크에러")
-//            default:
-//                print("몰라에러")
-//            }
-//        }
+        CreatePostService.shared.createPost(
+            model: writedData,
+            image: imageList
+        ) { [weak self] result in
+            switch result {
+            case let .success(resultData):
+                self?.postCreateResultClosure?(true)
+                debugPrint("POST /post/write success: \(resultData)")
+            case let .requestErr(message):
+                self?.postCreateResultClosure?(false)
+                debugPrint("POST /post/write requestErr: \(message)")
+            case .serverErr:
+                debugPrint("POST /post/write serverErr")
+            case .networkFail:
+                debugPrint("POST /post/write networkFail")
+            default:
+                debugPrint("POST /post/write error")
+                self?.postCreateResultClosure?(true)
+            }
+        }
     }
+    
+ 
     
     func requestPostLike() {
         LikeService.shared.Like(userEmail: Constants.userEmail,

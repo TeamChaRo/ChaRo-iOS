@@ -170,19 +170,6 @@ extension AddressMainViewModel {
 
     func postWritePost(writePostData: WritePostData?, imageList: [UIImage]) {
         guard let writedData = getWritedPostdata(writePostData: writePostData) else { return }
-
-//        writePostData.course = self.addressList.map { address -> Address in
-//            return Address(
-//                address: address.address,
-//                latitude: address.latitude,
-//                longitude: address.longitude
-//            )
-//        }
-//
-//        writePostData.theme = writePostData.theme.compactMap { title in
-//            return Const.ThemeDic[title]
-//        }
-        //let writedData = getWritedPostdata(writePostData: writePostData)
         
         CreatePostService.shared.createPost(
             model: writedData,
@@ -205,8 +192,9 @@ extension AddressMainViewModel {
     
     func getWritedPostdata(writePostData: WritePostData?) -> WritePostData? {
         guard var writePostData = writePostData else { return nil }
-        writePostData.course = self.addressList.map { address -> Address in
-            return Address(
+        
+        writePostData.course = self.addressList.map { address -> Course in
+            return Course(
                 address: address.address,
                 latitude: address.latitude,
                 longitude: address.longitude
