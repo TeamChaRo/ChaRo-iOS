@@ -169,22 +169,23 @@ extension AddressMainViewModel {
     }
 
     func postWritePost(writePostData: WritePostData?, imageList: [UIImage]) {
-        guard var writePostData = writePostData else { return }
+        guard let writedData = getWritedPostdata(writePostData: writePostData) else { return }
 
-        writePostData.course = self.addressList.map { address -> Address in
-            return Address(
-                address: address.address,
-                latitude: address.latitude,
-                longitude: address.longitude
-            )
-        }
-
-        writePostData.theme = writePostData.theme.compactMap { title in
-            return Const.ThemeDic[title]
-        }
-
+//        writePostData.course = self.addressList.map { address -> Address in
+//            return Address(
+//                address: address.address,
+//                latitude: address.latitude,
+//                longitude: address.longitude
+//            )
+//        }
+//
+//        writePostData.theme = writePostData.theme.compactMap { title in
+//            return Const.ThemeDic[title]
+//        }
+        //let writedData = getWritedPostdata(writePostData: writePostData)
+        
         CreatePostService.shared.createPost(
-            model: writePostData,
+            model: writedData,
             image: imageList
         ) { result in
             switch result {
@@ -200,5 +201,22 @@ extension AddressMainViewModel {
                 debugPrint("POST /post/write error")
             }
         }
+    }
+    
+    func getWritedPostdata(writePostData: WritePostData?) -> WritePostData? {
+        guard var writePostData = writePostData else { return nil }
+        writePostData.course = self.addressList.map { address -> Address in
+            return Address(
+                address: address.address,
+                latitude: address.latitude,
+                longitude: address.longitude
+            )
+        }
+
+        writePostData.theme = writePostData.theme.compactMap { title in
+            return Const.ThemeDic[title]
+        }
+        
+        return writePostData
     }
 }

@@ -13,10 +13,12 @@ import KakaoSDKShare
 import RxKakaoSDKShare
 import KakaoSDKCommon
 
-class PostDetailViewModel {
+final class PostDetailViewModel {
     private let disposeBag = DisposeBag()
     let postId: Int
     var postLikeClosure: ((Bool?) -> ())?
+    var writedImageList: [UIImage]?
+    
     var isLiked: Bool? {
         didSet {
             postLikeClosure?(isLiked)
@@ -39,6 +41,11 @@ class PostDetailViewModel {
         getPostDetailData(postId: postId)
     }
     
+    init(writePostData: WritePostData?, imageList: [UIImage]) {
+        self.postId = -1
+        refineWriteDataToPostData(writePostData: writePostData, imageList: imageList)
+    }
+    
     struct Input {}
     
     struct Output {
@@ -50,7 +57,43 @@ class PostDetailViewModel {
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         return Output(postDetailSubject: postDetailSubject, likeSubject: likeSubject, storeSubject: storeSubject)
     }
+    
+    func refineWriteDataToPostData(writePostData: WritePostData?, imageList: [UIImage]) {
+        guard let writedData = writePostData else { return }
+        var courseList: [Course] = []
+        writedData.course.forEach {
+            let course = Course(address: $0.address, latitude: $0.latitude, longitude: $0.longitude)
+            courseList.append(course)
+        }
+        
+        let detilaData = PostDetailDataModel(postId: -1,
+                                             title: writedData.title,
+                                             author: Constants.nickName,
+                                             authorEmail: writedData.userEmail,
+                                             profileImage: Constants.profileName,
+                                             isAuthor: true,
+                                             isStored: 0,
+                                             isFavorite: 0,
+                                             isParking: writedData.isParking,
+                                             parkingDesc: writedData.parkingDesc,
+                                             courseDesc: writedData.courseDesc,
+                                             province: writedData.province,
+                                             region: writedData.region,
+                                             themes: writedData.changeThemeToKorean(),
+                                             likesCount: 0,
+                                             createdAt: "",
+                                             images: [],
+                                             course: courseList,
+                                             warnings: writedData.changeWaningToBool())
+        self.postDetailData = detilaData
+        self.postDetailSubject.onNext(detilaData)
+        self.writedImageList = imageList
+        self.isLiked = false
+        self.isStored = false
+    }
 }
+
+
 
 extension PostDetailViewModel {
     
