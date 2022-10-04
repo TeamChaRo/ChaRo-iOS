@@ -70,6 +70,11 @@ final class PostDetailVC: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    init(writePostData: WritePostData?, imageList: [UIImage]) {
+        viewModel = PostDetailViewModel(writePostData: writePostData, imageList: imageList)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

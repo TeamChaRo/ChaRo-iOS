@@ -152,6 +152,9 @@ final class AddressMainVC: UIViewController {
                     writePostData: self.sendedPostData,
                     imageList: self.imageList
                 )
+                guard let writedData = self.viewModel.getWritedPostdata(writePostData: self.sendedPostData) else { return }
+                let nextVC = PostDetailVC(writePostData: writedData, imageList: self.imageList)
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 //let nextVC = PostDetailVC()
                 //self?.navigationController?.pushViewController(nextVC, animated: true)
             }).disposed(by: disposeBag)
