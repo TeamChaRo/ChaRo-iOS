@@ -23,6 +23,16 @@ struct WritePostData: Codable {
     let parkingDesc: String
     let courseDesc: String
     var course: [Address]
+    
+    func changeThemeToKorean() -> [String] {
+        var themeList: [String] = []
+        theme.forEach {
+            if let koreaTheme = CommonData.themeDict.getKey(by: $0) {
+                themeList.append(koreaTheme)
+            }
+        }
+        return themeList
+    }
 }
 
 struct Address: Codable {

@@ -238,6 +238,7 @@
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
+		7FC7EBBD28EC7F1F00F643C3 /* Dicationary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC7EBBC28EC7F1F00F643C3 /* Dicationary+.swift */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */; };
@@ -510,6 +511,7 @@
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
+		7FC7EBBC28EC7F1F00F643C3 /* Dicationary+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dicationary+.swift"; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDriveCourseTVC.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 				70FD4262281839B400631BB7 /* String+.swift */,
 				332867FE2857421200E75C70 /* DateComponents+.swift */,
 				3608440B289F9D850084C397 /* UILabel+.swift */,
+				7FC7EBBC28EC7F1F00F643C3 /* Dicationary+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1771,6 +1774,7 @@
 				33421B8F2817FAD9005EFBA5 /* NoticeVC.swift in Sources */,
 				7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */,
 				3C7A0C5127CE83AE00B78854 /* PostLikeListViewModel.swift in Sources */,
+				7FC7EBBD28EC7F1F00F643C3 /* Dicationary+.swift in Sources */,
 				36E445B3277CA160008E31BE /* SettingVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */,
