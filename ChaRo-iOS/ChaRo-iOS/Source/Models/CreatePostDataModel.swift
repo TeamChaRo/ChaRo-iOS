@@ -22,7 +22,7 @@ struct WritePostData: Codable {
     let isParking: Bool
     let parkingDesc: String
     let courseDesc: String
-    var course: [Address]
+    var course: [Course]
     
     func changeThemeToKorean() -> [String] {
         var themeList: [String] = []
@@ -44,10 +44,4 @@ struct WritePostData: Codable {
         }
         return waningList
     }
-}
-
-struct Address: Codable {
-    let address: String
-    let latitude: String
-    let longitude: String
 }
