@@ -37,6 +37,10 @@ final class PostPhotoCVC: UICollectionViewCell{
         imageView.kf.setImage(with: URL(string: imgString))
     }
     
+    func setImage(to image: UIImage) {
+        imageView.image = image
+    }
+    
     private func setupGesture() {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(gesture:)))
         self.contentView.addGestureRecognizer(pinchGesture)

@@ -10,13 +10,14 @@ import Then
 import SnapKit
 import RxSwift
 
-final class PostPhotoTVC: UITableViewCell{
+final class PostPhotoTVC: UITableViewCell {
     
     // MARK: - properties
     var presentingClosure: ((Int) -> ())?
     
     private let disposeBag = DisposeBag()
     private let photoSubject = PublishSubject<[String]>()
+    private let photoImageSubject = PublishSubject<[UIImage]>()
     private var imageList: [String] = []
     
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
@@ -73,21 +74,40 @@ final class PostPhotoTVC: UITableViewCell{
     }
     
     private func bind() {
+        collectionView.rx.itemSelected.bind(onNext: { [weak self] indexPath in
+            self?.presentingClosure?(indexPath.row)
+        }).disposed(by: disposeBag)
+    }
+    
+    func setContent(imageList: [String]) {
+        self.imageList = imageList
+        self.collectionView.delegate = nil
+        self.collectionView.dataSource = nil
+        
         photoSubject
+            .bind(to: collectionView.rx.items(cellIdentifier: PostPhotoCVC.className,
+                                                     cellType: PostPhotoCVC.self)) { row, element, cell in
+                
+                cell.setImage(to: element)
+        }.disposed(by: disposeBag)
+        
+        photoNumberButton.setTitle("1 / \(imageList.count)", for: .normal)
+        photoSubject.onNext(imageList)
+    }
+    
+    func setContent(imageList: [UIImage]) {
+        self.imageList = []
+        self.collectionView.delegate = nil
+        self.collectionView.dataSource = nil
+        
+        photoImageSubject
             .bind(to: collectionView.rx.items(cellIdentifier: PostPhotoCVC.className,
                                                      cellType: PostPhotoCVC.self)) { row, element, cell in
                 cell.setImage(to: element)
         }.disposed(by: disposeBag)
         
-        collectionView.rx.itemSelected.bind(onNext: { [weak self] indexPath in
-            self?.presentingClosure?(indexPath.row)
-        })
-    }
-    
-    func setContent(imageList: [String]) {
-        self.imageList = imageList
         photoNumberButton.setTitle("1 / \(imageList.count)", for: .normal)
-        photoSubject.onNext(imageList)
+        photoImageSubject.onNext(imageList)
     }
 }
 
