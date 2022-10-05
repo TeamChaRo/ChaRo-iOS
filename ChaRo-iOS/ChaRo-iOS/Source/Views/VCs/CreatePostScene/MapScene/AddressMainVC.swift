@@ -148,12 +148,9 @@ final class AddressMainVC: UIViewController {
             .drive(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.viewModel.postSearchKeywords()
-                self.viewModel.postWritePost(
-                    writePostData: self.sendedPostData,
-                    imageList: self.imageList
-                )
-                //let nextVC = PostDetailVC()
-                //self?.navigationController?.pushViewController(nextVC, animated: true)
+                guard let writedData = self.viewModel.getWritedPostdata(writePostData: self.sendedPostData) else { return }
+                let nextVC = PostDetailVC(writePostData: writedData, imageList: self.imageList)
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }).disposed(by: disposeBag)
     }
     
@@ -161,8 +158,8 @@ final class AddressMainVC: UIViewController {
         updateAddressSubject.onNext((address, index))
     }
     
-    private func changeAddressData() -> [Address] {
-        var castedToAddressDatalList : [Address] = []
+    private func changeAddressData() -> [Course] {
+        var castedToAddressDatalList : [Course] = []
         viewModel.addressList.forEach{
             castedToAddressDatalList.append($0.getAddressDataModel())
         }

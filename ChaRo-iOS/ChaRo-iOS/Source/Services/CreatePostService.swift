@@ -22,7 +22,7 @@ struct CreatePostService {
         isParking: Bool,
         parkingDesc: String,
         courseDesc: String,
-        course: [Address]
+        course: [Course]
     ) -> Parameters {
         
         return [
@@ -58,9 +58,9 @@ struct CreatePostService {
                 multipartFormData.append(Data(model.courseDesc.utf8), withName: "courseDesc")
 
                 for (index, data) in model.course.enumerated() {
-                    multipartFormData.append(Data(data.address.utf8), withName: "course[\(index)][address]")
-                    multipartFormData.append(Data(data.latitude.utf8), withName: "course[\(index)][latitude]")
-                    multipartFormData.append(Data(data.longitude.utf8), withName: "course[\(index)][longitude]")
+                    multipartFormData.append(Data((data.address ?? "").utf8), withName: "course[\(index)][address]")
+                    multipartFormData.append(Data((data.latitude ?? "").utf8), withName: "course[\(index)][latitude]")
+                    multipartFormData.append(Data((data.longitude ?? "").utf8), withName: "course[\(index)][longitude]")
                 }
 
                 image.map {
