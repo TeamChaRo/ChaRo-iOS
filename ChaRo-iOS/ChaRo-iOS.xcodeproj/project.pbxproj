@@ -239,6 +239,8 @@
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
 		7FC7EBBD28EC7F1F00F643C3 /* Dicationary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC7EBBC28EC7F1F00F643C3 /* Dicationary+.swift */; };
+		CB20C56428F30FCA0025FC69 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7FE3A83E28EB17890041DCCD /* FirebaseAnalytics */; };
+		CB20C56528F30FCA0025FC69 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7FE3A84028EB17890041DCCD /* FirebaseCrashlytics */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */; };
@@ -554,13 +556,13 @@
 				7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */,
 				7F7704F128A279940077F8A2 /* Then in Frameworks */,
 				7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */,
-				7FE3A83F28EB17890041DCCD /* FirebaseAnalytics in Frameworks */,
+				CB20C56428F30FCA0025FC69 /* FirebaseAnalytics in Frameworks */,
 				7F0BED8F28A16C4B00BB3A8F /* KakaoSDKCommonCore in Frameworks */,
 				7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */,
 				7F0BED8B28A16C4B00BB3A8F /* KakaoSDKAuth in Frameworks */,
 				7F0BED9128A16C4B00BB3A8F /* KakaoSDKShare in Frameworks */,
 				7F7704F428A279B90077F8A2 /* RxCocoa in Frameworks */,
-				7FE3A84128EB17890041DCCD /* FirebaseCrashlytics in Frameworks */,
+				CB20C56528F30FCA0025FC69 /* FirebaseCrashlytics in Frameworks */,
 				7F7704E828A279270077F8A2 /* SnapKit in Frameworks */,
 				7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */,
 				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
@@ -2032,6 +2034,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J8A843466G;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2063,7 +2067,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J8A843466G;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
