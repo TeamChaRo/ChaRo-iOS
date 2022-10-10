@@ -280,6 +280,10 @@ public struct TOPInfo {
     get
     set(value)
   }
+  public var calloutView: UIKit.UIView? {
+    get
+    set(value)
+  }
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class TMapRectangle : TMapSDK.TMapShape {

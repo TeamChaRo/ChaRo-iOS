@@ -238,6 +238,9 @@
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
+		7FC7EBBD28EC7F1F00F643C3 /* Dicationary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC7EBBC28EC7F1F00F643C3 /* Dicationary+.swift */; };
+		CB20C56428F30FCA0025FC69 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7FE3A83E28EB17890041DCCD /* FirebaseAnalytics */; };
+		CB20C56528F30FCA0025FC69 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7FE3A84028EB17890041DCCD /* FirebaseCrashlytics */; };
 		F42DA7FD2692235C003DA0DC /* PostTitleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */; };
 		F42DA80E2694D47F003DA0DC /* PostCourseThemeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */; };
 		F451640B2778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */; };
@@ -510,6 +513,7 @@
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
+		7FC7EBBC28EC7F1F00F643C3 /* Dicationary+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dicationary+.swift"; sourceTree = "<group>"; };
 		F42DA7FC2692235C003DA0DC /* PostTitleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTitleDataModel.swift; sourceTree = "<group>"; };
 		F42DA80D2694D47F003DA0DC /* PostCourseThemeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCourseThemeTVC.swift; sourceTree = "<group>"; };
 		F45164092778D92A00AE84B4 /* CreatePostDriveCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostDriveCourseTVC.swift; sourceTree = "<group>"; };
@@ -552,11 +556,13 @@
 				7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */,
 				7F7704F128A279940077F8A2 /* Then in Frameworks */,
 				7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */,
+				CB20C56428F30FCA0025FC69 /* FirebaseAnalytics in Frameworks */,
 				7F0BED8F28A16C4B00BB3A8F /* KakaoSDKCommonCore in Frameworks */,
 				7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */,
 				7F0BED8B28A16C4B00BB3A8F /* KakaoSDKAuth in Frameworks */,
 				7F0BED9128A16C4B00BB3A8F /* KakaoSDKShare in Frameworks */,
 				7F7704F428A279B90077F8A2 /* RxCocoa in Frameworks */,
+				CB20C56528F30FCA0025FC69 /* FirebaseCrashlytics in Frameworks */,
 				7F7704E828A279270077F8A2 /* SnapKit in Frameworks */,
 				7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */,
 				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
@@ -892,6 +898,7 @@
 				70FD4262281839B400631BB7 /* String+.swift */,
 				332867FE2857421200E75C70 /* DateComponents+.swift */,
 				3608440B289F9D850084C397 /* UILabel+.swift */,
+				7FC7EBBC28EC7F1F00F643C3 /* Dicationary+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1484,6 +1491,7 @@
 				3C71FEA026881DAA007E8EAD /* Frameworks */,
 				3C71FEA126881DAA007E8EAD /* Resources */,
 				36F8F6BD2713445200092338 /* Embed Frameworks */,
+				7FE3A84228EB19320041DCCD /* Firebase Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1507,6 +1515,8 @@
 				7F7704F728A279B90077F8A2 /* RxSwift */,
 				7F7704FA28A27A130077F8A2 /* GoogleSignIn */,
 				7F7704FD28A27A8A0077F8A2 /* Kingfisher */,
+				7FE3A83E28EB17890041DCCD /* FirebaseAnalytics */,
+				7FE3A84028EB17890041DCCD /* FirebaseCrashlytics */,
 			);
 			productName = "ChaRo-iOS";
 			productReference = 3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */;
@@ -1567,6 +1577,7 @@
 				7F7704F228A279B90077F8A2 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				7F7704F928A27A130077F8A2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				7F7704FC28A27A8A0077F8A2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7FE3A83D28EB17890041DCCD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3C71FEA426881DAA007E8EAD /* Products */;
 			projectDirPath = "";
@@ -1646,6 +1657,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7FE3A84228EB19320041DCCD /* Firebase Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3C71FE9F26881DAA007E8EAD /* Sources */ = {
@@ -1771,6 +1803,7 @@
 				33421B8F2817FAD9005EFBA5 /* NoticeVC.swift in Sources */,
 				7062C82C270A34AF00C1CD2E /* JoinAgreeButton.swift in Sources */,
 				3C7A0C5127CE83AE00B78854 /* PostLikeListViewModel.swift in Sources */,
+				7FC7EBBD28EC7F1F00F643C3 /* Dicationary+.swift in Sources */,
 				36E445B3277CA160008E31BE /* SettingVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
 				70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */,
@@ -1906,7 +1939,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2000,23 +2033,32 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.6;
 				DEVELOPMENT_TEAM = J8A843466G;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/ChaRo-iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Resource/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "차로";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 20221010;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VALIDATE_WORKSPACE = YES;
 			};
@@ -2031,25 +2073,32 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.6;
 				DEVELOPMENT_TEAM = J8A843466G;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/ChaRo-iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ChaRo-iOS/Resource/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "차로";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 20221010;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
@@ -2199,6 +2248,14 @@
 				kind = branch;
 			};
 		};
+		7FE3A83D28EB17890041DCCD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2281,6 +2338,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F7704FC28A27A8A0077F8A2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		7FE3A83E28EB17890041DCCD /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FE3A83D28EB17890041DCCD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		7FE3A84028EB17890041DCCD /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FE3A83D28EB17890041DCCD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

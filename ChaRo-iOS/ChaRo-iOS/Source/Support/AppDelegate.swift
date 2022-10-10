@@ -9,6 +9,7 @@ import UIKit
 import GoogleSignIn
 import KakaoSDKCommon
 import UserNotifications
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [END register_for_notifications]
         KakaoSDK.initSDK(appKey: "fe470f9e3a4348f2b8dad52d2014efcc")
+        FirebaseApp.configure()
         return true
     }
     
