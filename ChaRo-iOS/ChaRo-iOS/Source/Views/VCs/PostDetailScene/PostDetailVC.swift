@@ -355,27 +355,7 @@ extension PostDetailVC {
             self.bottomView.likeButton.isSelected = isLiked
             self.bottomView.changeLikeDescription(to: likeCount)
         }
-        
-        let rootVC = self.navigationController?.viewControllers.last
-        print("navigationController viewControllers = \(self.navigationController?.viewControllers)")
-        print("self.presentingViewController = \(self.presentingViewController)")
-        print("rootVC = \(rootVC)")
-        viewModel.postCreateResultClosure = { [weak self] success in
-            guard let self = self else { return }
-            print("포스트 결과!!!!!!")
-            let title = success ? "게시물 등록 완료" : "게시물 등록 실패"
-            let message = success ? "게시물이 성공적으로 등록되었습니다" : "게시물이 등록되지 않았습니다\n다시 한번 시도해주세요"
-            self.makeRequestAlert(title: title,
-                                  message: message,
-                                  okAction: { _ in
-                self.presentingViewController?.dismiss(animated: true)
-                print("navigationController viewControllers = \(self.navigationController?.viewControllers)")
-                
-                //self.dismiss(animated: true)
-            })
-        }
-        
-        
+    
         if viewModel.isEditingMode {
             viewModel.postCreateResultClosure = { [weak self] success in
                 guard let self = self else { return }
@@ -384,7 +364,7 @@ extension PostDetailVC {
                 self.makeRequestAlert(title: title,
                                       message: message,
                                       okAction: { _ in
-                    self.navigationController?.popToRootViewController(animated: true)
+                    self.navigationController?.dismiss(animated: true)
                 })
             }
         }
