@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
         configureTextfieldUI()
         configureNotificationCenter()
         configureDelegate()
-        addTestUserAccount()
+        //addTestUserAccount()
     }
     
     private func addTestUserAccount() {
