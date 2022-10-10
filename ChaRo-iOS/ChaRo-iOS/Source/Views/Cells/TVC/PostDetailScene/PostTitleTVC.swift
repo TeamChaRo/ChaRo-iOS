@@ -12,7 +12,7 @@ import Then
 class PostTitleTVC: UITableViewCell {
     
     // MARK: - properties
-    
+    var moveToPageClosure: (() ->())?
     private let postTitleLabel = UILabel().then {
         $0.font = .notoSansBoldFont(ofSize: 19)
         $0.textColor = .mainBlack
@@ -40,6 +40,7 @@ class PostTitleTVC: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
         configureUI()
+        addGestureToImageView()
     }
     
     required init?(coder: NSCoder) {
@@ -88,4 +89,15 @@ class PostTitleTVC: UITableViewCell {
         profileImageView.kf.setImage(with: URL(string: imageName))
     }
     
+    private func addGestureToImageView() {
+        let tapGeature = UITapGestureRecognizer()
+        tapGeature.addTarget(self, action: #selector(clickToImageView))
+        profileImageView.addGestureRecognizer(tapGeature)
+        profileImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc
+    private func clickToImageView() {
+        moveToPageClosure?()
+    }
 }
