@@ -38,12 +38,14 @@ struct PostDetailDataModel: Codable {
     
     //2022-06-13T16:35:31.000Z
     func getCreatedTimeText() -> String {
+        let timeText = createdAt?.split(separator: "T").first?.description ?? ""
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        dateFormatter.locale = Locale(identifier:"ko_KR")
-        let convertDate = dateFormatter.date(from: createdAt ?? "") ?? Date()
-        let dateString = dateFormatter.string(from: convertDate)
-        return dateString
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let convertedDate = dateFormatter.date(from: timeText) ?? Date()
+        let koreaDateFormatter = DateFormatter()
+        koreaDateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        let convertedString = koreaDateFormatter.string(from: convertedDate)
+        return convertedString
     }
     
 }

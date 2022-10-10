@@ -13,10 +13,15 @@ import KakaoSDKShare
 import RxKakaoSDKShare
 import KakaoSDKCommon
 
-class PostDetailViewModel {
+final class PostDetailViewModel {
     private let disposeBag = DisposeBag()
     let postId: Int
     var postLikeClosure: ((Bool?) -> ())?
+    var writedImageList: [UIImage]?
+    var writePostData: WritePostData?
+    var postCreateResultClosure: ((Bool) -> ())?
+    var isEditingMode = false
+    
     var isLiked: Bool? {
         didSet {
             postLikeClosure?(isLiked)
@@ -39,6 +44,14 @@ class PostDetailViewModel {
         getPostDetailData(postId: postId)
     }
     
+    init(writePostData: WritePostData?, imageList: [UIImage]) {
+        self.postId = -1
+        self.writePostData = writePostData
+        self.writedImageList = imageList
+        self.isEditingMode = true
+        refineWriteDataToPostData(writePostData: writePostData)
+    }
+    
     struct Input {}
     
     struct Output {
@@ -49,6 +62,33 @@ class PostDetailViewModel {
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         return Output(postDetailSubject: postDetailSubject, likeSubject: likeSubject, storeSubject: storeSubject)
+    }
+    
+    func refineWriteDataToPostData(writePostData: WritePostData?) {
+        guard let writedData = writePostData else { return }
+        let detilaData = PostDetailDataModel(postId: -1,
+                                             title: writedData.title,
+                                             author: Constants.nickName,
+                                             authorEmail: writedData.userEmail,
+                                             profileImage: Constants.profileName,
+                                             isAuthor: true,
+                                             isStored: 0,
+                                             isFavorite: 0,
+                                             isParking: writedData.isParking,
+                                             parkingDesc: writedData.parkingDesc,
+                                             courseDesc: writedData.courseDesc,
+                                             province: writedData.province,
+                                             region: writedData.region,
+                                             themes: writedData.changeThemeToKorean(),
+                                             likesCount: 0,
+                                             createdAt: "",
+                                             images: [],
+                                             course: writedData.course,
+                                             warnings: writedData.changeWaningToBool())
+        self.postDetailData = detilaData
+        self.postDetailSubject.onNext(detilaData)
+        self.isLiked = false
+        self.isStored = false
     }
 }
 
@@ -64,7 +104,6 @@ extension PostDetailViewModel {
                     self.postDetailSubject.onNext(data)
                     self.isLiked = data.isFavorite != 0
                     self.isStored = data.isStored != 0
-                    dump(data)
                 }
             case .requestErr(let message):
                 print("requestErr", message)
@@ -78,24 +117,34 @@ extension PostDetailViewModel {
         }
     }
     
-    func postCreatePost() {
+    
+    func postWritePost() {
+        guard let writedData = writePostData,
+              let imageList = writedImageList else { return }
         
-        print("===서버통신 시작=====")
-//        CreatePostService.shared.createPost(model: writedPostData!, image: imageList) { result in
-//            switch result {
-//            case .success(let message):
-//                print(message)
-//            case .requestErr(let message):
-//                print(message)
-//            case .serverErr:
-//                print("서버에러")
-//            case .networkFail:
-//                print("네트워크에러")
-//            default:
-//                print("몰라에러")
-//            }
-//        }
+        CreatePostService.shared.createPost(
+            model: writedData,
+            image: imageList
+        ) { [weak self] result in
+            switch result {
+            case let .success(resultData):
+                self?.postCreateResultClosure?(true)
+                debugPrint("POST /post/write success: \(resultData)")
+            case let .requestErr(message):
+                self?.postCreateResultClosure?(false)
+                debugPrint("POST /post/write requestErr: \(message)")
+            case .serverErr:
+                debugPrint("POST /post/write serverErr")
+            case .networkFail:
+                debugPrint("POST /post/write networkFail")
+            default:
+                debugPrint("POST /post/write error")
+                self?.postCreateResultClosure?(true)
+            }
+        }
     }
+    
+ 
     
     func requestPostLike() {
         LikeService.shared.Like(userEmail: Constants.userEmail,
