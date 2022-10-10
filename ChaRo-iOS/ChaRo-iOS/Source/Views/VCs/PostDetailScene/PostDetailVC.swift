@@ -262,11 +262,12 @@ extension PostDetailVC: UITableViewDataSource {
                                  userName: postData.author ?? "",
                                  date: postData.getCreatedTimeText(),
                                  imageName: postData.profileImage ?? "")
-            //TODO: -  user 이미지 + 텍스트 눌렀을 때 해당 유저 마이페이지로 이동
-    //            let otherVC = OtherMyPageVC()
-    //            otherVC.setOtherUserID(userID: follow.userEmail)
-    //            otherVC.modalPresentationStyle = .overFullScreen
-    //            self?.present(otherVC, animated: true)
+            
+            cell.moveToPageClosure = { [weak self] in
+                let otherVC = OtherMyPageVC()
+                otherVC.setOtherUserID(userID: postData.authorEmail ?? "")
+                self?.navigationController?.pushViewController(otherVC, animated: true)
+            }
             return cell
             
         case .photo:
