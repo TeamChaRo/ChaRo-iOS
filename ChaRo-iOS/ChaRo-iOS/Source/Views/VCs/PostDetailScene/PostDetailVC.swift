@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import RxSwift
+import SafariServices
 
 final class PostDetailVC: UIViewController {
     
@@ -56,7 +57,7 @@ final class PostDetailVC: UIViewController {
     }
     private lazy var modifyButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icMypageMore, for: .normal)
-        $0.addTarget(self, action: #selector(registActionSheet), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(reportActionSheet), for: .touchUpInside)
     }
     private lazy var saveButton = UIButton().then {
         $0.setTitle("등록", for: .normal)
@@ -111,25 +112,27 @@ extension PostDetailVC {
         }
     }
     
-    @objc func registActionSheet() {
+    @objc func reportActionSheet() {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let modifyAction = UIAlertAction(title: "글 수정하기", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
+        let reportUrl = "https://docs.google.com/forms/d/1A1I8b2xQLgKVGsx112udNrHRp51n1p0m2ymot-kofy4/viewform?edit_requested=true"
+        let reportAction = UIAlertAction(title: "신고하기", style: .default) { [weak self] _ in
+            self?.presentToSafariVC(urlString: reportUrl)
+        }
         
         let cancleAction = UIAlertAction(title: "취소", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })
-        optionMenu.addAction(modifyAction)
-        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(reportAction)
+        
         optionMenu.addAction(cancleAction)
         
         self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    private func presentToSafariVC(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let safariView: SFSafariViewController = SFSafariViewController(url: url)
+        self.present(safariView, animated: true, completion: nil)
     }
 }
 
@@ -176,6 +179,7 @@ extension PostDetailVC {
             viewModel.isEditingMode ? setNavigationViewInSaveMode(): setNavigationViewInConfirmMode()
         } else {
             navigationTitleLabel.text = "구경하기"
+            setNavigationViewInConfirmMode()
         }
     }
     
