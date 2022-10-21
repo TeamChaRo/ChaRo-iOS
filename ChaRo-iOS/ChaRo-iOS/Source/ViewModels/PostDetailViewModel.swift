@@ -236,6 +236,15 @@ extension PostDetailViewModel {
 
 //MARK: 카카오톡 공유하기
 extension PostDetailViewModel {
+    func makeShareText() -> [Any] {
+        let shareText: String = "share test"
+        var shareObject = [Any]()
+        
+        shareObject.append(shareText)
+        
+        return shareObject
+    }
+    
     func shareToKakaotalk() {
         guard let title = postDetailData?.title,
               let description = postDetailData?.courseDesc,

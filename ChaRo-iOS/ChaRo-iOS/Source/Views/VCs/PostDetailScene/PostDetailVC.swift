@@ -228,7 +228,11 @@ extension PostDetailVC {
         
         bottomView.shareButton.rx.tap.asDriver()
             .drive(onNext:{ [weak self] _ in
-                self?.viewModel.shareToKakaotalk()
+                if let activityItem = self?.viewModel.makeShareText() {
+                    let activityVC = UIActivityViewController(activityItems: activityItem, applicationActivities: nil)
+                    activityVC.popoverPresentationController?.sourceView = self?.view
+                    self?.present(activityVC, animated: true)
+                }
             })
             .disposed(by: disposeBag)
         
