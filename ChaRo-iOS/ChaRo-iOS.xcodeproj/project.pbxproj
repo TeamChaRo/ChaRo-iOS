@@ -18,6 +18,9 @@
 		3348E18D27E9F2C600D0E93D /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18C27E9F2C600D0E93D /* NotificationTVC.swift */; };
 		3348E18F27E9FF7B00D0E93D /* NotificationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */; };
 		3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E19027EA00F700D0E93D /* NotificationService.swift */; };
+		337D85362902F5A50016C3D1 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337D85342902F59B0016C3D1 /* TMapSDK.framework */; };
+		337D85372902F5A50016C3D1 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 337D85342902F59B0016C3D1 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		337D8539290301080016C3D1 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 337D8538290301080016C3D1 /* FirebaseDynamicLinks */; };
 		339DEED6277A44C3002749B2 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED5277A44C3002749B2 /* PresentationController.swift */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
@@ -100,8 +103,6 @@
 		3C73186F283BC67D00E51B05 /* BannerAboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */; };
 		3C7A0C4F27CE838100B78854 /* PostLikeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */; };
 		3C7A0C5127CE83AE00B78854 /* PostLikeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */; };
-		3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */; };
-		3C7A0C5427CE8E1F00B78854 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3C7DF0EF269A1C1F0021939C /* SearchPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */; };
 		3C7DF0F1269A30380021939C /* XmarkDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */; };
 		3C7DF0F3269A36870021939C /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */; };
@@ -287,7 +288,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3C7A0C5427CE8E1F00B78854 /* TMapSDK.framework in Embed Frameworks */,
+				337D85372902F5A50016C3D1 /* TMapSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +308,7 @@
 		3348E18E27E9FF7B00D0E93D /* NotificationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListModel.swift; sourceTree = "<group>"; };
 		3348E19027EA00F700D0E93D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		336D2CFC26E72F0900E64042 /* ChaRo-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ChaRo-iOS.entitlements"; sourceTree = "<group>"; };
+		337D85342902F59B0016C3D1 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		339DEED5277A44C3002749B2 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		36012A492694D557007F4633 /* HomePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePost.storyboard; sourceTree = "<group>"; };
 		36012A4B2694E55C007F4633 /* HomePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostVC.swift; sourceTree = "<group>"; };
@@ -390,7 +392,6 @@
 		3C73186E283BC67D00E51B05 /* BannerAboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAboutCell.swift; sourceTree = "<group>"; };
 		3C7A0C4E27CE838100B78854 /* PostLikeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListVC.swift; sourceTree = "<group>"; };
 		3C7A0C5027CE83AE00B78854 /* PostLikeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeListViewModel.swift; sourceTree = "<group>"; };
-		3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		3C7DF0EE269A1C1F0021939C /* SearchPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostVC.swift; sourceTree = "<group>"; };
 		3C7DF0F0269A30380021939C /* XmarkDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmarkDismissButton.swift; sourceTree = "<group>"; };
 		3C7DF0F2269A36870021939C /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
@@ -552,7 +553,6 @@
 				7F0BED8D28A16C4B00BB3A8F /* KakaoSDKCommon in Frameworks */,
 				7F0BED9328A16C4B00BB3A8F /* KakaoSDKTemplate in Frameworks */,
 				7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */,
-				3C7A0C5327CE8E1F00B78854 /* TMapSDK.framework in Frameworks */,
 				7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */,
 				7F7704F128A279940077F8A2 /* Then in Frameworks */,
 				7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */,
@@ -566,7 +566,9 @@
 				7F7704E828A279270077F8A2 /* SnapKit in Frameworks */,
 				7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */,
 				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
+				337D85362902F5A50016C3D1 /* TMapSDK.framework in Frameworks */,
 				7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */,
+				337D8539290301080016C3D1 /* FirebaseDynamicLinks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1456,7 +1458,7 @@
 		5871AE65ECA530CBED32CC7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3C7A0C5227CE8E1F00B78854 /* TMapSDK.framework */,
+				337D85342902F59B0016C3D1 /* TMapSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1517,6 +1519,7 @@
 				7F7704FD28A27A8A0077F8A2 /* Kingfisher */,
 				7FE3A83E28EB17890041DCCD /* FirebaseAnalytics */,
 				7FE3A84028EB17890041DCCD /* FirebaseCrashlytics */,
+				337D8538290301080016C3D1 /* FirebaseDynamicLinks */,
 			);
 			productName = "ChaRo-iOS";
 			productReference = 3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */;
@@ -1942,6 +1945,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2004,6 +2008,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2259,6 +2264,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		337D8538290301080016C3D1 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FE3A83D28EB17890041DCCD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
+		};
 		7F0BED8A28A16C4B00BB3A8F /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;

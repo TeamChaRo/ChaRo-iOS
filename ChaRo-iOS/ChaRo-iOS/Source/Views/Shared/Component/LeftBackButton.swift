@@ -8,7 +8,7 @@
 import UIKit
 
 class LeftBackButton: UIButton {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -19,12 +19,12 @@ class LeftBackButton: UIButton {
     
     init(toPop vc: UIViewController, isModal: Bool = false) {
         super.init(frame: .zero)
-        setBackgroundImage()
+        setBackgroundImage(isModal: isModal)
         initAction(vc: vc, isModal: isModal)
     }
     
-   private func setBackgroundImage() {
-        setBackgroundImage(ImageLiterals.icBack, for: .normal)
+    private func setBackgroundImage(isModal: Bool) {
+        setBackgroundImage(isModal ? ImageLiterals.icClose : ImageLiterals.icBack, for: .normal)
     }
     
     private func initAction(vc: UIViewController, isModal: Bool = false) {

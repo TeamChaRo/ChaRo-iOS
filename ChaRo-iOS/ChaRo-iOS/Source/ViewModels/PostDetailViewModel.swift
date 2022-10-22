@@ -13,6 +13,8 @@ import KakaoSDKShare
 import RxKakaoSDKShare
 import KakaoSDKCommon
 
+import FirebaseDynamicLinks
+
 final class PostDetailViewModel {
     private let disposeBag = DisposeBag()
     let postId: Int
@@ -234,8 +236,36 @@ extension PostDetailViewModel {
 //    }
 
 
-//MARK: 카카오톡 공유하기
+// MARK: Dynamic Link 공유하기
 extension PostDetailViewModel {
+    func makeDynamicShareLink(completion: @escaping ([Any]) -> ()) {
+        guard let postDetailLink = URL(string: "https://charo.page.link" + "/" + "dtl" + "?postId=" + "\(postId)") else { return }
+        let dynamicLinksDomainURIPrefix = "https://charo.page.link"
+        let linkBuilder = DynamicLinkComponents(link: postDetailLink, domainURIPrefix: dynamicLinksDomainURIPrefix)
+        
+        // iOS
+        linkBuilder?.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.king.Charo")
+        linkBuilder?.iOSParameters?.minimumAppVersion = "1.0.0"
+        
+        // android
+        linkBuilder?.androidParameters = DynamicLinkAndroidParameters(packageName: "com.charo.android")
+        linkBuilder?.androidParameters?.minimumVersion = 90
+        
+        // socialMetaTag
+        linkBuilder?.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+        linkBuilder?.socialMetaTagParameters?.imageURL = URL(string: postDetailData?.images?.first ?? "")
+        linkBuilder?.socialMetaTagParameters?.title = postDetailData?.title ?? ""
+        
+        guard let longDynamicLink = linkBuilder?.url else { return }
+        var shareObject = [Any]()
+        
+        DynamicLinkComponents.shortenURL(longDynamicLink, options: .none) { url, warning, error in
+            guard let url = url else { return }
+            shareObject.append(url)
+            completion(shareObject)
+        }
+    }
+    
     func shareToKakaotalk() {
         guard let title = postDetailData?.title,
               let description = postDetailData?.courseDesc,

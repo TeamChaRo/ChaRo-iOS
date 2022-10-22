@@ -66,6 +66,12 @@ final class PostDetailVC: UIViewController {
         $0.addTarget(self, action: #selector(clickedToSaveButton), for: .touchUpInside)
     }
     
+    init(postId: Int, isModal: Bool) {
+        viewModel = PostDetailViewModel(postId: postId)
+        super.init(nibName: nil, bundle: nil)
+        backButton = LeftBackButton(toPop: self, isModal: true)
+    }
+    
     init(postId: Int) {
         viewModel = PostDetailViewModel(postId: postId)
         super.init(nibName: nil, bundle: nil)
@@ -228,7 +234,11 @@ extension PostDetailVC {
         
         bottomView.shareButton.rx.tap.asDriver()
             .drive(onNext:{ [weak self] _ in
-                self?.viewModel.shareToKakaotalk()
+                self?.viewModel.makeDynamicShareLink(completion: { dynamicLink in
+                    let activityVC = UIActivityViewController(activityItems: dynamicLink, applicationActivities: nil)
+                    activityVC.popoverPresentationController?.sourceView = self?.view
+                    self?.present(activityVC, animated: true)
+                })
             })
             .disposed(by: disposeBag)
         
