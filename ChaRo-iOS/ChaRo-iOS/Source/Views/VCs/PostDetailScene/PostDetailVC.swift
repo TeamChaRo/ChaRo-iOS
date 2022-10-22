@@ -228,11 +228,11 @@ extension PostDetailVC {
         
         bottomView.shareButton.rx.tap.asDriver()
             .drive(onNext:{ [weak self] _ in
-                if let activityItem = self?.viewModel.makeShareText() {
-                    let activityVC = UIActivityViewController(activityItems: activityItem, applicationActivities: nil)
+                self?.viewModel.makeDynamicShareLink(completion: { dynamicLink in
+                    let activityVC = UIActivityViewController(activityItems: dynamicLink, applicationActivities: nil)
                     activityVC.popoverPresentationController?.sourceView = self?.view
                     self?.present(activityVC, animated: true)
-                }
+                })
             })
             .disposed(by: disposeBag)
         
