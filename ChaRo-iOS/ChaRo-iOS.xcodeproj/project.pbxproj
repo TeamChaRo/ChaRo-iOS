@@ -20,6 +20,7 @@
 		3348E19127EA00F700D0E93D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348E19027EA00F700D0E93D /* NotificationService.swift */; };
 		337D85362902F5A50016C3D1 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337D85342902F59B0016C3D1 /* TMapSDK.framework */; };
 		337D85372902F5A50016C3D1 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 337D85342902F59B0016C3D1 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		337D8539290301080016C3D1 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 337D8538290301080016C3D1 /* FirebaseDynamicLinks */; };
 		339DEED6277A44C3002749B2 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DEED5277A44C3002749B2 /* PresentationController.swift */; };
 		36012A4A2694D557007F4633 /* HomePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36012A492694D557007F4633 /* HomePost.storyboard */; };
 		36012A4C2694E55C007F4633 /* HomePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36012A4B2694E55C007F4633 /* HomePostVC.swift */; };
@@ -567,6 +568,7 @@
 				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
 				337D85362902F5A50016C3D1 /* TMapSDK.framework in Frameworks */,
 				7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */,
+				337D8539290301080016C3D1 /* FirebaseDynamicLinks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1517,6 +1519,7 @@
 				7F7704FD28A27A8A0077F8A2 /* Kingfisher */,
 				7FE3A83E28EB17890041DCCD /* FirebaseAnalytics */,
 				7FE3A84028EB17890041DCCD /* FirebaseCrashlytics */,
+				337D8538290301080016C3D1 /* FirebaseDynamicLinks */,
 			);
 			productName = "ChaRo-iOS";
 			productReference = 3C71FEA326881DAA007E8EAD /* ChaRo-iOS.app */;
@@ -2261,6 +2264,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		337D8538290301080016C3D1 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FE3A83D28EB17890041DCCD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
+		};
 		7F0BED8A28A16C4B00BB3A8F /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7F0BED8928A16C4B00BB3A8F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
