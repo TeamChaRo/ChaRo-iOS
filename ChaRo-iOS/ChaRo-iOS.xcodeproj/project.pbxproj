@@ -227,6 +227,7 @@
 		7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */; };
 		7F33C1252886E2280040E4F3 /* ExpendedMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */; };
 		7F5F73FC2903C7C3004349D2 /* SendCrashlyticsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */; };
+		7F5F73FE2903CE3B004349D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F5F73FD2903CE3B004349D2 /* GoogleService-Info.plist */; };
 		7F7704E828A279270077F8A2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704E728A279270077F8A2 /* SnapKit */; };
 		7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704EA28A279420077F8A2 /* Alamofire */; };
 		7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704ED28A2796D0077F8A2 /* Lottie */; };
@@ -237,7 +238,6 @@
 		7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FA28A27A130077F8A2 /* GoogleSignIn */; };
 		7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FD28A27A8A0077F8A2 /* Kingfisher */; };
 		7F88B78A28E99F8000044463 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		7F88B78C28E9BB2600044463 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F88B78B28E9BB2600044463 /* GoogleService-Info.plist */; };
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
@@ -513,7 +513,7 @@
 		70FD4262281839B400631BB7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedMapVC.swift; sourceTree = "<group>"; };
 		7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCrashlyticsDelegate.swift; sourceTree = "<group>"; };
-		7F88B78B28E9BB2600044463 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7F5F73FD2903CE3B004349D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
@@ -777,7 +777,7 @@
 		3C86FA7B2694C7C6009370CD /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				7F88B78B28E9BB2600044463 /* GoogleService-Info.plist */,
+				7F5F73FD2903CE3B004349D2 /* GoogleService-Info.plist */,
 				3CB532CD27C508D1005AAB1D /* Literals */,
 				3C86FA7C2694C7C6009370CD /* Xibs */,
 				3C86FA8C2694C7C6009370CD /* Storyboards */,
@@ -1615,7 +1615,7 @@
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
 				36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */,
 				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
-				7F88B78C28E9BB2600044463 /* GoogleService-Info.plist in Resources */,
+				7F5F73FE2903CE3B004349D2 /* GoogleService-Info.plist in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				36F3302926A2A97D009C0173 /* loading.json in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
