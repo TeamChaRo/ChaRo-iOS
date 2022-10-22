@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-struct LoginService {
+struct LoginService: SendCrashlyticsDelegate {
     
     static let shared = LoginService()
     

@@ -126,10 +126,11 @@ class HomeVC: UIViewController, UIGestureRecognizerDelegate {
         //lottieview
         delegate = self
         delegate?.startIndicator()
-        GetHomeDataService.HomeData.getRecommendInfo{ (response) in
-            switch response
-            {
+        GetHomeDataService.HomeData.getRecommendInfo{ [weak self] response in
+            guard let self = self else { return }
+            switch response {
             case .success(let data) :
+                GetHomeDataService.HomeData.presentCrashAlert(at: self)
                 if let response = data as? HomeDataModel {
                     print("겟 데이터 실행")
                     DispatchQueue.global().sync {
