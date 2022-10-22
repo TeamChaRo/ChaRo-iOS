@@ -236,7 +236,7 @@ extension PostDetailViewModel {
 //    }
 
 
-//MARK: 카카오톡 공유하기
+// MARK: Dynamic Link 공유하기
 extension PostDetailViewModel {
     func makeDynamicShareLink(completion: @escaping ([Any]) -> ()) {
         guard let postDetailLink = URL(string: "https://charo.page.link" + "/" + "dtl" + "?postId=" + "\(postId)") else { return }
