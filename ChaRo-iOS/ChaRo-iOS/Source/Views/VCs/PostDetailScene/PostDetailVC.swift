@@ -66,6 +66,12 @@ final class PostDetailVC: UIViewController {
         $0.addTarget(self, action: #selector(clickedToSaveButton), for: .touchUpInside)
     }
     
+    init(postId: Int, isModal: Bool) {
+        viewModel = PostDetailViewModel(postId: postId)
+        super.init(nibName: nil, bundle: nil)
+        backButton = LeftBackButton(toPop: self, isModal: true)
+    }
+    
     init(postId: Int) {
         viewModel = PostDetailViewModel(postId: postId)
         super.init(nibName: nil, bundle: nil)
