@@ -226,6 +226,7 @@
 		7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9428A16C4B00BB3A8F /* KakaoSDKUser */; };
 		7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */; };
 		7F33C1252886E2280040E4F3 /* ExpendedMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */; };
+		7F5F73FC2903C7C3004349D2 /* SendCrashlyticsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */; };
 		7F7704E828A279270077F8A2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704E728A279270077F8A2 /* SnapKit */; };
 		7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704EA28A279420077F8A2 /* Alamofire */; };
 		7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704ED28A2796D0077F8A2 /* Lottie */; };
@@ -235,7 +236,7 @@
 		7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704F728A279B90077F8A2 /* RxSwift */; };
 		7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FA28A27A130077F8A2 /* GoogleSignIn */; };
 		7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FD28A27A8A0077F8A2 /* Kingfisher */; };
-		7F88B78A28E99F8000044463 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7F88B78928E99F8000044463 /* FirebaseCrashlytics */; };
+		7F88B78A28E99F8000044463 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		7F88B78C28E9BB2600044463 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F88B78B28E9BB2600044463 /* GoogleService-Info.plist */; };
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
@@ -511,6 +512,7 @@
 		70FD4260281715B300631BB7 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		70FD4262281839B400631BB7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedMapVC.swift; sourceTree = "<group>"; };
+		7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCrashlyticsDelegate.swift; sourceTree = "<group>"; };
 		7F88B78B28E9BB2600044463 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
@@ -566,7 +568,7 @@
 				CB20C56528F30FCA0025FC69 /* FirebaseCrashlytics in Frameworks */,
 				7F7704E828A279270077F8A2 /* SnapKit in Frameworks */,
 				7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */,
-				7F88B78A28E99F8000044463 /* FirebaseCrashlytics in Frameworks */,
+				7F88B78A28E99F8000044463 /* (null) in Frameworks */,
 				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
 				337D85362902F5A50016C3D1 /* TMapSDK.framework in Frameworks */,
 				7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */,
@@ -729,6 +731,7 @@
 				70FD4260281715B300631BB7 /* UserDefaultKey.swift */,
 				708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */,
 				36179EE428660CA300E8E772 /* GetInfinityDetailDataService.swift */,
+				7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1813,6 +1816,7 @@
 				7FC7EBBD28EC7F1F00F643C3 /* Dicationary+.swift in Sources */,
 				36E445B3277CA160008E31BE /* SettingVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
+				7F5F73FC2903C7C3004349D2 /* SendCrashlyticsDelegate.swift in Sources */,
 				70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */,
 				368EC8EC277A15B20076BF5E /* GetFollowDataService.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
@@ -2042,7 +2046,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.6;
+				CURRENT_PROJECT_VERSION = 20221019;
 				DEVELOPMENT_TEAM = J8A843466G;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2059,7 +2063,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 20221010;
+				MARKETING_VERSION = 1.0.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2082,7 +2086,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.6;
+				CURRENT_PROJECT_VERSION = 20221019;
 				DEVELOPMENT_TEAM = J8A843466G;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2098,7 +2102,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 20221010;
+				MARKETING_VERSION = 1.0.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
