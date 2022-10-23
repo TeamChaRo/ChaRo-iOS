@@ -30,8 +30,6 @@ struct GetHomeDataService: SendCrashlyticsDelegate {
             
             case .failure: completion(.pathErr)
                 print("실패 사유")
-
-                
             }
         }
                                             

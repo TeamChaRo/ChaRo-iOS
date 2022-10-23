@@ -35,13 +35,13 @@ class LoginVC: UIViewController {
         configureTextfieldUI()
         configureNotificationCenter()
         configureDelegate()
-        addTestUserAccount()
+        //addTestUserAccount()
     }
     
     private func addTestUserAccount() {
         self.idTextField.text = "charo-ios@gmail.com"
         self.pwdTextField.text = "charo111"
-        fatalError("crashlytics test")
+            fatalError("crashlytics test")
     }
     
     private func configureDelegate() {

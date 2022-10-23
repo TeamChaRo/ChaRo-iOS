@@ -129,8 +129,7 @@ class HomeVC: UIViewController, UIGestureRecognizerDelegate {
         GetHomeDataService.HomeData.getRecommendInfo{ [weak self] response in
             guard let self = self else { return }
             switch response {
-            case .success(let data) :
-                GetHomeDataService.HomeData.presentCrashAlert(at: self)
+            case .success(let data):
                 if let response = data as? HomeDataModel {
                     print("겟 데이터 실행")
                     DispatchQueue.global().sync {
@@ -170,16 +169,20 @@ class HomeVC: UIViewController, UIGestureRecognizerDelegate {
             case .requestErr(let message):
                 print("requestERR")
                 self.delegate?.endIndicator()
+                GetHomeDataService.HomeData.presentCrashAlert(at: self)
             case .pathErr:
                 print("pathERR")
                 print("한번 더 실행ㅋ")
                 self.delegate?.endIndicator()
+                GetHomeDataService.HomeData.presentCrashAlert(at: self)
             case .serverErr:
                 print("serverERR")
                 self.delegate?.endIndicator()
+                GetHomeDataService.HomeData.presentCrashAlert(at: self)
             case .networkFail:
                 print("networkFail")
                 self.delegate?.endIndicator()
+                GetHomeDataService.HomeData.presentCrashAlert(at: self)
             }
             //shot out to 'Jang PARTZZANG'
             DispatchQueue.main.async { [weak self] in
