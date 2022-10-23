@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-struct PostResultService {
+struct PostResultService: SendCrashlyticsDelegate {
     
     static let shared = PostResultService()
     let header : HTTPHeaders = ["Content-Type" : "application/json"]

@@ -87,6 +87,8 @@ final class FindPasswordVC: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                     UserDefaults.standard.set(data, forKey: Constants.UserDefaultsKey.userPassword)
                 })
+            case .requestErr(_), .networkFail:
+                FindPasswordService.shared.presentCrashAlert(at: self)
             default:
                 self.makeAlert(title: "비밀번호 찾기 오류",
                                message: "존재하지 않는 유저입니다.")

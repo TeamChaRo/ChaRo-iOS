@@ -3,8 +3,7 @@
 import Alamofire
 import Foundation
 
-struct GetHomeDataService
-{
+struct GetHomeDataService: SendCrashlyticsDelegate {
     static let HomeData = GetHomeDataService()
     func getRecommendInfo(completion: @escaping (NetworkResult<Any>) -> Void)
     {
@@ -31,8 +30,6 @@ struct GetHomeDataService
             
             case .failure: completion(.pathErr)
                 print("실패 사유")
-
-                
             }
         }
                                             

@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [END register_for_notifications]
         KakaoSDK.initSDK(appKey: "fe470f9e3a4348f2b8dad52d2014efcc")
         FirebaseApp.configure()
+        
         return true
     }
     

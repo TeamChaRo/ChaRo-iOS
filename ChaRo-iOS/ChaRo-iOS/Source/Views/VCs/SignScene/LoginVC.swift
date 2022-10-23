@@ -41,7 +41,7 @@ class LoginVC: UIViewController {
     private func addTestUserAccount() {
         self.idTextField.text = "charo-ios@gmail.com"
         self.pwdTextField.text = "charo111"
-        fatalError("crashlytics test")
+            fatalError("crashlytics test")
     }
     
     private func configureDelegate() {
@@ -118,7 +118,8 @@ class LoginVC: UIViewController {
             self.makeAlert(title: "로그인 실패", message: "비밀번호를 입력해주세요.")
             return
         }
-        LoginService.shared.login(id: userEmail, password: userPassword) { result in
+        LoginService.shared.login(id: userEmail, password: userPassword) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 print("일반 로그인 성공 \(data)")
@@ -148,6 +149,7 @@ class LoginVC: UIViewController {
                                    message: message)
                     }
                 }
+                LoginService.shared.presentCrashAlert(at: self)
             default :
                 print("ERROR")
             }

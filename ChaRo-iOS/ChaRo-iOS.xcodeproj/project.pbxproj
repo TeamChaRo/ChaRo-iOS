@@ -194,7 +194,6 @@
 		7084948226A23AB7001B3C2B /* CollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084948126A23AB7001B3C2B /* CollectionViewFooter.swift */; };
 		7084948526A2441C001B3C2B /* EmptyCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084948326A2441C001B3C2B /* EmptyCVC.swift */; };
 		7084948626A2441C001B3C2B /* EmptyCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7084948426A2441C001B3C2B /* EmptyCVC.xib */; };
-		70876CD0275E08EB00096C51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70876CCF275E08EB00096C51 /* GoogleService-Info.plist */; };
 		708CDF68282AB85E00DDCEF3 /* FindPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */; };
 		70A18FA92778E4370069B1E5 /* FindPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */; };
 		70A37C3126EF5FE3006CCEA9 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */; };
@@ -227,6 +226,8 @@
 		7F0BED9528A16C4B00BB3A8F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9428A16C4B00BB3A8F /* KakaoSDKUser */; };
 		7F0BED9828A16C8D00BB3A8F /* RxKakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0BED9728A16C8D00BB3A8F /* RxKakaoSDKShare */; };
 		7F33C1252886E2280040E4F3 /* ExpendedMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */; };
+		7F5F73FC2903C7C3004349D2 /* SendCrashlyticsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */; };
+		7F5F73FE2903CE3B004349D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F5F73FD2903CE3B004349D2 /* GoogleService-Info.plist */; };
 		7F7704E828A279270077F8A2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704E728A279270077F8A2 /* SnapKit */; };
 		7F7704EB28A279420077F8A2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704EA28A279420077F8A2 /* Alamofire */; };
 		7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704ED28A2796D0077F8A2 /* Lottie */; };
@@ -236,6 +237,7 @@
 		7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704F728A279B90077F8A2 /* RxSwift */; };
 		7F7704FB28A27A130077F8A2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FA28A27A130077F8A2 /* GoogleSignIn */; };
 		7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7704FD28A27A8A0077F8A2 /* Kingfisher */; };
+		7F88B78A28E99F8000044463 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		7F950A2228664CF8005E5E5C /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F950A2128664CF8005E5E5C /* FollowButton.swift */; };
 		7FC2455B2866008A00B3756F /* ExpendedImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */; };
 		7FC2455D2866013000B3756F /* ExpendedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */; };
@@ -485,7 +487,6 @@
 		7084948126A23AB7001B3C2B /* CollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFooter.swift; sourceTree = "<group>"; };
 		7084948326A2441C001B3C2B /* EmptyCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCVC.swift; sourceTree = "<group>"; };
 		7084948426A2441C001B3C2B /* EmptyCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyCVC.xib; sourceTree = "<group>"; };
-		70876CCF275E08EB00096C51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordService.swift; sourceTree = "<group>"; };
 		70A18FA82778E4370069B1E5 /* FindPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordVC.swift; sourceTree = "<group>"; };
 		70A37C3026EF5FE3006CCEA9 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
@@ -511,6 +512,8 @@
 		70FD4260281715B300631BB7 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		70FD4262281839B400631BB7 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		7F33C1242886E2280040E4F3 /* ExpendedMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedMapVC.swift; sourceTree = "<group>"; };
+		7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCrashlyticsDelegate.swift; sourceTree = "<group>"; };
+		7F5F73FD2903CE3B004349D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7F950A2128664CF8005E5E5C /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		7FC2455A2866008A00B3756F /* ExpendedImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageVC.swift; sourceTree = "<group>"; };
 		7FC2455C2866013000B3756F /* ExpendedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpendedImageViewModel.swift; sourceTree = "<group>"; };
@@ -565,6 +568,7 @@
 				CB20C56528F30FCA0025FC69 /* FirebaseCrashlytics in Frameworks */,
 				7F7704E828A279270077F8A2 /* SnapKit in Frameworks */,
 				7F7704FE28A27A8A0077F8A2 /* Kingfisher in Frameworks */,
+				7F88B78A28E99F8000044463 /* (null) in Frameworks */,
 				7F7704F828A279B90077F8A2 /* RxSwift in Frameworks */,
 				337D85362902F5A50016C3D1 /* TMapSDK.framework in Frameworks */,
 				7F7704EE28A2796D0077F8A2 /* Lottie in Frameworks */,
@@ -727,6 +731,7 @@
 				70FD4260281715B300631BB7 /* UserDefaultKey.swift */,
 				708CDF67282AB85E00DDCEF3 /* FindPasswordService.swift */,
 				36179EE428660CA300E8E772 /* GetInfinityDetailDataService.swift */,
+				7F5F73FB2903C7C3004349D2 /* SendCrashlyticsDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -772,8 +777,8 @@
 		3C86FA7B2694C7C6009370CD /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7F5F73FD2903CE3B004349D2 /* GoogleService-Info.plist */,
 				3CB532CD27C508D1005AAB1D /* Literals */,
-				70876CCF275E08EB00096C51 /* GoogleService-Info.plist */,
 				3C86FA7C2694C7C6009370CD /* Xibs */,
 				3C86FA8C2694C7C6009370CD /* Storyboards */,
 				3C86FA952694C7C6009370CD /* Assets.xcassets */,
@@ -1610,11 +1615,11 @@
 				3C86FAC32694CC47009370CD /* HomeAreaRecommandTVC.xib in Resources */,
 				36B69F7B2772420D00FEEAAE /* OtherMyPage.storyboard in Resources */,
 				F4CC1B9E269D3E7B009A0C01 /* CreatePostThemeTVC.xib in Resources */,
+				7F5F73FE2903CE3B004349D2 /* GoogleService-Info.plist in Resources */,
 				3C86FAB32694C7C6009370CD /* Tabbar.storyboard in Resources */,
 				36F3302926A2A97D009C0173 /* loading.json in Resources */,
 				3C86FAAF2694C7C6009370CD /* Home.storyboard in Resources */,
 				3C86FAC12694CC37009370CD /* HomeSeasonRecommandTVC.xib in Resources */,
-				70876CD0275E08EB00096C51 /* GoogleService-Info.plist in Resources */,
 				36E445B5277CA17E008E31BE /* Setting.storyboard in Resources */,
 				36D1E5FE269709F00079BD94 /* HomePostDetailCVC.xib in Resources */,
 				3CEC0117269E277A00E9332C /* OnBoardCVC.xib in Resources */,
@@ -1670,6 +1675,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			name = "Firebase Crashlytics";
 			outputFileListPaths = (
@@ -1809,6 +1816,7 @@
 				7FC7EBBD28EC7F1F00F643C3 /* Dicationary+.swift in Sources */,
 				36E445B3277CA160008E31BE /* SettingVC.swift in Sources */,
 				3610A8A12693730700EFC794 /* HomeSquareTVC.swift in Sources */,
+				7F5F73FC2903C7C3004349D2 /* SendCrashlyticsDelegate.swift in Sources */,
 				70F5D7B9271D954F00FF9229 /* SNSJoinVC.swift in Sources */,
 				368EC8EC277A15B20076BF5E /* GetFollowDataService.swift in Sources */,
 				F49DE533268E148300A8185C /* PostDetailVC.swift in Sources */,
@@ -2038,7 +2046,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.6;
+				CURRENT_PROJECT_VERSION = 20221022;
 				DEVELOPMENT_TEAM = J8A843466G;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2055,7 +2063,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 20221010;
+				MARKETING_VERSION = 1.0.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2078,7 +2086,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.6;
+				CURRENT_PROJECT_VERSION = 20221022;
 				DEVELOPMENT_TEAM = J8A843466G;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2094,7 +2102,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 20221010;
+				MARKETING_VERSION = 1.0.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.king.Charo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-struct FindPasswordService {
+struct FindPasswordService: SendCrashlyticsDelegate {
     static let shared = FindPasswordService()
     
     func sendTempPassword(email: String, completion : @escaping (NetworkResult<Any>) -> Void) {
