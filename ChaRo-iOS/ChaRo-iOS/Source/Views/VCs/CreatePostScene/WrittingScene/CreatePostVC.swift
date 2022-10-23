@@ -708,7 +708,7 @@ extension CreatePostVC {
 
     func AuthSettingOpen(AuthString: String) {
         if let AppName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
-            let message = "\(AppName)이(가) \(AuthString) 접근 허용되어 있지않습니다. \r\n 설정화면으로 가시겠습니까?"
+            let message = "\(AppName) 앱을 사용하여 사용자의 기기에서 \(AuthString)을 업로드합니다."
             let alert = UIAlertController(title: "설정", message: message, preferredStyle: .alert)
             let cancle = UIAlertAction(title: "취소", style: .default)
             let confirm = UIAlertAction(title: "확인", style: .default) { (UIAlertAction) in
