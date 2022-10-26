@@ -12,8 +12,11 @@ class ChangePasswordVC: UIViewController {
     //MARK: - Properties
     static let identifier = "ChangePasswordVC"
     
-    let userWidth = UIScreen.main.bounds.width
-    let userheight = UIScreen.main.bounds.height
+    private let userWidth = UIScreen.main.bounds.width
+    private let userheight = UIScreen.main.bounds.height
+    private var shownPhotoAuth: Bool = UserDefaults.standard.bool(
+        forKey: Constants.UserDefaultsKey.shownPhotoAuth
+    )
     
     //headerView
     private let settingBackgroundView = UIView().then {
@@ -203,3 +206,4 @@ extension ChangePasswordVC: UITextFieldDelegate {
     }
     
 }
+
