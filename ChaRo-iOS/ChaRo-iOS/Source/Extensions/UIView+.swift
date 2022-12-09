@@ -50,10 +50,10 @@ extension UIView {
         self.endEditing(true)
     }
     
-    func showToast(message : String) {
-        let toastLabel = UILabel(frame: CGRect(x: UIScreen.getDeviceWidth() / 2 - 100,
+    func showToast(message : String, width: CGFloat = 200) {
+        let toastLabel = UILabel(frame: CGRect(x: (UIScreen.getDeviceWidth() - width) / 2,
                                                y: UIScreen.getDeviceHeight() - 150,
-                                               width: 200, height: 35)).then {
+                                               width: width, height: 35)).then {
             $0.backgroundColor = .gray40
             $0.textColor = UIColor.white
             $0.font = .notoSansRegularFont(ofSize: 14)
