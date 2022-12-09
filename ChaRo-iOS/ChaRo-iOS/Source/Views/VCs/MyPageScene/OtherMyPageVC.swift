@@ -32,7 +32,7 @@ class OtherMyPageVC: UIViewController {
     var scrollTriger: Bool = false
     var lottieView = IndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     var delegate: AnimateIndicatorDelegate?
-
+    
     
     //헤더뷰 유아이
     private let profileImageView = UIImageView().then {
@@ -47,7 +47,7 @@ class OtherMyPageVC: UIViewController {
     private let headerBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.mainBlue
     }
-
+    
     private let headerTitleLabel = UILabel().then {
         $0.textColor = UIColor.white
         $0.font = UIFont.notoSansMediumFont(ofSize: 17)
@@ -100,6 +100,10 @@ class OtherMyPageVC: UIViewController {
         $0.textColor = UIColor.gray50
     }
     
+    private let blockUserButton = UIButton().then {
+        $0.setImage(ImageLiterals.icMyPageMoreVertical, for: .normal)
+    }
+    
     private let backButton = UIButton().then {
         $0.setBackgroundImage(ImageLiterals.icBackWhite, for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(_:)), for: .touchUpInside)
@@ -124,7 +128,7 @@ class OtherMyPageVC: UIViewController {
     }()
     //인기순 최신순 필터
     private let filterView = FilterView()
-
+    
     
     
     //MARK: viewdidLoad
@@ -140,12 +144,14 @@ class OtherMyPageVC: UIViewController {
         self.dismissDropDownWhenTappedAround()
         setButtonTarget()
     }
-
+    
     func setButtonTarget() {
         isFollowButton.addTarget(self, action: #selector(doFollowButtonClicked(_:)), for: .touchUpInside)
         followerButton.addTarget(self, action: #selector(followerButtonClicked(_:)), for: .touchUpInside)
         followButton.addTarget(self, action: #selector(followingButtonClicked(_:)), for: .touchUpInside)
+        blockUserButton.addTarget(self, action: #selector(blockButtonClicked(_:)), for: .touchUpInside)
     }
+    
     //MARK: setUI
     
     func setCollectionviewLayout() {
@@ -170,7 +176,7 @@ class OtherMyPageVC: UIViewController {
     
     func setHeaderViewLayout() {
         self.view.addSubview(headerBackgroundView)
-        headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton, backButton])
+        headerBackgroundView.addSubviews([profileImageView,headerTitleLabel,userNameLabel, isFollowButton, followButton, followNumButton, followerButton, followerNumButton, backButton, blockUserButton])
         
         let headerViewHeight = userheight * 0.29
         
@@ -237,39 +243,45 @@ class OtherMyPageVC: UIViewController {
             $0.leading.equalToSuperview().offset(0)
             $0.centerY.equalTo(headerTitleLabel)
         }
-    
-    }
-//MARK: filterTableView
-        func setFilterViewLayout() {
-            self.view.addSubview(filterView)
-            filterView.isHidden = true
-            filterView.snp.makeConstraints{
-                $0.top.equalTo(headerBackgroundView.snp.bottom).offset(49)
-                $0.trailing.equalToSuperview().offset(-10)
-                $0.height.equalTo(97)
-                $0.width.equalTo(180)
-            }
-        }
         
-        func setFilterViewCompletion(){
-            filterView.touchCellCompletion = { index in
-                switch index{
-                case 0:
-                    self.currentState = "인기순"
-                    GetMyPageDataService.URL = Constants.myPageLikeURL
-                case 1:
-                    self.currentState = "최신순"
-                    GetMyPageDataService.URL = Constants.myPageNewURL
-                default:
-                    print("Error")
-                }
-                self.writenPostDriveData = []
-                self.getMypageData()
-                self.collectionview.reloadData()
-                self.filterView.isHidden = true
-                return index
-            }
+        // 유저 차단 더보기 버튼
+        blockUserButton.snp.makeConstraints {
+            $0.width.height.equalTo(48)
+            $0.trailing.equalToSuperview()
+            $0.centerY.equalTo(headerTitleLabel)
         }
+    }
+    //MARK: filterTableView
+    func setFilterViewLayout() {
+        self.view.addSubview(filterView)
+        filterView.isHidden = true
+        filterView.snp.makeConstraints{
+            $0.top.equalTo(headerBackgroundView.snp.bottom).offset(49)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(97)
+            $0.width.equalTo(180)
+        }
+    }
+    
+    func setFilterViewCompletion(){
+        filterView.touchCellCompletion = { index in
+            switch index{
+            case 0:
+                self.currentState = "인기순"
+                GetMyPageDataService.URL = Constants.myPageLikeURL
+            case 1:
+                self.currentState = "최신순"
+                GetMyPageDataService.URL = Constants.myPageNewURL
+            default:
+                print("Error")
+            }
+            self.writenPostDriveData = []
+            self.getMypageData()
+            self.collectionview.reloadData()
+            self.filterView.isHidden = true
+            return index
+        }
+    }
     //MARK: function
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -280,25 +292,25 @@ class OtherMyPageVC: UIViewController {
             var likeOrNew = ""
             var addURL = ""
             if lastcount > 0 && scrollTriger == false {
-            scrollTriger = true
-            lastId = writenPostDriveData[lastcount-1].postID
-            lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
-            
-            if currentState == "인기순"{
-                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
-                likeOrNew = "like/"
-                addURL = "/write/\(lastId)/\(lastFavorite)"
-                //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
-                //MypageInfinityService.addURL = "/write/11/0"
-                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
-
-            } else if currentState == "최신순"{
-                //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
-                likeOrNew = "new/"
-                addURL = "/write/\(lastId)"
-                //MypageInfinityService.addURL = "/write/5/0"
-                getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
-            }
+                scrollTriger = true
+                lastId = writenPostDriveData[lastcount-1].postID
+                lastFavorite = writenPostDriveData[lastcount-1].favoriteNum
+                
+                if currentState == "인기순"{
+                    //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿" , "인기순")
+                    likeOrNew = "like/"
+                    addURL = "/write/\(lastId)/\(lastFavorite)"
+                    //이거 릴리즈전에는 지울건데 지금은 더미가 부족해서 테스트 용으로 잠시 주석처리해놨슴니당 무한으로 즐기는 스크롤
+                    //MypageInfinityService.addURL = "/write/11/0"
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                    
+                } else if currentState == "최신순"{
+                    //print(lastId , "라스트 아이디", lastFavorite, "라스트 페이브릿", "최신순")
+                    likeOrNew = "new/"
+                    addURL = "/write/\(lastId)"
+                    //MypageInfinityService.addURL = "/write/5/0"
+                    getInfinityData(addUrl: addURL, LikeOrNew: likeOrNew)
+                }
                 
             }
         }
@@ -347,11 +359,11 @@ class OtherMyPageVC: UIViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(225)
         }
-      
+        
         if writenPostDriveData.isEmpty == true {
             noDataImageView.isHidden = false
         }
-      
+        
     }
     
     @objc private func doFollowButtonClicked(_ sender: UIButton) {
@@ -369,88 +381,99 @@ class OtherMyPageVC: UIViewController {
     
     @objc private func followerButtonClicked(_ sender: UIButton) {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
-            followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: otherUserID)
-            followVC.isOtherMypage = true
-            self.tabBarController?.tabBar.isHidden = true
+        followVC.setData(userName: userProfileData[0].nickname, isFollower: true, userID: otherUserID)
+        followVC.isOtherMypage = true
+        self.tabBarController?.tabBar.isHidden = true
         if self.navigationController == nil {
             followVC.modalPresentationStyle = .overFullScreen
             self.present(followVC, animated: true)
         } else {
             self.navigationController?.pushViewController(followVC, animated: true)
         }
-     }
+    }
     
     @objc private func followingButtonClicked(_ sender: UIButton) {
         guard let followVC = UIStoryboard(name: "FollowFollowing", bundle: nil).instantiateViewController(withIdentifier: "FollowFollwingVC") as? FollowFollwingVC else {return}
-            followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: otherUserID)
-            followVC.isOtherMypage = true
-            self.tabBarController?.tabBar.isHidden = true
+        followVC.setData(userName: userProfileData[0].nickname, isFollower: false, userID: otherUserID)
+        followVC.isOtherMypage = true
+        self.tabBarController?.tabBar.isHidden = true
         if self.navigationController == nil {
             followVC.modalPresentationStyle = .overFullScreen
             self.present(followVC, animated: true)
         } else {
             self.navigationController?.pushViewController(followVC, animated: true)
         }
-     }
+    }
+    
+    @objc
+    private func blockButtonClicked(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "차단하기", style: .destructive, handler: { _ in
+            // show toast message
+            self.view.showToast(message: "사용자 차단 신고가 접수되었습니다.", width: 275)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+    }
     
     //MARK: Server
     //마이페이지 데이터 받아오는 함수
-        func getMypageData() {
-            GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
-            GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
-                       switch response
-                       {
-                       case .success(let data) :
-                           if let response = data as? MyPageDataModel {
-                               self.userProfileData = []
-                               //팔로우 수만 업데이트 할때
-                               if self.updateFollowNum == false {self.writenPostDriveData = []}
-                               self.userProfileData.append(response.data.userInformation)
-                               self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
-                               if self.updateFollowNum == false {self.collectionview.reloadData()}
-                               self.setHeaderData()
-                               
-                               if self.writenPostDriveData.isEmpty == true {
-                                   self.isNoData()
-                                   
-                               }
-                           }
-                       case .requestErr(let message) :
-                           print("requestERR")
-                       case .pathErr :
-                           print("pathERR")
-                       case .serverErr:
-                           print("serverERR")
-                       case .networkFail:
-                           print("networkFail")
-                       }
-                   }
+    func getMypageData() {
+        GetMyPageDataService.URL = Constants.otherMyPageURL + otherUserID
+        GetMyPageDataService.MyPageData.getRecommendInfo{ (response) in
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? MyPageDataModel {
+                    self.userProfileData = []
+                    //팔로우 수만 업데이트 할때
+                    if self.updateFollowNum == false {self.writenPostDriveData = []}
+                    self.userProfileData.append(response.data.userInformation)
+                    self.writenPostDriveData.append(contentsOf: response.data.writtenPost.drive)
+                    if self.updateFollowNum == false {self.collectionview.reloadData()}
+                    self.setHeaderData()
+                    
+                    if self.writenPostDriveData.isEmpty == true {
+                        self.isNoData()
+                        
+                    }
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
         }
+    }
     func getFollowData() {
         FollowCheckService.followData.getRecommendInfo(userId: myId, otherId: otherUserID) { (response) in
-                   switch response
-                   {
-                   case .success(let data):
-                       if let response = data as? DoFollowDataModel {
-                           self.isFollow = response.data.isFollow
-                           if self.isFollow == true {
-                               self.isFollowButton.isSelected = true
-                               self.setFollowButtonUI()
-                           } else {
-                               self.isFollowButton.isSelected = false
-                               self.setFollowButtonUI()
-                           }
-                       }
-                   case .requestErr(let message) :
-                       print("requestERR")
-                   case .pathErr :
-                       print("pathERR")
-                   case .serverErr:
-                       print("serverERR")
-                   case .networkFail:
-                       print("networkFail")
-                   }
-               }
+            switch response
+            {
+            case .success(let data):
+                if let response = data as? DoFollowDataModel {
+                    self.isFollow = response.data.isFollow
+                    if self.isFollow == true {
+                        self.isFollowButton.isSelected = true
+                        self.setFollowButtonUI()
+                    } else {
+                        self.isFollowButton.isSelected = false
+                        self.setFollowButtonUI()
+                    }
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
         
     }
     
@@ -460,34 +483,34 @@ class OtherMyPageVC: UIViewController {
         delegate = self
         self.delegate?.startIndicator()
         MypageInfinityService.MyPageInfinityData.getRecommendInfo(userID: otherUserID, addURL: addUrl,likeOrNew: LikeOrNew) { (response) in
-                   switch response
-                   {
-                   case .success(let data) :
-                       if let response = data as? MypageInfinityModel {
-                           if response.data.lastID == 0{
-                               self.isLast = true
-                               self.delegate?.endIndicator()
-                           } else {
-                               self.isLast = false
-                           }
-                           if self.isLast == false {
-                               self.writenPostDriveData.append(contentsOf: response.data.drive)
-                               self.collectionview.reloadData()
-                               self.delegate?.endIndicator()
-                           }
-
-                       }
-                   case .requestErr(let message) :
-                       print("requestERR")
-                   case .pathErr :
-                       print("pathERR")
-                   case .serverErr:
-                       print("serverERR")
-                   case .networkFail:
-                       print("networkFail")
-                   }
+            switch response
+            {
+            case .success(let data) :
+                if let response = data as? MypageInfinityModel {
+                    if response.data.lastID == 0{
+                        self.isLast = true
+                        self.delegate?.endIndicator()
+                    } else {
+                        self.isLast = false
+                    }
+                    if self.isLast == false {
+                        self.writenPostDriveData.append(contentsOf: response.data.drive)
+                        self.collectionview.reloadData()
+                        self.delegate?.endIndicator()
+                    }
+                    
+                }
+            case .requestErr(let message) :
+                print("requestERR")
+            case .pathErr :
+                print("pathERR")
+            case .serverErr:
+                print("serverERR")
+            case .networkFail:
+                print("networkFail")
+            }
             
-               }
+        }
         self.delegate?.endIndicator()
     }
     func postFollowUser() {
@@ -575,11 +598,11 @@ extension OtherMyPageVC: UICollectionViewDataSource {
 }
 extension OtherMyPageVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
-                            UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0{
             return CGSize(width: userWidth-35, height: 42)
         } else {
-        return CGSize(width: collectionView.frame.width, height: 100)
+            return CGSize(width: collectionView.frame.width, height: 100)
         }
     }
     
@@ -598,9 +621,9 @@ extension OtherMyPageVC: UICollectionViewDelegateFlowLayout {
     }
 }
 extension OtherMyPageVC{
-func dismissDropDownWhenTappedAround() {
+    func dismissDropDownWhenTappedAround() {
         let tap: UITapGestureRecognizer =
-            UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
+        UITapGestureRecognizer(target: self, action: #selector(dismissDropDown))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
@@ -620,7 +643,7 @@ extension OtherMyPageVC: AnimateIndicatorDelegate {
         lottieView.isHidden = false
         lottieView.lottieView.play()
     }
-
+    
     func endIndicator() {
         lottieView.lottieView.stop()
         lottieView.isHidden = true
