@@ -11,7 +11,7 @@ import Foundation
 struct Constants {
     
     // MARK: - BASE URL
-    static let baseURL = "http://3.35.17.144"
+    static let baseURL = "http://52.79.241.20:5000"
     
     static let nickName = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userNickname) ?? "지으니"
     static let profileName = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.userImage) ?? "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/jieun.JPG"

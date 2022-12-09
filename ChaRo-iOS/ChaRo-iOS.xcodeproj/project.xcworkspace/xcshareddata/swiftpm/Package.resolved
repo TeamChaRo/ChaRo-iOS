@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
-        "version" : "5.6.2"
+        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
+        "version" : "5.6.4"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "68ea347bdb1a69e2d2ae2e25cd085b6ef92f64cb",
-        "version" : "7.9.0"
+        "revision" : "6db6edb48bdd9943426562c7f042a5492de5ba3d",
+        "version" : "7.10.0"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "d4289da23e978f37c344ea6a386e5546e2466294",
-        "version" : "2.1.0"
+        "revision" : "5ccda3981422a84186387dbb763ba739178b529c",
+        "version" : "2.3.0"
       }
     },
     {
@@ -114,7 +114,7 @@
       "location" : "https://github.com/kakao/kakao-ios-sdk",
       "state" : {
         "branch" : "master",
-        "revision" : "8b968cfd71e3612dd43892910f8f8b8ca69cd51b"
+        "revision" : "c503b3b0f60bf1b788cc3e71eab28648a838861c"
       }
     },
     {
@@ -123,7 +123,7 @@
       "location" : "https://github.com/kakao/kakao-ios-sdk-rx",
       "state" : {
         "branch" : "master",
-        "revision" : "4ebe91e062bb4c95c502d1de63e4143240e82c43"
+        "revision" : "4495919e48c8426b2b5afc1f2490f22ef2b93958"
       }
     },
     {
@@ -132,7 +132,7 @@
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
         "branch" : "master",
-        "revision" : "26a5aee988318f1a57adc9b9c3e676ce318630a8"
+        "revision" : "3e091ee962391a2ddcae5b18e17bc625f9d88d6e"
       }
     },
     {
@@ -149,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
-        "revision" : "314537ec697719fa33a9d48210f4d06a463286d3",
-        "version" : "3.4.3"
+        "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
+        "version" : "3.5.0"
       }
     },
     {
@@ -212,8 +212,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "88c7d15e1242fdb6ecbafbc7926426a19be1e98a",
-        "version" : "1.20.2"
+        "revision" : "ab3a58b7209a17d781c0d1dbb3e1ff3da306bae8",
+        "version" : "1.20.3"
       }
     },
     {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1669,6 +1669,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		7FE3A84228EB19320041DCCD /* Firebase Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -2046,7 +2047,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20221022;
+				CURRENT_PROJECT_VERSION = 20221122;
 				DEVELOPMENT_TEAM = J8A843466G;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2086,8 +2087,9 @@
 				CODE_SIGN_ENTITLEMENTS = "ChaRo-iOS/ChaRo-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20221022;
+				CURRENT_PROJECT_VERSION = 20221122;
 				DEVELOPMENT_TEAM = J8A843466G;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
