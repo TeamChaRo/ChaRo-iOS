@@ -235,8 +235,8 @@ class SNSLoginVC: UIViewController {
                     //여기서 UserDefault 에 저장
                     Constants.addUserDefaults(userEmail: data.email,
                                               userPassword: "",
-                                              userNickname: data.nickname ?? "",
-                                              userImage: data.profileImage ?? "")
+                                              userNickname: data.nickname,
+                                              userImage: data.profileImage)
                     UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isSNSLogin)
                     self.goToHomeVC()
                 } else {

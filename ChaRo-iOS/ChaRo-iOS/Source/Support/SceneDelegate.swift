@@ -22,6 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+            if let url = URLContexts.first?.url {
+                if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                    _ = AuthController.handleOpenUrl(url: url)
+                }
+            }
+        }
+    
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         if let incomingURL = userActivity.webpageURL {
             DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { dynamicLinks, error  in
