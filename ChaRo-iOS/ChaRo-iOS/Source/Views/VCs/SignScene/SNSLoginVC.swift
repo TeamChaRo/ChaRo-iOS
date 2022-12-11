@@ -155,11 +155,6 @@ class SNSLoginVC: UIViewController {
         }
     }
     
-    @objc func testLogin() {
-        socialType = .apple
-        socialLogin(email: "aggdddswe662@naver.com", profileImage: nil, nickname: nil)
-    }
-    
     @objc func appleLogin() {
         socialType = .apple
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -235,8 +230,8 @@ class SNSLoginVC: UIViewController {
                     //여기서 UserDefault 에 저장
                     Constants.addUserDefaults(userEmail: data.email,
                                               userPassword: "",
-                                              userNickname: data.nickname ?? "",
-                                              userImage: data.profileImage ?? "")
+                                              userNickname: data.nickname,
+                                              userImage: data.profileImage)
                     UserDefaults.standard.set(true, forKey: Constants.UserDefaultsKey.isSNSLogin)
                     self.goToHomeVC()
                 } else {
@@ -503,13 +498,21 @@ extension SNSLoginVC : ASAuthorizationControllerDelegate, ASAuthorizationControl
                 print("애플 최초 로그인 이메일 \(email)")
                 UserDefaults.standard.set(email, forKey: Constants.UserDefaultsKey.savedAppleEmail)
                 socialLogin(email: email, profileImage: nil, nickname: nil)
+            } else {
+                if let savedAppleEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.savedAppleEmail) {
+                    socialLogin(email: savedAppleEmail, profileImage: nil, nickname: nil)
+                } else {
+                    self.makeAlert(title: "로그인 오류", message: "로그인 하기 위해서는 이메일 계정 정보가 필요합니다. 설정 > 계정 > 암호 및 보안 > Apple ID 를 사용하는 앱 > XC com king Charo 를 애플 아이디 사용 중단 한 후, 시도해주세요.")
+                }
             }
+        } else {
+            print("Credential error")
         }
     }
     
     // AppleID 연동 실패
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("error \(error)")
+        print("Authorization error \(error)")
     }
     
 }
