@@ -85,19 +85,17 @@ class ChangeImageVC: UIViewController {
             self.makeDoneEnable()
         }
         profileView.authSettingOpenClosure = { authString in
-            if let AppName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
-                let message = "\(AppName) 앱을 사용하여 사용자의 기기에서 \(authString)을 업로드합니다."
-                let alert = UIAlertController(title: "설정", message: message, preferredStyle: .alert)
-                let cancle = UIAlertAction(title: "취소", style: .default)
-                let confirm = UIAlertAction(title: "확인", style: .default) { (UIAlertAction) in
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                }
-                
-                alert.addAction(cancle)
-                alert.addAction(confirm)
-                
-                self.present(alert, animated: true)
+            let message = "\(authString) 사용에 대한 액세스 권한을 허용해주세요. 더 쉽고 편하게 사진을 올릴 수 있어요."
+            let alert = UIAlertController(title: "설정", message: message, preferredStyle: .alert)
+            let cancle = UIAlertAction(title: "취소", style: .default)
+            let confirm = UIAlertAction(title: "확인", style: .default) { (UIAlertAction) in
+              UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }
+          
+            alert.addAction(cancle)
+            alert.addAction(confirm)
+          
+            self.present(alert, animated: true)
         }
     }
     
