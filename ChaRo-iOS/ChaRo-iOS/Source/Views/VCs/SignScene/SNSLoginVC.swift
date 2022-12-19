@@ -212,6 +212,19 @@ class SNSLoginVC: UIViewController {
                     }
                 }
             }
+        } else {
+            self.makeRequestAlert(title: "카카오톡 미설치",
+                                  message: "카카오톡이 설치되어 있지 않습니다.\n설치를 위해 앱스토어로 이동하시겠습니까?",
+                                  okAction: { (action) in
+                let appId = "362057947"
+                if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(appId)"), UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+            })
         }
     }
     
