@@ -52,11 +52,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>글을 작성하기 위해 카메라 접근 권한이 필요합니다.</string>
+	<string>&quot;차로&quot;가 사용자의 카메라에 접근하려고 합니다. 게시물이나 프로필 사진을 업로드할 때 사용합니다.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>사진 저장을 위해 갤러리 권한이 필요합니다.</string>
+	<string>&quot;차로&quot;가 사용자의 사진에 접근하려고 합니다. 게시물이나 프로필 사진을 업로드할 때 사용합니다. </string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사진을 가져오기 위해 갤러리 권한 허용을 요청합니다.</string>
+	<string>&quot;차로&quot;가 사용자의 사진에 접근하려고 합니다. 게시물이나 프로필 사진을 업로드할 때 사용합니다. </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NotoSansMonoCJKkr-Regular.otf</string>
