@@ -11,6 +11,7 @@ import Then
 import AuthenticationServices
 import GoogleSignIn
 import KakaoSDKUser
+import KakaoSDKAuth
 
 enum socialType: String {
     case google
@@ -189,42 +190,66 @@ class SNSLoginVC: UIViewController {
     @objc func kakaoLogin() {
         socialType = .kakao
         
+        // 카톡 앱 설치 여부
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk {(_, error) in
-                if let error = error {
-                    print(error)
-                }
-                else {
-                    UserApi.shared.me() { (user, error) in
-                        if let error = error {
-                            print(error)
-                        }
-                        else {
-                            // 닉네임, 이메일 정보
-                            let email = user?.kakaoAccount?.email
-                            let nickname = user?.kakaoAccount?.profile?.nickname
-                            let profile = user?.kakaoAccount?.profile?.profileImageUrl
-                            //여기서도 URL 을 String 으로 바꾸는 법을 모르겠군요 ...
-                            
-                            //로그인
-                            self.socialLogin(email: email, profileImage: nil, nickname: nickname)
-                        }
+            self.kakaoLoginByApp()
+        } else {
+            self.makeAlert(title: "카카오톡 미설치", message: "카카오톡이 설치되어 있지 않습니다. 로그인을 위해 웹으로 이동합니다.", okAction: { _ in
+                self.kakaoLoginByWeb()
+            })
+        }
+    }
+    
+    // 카톡 앱으로 로그인
+    private func kakaoLoginByApp() {
+        UserApi.shared.loginWithKakaoTalk {(_, error) in
+            if let error = error {
+                print(error)
+            }
+            else {
+                UserApi.shared.me() { (user, error) in
+                    if let error = error {
+                        print(error)
+                    }
+                    else {
+                        // 닉네임, 이메일 정보
+                        let email = user?.kakaoAccount?.email
+                        let nickname = user?.kakaoAccount?.profile?.nickname
+                        let profile = user?.kakaoAccount?.profile?.profileImageUrl
+                        //여기서도 URL 을 String 으로 바꾸는 법을 모르겠군요 ...
+                        
+                        //로그인
+                        self.socialLogin(email: email, profileImage: nil, nickname: nickname)
                     }
                 }
             }
-        } else {
-            self.makeRequestAlert(title: "카카오톡 미설치",
-                                  message: "카카오톡이 설치되어 있지 않습니다.\n설치를 위해 앱스토어로 이동하시겠습니까?",
-                                  okAction: { (action) in
-                let appId = "362057947"
-                if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(appId)"), UIApplication.shared.canOpenURL(url) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    // 카톡 앱 미설치시 웹으로 로그인
+    private func kakaoLoginByWeb() {
+        UserApi.shared.loginWithKakaoAccount {(_, error) in
+            if let error = error {
+                print(error)
+            }
+            
+            else {
+                UserApi.shared.me() { (user, error) in
+                    
+                    if let error = error {
+                        print(error)
                     } else {
-                        UIApplication.shared.openURL(url)
+                        print("loginWithKakaoAccount me() sucess.")
+                        
+                        let email = user?.kakaoAccount?.email
+                        let nickname = user?.kakaoAccount?.profile?.nickname
+                        
+                        //로그인
+                        self.socialLogin(email: email, profileImage: nil, nickname: nickname)
                     }
+                    
                 }
-            })
+            }
         }
     }
     
@@ -529,3 +554,17 @@ extension SNSLoginVC : ASAuthorizationControllerDelegate, ASAuthorizationControl
     }
     
 }
+
+
+//            self.makeRequestAlert(title: "카카오톡 미설치",
+//                                  message: "카카오톡이 설치되어 있지 않습니다.\n설치를 위해 앱스토어로 이동하시겠습니까?",
+//                                  okAction: { (action) in
+//                let appId = "362057947"
+//                if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(appId)"), UIApplication.shared.canOpenURL(url) {
+//                    if #available(iOS 10.0, *) {
+//                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                    } else {
+//                        UIApplication.shared.openURL(url)
+//                    }
+//                }
+//            })
