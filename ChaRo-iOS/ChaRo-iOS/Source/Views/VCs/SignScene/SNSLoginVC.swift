@@ -176,7 +176,7 @@ class SNSLoginVC: UIViewController {
             guard error == nil else { return }
             
             let userEmail = user?.profile?.email
-            self.socialLogin(email: userEmail, profileImage: nil, nickname: nil)
+            self.socialLogin(email: userEmail, id: nil, profileImage: nil, nickname: nil)
             //여기 유저 이미지 ... String 으로 변환 모루겟다
             //            do {
             //                var userProfileImageString = try String(contentsOf: URL(string: (user?.profile?.imageURL(withDimension: 320)!)!)!)
@@ -213,13 +213,14 @@ class SNSLoginVC: UIViewController {
                     }
                     else {
                         // 닉네임, 이메일 정보
+                        let id = user?.id
                         let email = user?.kakaoAccount?.email
                         let nickname = user?.kakaoAccount?.profile?.nickname
                         let profile = user?.kakaoAccount?.profile?.profileImageUrl
                         //여기서도 URL 을 String 으로 바꾸는 법을 모르겠군요 ...
                         
                         //로그인
-                        self.socialLogin(email: email, profileImage: nil, nickname: nickname)
+                        self.socialLogin(email: email, id: "\(id)", profileImage: nil, nickname: nickname)
                     }
                 }
             }
@@ -241,11 +242,12 @@ class SNSLoginVC: UIViewController {
                     } else {
                         print("loginWithKakaoAccount me() sucess.")
                         
+                        let id = user?.id
                         let email = user?.kakaoAccount?.email
                         let nickname = user?.kakaoAccount?.profile?.nickname
                         
                         //로그인
-                        self.socialLogin(email: email, profileImage: nil, nickname: nickname)
+                        self.socialLogin(email: email, id: "\(id)", profileImage: nil, nickname: nickname)
                     }
                     
                 }
@@ -253,13 +255,21 @@ class SNSLoginVC: UIViewController {
         }
     }
     
-    @objc func socialLogin(email: String?, profileImage: String?, nickname: String?) {
-        guard let email = email else {
-            self.makeAlert(title: "오류", message: "이메일이 존재하지 않습니다.")
-            return
+    @objc func socialLogin(email: String?, id: String?, profileImage: String?, nickname: String?) {
+        var finalEmail: String = ""
+        
+        if let email = email {
+            finalEmail = email
+        } else {
+            if let id = id {
+                finalEmail = "Kakao@\(id)"
+            } else {
+                self.makeAlert(title: "오류", message: "카카오 계정 정보를 불러오지 못했습니다.")
+                return
+            }
         }
 
-        SocialLoginService.shared.socialLogin(email: email) { (response) in
+        SocialLoginService.shared.socialLogin(email: finalEmail) { (response) in
             
             switch(response) {
             case .success(let data):
@@ -274,7 +284,7 @@ class SNSLoginVC: UIViewController {
                     self.goToHomeVC()
                 } else {
                     print("회원가입 갈겨")
-                    self.snsJoin(email: email, profileImage: profileImage, nickname: nickname)
+                    self.snsJoin(email: finalEmail, profileImage: profileImage, nickname: nickname)
                 }
             case .requestErr(let message) :
                 print("requestERR", message)
@@ -535,10 +545,10 @@ extension SNSLoginVC : ASAuthorizationControllerDelegate, ASAuthorizationControl
             if let email = credential.email {
                 print("애플 최초 로그인 이메일 \(email)")
                 UserDefaults.standard.set(email, forKey: Constants.UserDefaultsKey.savedAppleEmail)
-                socialLogin(email: email, profileImage: nil, nickname: nil)
+                socialLogin(email: email, id: nil, profileImage: nil, nickname: nil)
             } else {
                 if let savedAppleEmail = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.savedAppleEmail) {
-                    socialLogin(email: savedAppleEmail, profileImage: nil, nickname: nil)
+                    socialLogin(email: savedAppleEmail, id: nil, profileImage: nil, nickname: nil)
                 } else {
                     self.makeAlert(title: "로그인 오류", message: "로그인 하기 위해서는 이메일 계정 정보가 필요합니다. 설정 > 계정 > 암호 및 보안 > Apple ID 를 사용하는 앱 > XC com king Charo 를 애플 아이디 사용 중단 한 후, 시도해주세요.")
                 }
